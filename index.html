@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>...</title>
+    <title>Join</title>
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
@@ -16,9 +16,45 @@
 
     <!-- Embedding the css -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/assets.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/standard.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- Logo absolut to Body -->
+    <div class="logo-join">Logo Join</div>
+
+    <header>
+      <nav>
+        <span>Not a Join user?</span>
+        <button>Sign up</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="login-container">
+        <h1>Log in</h1>
+        <!-- <div></div> blue line -->
+        <!-- border or not border input?  -->
+        <form>
+          <div class="input-container">
+            <input type="email" required placeholder="Email" />
+            <input type="password" required placeholder="Password" />
+          </div>
+          <div class="button-container">
+            <button>Log in</button>
+            <button>Guest Log in</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="sign-up-container"></div>
+    </main>
+
+    <footer>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Legal notice</a>
+    </footer>
+  </body>
 </html>

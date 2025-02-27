@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  height: 100dvh;
+  width: 100%;
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+header {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* background-color: aquamarine; */
+  height: 80px;
+}
+
+.logo-join {
+  background-color: aliceblue;
+  width: 70px;
+  aspect-ratio: 1 /1;
+  position: absolute;
+  top: 60px;
+  left: 60px;
+}
+
+nav {
+  padding-right: var(--padding-header);
+  margin-bottom: 10px;
+}
+
+main {
+}
+
+.login-container {
+  gap: 30px;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: var(--border-radius);
+}
+
+.login-container form {
+  gap: var(--form-gap);
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--input-gap);
+}
+
+.button-container {
+  gap: var(--button-gap);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  height: 100px;
+}

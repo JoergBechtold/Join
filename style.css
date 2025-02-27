@@ -1,5 +1,85 @@
 /* Everything that is global comes in here */
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+.d-none {
+  display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* input {
+  border: unset;
+} */
+
+button {
+  cursor: pointer;
+  /* border: unset; */
+}
+
 :root {
+  /* color */
+  --light-gray-bg: #ffffff;
+  --primary-color: ;
+  --primary-color-hover: ;
+
+  /* gap */
+  --form-gap: 25px;
+  --button-gap: 25px;
+  --input-gap: 15px;
+
+  /* shadow */
+
+  /* padding */
+  --padding-header: 80px;
+
+  /* border */
+  --border-radius: 10px;
+
+  /* font-size */
+
+  /* transition */
+  --transition-75ms: 75ms;
+  --transition-125ms: 125ms;
+}
+
+/* width */
+::-webkit-scrollbar {
+  /* width: 10px; */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background-color: transparent;
+    border-radius: 10px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  /* background: var(--blue);
+    border-radius: 10px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* background: var(--light-blue);
+    cursor: grab; */
+}
+
+::-webkit-scrollbar-thumb:active {
+  /* background: var(--light-blue);
+    cursor: grabbing; */
 }
 
 /* Responsive Breakpoints!!
