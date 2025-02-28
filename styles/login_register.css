@@ -63,32 +63,12 @@ nav > a > button:hover {
   box-shadow: var(--box-shadow-button);
 }
 
-.login-headline-vector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 315px;
-  height: 89px;
-}
-
-.login-headline-vector h1 {
-  font-weight: 700;
-  font-size: 61px;
-  line-height: 73.2px;
-  letter-spacing: 0%;
-  text-align: center;
-}
-
-.vector-login {
-  display: block;
-}
-
 .login-container {
   padding: 48px 115px 48px 115px;
   gap: 32px;
   width: 652px;
   min-height: 450px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -97,12 +77,41 @@ nav > a > button:hover {
   border-radius: var(--border-radius);
 }
 
-.login-container form {
+/* .login-container form,
+.sign-up-container form {
   margin-top: 16px;
   gap: var(--form-gap);
   display: flex;
   flex-direction: column;
   align-items: center;
+} */
+
+form {
+  margin-top: 16px;
+  gap: var(--form-gap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headline-vector h1 {
+  font-weight: 700;
+  font-size: var(--font-size-61);
+  line-height: 73.2px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.headline-vector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 315px;
+  height: 89px;
+}
+
+.vector {
+  display: block;
 }
 
 .input-container {
@@ -165,27 +174,28 @@ input::placeholder {
   display: none;
 }
 
-.checkbox {
+/* .checkbox {
   margin-right: 8px;
   height: 20px;
   width: 20px;
-  display: flex;
+  display: grid;
+  place-items: center;
   background-image: url('../assets/icons/checkbox.png');
   background-size: cover;
   cursor: pointer;
-}
+} */
 
 .button-container {
   width: 322px;
   margin-top: 18px;
-  /* height: 48px; */
   gap: var(--button-gap);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn-log-in {
+.button-log-in,
+.button-sign-up {
   background-color: var(--primary-color-gray);
   color: white;
   box-shadow: none;
@@ -198,13 +208,14 @@ input::placeholder {
   transition: var(--transition-hover-effect);
 }
 
-.btn-log-in:hover {
+.button-log-in:hover,
+.button-sign-up:hover {
   scale: var(--scale-hover);
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
 }
 
-.btn-guest-log-in {
+.button-guest-log-in {
   box-shadow: none;
   transition: var(--transition-hover-effect);
   border: var(--border-buttons);
@@ -218,7 +229,7 @@ input::placeholder {
   white-space: nowrap;
 }
 
-.btn-guest-log-in:hover {
+.button-guest-log-in:hover {
   scale: var(--scale-hover);
   color: var(--blue);
   border-color: var(--blue);
@@ -246,4 +257,89 @@ footer > a:hover {
   font-weight: 700;
   color: var(--blue);
   scale: var(--scale-hover);
+}
+
+/* sign up section */
+.sign-up-container {
+  position: relative;
+  padding: 48px 115px 48px 115px;
+  gap: 32px;
+  width: 652px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+.arrow-left {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 60px;
+  left: 80px;
+  width: 35px;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.arrow-left img {
+  width: 32px;
+}
+
+.arrow-left:hover {
+  background-color: var(--light-gray-bg);
+}
+
+.arrow-left:hover img {
+  transform: scale(1.1);
+}
+
+.button-sign-up:disabled,
+.button-sign-up[disabled] {
+  cursor: not-allowed;
+}
+
+.button-sign-up:disabled:hover,
+.button-sign-up[disabled]:hover {
+  background-color: var(--primary-color-gray);
+  cursor: not-allowed;
+  scale: unset;
+  box-shadow: unset;
+}
+
+.checkbox-accept-privacy-policy {
+  width: 231px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox {
+  width: 24px;
+  aspect-ratio: 1 / 1;
+}
+
+.checkbox img {
+  cursor: pointer;
+  display: block;
+}
+
+.checkbox-accept-privacy-policy > span > a {
+  color: var(--light-blue);
+  font-weight: 400;
+  font-size: var(--font-size-16);
+  line-height: 19.2px;
+}
+
+.checkbox-accept-privacy-policy > span > a:hover {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 3px;
 }

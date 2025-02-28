@@ -26,37 +26,91 @@
     <!-- Logo absolut to Body -->
     <div class="login-logo-join"><img src="assets/img/loginLogo.png" alt="Logo Join" /></div>
 
-    <nav>
+    <nav id="nav_log_in">
       <span>Not a Join user?</span>
       <a href="signUp.html"><button>Sign up</button></a>
     </nav>
 
     <main>
-      <div class="login-container">
-        <div class="login-headline-vector">
-          <h1>Log in</h1>
-          <div class="vector-login"><img src="assets/icons/Vector 5.png" alt="" /></div>
-        </div>
-
-        <form>
-          <label class="input-container" for="email">
-            <input id="email" type="email" required placeholder="Email" />
-            <div class="input-icon-mail">
-              <img src="assets/icons/mail.png" alt="Brief Icon" />
-            </div>
-          </label>
-
-          <label class="input-container" for="password">
-            <input id="password" type="password" required placeholder="Password" />
-            <img class="input-icon-lock" src="assets/icons/lock.png" alt="Schloss Icon" />
-          </label>
-
-          <div class="button-container">
-            <button class="btn-log-in">Log in</button>
-            <a href="summary.html"><button class="btn-guest-log-in">Guest Log in</button></a>
+      <!-- log in section -->
+      <section>
+        <div class="login-container">
+          <div class="login-headline-vector">
+            <h1>Log in</h1>
+            <div class="vector-login"><img src="assets/icons/Vector 5.png" alt="Blaue Trennlinie" /></div>
           </div>
-        </form>
-      </div>
+
+          <form>
+            <label class="input-container" for="email">
+              <input id="email" type="email" required placeholder="Email" />
+              <div class="input-icon-mail">
+                <img src="assets/icons/mail.png" alt="Brief Icon" />
+              </div>
+            </label>
+
+            <label class="input-container" for="password">
+              <input id="password" type="password" required placeholder="Password" />
+              <img class="input-icon-lock" src="assets/icons/lock.png" alt="Schloss Icon" />
+            </label>
+
+            <div class="button-container">
+              <button class="button-log-in">Log in</button>
+              <a href="summary.html"><button class="button-guest-log-in">Guest Log in</button></a>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- sign up section -->
+      <section>
+        <div class="sign-up-container">
+          <div class="arrow-left">
+            <img src="assets/icons/arrow-left-line.png" alt="Pfeil nach links" />
+          </div>
+
+          <div class="headline-vector">
+            <h1>Sign up</h1>
+            <div class="vector"><img src="assets/icons/Vector 5.png" alt="Blaue Trennlinie" /></div>
+          </div>
+
+          <form>
+            <label class="input-container" for="name">
+              <input id="name" type="text" required placeholder="Name" />
+              <div class="input-icon-mail">
+                <img src="assets/icons/gray-person.png" alt="Personen Icon" />
+              </div>
+            </label>
+
+            <label class="input-container" for="email">
+              <input id="email" type="email" required placeholder="Email" />
+              <div class="input-icon-mail">
+                <img src="assets/icons/mail.png" alt="Brief Icon" />
+              </div>
+            </label>
+
+            <label class="input-container" for="password">
+              <input id="password" type="password" required placeholder="Password" />
+              <img class="input-icon-lock" src="assets/icons/lock.png" alt="Schloss Icon" />
+            </label>
+
+            <label class="input-container" for="confirm_password">
+              <input id="confirm_password" type="password" required placeholder="Confirm Password" />
+              <img class="input-icon-lock" src="assets/icons/lock.png" alt="Schloss Icon" />
+            </label>
+
+            <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
+              <div class="checkbox">
+                <img src="assets/icons/checkbox.png" alt="Checkbox" />
+              </div>
+              <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
+            </div>
+
+            <div class="button-container">
+              <button disabled class="button-sign-up">Sign up</button>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
 
     <footer>

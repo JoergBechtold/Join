@@ -36,6 +36,7 @@ button {
   --primary-color-gray: #2a3647;
   --primary-color-gray-hover: ;
   --blue: #29abe2;
+  --light-blue: #29abe2;
   --gray-a-links: #a8a8a8;
 
   /* gap */
@@ -62,6 +63,7 @@ button {
   --font-size-16: 16px;
   --font-size-20: 20px;
   --font-size-21: 21px;
+  --font-size-61: 61px;
 
   /* transition */
   --transition-75ms: 75ms;
