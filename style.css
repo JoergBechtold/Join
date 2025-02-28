@@ -32,10 +32,9 @@ button {
 :root {
   /* color */
   --light-gray-bg: #f6f7f8;
-  --primary-color: rgba(42, 54, 71, 1);
-  --primary-color-hover: ;
+  --primary-color-gray: rgba(42, 54, 71, 1);
+  --primary-color-gray-hover: ;
   --blue: #29abe2;
-
 
   /* gap */
   --form-gap: 32px;
@@ -44,6 +43,7 @@ button {
 
   /* shadow */
   --box-shadow: 0px 0px 14px 3px #0000000a;
+  --box-shadow-header: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 
   /* padding */
   --padding-header: 80px;
@@ -60,19 +60,19 @@ button {
 
 /* width */
 ::-webkit-scrollbar {
-  /* width: 10px; */
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  /* background-color: transparent;
-    border-radius: 10px; */
+  background-color: transparent;
+  /* border-radius: 10px; */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  /* background: var(--blue);
-    border-radius: 10px; */
+  background: var(--primary-color-gray);
+  border-radius: 10px;
 }
 
 /* Handle on hover */
