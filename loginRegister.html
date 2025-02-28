@@ -26,12 +26,10 @@
     <!-- Logo absolut to Body -->
     <div class="login-logo-join"><img src="assets/img/loginLogo.png" alt="Logo Join" /></div>
 
-    <header>
-      <nav>
-        <span>Not a Join user?</span>
-        <button>Sign up</button>
-      </nav>
-    </header>
+    <nav>
+      <span>Not a Join user?</span>
+      <button>Sign up</button>
+    </nav>
 
     <main>
       <div class="login-container">
@@ -41,31 +39,34 @@
         </div>
         <!-- border or not border input?  -->
         <form>
-          <label class="input-container">
-            <input type="email" required placeholder="Email" />
-            <img class="input-icon-mail" src="assets/icons/mail.png" alt="Brief Icon" />
+          <label class="input-container" for="email">
+            <input id="email" type="email" required placeholder="Email" />
+            <div class="input-icon-mail">
+              <img src="assets/icons/mail.png" alt="Brief Icon" />
+            </div>
           </label>
 
-          <label class="input-container">
-            <input type="password" required placeholder="Password" />
+          <label class="input-container" for="password">
+            <input id="password" type="password" required placeholder="Password" />
             <img class="input-icon-lock" src="assets/icons/lock.png" alt="Schloss Icon" />
           </label>
 
-          <label class="checkbox-container">
+          <!-- <label class="checkbox-container">
             <input class="remember-me-checkbox" type="checkbox" name="option" />
 
             <span class="checkbox"></span>
             Remember me
-          </label>
+          </label> -->
 
           <div class="button-container">
-            <button>Log in</button>
-            <button>Guest Log in</button>
+            <button class="btn-log-in">Log in</button>
+            <button class="btn-guest-log-in">Guest Log in</button>
           </div>
         </form>
       </div>
 
-      <div class="sign-up-container"></div>
+      <!-- include sign up container and show it with display flex -->
+      <!-- <div class="sign-up-container"></div> -->
     </main>
 
     <footer>

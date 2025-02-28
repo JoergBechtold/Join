@@ -26,36 +26,50 @@ input {
 
 button {
   cursor: pointer;
-  /* border: unset; */
+  border: unset;
 }
 
 :root {
   /* color */
+  --light-gray-placeholder: #d1d1d1;
   --light-gray-bg: #f6f7f8;
-  --primary-color-gray: rgba(42, 54, 71, 1);
+  --primary-color-gray: #2a3647;
   --primary-color-gray-hover: ;
   --blue: #29abe2;
+  --gray-a-links: #a8a8a8;
 
   /* gap */
   --form-gap: 32px;
-  --button-gap: 25px;
+  --button-gap: 35px;
   --input-gap: 20px;
 
   /* shadow */
   --box-shadow: 0px 0px 14px 3px #0000000a;
   --box-shadow-header: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --box-shadow-button: 0px 4px 4px 0px #00000040;
 
   /* padding */
   --padding-header: 80px;
 
   /* border */
   --border-radius: 30px;
+  --border-radius-buttons: 8px;
+  --border-radius-input-fields: 10px;
+  --border-input-fields: 1px solid #d1d1d1;
+  --border-buttons: 1px solid #2a3647;
 
   /* font-size */
+  --font-size-16: 16px;
+  --font-size-20: 20px;
+  --font-size-21: 21px;
 
   /* transition */
   --transition-75ms: 75ms;
   --transition-125ms: 125ms;
+  --transition-hover-effect: all 100ms ease-in-out;
+
+  /* hover-scale */
+  --scale-hover: 1.01;
 }
 
 /* width */
@@ -77,13 +91,13 @@ button {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  /* background: var(--light-blue);
-    cursor: grab; */
+  /* background: var(--light-blue); */
+  cursor: grab;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  /* background: var(--light-blue);
-    cursor: grabbing; */
+  /* background: var(--light-blue); */
+  cursor: grabbing;
 }
 
 /* Responsive Breakpoints!!
