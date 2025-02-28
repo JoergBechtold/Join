@@ -36,13 +36,12 @@ nav {
   right: 80px;
   display: flex;
   align-items: center;
-
   width: 279px;
   height: 49px;
   gap: 35px;
 }
 
-nav > button {
+nav > a > button {
   border-radius: var(--border-radius-buttons);
   padding: 15px 16px 15px 16px;
   background-color: var(--primary-color-gray);
@@ -59,7 +58,7 @@ nav > span {
   letter-spacing: 0%;
 }
 
-nav > button:hover {
+nav > a > button:hover {
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
 }
@@ -104,7 +103,7 @@ nav > button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 152px;
+  /* height: 152px; */
 }
 
 .input-container {
@@ -179,7 +178,8 @@ input::placeholder {
 
 .button-container {
   width: 322px;
-  height: 48px;
+  margin-top: 18px;
+  /* height: 48px; */
   gap: var(--button-gap);
   display: flex;
   justify-content: center;
