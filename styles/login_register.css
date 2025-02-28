@@ -65,7 +65,7 @@ nav > a > button:hover {
 
 .login-container {
   padding: 48px 115px 48px 115px;
-  gap: 32px;
+  gap: 20px;
   width: 652px;
   min-height: 450px;
   display: none;
@@ -76,15 +76,6 @@ nav > a > button:hover {
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
 }
-
-/* .login-container form,
-.sign-up-container form {
-  margin-top: 16px;
-  gap: var(--form-gap);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
 
 form {
   margin-top: 16px;
@@ -125,9 +116,10 @@ form {
 }
 
 input[type='email']:focus-visible,
-input[type='password']:focus-visible {
+input[type='password']:focus-visible,
+input[type='text']:focus-visible {
   outline: none;
-  border: 2px solid #29abe2;
+  border: 2px solid var(--blue);
   opacity: 1;
 }
 
@@ -148,8 +140,7 @@ input::placeholder {
   border: var(--border-input-fields);
 }
 
-.input-icon-mail,
-.input-icon-lock {
+.input-icon {
   position: absolute;
   display: grid;
   place-items: center;
@@ -161,7 +152,7 @@ input::placeholder {
   object-fit: scale-down;
 }
 
-.input-icon-mail img {
+.input-iconimg {
   display: block;
 }
 
@@ -173,17 +164,6 @@ input::placeholder {
 .remember-me-checkbox {
   display: none;
 }
-
-/* .checkbox {
-  margin-right: 8px;
-  height: 20px;
-  width: 20px;
-  display: grid;
-  place-items: center;
-  background-image: url('../assets/icons/checkbox.png');
-  background-size: cover;
-  cursor: pointer;
-} */
 
 .button-container {
   width: 322px;
@@ -263,7 +243,7 @@ footer > a:hover {
 .sign-up-container {
   position: relative;
   padding: 48px 115px 48px 115px;
-  gap: 32px;
+  gap: 20px;
   width: 652px;
   min-height: 450px;
   display: flex;
@@ -313,11 +293,35 @@ footer > a:hover {
 }
 
 .checkbox-accept-privacy-policy {
-  width: 231px;
-  height: 24px;
-  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+}
+
+.checkbox-link {
+  width: 50%;
+}
+
+.checkbox-accept-privacy-policy a {
+  color: var(--light-blue);
+  font-weight: 400;
+  font-size: var(--font-size-16);
+}
+
+.checkbox-accept-privacy-policy span {
+  font-weight: 400;
+  font-size: var(--font-size-16);
+}
+
+.checkbox-accept-privacy-policy a:hover {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 3px;
 }
 
 .checkbox {
@@ -330,16 +334,6 @@ footer > a:hover {
   display: block;
 }
 
-.checkbox-accept-privacy-policy > span > a {
-  color: var(--light-blue);
-  font-weight: 400;
-  font-size: var(--font-size-16);
-  line-height: 19.2px;
-}
-
-.checkbox-accept-privacy-policy > span > a:hover {
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-style: solid;
-  text-underline-offset: 3px;
+.checkbox span {
+  white-space: nowrap;
 }
