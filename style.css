@@ -32,9 +32,10 @@ button {
 :root {
   /* color */
   --light-gray-bg: #f6f7f8;
-  --primary-color: ;
+  --primary-color: rgba(42, 54, 71, 1);
   --primary-color-hover: ;
   --blue: #29abe2;
+
 
   /* gap */
   --form-gap: 32px;
