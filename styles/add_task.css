@@ -52,6 +52,24 @@ main {
     gap: 20px;
 }
 
+.add-task-subtasks {
+    position: relative;
+}
+
+.subtasks-input {
+    width: 100%;
+}
+
+.add-subtask-icon {
+    position: absolute;
+    right: 5px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px; 
+    height: auto;
+    cursor: pointer; 
+}
+
 
 
 
