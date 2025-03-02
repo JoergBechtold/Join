@@ -1,0 +1,73 @@
+body {
+    font-family: 'inter';
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.legal{
+    position: absolute;
+    top: 150px;
+    left: 328px;
+}
+
+h1 {
+    color: #004080;
+    text-align: center;
+    font-size: 28px;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 0 15px;
+}
+
+strong {
+    color: #004080;
+}
+
+a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.impressum-container {
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.impressum-container p {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.impressum-container p:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .impressum-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}

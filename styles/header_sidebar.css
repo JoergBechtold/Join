@@ -97,6 +97,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
   width: -webkit-fill-available;
   height: 96px;
   padding-top: 20px;
