@@ -1,21 +1,57 @@
-.add-task-content {
-    position: relative;
-    left: 328px;
-    top: 327px;
-
+body {
+    height: 100dvh;
+    width: 100%;
+    background-color: var(--light-gray-bg);
 }
 
-
-h1 {
+.h1-add-task {
     font-size: 72px;
+    margin-bottom: 40px; /* sollte einheitlich sein*/
+}
+
+main {
+    width: 1014px;
     position: relative;
-    top: 206px;
+    top: 311px;
     left: 328px;
 
 }
 
-.required-text {
-    position: relative;
-    top: 599px ;
-
+.footer-add-task {
+    display: flex;
+    justify-content: space-between;
 }
+
+.add-task-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 100px;
+}
+
+.vertical-line {
+    width: 2px;
+    background-color: var(--light-gray-placeholder); 
+    margin: 0 40px;
+    height: auto;
+}
+
+.left-container, .right-container {
+    flex: 1;
+}
+
+.form-group {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+
+
