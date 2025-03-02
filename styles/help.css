@@ -5,14 +5,13 @@ body {
     background-color: var(--light-gray-bg);
 }
 
-.help-headline {
-    position: relative;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    top: 206px;
-    left: 328px;
+
+main {
     width: 1014px;
+    position: relative;
+    top: 311px;
+    left: 328px;
+
 }
 
 .headline-image {
@@ -25,13 +24,15 @@ body {
 .headline-image:hover {
     border-color: var(--blue); 
 }
- 
+
+.help-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
 
 .help-content{
-    position: relative;
-    top: 311px;
-    left: 328px;
-    width: 1014px;
     display:flex;
     flex-direction: column;
     gap: 30px;
