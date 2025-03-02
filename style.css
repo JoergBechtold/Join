@@ -29,6 +29,14 @@ button {
   border: unset;
 }
 
+textarea {
+  border: unset;
+}
+
+select {
+  border: unset;
+}
+
 :root {
   /* color */
   --light-gray-placeholder: #d1d1d1;
