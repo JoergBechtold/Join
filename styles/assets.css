@@ -15,3 +15,90 @@ textarea {
 select {
   border: unset;
 }
+
+.button-base-gray {
+  white-space: nowrap;
+  border-radius: var(--border-radius-buttons);
+  /* padding: 15px 16px 15px 16px; */
+  background-color: var(--primary-color-gray);
+  box-shadow: none;
+  color: white;
+  /* font-size: var(--font-size-16); */
+  transition: all 100ms ease-in-out;
+}
+
+.button-base-gray:hover {
+  background-color: var(--blue);
+  box-shadow: var(--box-shadow-button);
+}
+
+.button-base-white {
+  box-shadow: none;
+  transition: var(--transition-hover-effect);
+  border: var(--border-buttons);
+  background-color: white;
+  /* padding: 15px 24px 15px 24px; */
+  border-radius: var(--border-radius-buttons);
+  color: var(--primary-color-gray);
+  /* font-weight: var(--font-weight-700); */
+  /* font-size: var(--font-size-21); */
+  white-space: nowrap;
+}
+
+.button-base-white:hover {
+  scale: var(--scale-hover);
+  color: var(--blue);
+  border-color: var(--blue);
+  box-shadow: var(--box-shadow-button);
+}
+
+.input-base-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--input-gap);
+}
+
+.input-base[type='email']:focus-visible,
+.input-base[type='password']:focus-visible,
+.input-base[type='text']:focus-visible {
+  outline: none;
+  border: 2px solid var(--blue);
+  opacity: 1;
+}
+
+.input-base::placeholder {
+  transform: translateY(2px);
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-20);
+  color: var(--light-gray-placeholder);
+}
+
+.input-base {
+  width: 422px;
+  height: 48px;
+  padding: 12px 21px 12px 21px;
+  border-radius: var(--border-radius-input-fields);
+  border: var(--border-input-fields);
+}
+
+.input-base-icon {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 50%;
+  right: 21px;
+  transform: translateY(-50%);
+  width: 24px;
+  aspect-ratio: 1 / 1;
+  object-fit: scale-down;
+}
+
+.input-base-icon-img {
+  display: block;
+}

@@ -60,7 +60,7 @@
   gap: 35px;
 }
 
-.nav-log-in > a > button {
+/* .nav-log-in > a > button {
   border-radius: var(--border-radius-buttons);
   padding: 15px 16px 15px 16px;
   background-color: var(--primary-color-gray);
@@ -68,7 +68,7 @@
   color: white;
   font-size: var(--font-size-16);
   transition: all 100ms ease-in-out;
-}
+} */
 
 .nav-log-in > span {
   font-weight: var(--font-weight-400);
@@ -77,10 +77,10 @@
   letter-spacing: 0%;
 }
 
-.nav-log-in > a > button:hover {
+/* .nav-log-in > a > button:hover {
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
-}
+} */
 
 .login-container {
   padding: 48px 115px 48px 115px;
@@ -180,10 +180,6 @@
   padding: 0 16px 0 16px;
 }
 
-.remember-me-checkbox {
-  display: none;
-}
-
 .button-container {
   width: 322px;
   margin-top: 18px;
@@ -203,7 +199,6 @@
   white-space: nowrap;
   font-weight: var(--font-weight-700);
   font-size: var(--font-size-21);
-  line-height: 25.2px;
   transition: var(--transition-hover-effect);
 }
 
@@ -214,7 +209,7 @@
   box-shadow: var(--box-shadow-button);
 }
 
-.button-guest-log-in {
+/* .button-guest-log-in {
   box-shadow: none;
   transition: var(--transition-hover-effect);
   border: var(--border-buttons);
@@ -226,14 +221,14 @@
   font-size: var(--font-size-21);
   line-height: 25.2px;
   white-space: nowrap;
-}
+} */
 
-.button-guest-log-in:hover {
+/* .button-guest-log-in:hover {
   scale: var(--scale-hover);
   color: var(--blue);
   border-color: var(--blue);
   box-shadow: var(--box-shadow-button);
-}
+} */
 
 .footer {
   position: absolute;
@@ -287,7 +282,7 @@
 }
 
 .arrow-left img {
-  width: 32px;
+  width: 21px;
 }
 
 .arrow-left:hover {
