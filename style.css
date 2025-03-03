@@ -54,7 +54,8 @@ select {
 
   /* shadow */
   --box-shadow: 0px 0px 14px 3px #0000000a;
-  --box-shadow-header: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --box-shadow-sidebar: 0px 0px 4px 0px #0000001a;
+  --box-shadow-header: 0 4px 10px #00000026;
   --box-shadow-button: 0px 4px 4px 0px #00000040;
 
   /* padding */
@@ -68,6 +69,7 @@ select {
   --border-buttons: 1px solid #2a3647;
 
   /* font-size */
+  --font-size-14: 14px;
   --font-size-16: 16px;
   --font-size-20: 20px;
   --font-size-21: 21px;

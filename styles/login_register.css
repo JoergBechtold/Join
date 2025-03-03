@@ -17,6 +17,32 @@ body {
   overflow-x: hidden;
 }
 
+.animation-join-logo {
+  z-index: 2;
+  display: inline-block;
+  position: relative;
+}
+
+.animation-join-logo img {
+  position: absolute;
+  transform: translate(-50%, 25%);
+  transition: transform 0.5s ease, width 0.5s ease;
+  animation: logoAnimation 0.5s ease forwards;
+}
+
+@keyframes logoAnimation {
+  from {
+    transform: translate(-50%, 25%);
+    width: auto;
+  }
+  to {
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    transform: none;
+  }
+}
+
 .login-logo-join {
   background-color: aliceblue;
   width: 70px;
@@ -152,7 +178,7 @@ input::placeholder {
   object-fit: scale-down;
 }
 
-.input-iconimg {
+.input-icon-img {
   display: block;
 }
 
