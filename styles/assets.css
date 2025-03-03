@@ -1,1 +1,17 @@
 /* This is where the style of buttons, for example, comes in */
+input {
+  border: unset;
+}
+
+button {
+  cursor: pointer;
+  border: unset;
+}
+
+textarea {
+  border: unset;
+}
+
+select {
+  border: unset;
+}
