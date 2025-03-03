@@ -1,11 +1,4 @@
-* {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
-}
-
-body {
+.body-login-register {
   position: relative;
   height: 100dvh;
   width: 100%;
@@ -56,7 +49,7 @@ body {
   width: 100%;
 }
 
-nav {
+.nav-log-in {
   position: absolute;
   top: 80px;
   right: 80px;
@@ -67,7 +60,7 @@ nav {
   gap: 35px;
 }
 
-nav > a > button {
+.nav-log-in > a > button {
   border-radius: var(--border-radius-buttons);
   padding: 15px 16px 15px 16px;
   background-color: var(--primary-color-gray);
@@ -77,14 +70,14 @@ nav > a > button {
   transition: all 100ms ease-in-out;
 }
 
-nav > span {
-  font-weight: 400;
+.nav-log-in > span {
+  font-weight: var(--font-weight-400);
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0%;
 }
 
-nav > a > button:hover {
+.nav-log-in > a > button:hover {
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
 }
@@ -103,7 +96,7 @@ nav > a > button:hover {
   border-radius: var(--border-radius);
 }
 
-form {
+.form {
   margin-top: 16px;
   gap: var(--form-gap);
   display: flex;
@@ -112,7 +105,7 @@ form {
 }
 
 .headline-vector h1 {
-  font-weight: 700;
+  font-weight: var(--font-weight-700);
   font-size: var(--font-size-61);
   line-height: 73.2px;
   letter-spacing: 0%;
@@ -141,24 +134,24 @@ form {
   gap: var(--input-gap);
 }
 
-input[type='email']:focus-visible,
-input[type='password']:focus-visible,
-input[type='text']:focus-visible {
+.input[type='email']:focus-visible,
+.input[type='password']:focus-visible,
+.input[type='text']:focus-visible {
   outline: none;
   border: 2px solid var(--blue);
   opacity: 1;
 }
 
-input::placeholder {
+.input::placeholder {
   transform: translateY(2px);
   display: flex;
   align-items: center;
-  font-weight: 400;
+  font-weight: var(--font-weight-400);
   font-size: var(--font-size-20);
   color: var(--light-gray-placeholder);
 }
 
-.input-container input {
+.input {
   width: 422px;
   height: 48px;
   padding: 12px 21px 12px 21px;
@@ -208,7 +201,7 @@ input::placeholder {
   padding: 15px 24px 15px 24px;
   border-radius: var(--border-radius-buttons);
   white-space: nowrap;
-  font-weight: 700;
+  font-weight: var(--font-weight-700);
   font-size: var(--font-size-21);
   line-height: 25.2px;
   transition: var(--transition-hover-effect);
@@ -229,7 +222,7 @@ input::placeholder {
   padding: 15px 24px 15px 24px;
   border-radius: var(--border-radius-buttons);
   color: var(--primary-color-gray);
-  font-weight: 700;
+  font-weight: var(--font-weight-700);
   font-size: var(--font-size-21);
   line-height: 25.2px;
   white-space: nowrap;
@@ -242,7 +235,7 @@ input::placeholder {
   box-shadow: var(--box-shadow-button);
 }
 
-footer {
+.footer {
   position: absolute;
   bottom: 50px;
   display: flex;
@@ -253,14 +246,14 @@ footer {
   width: 246px;
 }
 
-footer > a {
+.footer > a {
   color: var(--gray-a-links);
   font-size: var(--font-size-16);
-  font-weight: 400;
+  font-weight: var(--font-weight-400);
 }
 
-footer > a:hover {
-  font-weight: 700;
+.footer > a:hover {
+  font-weight: var(--font-weight-700);
   color: var(--blue);
   scale: var(--scale-hover);
 }
@@ -334,17 +327,17 @@ footer > a:hover {
 
 .checkbox-accept-privacy-policy a {
   color: var(--light-blue);
-  font-weight: 400;
+  font-weight: var(--font-weight-400);
   font-size: var(--font-size-16);
 }
 
 .checkbox-accept-privacy-policy span {
-  font-weight: 400;
+  font-weight: var(--font-weight-400);
   font-size: var(--font-size-16);
 }
 
 .checkbox-accept-privacy-policy a:hover {
-  font-weight: 500;
+  font-weight: var(--font-weight-500);
   text-decoration: underline;
   text-decoration-style: solid;
   text-underline-offset: 3px;
