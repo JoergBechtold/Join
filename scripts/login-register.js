@@ -23,6 +23,15 @@ function addFadeInAnimation(element) {
   element.style.animation = 'fadeIn 0.8s ease-in-out forwards';
 }
 
+function showSignUp() {
+  const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
+
+  loginContainerRef.classList.add('d-none');
+  navLogInRef.classList.add('d-none');
+  signUpContainerRef.classList.add('d-flex');
+  removeAnimation();
+}
+
 function removeAnimation() {
   const { navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
 
@@ -34,19 +43,14 @@ function removeAnimation() {
   footerLoginRegisterRef.style.opacity = 'unset';
 }
 
-function showSignUp() {
-  const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
-
-  loginContainerRef.classList.add('d-none');
-  navLogInRef.classList.add('d-none');
-  signUpContainerRef.classList.add('d-flex');
-  removeAnimation();
-}
-
 function showLogIn() {
   const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
 
   loginContainerRef.classList.remove('d-none');
   signUpContainerRef.classList.remove('d-flex');
   navLogInRef.classList.remove('d-none');
+}
+
+function acceptCheckbox() {
+  const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
 }

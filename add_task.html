@@ -1,134 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Join</title>
-    
-        <!-- Embedding scripts -->
-        <!-- Scripts/templates must always be included before the normal scripts.js! -->
-        <script src="scripts/database.js"></script>
-        <script src="scripts/templates.js"></script>
-        <script src="script.js"></script>
-    
-        <!-- Embedding the favicon -->
-        <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
-    
-        <!-- Embedding the css -->
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="assets/fonts/fonts.css" />
-        <link rel="stylesheet" href="/styles/add_task.css" />
-        <link rel="stylesheet" href="/styles/assets.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
 
-      </head>
+    <!-- Embedding scripts -->
+    <!-- Scripts/templates must always be included before the normal scripts.js! -->
+    <script src="scripts/database.js"></script>
+    <script src="scripts/templates.js"></script>
+    <script src="script.js"></script>
 
+    <!-- Embedding the favicon -->
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
 
-<body class="body-add-task">
-<div id="header-container"></div>
+    <!-- Embedding the css -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="/styles/add_task.css" />
+    <link rel="stylesheet" href="/styles/assets.css" />
+  </head>
 
-<main class="main-add-task">
-  <h1 class="h1-add-task">Add Task</h1>
+  <body class="body-add-task">
+    <div id="header-container"></div>
 
-  <form>
-    <div class="add-task-content">
-      <div class="form-column left-container">
-        <div class="form-group">
-          <label for="title">Title <span class="red">*</span></label>
-          <input class="input-base" type="text" name="title" placeholder="Enter a title" required>
-        </div>
+    <main class="main-add-task">
+      <h1 class="h1-add-task">Add Task</h1>
 
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
-        </div>
+      <form>
+        <div class="add-task-content">
+          <div class="form-column left-container">
+            <div class="form-group">
+              <label for="title">Title <span class="red">*</span></label>
+              <input class="input-base" type="text" name="title" placeholder="Enter a title" required />
+            </div>
 
-        <div class="form-group">
-          <label for="due-date">Due date <span class="red">*</span></label>
-          <div class="input-container">
-            <input class="input-base" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
-            <img class="input-base-icon" src="/assets/icons/event.svg" alt="Calendar">
-          </div>
-        </div> 
-        
-      </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
+            </div>
 
-      <div class="vertical-line"></div>
-
-
-      <div class="form-column right-container">
-      
-        <div class="form-group">
-          <label>Prio</label>
-          <div class="prio-buttons">
-            <button type="button" class="prio">
-              Urgent
-              <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon">
-            </button>
-            <button type="button" class="prio orange">
-              Medium
-              <img src="/assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon">
-            </button>
-            <button type="button" class="prio">
-              Low
-              <img src="/assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon">
-            </button>
-          </div>
-        </div>
-      
-          <div class="form-group">
-            <label for="assigned">Assigned to</label>
-            <select class="select-base" name="assigned">
-              <option value="" disabled selected>Select contacts to assign</option>
-              <option value="contact1">Contact 1</option>
-              <option value="contact2">Contact 2</option>
-              <!-- Add more options as needed -->
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="category">Category <span class="red">*</span></label>
-            <select class="select-base" name="category" required>
-              <option value="" disabled selected>Select task category</option>
-              <!-- Add categories as needed -->
-              <option value="work">Work</option>
-              <option value="personal">Personal</option>
-            </select>
-          </div>
-
-
-          <div class="form-group">
-            <label for="subtasks">Subtasks</label>
-            <div class="input-container">
-              <input class="input-base" type="text" name="subtasks" placeholder="Add new subtask">
-              <img class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask">
+            <div class="form-group">
+              <label for="due-date">Due date <span class="red">*</span></label>
+              <div class="input-container">
+                <input class="input-base" type="text" name="due-date" placeholder="dd/mm/yyyy" required />
+                <img class="input-base-icon" src="/assets/icons/event.svg" alt="Calendar" />
+              </div>
             </div>
           </div>
-          
+
+          <div class="vertical-line"></div>
+
+          <div class="form-column right-container">
+            <div class="form-group">
+              <label>Prio</label>
+              <div class="prio-buttons">
+                <button type="button" class="prio">
+                  Urgent
+                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" />
+                </button>
+                <button type="button" class="prio orange">
+                  Medium
+                  <img src="/assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" />
+                </button>
+                <button type="button" class="prio">
+                  Low
+                  <img src="/assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" />
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="assigned">Assigned to</label>
+              <select class="select-base" name="assigned">
+                <option value="" disabled selected>Select contacts to assign</option>
+                <option value="contact1">Contact 1</option>
+                <option value="contact2">Contact 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category <span class="red">*</span></label>
+              <select class="select-base" name="category" required>
+                <option value="" disabled selected>Select task category</option>
+                <!-- Add categories as needed -->
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="subtasks">Subtasks</label>
+              <div class="input-container">
+                <input class="input-base" type="text" name="subtasks" placeholder="Add new subtask" />
+                <img class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask" />
+              </div>
+            </div>
+          </div>
         </div>
 
+        <div class="footer-add-task">
+          <div class="required-text"><span class="red">*</span> This field is required</div>
+          <div class="align-with-gap">
+            <button type="button" class="button-clear-white align">
+              Clear
+              <div class="button-clear-white-img-box">
+                <img class="button-clear-white-standard-img" src="/assets/icons/cancel.svg" alt="Clear" />
+                <img class="button-clear-white-hover-img" src="/assets/icons/x-mark-blue.svg" alt="Clear" />
+              </div>
+            </button>
+            <button type="submit" class="button-create-task-gray align">
+              Create Task
+              <img src="/assets/icons/check.svg" alt="Check" />
+            </button>
+          </div>
+        </div>
+      </form>
+    </main>
 
-    </div>
-
-    
-
-    <div class="footer-add-task">
-      <div class="required-text"><span class="red">*</span> This field is required </div>
-      <div class="align-with-gap">
-        <button type="button" class="button-clear-white align">
-          Clear
-          <img  class="button-clear-white-standard-img" src="/assets/icons/cancel.svg" alt="Clear" >
-          <img class="button-clear-white-hover-img" src="/assets/icons/x-mark-blue.svg" alt="Clear" >
-        </button>
-        <button type="submit" class="button-create-task-gray align ">
-          Create Task
-          <img src="/assets/icons/check.svg" alt="Check" >
-        </button>
-      </div>
-    </div>
-
-  </form>
-</main>
-  
-  <script src="./scripts/load-header.js"></script>
-</body>
+    <script src="./scripts/load-header.js"></script>
+  </body>
 </html>

@@ -189,6 +189,18 @@ button[disabled]:hover {
   box-shadow: var(--box-shadow-button);
 }
 
+.button-clear-white-img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  aspect-ratio: 1 / 1;
+}
+
+.button-clear-white-img-box img {
+  display: block;
+}
+
 .button-clear-white img.button-clear-white-hover-img {
   display: none;
 }
@@ -198,7 +210,7 @@ button[disabled]:hover {
 }
 
 .button-clear-white:hover img.button-clear-white-hover-img {
-  display: flex;
+  display: block;
 }
 
 /* button save gray */
