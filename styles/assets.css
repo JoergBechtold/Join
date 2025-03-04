@@ -198,7 +198,7 @@ button[disabled]:hover {
 }
 
 .button-clear-white:hover img.button-clear-white-hover-img {
-  display: inline;
+  display: flex;
 }
 
 /* button save gray */
