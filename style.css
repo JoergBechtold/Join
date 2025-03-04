@@ -73,6 +73,9 @@ a {
   --transition-125ms: 125ms;
   --transition-hover-effect: all 100ms ease-in-out;
 
+  /* animation */
+  --animation-login-overlay: fadeIn 1s ease-in-out forwards;
+
   /* hover-scale */
   --scale-hover: 1.01;
 
