@@ -25,9 +25,10 @@ a {
   --light-gray-placeholder: #d1d1d1;
   --light-gray-bg: #f6f7f8;
   --primary-color-gray: #2a3647;
+  --primary-color-dark-gray: #091931;
   --primary-color-gray-hover: ;
   --blue: #29abe2;
-  --light-blue: #29abe2;
+  /* --light-blue: #29abe2; */
   --gray-a-links: #a8a8a8;
   --red: #ff001f;
 
@@ -50,7 +51,9 @@ a {
   --border-radius-buttons: 8px;
   --border-radius-input-fields: 10px;
   --border-input-fields: 1px solid #d1d1d1;
-  --border-buttons: 1px solid #2a3647;
+  --border-buttons-gray: 1px solid #2a3647;
+  --border-buttons-dark-gray: 1px solid #091931;
+  --border-buttons-blue: 1px solid #29abe2;
 
   /* font-size */
   --font-size-14: 14px;
