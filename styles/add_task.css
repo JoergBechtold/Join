@@ -73,7 +73,7 @@ body {
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-20);
     background-color: white;
-    width: 422px;
+    width: auto;
     height: 48px;
     border-radius: var(--border-radius-input-fields);
     border: var(--border-input-fields);
@@ -82,7 +82,7 @@ body {
 
 
 .textarea-base {
-  width: 422px;
+  width: auto;
   height: 168px;
   padding: 12px 21px 12px 21px;
   border-radius: var(--border-radius-input-fields);
