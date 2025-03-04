@@ -168,7 +168,7 @@ button[disabled]:hover {
 
 /* button clear white */
 .button-clear-white {
-  gap: 10px;
+  gap: 4px;
   white-space: nowrap;
   border-radius: var(--border-radius-input-fields);
   background-color: white;
