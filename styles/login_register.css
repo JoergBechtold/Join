@@ -237,19 +237,6 @@
   transform: scale(1.1);
 }
 
-/* .button-sign-up:disabled,
-.button-sign-up[disabled] {
-  cursor: not-allowed;
-} */
-
-/* .button-sign-up:disabled:hover,
-.button-sign-up[disabled]:hover {
-  background-color: var(--primary-color-gray);
-  cursor: not-allowed;
-  scale: unset;
-  box-shadow: unset;
-} */
-
 .checkbox-accept-privacy-policy {
   box-sizing: border-box;
   width: 100%;

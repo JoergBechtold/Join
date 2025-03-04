@@ -20,6 +20,10 @@
   overflow: hidden;
 }
 
+.width-422px {
+  width: 422px;
+}
+
 a {
   text-decoration: none;
 }
