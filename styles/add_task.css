@@ -1,7 +1,7 @@
 body {
-    height: 100dvh;
-    width: 100%;
-    background-color: var(--light-gray-bg);
+  height: 100dvh;
+  width: 100%;
+  background-color: var(--light-gray-bg);
 }
 
 .main-add-task {
@@ -11,85 +11,85 @@ body {
 }
 
 .h1-add-task {
-    font-size: var(--font-size-61);
-    font-weight: var(--font-weight-700);
-    margin-bottom: 40px; /* sollte einheitlich sein*/
+  font-size: var(--font-size-61);
+  font-weight: var(--font-weight-700);
+  margin-bottom: 40px; /* sollte einheitlich sein*/
 }
 
-
 .footer-add-task {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-task-content {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 100px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 100px;
 }
 
 .vertical-line {
-    width: 2px;
-    background-color: var(--light-gray-placeholder); 
-    margin: 0 40px;
-    height: auto;
+  width: 2px;
+  background-color: var(--light-gray-placeholder);
+  margin: 0 40px;
+  height: auto;
 }
 
-.left-container, .right-container {
-    flex: 1;
+.left-container,
+.right-container {
+  flex: 1;
 }
 
 .form-group {
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .form-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .red {
-    color: var(--red);
-  }
+  color: var(--red);
+}
 
 .input-container {
-    position: relative; 
-    width: fit-content; 
+  position: relative;
+  width: fit-content;
 }
 
 .input-base-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .select-base {
-    padding: 12px 21px; 
-    padding-right: 40px; /* Platz für das Dropdown-Symbol */
-    appearance: none; 
-    background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center;
-    font-weight: var(--font-weight-400);
-    font-size: var(--font-size-18);
-    background-color: white;
+  padding: 12px 21px;
+  padding-right: 40px; /* Platz für das Dropdown-Symbol */
+  appearance: none;
+  background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center;
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-18);
+  background-color: white;
 }
 
 .textarea-base {
-    width: 422px;
-    height: 168px;
-    padding: 12px 21px 12px 21px;
-    border-radius: var(--border-radius-input-fields);
-    border: var(--border-input-fields);
-  }
+  width: 422px;
+  height: 168px;
+  padding: 12px 21px 12px 21px;
+  border-radius: var(--border-radius-input-fields);
+  border: var(--border-input-fields);
+}
 
 .textarea-base::placeholder {
-    transform: translateY(2px);
-    display: flex;
-    align-items: center;
-    font-weight: var(--font-weight-400);
-    font-size: var(--font-size-20);
-    color: var(--light-gray-placeholder);
+  transform: translateY(2px);
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-20);
+  color: var(--light-gray-placeholder);
 }
 
 .textarea-base:focus-visible {
@@ -99,23 +99,22 @@ body {
 }
 
 .select-base:focus-visible {
-    outline: none;
-    border: 1px solid var(--blue);
-    opacity: 1;
+  outline: none;
+  border: 1px solid var(--blue);
+  opacity: 1;
 }
 
 .prio {
-    width: 133px;
-    height: 48px;
-    border-radius: var(--border-radius-input-fields);
-    border: var(--border-input-fields);
-    background-color: white;
-    font-weight: var(--font-weight-400);
-    font-size: var(--font-size-18);
-    display: flex;
-    align-items:center;
-    justify-content: center;
-
+  width: 133px;
+  height: 48px;
+  border-radius: var(--border-radius-input-fields);
+  border: var(--border-input-fields);
+  background-color: white;
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .prio-buttons {
@@ -124,12 +123,7 @@ body {
 }
 
 .prio-icon {
-    width: 20px; 
-    height: 14px; 
-    margin-left: 5px; 
+  width: 20px;
+  height: 14px;
+  margin-left: 5px;
 }
-
-
-
-
-
