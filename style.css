@@ -72,9 +72,11 @@ a {
   --transition-75ms: 75ms;
   --transition-125ms: 125ms;
   --transition-hover-effect: all 100ms ease-in-out;
+  --transition-animations-overlay: all 1s ease;
 
   /* animation */
-  --animation-login-overlay: fadeIn 1s ease-in-out forwards;
+  --animation-opacity-overlay: fadeIn 1s ease-in-out forwards;
+  --animation-logo-overlay: logoAnimation 1s ease forwards;
 
   /* hover-scale */
   --scale-hover: 1.01;

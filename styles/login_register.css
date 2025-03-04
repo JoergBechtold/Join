@@ -18,8 +18,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all 1s ease;
-  animation: logoAnimation 1s ease forwards;
+  transition: var(--transition-animations-overlay);
+  /* animation: logoAnimation 1s ease forwards; */
 }
 
 .animation-join-logo img {
@@ -51,7 +51,7 @@
   width: 279px;
   height: 49px;
   gap: 35px;
-  animation: var(--animation-login-overlay);
+  /* animation: var(--animation-opacity-overlay); */
   opacity: 0;
 }
 
@@ -89,7 +89,7 @@
   background-color: white;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
-  animation: var(--animation-login-overlay);
+  /* animation: var(--animation-opacity-overlay); */
   opacity: 0;
 }
 
@@ -177,7 +177,7 @@
   box-shadow: var(--box-shadow-button);
 }
 
-.footer {
+.footer-login-register {
   position: absolute;
   bottom: 50px;
   display: flex;
@@ -186,17 +186,17 @@
   background-color: var(--light-gray-bg);
   height: 35px;
   width: 246px;
-  animation: var(--animation-login-overlay);
+  /* animation: var(--animation-opacity-overlay); */
   opacity: 0;
 }
 
-.footer > a {
+.footer-login-register a {
   color: var(--gray-a-links);
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-400);
 }
 
-.footer > a:hover {
+.footer-login-register a:hover {
   font-weight: var(--font-weight-700);
   color: var(--blue);
   scale: var(--scale-hover);
