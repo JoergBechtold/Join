@@ -61,15 +61,30 @@ body {
 }
 
 .select-base {
-    padding: 12px 21px; /* Platz für Text */
+    padding: 12px 21px; 
     padding-right: 40px; /* Platz für das Dropdown-Symbol */
     appearance: none; 
-    background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center; 
+    background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-18);
+}
+
+.textarea-base {
+    width: 422px;
+    height: 168px;
+    padding: 12px 21px 12px 21px;
+    border-radius: var(--border-radius-input-fields);
+    border: var(--border-input-fields);
   }
-  
 
-
-  
+.textarea-base::placeholder {
+    transform: translateY(2px);
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+    color: var(--light-gray-placeholder);
+}  
 
 
 
