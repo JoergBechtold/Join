@@ -105,16 +105,29 @@ body {
 }
 
 .prio {
-    width: 138px;
+    width: 133px;
     height: 48px;
     border-radius: var(--border-radius-input-fields);
     border: var(--border-input-fields);
     background-color: white;
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-18);
+    display: flex;
+    align-items:center;
+    justify-content: center;
 
 }
 
+.prio-buttons {
+  display: flex;
+  gap: 10px; /* Abstand zwischen den Buttons */
+}
+
+.prio-icon {
+    width: 20px; 
+    height: 14px; 
+    margin-left: 5px; 
+}
 
 
 
