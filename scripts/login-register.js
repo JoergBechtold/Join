@@ -13,5 +13,5 @@ function showAnimationOverlay() {
 }
 
 function applyFadeInAnimation(element) {
-  element.style.animation = 'fadeIn 1s ease-in-out forwards';
+  element.style.animation = 'fadeIn 0.8s ease-in-out forwards';
 }
