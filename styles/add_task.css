@@ -1,21 +1,20 @@
 body {
     height: 100dvh;
     width: 100%;
-    background-color: var(--light-gray-bg);
+}
+
+.main-add-task {
+  width: var(--main-container-width);
+  margin-left: var(--margin-left-main);
+  padding-top: var(--padding-top-main);
 }
 
 .h1-add-task {
-    font-size: 72px;
+    font-size: var(--font-size-61);
+    font-weight: var(--font-weight-700);
     margin-bottom: 40px; /* sollte einheitlich sein*/
 }
 
-main {
-    width: 1014px;
-    position: relative;
-    top: 311px;
-    left: 328px;
-
-}
 
 .footer-add-task {
     display: flex;
@@ -52,23 +51,11 @@ main {
     gap: 20px;
 }
 
-.add-task-subtasks {
-    position: relative;
-}
+.red {
+    color: var(--red);
+  }
+  
 
-.subtasks-input {
-    width: 100%;
-}
-
-.add-subtask-icon {
-    position: absolute;
-    right: 5px; 
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px; 
-    height: auto;
-    cursor: pointer; 
-}
 
 
 

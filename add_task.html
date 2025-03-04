@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="assets/fonts/fonts.css" />
         <link rel="stylesheet" href="/styles/add_task.css" />
+        <link rel="stylesheet" href="/styles/assets.css" />
 
       </head>
 
@@ -25,30 +26,25 @@
 <body>
 <div id="header-container"></div>
 
-<main>
+<main class="main-add-task">
   <h1 class="h1-add-task">Add Task</h1>
 
   <form>
     <div class="add-task-content">
       <div class="form-column left-container">
         <div class="form-group">
-          <label for="title">Title*</label>
-          <input type="text" name="title" placeholder="Enter a title" required>
+          <label for="title">Title <span class="red">*</span></label>
+          <input class="input-base" type="text" name="title" placeholder="Enter a title" required>
         </div>
 
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea name="description" placeholder="Enter a Description"></textarea>
+          <textarea class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="assigned">Assigned to</label>
-          <select  name="assigned">
-            <option value="" disabled selected>Select contacts to assign</option>
-            <option value="contact1">Contact 1</option>
-            <option value="contact2">Contact 2</option>
-            <!-- Add more options as needed -->
-          </select>
+          <label for="due-date">Due date <span class="red">*</span></label>
+          <input class="input-base" type="date" name="due-date" required>
         </div>
       </div>
 
@@ -56,11 +52,7 @@
 
 
       <div class="form-column right-container">
-          <div class="form-group">
-            <label for="due-date">Due date*</label>
-            <input type="date" name="due-date" required>
-          </div>
-
+      
           <div class="form-group prio-group">
             <label>Prio</label>
             <div class="prio-buttons">
@@ -71,8 +63,18 @@
           </div>
 
           <div class="form-group">
-            <label for="category">Category*</label>
-            <select  name="category" required>
+            <label for="assigned">Assigned to</label>
+            <select class="input-base" name="assigned">
+              <option value="" disabled selected>Select contacts to assign</option>
+              <option value="contact1">Contact 1</option>
+              <option value="contact2">Contact 2</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category <span class="red">*</span></label>
+            <select class="input-base" name="category" required>
               <option value="" disabled selected>Select task category</option>
               <!-- Add categories as needed -->
               <option value="work">Work</option>
@@ -83,9 +85,11 @@
 
           <div class="form-group subtasks">
             <label for="subtasks">Subtasks</label>
-            <div class="add-task-subtasks">
-            <input class="subtasks-input" type="text"  name="subtasks" placeholder="Add new subtask">
-            <img src="/assets/icons/add.png" alt="Add subtask" class="add-subtask-icon">
+            <div class="input-base-container">
+            <input class="subtasks-input input-base" type="text"  name="subtasks" placeholder="Add new subtask">
+            <div class="input-base-icon">
+              <img src="/assets/icons/add.svg" alt="Add subtask" />
+            </div>
             </div>
           </div>
         </div>
@@ -96,7 +100,7 @@
     
 
     <div class="footer-add-task">
-      <div class="required-text">* This field is required </div>
+      <div class="required-text"><span class="red">*</span> This field is required </div>
       <div>
         <button type="button" class="cancel-btn">Clear x</button>
         <button type="submit" class="create-btn">Create Task</button>
