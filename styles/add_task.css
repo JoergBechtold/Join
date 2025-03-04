@@ -1,6 +1,7 @@
 body {
     height: 100dvh;
     width: 100%;
+    background-color: var(--light-gray-bg);
 }
 
 .main-add-task {
@@ -60,6 +61,10 @@ body {
     width: fit-content; 
 }
 
+.input-base-icon {
+    cursor: pointer;
+}
+
 .select-base {
     padding: 12px 21px; 
     padding-right: 40px; /* Platz für das Dropdown-Symbol */
@@ -67,6 +72,7 @@ body {
     background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center;
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-18);
+    background-color: white;
 }
 
 .textarea-base {
@@ -96,7 +102,19 @@ body {
     outline: none;
     border: 1px solid var(--blue);
     opacity: 1;
-  }
+}
+
+.prio {
+    width: 138px;
+    height: 48px;
+    border-radius: var(--border-radius-input-fields);
+    border: var(--border-input-fields);
+    background-color: white;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-18);
+
+}
+
 
 
 
