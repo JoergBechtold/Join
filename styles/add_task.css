@@ -84,7 +84,19 @@ body {
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-20);
     color: var(--light-gray-placeholder);
-}  
+}
+
+.textarea-base:focus-visible {
+  outline: none;
+  border: 1px solid var(--blue);
+  opacity: 1;
+}
+
+.select-base:focus-visible {
+    outline: none;
+    border: 1px solid var(--blue);
+    opacity: 1;
+  }
 
 
 
