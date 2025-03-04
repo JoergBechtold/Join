@@ -277,7 +277,8 @@ input {
   color: black;
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-20);
-  width: 440px;
+  /* width: 440px; */
+  width: auto;
   height: 48px;
   padding: 12px 21px 12px 21px;
   border-radius: var(--border-radius-input-fields);
