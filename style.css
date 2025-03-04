@@ -12,6 +12,10 @@
   display: none;
 }
 
+.d-flex {
+  display: flex;
+}
+
 .no-scroll {
   overflow: hidden;
 }

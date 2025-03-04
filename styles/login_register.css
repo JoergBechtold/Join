@@ -19,7 +19,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   transition: var(--transition-animations-overlay);
-  /* animation: logoAnimation 1s ease forwards; */
 }
 
 .animation-join-logo img {
@@ -51,11 +50,10 @@
   width: 279px;
   height: 49px;
   gap: 35px;
-  /* animation: var(--animation-opacity-overlay); */
   opacity: 0;
 }
 
-.nav-log-in a button {
+.nav-log-in button {
   border-radius: var(--border-radius-buttons);
   padding: 15px 16px 15px 16px;
   background-color: var(--primary-color-gray);
@@ -65,7 +63,7 @@
   transition: var(--transition-hover-effect);
 }
 
-.nav-log-in a button:hover {
+.nav-log-in button:hover {
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
 }
@@ -89,7 +87,6 @@
   background-color: white;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
-  /* animation: var(--animation-opacity-overlay); */
   opacity: 0;
 }
 
@@ -186,7 +183,6 @@
   background-color: var(--light-gray-bg);
   height: 35px;
   width: 246px;
-  /* animation: var(--animation-opacity-overlay); */
   opacity: 0;
 }
 
