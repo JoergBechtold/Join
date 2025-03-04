@@ -66,6 +66,7 @@ body {
 }
 
 .select-base {
+<<<<<<< HEAD
   padding: 12px 16px;
   padding-right: 40px; /* Platz für das Dropdown-Symbol */
   appearance: none;
@@ -78,6 +79,20 @@ body {
   border-radius: var(--border-radius-input-fields);
   border: var(--border-input-fields);
   color: black;
+=======
+    padding: 12px 16px; 
+    padding-right: 40px; /* Platz für das Dropdown-Symbol */
+    appearance: none; 
+    background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+    background-color: white;
+    width: 422px;
+    height: 48px;
+    border-radius: var(--border-radius-input-fields);
+    border: var(--border-input-fields);
+    color: black;
+>>>>>>> feeb313406f6a166e0a59b72abbe65427a11ca38
 }
 
 .textarea-base {
@@ -136,3 +151,9 @@ body {
 .orange {
   background-color: #ffa800;
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> feeb313406f6a166e0a59b72abbe65427a11ca38
