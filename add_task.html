@@ -64,7 +64,7 @@
 
           <div class="form-group">
             <label for="assigned">Assigned to</label>
-            <select class="input-base" name="assigned">
+            <select class="input-base select-base" name="assigned">
               <option value="" disabled selected>Select contacts to assign</option>
               <option value="contact1">Contact 1</option>
               <option value="contact2">Contact 2</option>
@@ -74,7 +74,7 @@
 
           <div class="form-group">
             <label for="category">Category <span class="red">*</span></label>
-            <select class="input-base" name="category" required>
+            <select class="input-base select-base" name="category" required>
               <option value="" disabled selected>Select task category</option>
               <!-- Add categories as needed -->
               <option value="work">Work</option>
@@ -83,15 +83,14 @@
           </div>
 
 
-          <div class="form-group subtasks">
+          <div class="form-group">
             <label for="subtasks">Subtasks</label>
-            <div class="input-base-container">
-            <input class="subtasks-input input-base" type="text"  name="subtasks" placeholder="Add new subtask">
-            <div class="input-base-icon">
-              <img src="/assets/icons/add.svg" alt="Add subtask" />
-            </div>
+            <div class="input-container">
+              <input class="input-base" type="text" name="subtasks" placeholder="Add new subtask">
+              <img class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask">
             </div>
           </div>
+          
         </div>
 
 

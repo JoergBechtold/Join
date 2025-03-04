@@ -54,6 +54,21 @@ body {
 .red {
     color: var(--red);
   }
+
+.input-container {
+    position: relative; 
+    width: fit-content; 
+}
+
+.select-base {
+    padding: 12px 21px; /* Platz für Text */
+    padding-right: 40px; /* Platz für das Dropdown-Symbol */
+    appearance: none; 
+    background: url('/assets/icons/arrow_drop_down.svg') no-repeat right 15px center; 
+  }
+  
+
+
   
 
 
