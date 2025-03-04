@@ -14,6 +14,15 @@ button {
   border: unset;
 }
 
+button:disabled:hover,
+button[disabled]:hover {
+  background-color: var(--primary-color-gray);
+  cursor: not-allowed;
+  scale: unset;
+  box-shadow: unset;
+}
+
+/* button primary gray */
 .button-primary-gray {
   white-space: nowrap;
   border-radius: var(--border-radius-buttons);
@@ -31,6 +40,7 @@ button {
   box-shadow: var(--box-shadow-button);
 }
 
+/* button primary dark gray */
 .button-primary-dark-gray {
   white-space: nowrap;
   border-radius: var(--border-radius-buttons);
@@ -48,6 +58,7 @@ button {
   box-shadow: var(--box-shadow-button);
 }
 
+/* button cancel white gray */
 .button-cancel-white-gray {
   gap: 4px;
   white-space: nowrap;
@@ -69,6 +80,7 @@ button {
   box-shadow: var(--box-shadow-button);
 }
 
+/* button create task gray */
 .button-create-task-gray {
   gap: 4px;
   white-space: nowrap;
@@ -88,6 +100,7 @@ button {
   box-shadow: var(--box-shadow-button);
 }
 
+/* button add new contact gray */
 .button-add-new-contact-gray {
   gap: 16px;
   white-space: nowrap;
@@ -107,6 +120,7 @@ button {
   box-shadow: var(--box-shadow-button);
 }
 
+/* button add task gray */
 .button-add-task-gray {
   gap: 16px;
   white-space: nowrap;
@@ -121,6 +135,47 @@ button {
 }
 
 .button-add-task-gray:hover {
+  scale: var(--scale-hover);
+  color: var(--blue);
+  box-shadow: var(--box-shadow-button);
+}
+
+/* button delete white */
+.button-delete-white {
+  gap: 10px;
+  white-space: nowrap;
+  border-radius: var(--border-radius-buttons);
+  background-color: white;
+  box-shadow: none;
+  color: var(--primary-color-gray);
+  transition: var(--transition-hover-effect);
+  font-size: var(--font-size-21);
+  padding: 15px 24px 15px 24px;
+  font-weight: var(--font-weight-400);
+}
+
+.button-delete-white:hover {
+  scale: var(--scale-hover);
+  color: var(--blue);
+  border-color: var(--blue);
+  box-shadow: var(--box-shadow-button);
+}
+
+/* button save gray */
+.button-save-gray {
+  gap: 4px;
+  white-space: nowrap;
+  border-radius: var(--border-radius-input-fields);
+  background-color: var(--primary-color-gray);
+  box-shadow: none;
+  color: white;
+  transition: var(--transition-hover-effect);
+  font-size: var(--font-size-21);
+  padding: 16px;
+  font-weight: var(--font-weight-700);
+}
+
+.button-save-gray:hover {
   scale: var(--scale-hover);
   color: var(--blue);
   box-shadow: var(--box-shadow-button);
@@ -191,7 +246,8 @@ input {
   gap: var(--input-gap);
 }
 
-.input-base {
+.input-base,
+.input-base-textarea {
   color: black;
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-20);
@@ -220,7 +276,8 @@ input {
 
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
-.input-base[type='text']:focus-visible {
+.input-base[type='text']:focus-visible,
+.input-base-textarea:focus-visible {
   outline: none;
   border: 1px solid var(--blue);
   opacity: 1;
@@ -228,13 +285,15 @@ input {
 
 .input-base[type='email']:invalid:not(:placeholder-shown),
 .input-base[type='password']:invalid:not(:placeholder-shown),
-.input-base[type='text']:invalid:not(:placeholder-shown) {
+.input-base[type='text']:invalid:not(:placeholder-shown),
+.input-base-textarea:invalid:not(:placeholder-shown) {
   outline: none;
   border: 1px solid var(--red);
   opacity: 1;
 }
 
-.input-base::placeholder {
+.input-base::placeholder,
+.input-base-textarea::placeholder {
   transform: translateY(2px);
   display: flex;
   align-items: center;
