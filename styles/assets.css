@@ -247,7 +247,7 @@ input {
 }
 
 .input-base,
-.input-base-textarea {
+.textarea-base {
   color: black;
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-20);
@@ -277,7 +277,7 @@ input {
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
 .input-base[type='text']:focus-visible,
-.input-base-textarea:focus-visible {
+.textarea-base:focus-visible {
   outline: none;
   border: 1px solid var(--blue);
   opacity: 1;
@@ -286,14 +286,14 @@ input {
 .input-base[type='email']:invalid:not(:placeholder-shown),
 .input-base[type='password']:invalid:not(:placeholder-shown),
 .input-base[type='text']:invalid:not(:placeholder-shown),
-.input-base-textarea:invalid:not(:placeholder-shown) {
+.textarea-base:invalid:not(:placeholder-shown) {
   outline: none;
   border: 1px solid var(--red);
   opacity: 1;
 }
 
 .input-base::placeholder,
-.input-base-textarea::placeholder {
+.textarea-base::placeholder {
   transform: translateY(2px);
   display: flex;
   align-items: center;
