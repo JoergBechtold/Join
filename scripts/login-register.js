@@ -5,6 +5,7 @@ function getIdRefs() {
     loginContainerRef: document.getElementById('login_container'),
     signUpContainerRef: document.getElementById('sign_up_container'),
     footerLoginRegisterRef: document.getElementById('footer_login_register'),
+    imgPasswordLogInRef: document.getElementById('img_password_log_in'),
   };
 }
 
@@ -53,4 +54,19 @@ function showLogIn() {
 
 function acceptCheckbox() {
   const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
+}
+
+function togglePasswordVisibility(inputId) {
+  const { imgPasswordLogInRef } = getIdRefs();
+
+  const passwordInput = document.getElementById(inputId);
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    imgPasswordLogInRef.src = 'assets/icons/visibility-eye.svg';
+    imgPasswordLogInRef.alt = 'Visibility Eye Icon';
+  } else {
+    passwordInput.type = 'password';
+    imgPasswordLogInRef.src = 'assets/icons/lock.svg';
+    imgPasswordLogInRef.alt = 'Lock Icon';
+  }
 }

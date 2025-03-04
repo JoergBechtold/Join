@@ -40,12 +40,6 @@
             <div class="vector-login"><img src="assets/icons/vector-horizontal.svg" alt="Blue dividing line" /></div>
           </div>
 
-          <!-- <button type="button" class="button-clear-white align">
-            Clear
-            <img class="button-clear-white-standard-img" src="/assets/icons/cancel.svg" alt="X Icon" />
-            <img class="button-clear-white-hover-img" src="/assets/icons/x-mark-blue.svg" alt="X Icon" />
-          </button> -->
-
           <form class="form width-422px">
             <label class="input-base-container" for="email_log_in">
               <input class="input-base" id="email_log_in" type="email" required placeholder="Email" />
@@ -56,12 +50,18 @@
 
             <label class="input-base-container" for="password_log_in">
               <input class="input-base" id="password_log_in" type="password" required placeholder="Password" />
-              <img class="input-base-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
+              <img
+                onclick="togglePasswordVisibility('password_log_in')"
+                class="input-base-icon cursor-pointer"
+                src="assets/icons/lock.svg"
+                alt="Lock Icon"
+                id="img_password_log_in"
+              />
             </label>
 
             <div class="button-container">
               <button class="button-log-in">Log in</button>
-              <a href="summary.html"><button class="button-guest-log-in">Guest Log in</button></a>
+              <a href="summary.html"><button class="button-guest-log-in" formaction="summary.html" formnovalidate>Guest Log in</button></a>
             </div>
           </form>
         </div>
@@ -90,18 +90,28 @@
             <label class="input-base-container" for="email_sign-up">
               <input class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
               <div class="input-base-icon">
-                <img src="assets/icons/mail.svg" alt="Brief Icon" />
+                <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="password_sign_up">
               <input class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
-              <img class="input-base-icon" src="assets/icons/lock.svg" alt="Schloss Icon" />
+              <img
+                onclick="togglePasswordVisibility('password_sign_up')"
+                class="input-base-icon cursor-pointer"
+                src="assets/icons/lock.svg"
+                alt="Lock Icon"
+              />
             </label>
 
             <label class="input-base-container" for="confirm_password">
               <input class="input-base" id="confirm_password" type="password" required placeholder="Confirm Password" />
-              <img class="input-base-icon" src="assets/icons/lock.svg" alt="Schloss Icon" />
+              <img
+                onclick="togglePasswordVisibility('confirm_password')"
+                class="input-base-icon cursor-pointer"
+                src="assets/icons/lock.svg"
+                alt="Lock Icon"
+              />
             </label>
 
             <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
@@ -123,8 +133,8 @@
     </main>
 
     <footer class="footer-login-register" id="footer_login_register">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Legal notice</a>
+      <a href="privacy_policy.html">Privacy Policy</a>
+      <a href="legal_notice.html">Legal notice</a>
     </footer>
   </body>
 </html>
