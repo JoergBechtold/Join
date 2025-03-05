@@ -57,8 +57,6 @@
   color: var(--red);
 }
 
-
-
 .input-container {
   position: relative;
   width: 100%;
@@ -92,6 +90,8 @@
   padding: 12px 21px 12px 21px;
   border-radius: var(--border-radius-input-fields);
   border: var(--border-input-fields);
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-20);
 }
 
 .textarea-base::placeholder {
