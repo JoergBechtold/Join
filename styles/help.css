@@ -9,14 +9,22 @@
   padding-top: var(--padding-top-main);
 }
 
-.headline-image {
+.arrow-left img {
   width: 37px;
   height: 37px;
 }
 
-.headline-image:hover {
-  border-color: var(--blue);
+.arrow-left {
+  place-items: center;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.arrow-left:hover {
   background-color: var(--light-gray-bg);
+}
+
+.arrow-left:hover img {
   transform: scale(1.1);
 }
 
