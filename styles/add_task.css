@@ -125,6 +125,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .prio:hover{
@@ -169,3 +170,8 @@
     flex-direction: row;
     gap: 10px;
 }
+
+.active-prio {
+    color: white;
+    font-weight: bold;
+  }

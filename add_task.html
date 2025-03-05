@@ -9,6 +9,7 @@
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
     <script src="scripts/database.js"></script>
     <script src="scripts/templates.js"></script>
+    <script src="scripts/add_task.js"></script>
     <script src="script.js"></script>
 
     <!-- Embedding the favicon -->
@@ -55,17 +56,17 @@
             <div class="form-group">
               <label>Priority</label>
               <div class="prio-buttons">
-                <button type="button" class="prio">
+                <button type="button" class="prio" id="urgent_button" onclick="setPriority('urgent_button')">
                   Urgent
-                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" />
+                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img"/>
                 </button>
-                <button type="button" class="prio">
+                <button type="button" class="prio" id="medium_button" onclick="setPriority('medium_button')">
                   Medium
-                  <img src="/assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" />
+                  <img src="/assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" id="medium_button_img" />
                 </button>
-                <button type="button" class="prio">
+                <button type="button" class="prio" id="low_button" onclick="setPriority('low_button')">
                   Low
-                  <img src="/assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" />
+                  <img src="/assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" id="low_button_img" />
                 </button>
               </div>
             </div>
