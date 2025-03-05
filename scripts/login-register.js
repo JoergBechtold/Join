@@ -1,3 +1,5 @@
+const randomColors = [''];
+
 function getIdRefs() {
   return {
     animationJoinLogoRef: document.getElementById('animation_join_logo'),
@@ -74,10 +76,33 @@ function togglePasswordVisibility(inputId, iconElement) {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
     toggleIcon.src = 'assets/icons/visibility-eye.svg';
-    toggleIcon.alt = 'Password visibility on';
+    toggleIcon.alt = 'Visibility Eye Icon';
   } else {
     passwordInput.type = 'password';
-    toggleIcon.src = 'assets/icons/visibility-eye-off.svg';
-    toggleIcon.alt = 'Password visibility off';
+    toggleIcon.src = 'assets/icons/lock.svg';
+    toggleIcon.alt = 'Lock Icon';
   }
+}
+
+async function handleSignUp () {
+  const name = document.getElementById('name_sign_up').value.trim();
+  const email = document.getElementById('email_sign_up').value.trim();
+  const password = document.getElementById('password_sign_up').value.trim();
+  const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
+
+  if (password !== confirmPassword) {
+    return;
+  }
+
+  const [firstName, ...lastNameParts] = name.split('');
+  const lastName = lastNameParts.join('');
+
+  await createUser(firstName, lastName, email, password, color);
+
+} 
+
+async function createUser (firstname, lastname, email, password, color) {
+  const newUser = {firstname, lastname, username: email, password, color};
+  await postData('user', newUser);
+  await postData('contacts', newUser);
 }
