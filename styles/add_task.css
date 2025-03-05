@@ -123,6 +123,12 @@
   justify-content: center;
 }
 
+.prio:hover{
+  scale: var(--scale-hover);
+  box-shadow: var(--box-shadow-button);
+
+}
+
 .prio-buttons {
   display: flex;
   width: 100%;
