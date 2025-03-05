@@ -25,6 +25,7 @@ button[disabled]:hover {
   cursor: not-allowed;
   scale: unset;
   box-shadow: unset;
+  border: var(--border-buttons-gray);
 }
 
 /* button primary gray */
@@ -38,13 +39,13 @@ button[disabled]:hover {
   font-size: var(--font-size-16);
   padding: 15px 24px 15px 24px;
   font-weight: var(--font-weight-400);
-  /* border: var(--border-buttons-gray); */
+  border: var(--border-buttons-gray);
 }
 
 .button-primary-gray:hover {
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
-  /* border: var(--blue); */
+  border: var(--border-buttons-blue);
 }
 
 /* button primary dark gray */
@@ -89,6 +90,7 @@ button[disabled]:hover {
 
 /* button create task gray */
 .button-create-task-gray {
+  border: var(--border-buttons-gray);
   gap: 4px;
   white-space: nowrap;
   border-radius: var(--border-radius-input-fields);
@@ -106,11 +108,12 @@ button[disabled]:hover {
   color: white;
   box-shadow: var(--box-shadow-button);
   background-color: var(--blue);
+  border: var(--border-buttons-blue);
 }
 
 /* button add new contact gray */
 .button-add-new-contact-gray {
-  /* border: var(--border-buttons-gray); */
+  border: var(--border-buttons-gray);
   gap: 16px;
   white-space: nowrap;
   border-radius: var(--border-radius-input-fields);
@@ -127,12 +130,12 @@ button[disabled]:hover {
   scale: var(--scale-hover);
   color: var(--blue);
   box-shadow: var(--box-shadow-button);
-  /* border: var(--blue); */
+  border: var(--border-buttons-blue);
 }
 
 /* button add task gray */
 .button-add-task-gray {
-  /* border: var(--border-buttons-gray); */
+  border: var(--border-buttons-gray);
   gap: 16px;
   white-space: nowrap;
   border-radius: var(--border-radius-input-fields);
@@ -149,7 +152,7 @@ button[disabled]:hover {
   scale: var(--scale-hover);
   color: var(--blue);
   box-shadow: var(--box-shadow-button);
-  /* border: var(--blue); */
+  border: var(--border-buttons-blue);
 }
 
 /* button delete white */
