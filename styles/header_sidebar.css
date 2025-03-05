@@ -184,5 +184,6 @@
 }
 
 .footer a:hover {
-  color: white;
+  color: #4a90e2;
+  transform: scale(1.1);
 }
