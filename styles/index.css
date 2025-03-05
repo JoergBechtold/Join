@@ -1,0 +1,84 @@
+.main-board {
+    padding-top: var(--padding-top-main);
+    position: absolute;
+    left: 330px;
+}
+
+.headline-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headline-input-container span {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+}
+
+.search-input-add-button-div {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 48px;
+    margin-right: 48px;
+}
+
+.search-input-div {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-inputfield {
+    height: 48px;
+    width: 100%;
+    padding: 8px 64px 8px 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.placeholder {
+    width: 1px;
+    height: 32px;
+    position: absolute;
+    right: 59px;
+    border-left: 1px solid lightgray;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+}
+
+.card-container {
+    width: 100%;
+    height: calc(100% - 113px);
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.drag-area {
+    display: flex;
+    flex-direction: column;
+    width: 252px;
+    gap: 10px;
+    padding-top: 10px;
+    border: none;
+}
+
+.column-title {
+    width: 252px;
+    height: 24px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    display: flex;
+    justify-content: space-between;
+}

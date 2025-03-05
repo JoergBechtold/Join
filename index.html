@@ -18,9 +18,45 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/assets.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
+    <link rel="stylesheet" href="styles/index.css">
   </head>
   <body>
     <!-- hier kommt das board rein al index.html -->
+    <main class="main-board">
+      <div class="headline-input-container">
+        <span>Board</span>
+        <div class="search-input-add-button-div">
+          <div class="search-input-div">
+            <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text">
+            <div class="placeholder"></div>
+            <img src="./assets/icons/search.icon.png" class="search-icon" alt="">
+          </div>
+          <button onclick="openAddTaskForm()" class="button-primary-dark-gray">Add Task +</button>
+        </div>
+        
+      </div>
+
+      <div class="card-container">
+        <div>
+          <span class="column-title">To do<img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event);"></div>
+        </div>
+        <div>
+          <span class="column-title">In Progress<img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')" ondragover="allowDrop(event);"></div>
+        </div>
+        <div>
+          <span class="column-title">Await feedback<img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event);"></div>
+        </div>
+        <div>
+          <span class="column-title">Done</span>
+          <div class="drag-area" id="done" ondrop="moveTo(event, 'done')" ondragover="allowDrop(event);"></div>
+        </div>
+      </div>
+
+    </main>
+
 
     <div id="header_container"></div>
     <script src="./scripts/load-header.js"></script>
