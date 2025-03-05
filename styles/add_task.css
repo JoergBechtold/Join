@@ -5,7 +5,7 @@
 }
 
 .main-add-task {
-  width: var(--main-container-width);
+  max-width: 976px;
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
 }
