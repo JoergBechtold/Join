@@ -13,11 +13,9 @@ body {
     left: 328px;
 }
 
-h1 {
-    color: #004080;
-    text-align: center;
-    font-size: 28px;
- 
+.priv h1 {
+    font-size: var(--font-size-61);
+    font-weight: var(--font-weight-700);
 }
 
 p {

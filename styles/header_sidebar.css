@@ -42,14 +42,18 @@
   gap: 15px;
 }
 
-.header-icons i {
+.header-icons a:hover{
+  transform: scale(1.2);
+}
+
+.header-icons span {
   font-size: 18px;
   color: #888;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
 }
 
-.header-icons i:hover {
+.header-icons span:hover {
   color: #4a90e2;
 }
 
@@ -98,7 +102,7 @@
   transition: 0.3s ease-in-out;
 }
 
-.nav-links a i {
+.nav-links a span {
   width: 15px;
   height: 30px;
   font-size: 30px;
@@ -172,6 +176,11 @@
 .footer a {
   color: var(--gray-a-links);
   font-size: var(--font-size-14);
+  width: 121;
+  height: 35;
+  gap: 8px;
+  padding: 8px;
+
 }
 
 .footer a:hover {
