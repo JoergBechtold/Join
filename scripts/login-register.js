@@ -86,7 +86,7 @@ function togglePasswordVisibility(inputId, iconElement) {
 
 async function handleSignUp () {
   const name = document.getElementById('name_sign_up').value.trim();
-  const email = document.getElementById('email_sign_up').value.trim();
+  const email = document.getElementById('email_sign-up').value.trim();
   const password = document.getElementById('password_sign_up').value.trim();
   const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
 
@@ -94,15 +94,19 @@ async function handleSignUp () {
     return;
   }
 
-  const [firstName, ...lastNameParts] = name.split('');
-  const lastName = lastNameParts.join('');
+  const [firstName, ...lastNameParts] = name.split(' ');
+  const lastName = lastNameParts.join(' ');  
 
-  await createUser(firstName, lastName, email, password, color);
+  if (!lastName) {
+    showCustomAlert('Please enter both first and last name');
+    return;
+  }
 
+  await createUser(firstName, lastName, email, password, randomColors);
 } 
 
-async function createUser (firstname, lastname, email, password, color) {
-  const newUser = {firstname, lastname, username: email, password, color};
+async function createUser (firstname, lastname, email, password, randomColors) {
+  const newUser = {firstname, lastname, username: email, password, randomColors};
   await postData('user', newUser);
   await postData('contacts', newUser);
 }

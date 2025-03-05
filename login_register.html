@@ -70,7 +70,7 @@
             </label>
 
             <div class="button-container">
-              <button class="button-log-in">Log in</button>
+              <button type="submit" class="button-log-in">Log in</button>
               <a href="summary.html"><button class="button-guest-log-in" formaction="summary.html" formnovalidate>Guest Log in</button></a>
             </div>
           </form>
@@ -89,7 +89,7 @@
             <div class="vector"><img src="assets/icons/vector-horizontal.svg" alt="Blaue Trennlinie" /></div>
           </div>
 
-          <form class="form width-422px">
+          <form class="form width-422px" onsubmit="handleSignUp(); return false">
             <label class="input-base-container" for="name">
               <input class="input-base" id="name_sign_up" type="text" required placeholder="Name" />
               <div class="input-base-icon cursor-pointer">
@@ -152,7 +152,7 @@
             </div>
 
             <div class="button-sign-up-container">
-              <button disabled class="button-sign-up">Sign up</button>
+              <button type="submit" class="button-sign-up">Sign up</button>
             </div>
           </form>
         </div>
