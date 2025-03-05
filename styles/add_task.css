@@ -135,9 +135,19 @@
   margin-left: 5px;
 }
 
-.orange {
+.orange-prio {
   background-color: #ffa800;
 }
+
+.red-prio {
+    background-color: #FF3D00;
+    ;
+  }
+
+.green-prio {
+    background-color: #7AE229;
+    
+  }
 
 .align {
     display: flex;
