@@ -1,7 +1,6 @@
 .main-board {
+    margin-left: var(--margin-left-main);
     padding-top: var(--padding-top-main);
-    position: absolute;
-    left: 330px;
 }
 
 .headline-input-container {
