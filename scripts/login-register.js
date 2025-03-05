@@ -76,15 +76,15 @@ function togglePasswordVisibility(inputId, iconElement) {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
     toggleIcon.src = 'assets/icons/visibility-eye.svg';
-    toggleIcon.alt = 'Password Visivility on';
+    toggleIcon.alt = 'Visibility Eye Icon';
   } else {
     passwordInput.type = 'password';
-    toggleIcon.src = 'assets/icons/visibility-eye-off.svg';
-    toggleIcon.alt = 'Password Visivility on';
+    toggleIcon.src = 'assets/icons/lock.svg';
+    toggleIcon.alt = 'Lock Icon';
   }
 }
 
-async function handleSignUp() {
+async function handleSignUp () {
   const name = document.getElementById('name_sign_up').value.trim();
   const email = document.getElementById('email_sign-up').value.trim();
   const password = document.getElementById('password_sign_up').value.trim();
@@ -97,12 +97,16 @@ async function handleSignUp() {
   const [firstName, ...lastNameParts] = name.split(' ');
   const lastName = lastNameParts.join(' ');  
 
-  await createUser(firstName, lastName, email, password, color);
+  if (!lastName) {
+    showCustomAlert('Please enter both first and last name');
+    return;
+  }
 
+  await createUser(firstName, lastName, email, password, randomColors);
 } 
 
-async function createUser (firstname, lastname, email, password, color) {
-  const newUser = {firstname, lastname, username: email, password, color};
+async function createUser (firstname, lastname, email, password, randomColors) {
+  const newUser = {firstname, lastname, username: email, password, randomColors};
   await postData('user', newUser);
   await postData('contacts', newUser);
 }
