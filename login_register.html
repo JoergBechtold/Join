@@ -54,7 +54,7 @@
             </label>
 
             <label class="input-base-container" for="password_log_in">
-              <input class="input-base" id="password_log_in" type="password" required placeholder="Password" />
+              <input minlength="8" class="input-base" id="password_log_in" type="password" required placeholder="Password" />
               <img
                 onclick="togglePasswordVisibility('password_log_in', this)"
                 class="input-base-icon cursor-pointer"
@@ -99,7 +99,7 @@
             </label>
 
             <label class="input-base-container" for="password_sign_up">
-              <input class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
+              <input minlength="8" class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
               <img
                 onclick="togglePasswordVisibility('password_sign_up', this)"
                 class="input-base-icon cursor-pointer"
@@ -109,7 +109,7 @@
             </label>
 
             <label class="input-base-container" for="confirm_password">
-              <input class="input-base" id="confirm_password" type="password" required placeholder="Confirm Password" />
+              <input minlength="8" class="input-base" id="confirm_password" type="password" required placeholder="Confirm Password" />
               <img
                 onclick="togglePasswordVisibility('confirm_password', this)"
                 class="input-base-icon cursor-pointer"
@@ -118,7 +118,7 @@
               />
             </label>
 
-            <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
+            <!-- <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
               <div class="checkbox">
                 <img src="assets/icons/checkbox.png" alt="Checkbox" />
               </div>
@@ -126,6 +126,11 @@
                 <span>I accept the</span>
                 <a href="privacy_policy.html">Privacy policy</a>
               </div>
+            </div> -->
+
+            <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
+              <input type="checkbox" id="checkbox" />
+              <label for="checkbox"><span>I accept the</span> <a href="privacy_policy.html">Privacy policy</a></label>
             </div>
 
             <div class="button-sign-up-container">
