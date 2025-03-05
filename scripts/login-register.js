@@ -84,26 +84,39 @@ function togglePasswordVisibility(inputId, iconElement) {
   }
 }
 
-async function handleSignUp () {
+function checkSignUpForm() {
+  const name = document.getElementById('name_sign_up').value.trim();
+  const email = document.getElementById('email_sign-up').value.trim();
+  const password = document.getElementById('password_sign_up').value.trim();
+  const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
+
+  document.getElementById('signupButton').disabled = !(name && email && password && confirmPassword && (password === confirmPassword));
+}
+
+async function handleSignUp() {
   const name = document.getElementById('name_sign_up').value.trim();
   const email = document.getElementById('email_sign-up').value.trim();
   const password = document.getElementById('password_sign_up').value.trim();
   const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
 
   if (password !== confirmPassword) {
-    return;
+    showCustomAlert('Passwörter stimmen nicht überein.');
+    return false;
   }
 
-  const [firstName, ...lastNameParts] = name.split(' ');
-  const lastName = lastNameParts.join(' ');  
-
-  if (!lastName) {
-    showCustomAlert('Please enter both first and last name');
-    return;
+  const nameParts = name.split(' ');
+  if (nameParts.length < 2) {
+    showCustomAlert('Bitte gib Vor- und Nachname an.');
+    return false;
   }
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(' ');
 
   await createUser(firstName, lastName, email, password, randomColors);
-} 
+
+  document.getElementById('sign_up_form').reset();
+  return false; 
+}
 
 async function createUser (firstname, lastname, email, password, randomColors) {
   const newUser = {firstname, lastname, username: email, password, randomColors};

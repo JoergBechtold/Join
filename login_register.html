@@ -89,23 +89,23 @@
             <div class="vector"><img src="assets/icons/vector-horizontal.svg" alt="Blaue Trennlinie" /></div>
           </div>
 
-          <form class="form width-422px" onsubmit="handleSignUp(); return false">
+          <form class="form width-422px" id="sign_up_form" onsubmit="return handleSignUp()">
             <label class="input-base-container" for="name">
-              <input class="input-base" id="name_sign_up" type="text" required placeholder="Name" />
+              <input oninput="checkSignUpForm()" class="input-base" id="name_sign_up" type="text" required placeholder="Name" />
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/gray-person.svg" alt="Personen Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="email_sign-up">
-              <input class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
+              <input oninput="checkSignUpForm()" class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="password_sign_up">
-              <input minlength="8" class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
+              <input oninput="checkSignUpForm()" minlength="8" class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
 
@@ -121,7 +121,7 @@
             </label>
 
             <label class="input-base-container" for="confirm_password">
-              <input minlength="8" class="input-base" id="confirm_sign_up" type="password" required placeholder="Confirm Password" />
+              <input oninput="checkSignUpForm()" minlength="8" class="input-base" id="confirm_sign_up" type="password" required placeholder="Confirm Password" />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
 
@@ -152,7 +152,7 @@
             </div>
 
             <div class="button-sign-up-container">
-              <button type="submit" class="button-sign-up">Sign up</button>
+              <button type="submit" class="button-sign-up" id="signupButton" disabled>Sign up</button>
             </div>
           </form>
         </div>
