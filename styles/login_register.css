@@ -248,6 +248,37 @@
   transform: scale(1.1);
 }
 
+.visibility-eye-off-icon {
+  display: none;
+}
+
+.input-base:focus + .input-base-icon .lock-icon,
+.input-base:not(:placeholder-shown) + .input-base-icon .lock-icon {
+  display: none;
+}
+
+.visibility-eye-off-icon {
+  display: none;
+}
+
+.input-base:focus + .input-base-icon .visibility-eye-off-icon,
+.input-base:not(:placeholder-shown) + .input-base-icon .visibility-eye-off-icon {
+  display: block;
+}
+
+/* .input-base:focus + .input-base-icon .visibility-eye-off-icon {
+  display: block;
+} */
+
+/* .input-base:focus + .input-base-icon .lock-icon {
+  display: none;
+} */
+
+/* .input-base:focus + .input-base-icon .lock-icon,
+.input-base:not(:placeholder-shown) + .input-base-icon .lock-icon {
+  display: none;
+} */
+
 .checkbox-accept-privacy-policy {
   box-sizing: border-box;
   width: 100%;

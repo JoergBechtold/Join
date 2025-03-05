@@ -17,8 +17,8 @@
 
     <!-- Embedding the css -->
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="styles/login_register.css" />
     <link rel="stylesheet" href="styles/assets.css" />
+    <link rel="stylesheet" href="styles/login_register.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="checkAndShowAnimation()" class="body-login-register">
@@ -36,8 +36,6 @@
       <button onclick="showSignUp()" class="button-base-gray">Sign up</button>
     </nav>
 
-    <div class="name-color-circle">SM</div>
-
     <main>
       <!-- log in section -->
       <section>
@@ -50,19 +48,24 @@
           <form class="form width-422px">
             <label class="input-base-container" for="email_log_in">
               <input class="input-base" id="email_log_in" type="email" required placeholder="Email" />
-              <div class="input-base-icon pointer-none">
+              <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="password_log_in">
               <input minlength="8" class="input-base" id="password_log_in" type="password" required placeholder="Password" />
-              <img
-                onclick="togglePasswordVisibility('password_log_in', this)"
-                class="input-base-icon cursor-pointer"
-                src="assets/icons/lock.svg"
-                alt="Lock Icon"
-              />
+              <div class="input-base-icon cursor-pointer">
+                <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
+
+                <img
+                  id="visibility_eye_off_icon"
+                  class="visibility-eye-off-icon d-none"
+                  onclick="togglePasswordVisibility('password_log_in', this)"
+                  src="assets/icons/visibility-eye-off.svg"
+                  alt="password visibility off"
+                />
+              </div>
             </label>
 
             <div class="button-container">
@@ -87,37 +90,49 @@
 
           <form class="form width-422px">
             <label class="input-base-container" for="name">
-              <input class="input-base" id="name" type="text" required placeholder="Name" />
-              <div class="input-base-icon pointer-none">
+              <input class="input-base" id="name_sign_up" type="text" required placeholder="Name" />
+              <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/gray-person.svg" alt="Personen Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="email_sign-up">
               <input class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
-              <div class="input-base-icon pointer-none">
+              <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="password_sign_up">
               <input minlength="8" class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
-              <img
-                onclick="togglePasswordVisibility('password_sign_up', this)"
-                class="input-base-icon cursor-pointer"
-                src="assets/icons/lock.svg"
-                alt="Lock Icon"
-              />
+              <div class="input-base-icon cursor-pointer">
+                <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
+
+                <img
+                  id="visibility_eye_off_icon"
+                  class="visibility-eye-off-icon d-none"
+                  onclick="togglePasswordVisibility('password_sign_up', this)"
+                  src="assets/icons/visibility-eye-off.svg"
+                  alt="password visibility off"
+                />
+              </div>
+              <!-- <img onclick="togglePasswordVisibility('password_sign_up', this)" class="input-base-icon" src="assets/icons/lock.svg" alt="Lock Icon" /> -->
             </label>
 
             <label class="input-base-container" for="confirm_password">
-              <input minlength="8" class="input-base" id="confirm_password" type="password" required placeholder="Confirm Password" />
-              <img
-                onclick="togglePasswordVisibility('confirm_password', this)"
-                class="input-base-icon cursor-pointer"
-                src="assets/icons/lock.svg"
-                alt="Lock Icon"
-              />
+              <input minlength="8" class="input-base" id="confirm_sign_up" type="password" required placeholder="Confirm Password" />
+              <div class="input-base-icon cursor-pointer">
+                <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
+
+                <img
+                  id="visibility_eye_off_icon"
+                  class="visibility-eye-off-icon d-none"
+                  onclick="togglePasswordVisibility('confirm_password', this)"
+                  src="assets/icons/visibility-eye-off.svg"
+                  alt="password visibility off"
+                />
+              </div>
+              <!-- <img onclick="togglePasswordVisibility('confirm_password', this)" class="input-base-icon" src="assets/icons/lock.svg" alt="Lock Icon" /> -->
             </label>
 
             <!-- <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">

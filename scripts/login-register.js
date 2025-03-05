@@ -74,10 +74,10 @@ function togglePasswordVisibility(inputId, iconElement) {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
     toggleIcon.src = 'assets/icons/visibility-eye.svg';
-    toggleIcon.alt = 'Visibility Eye Icon';
+    toggleIcon.alt = 'Password visibility on';
   } else {
     passwordInput.type = 'password';
-    toggleIcon.src = 'assets/icons/lock.svg';
-    toggleIcon.alt = 'Lock Icon';
+    toggleIcon.src = 'assets/icons/visibility-eye-off.svg';
+    toggleIcon.alt = 'Password visibility off';
   }
 }

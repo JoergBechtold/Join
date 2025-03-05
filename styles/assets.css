@@ -285,19 +285,20 @@ button[disabled]:hover {
 
 .input-base-icon {
   position: absolute;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 50%;
   right: 21px;
-  transform: translateY(-50%);
+  transform: translateY(-48%);
   width: 24px;
   aspect-ratio: 1 / 1;
   object-fit: scale-down;
 }
 
-.input-base-icon img {
+/* .input-base-icon img {
   display: block;
-}
+} */
 
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
