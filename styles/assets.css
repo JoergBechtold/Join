@@ -1,18 +1,14 @@
 /* This is where the style of buttons, for example, comes in */
 
-textarea {
+textarea,
+input,
+select,
+button {
   border: unset;
-}
-
-select {
-  border: unset;
+  cursor: pointer;
 }
 
 /* all properties for buttons */
-button {
-  cursor: pointer;
-  border: unset;
-}
 
 button:disabled,
 button[disabled] {
@@ -244,9 +240,6 @@ button[disabled]:hover {
 }
 
 /* all properties for input */
-input {
-  border: unset;
-}
 
 .form {
   margin-top: 16px;
