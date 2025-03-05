@@ -1,6 +1,7 @@
 function getIdRefs() {
   return {
     animationJoinLogoRef: document.getElementById('animation_join_logo'),
+    animationFinishedRef: document.getElementById('animation_finished'),
     navLogInRef: document.getElementById('nav_log_in'),
     loginContainerRef: document.getElementById('login_container'),
     signUpContainerRef: document.getElementById('sign_up_container'),
@@ -9,8 +10,16 @@ function getIdRefs() {
   };
 }
 
-function showAnimationOverlay() {
-  const { animationJoinLogoRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
+function checkAndShowAnimation() {
+  const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
+
+  if (sessionStorage.getItem('animationShown')) {
+    animationFinishedRef.classList.add('d-flex');
+    removeAnimation();
+    return;
+  }
+
+  animationJoinLogoRef.classList.remove('d-none');
 
   setTimeout(function () {
     animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards';
@@ -18,6 +27,8 @@ function showAnimationOverlay() {
     addFadeInAnimation(navLogInRef);
     addFadeInAnimation(footerLoginRegisterRef);
   }, 500);
+
+  sessionStorage.setItem('animationShown', 'true');
 }
 
 function addFadeInAnimation(element) {
@@ -56,17 +67,17 @@ function acceptCheckbox() {
   const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
 }
 
-function togglePasswordVisibility(inputId) {
-  const { imgPasswordLogInRef } = getIdRefs();
-
+function togglePasswordVisibility(inputId, iconElement) {
   const passwordInput = document.getElementById(inputId);
+  const toggleIcon = iconElement;
+
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
-    imgPasswordLogInRef.src = 'assets/icons/visibility-eye.svg';
-    imgPasswordLogInRef.alt = 'Visibility Eye Icon';
+    toggleIcon.src = 'assets/icons/visibility-eye.svg';
+    toggleIcon.alt = 'Visibility Eye Icon';
   } else {
     passwordInput.type = 'password';
-    imgPasswordLogInRef.src = 'assets/icons/lock.svg';
-    imgPasswordLogInRef.alt = 'Lock Icon';
+    toggleIcon.src = 'assets/icons/lock.svg';
+    toggleIcon.alt = 'Lock Icon';
   }
 }

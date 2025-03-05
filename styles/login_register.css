@@ -13,7 +13,7 @@
 .animation-join-logo {
   width: 274px;
   z-index: 2;
-  display: inline-block;
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -36,9 +36,18 @@
   to {
     top: 60px;
     left: 60px;
-    width: 70px;
+    width: 100px;
     transform: none;
   }
+}
+
+.animation-finished {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  width: 100px;
+  transform: none;
 }
 
 .nav-log-in {
@@ -144,6 +153,7 @@
   font-weight: var(--font-weight-700);
   font-size: var(--font-size-21);
   transition: var(--transition-hover-effect);
+  border: var(--border-buttons-gray);
 }
 
 .button-log-in:hover,
@@ -151,6 +161,7 @@
   scale: var(--scale-hover);
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
+  border: var(--blue);
 }
 
 .button-guest-log-in {

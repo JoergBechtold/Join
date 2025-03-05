@@ -21,8 +21,13 @@
     <link rel="stylesheet" href="styles/assets.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="showAnimationOverlay()" class="body-login-register">
-    <div class="animation-join-logo" id="animation_join_logo">
+  <body onload="checkAndShowAnimation()" class="body-login-register">
+    <!-- animations logo -->
+    <div class="animation-join-logo d-none" id="animation_join_logo">
+      <img src="assets/img/loginLogo.svg" alt="Join Logo" />
+    </div>
+
+    <div class="animation-finished" id="animation_finished">
       <img src="assets/img/loginLogo.svg" alt="Join Logo" />
     </div>
 
@@ -43,7 +48,7 @@
           <form class="form width-422px">
             <label class="input-base-container" for="email_log_in">
               <input class="input-base" id="email_log_in" type="email" required placeholder="Email" />
-              <div class="input-base-icon">
+              <div class="input-base-icon pointer-none">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
             </label>
@@ -51,11 +56,10 @@
             <label class="input-base-container" for="password_log_in">
               <input class="input-base" id="password_log_in" type="password" required placeholder="Password" />
               <img
-                onclick="togglePasswordVisibility('password_log_in')"
+                onclick="togglePasswordVisibility('password_log_in', this)"
                 class="input-base-icon cursor-pointer"
                 src="assets/icons/lock.svg"
                 alt="Lock Icon"
-                id="img_password_log_in"
               />
             </label>
 
@@ -82,14 +86,14 @@
           <form class="form">
             <label class="input-base-container" for="name">
               <input class="input-base" id="name" type="text" required placeholder="Name" />
-              <div class="input-base-icon">
+              <div class="input-base-icon pointer-none">
                 <img src="assets/icons/gray-person.svg" alt="Personen Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="email_sign-up">
               <input class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
-              <div class="input-base-icon">
+              <div class="input-base-icon pointer-none">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
             </label>
@@ -97,7 +101,7 @@
             <label class="input-base-container" for="password_sign_up">
               <input class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
               <img
-                onclick="togglePasswordVisibility('password_sign_up')"
+                onclick="togglePasswordVisibility('password_sign_up', this)"
                 class="input-base-icon cursor-pointer"
                 src="assets/icons/lock.svg"
                 alt="Lock Icon"
@@ -107,7 +111,7 @@
             <label class="input-base-container" for="confirm_password">
               <input class="input-base" id="confirm_password" type="password" required placeholder="Confirm Password" />
               <img
-                onclick="togglePasswordVisibility('confirm_password')"
+                onclick="togglePasswordVisibility('confirm_password', this)"
                 class="input-base-icon cursor-pointer"
                 src="assets/icons/lock.svg"
                 alt="Lock Icon"

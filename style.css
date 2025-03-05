@@ -28,6 +28,10 @@
   cursor: pointer;
 }
 
+.pointer-none {
+  pointer-events: none;
+}
+
 a {
   text-decoration: none;
 }
