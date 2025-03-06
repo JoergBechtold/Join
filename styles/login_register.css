@@ -267,6 +267,26 @@
   display: block;
 }
 
+.error-message-Confirm-password {
+  position: absolute;
+  top: 115%;
+  left: 0;
+  color: red;
+  font-size: 12px;
+  display: block;
+  font-weight: 400;
+}
+
+.error-message-log-in {
+  position: absolute;
+  top: 115%;
+  left: 0;
+  color: red;
+  font-size: 12px;
+  display: block;
+  font-weight: 400;
+}
+
 .checkbox-accept-privacy-policy {
   box-sizing: border-box;
   width: 100%;

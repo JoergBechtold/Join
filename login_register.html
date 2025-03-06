@@ -67,6 +67,7 @@
                   alt="password visibility off"
                 />
               </div>
+              <span class="error-message-log-in" id="error_message_log_in">Check your email and password. Please try again.</span>
             </label>
 
             <div class="button-container">
@@ -132,15 +133,15 @@
               <input
                 oninput="checkSignUpForm()"
                 minlength="8"
-                class="input-base"
+                class="input-base confirm-password"
                 id="confirm_sign_up"
                 type="password"
                 required
                 placeholder="Confirm Password"
               />
+              <span class="error-message-Confirm-password" id="error_message_confirm_password">Your passwords don't match. Please try again.</span>
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
-
                 <img
                   id="visibility_eye_off_icon"
                   class="visibility-eye-off-icon d-none"
