@@ -122,10 +122,6 @@ main{
     color: #FFFFFF;
 }
 
-.pencil:hover .summaryimg{
-    background-color: #FFFFFF;
-}
-
 .urgent:hover .urgentimg {
     filter: none !important;
 }
@@ -167,20 +163,13 @@ main{
 }
 
 .summarymission{
-    width: 50px;
-    height: 24px;
-    gap: 0px;
     font-family: 'inter';
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 400;
     line-height: 24px;
-    text-align: left;
+    text-align: center;
     color: #2A3647;
     margin: 0;
-}
-
-.todo{
-    width: 98px;
 }
 
 .urgent{

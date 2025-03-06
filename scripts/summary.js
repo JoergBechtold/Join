@@ -50,3 +50,23 @@ document.addEventListener("DOMContentLoaded", () => {
     updateTaskData();
     addClickEvents();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
+        if (!container || !imgElement) return;
+
+        container.addEventListener("mouseover", () => imgElement.src = hoverSrc);
+        container.addEventListener("mouseout", () => imgElement.src = defaultSrc);
+    }
+
+    let pencilContainer = document.querySelector(".pencil:first-child");
+    let pencilImg = pencilContainer?.querySelector("img");
+
+    let doneContainer = document.querySelector(".pencil:nth-child(2)");
+    let doneImg = doneContainer?.querySelector("img");
+
+    addHoverEffect(pencilContainer, pencilImg, "assets/icons/Pencil.svg", "assets/icons/pencilhover.svg");
+    addHoverEffect(doneContainer, doneImg, "assets/icons/done.svg", "assets/icons/donehover.svg");
+});
+
+
