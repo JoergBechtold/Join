@@ -25,6 +25,13 @@ function getIdRefs() {
     signUpContainerRef: document.getElementById('sign_up_container'),
     footerLoginRegisterRef: document.getElementById('footer_login_register'),
     imgPasswordLogInRef: document.getElementById('img_password_log_in'),
+    nameSignUpRef: document.getElementById('name_sign_up'),
+    emailSignUpRef: document.getElementById('email_sign-up'),
+    passwordSignUpRef: document.getElementById('password_sign_up'),
+    confirmPasswordSignUpRef: document.getElementById('confirm_sign_up'),
+    checkboxRef: document.getElementById('checkbox'),
+    signUpButtonRef: document.getElementById('sign_up_button'),
+    customCheckmarkRef: document.getElementById('custom_checkmark'),
   };
 }
 
@@ -110,6 +117,8 @@ function checkSignUpForm() {
 }
 
 async function handleSignUp() {
+  const { nameSignUpRef, emailSignUpRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
+
   const name = document.getElementById('name_sign_up').value.trim();
   const email = document.getElementById('email_sign-up').value.trim();
   const password = document.getElementById('password_sign_up').value.trim();
@@ -138,4 +147,29 @@ async function createUser(firstname, lastname, email, password, randomColors) {
   const newUser = { firstname, lastname, username: email, password, randomColors };
   await postData('user', newUser);
   await postData('contacts', newUser);
+}
+
+function toggleCheckbox() {
+  const { checkboxRef, customCheckmarkRef } = getIdRefs();
+
+  checkboxRef.checked;
+
+  if (checkbox.checked) {
+    customCheckmarkRef.src = 'assets/icons/checkbox-empty.svg';
+    customCheckmarkRef.alt = 'Checkbox not Checked';
+  } else {
+    customCheckmarkRef.src = 'assets/icons/checkbox-checked.svg';
+    customCheckmarkRef.alt = 'Checkbox Checked';
+  }
+  checkButtonStatus();
+}
+
+function checkButtonStatus() {
+  const { signUpButtonRef } = getIdRefs();
+
+  if (checkbox.checked) {
+    signUpButtonRef.disabled = true;
+  } else {
+    signUpButtonRef.disabled = false;
+  }
 }

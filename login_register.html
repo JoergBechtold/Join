@@ -105,7 +105,15 @@
             </label>
 
             <label class="input-base-container" for="password_sign_up">
-              <input oninput="checkSignUpForm()" minlength="8" class="input-base" id="password_sign_up" type="password" required placeholder="Password" />
+              <input
+                oninput="checkSignUpForm()"
+                minlength="8"
+                class="input-base"
+                id="password_sign_up"
+                type="password"
+                required
+                placeholder="Password"
+              />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
 
@@ -121,7 +129,15 @@
             </label>
 
             <label class="input-base-container" for="confirm_password">
-              <input oninput="checkSignUpForm()" minlength="8" class="input-base" id="confirm_sign_up" type="password" required placeholder="Confirm Password" />
+              <input
+                oninput="checkSignUpForm()"
+                minlength="8"
+                class="input-base"
+                id="confirm_sign_up"
+                type="password"
+                required
+                placeholder="Confirm Password"
+              />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
 
@@ -136,23 +152,16 @@
               <!-- <img onclick="togglePasswordVisibility('confirm_password', this)" class="input-base-icon" src="assets/icons/lock.svg" alt="Lock Icon" /> -->
             </label>
 
-            <!-- <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
-              <div class="checkbox">
-                <img src="assets/icons/checkbox.png" alt="Checkbox" />
-              </div>
-              <div class="checkbox-link">
-                <span>I accept the</span>
-                <a href="privacy_policy.html">Privacy policy</a>
-              </div>
-            </div> -->
-
             <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
-              <input type="checkbox" id="checkbox" />
-              <label for="checkbox"><span>I accept the</span> <a href="privacy_policy.html">Privacy policy</a></label>
+              <input onclick="toggleCheckbox()" type="checkbox" id="checkbox" />
+              <label for="checkbox">
+                <img id="custom_checkmark" " class="custom-checkmark" src="assets/icons/checkbox-empty.svg" alt="Checkbox not Checked" />
+                <span>I accept the</span><a href="privacy_policy.html">Privacy policy</a>
+              </label>
             </div>
 
             <div class="button-sign-up-container">
-              <button type="submit" class="button-sign-up" id="signupButton" disabled>Sign up</button>
+              <button type="submit" class="button-sign-up" id="sign_up_button" disabled>Sign up</button>
             </div>
           </form>
         </div>
@@ -160,8 +169,8 @@
     </main>
 
     <footer class="footer-login-register" id="footer_login_register">
-      <a href="privacy_policy.html">Privacy Policy</a>
-      <a href="legal_notice.html">Legal notice</a>
+      <span onclick="goToUrl('privacy_policy.html')">Privacy Policy</span>
+      <span onclick="goToUrl('legal_notice.html')">Legal notice</span>
     </footer>
   </body>
 </html>

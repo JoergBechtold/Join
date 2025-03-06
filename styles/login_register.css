@@ -196,13 +196,14 @@
   opacity: 0;
 }
 
-.footer-login-register a {
+.footer-login-register span {
+  cursor: pointer;
   color: var(--gray-a-links);
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-400);
 }
 
-.footer-login-register a:hover {
+.footer-login-register span:hover {
   font-weight: var(--font-weight-700);
   color: var(--blue);
   scale: var(--scale-hover);
@@ -266,19 +267,6 @@
   display: block;
 }
 
-/* .input-base:focus + .input-base-icon .visibility-eye-off-icon {
-  display: block;
-} */
-
-/* .input-base:focus + .input-base-icon .lock-icon {
-  display: none;
-} */
-
-/* .input-base:focus + .input-base-icon .lock-icon,
-.input-base:not(:placeholder-shown) + .input-base-icon .lock-icon {
-  display: none;
-} */
-
 .checkbox-accept-privacy-policy {
   box-sizing: border-box;
   width: 100%;
@@ -289,28 +277,53 @@
   gap: 8px;
 }
 
-.checkbox-link {
-  width: 50%;
+.checkbox-accept-privacy-policy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.checkbox-link a {
+.checkbox-accept-privacy-policy label {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-accept-privacy-policy a {
   color: var(--light-blue);
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-16);
   white-space: nowrap;
+  width: 105px;
 }
 
-.checkbox-link span {
+.checkbox-accept-privacy-policy a:hover {
+  font-weight: var(--font-weight-500);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 3px;
+}
+
+.checkbox-accept-privacy-policy span {
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-16);
   white-space: nowrap;
 }
 
-.checkbox-link a:hover {
-  font-weight: var(--font-weight-500);
-  text-decoration: underline;
-  text-decoration-style: solid;
-  text-underline-offset: 3px;
+.checkbox-accept-privacy-policy input {
+  position: absolute;
+  display: none;
+}
+
+.custom-checkmark {
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 16px;
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .checkbox {
