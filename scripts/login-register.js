@@ -73,10 +73,19 @@ function removeAnimation() {
   const { navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
 
   loginContainerRef.style.removeProperty('animation');
+  // removeOpacity();
   loginContainerRef.style.opacity = 'unset';
   navLogInRef.style.removeProperty('animation');
   navLogInRef.style.opacity = 'unset';
   footerLoginRegisterRef.style.removeProperty('animation');
+  footerLoginRegisterRef.style.opacity = 'unset';
+}
+
+function removeOpacity() {
+  const { navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
+
+  loginContainerRef.style.opacity = 'unset';
+  navLogInRef.style.opacity = 'unset';
   footerLoginRegisterRef.style.opacity = 'unset';
 }
 
@@ -86,10 +95,6 @@ function showLogIn() {
   loginContainerRef.classList.remove('d-none');
   signUpContainerRef.classList.remove('d-flex');
   navLogInRef.classList.remove('d-none');
-}
-
-function acceptCheckbox() {
-  const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
 }
 
 function togglePasswordVisibility(inputId, iconElement) {
@@ -154,12 +159,12 @@ function toggleCheckbox() {
 
   checkboxRef.checked;
 
-  if (checkbox.checked) {
-    customCheckmarkRef.src = 'assets/icons/checkbox-empty.svg';
-    customCheckmarkRef.alt = 'Checkbox not Checked';
-  } else {
+  if (checkboxRef.checked) {
     customCheckmarkRef.src = 'assets/icons/checkbox-checked.svg';
     customCheckmarkRef.alt = 'Checkbox Checked';
+  } else {
+    customCheckmarkRef.src = 'assets/icons/checkbox-empty.svg';
+    customCheckmarkRef.alt = 'Checkbox not Checked';
   }
   checkButtonStatus();
 }
@@ -168,8 +173,8 @@ function checkButtonStatus() {
   const { signUpButtonRef } = getIdRefs();
 
   if (checkbox.checked) {
-    signUpButtonRef.disabled = true;
-  } else {
     signUpButtonRef.disabled = false;
+  } else {
+    signUpButtonRef.disabled = true;
   }
 }
