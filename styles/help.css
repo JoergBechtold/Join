@@ -22,11 +22,9 @@
 
 .arrow-left:hover {
   background-color: var(--light-gray-bg);
-}
-
-.arrow-left:hover img {
   transform: scale(1.1);
 }
+
 
 .help-headline {
   display: flex;
