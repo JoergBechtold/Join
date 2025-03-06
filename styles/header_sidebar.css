@@ -189,3 +189,50 @@
   transform: scale(1.1);
   text-decoration: none;
 }
+
+.submenu {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  background: #2a3647;
+  border-top-left-radius:20px ;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  z-index: 100;
+}
+
+.submenu a {
+  text-decoration: none;
+  color: #cdcdcd;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease-in-out;
+  width: 130;
+  height: 46;
+  border-radius: 8px;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.submenu a:hover {
+  background: rgba(42, 61, 89, 1);
+  transform: scale(0.9);
+}
+
+.hidden {
+  display: none;
+}
+
+.user-profile-container {
+  position: relative;
+}
