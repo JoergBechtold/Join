@@ -115,6 +115,7 @@
   opacity: 1;
 }
 
+
 .prio {
   flex: 1;
   height: 48px;
@@ -177,7 +178,35 @@
     font-weight: bold;
 }
 
+.input-base-icon-active:hover ,
 .input-base-icon:hover {
     background-color: var(--light-gray-bg);
     border-radius: 50%;
   }
+
+
+.input-base-icon-active {
+    position: static;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+    object-fit: scale-down;
+}
+  
+.close-and-check {
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    padding-right: 21px;
+    transform: translateY(-50%);
+    display: flex;
+}
+
+.input-base:focus {
+    outline: none;
+    border: 1px solid var(--blue);
+    opacity: 1;
+}

@@ -94,10 +94,15 @@
             <div class="form-group">
               <label for="subtasks">Subtasks</label>
               <div class="input-container">
-                <input class="input-base" type="text" name="subtasks" placeholder="Add new subtask" />
-                <img class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask" />
+                <input id="subtask_input" class="input-base" type="text" name="subtasks" placeholder="Add new subtask" onclick="handleSubtaskInput()" />
+                <div class="close-and-check">
+                <img id="close_subtask_icon" class="input-base-icon d-none" src="/assets/icons/blackclose.svg" alt="Close subtask" />
+                <img id="check_subtask_icon" class="input-base-icon d-none" src="/assets/icons/blackcheck.svg" alt="Save subtask" />
+                <img id="add_subtask_icon" class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask"  onclick="handleSubtaskInputImg()"/>
+                </div>
               </div>
             </div>
+            
           </div>
         </div>
 

@@ -36,4 +36,20 @@ function updateButtonStyle(buttonType) {
   document.getElementById(activeButton.id + '_img').src = `/assets/icons/prio-${iconType}-event.svg`;
 }
 
+function handleSubtaskInput() {
+    document.getElementById('add_subtask_icon').classList.add('d-none');
+    document.getElementById('check_subtask_icon').classList.remove('d-none');
+    document.getElementById('check_subtask_icon').classList.remove('input-base-icon');
+    document.getElementById('check_subtask_icon').classList.add('input-base-icon-active');
+    document.getElementById('close_subtask_icon').classList.remove('d-none');
+    document.getElementById('close_subtask_icon').classList.remove('input-base-icon');
+    document.getElementById('close_subtask_icon').classList.add('input-base-icon-active');
+}
+
+function handleSubtaskInputImg() {
+    handleSubtaskInput();
+    document.getElementById('subtask_input').focus();
+}
+  
+
 
