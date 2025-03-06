@@ -129,7 +129,7 @@ function checkSignUpForm() {
   // const password = document.getElementById('password_sign_up').value.trim();
   // const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
 
-  document.getElementById('signupButton').disabled = !(name && email && password && confirmPassword && password === confirmPassword);
+  document.getElementById('sign_up_button').disabled = !(name && email && password && confirmPassword && password === confirmPassword);
 }
 
 async function handleSignUp() {
