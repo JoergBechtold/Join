@@ -230,13 +230,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    margin-bottom: 8px;
+    padding: 4px 8px;
     transition: background-color 0.3s ease;
 }
 
 .subtask-item:hover {
-    background-color: #a8a8a81b;
+    background-color: #EEEEEE;
     border-radius: var(--border-radius-input-fields);
 
 }
