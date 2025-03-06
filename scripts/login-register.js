@@ -1,4 +1,20 @@
-const randomColors = [''];
+const randomColors = [
+  '#ff7a00', // orange
+  '#ff5eb3', // pink
+  '#6e52ff', // violet
+  '#9327ff', // purple
+  '#00bee8', // turquoise
+  '#1fd7c1', // mint
+  '#ff745e', // coral
+  '#ffa35e', // peach
+  '#fc71ff', // magenta
+  '#ffc701', // yellow
+  '#0038ff', // blue
+  '#c3ff2b', // lime
+  '#ffe62b', // lemon
+  '#ff4646', // red
+  '#ffbb2b', // gold
+];
 
 function getIdRefs() {
   return {
@@ -90,7 +106,7 @@ function checkSignUpForm() {
   const password = document.getElementById('password_sign_up').value.trim();
   const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
 
-  document.getElementById('signupButton').disabled = !(name && email && password && confirmPassword && (password === confirmPassword));
+  document.getElementById('signupButton').disabled = !(name && email && password && confirmPassword && password === confirmPassword);
 }
 
 async function handleSignUp() {
@@ -115,11 +131,11 @@ async function handleSignUp() {
   await createUser(firstName, lastName, email, password, randomColors);
 
   document.getElementById('sign_up_form').reset();
-  return false; 
+  return false;
 }
 
-async function createUser (firstname, lastname, email, password, randomColors) {
-  const newUser = {firstname, lastname, username: email, password, randomColors};
+async function createUser(firstname, lastname, email, password, randomColors) {
+  const newUser = { firstname, lastname, username: email, password, randomColors };
   await postData('user', newUser);
   await postData('contacts', newUser);
 }
