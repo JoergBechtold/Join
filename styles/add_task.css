@@ -175,4 +175,9 @@
 .active-prio {
     color: white;
     font-weight: bold;
+}
+
+.input-base-icon:hover {
+    background-color: var(--light-gray-bg);
+    border-radius: 50%;
   }
