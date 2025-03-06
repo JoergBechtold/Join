@@ -145,23 +145,24 @@
 }
 
 .user-profile {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 2px solid var(--primary-color-gray);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: var(#29abe2);
+  color: #4a90e2;
   background-color: white;
   transition: border 75ms ease-in-out, transform 75ms;
   cursor: pointer;
 }
 
 .user-profile:hover {
-  border: 3px solid var(--blue);
+  border: 3px solid #2a3647;
   transform: scale(1.1);
+  background: linear-gradient(0deg, rgba(12, 46, 98, 0.12), rgba(12, 46, 98, 0.12));
 }
 
 .footer {
