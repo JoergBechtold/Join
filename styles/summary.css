@@ -102,6 +102,34 @@ main{
     opacity: 0px;  
 }
 
+.pencil:hover,
+.urgent:hover,
+.undertask:hover {
+    background-color: #2A3647; 
+    color: #FFFFFF; 
+    transform: scale(1.1);
+    transition: 0.1s;
+}
+
+.pencil:hover .summarymission,
+.pencil:hover .summarynmb,
+.urgent:hover .urgenttext,
+.urgent:hover .urgentnmb,
+.urgent:hover .date,
+.urgent:hover .underdate,
+.undertask:hover .tasktext,
+.undertask:hover .tasknmb {
+    color: #FFFFFF;
+}
+
+.pencil:hover .summaryimg{
+    background-color: #FFFFFF;
+}
+
+.urgent:hover .urgentimg {
+    filter: none !important;
+}
+
 .pencil{
     display: flex;
     justify-content: center;
@@ -116,15 +144,6 @@ main{
     background-color: #FFFFFF;
     box-shadow: 0px 0px 4px 0px #0000001A;
     cursor: pointer;
-}
-
-.summaryimg{
-    width: 69px;
-    height: 69px;
-    gap: 10px;
-    opacity: 0px;
-    border: 7px solid #FFFFFF;
-    color: #2A3647;
 }
 
 .summaryp{
@@ -151,7 +170,6 @@ main{
     width: 50px;
     height: 24px;
     gap: 0px;
-    opacity: 0px;
     font-family: 'inter';
     font-size: 20px;
     font-weight: 400;
