@@ -111,7 +111,7 @@ function togglePasswordVisibility(inputId, iconElement) {
   }
 }
 
-// new functon for checkSignUpForm and handleSignUp
+// new function for checkSignUpForm and handleSignUp
 function setIdRefValueTrim() {
   return {
     name: document.getElementById('name_sign_up').value.trim(),
