@@ -194,6 +194,7 @@
     height: 24px;
     margin-left: 5px;
     object-fit: scale-down;
+    cursor: pointer;
 }
   
 .close-and-check {
@@ -210,3 +211,10 @@
     border: 1px solid var(--blue);
     opacity: 1;
 }
+
+.vertical-line-subtask {
+    width: 1px;
+    background-color: var(--light-gray-placeholder);
+    margin-left: 5px;
+    height: auto;
+  }

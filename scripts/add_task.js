@@ -62,4 +62,25 @@ function handleSubtaskDelete() {
     document.getElementById('close_subtask_icon').classList.remove('input-base-icon-active');
 }
 
+let subtasks = [];
+
+function handleSubtaskSave() {
+    const subtaskInput = document.getElementById('subtask_input');
+    const subtaskValue = subtaskInput.value.trim();
+    if (subtaskValue !== '') {
+        subtasks.push(subtaskValue);
+        subtaskInput.value = '';
+        handleSubtaskDelete();
+        updateSubtaskDisplay();
+    }
+}
+
+function updateSubtaskDisplay() {
+    const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
+    let subtaskHtml = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        subtaskHtml += `<div>• ${subtasks[i]}</div>`;
+    }
+    subtaskEnum.innerHTML = subtaskHtml;
+}
 
