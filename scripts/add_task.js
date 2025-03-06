@@ -8,7 +8,7 @@ function setPriority(buttonId) {
   if (activeButton !== button) {
     activateButton(button);
   } else {
-    activeButton = null; // Deaktiviert den Button, wenn er erneut geklickt wird
+    activeButton = null; 
   }
 }
 
@@ -50,6 +50,16 @@ function handleSubtaskInputImg() {
     handleSubtaskInput();
     document.getElementById('subtask_input').focus();
 }
-  
+
+function handleSubtaskDelete() {
+    document.getElementById('subtask_input').value = '';
+    document.getElementById('add_subtask_icon').classList.remove('d-none');
+    document.getElementById('check_subtask_icon').classList.add('d-none');
+    document.getElementById('close_subtask_icon').classList.add('d-none');
+    document.getElementById('check_subtask_icon').classList.add('input-base-icon');
+    document.getElementById('check_subtask_icon').classList.remove('input-base-icon-active');
+    document.getElementById('close_subtask_icon').classList.add('input-base-icon');
+    document.getElementById('close_subtask_icon').classList.remove('input-base-icon-active');
+}
 
 
