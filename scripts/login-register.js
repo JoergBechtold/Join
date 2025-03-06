@@ -73,7 +73,6 @@ function removeAnimation() {
   const { navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
 
   loginContainerRef.style.removeProperty('animation');
-  // removeOpacity();
   loginContainerRef.style.opacity = 'unset';
   navLogInRef.style.removeProperty('animation');
   navLogInRef.style.opacity = 'unset';
@@ -112,22 +111,33 @@ function togglePasswordVisibility(inputId, iconElement) {
   }
 }
 
+// new functon for checkSignUpForm and handleSignUp
+function setIdRefValueTrim() {
+  return {
+    name: document.getElementById('name_sign_up').value.trim(),
+    email: document.getElementById('email_sign-up').value.trim(),
+    password: document.getElementById('password_sign_up').value.trim(),
+    confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
+  };
+}
+
 function checkSignUpForm() {
-  const name = document.getElementById('name_sign_up').value.trim();
-  const email = document.getElementById('email_sign-up').value.trim();
-  const password = document.getElementById('password_sign_up').value.trim();
-  const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
+  const { name, email, password, confirmPassword } = setIdRefValueTrim();
+
+  // const name = document.getElementById('name_sign_up').value.trim();
+  // const email = document.getElementById('email_sign-up').value.trim();
+  // const password = document.getElementById('password_sign_up').value.trim();
+  // const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
 
   document.getElementById('signupButton').disabled = !(name && email && password && confirmPassword && password === confirmPassword);
 }
 
 async function handleSignUp() {
-  const { nameSignUpRef, emailSignUpRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
-
-  const name = document.getElementById('name_sign_up').value.trim();
-  const email = document.getElementById('email_sign-up').value.trim();
-  const password = document.getElementById('password_sign_up').value.trim();
-  const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
+  const { name, email, password, confirmPassword } = setIdRefValueTrim();
+  // const name = document.getElementById('name_sign_up').value.trim();
+  // const email = document.getElementById('email_sign-up').value.trim();
+  // const password = document.getElementById('password_sign_up').value.trim();
+  // const confirmPassword = document.getElementById('confirm_sign_up').value.trim();
 
   if (password !== confirmPassword) {
     showCustomAlert('Passwörter stimmen nicht überein.');
