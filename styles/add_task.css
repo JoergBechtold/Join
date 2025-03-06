@@ -217,4 +217,71 @@
     background-color: var(--light-gray-placeholder);
     margin-left: 5px;
     height: auto;
-  }
+}
+
+.vertical-line-subtask-dark {
+    width: 1px;
+    background-color: grey;
+    height: 20px;
+}
+
+
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.subtask-item:hover {
+    background-color: #a8a8a81b;
+    border-radius: var(--border-radius-input-fields);
+
+}
+
+.subtask-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-right: 4px;
+}
+
+.subtask-icon {
+    cursor: pointer;
+}
+
+.subtask-item:hover .subtask-icons {
+    opacity: 1;
+}
+
+.subtask-enum {
+    padding: 0 10px; 
+}
+
+.subtask-text {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.subtask-icons {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.subtask-icon {
+    cursor: pointer;
+}
+
+.edit-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.delete-icon {
+    width: 22px;
+    height: 22px;
+}
