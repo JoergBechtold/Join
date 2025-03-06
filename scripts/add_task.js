@@ -85,13 +85,19 @@ function updateSubtaskDisplay() {
                 <div class="subtask-icons">
                     <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon">
                     <div class="vertical-line-subtask-dark"></div>
-                    <img src="assets/icons/paperbasketdelet.svg" alt="Delete" class="subtask-icon delete-icon">
+                    <img src="assets/icons/paperbasketdelet.svg" alt="Delete" class="subtask-icon delete-icon" onclick="deleteSubtask(${i})">
                 </div>
             </div>
         `;
     }
     subtaskEnum.innerHTML = subtaskHtml;
 }
+
+function deleteSubtask(index) {
+    subtasks.splice(index, 1); 
+    updateSubtaskDisplay(); 
+}
+
 
 
 
