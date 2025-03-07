@@ -98,6 +98,41 @@ function deleteSubtask(index) {
     updateSubtaskDisplay(); 
 }
 
+function clearAll() {
+    clearInput();
+    clearButtons();
+    clearSubtasks();
+}
+
+function clearInput() {
+    const inputBaseFields = document.getElementsByClassName('input-base');
+    const textareaBaseFields = document.getElementsByClassName('textarea-base');
+    for (let i = 0; i < inputBaseFields.length; i++) {
+        inputBaseFields[i].value = '';
+    }
+    for (let i = 0; i < textareaBaseFields.length; i++) {
+        textareaBaseFields[i].value = '';
+    }
+
+}
+
+function clearButtons() {
+    resetActiveButton();
+}
+
+function clearSubtasks() {
+    document.getElementById('subtask_input').value = '';
+    subtasks = [];
+    updateSubtaskDisplay();
+    document.getElementById('add_subtask_icon').classList.remove('d-none');
+    document.getElementById('check_subtask_icon').classList.add('d-none');
+    document.getElementById('close_subtask_icon').classList.add('d-none');
+    document.getElementById('check_subtask_icon').classList.add('input-base-icon');
+    document.getElementById('check_subtask_icon').classList.remove('input-base-icon-active');
+    document.getElementById('close_subtask_icon').classList.add('input-base-icon');
+    document.getElementById('close_subtask_icon').classList.remove('input-base-icon-active');
+}
+
 
 
 
