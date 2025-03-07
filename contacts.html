@@ -4,10 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
-    <title>Contact</title>
+    <title>Contacts</title>
+    
+    <link rel="stylesheet" href="styles/contacts.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 </head>
 <body>
+
     <div id="header_container"></div>
+
+    <div class="contacts-container">
+ 
+        <aside class="sidebarContact">
+            <button class="add-contact-btn">
+                <span>Add new contact</span>
+                <img src="assets/icons/person_add.svg" alt="Add User">
+            </button>
+
+            <div class="contact-list">
+                <div class="letter-group">A</div>
+                <div class="line"></div>
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #FF9F1C;">AM</div>
+                    <div class="contact-info">
+                        <p class="contact-name">Anton Mayer</p>
+                        <a class="contact-email">antom@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #906AFF;">AS</div>
+                    <div class="contact-info">
+                        <p class="contact-name">Anja Schulz</p>
+                        <a class="contact-email">schulz@hotmail.com</a>
+                    </div>
+                </div>
+
+                <div class="letter-group">B</div>
+                <div class="line"></div>
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #906AFF;">BZ</div>
+                    <div class="contact-info">
+                        <p class="contact-name">Benedikt Ziegler</p>
+                        <p class="contact-email">benedikt@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="letter-group">D</div>
+                <div class="line"></div>
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #FF66C4;">DE</div>
+                    <div class="contact-info">
+                        <p class="contact-name">David Eisenberg</p>
+                        <p class="contact-email">davidberg@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="letter-group">E</div>
+                <div class="line"></div>
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #FFC107;">EF</div>
+                    <div class="contact-info">
+                        <p class="contact-name">Eva Fischer</p>
+                        <p class="contact-email">eva@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #3DA5F4;">EM</div>
+                    <div class="contact-info">
+                        <p class="contact-name">Emmanuel Mauer</p>
+                        <p class="contact-email">emmanuelma@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <h1>Contacts <span class="divider"></span> <span class="subtitle">Better with a team</span></h1>
+        </div>
+    </div>
+
     <script src="./scripts/load-header.js"></script>
 </body>
 </html>
