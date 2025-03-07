@@ -37,14 +37,16 @@ function updateButtonStyle(buttonType) {
 }
 
 function handleSubtaskInput() {
-    document.getElementById('add_subtask_icon').classList.add('d-none');
-    document.getElementById('check_subtask_icon').classList.remove('d-none');
-    document.getElementById('check_subtask_icon').classList.remove('input-base-icon');
-    document.getElementById('check_subtask_icon').classList.add('input-base-icon-active');
-    document.getElementById('close_subtask_icon').classList.remove('d-none');
-    document.getElementById('close_subtask_icon').classList.remove('input-base-icon');
-    document.getElementById('close_subtask_icon').classList.add('input-base-icon-active');
+    const addIcon = document.getElementById('add_subtask_icon');
+    const checkIcon = document.getElementById('check_subtask_icon');
+    const closeIcon = document.getElementById('close_subtask_icon');
+    addIcon.classList.add('d-none');
+    checkIcon.classList.replace('input-base-icon', 'input-base-icon-active');
+    closeIcon.classList.replace('input-base-icon', 'input-base-icon-active');
+    checkIcon.classList.remove('d-none');
+    closeIcon.classList.remove('d-none');
 }
+
 
 function handleSubtaskInputImg() {
     handleSubtaskInput();
@@ -52,15 +54,18 @@ function handleSubtaskInputImg() {
 }
 
 function handleSubtaskDelete() {
-    document.getElementById('subtask_input').value = '';
-    document.getElementById('add_subtask_icon').classList.remove('d-none');
-    document.getElementById('check_subtask_icon').classList.add('d-none');
-    document.getElementById('close_subtask_icon').classList.add('d-none');
-    document.getElementById('check_subtask_icon').classList.add('input-base-icon');
-    document.getElementById('check_subtask_icon').classList.remove('input-base-icon-active');
-    document.getElementById('close_subtask_icon').classList.add('input-base-icon');
-    document.getElementById('close_subtask_icon').classList.remove('input-base-icon-active');
+    const inputField = document.getElementById('subtask_input');
+    const addIcon = document.getElementById('add_subtask_icon');
+    const checkIcon = document.getElementById('check_subtask_icon');
+    const closeIcon = document.getElementById('close_subtask_icon');
+    inputField.value = '';
+    addIcon.classList.remove('d-none');
+    checkIcon.classList.replace('input-base-icon-active', 'input-base-icon');
+    checkIcon.classList.add('d-none');
+    closeIcon.classList.replace('input-base-icon-active', 'input-base-icon');
+    closeIcon.classList.add('d-none');
 }
+
 
 let subtasks = [];
 
@@ -113,25 +118,23 @@ function clearInput() {
     for (let i = 0; i < textareaBaseFields.length; i++) {
         textareaBaseFields[i].value = '';
     }
-
 }
 
 function clearButtons() {
-    resetActiveButton();
+    if (activeButton) {
+        resetActiveButton();
+    }
 }
 
 function clearSubtasks() {
     document.getElementById('subtask_input').value = '';
     subtasks = [];
+    handleSubtaskDelete();
     updateSubtaskDisplay();
-    document.getElementById('add_subtask_icon').classList.remove('d-none');
-    document.getElementById('check_subtask_icon').classList.add('d-none');
-    document.getElementById('close_subtask_icon').classList.add('d-none');
-    document.getElementById('check_subtask_icon').classList.add('input-base-icon');
-    document.getElementById('check_subtask_icon').classList.remove('input-base-icon-active');
-    document.getElementById('close_subtask_icon').classList.add('input-base-icon');
-    document.getElementById('close_subtask_icon').classList.remove('input-base-icon-active');
 }
+
+
+
 
 
 
