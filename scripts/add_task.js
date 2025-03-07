@@ -177,6 +177,28 @@ function saveEditedSubtask() {
     currentEditIndex = null; 
 }
 
+function toggleDropdown() {
+    const optionsContainer = document.getElementById('options_container');
+    const arrowIcon = document.getElementById('select_arrow');
+
+    if (optionsContainer.classList.contains('d-none')) {
+        optionsContainer.classList.remove('d-none');
+        arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+    } else {
+        optionsContainer.classList.add('d-none');
+        arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
+    }
+}
+
+function selectOption(value) {
+    const selectedOption = document.getElementById('selected_option');
+    selectedOption.textContent = value.charAt(0).toUpperCase() + value.slice(1);
+    document.getElementById('options_container').classList.add('d-none');
+    document.getElementById('select_arrow').src = '/assets/icons/arrow_drop_down.svg';
+}
+
+
+
 
 
 
