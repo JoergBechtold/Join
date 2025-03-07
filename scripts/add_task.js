@@ -135,12 +135,16 @@ function clearSubtasks() {
 function editSubtask(index) {
     const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
     const editInput = document.getElementById('edit_subtask_input');
+    const deleteIcon = document.getElementById('edit_delete_icon');
+    const saveIcon = document.getElementById('edit_save_icon'); 
     subtaskEnum.style.display = 'none';
     editInput.classList.remove('d-none');
-    editInput.parentNode.classList.remove('d-none');
+    deleteIcon.classList.remove('d-none');
+    saveIcon.classList.remove('d-none');
     editInput.value = subtasks[index];
     editInput.focus();
 }
+
 
 
 
