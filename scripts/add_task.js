@@ -131,6 +131,7 @@ function clearSubtasks() {
     updateSubtaskDisplay();
 }
 
+let currentEditIndex = null;
 
 function editSubtask(index) {
     const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
@@ -143,7 +144,39 @@ function editSubtask(index) {
     saveIcon.classList.remove('d-none');
     editInput.value = subtasks[index];
     editInput.focus();
+    currentEditIndex = index;
 }
+
+function cancelEditSubtask() {
+    const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
+    const editInput = document.getElementById('edit_subtask_input');
+    const deleteIcon = document.getElementById('edit_delete_icon');
+    const saveIcon = document.getElementById('edit_save_icon');
+    if (currentEditIndex !== null) {
+        subtasks.splice(currentEditIndex, 1);
+    }
+    editInput.classList.add('d-none');
+    deleteIcon.classList.add('d-none');
+    saveIcon.classList.add('d-none');
+    subtaskEnum.style.display = 'block';
+    updateSubtaskDisplay(); 
+    currentEditIndex = null; 
+}
+
+function saveEditedSubtask() {
+    const editInput = document.getElementById('edit_subtask_input');
+    const editedValue = editInput.value.trim();
+    if (currentEditIndex !== null) {
+        subtasks[currentEditIndex] = editedValue;
+    }
+    editInput.classList.add('d-none');
+    document.getElementById('edit_delete_icon').classList.add('d-none');
+    document.getElementById('edit_save_icon').classList.add('d-none');
+    document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
+    updateSubtaskDisplay(); 
+    currentEditIndex = null; 
+}
+
 
 
 
