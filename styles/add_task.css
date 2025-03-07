@@ -1,14 +1,14 @@
 .body-add-task {
-  height: 100dvh;
+  min-height: 100dvh;
   width: 100%;
   background-color: var(--light-gray-bg);
 }
 
 .main-add-task {
+  flex: 1;
   max-width: 976px;
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
-  padding-right: 40px;
 }
 
 .h1-add-task {
@@ -18,9 +18,13 @@
 }
 
 .footer-add-task {
-  display: flex;
-  justify-content: space-between;
-}
+    margin-top: auto;
+    width: 100%;
+    max-width: 976px; 
+    display: flex;
+    justify-content: space-between;
+  }
+  
 
 
 .add-task-content {
@@ -319,8 +323,7 @@
 }
 
 .custom-options {
-    top: 100%; 
-    left: 0;
+    position: relative;
     width: 100%;
     background-color: white;
     border-radius: var(--border-radius-input-fields);
