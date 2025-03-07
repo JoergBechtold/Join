@@ -316,6 +316,26 @@ button[disabled]:hover {
   opacity: 1;
 }
 
+.error-message-confirm-password {
+  display: none;
+  position: absolute;
+  top: 115%;
+  left: 0;
+  color: red;
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-400);
+}
+
+.error-message-log-in {
+  display: none;
+  position: absolute;
+  top: 115%;
+  left: 0;
+  color: red;
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-400);
+}
+
 .input-base::placeholder {
   transform: translateY(2px);
   display: flex;

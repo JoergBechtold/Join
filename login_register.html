@@ -7,9 +7,9 @@
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
+    <script src="scripts/login-register.js"></script>
     <script src="scripts/database.js"></script>
     <script src="scripts/templates.js"></script>
-    <script src="scripts/login-register.js"></script>
     <script src="script.js"></script>
     <script src="scripts/firebase.js"></script>
 
@@ -46,7 +46,7 @@
             <div class="vector-login"><img src="assets/icons/vector-horizontal.svg" alt="Blue dividing line" /></div>
           </div>
 
-          <form class="form width-422px">
+          <form onsubmit="return false" class="form width-422px">
             <label class="input-base-container" for="email_log_in">
               <input class="input-base" id="email_log_in" type="email" required placeholder="Email" />
               <div class="input-base-icon cursor-pointer">
@@ -71,8 +71,8 @@
             </label>
 
             <div class="button-container">
-              <button type="submit" class="button-log-in">Log in</button>
-              <a href="summary.html"><button class="button-guest-log-in" formaction="summary.html" formnovalidate>Guest Log in</button></a>
+              <button onclick="checkUserIsPresent()" type="submit" class="button-log-in">Log in</button>
+              <button onclick="goToUrl('summary.html')" class="button-guest-log-in">Guest Log in</button>
             </div>
           </form>
         </div>
@@ -90,16 +90,16 @@
             <div class="vector"><img src="assets/icons/vector-horizontal.svg" alt="Blaue Trennlinie" /></div>
           </div>
 
-          <form class="form width-422px" id="sign_up_form" onsubmit="return handleSignUp()">
+          <form onsubmit="return false" class="form width-422px" id="sign_up_form">
             <label class="input-base-container" for="name">
-              <input oninput="checkSignUpForm()" class="input-base" id="name_sign_up" type="text" required placeholder="Name" />
+              <input class="input-base" id="name_sign_up" type="text" required placeholder="Firstname Lastname" />
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/gray-person.svg" alt="Personen Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="email_sign-up">
-              <input oninput="checkSignUpForm()" class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
+              <input onkeydown="updateSignUpButton()" class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
@@ -107,7 +107,7 @@
 
             <label class="input-base-container" for="password_sign_up">
               <input
-                oninput="checkSignUpForm()"
+                oninput="updateSignUpButton()"
                 minlength="8"
                 class="input-base"
                 id="password_sign_up"
@@ -121,6 +121,7 @@
                 <img
                   id="visibility_eye_off_icon"
                   class="visibility-eye-off-icon d-none"
+                  oninput="updateSignUpButton()"
                   onclick="togglePasswordVisibility('password_sign_up', this)"
                   src="assets/icons/visibility-eye-off.svg"
                   alt="password visibility off"
@@ -131,7 +132,7 @@
 
             <label class="input-base-container" for="confirm_password">
               <input
-                oninput="checkSignUpForm()"
+                oninput="updateSignUpButton()"
                 minlength="8"
                 class="input-base confirm-password"
                 id="confirm_sign_up"
@@ -139,7 +140,7 @@
                 required
                 placeholder="Confirm Password"
               />
-              <span class="error-message-Confirm-password" id="error_message_confirm_password">Your passwords don't match. Please try again.</span>
+              <span class="error-message-confirm-password" id="error_message_confirm_password">Your passwords don't match. Please try again.</span>
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
                 <img
@@ -154,15 +155,15 @@
             </label>
 
             <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
-              <input onclick="toggleCheckbox()" type="checkbox" id="checkbox" />
+              <input class="input-checkbox" onclick="toggleCheckbox()" type="checkbox" id="checkbox" />
               <label for="checkbox">
-                <img id="custom_checkmark" " class="custom-checkmark" src="assets/icons/checkbox-empty.svg" alt="Checkbox not Checked" />
+                <img id="custom_checkmark" class="custom-checkmark" src="assets/icons/checkbox-empty.svg" alt="Checkbox not Checked" />
                 <span>I accept the</span><a href="privacy_policy.html">Privacy policy</a>
               </label>
             </div>
 
             <div class="button-sign-up-container">
-              <button type="submit" class="button-sign-up" id="sign_up_button" disabled>Sign up</button>
+              <button onclick="handleSignUp()" class="button-sign-up" id="sign_up_button" disabled>Sign up</button>
             </div>
           </form>
         </div>

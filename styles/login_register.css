@@ -267,26 +267,6 @@
   display: block;
 }
 
-.error-message-Confirm-password {
-  position: absolute;
-  top: 115%;
-  left: 0;
-  color: red;
-  font-size: 12px;
-  display: block;
-  font-weight: 400;
-}
-
-.error-message-log-in {
-  position: absolute;
-  top: 115%;
-  left: 0;
-  color: red;
-  font-size: 12px;
-  display: block;
-  font-weight: 400;
-}
-
 .checkbox-accept-privacy-policy {
   box-sizing: border-box;
   width: 100%;
@@ -306,7 +286,7 @@
 .checkbox-accept-privacy-policy label {
   display: flex;
   gap: 5px;
-  width: 100%;
+  /* width: 100%; */
   align-items: center;
   justify-content: center;
 }
@@ -333,7 +313,7 @@
 }
 
 .checkbox-accept-privacy-policy input {
-  position: absolute;
+  /* position: absolute; */
   display: none;
 }
 
@@ -346,7 +326,16 @@
   margin-right: 5px;
 }
 
-.checkbox {
+.input-checkbox {
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 16px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* #checkbox {
   width: 24px;
   aspect-ratio: 1 / 1;
 }
@@ -354,4 +343,4 @@
 .checkbox img {
   cursor: pointer;
   display: block;
-}
+} */
