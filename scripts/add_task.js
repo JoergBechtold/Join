@@ -47,7 +47,6 @@ function handleSubtaskInput() {
     closeIcon.classList.remove('d-none');
 }
 
-
 function handleSubtaskInputImg() {
     handleSubtaskInput();
     document.getElementById('subtask_input').focus();
@@ -65,7 +64,6 @@ function handleSubtaskDelete() {
     closeIcon.classList.replace('input-base-icon-active', 'input-base-icon');
     closeIcon.classList.add('d-none');
 }
-
 
 let subtasks = [];
 
@@ -88,7 +86,7 @@ function updateSubtaskDisplay() {
             <div class="subtask-item">
                 <span class="subtask-text">• ${subtasks[i]}</span>
                 <div class="subtask-icons">
-                    <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon">
+                    <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon" onclick="editSubtask(${i})">
                     <div class="vertical-line-subtask-dark"></div>
                     <img src="assets/icons/paperbasketdelet.svg" alt="Delete" class="subtask-icon delete-icon" onclick="deleteSubtask(${i})">
                 </div>
@@ -132,6 +130,22 @@ function clearSubtasks() {
     handleSubtaskDelete();
     updateSubtaskDisplay();
 }
+
+
+function editSubtask(index) {
+    const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
+    const editInput = document.getElementById('edit_subtask_input');
+    subtaskEnum.style.display = 'none';
+    editInput.classList.remove('d-none');
+    editInput.parentNode.classList.remove('d-none');
+    editInput.value = subtasks[index];
+    editInput.focus();
+}
+
+
+
+
+
 
 
 
