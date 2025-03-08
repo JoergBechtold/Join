@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
     <title>Contacts</title>
-    
+
     <link rel="stylesheet" href="styles/contacts.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 </head>
 <body>
 
@@ -84,8 +83,50 @@
         <div class="main-content">
             <h1>Contacts <span class="divider"></span> <span class="subtitle">Better with a team</span></h1>
         </div>
+
+        <div class="overlay hidden"></div>
+
+        <div class="container-add hidden">
+            <div class="left-section">
+                <div class="left-section-logo"> 
+                    <img src="./assets/icons/Logo1.svg" alt="">
+                </div>
+                <h1>Add contact</h1>
+                <p>Tasks are better with a team!</p>
+                <div class="underline"></div>
+            </div>
+            <div class="right-section">
+                <button class="close-btn">&times;</button>
+                <div class="profile-image">
+                    <img src="./assets/icons/graycontactperson.svg" alt="">
+                </div>
+                <form>
+                    <div class="input-group">
+                        <input type="text" placeholder="Name">
+                        <img class="icon" src="./assets/icons/gray-person.svg" alt="">
+                    </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="Email">
+                        <img class="icon"  src="./assets/icons/mail.svg" alt="">
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" placeholder="Phone">
+                        <img class="icon"  src="./assets/icons/call.svg" alt="">
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="cancel-btn">Cancel
+                            <img src="./assets/icons/cancel.svg" alt="">
+                        </button>
+                        <button type="submit" class="create-btn">Create contact
+                            <img src="./assets/icons/check.svg" alt="">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="./scripts/load-header.js"></script>
+    <script src="./scripts/addPopUp.js"></script>
 </body>
 </html>

@@ -68,6 +68,7 @@ body {
     padding-top: 12px;
     padding-bottom: 12px;
     gap: 16px;
+    margin-top: 10px;
 }
 
 .add-contact-btn img {
@@ -213,4 +214,240 @@ body {
     font-size: 27px;
     line-height: 120%;
     letter-spacing: 0%;
+}
+
+.container-add {
+    position: fixed;
+    right: -500px; 
+    top: 50%;
+    transform: translateY(-50%);
+    height: 592px;
+    border-radius: 30px;
+    display: flex;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+.container-add.active {
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+.hidden {
+    display: none;
+}
+
+.left-section {
+    width: 467px;
+    height: 594px;
+    padding-top: 66px;
+    padding-right: 48px;
+    padding-bottom: 66px;
+    padding-left: 48px;
+    gap: 12px;
+    background-color: #2A3647;
+    color: white;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.left-section h1 {
+    width: 366px;
+    height: 73px;
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 1);
+}
+
+.left-section p {
+    width: 371px;
+    height: 32px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 1);
+}
+
+.underline{
+    width: 100px;
+    border: 2px solid rgba(41, 171, 226, 1);
+}
+
+.left-section-logo{
+    top: 154px;
+    left: 46.9px;
+}
+
+.left-section-logo img{
+    width: 55px;
+    height: 66px;
+}
+
+.right-section {
+    padding: 40px;
+    flex: 1.5;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.close-btn {
+    position: absolute;
+    border: none;
+    background: none;
+    font-size: 28px;
+    padding: 1px 7px;
+    cursor: pointer;
+    top: 48px;
+    left: 750px;
+    border-radius: 50%;
+}
+
+.close-btn:hover{
+    background-color: #F0F0F0;
+}
+
+.profile-image {
+    width: 70px;
+    height: 70px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-right: 150px;
+    margin-left: 100px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+    width: 422px;
+    height: 50px;
+    gap: 8px;
+}
+
+.input-group input {
+    font-size: 20px;
+    width: 422px;
+    height: 50px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-top: 13px;
+    padding-right: 21px;
+    padding-bottom: 13px;
+    padding-left: 21px;
+    gap: 10px;
+    border: 1px solid rgba(209, 209, 209, 1);
+}
+
+.input-group ::placeholder{
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: rgba(209, 209, 209, 1);
+}
+
+.input-group .icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #888;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 364px;
+    height: 57px;
+    gap: 24px;
+}
+
+.cancel-btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border-width: 1px;
+    gap: 8px;
+    padding: 16px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.cancel-btn:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+    box-shadow: var(--box-shadow-button);
+}
+
+.cancel-btn:hover img{
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0; 
+}
+
+.create-btn {
+    display: flex;
+    align-items: center;
+    background: #1f2937;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 214px;
+    height: 57px;
+    border-radius: 10px;
+    gap: 4px;
+    padding: 16px;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.create-btn:hover {
+    background-color: var(--blue);
+    box-shadow: var(--box-shadow-button);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(1px); 
+    z-index: 999; 
+    display: none;
+}
+
+.overlay.active {
+    display: block;
 }
