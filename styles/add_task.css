@@ -5,7 +5,6 @@
 }
 
 .main-add-task {
-  flex: 1;
   max-width: 976px;
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
@@ -98,13 +97,6 @@
   opacity: 1;
 }
 
-.select-base:focus-visible {
-  outline: none;
-  border: 1px solid var(--blue);
-  opacity: 1;
-}
-
-
 .prio {
   flex: 1;
   height: 48px;
@@ -171,8 +163,7 @@
 .input-base-icon:hover {
     background-color: var(--light-gray-bg);
     border-radius: 50%;
-  }
-
+}
 
 .input-base-icon-active {
     position: static;
@@ -226,7 +217,6 @@
 .subtask-item:hover {
     background-color: #EEEEEE;
     border-radius: var(--border-radius-input-fields);
-
 }
 
 .subtask-icons {
@@ -251,6 +241,7 @@
 .subtask-text {
     flex-grow: 1;
     margin-right: 10px;
+    cursor:pointer;
 }
 
 .subtask-icons {
@@ -330,6 +321,11 @@
     border: var(--border-input-fields);
 }
 
+.custom-select:hover {
+    border: 1px solid grey;
+}
+
+
   
 .custom-select-option {
     padding: 12px 21px;
@@ -337,4 +333,16 @@
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-20);
 }
+
+.select-icon-active:hover ,
+.select-icon:hover {
+    background-color: var(--light-gray-bg);
+    border-radius: 50%;
+}
+
+.custom-select-option:hover {
+    background-color: #EEEEEE;
+    border-radius: var(--border-radius-input-fields);
+}
+
 

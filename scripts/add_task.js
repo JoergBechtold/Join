@@ -84,7 +84,7 @@ function updateSubtaskDisplay() {
     for (let i = 0; i < subtasks.length; i++) {
         subtaskHtml += `
             <div class="subtask-item">
-                <span class="subtask-text">• ${subtasks[i]}</span>
+                <span class="subtask-text" ondblclick="editSubtask(${i})">• ${subtasks[i]}</span>
                 <div class="subtask-icons">
                     <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon" onclick="editSubtask(${i})">
                     <div class="vertical-line-subtask-dark"></div>
@@ -105,6 +105,7 @@ function clearAll() {
     clearInput();
     clearButtons();
     clearSubtasks();
+    clearSelection();
 }
 
 function clearInput() {
@@ -195,6 +196,11 @@ function selectOption(value) {
     selectedOption.textContent = value.charAt(0).toUpperCase() + value.slice(1);
     document.getElementById('options_container').classList.add('d-none');
     document.getElementById('select_arrow').src = '/assets/icons/arrow_drop_down.svg';
+}
+
+function clearSelection() {
+    const selectedOption = document.getElementById('selected_option');
+    selectedOption.textContent = 'Select task category'; 
 }
 
 
