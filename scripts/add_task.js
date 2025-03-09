@@ -178,7 +178,7 @@ function saveEditedSubtask() {
     currentEditIndex = null; 
 }
 
-function toggleDropdownCategory() {
+function toggleDropdown() {
     const optionsContainer = document.getElementById('options_container');
     const arrowIcon = document.getElementById('select_arrow');
 
