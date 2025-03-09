@@ -10,6 +10,10 @@
   padding-top: var(--padding-top-main);
 }
 
+.form-add-task {
+    height: 600px;; 
+}
+
 .h1-add-task {
   font-size: var(--font-size-61);
   font-weight: var(--font-weight-700);
@@ -17,15 +21,12 @@
 }
 
 .footer-add-task {
-    margin-top: auto;
     width: 100%;
     max-width: 976px; 
     display: flex;
     justify-content: space-between;
-  }
+}
   
-
-
 .add-task-content {
   display: flex;
   margin-bottom: 100px;
@@ -136,12 +137,12 @@
 .red-prio {
     background-color: #FF3D00;
     ;
-  }
+}
 
 .green-prio {
     background-color: #7AE229;
     
-  }
+}
 
 .align {
     display: flex;
@@ -204,7 +205,6 @@
     background-color: grey;
     height: 20px;
 }
-
 
 .subtask-item {
     display: flex;
@@ -324,9 +324,7 @@
 .custom-select:hover {
     border: 1px solid grey;
 }
-
-
-  
+ 
 .custom-select-option {
     padding: 12px 21px;
     cursor: pointer;

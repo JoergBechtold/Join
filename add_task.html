@@ -28,7 +28,7 @@
     <main class="main-add-task">
       <h1 class="h1-add-task">Add Task</h1>
 
-      <form>
+      <form class="form-add-task">
         <div class="add-task-content">
           <div class="form-column left-container">
             <div class="form-group">
@@ -72,14 +72,11 @@
             </div>
 
             <div class="form-group">
-              <label for="category">Assigned to </label>
+              <label for="Assigned to">Assigned to </label>
               <div class="custom-select-container">
-                <div class="custom-select" onclick="toggleDropdown()">
+                <div class="custom-select">
                   <span id="selected_option">Select contacts so assign</span>
                   <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
-                </div>
-                <div class="custom-options d-none" id="options_container">
-                  <div class="custom-select-option">hier kommen Kontakte</div>
                 </div>
               </div>
             </div>
@@ -87,7 +84,7 @@
             <div class="form-group">
               <label for="category">Category <span class="red">*</span></label>
               <div class="custom-select-container">
-                <div class="custom-select" onclick="toggleDropdown()">
+                <div class="custom-select" onclick="toggleDropdownCategory()">
                   <span id="selected_option">Select task category</span>
                   <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
@@ -141,6 +138,7 @@
         </div>
       </div>
     </main>
+
 
     <script src="./scripts/load-header.js"></script>
   </body>
