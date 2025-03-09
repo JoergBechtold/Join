@@ -451,3 +451,50 @@ body {
 .overlay.active {
     display: block;
 }
+
+.popup {
+    position: fixed;
+    width: 326px;
+    height: 74px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(42, 54, 71, 1);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 999;
+    backdrop-filter: none; 
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-hidden {
+    display: none; 
+    visibility: hidden; 
+}
+
+.popup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.create-btn:disabled,
+.create-btn.disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
