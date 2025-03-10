@@ -296,10 +296,6 @@ button[disabled]:hover {
   object-fit: scale-down;
 }
 
-/* .input-base-icon img {
-  display: block;
-} */
-
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
 .input-base[type='text']:focus-visible {

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((response) => response.text())
     .then((data) => {
       document.getElementById('header_container').innerHTML = data;
+      hideLoggedInLinks();
     })
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
@@ -20,3 +21,19 @@ document.addEventListener('click', function (event) {
     submenu.classList.add('hidden');
   }
 });
+
+function hideLoggedInLinks() {
+  const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
+
+  loggedInLinks.forEach((li) => {
+    li.style.display = 'none';
+  });
+}
+
+function showLoggedInLinks() {
+  const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
+
+  loggedInLinks.forEach((li) => {
+    li.style.display = 'flex';
+  });
+}
