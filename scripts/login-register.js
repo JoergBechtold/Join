@@ -27,6 +27,7 @@ function getIdRefs() {
     imgPasswordLogInRef: document.getElementById('img_password_log_in'),
     nameSignUpRef: document.getElementById('name_sign_up'),
     emailSignUpRef: document.getElementById('email_sign-up'),
+    emailLogInRef: document.getElementById('email_log_in'),
     passwordLogInRef: document.getElementById('password_log_in'),
     passwordSignUpRef: document.getElementById('password_sign_up'),
     confirmPasswordSignUpRef: document.getElementById('confirm_sign_up'),
@@ -234,20 +235,40 @@ function passwordMatch(password, confirmPassword) {
   }
 }
 
-function checkUserIsPresent() {
-  const { passwordLogInRef, errorMessageLogInRef, errorMessageConfirmPasswordRef } = getIdRefs();
+async function checkUserIsPresent() {
+  const { passwordLogInRef, emailLogInRef } = getIdRefs();
   const { emailLogIn, passwordLogIn } = setIdRefValueTrim();
+  try {
+    const users = await loadData('/user');
 
-  loadData('/user');
-  // console.log(emailLogIn + passwordLogIn);
+    if (users) {
+      const userIds = Object.keys(users);
 
-  // if (!passwordLogInRef.validity.valid) {
-  //   errorMessageLogInRef.classList.add('d-flex');
-  //   return false;
-  // } else {
-  //   errorMessageLogInRef.classList.remove('d-flex');
-  //   return true;
-  // }
+      for (let index = 0; index < userIds.length; index++) {
+        const userId = userIds[index];
+        const user = users[userId];
+
+        if (user.username === emailLogIn && user.password === passwordLogIn) {
+          emailLogInRef.value = '';
+          passwordLogInRef.value = '';
+          goToUrl('summary.html');
+          return true;
+        }
+      }
+      showLoginError();
+      return false;
+    }
+  } catch (error) {
+    console.error('Fehler beim Überprüfen des Benutzers:', error);
+    return false;
+  }
+}
+
+function showLoginError() {
+  const { errorMessageLogInRef, passwordLogInRef, emailLogInRef } = getIdRefs();
+  errorMessageLogInRef.classList.add('d-flex');
+  emailLogInRef.classList.add('not-valide-error');
+  passwordLogInRef.classList.add('not-valide-error');
 }
 
 function guestLogIn(url) {
@@ -256,7 +277,6 @@ function guestLogIn(url) {
   const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
 
   loggedInLinks.forEach((li) => {
-    // li.style.display = 'flex';
     li.classList.remove('d-none');
   });
   window.location.href = url;

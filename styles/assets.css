@@ -344,7 +344,7 @@ button[disabled]:hover {
   color: var(--light-gray-placeholder);
 }
 
-.not-valide-error {
+.passwordLogInRef {
   outline: none;
   border: 1px solid var(--red);
   opacity: 1;

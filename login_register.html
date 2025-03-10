@@ -134,19 +134,17 @@
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_password_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
-
                 <img
-                  id="visibility_eye_off_icon"
+                  id="password_sign_up_visibility_eye_off_icon"
                   class="visibility-eye-off-icon d-none"
                   onclick="togglePasswordVisibility('password_sign_up', this)"
                   src="assets/icons/visibility-eye-off.svg"
                   alt="password visibility off"
                 />
               </div>
-              <!-- <img onclick="togglePasswordVisibility('password_sign_up', this)" class="input-base-icon" src="assets/icons/lock.svg" alt="Lock Icon" /> -->
             </label>
 
-            <label class="input-base-container" for="confirm_password">
+            <label class="input-base-container" for="confirm_sign_up">
               <input
                 title="Please repeat your password."
                 minlength="8"
@@ -156,18 +154,17 @@
                 required
                 placeholder="Confirm Password"
               />
-              <span class="error-message-confirm-password" id="error_message_confirm_password">Your passwords don't match. Please try again.</span>
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_confirm_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
                 <img
-                  id="visibility_eye_off_icon"
+                  id="confirm_sign_up_visibility_eye_off_icon"
                   class="visibility-eye-off-icon d-none"
                   onclick="togglePasswordVisibility('confirm_sign_up', this)"
                   src="assets/icons/visibility-eye-off.svg"
                   alt="password visibility off"
                 />
               </div>
-              <!-- <img onclick="togglePasswordVisibility('confirm_password', this)" class="input-base-icon" src="assets/icons/lock.svg" alt="Lock Icon" /> -->
+              <span class="error-message-confirm-password" id="error_message_confirm_password">Your passwords don't match. Please try again.</span>
             </label>
 
             <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
