@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .animation-join-logo {
@@ -328,4 +328,31 @@
   font-weight: var(--font-weight-700);
   color: var(--blue);
   scale: var(--scale-hover);
+}
+
+.popup-sign-up {
+  transform: translateY(600px);
+  transition: popup 1s ease-in-out forwards;
+  position: absolute;
+  background-color: var(--primary-color-gray);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: 0px 0px 4px 0px #00000026;
+}
+
+.popup-sign-up span {
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-20);
+  line-height: 120%;
+  color: white;
+}
+
+@keyframes popup {
+  from {
+    transform: translateY(600px);
+  }
+
+  to {
+    transform: translateY(150px);
+  }
 }

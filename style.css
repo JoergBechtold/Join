@@ -81,6 +81,7 @@ a {
 
   /* border */
   --border-radius: 30px;
+  --border-radius: 20px;
   --border-radius-buttons: 8px;
   --border-radius-input-fields: 10px;
   --border-input-fields: 1px solid #d1d1d1;
