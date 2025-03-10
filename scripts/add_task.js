@@ -234,21 +234,7 @@ async function loadContacts() {
     }
 }
   
-function renderContacts(data, container) {
-    container.innerHTML = data
-    ? generateContactsHTML(data)
-    : '<div class="contact-select-option">No contacts found.</div>';
-}
-    
-function generateContactsHTML(data) {
-    return Object.values(data)
-    .map(contact => `<div class="contact-select-option">${contact.firstname} ${contact.lastname}</div>`)
-    .join('');
-}
-    
-function renderContactsError(container) {
-    container.innerHTML = '<div class="contact-select-option">Error loading contacts.</div>';
-}
+
 
 
 

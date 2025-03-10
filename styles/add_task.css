@@ -344,28 +344,18 @@
     font-size: var(--font-size-20);
 }
 
+.custom-select-option:hover {
+    background-color: #EEEEEE;
+    border-radius: var(--border-radius-input-fields);
+}
+
 .select-icon-active:hover ,
 .select-icon:hover {
     background-color: var(--light-gray-bg);
     border-radius: 50%;
 }
 
-.custom-select-option:hover {
-    background-color: #EEEEEE;
-    border-radius: var(--border-radius-input-fields);
-}
 
-.contact-select-option {
-    padding: 12px 21px;
-    cursor: pointer;
-    font-weight: var(--font-weight-400);
-    font-size: var(--font-size-20);
-}
-
-.contact-select-option:hover {
-    background-color: #EEEEEE;
-    border-radius: var(--border-radius-input-fields);
-}
 
 
 
