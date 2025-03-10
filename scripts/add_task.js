@@ -203,6 +203,50 @@ function clearSelection() {
     selectedOption.textContent = 'Select task category'; 
 }
 
+const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
+
+function toggleContactsDropdown() {
+  const optionsContainer = document.getElementById('contacts_options_container');
+  const arrowIcon = document.getElementById('contacts_select_arrow');
+  if (optionsContainer.classList.contains('d-none')) {
+    optionsContainer.classList.remove('d-none');
+    arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+    loadContacts(); 
+  } else {
+    optionsContainer.classList.add('d-none');
+    arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
+  }
+}
+
+async function loadContacts() {
+    const optionsContainer = document.getElementById('contacts_options_container');
+    if (optionsContainer.childElementCount) return;
+    try {
+      const res = await fetch(`${BASE_URL}/contacts.json`);
+      const data = await res.json();
+      optionsContainer.innerHTML = '';
+      if (data) {
+        Object.values(data).forEach(renderContactOption);
+      } else {
+        optionsContainer.innerHTML = '<div class="custom-select-option">No contacts found.</div>';
+      }
+    } catch (e) {
+      console.error('Error loading contacts:', e);
+      optionsContainer.innerHTML = '<div class="custom-select-option">Error loading contacts.</div>';
+    }
+}
+  
+function renderContactOption(contact) {
+    const optionDiv = document.createElement('div');
+    optionDiv.className = 'custom-select-option';
+    optionDiv.textContent = `${contact.firstname} ${contact.lastname}`;
+    optionDiv.onclick = () => selectContact(`${contact.firstname} ${contact.lastname}`);
+    document.getElementById('contacts_options_container').appendChild(optionDiv);
+}
+  
+
+
+
 
 
 

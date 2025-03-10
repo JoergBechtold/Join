@@ -72,16 +72,17 @@
             </div>
 
             <div class="form-group">
-              <label for="Assigned to">Assigned to</label>
+              <label for="assigned_to">Assigned to</label>
               <div class="custom-select-container">
-                <div class="custom-select" >
-                  <span>Select contacts to assign</span>
-                  <img class="select-icon" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
+                <div class="custom-select" onclick="toggleContactsDropdown()">
+                  <span id="selected_contact">Select contacts to assign</span>
+                  <img class="select-icon" id="contacts_select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
-                <div class="custom-options d-none" >
+                <div class="custom-options-contacts d-none" id="contacts_options_container">
                 </div>
               </div>
             </div>
+            
 
             <div class="form-group">
               <label for="category">Category <span class="red">*</span></label>

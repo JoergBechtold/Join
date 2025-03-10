@@ -321,6 +321,16 @@
     border: var(--border-input-fields);
 }
 
+.custom-options-contacts {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    border-radius: var(--border-radius-input-fields);
+    border: var(--border-input-fields);
+    max-height: 100px; /* 240px entspricht ca. 5 Optionen à ~48px Höhe */
+    overflow-y: auto; 
+}
+
 .custom-select:hover {
     border: 1px solid grey;
 }
