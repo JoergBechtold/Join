@@ -314,6 +314,10 @@
     justify-content: space-between;
 }
 
+.custom-select:hover {
+    border: 1px solid grey;
+}
+
 .custom-options {
     position: relative;
     width: 100%;
@@ -322,7 +326,7 @@
     border: var(--border-input-fields);
 }
 
-.custom-options-contacts {
+.contacts-custom-options {
     position: relative;
     width: 100%;
     background-color: white;
@@ -332,10 +336,7 @@
     overflow-y: auto; 
 }
 
-.custom-select:hover {
-    border: 1px solid grey;
-}
- 
+
 .custom-select-option {
     padding: 12px 21px;
     cursor: pointer;
@@ -353,5 +354,19 @@
     background-color: #EEEEEE;
     border-radius: var(--border-radius-input-fields);
 }
+
+.contact-select-option {
+    padding: 12px 21px;
+    cursor: pointer;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+}
+
+.contact-select-option:hover {
+    background-color: #EEEEEE;
+    border-radius: var(--border-radius-input-fields);
+}
+
+
 
 

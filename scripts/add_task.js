@@ -223,31 +223,32 @@ async function loadContacts() {
     try {
       const res = await fetch(`${BASE_URL}/contacts.json`);
       const data = await res.json();
-      renderContacts(data, optionsContainer);
+      if (data) {
+        optionsContainer.innerHTML = Object.values(data).map(contact => `<div class="custom-select-option">${contact.firstname} ${contact.lastname}</div>`).join('');
+      } else {
+        optionsContainer.innerHTML = '<div class="custom-select-option">No contacts found.</div>';
+      }
     } catch (e) {
-      renderContactsError(optionsContainer);
       console.error('Error loading contacts:', e);
+      optionsContainer.innerHTML = '<div class="custom-select-option">Error loading contacts.</div>';
     }
 }
-
+  
 function renderContacts(data, container) {
     container.innerHTML = data
-      ? generateContactsHTML(data)
-      : '<div class="custom-select-option">No contacts found.</div>';
+    ? generateContactsHTML(data)
+    : '<div class="contact-select-option">No contacts found.</div>';
 }
-  
+    
 function generateContactsHTML(data) {
     return Object.values(data)
-      .map(contact => `<div class="custom-select-option">${contact.firstname} ${contact.lastname}</div>`)
-      .join('');
+    .map(contact => `<div class="contact-select-option">${contact.firstname} ${contact.lastname}</div>`)
+    .join('');
 }
-  
+    
 function renderContactsError(container) {
-    container.innerHTML = '<div class="custom-select-option">Error loading contacts.</div>';
+    container.innerHTML = '<div class="contact-select-option">Error loading contacts.</div>';
 }
-  
-  
-
 
 
 
