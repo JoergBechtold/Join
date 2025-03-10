@@ -8,6 +8,22 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
 
+function hideLoggedInLinks() {
+  const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
+
+  loggedInLinks.forEach((li) => {
+    li.classList.add('d-none');
+  });
+}
+
+// function showLoggedInLinks() {
+//   const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
+
+//   loggedInLinks.forEach((li) => {
+//     li.classList.remove('d-none');
+//   });
+// }
+
 function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
   submenu.classList.toggle('hidden');
@@ -21,19 +37,3 @@ document.addEventListener('click', function (event) {
     submenu.classList.add('hidden');
   }
 });
-
-function hideLoggedInLinks() {
-  const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
-
-  loggedInLinks.forEach((li) => {
-    li.style.display = 'none';
-  });
-}
-
-function showLoggedInLinks() {
-  const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
-
-  loggedInLinks.forEach((li) => {
-    li.style.display = 'flex';
-  });
-}

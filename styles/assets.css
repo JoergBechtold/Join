@@ -312,8 +312,9 @@ button[disabled]:hover {
   opacity: 1;
 }
 
-.error-message-confirm-password {
-  display: none;
+.error-message-name,
+.error-message-confirm-password,
+.error-message-log-in {
   position: absolute;
   top: 115%;
   left: 0;
@@ -322,14 +323,16 @@ button[disabled]:hover {
   font-weight: var(--font-weight-400);
 }
 
+.error-message-name {
+  display: none;
+}
+
+.error-message-confirm-password {
+  display: none;
+}
+
 .error-message-log-in {
   display: none;
-  position: absolute;
-  top: 115%;
-  left: 0;
-  color: red;
-  font-size: var(--font-size-12);
-  font-weight: var(--font-weight-400);
 }
 
 .input-base::placeholder {
@@ -339,4 +342,10 @@ button[disabled]:hover {
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-20);
   color: var(--light-gray-placeholder);
+}
+
+.not-valide-error {
+  outline: none;
+  border: 1px solid var(--red);
+  opacity: 1;
 }

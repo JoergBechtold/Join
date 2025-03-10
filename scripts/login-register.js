@@ -33,6 +33,7 @@ function getIdRefs() {
     checkboxRef: document.getElementById('checkbox'),
     signUpButtonRef: document.getElementById('sign_up_button'),
     customCheckmarkRef: document.getElementById('custom_checkmark'),
+    errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
   };
@@ -113,8 +114,8 @@ function togglePasswordVisibility(inputId, iconElement) {
     toggleIcon.alt = 'Visibility Eye Icon';
   } else {
     passwordInput.type = 'password';
-    toggleIcon.src = 'assets/icons/lock.svg';
-    toggleIcon.alt = 'Lock Icon';
+    toggleIcon.src = 'assets/icons/visibility-eye-off.svg';
+    toggleIcon.alt = 'Visibility eye of Icon';
   }
 }
 
@@ -132,33 +133,49 @@ function setIdRefValueTrim() {
 
 async function handleSignUp() {
   const { name, email, password, confirmPassword } = setIdRefValueTrim();
+
   try {
-    // if (password !== confirmPassword) {
-    //   showCustomAlert('Passwörter stimmen nicht überein.');
-
-    //   return false;
-    // }
-
     const nameParts = name.split(' ');
-    // if (nameParts.length < 2) {
-    //   showCustomAlert('Bitte gib Vor- und Nachname an.');
-    //   return false;
-    // }
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ');
-
     const randomColor = getRandomColor();
 
-    console.log('Benutzerdaten:', { firstName, lastName, email, password, randomColor });
+    if (!checkNamePartsLength(nameParts)) {
+      return;
+    }
+
+    if (!checkPasswordConfirm(password, confirmPassword)) {
+      return;
+    }
 
     await createUser(firstName, lastName, email, password, randomColor);
-
     goToUrl('login_register.html');
     resetProberties();
   } catch (error) {
     console.error('Fehler beim Erstellen des Benutzers:', error);
   }
-  return false;
+}
+
+function checkNamePartsLength(nameParts) {
+  const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
+
+  if (nameParts.length < 2) {
+    errorMessageNameRef.classList.add('d-flex');
+    nameSignUpRef.classList.add('not-valide-error');
+    return false;
+  }
+  return true;
+}
+
+function checkPasswordConfirm(password, confirmPassword) {
+  const { errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
+  if (password !== confirmPassword) {
+    errorMessageConfirmPasswordRef.classList.add('d-flex');
+    passwordSignUpRef.classList.add('not-valide-error');
+    confirmPasswordSignUpRef.classList.add('not-valide-error');
+    return false;
+  }
+  return true;
 }
 
 function resetProberties() {
@@ -190,7 +207,7 @@ async function createUser(firstname, lastname, email, password, randomColors) {
 }
 
 function toggleCheckbox(element = false) {
-  const { checkboxRef, customCheckmarkRef } = getIdRefs();
+  const { checkboxRef, customCheckmarkRef, signUpButtonRef } = getIdRefs();
   if (element) {
     checkboxRef.checked = false;
   }
@@ -200,30 +217,21 @@ function toggleCheckbox(element = false) {
   if (checkboxRef.checked) {
     customCheckmarkRef.src = 'assets/icons/checkbox-checked.svg';
     customCheckmarkRef.alt = 'Checkbox Checked';
+    signUpButtonRef.disabled = false;
   } else {
     customCheckmarkRef.src = 'assets/icons/checkbox-empty.svg';
     customCheckmarkRef.alt = 'Checkbox not Checked';
-  }
-
-  updateSignUpButton();
-}
-
-function updateSignUpButton() {
-  const { emailSignUpRef, passwordSignUpRef, checkboxRef, signUpButtonRef, confirmPasswordSignUpRef } = getIdRefs();
-
-  const isEmailValid = emailSignUpRef.checkValidity();
-  const isPasswordValid = passwordSignUpRef.checkValidity();
-  const passwordsAreValid = passwordsMatch(passwordSignUpRef.value, confirmPasswordSignUpRef.value);
-
-  if (isEmailValid && isPasswordValid && checkboxRef.checked && passwordsAreValid) {
-    signUpButtonRef.disabled = false;
-  } else {
     signUpButtonRef.disabled = true;
   }
 }
 
-function passwordsMatch(password, confirmPassword) {
-  return password === confirmPassword;
+function passwordMatch(password, confirmPassword) {
+  const { errorMessageConfirmPasswordRef } = getIdRefs();
+
+  if (!password.value === confirmPassword.value) {
+    errorMessageConfirmPasswordRef.classList.add('d-flex');
+    return false;
+  }
 }
 
 function checkUserIsPresent() {
@@ -240,4 +248,16 @@ function checkUserIsPresent() {
   //   errorMessageLogInRef.classList.remove('d-flex');
   //   return true;
   // }
+}
+
+function guestLogIn(url) {
+  // showLoggedInLinks();
+
+  const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
+
+  loggedInLinks.forEach((li) => {
+    // li.style.display = 'flex';
+    li.classList.remove('d-none');
+  });
+  window.location.href = url;
 }

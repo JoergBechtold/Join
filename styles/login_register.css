@@ -184,31 +184,6 @@
   box-shadow: var(--box-shadow-button);
 }
 
-.footer-login-register {
-  position: absolute;
-  bottom: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--light-gray-bg);
-  height: 35px;
-  width: 246px;
-  opacity: 0;
-}
-
-.footer-login-register span {
-  cursor: pointer;
-  color: var(--gray-a-links);
-  font-size: var(--font-size-16);
-  font-weight: var(--font-weight-400);
-}
-
-.footer-login-register span:hover {
-  font-weight: var(--font-weight-700);
-  color: var(--blue);
-  scale: var(--scale-hover);
-}
-
 /* sign up section */
 .sign-up-container {
   position: relative;
@@ -255,10 +230,6 @@
 
 .input-base:focus + .input-base-icon .lock-icon,
 .input-base:not(:placeholder-shown) + .input-base-icon .lock-icon {
-  display: none;
-}
-
-.visibility-eye-off-icon {
   display: none;
 }
 
@@ -313,7 +284,6 @@
 }
 
 .checkbox-accept-privacy-policy input {
-  /* position: absolute; */
   display: none;
 }
 
@@ -335,12 +305,27 @@
   margin-right: 5px;
 }
 
-/* #checkbox {
-  width: 24px;
-  aspect-ratio: 1 / 1;
+.footer-login-register {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-gray-bg);
+  height: 35px;
+  width: 246px;
+  opacity: 0;
 }
 
-.checkbox img {
+.footer-login-register a {
   cursor: pointer;
-  display: block;
-} */
+  color: var(--gray-a-links);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-400);
+}
+
+.footer-login-register a:hover {
+  font-weight: var(--font-weight-700);
+  color: var(--blue);
+  scale: var(--scale-hover);
+}
