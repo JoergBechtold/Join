@@ -198,7 +198,7 @@ function getRandomColor() {
 }
 
 async function createUser(firstname, lastname, email, password, randomColors, initials) {
-  const newUser = { firstname, lastname, username: email, password, randomColors, initials };
+  const newUser = { firstname, lastname, email, password, randomColors, initials };
 
   try {
     await postData('/user', newUser);
