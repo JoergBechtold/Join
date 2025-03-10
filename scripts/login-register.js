@@ -249,7 +249,7 @@ async function checkUserIsPresent() {
         const userId = userIds[index];
         const user = users[userId];
 
-        if (user.username === emailLogIn && user.password === passwordLogIn) {
+        if (user.email === emailLogIn && user.password === passwordLogIn) {
           emailLogInRef.value = '';
           passwordLogInRef.value = '';
           goToUrl('summary.html');
