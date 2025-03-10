@@ -140,6 +140,7 @@ async function handleSignUp() {
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ');
     const randomColor = getRandomColor();
+    const initials = firstName[0].toUpperCase() + lastName[0].toUpperCase();
 
     if (!checkNamePartsLength(nameParts)) {
       return;
@@ -149,7 +150,7 @@ async function handleSignUp() {
       return;
     }
 
-    await createUser(firstName, lastName, email, password, randomColor);
+    await createUser(firstName, lastName, email, password, randomColor, initials);
     goToUrl('login_register.html');
     resetProberties();
   } catch (error) {
@@ -196,8 +197,8 @@ function getRandomColor() {
   return selectedColor;
 }
 
-async function createUser(firstname, lastname, email, password, randomColors) {
-  const newUser = { firstname, lastname, username: email, password, randomColors };
+async function createUser(firstname, lastname, email, password, randomColors, initials) {
+  const newUser = { firstname, lastname, username: email, password, randomColors, initials };
 
   try {
     await postData('/user', newUser);

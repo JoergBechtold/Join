@@ -16,14 +16,6 @@ function hideLoggedInLinks() {
   });
 }
 
-// function showLoggedInLinks() {
-//   const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
-
-//   loggedInLinks.forEach((li) => {
-//     li.classList.remove('d-none');
-//   });
-// }
-
 function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
   submenu.classList.toggle('hidden');
