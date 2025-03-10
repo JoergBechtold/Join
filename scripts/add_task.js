@@ -224,9 +224,8 @@ async function loadContacts() {
     try {
       const res = await fetch(`${BASE_URL}/contacts.json`);
       const data = await res.json();
-      optionsContainer.innerHTML = '';
       if (data) {
-        Object.values(data).forEach(renderContactOption);
+        optionsContainer.innerHTML = Object.values(data).map(contact => `<div class="custom-select-option">${contact.firstname} ${contact.lastname}</div>`).join('');
       } else {
         optionsContainer.innerHTML = '<div class="custom-select-option">No contacts found.</div>';
       }
@@ -234,14 +233,6 @@ async function loadContacts() {
       console.error('Error loading contacts:', e);
       optionsContainer.innerHTML = '<div class="custom-select-option">Error loading contacts.</div>';
     }
-}
-  
-function renderContactOption(contact) {
-    const optionDiv = document.createElement('div');
-    optionDiv.className = 'custom-select-option';
-    optionDiv.textContent = `${contact.firstname} ${contact.lastname}`;
-    optionDiv.onclick = () => selectContact(`${contact.firstname} ${contact.lastname}`);
-    document.getElementById('contacts_options_container').appendChild(optionDiv);
 }
   
 
