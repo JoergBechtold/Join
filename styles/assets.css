@@ -306,7 +306,8 @@ button[disabled]:hover {
 
 .input-base[type='email']:invalid:not(:placeholder-shown),
 .input-base[type='password']:invalid:not(:placeholder-shown),
-.input-base[type='text']:invalid:not(:placeholder-shown) {
+.input-base[type='text']:invalid:not(:placeholder-shown),
+.not-valide-error {
   outline: none;
   border: 1px solid var(--red);
   opacity: 1;
@@ -344,8 +345,8 @@ button[disabled]:hover {
   color: var(--light-gray-placeholder);
 }
 
-.not-valide-error {
+/* .not-valide-error {
   outline: none;
   border: 1px solid var(--red);
   opacity: 1;
-}
+} */
