@@ -63,6 +63,7 @@ function checkAndShowAnimation() {
   }, 500);
 
   sessionStorage.setItem('animationShown', 'true');
+  sessionStorage.getItem('linksSidebarBoolienKey');
 }
 
 function addFadeInAnimation(element) {
@@ -274,13 +275,12 @@ function showLoginError() {
   passwordLogInRef.classList.add('not-valide-error');
 }
 
-function guestLogIn(url) {
-  // showLoggedInLinks();
+// function guestLogIn(url) {
 
-  const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
+//   const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
 
-  loggedInLinks.forEach((li) => {
-    li.classList.remove('d-none');
-  });
-  window.location.href = url;
-}
+//   loggedInLinks.forEach((li) => {
+//     li.classList.remove('d-none');
+//   });
+//   window.location.href = url;
+// }

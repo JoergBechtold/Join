@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban Project Management Tool</title>
 
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/header_sidebar.css" />
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
 
@@ -60,7 +60,7 @@
 
     <div class="header">
       <h1>Kanban Project Management Tool</h1>
-      <div class="header-icons">
+      <div class="header-icons hide-before-log-in">
         <a href="help.html"><img src="./assets/icons/help.png" alt="Help Icon" /></a>
 
         <div class="user-profile-container">
@@ -69,7 +69,7 @@
           <div id="user-submenu" class="submenu hidden">
             <a href="privacy_policy.html">Privacy Policy</a>
             <a href="legal_notice.html">Legal Notice</a>
-            <a href="login_register.html">Log Out</a>
+            <a onclick="logOut(); return false;" href="login_register.html">Log Out</a>
           </div>
         </div>
       </div>

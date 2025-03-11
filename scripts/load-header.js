@@ -6,34 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
 
-      if (buttonLinksSidebar) {
-        showLoggedInLinks();
+      if (buttonLinksSidebar === 'true') {
+        showLoggedInLinks(); //in script.js
       } else {
-        hideLoggedInLinks();
+        hideLoggedInLinks(); //in script.js
       }
     })
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
-
-function hideLoggedInLinks() {
-  const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
-
-  loggedInLinks.forEach((li) => {
-    li.classList.add('d-none');
-  });
-}
-
-function showLoggedInLinks() {
-  const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
-  const loggedInLink = Array.from(document.getElementsByClassName('hide-after-log-in'));
-
-  loggedInLinks.forEach((li) => {
-    li.classList.remove('d-none');
-  });
-  loggedInLink.forEach((li) => {
-    li.classList.add('d-none');
-  });
-}
 
 function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
