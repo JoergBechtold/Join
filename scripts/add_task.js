@@ -272,7 +272,6 @@ function toggleSelectedContact(element) {
     toggleClass(element);
     updateSelectedContacts(element);
     updateImage(element);
-    console.log(selectedContacts);
   }
 
 function toggleClass(element) {
@@ -289,13 +288,17 @@ function updateSelectedContacts(element) {
     } else {
         selectedContacts = selectedContacts.filter(contact => contact.initials !== initials);
     }
-    selectedContacts.sort((a, b) => {
+    selectedContacts = sortContacts(selectedContacts);
+    renderSelectedContacts(); 
+}
+
+function sortContacts(contacts) {
+    return contacts.sort((a, b) => {
         if (a.initials[0] !== b.initials[0]) {
             return a.initials[0].localeCompare(b.initials[0]); 
         }
-        return a.initials[1].localeCompare(b.initials[1]); 
+        return (a.initials[1] || '').localeCompare(b.initials[1] || ''); 
     });
-    renderSelectedContacts();
 }
 
 function updateImage(element) {
