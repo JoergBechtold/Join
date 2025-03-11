@@ -37,7 +37,19 @@ function getIdRefs() {
     errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
+    errorMessageEmailRef: document.getElementById('error_message_email'),
     popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
+  };
+}
+
+function setIdRefValueTrim() {
+  return {
+    name: document.getElementById('name_sign_up').value.trim(),
+    email: document.getElementById('email_sign-up').value.trim(),
+    password: document.getElementById('password_sign_up').value.trim(),
+    confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
+    emailLogIn: document.getElementById('email_log_in').value.trim(),
+    passwordLogIn: document.getElementById('password_log_in').value.trim(),
   };
 }
 
@@ -122,18 +134,6 @@ function togglePasswordVisibility(inputId, iconElement) {
   }
 }
 
-// new function for checkSignUpForm and handleSignUp
-function setIdRefValueTrim() {
-  return {
-    name: document.getElementById('name_sign_up').value.trim(),
-    email: document.getElementById('email_sign-up').value.trim(),
-    password: document.getElementById('password_sign_up').value.trim(),
-    confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
-    emailLogIn: document.getElementById('email_log_in').value.trim(),
-    passwordLogIn: document.getElementById('password_log_in').value.trim(),
-  };
-}
-
 async function handleSignUp() {
   const { name, email, password, confirmPassword } = setIdRefValueTrim();
 
@@ -149,6 +149,12 @@ async function handleSignUp() {
     }
 
     if (!checkPasswordConfirm(password, confirmPassword)) {
+      return;
+    }
+
+    const isEmailPresent = await checkUserIsPresent(true);
+
+    if (!isEmailPresent) {
       return;
     }
 
@@ -242,9 +248,9 @@ function passwordMatch(password, confirmPassword) {
   }
 }
 
-async function checkUserIsPresent() {
-  const { passwordLogInRef, emailLogInRef } = getIdRefs();
-  const { emailLogIn, passwordLogIn } = setIdRefValueTrim();
+async function checkUserIsPresent(parameter = false) {
+  const { passwordLogInRef, emailLogInRef, nameSignUpRef, emailSignUpRef, errorMessageEmailRef } = getIdRefs();
+  const { name, email, emailLogIn, passwordLogIn } = setIdRefValueTrim();
   try {
     const users = await loadData('/user');
 
@@ -255,16 +261,35 @@ async function checkUserIsPresent() {
         const userId = userIds[index];
         const user = users[userId];
 
-        if (user.email === emailLogIn && user.password === passwordLogIn) {
-          emailLogInRef.value = '';
-          passwordLogInRef.value = '';
-          window.showButtonLinksSidebar = true;
-          sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-          goToUrl('summary.html');
-          return true;
+        if (parameter) {
+          if (user.email === email) {
+            // console.log('email ist schon vorhanden');
+            errorMessageEmailRef.classList.add('d-flex');
+
+            // emailLogInRef.value = '';
+            // passwordLogInRef.value = '';
+            // window.showButtonLinksSidebar = true;
+            // sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+            // goToUrl('summary.html');
+            return false;
+          }
+        }
+
+        if (parameter === false) {
+          if (user.email === emailLogIn && user.password === passwordLogIn) {
+            emailLogInRef.value = '';
+            passwordLogInRef.value = '';
+            window.showButtonLinksSidebar = true;
+            sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+            goToUrl('summary.html');
+            return true;
+          }
         }
       }
-      showLoginError();
+      if (parameter === false) {
+        showLoginError();
+      }
+      // showLoginError();
       return false;
     }
   } catch (error) {
@@ -285,5 +310,5 @@ function showPupupOverlaySignUp() {
   popupOverlaySignUpRef.classList.add('d-flex');
   setTimeout(function () {
     popupOverlaySignUpRef.classList.remove('d-flex');
-  }, 1500);
+  }, 1300);
 }

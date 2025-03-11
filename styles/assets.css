@@ -315,7 +315,8 @@ button[disabled]:hover {
 
 .error-message-name,
 .error-message-confirm-password,
-.error-message-log-in {
+.error-message-log-in,
+.error-message-email {
   position: absolute;
   top: 115%;
   left: 0;
@@ -333,6 +334,10 @@ button[disabled]:hover {
 }
 
 .error-message-log-in {
+  display: none;
+}
+
+.error-message-email {
   display: none;
 }
 
