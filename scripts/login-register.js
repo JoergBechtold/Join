@@ -154,7 +154,7 @@ async function handleSignUp() {
 
     const isEmailPresent = await checkUserIsPresent(true);
 
-    if (!isEmailPresent) {
+    if (isEmailPresent) {
       return;
     }
 
@@ -249,8 +249,8 @@ function passwordMatch(password, confirmPassword) {
 }
 
 async function checkUserIsPresent(parameter = false) {
-  const { passwordLogInRef, emailLogInRef, nameSignUpRef, emailSignUpRef, errorMessageEmailRef } = getIdRefs();
-  const { name, email, emailLogIn, passwordLogIn } = setIdRefValueTrim();
+  const { passwordLogInRef, emailLogInRef, emailSignUpRef, errorMessageEmailRef } = getIdRefs();
+  const { email, emailLogIn, passwordLogIn } = setIdRefValueTrim();
   try {
     const users = await loadData('/user');
 
@@ -263,19 +263,13 @@ async function checkUserIsPresent(parameter = false) {
 
         if (parameter) {
           if (user.email === email) {
-            // console.log('email ist schon vorhanden');
             errorMessageEmailRef.classList.add('d-flex');
-
-            // emailLogInRef.value = '';
-            // passwordLogInRef.value = '';
-            // window.showButtonLinksSidebar = true;
-            // sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-            // goToUrl('summary.html');
-            return false;
+            emailSignUpRef.classList.add('not-valide-error');
+            return true;
           }
         }
 
-        if (parameter === false) {
+        if (!parameter) {
           if (user.email === emailLogIn && user.password === passwordLogIn) {
             emailLogInRef.value = '';
             passwordLogInRef.value = '';
@@ -286,10 +280,7 @@ async function checkUserIsPresent(parameter = false) {
           }
         }
       }
-      if (parameter === false) {
-        showLoginError();
-      }
-      // showLoginError();
+      showLoginError();
       return false;
     }
   } catch (error) {
@@ -310,5 +301,5 @@ function showPupupOverlaySignUp() {
   popupOverlaySignUpRef.classList.add('d-flex');
   setTimeout(function () {
     popupOverlaySignUpRef.classList.remove('d-flex');
-  }, 1300);
+  }, 1000);
 }
