@@ -235,6 +235,7 @@ function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, se
     inputField.placeholder = 'Select contacts to assign';
     customSelect.classList.replace('custom-select-focused', 'custom-select');
     selectedContactsContainer.classList.remove('d-none');
+    inputField.blur();
 }
 
 async function loadContacts() {
