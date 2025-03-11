@@ -3,7 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((response) => response.text())
     .then((data) => {
       document.getElementById('header_container').innerHTML = data;
-      hideLoggedInLinks();
+
+      const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
+
+      if (buttonLinksSidebar) {
+        showLoggedInLinks();
+      } else {
+        hideLoggedInLinks();
+      }
     })
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
@@ -12,6 +19,18 @@ function hideLoggedInLinks() {
   const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
 
   loggedInLinks.forEach((li) => {
+    li.classList.add('d-none');
+  });
+}
+
+function showLoggedInLinks() {
+  const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
+  const loggedInLink = Array.from(document.getElementsByClassName('hide-after-log-in'));
+
+  loggedInLinks.forEach((li) => {
+    li.classList.remove('d-none');
+  });
+  loggedInLink.forEach((li) => {
     li.classList.add('d-none');
   });
 }

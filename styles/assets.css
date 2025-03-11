@@ -344,9 +344,3 @@ button[disabled]:hover {
   font-size: var(--font-size-20);
   color: var(--light-gray-placeholder);
 }
-
-/* .not-valide-error {
-  outline: none;
-  border: 1px solid var(--red);
-  opacity: 1;
-} */

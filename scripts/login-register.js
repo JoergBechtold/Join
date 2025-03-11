@@ -252,6 +252,8 @@ async function checkUserIsPresent() {
         if (user.email === emailLogIn && user.password === passwordLogIn) {
           emailLogInRef.value = '';
           passwordLogInRef.value = '';
+          window.showButtonLinksSidebar = true;
+          sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
           goToUrl('summary.html');
           return true;
         }
