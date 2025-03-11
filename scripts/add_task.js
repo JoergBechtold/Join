@@ -328,6 +328,15 @@ function renderSelectedContacts() {
 function clearAssignedTo() {
     selectedContacts = []; 
     renderSelectedContacts(); 
+    const selectedOptions = document.getElementsByClassName('contacts-custom-select-option-selected');
+    Array.from(selectedOptions).forEach(option => {
+        option.classList.remove('contacts-custom-select-option-selected'); 
+        option.classList.add('contacts-custom-select-option');
+        const imgElement = option.querySelector('img');
+        if (imgElement) {
+            imgElement.src = '/assets/icons/Square_box.svg';
+        }
+    });
 }
 
   
