@@ -26,6 +26,7 @@
     display: flex;
     justify-content: space-between;
     z-index: 10;
+    margin-bottom: 200px;
 }
   
 .add-task-content {
@@ -355,6 +356,52 @@
     border-radius: 50%;
 }
 
+.error-select-option {
+    padding: 12px 21px;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+}
+
+.contacts-custom-select-option {
+    padding: 12px 21px;
+    cursor: pointer;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts-custom-select-option:hover {
+    background-color: #EEEEEE;
+    border-radius: var(--border-radius-input-fields);
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 2px solid white; /* weißer Rand */
+    box-sizing: border-box;
+}
+
+.circle-and-name {
+    display:flex;
+    align-items:center;
+    gap: 5px;
+}
+
+.name-and-img {
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+  
+  
 
 
 

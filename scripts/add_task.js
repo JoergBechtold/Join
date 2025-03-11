@@ -220,19 +220,44 @@ function toggleContactsDropdown() {
 async function loadContacts() {
     const optionsContainer = document.getElementById('contacts_options_container');
     if (optionsContainer.childElementCount) return;
+  
     try {
-      const res = await fetch(`${BASE_URL}/contacts.json`);
+      const res = await fetch(`${BASE_URL}/user.json`); /* Ändern */
       const data = await res.json();
-      if (data) {
-        optionsContainer.innerHTML = Object.values(data).map(contact => `<div class="custom-select-option">${contact.firstname} ${contact.lastname}</div>`).join('');
-      } else {
-        optionsContainer.innerHTML = '<div class="custom-select-option">No contacts found.</div>';
-      }
+      optionsContainer.innerHTML = renderContactsHtml(data);
     } catch (e) {
       console.error('Error loading contacts:', e);
-      optionsContainer.innerHTML = '<div class="custom-select-option">Error loading contacts.</div>';
+      optionsContainer.innerHTML = '<div class="error-select-option">Error loading contacts.</div>';
     }
+  }
+
+function renderContactsHtml(data) {
+    if (!data || Object.keys(data).length === 0) {
+      return '<div class="error-select-option">No contacts found.</div>';
+    }
+  
+    return Object.values(data)
+      .map(user => {
+        const initials = user.initials || 'NN'; // Fallback auf "NN" wenn initials leer oder undefined
+        return `
+          <div class="contacts-custom-select-option">
+            <div class="name-and-img">
+              <div class="circle-and-name">
+                <div class="circle" style="background-color: ${user.randomColors};">
+                  ${initials}
+                </div>
+                <div class="contact-name">${user.firstname} ${user.lastname}</div>
+              </div>
+              <img class="square-box" src="/assets/icons/Square_box.svg" alt="icon">
+            </div>
+          </div>
+        `;
+      })
+      .join('');
 }
+  
+  
+  
   
 
 
