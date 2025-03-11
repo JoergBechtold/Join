@@ -205,17 +205,26 @@ function clearSelection() {
 const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
 
 function toggleContactsDropdown() {
-  const optionsContainer = document.getElementById('contacts_options_container');
-  const arrowIcon = document.getElementById('contacts_select_arrow');
-  if (optionsContainer.classList.contains('d-none')) {
-    optionsContainer.classList.remove('d-none');
-    arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
-    loadContacts(); 
-  } else {
-    optionsContainer.classList.add('d-none');
-    arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
-  }
+    const optionsContainer = document.getElementById('contacts_options_container');
+    const arrowIcon = document.getElementById('contacts_select_arrow');
+    const spanField = document.getElementById('selected_contact'); 
+    const customSelect = document.getElementById('custom_select'); 
+    if (optionsContainer.classList.contains('d-none')) {
+        optionsContainer.classList.remove('d-none');
+        arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+        loadContacts();
+        spanField.textContent = ''; 
+        customSelect.classList.replace('custom-select', 'custom-select-focused'); 
+    } else {        
+        optionsContainer.classList.add('d-none');
+        arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
+        spanField.textContent = 'Select contacts to assign'; 
+        customSelect.classList.replace('custom-select-focused', 'custom-select'); 
+    }
 }
+
+  
+  
 
 async function loadContacts() {
     const optionsContainer = document.getElementById('contacts_options_container');

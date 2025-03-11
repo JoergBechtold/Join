@@ -400,6 +400,24 @@
     align-items:center;
     justify-content: space-between;
 }
+
+
+.custom-select-focused{
+    padding: 12px 21px 12px 21px;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+    background-color: white;
+    height: 48px;
+    border-radius: var(--border-radius-input-fields);
+    border: 1px solid var(--blue);
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+  
   
   
 
