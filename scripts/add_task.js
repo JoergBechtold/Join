@@ -106,6 +106,7 @@ function clearAll() {
     clearButtons();
     clearSubtasks();
     clearSelection();
+    clearAssignedTo();
 }
 
 function clearInput() {
@@ -272,7 +273,7 @@ function toggleSelectedContact(element) {
     toggleClass(element);
     updateSelectedContacts(element);
     updateImage(element);
-  }
+}
 
 function toggleClass(element) {
     element.classList.toggle('contacts-custom-select-option-selected');
@@ -324,6 +325,10 @@ function renderSelectedContacts() {
     });
 }
 
+function clearAssignedTo() {
+    selectedContacts = []; 
+    renderSelectedContacts(); 
+}
 
   
   
