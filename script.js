@@ -17,14 +17,10 @@ function logOut() {
 }
 
 function hideLoggedInLinks() {
-  const loggedInLinks = Array.from(document.getElementsByClassName('hide-before-log-in'));
+  const htmlLinks = document.getElementsByClassName('hide-before-log-in');
 
-  loggedInLinks.forEach((div) => {
-    div.classList.add('d-none');
-  });
-
-  loggedInLinks.forEach((li) => {
-    li.classList.add('d-none');
+  Array.from(htmlLinks).forEach((element) => {
+    element.classList.add('d-none');
   });
 }
 
