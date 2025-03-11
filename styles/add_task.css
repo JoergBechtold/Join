@@ -392,7 +392,7 @@
 .circle-and-name {
     display:flex;
     align-items:center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .name-and-img {
@@ -417,6 +417,23 @@
     justify-content: space-between;
 }
 
+.contacts-custom-select-option-selected {
+    padding: 12px 21px;
+    cursor: pointer;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+    background-color: var(--primary-color-gray) !important;
+    border-radius: var(--border-radius-buttons);
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.show-selected-contacts {
+    display: flex; 
+    gap: 5px; 
+    margin-top: 10px;
+}
   
   
   

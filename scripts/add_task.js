@@ -209,9 +209,11 @@ function toggleContactsDropdown() {
     const arrowIcon = document.getElementById('contacts_select_arrow');
     const spanField = document.getElementById('selected_contact'); 
     const customSelect = document.getElementById('custom_select'); 
+    const selectedContactsContainer = document.querySelector('.show-selected-contacts');
     if (optionsContainer.classList.contains('d-none')) {
         optionsContainer.classList.remove('d-none');
         arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+        selectedContactsContainer.classList.add('d-none')
         loadContacts();
         spanField.textContent = ''; 
         customSelect.classList.replace('custom-select', 'custom-select-focused'); 
@@ -220,11 +222,9 @@ function toggleContactsDropdown() {
         arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
         spanField.textContent = 'Select contacts to assign'; 
         customSelect.classList.replace('custom-select-focused', 'custom-select'); 
+        selectedContactsContainer.classList.remove('d-none')
     }
 }
-
-  
-  
 
 async function loadContacts() {
     const optionsContainer = document.getElementById('contacts_options_container');
@@ -244,26 +244,85 @@ function renderContactsHtml(data) {
     if (!data || Object.keys(data).length === 0) {
       return '<div class="error-select-option">No contacts found.</div>';
     }
-  
     return Object.values(data)
       .map(user => {
         const initials = user.initials || 'NN'; // Fallback auf "NN" wenn initials leer oder undefined
         return `
-          <div class="contacts-custom-select-option">
+          <div class="contacts-custom-select-option" onclick="toggleSelectedContact(this)">
             <div class="name-and-img">
               <div class="circle-and-name">
                 <div class="circle" style="background-color: ${user.randomColors};">
                   ${initials}
                 </div>
-                <div class="contact-name">${user.firstname} ${user.lastname}</div>
+                <div >${user.firstname} ${user.lastname}</div>
               </div>
-              <img class="square-box" src="/assets/icons/Square_box.svg" alt="icon">
+              <div>
+              <img  src="/assets/icons/Square_box.svg" alt="Checkbox">
+              </div>
             </div>
           </div>
         `;
       })
       .join('');
 }
+
+let selectedContacts = []; 
+
+function toggleSelectedContact(element) {
+    toggleClass(element);
+    updateSelectedContacts(element);
+    updateImage(element);
+    console.log(selectedContacts);
+  }
+
+function toggleClass(element) {
+    element.classList.toggle('contacts-custom-select-option-selected');
+}
+   
+function updateSelectedContacts(element) {
+    const initials = element.querySelector('.circle').textContent.trim(); 
+    const randomColor = element.querySelector('.circle').style.backgroundColor; 
+    if (element.classList.contains('contacts-custom-select-option-selected')) {
+        if (!selectedContacts.some(contact => contact.initials === initials)) {
+            selectedContacts.push({ initials, randomColor });
+        }
+    } else {
+        selectedContacts = selectedContacts.filter(contact => contact.initials !== initials);
+    }
+    selectedContacts.sort((a, b) => {
+        if (a.initials[0] !== b.initials[0]) {
+            return a.initials[0].localeCompare(b.initials[0]); 
+        }
+        return a.initials[1].localeCompare(b.initials[1]); 
+    });
+    renderSelectedContacts();
+}
+
+function updateImage(element) {
+    const imgElement = element.querySelector('img');
+    if (imgElement) {
+      if (element.classList.contains('contacts-custom-select-option-selected')) {
+        imgElement.src = '/assets/icons/checked_box.svg'; 
+      } else {
+        imgElement.src = '/assets/icons/Square_box.svg'; 
+      }
+    }
+  }
+
+function renderSelectedContacts() {
+    const container = document.querySelector('.show-selected-contacts');
+    container.innerHTML = ''; 
+    selectedContacts.forEach(contact => {
+        const circle = document.createElement('div');
+        circle.className = 'circle';
+        circle.style.backgroundColor = contact.randomColor; 
+        circle.textContent = contact.initials; 
+        container.appendChild(circle); 
+    });
+}
+
+
+  
   
   
   
