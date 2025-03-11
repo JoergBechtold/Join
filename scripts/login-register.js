@@ -37,6 +37,7 @@ function getIdRefs() {
     errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
+    popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
   };
 }
 
@@ -152,8 +153,14 @@ async function handleSignUp() {
     }
 
     await createUser(firstName, lastName, email, password, randomColor, initials);
-    goToUrl('login_register.html');
-    resetProberties();
+
+    showPupupOverlaySignUp();
+    setTimeout(() => {
+      goToUrl('login_register.html');
+      resetProberties();
+    }, 1700);
+    // goToUrl('login_register.html');
+    // resetProberties();
   } catch (error) {
     console.error('Fehler beim Erstellen des Benutzers:', error);
   }
@@ -275,12 +282,10 @@ function showLoginError() {
   passwordLogInRef.classList.add('not-valide-error');
 }
 
-// function guestLogIn(url) {
-
-//   const loggedInLinks = Array.from(document.getElementsByClassName('hide-befor-log-in'));
-
-//   loggedInLinks.forEach((li) => {
-//     li.classList.remove('d-none');
-//   });
-//   window.location.href = url;
-// }
+function showPupupOverlaySignUp() {
+  const { popupOverlaySignUpRef } = getIdRefs();
+  popupOverlaySignUpRef.classList.add('d-flex');
+  setTimeout(function () {
+    popupOverlaySignUpRef.classList.remove('d-flex');
+  }, 1500);
+}
