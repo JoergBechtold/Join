@@ -236,6 +236,10 @@ function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, se
     customSelect.classList.replace('custom-select-focused', 'custom-select');
     selectedContactsContainer.classList.remove('d-none');
     inputField.blur();
+    const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
+    contactOptions.forEach(option => {
+        option.style.display = 'block'; 
+    });
 }
 
 async function loadContacts() {
