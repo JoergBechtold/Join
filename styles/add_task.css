@@ -434,7 +434,22 @@
     gap: 5px; 
     margin-top: 10px;
 }
+
+.custom-input {
+    color: black;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-20);
+    border: none;
+    outline: none;   
+}
+
+.custom-input::placeholder {
+    color: black;
+    opacity: 1; 
+  }
   
+
+
   
   
 

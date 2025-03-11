@@ -208,24 +208,27 @@ const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.ap
 function toggleContactsDropdown() {
     const optionsContainer = document.getElementById('contacts_options_container');
     const arrowIcon = document.getElementById('contacts_select_arrow');
-    const spanField = document.getElementById('selected_contact'); 
+    const inputField = document.getElementById('selected_contact'); 
     const customSelect = document.getElementById('custom_select'); 
     const selectedContactsContainer = document.querySelector('.show-selected-contacts');
     if (optionsContainer.classList.contains('d-none')) {
-        optionsContainer.classList.remove('d-none');
-        arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
-        selectedContactsContainer.classList.add('d-none')
-        loadContacts();
-        spanField.textContent = ''; 
-        customSelect.classList.replace('custom-select', 'custom-select-focused'); 
+      optionsContainer.classList.remove('d-none');
+      arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+      selectedContactsContainer.classList.add('d-none');
+      loadContacts();
+      inputField.placeholder = ''; 
+      inputField.focus(); 
+      customSelect.classList.replace('custom-select', 'custom-select-focused'); 
     } else {        
-        optionsContainer.classList.add('d-none');
-        arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
-        spanField.textContent = 'Select contacts to assign'; 
-        customSelect.classList.replace('custom-select-focused', 'custom-select'); 
-        selectedContactsContainer.classList.remove('d-none')
+      optionsContainer.classList.add('d-none');
+      arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
+      inputField.value = ''; 
+      inputField.placeholder = 'Select contacts to assign'; 
+      customSelect.classList.replace('custom-select-focused', 'custom-select'); 
+      selectedContactsContainer.classList.remove('d-none');
     }
-}
+  }
+  
 
 async function loadContacts() {
     const optionsContainer = document.getElementById('contacts_options_container');
@@ -339,6 +342,19 @@ function clearAssignedTo() {
     });
 }
 
+function filterContacts() {
+    const searchValue = document.getElementById('selected_contact').value.toLowerCase();
+    const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
+    contactOptions.forEach(option => {
+      const contactName = option.querySelector('.circle-and-name div:nth-child(2)').textContent.toLowerCase(); 
+      if (contactName.includes(searchValue)) {
+        option.style.display = 'block'; 
+      } else {
+        option.style.display = 'none'; 
+      }
+    });
+  }
+  
   
   
   

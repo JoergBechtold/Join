@@ -75,7 +75,7 @@
               <label for="assigned_to">Assigned to</label>
                 <div class="custom-select-container" >
                    <div class="custom-select" id="custom_select" onclick="toggleContactsDropdown()">
-                   <span id="selected_contact">Select contacts to assign</span>
+                  <input class="custom-input" type="text" id="selected_contact" placeholder="Select contacts to assign" oninput="filterContacts()" autocomplete="off"/>
                    <img class="select-icon" id="contacts_select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                  </div>
                  <div class="contacts-custom-options d-none" id="contacts_options_container">
