@@ -10,6 +10,7 @@
     <script src="scripts/database.js"></script>
     <script src="scripts/templates.js"></script>
     <script src="script.js"></script>
+    <script src="scripts/board.js"></script>
 
     <!-- Embedding the favicon -->
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
@@ -21,7 +22,7 @@
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body onload="updateHTML()">
     <!-- hier kommt das board rein al index.html -->
     <div id="header_container"></div>
 
@@ -39,6 +40,50 @@
       </div>
 
       <div class="card-container">
+        <div>
+          <span class="column-title">To do
+            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+          </span>
+          <div class="drag-area" id="open"
+               ondrop="moveTo('open')" 
+               ondragleave="removeHighlight('open')" 
+               ondragover="allowDrop(event); highlight('open')">
+          </div>
+        </div>
+    
+        <div>
+          <span class="column-title">In Progress
+            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+          </span>
+          <div class="drag-area" id="in-progress"
+               ondrop="moveTo('in-progress')" 
+               ondragleave="removeHighlight('in-progress')" 
+               ondragover="allowDrop(event); highlight('in-progress')">
+          </div>
+        </div>
+    
+        <div>
+          <span class="column-title">Await feedback
+            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+          </span>
+          <div class="drag-area" id="await-feedback"
+               ondrop="moveTo('await-feedback')" 
+               ondragleave="removeHighlight('await-feedback')" 
+               ondragover="allowDrop(event); highlight('await-feedback')">
+          </div>
+        </div>
+    
+        <div>
+          <span class="column-title">Done</span>
+          <div class="drag-area" id="done"
+               ondrop="moveTo('done')" 
+               ondragleave="removeHighlight('done')" 
+               ondragover="allowDrop(event); highlight('done')">
+          </div>
+        </div>
+      </div>
+        
+      <!-- <div class="card-container">
         <div>
           <span class="column-title"
             >To do<img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column"
