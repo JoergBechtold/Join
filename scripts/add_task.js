@@ -212,28 +212,34 @@ function toggleContactsDropdown() {
     const customSelect = document.getElementById('custom_select'); 
     const selectedContactsContainer = document.querySelector('.show-selected-contacts');
     if (optionsContainer.classList.contains('d-none')) {
-      optionsContainer.classList.remove('d-none');
-      arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
-      selectedContactsContainer.classList.add('d-none');
-      loadContacts();
-      inputField.placeholder = ''; 
-      inputField.focus(); 
-      customSelect.classList.replace('custom-select', 'custom-select-focused'); 
-    } else {        
-      optionsContainer.classList.add('d-none');
-      arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
-      inputField.value = ''; 
-      inputField.placeholder = 'Select contacts to assign'; 
-      customSelect.classList.replace('custom-select-focused', 'custom-select'); 
-      selectedContactsContainer.classList.remove('d-none');
+        openDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
+    } else {
+        closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
     }
-  }
-  
+}
+
+function openDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
+    optionsContainer.classList.remove('d-none');
+    arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+    selectedContactsContainer.classList.add('d-none');
+    loadContacts();
+    inputField.placeholder = '';
+    inputField.focus();
+    customSelect.classList.replace('custom-select', 'custom-select-focused');
+}
+
+function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
+    optionsContainer.classList.add('d-none');
+    arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
+    inputField.value = '';
+    inputField.placeholder = 'Select contacts to assign';
+    customSelect.classList.replace('custom-select-focused', 'custom-select');
+    selectedContactsContainer.classList.remove('d-none');
+}
 
 async function loadContacts() {
     const optionsContainer = document.getElementById('contacts_options_container');
     if (optionsContainer.childElementCount) return;
-  
     try {
       const res = await fetch(`${BASE_URL}/user.json`); /* Ändern */
       const data = await res.json();
@@ -242,7 +248,7 @@ async function loadContacts() {
       console.error('Error loading contacts:', e);
       optionsContainer.innerHTML = '<div class="error-select-option">Error loading contacts.</div>';
     }
-  }
+}
 
 function renderContactsHtml(data) {
     if (!data || Object.keys(data).length === 0) {
