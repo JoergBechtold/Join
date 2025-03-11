@@ -14,100 +14,108 @@
     <div id="header_container"></div>
 
     <div class="contacts-container">
-        <aside class="sidebarContact">
-            <button class="add-contact-btn">
-                <span>Add new contact</span>
-                <img src="assets/icons/person_add.svg" alt="Add User" />
-            </button>
- 
+      <aside class="sidebarContact">
+        <!-- Button zum Öffnen des Popups -->
+        <button class="add-contact-btn" onclick="showAddContactPopup()">
+          <span>Add new contact</span>
+          <img src="assets/icons/person_add.svg" alt="Add User" />
+        </button>
+        <!-- Kontaktliste – hier wird mit onclick der gesamte Bereich behandelt -->
+        <div class="contact-list" onclick="handleContactListClick(event)">
             <div class="contact-list">
-            </div>
-        </aside>
-
-        <div class="overlay hidden"></div>
-
-        <div class="container-add hidden">
-            <div class="left-section">
-                <div class="left-section-logo"> 
-                    <img src="./assets/icons/Logo1.svg" alt="">
-                </div>
-                <h1>Add contact</h1>
-                <p>Tasks are better with a team!</p>
-                <div class="underline"></div>
-            </div>
-
-            <div class="right-section">
-                <button class="close-btn">&times;</button>
-                <div class="profile-image">
-                    <img src="./assets/icons/graycontactperson.svg" alt="">
-                </div>
-                <form>
-                    <div class="input-group">
-                        <input type="text" placeholder="Name">
-                        <img class="icon" src="./assets/icons/gray-person.svg" alt="">
-                    </div>
-                    <div class="input-group">
-                        <input type="email" placeholder="Email">
-                        <img class="icon" src="./assets/icons/mail.svg" alt="">
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" placeholder="Phone">
-                        <img class="icon" src="./assets/icons/call.svg" alt="">
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="cancel-btn">Cancel
-                            <img src="./assets/icons/cancel.svg" alt="">
-                        </button>
-                        <button type="submit" class="create-btn">Create contact
-                            <img src="./assets/icons/check.svg" alt="">
-                        </button>
-                    </div>
-                </form>
+                <!-- <div class="letter-group">A</div>
+                <div class="line"></div>
+                <div class="contact">
+                    <div class="contact-avatar" style="background-color: #ff9f1c">AM</div>
+                    <div class="contact-info">
+                        <p class="contact-name">Anton Mayer</p>
+                        <a class="contact-email">antom@gmail.com</a>
+                    </div>. -->
             </div>
         </div>
-
-        <div id="success-popup" class="popup popup-hidden">
-            <p>Contact successfully created</p>
+      </aside>
+  
+      <div class="overlay hidden"></div>
+  
+      <div class="container-add hidden">
+        <div class="left-section">
+          <div class="left-section-logo">
+            <img src="assets/icons/Logo1.svg" alt="">
+          </div>
+          <h1>Add contact</h1>
+          <p>Tasks are better with a team!</p>
+          <div class="underline"></div>
         </div>
-
-        <div class="main-content">
-            <h1>Contacts <span class="divider"></span> <span class="subtitle">Better with a team</span></h1>
-        </div>
-
-        <div class="contact-detail invisible">
-            <div class="detail-header">
-                <div class="avatar" id="detail-avatar">AM</div>
-                <div class="detail-info">
-                    <h1 id="detail-name">Anton Mayer</h1>
-                    <div class="actions">
-                        <span class="edit-btn">
-                            <img src="./assets/icons/edit.svg" alt="Edit"> Edit
-                        </span>
-                        <span class="delete-btn">
-                            <img src="./assets/icons/paperbasketdelet.svg" alt="Delete"> Delete
-                        </span> 
-                    </div>
-                </div>
+  
+        <div class="right-section">
+          <button class="close-btn" onclick="closeAddContactPopup()">&times;</button>
+          <div class="profile-image">
+            <img src="assets/icons/graycontactperson.svg" alt="">
+          </div>
+          <!-- Formular: onsubmit ruft createContact(event) auf -->
+          <form onsubmit="createContact(event)">
+            <div class="input-group">
+              <input type="text" placeholder="Name" oninput="checkInputs()">
+              <img class="icon" src="assets/icons/gray-person.svg" alt="">
             </div>
-        
-            <div class="contact-info-section">
-                <h3>Contact Information</h3>
-        
-                <div class="info-block">
-                    <strong>Email</strong>
-                    <p id="detail-email">antom@gmail.com</p>
-                </div>
-        
-                <div class="info-block">
-                    <strong>Phone</strong>
-                    <p id="detail-phone">Keine Nummer vorhanden</p>  <!-- Statt <input> wird nun <p> genutzt -->
-                </div>
-                                
+            <div class="input-group">
+              <input type="email" placeholder="Email" oninput="checkInputs()">
+              <img class="icon" src="assets/icons/mail.svg" alt="">
             </div>
+            <div class="input-group">
+              <!-- Nur Zahlen zulassen -->
+              <input type="tel" placeholder="Phone" oninput="this.value = this.value.replace(/\D/g, ''); checkInputs()">
+              <img class="icon" src="assets/icons/call.svg" alt="">
+            </div>
+            <div class="button-group">
+              <button type="button" class="cancel-btn" onclick="closeAddContactPopup()">Cancel
+                <img src="assets/icons/cancel.svg" alt="">
+              </button>
+              <button type="submit" class="create-btn" disabled onclick="createContact(event)">Create contact
+                <img src="assets/icons/check.svg" alt="">
+              </button>
+            </div>
+          </form>
         </div>
-        
+      </div>
+  
+      <div id="success-popup" class="popup popup-hidden">
+        <p>Contact successfully created</p>
+      </div>
+  
+      <div class="main-content">
+        <h1>Contacts <span class="divider"></span> <span class="subtitle">Better with a team</span></h1>
+      </div>
+  
+      <div class="contact-detail invisible">
+        <div class="detail-header">
+          <div class="avatar" id="detail-avatar">AM</div>
+          <div class="detail-info">
+            <h1 id="detail-name">Anton Mayer</h1>
+            <div class="actions">
+              <span class="edit-btn">
+                <img src="assets/icons/edit.svg" alt="Edit"> Edit
+              </span>
+              <span class="delete-btn" onclick="processContactDeletion()">
+                <img src="assets/icons/paperbasketdelet.svg" alt="Delete"> Delete
+              </span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="contact-info-section">
+          <h3>Contact Information</h3>
+          <div class="info-block">
+            <strong>Email</strong>
+            <p id="detail-email">antom@gmail.com</p>
+          </div>
+          <div class="info-block">
+            <strong>Phone</strong>
+            <p id="detail-phone">Keine Nummer vorhanden</p>
+          </div>
+        </div>
+      </div>
     </div>
-
     <script src="./scripts/load-header.js"></script>
     <script src="./scripts/addPopUp.js"></script>
     <script src="./scripts/addContact.js"></script>

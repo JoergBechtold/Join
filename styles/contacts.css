@@ -374,6 +374,11 @@ body {
     color: #888;
 }
 
+input:focus {
+    outline: none;
+    border: 1px solid rgba(41,171,226,1) !important;
+  }
+   
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -623,6 +628,7 @@ body {
 .info-block p {
     margin: 0;
     color: rgba(0, 124, 238, 1);
+    cursor: pointer;
     font-family: 'Inter';
     font-weight: 400;
     font-size: 16px;
@@ -633,6 +639,7 @@ body {
 
 #detail-phone{
     color: rgba(0, 0, 0, 1);
+    cursor: default;
 }
 
 /* ✅ Aktiver Kontakt bleibt stabil blau */
