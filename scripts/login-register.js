@@ -159,8 +159,6 @@ async function handleSignUp() {
       goToUrl('login_register.html');
       resetProberties();
     }, 1700);
-    // goToUrl('login_register.html');
-    // resetProberties();
   } catch (error) {
     console.error('Fehler beim Erstellen des Benutzers:', error);
   }
