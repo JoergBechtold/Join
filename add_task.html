@@ -58,7 +58,7 @@
               <div class="prio-buttons">
                 <button type="button" class="prio" id="urgent_button" onclick="setPriority('urgent_button')">
                   Urgent
-                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img"/>
+                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img" />
                 </button>
                 <button type="button" class="prio" id="medium_button" onclick="setPriority('medium_button')">
                   Medium
@@ -73,23 +73,29 @@
 
             <div class="form-group">
               <label for="assigned_to">Assigned to</label>
-                <div class="custom-select-container" >
-                   <div class="custom-select" id="custom_select" onclick="toggleContactsDropdown()">
-                  <input class="custom-input" type="text" id="selected_contact" placeholder="Select contacts to assign" oninput="filterContacts()" autocomplete="off"/>
-                   <img class="select-icon" id="contacts_select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
-                 </div>
-                 <div class="contacts-custom-options d-none" id="contacts_options_container">
-                 </div>
-                 <div class="show-selected-contacts"></div>
+              <div class="custom-select-container">
+                <div class="custom-select" id="custom_select" onclick="toggleContactsDropdown()">
+                  <input
+                    class="custom-input"
+                    type="text"
+                    id="selected_contact"
+                    placeholder="Select contacts to assign"
+                    oninput="filterContacts()"
+                    autocomplete="off"
+                  />
+                  <img class="select-icon" id="contacts_select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
+                <div class="contacts-custom-options d-none" id="contacts_options_container"></div>
+                <div class="show-selected-contacts"></div>
+              </div>
             </div>
-            
+
             <div class="form-group">
               <label for="category">Category <span class="red">*</span></label>
               <div class="custom-select-container">
-                <div class="custom-select"  onclick="toggleDropdown()">
+                <div class="custom-select" onclick="toggleDropdown()">
                   <span id="selected_option">Select task category</span>
-                  <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow"  />
+                  <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
                 <div class="custom-options d-none" id="options_container">
                   <div class="custom-select-option" onclick="selectOption('Technical Task')">Technical Task</div>
@@ -98,28 +104,64 @@
               </div>
             </div>
 
-            <div class="form-group" >
+            <div class="form-group">
               <label for="subtasks">Subtasks</label>
               <div class="input-container">
-                <input id="subtask_input" class="input-base" type="text" name="subtasks" placeholder="Add new subtask" onclick="handleSubtaskInput()" />
+                <input
+                  id="subtask_input"
+                  class="input-base"
+                  type="text"
+                  name="subtasks"
+                  placeholder="Add new subtask"
+                  onclick="handleSubtaskInput()"
+                />
                 <div class="close-and-check">
-                <img id="close_subtask_icon" class="input-base-icon d-none" src="/assets/icons/blackclose.svg" alt="Close subtask" onclick="handleSubtaskDelete()" />
-                <div class="vertical-line-subtask"></div>
-                <img id="check_subtask_icon" class="input-base-icon d-none" src="/assets/icons/blackcheck.svg" alt="Save subtask" onclick="handleSubtaskSave()" />
-                <img id="add_subtask_icon" class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask"  onclick="handleSubtaskInputImg()"/>
+                  <img
+                    id="close_subtask_icon"
+                    class="input-base-icon d-none"
+                    src="/assets/icons/blackclose.svg"
+                    alt="Close subtask"
+                    onclick="handleSubtaskDelete()"
+                  />
+                  <div class="vertical-line-subtask"></div>
+                  <img
+                    id="check_subtask_icon"
+                    class="input-base-icon d-none"
+                    src="/assets/icons/blackcheck.svg"
+                    alt="Save subtask"
+                    onclick="handleSubtaskSave()"
+                  />
+                  <img
+                    id="add_subtask_icon"
+                    class="input-base-icon"
+                    src="/assets/icons/add.svg"
+                    alt="Add subtask"
+                    onclick="handleSubtaskInputImg()"
+                  />
                 </div>
               </div>
               <div class="subtask-enum"></div>
               <div class="input-container">
-              <input id="edit_subtask_input" class="input-base-V2 d-none" type="text" name="edit-subtasks" placeholder="Edit subtask"/>
-              <div class="close-and-check">
-                <img id="edit_delete_icon" class="input-base-V2-icon-active d-none" src="/assets/icons/paperbasketdelet.svg" alt="Delete" onclick="cancelEditSubtask()" />
-                <div class="vertical-line-subtask"></div>
-                <img id="edit_save_icon" class="input-base-V2-icon-active d-none" src="/assets/icons/blackcheck.svg" alt="Save" onclick="saveEditedSubtask()" />
+                <input id="edit_subtask_input" class="input-base-V2 d-none" type="text" name="edit-subtasks" placeholder="Edit subtask" />
+                <div class="close-and-check">
+                  <img
+                    id="edit_delete_icon"
+                    class="input-base-V2-icon-active d-none"
+                    src="/assets/icons/paperbasketdelet.svg"
+                    alt="Delete"
+                    onclick="cancelEditSubtask()"
+                  />
+                  <div class="vertical-line-subtask"></div>
+                  <img
+                    id="edit_save_icon"
+                    class="input-base-V2-icon-active d-none"
+                    src="/assets/icons/blackcheck.svg"
+                    alt="Save"
+                    onclick="saveEditedSubtask()"
+                  />
+                </div>
+              </div>
             </div>
-             </div>
-            </div>
-            
           </div>
           <div class="spacer"></div>
         </div>
@@ -127,7 +169,7 @@
       <div class="footer-add-task">
         <div class="required-text"><span class="red">*</span> This field is required</div>
         <div class="align-with-gap">
-          <button type="button" class="button-clear-white align"  onclick="clearAll()">
+          <button type="button" class="button-clear-white align" onclick="clearAll()">
             Clear
             <div class="button-clear-white-img-box">
               <img class="button-clear-white-standard-img" src="/assets/icons/cancel.svg" alt="Clear" />
@@ -142,7 +184,7 @@
       </div>
     </main>
 
-
+    <script src="script.js"></script>
     <script src="./scripts/load-header.js"></script>
   </body>
 </html>
