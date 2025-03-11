@@ -23,35 +23,51 @@ function closeAddContactPopup() {
   document.querySelector('.container-add').classList.add('hidden');
 }
 
+// Aktualisierte checkInputs-Funktion für beide Popups (Add und Edit)
 function checkInputs() {
-    var nameInput = document.querySelector('input[placeholder="Name"]');
-    var emailInput = document.querySelector('input[placeholder="Email"]');
-    var phoneInput = document.querySelector('input[placeholder="Phone"]');
-    var createBtn = document.querySelector('.create-btn');
+    // Ermittelt den aktiven Popup-Container (falls vorhanden)
+    var container = document.querySelector('.container-edit.active') ||
+                    document.querySelector('.container-add.active');
+    if (!container) return; // falls keins aktiv ist, nichts tun
+  
+    var nameInput = container.querySelector('input[placeholder="Name"]');
+    var emailInput = container.querySelector('input[placeholder="Email"]');
+    var phoneInput = container.querySelector('input[placeholder="Phone"]');
+    var btn = container.querySelector('.create-btn'); // Bei Add: "Create contact", bei Edit: "Save contact"
+    
+    // Validierung: Email muss ein vollständiges Format haben, Phone nur Ziffern
     var isPhoneValid = /^[0-9]+$/.test(phoneInput.value.trim());
-    // Neuer Regex: Erfordert mindestens ein Zeichen vor und nach dem @, einen Punkt und etwas danach
     var isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
     
     if (nameInput.value.trim() !== "" && isEmailValid && phoneInput.value.trim() !== "" && isPhoneValid) {
-      createBtn.disabled = false;
-      createBtn.classList.remove("disabled");
+      btn.disabled = false;
+      btn.classList.remove("disabled");
     } else {
-      createBtn.disabled = true;
-      createBtn.classList.add("disabled");
+      btn.disabled = true;
+      btn.classList.add("disabled");
     }
-  }  
+  }
+   
 
-// Liest die Werte der Inputfelder und gibt sie zurück
-function getInputValues() {
-  var nameInput = document.querySelector('input[placeholder="Name"]'),
-      emailInput = document.querySelector('input[placeholder="Email"]'),
-      phoneInput = document.querySelector('input[placeholder="Phone"]');
-  return { 
-    name: nameInput.value.trim(), 
-    email: emailInput.value.trim(), 
-    phone: phoneInput.value.trim() 
-  };
-}
+  function getInputValues() {
+    // Prüfe, ob das Edit-Popup aktiv ist; wenn ja, verwende dessen Felder,
+    // ansonsten verwende das Add-Popup.
+    var container = document.querySelector('.container-edit.active') ||
+                    document.querySelector('.container-add.active');
+    if (!container) {
+      // Falls kein Popup aktiv ist, greife global auf die ersten Inputfelder zu
+      container = document;
+    }
+    var nameInput = container.querySelector('input[placeholder="Name"]');
+    var emailInput = container.querySelector('input[placeholder="Email"]');
+    var phoneInput = container.querySelector('input[placeholder="Phone"]');
+    return { 
+      name: nameInput ? nameInput.value.trim() : "",
+      email: emailInput ? emailInput.value.trim() : "",
+      phone: phoneInput ? phoneInput.value.trim() : ""
+    };
+  }
+  
   
 // Sucht den Gruppen-Container oder erstellt ihn neu, falls nicht vorhanden
 function getOrCreateGroupContainer(firstLetter) {
@@ -192,3 +208,142 @@ function handleContactListClick(event) {
   var contactDiv = event.target.closest(".contact");
   showContactDetails(contactDiv);
 }
+
+// Öffnet das Edit-Popup: Entfernt "hidden" und fügt "active" hinzu, damit es von rechts hereingleitet
+function showEditContactPopup() {
+    var editPopup = document.querySelector('.container-edit');
+    var overlay = document.querySelector('.overlay');
+    editPopup.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+    editPopup.classList.add('active');
+    overlay.classList.add('active');
+  }
+  
+  // Schließt das Edit-Popup: Entfernt "active" und fügt nach der Animation "hidden" hinzu
+  function closeEditContactPopup() {
+    var editPopup = document.querySelector('.container-edit');
+    var overlay = document.querySelector('.overlay');
+    editPopup.classList.remove('active');
+    overlay.classList.remove('active');
+    setTimeout(function() {
+      editPopup.classList.add('hidden');
+      overlay.classList.add('hidden');
+    }, 500); // 500ms entspricht der Transition-Dauer
+  }
+  
+  // Füllt das Edit-Popup mit den Daten des aktuell ausgewählten Kontakts und zeigt es an
+  function processContactEdition() {
+    if (!activeContact) {
+      alert("Bitte wähle einen Kontakt aus!");
+      return;
+    }
+    var nameInput = document.querySelector('.container-edit input[placeholder="Name"]');
+    var emailInput = document.querySelector('.container-edit input[placeholder="Email"]');
+    var phoneInput = document.querySelector('.container-edit input[placeholder="Phone"]');
+    
+    // Vorbelegen der Felder mit den Werten des aktiven Kontakts
+    nameInput.value = activeContact.querySelector('.contact-name').textContent;
+    emailInput.value = activeContact.querySelector('.contact-email').textContent;
+    phoneInput.value = activeContact.getAttribute('data-phone') || "";
+    
+    // Zeige das Edit-Popup an
+    showEditContactPopup();
+    
+    // Optional: Aktualisiere den Zustand der Save-Schaltfläche
+    checkInputs();
+  }
+  
+  function saveContact(event) {
+    event.preventDefault();
+    
+    var container = document.querySelector('.container-edit');
+    var nameInput = container.querySelector('input[placeholder="Name"]');
+    var emailInput = container.querySelector('input[placeholder="Email"]');
+    var phoneInput = container.querySelector('input[placeholder="Phone"]');
+    
+    if (!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim()) {
+      alert("Bitte fülle alle Felder aus!");
+      return;
+    }
+    
+    var newName = nameInput.value.trim();
+    var newEmail = emailInput.value.trim();
+    var newPhone = phoneInput.value.trim();
+    
+    // Ermittele den alten und neuen Anfangsbuchstaben, falls sich die Gruppenzugehörigkeit ändern soll
+    var oldName = activeContact.querySelector('.contact-name').textContent;
+    var oldFirstLetter = oldName.charAt(0).toUpperCase();
+    var newFirstLetter = newName.charAt(0).toUpperCase();
+    
+    // Aktualisiere den aktiven Kontakt in der Liste
+    activeContact.querySelector('.contact-name').textContent = newName;
+    activeContact.querySelector('.contact-email').textContent = newEmail;
+    activeContact.setAttribute('data-phone', newPhone);
+    
+    // Aktualisiere den Avatar im Listenelement (Initialen)
+    var avatarDiv = activeContact.querySelector('.contact-avatar');
+    avatarDiv.textContent = newName
+      .split(" ")
+      .map(function(w) { return w.charAt(0).toUpperCase(); })
+      .join("");
+    
+    // Aktualisiere die Detailansicht: Name, E-Mail, Phone und Avatar
+    var detailName = document.getElementById('detail-name');
+    var detailEmail = document.getElementById('detail-email');
+    var detailPhone = document.getElementById('detail-phone');
+    var detailAvatar = document.getElementById('detail-avatar');
+    if (detailName) detailName.textContent = newName;
+    if (detailEmail) detailEmail.textContent = newEmail;
+    if (detailPhone) detailPhone.textContent = newPhone;
+    if (detailAvatar) {
+      detailAvatar.textContent = newName
+        .split(" ")
+        .map(function(w) { return w.charAt(0).toUpperCase(); })
+        .join("");
+      // Optional: Übernimm die Hintergrundfarbe vom Listenelement
+      detailAvatar.style.backgroundColor = avatarDiv.style.backgroundColor;
+    }
+    
+    // Falls sich der erste Buchstabe ändert, verschiebe den Kontakt in die richtige Gruppe
+    if (oldFirstLetter !== newFirstLetter) {
+      var currentContainer = activeContact.parentElement; // .contact-container
+      activeContact.remove();
+      if (currentContainer.children.length === 0) {
+        var line = currentContainer.previousElementSibling;
+        var letterGroup = line ? line.previousElementSibling : null;
+        if (letterGroup && letterGroup.classList.contains("letter-group")) {
+          letterGroup.remove();
+        }
+        if (line && line.classList.contains("line")) {
+          line.remove();
+        }
+        currentContainer.remove();
+      }
+      var newContainer = getOrCreateGroupContainer(newFirstLetter);
+      insertContactSorted(newContainer, activeContact, newName);
+    }
+    
+    closeEditContactPopup();
+  }
+
+function deleteAndCloseEdit() {
+    processContactDeletion();
+    closeEditContactPopup();
+  }
+  
+function hoverEdit(isHover) {
+  var img = document.getElementById("edit-icon");
+  if (img) {
+    img.src = isHover ? "assets/icons/editblau.svg" : "assets/icons/edit.svg";
+  }
+}
+
+function hoverDelete(isHover) {
+  var img = document.getElementById("delete-icon");
+  if (img) {
+    img.src = isHover ? "assets/icons/delete.svg" : "assets/icons/paperbasketdelet.svg";
+  }
+}
+  
+  
+  

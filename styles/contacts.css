@@ -217,7 +217,8 @@ body {
     letter-spacing: 0%;
 }
 
-.container-add {
+.container-add,
+.container-edit {
     position: fixed;
     right: -500px; 
     top: 50%;
@@ -231,7 +232,8 @@ body {
     z-index: 1000;
 }
 
-.container-add.active {
+.container-add.active,
+.container-edit.active {
     right: 50%;
     transform: translate(50%, -50%);
 }
