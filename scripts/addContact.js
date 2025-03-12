@@ -1,3 +1,5 @@
+const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
+
 // Globaler Status und Farbvariablen
 var activeContact = null;
 var colorVariables = [
@@ -120,50 +122,98 @@ function resetForm() {
   checkInputs(); closeAddContactPopup();
 }
   
-// Hauptfunktion zum Erstellen eines neuen Kontakts
 function createContact(event) {
   event.preventDefault();
   var inputs = getInputValues();
-  if (!inputs.name || !inputs.email || !inputs.phone) { alert("Bitte fülle alle Felder aus!"); return; }
+  if (!inputs.name || !inputs.email || !inputs.phone) { 
+    alert("Bitte fülle alle Felder aus!"); 
+    return; 
+  }
+  
   var firstLetter = inputs.name.charAt(0).toUpperCase(),
       container = getOrCreateGroupContainer(firstLetter),
       contactEl = buildContactElement(inputs.name, inputs.email, inputs.phone);
   insertContactSorted(container, contactEl, inputs.name);
+  
+  // Speichere den neuen Kontakt in Firebase
+  fetch(`${BASE_URL}/contacts.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: inputs.name,
+      email: inputs.email,
+      phone: inputs.phone,
+      createdAt: new Date().toISOString()
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Kontakt erfolgreich in Firebase gespeichert:", data);
+    // Optional: Hier kannst du die Rückgabe (z. B. die generierte ID) weiterverwenden.
+  })
+  .catch(error => {
+    console.error("Fehler beim Speichern des Kontakts in Firebase:", error);
+  });
+  
   resetForm();
 }
+
   
-// Löscht einen Kontakt und räumt die Detailanzeige auf
 function processContactDeletion(deleteBtn) {
-    // Nutze den deleteBtn oder, falls keiner übergeben wurde, den aktuell aktiven Kontakt
-    var contactDiv = deleteBtn ? deleteBtn.closest(".contact") : activeContact;
-    if (!contactDiv) return false;
-    
-    // Bestätigungsabfrage
-    if (!confirm("Are you sure you want to delete this contact?")) return false;
-    
-    // Finde den übergeordneten Container, der alle Kontakte dieser Gruppe enthält
-    var container = contactDiv.parentElement; // .contact-container
-    if (activeContact === contactDiv) clearDetails();
-    
-    // Entferne den Kontakt
-    contactDiv.remove();
-    
-    // Falls der Container nun keine Kontakte mehr enthält, entferne auch Gruppe und Trennlinie
-    if (container.children.length === 0) {
-      // Struktur: letter-group, line, contact-container
-      var line = container.previousElementSibling;  // sollte die .line sein
-      var letterGroup = line ? line.previousElementSibling : null; // sollte die .letter-group sein
-      if (letterGroup && letterGroup.classList.contains("letter-group")) {
-        letterGroup.remove();
+  // Nutze den deleteBtn oder, falls keiner übergeben wurde, den aktuell aktiven Kontakt
+  var contactDiv = deleteBtn ? deleteBtn.closest(".contact") : activeContact;
+  if (!contactDiv) return false;
+  
+  // Bestätigungsabfrage
+  if (!confirm("Are you sure you want to delete this contact?")) return false;
+  
+  // Hole die Firebase-ID, falls vorhanden
+  var firebaseId = contactDiv.getAttribute('data-id');
+  
+  // Wenn eine Firebase-ID vorhanden ist, lösche den Kontakt in Firebase
+  if (firebaseId) {
+    fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Fehler beim Löschen des Kontakts in Firebase');
       }
-      if (line && line.classList.contains("line")) {
-        line.remove();
-      }
-      container.remove();
-    }
-    
-    return true;
+      // Entferne den Kontakt aus der UI, nachdem Firebase die Löschung bestätigt hat
+      removeContactFromUI(contactDiv);
+    })
+    .catch(error => {
+      console.error("Fehler beim Löschen des Kontakts in Firebase:", error);
+    });
+  } else {
+    // Falls keine Firebase-ID vorhanden ist, entferne den Kontakt nur aus der UI
+    removeContactFromUI(contactDiv);
   }
+  
+  return true;
+}
+
+function removeContactFromUI(contactDiv) {
+  var container = contactDiv.parentElement; // .contact-container
+  if (activeContact === contactDiv) clearDetails();
+  contactDiv.remove();
+  
+  // Wenn der Container leer ist, entferne auch Gruppe und Trennlinie
+  if (container.children.length === 0) {
+    var line = container.previousElementSibling;  // sollte die .line sein
+    var letterGroup = line ? line.previousElementSibling : null; // sollte die .letter-group sein
+    if (letterGroup && letterGroup.classList.contains("letter-group")) {
+      letterGroup.remove();
+    }
+    if (line && line.classList.contains("line")) {
+      line.remove();
+    }
+    container.remove();
+  }
+}
+
   
   
   
@@ -270,24 +320,23 @@ function showEditContactPopup() {
     var newEmail = emailInput.value.trim();
     var newPhone = phoneInput.value.trim();
     
-    // Ermittele den alten und neuen Anfangsbuchstaben, falls sich die Gruppenzugehörigkeit ändern soll
+    // Ermittle alte Werte und Gruppenzugehörigkeit
     var oldName = activeContact.querySelector('.contact-name').textContent;
     var oldFirstLetter = oldName.charAt(0).toUpperCase();
     var newFirstLetter = newName.charAt(0).toUpperCase();
     
-    // Aktualisiere den aktiven Kontakt in der Liste
+    // Aktualisiere die UI des Kontakts
     activeContact.querySelector('.contact-name').textContent = newName;
     activeContact.querySelector('.contact-email').textContent = newEmail;
     activeContact.setAttribute('data-phone', newPhone);
     
-    // Aktualisiere den Avatar im Listenelement (Initialen)
+    // Aktualisiere den Avatar (Initialen)
     var avatarDiv = activeContact.querySelector('.contact-avatar');
-    avatarDiv.textContent = newName
-      .split(" ")
-      .map(function(w) { return w.charAt(0).toUpperCase(); })
-      .join("");
+    avatarDiv.textContent = newName.split(" ").map(function(w) {
+      return w.charAt(0).toUpperCase();
+    }).join("");
     
-    // Aktualisiere die Detailansicht: Name, E-Mail, Phone und Avatar
+    // Aktualisiere die Detailanzeige
     var detailName = document.getElementById('detail-name');
     var detailEmail = document.getElementById('detail-email');
     var detailPhone = document.getElementById('detail-phone');
@@ -296,15 +345,14 @@ function showEditContactPopup() {
     if (detailEmail) detailEmail.textContent = newEmail;
     if (detailPhone) detailPhone.textContent = newPhone;
     if (detailAvatar) {
-      detailAvatar.textContent = newName
-        .split(" ")
-        .map(function(w) { return w.charAt(0).toUpperCase(); })
-        .join("");
-      // Optional: Übernimm die Hintergrundfarbe vom Listenelement
+      detailAvatar.textContent = newName.split(" ").map(function(w) {
+        return w.charAt(0).toUpperCase();
+      }).join("");
+      // Übernimm die Hintergrundfarbe vom Listenelement
       detailAvatar.style.backgroundColor = avatarDiv.style.backgroundColor;
     }
     
-    // Falls sich der erste Buchstabe ändert, verschiebe den Kontakt in die richtige Gruppe
+    // Falls sich der erste Buchstabe geändert hat, verschiebe den Kontakt in die richtige Gruppe
     if (oldFirstLetter !== newFirstLetter) {
       var currentContainer = activeContact.parentElement; // .contact-container
       activeContact.remove();
@@ -323,8 +371,37 @@ function showEditContactPopup() {
       insertContactSorted(newContainer, activeContact, newName);
     }
     
+    // Aktualisiere den Kontakt in Firebase per PATCH-Request
+    var firebaseId = activeContact.getAttribute('data-id');
+    if (firebaseId) {
+      fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: newName,
+          email: newEmail,
+          phone: newPhone
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Fehler beim Aktualisieren des Kontakts in Firebase");
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Kontakt erfolgreich in Firebase aktualisiert:", data);
+      })
+      .catch(error => {
+        console.error("Fehler beim Aktualisieren des Kontakts in Firebase:", error);
+      });
+    }
+    
     closeEditContactPopup();
   }
+  
 
 function deleteAndCloseEdit() {
     processContactDeletion();
@@ -345,5 +422,32 @@ function hoverDelete(isHover) {
   }
 }
   
-  
+function loadContacts() {
+  fetch(`${BASE_URL}/contacts.json`)
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        Object.keys(data).forEach(key => {
+          const contact = data[key];
+          // Nur fortfahren, wenn contact existiert und eine name-Eigenschaft hat
+          if (contact && typeof contact.name === 'string') {
+            const firstLetter = contact.name.charAt(0).toUpperCase();
+            const container = getOrCreateGroupContainer(firstLetter);
+            const contactEl = buildContactElement(contact.name, contact.email, contact.phone);
+            contactEl.setAttribute('data-id', key);
+            insertContactSorted(container, contactEl, contact.name);
+          } else {
+            console.warn("Ungültiger Kontakt für Schlüssel", key, contact);
+          }
+        });
+      }
+    })
+    .catch(error => {
+      console.error("Fehler beim Laden der Kontakte aus Firebase:", error);
+    });
+}
+
+// Aufruf beim Laden der Seite
+window.addEventListener('DOMContentLoaded', loadContacts);
+
   
