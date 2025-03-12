@@ -133,9 +133,11 @@ function createContact(event) {
   var firstLetter = inputs.name.charAt(0).toUpperCase(),
       container = getOrCreateGroupContainer(firstLetter),
       contactEl = buildContactElement(inputs.name, inputs.email, inputs.phone);
+  
+  // Füge den Kontakt sortiert in die Gruppe ein
   insertContactSorted(container, contactEl, inputs.name);
   
-  // Speichere den neuen Kontakt in Firebase
+  // Speichere den neuen Kontakt in Firebase und setze die Firebase-ID ins UI-Element
   fetch(`${BASE_URL}/contacts.json`, {
     method: 'POST',
     headers: {
@@ -151,7 +153,9 @@ function createContact(event) {
   .then(response => response.json())
   .then(data => {
     console.log("Kontakt erfolgreich in Firebase gespeichert:", data);
-    // Optional: Hier kannst du die Rückgabe (z. B. die generierte ID) weiterverwenden.
+    // Firebase gibt als Rückgabeobjekt z. B. { name: "-OL0NGwivvBFv7JPL_5E" } zurück.
+    // Setze diese ID im UI-Element, damit sie später zum Löschen verwendet werden kann.
+    contactEl.setAttribute('data-id', data.name);
   })
   .catch(error => {
     console.error("Fehler beim Speichern des Kontakts in Firebase:", error);
@@ -160,40 +164,47 @@ function createContact(event) {
   resetForm();
 }
 
-  
 function processContactDeletion(deleteBtn) {
-  // Nutze den deleteBtn oder, falls keiner übergeben wurde, den aktuell aktiven Kontakt
   var contactDiv = deleteBtn ? deleteBtn.closest(".contact") : activeContact;
-  if (!contactDiv) return false;
+  if (!contactDiv) return Promise.resolve(false);
   
-  // Bestätigungsabfrage
-  if (!confirm("Are you sure you want to delete this contact?")) return false;
+  if (!confirm("Are you sure you want to delete this contact?")) {
+    return Promise.resolve(false);
+  }
   
-  // Hole die Firebase-ID, falls vorhanden
   var firebaseId = contactDiv.getAttribute('data-id');
   
-  // Wenn eine Firebase-ID vorhanden ist, lösche den Kontakt in Firebase
   if (firebaseId) {
-    fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
+    return fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
       method: 'DELETE'
     })
     .then(response => {
       if (!response.ok) {
         throw new Error('Fehler beim Löschen des Kontakts in Firebase');
       }
-      // Entferne den Kontakt aus der UI, nachdem Firebase die Löschung bestätigt hat
       removeContactFromUI(contactDiv);
+      return true;
     })
     .catch(error => {
       console.error("Fehler beim Löschen des Kontakts in Firebase:", error);
+      return false;
     });
   } else {
-    // Falls keine Firebase-ID vorhanden ist, entferne den Kontakt nur aus der UI
     removeContactFromUI(contactDiv);
+    return Promise.resolve(true);
   }
-  
-  return true;
 }
+
+function deleteAndCloseEdit() {
+  processContactDeletion().then(success => {
+    if (success) {
+      closeEditContactPopup();
+    } else {
+      console.error("Der Kontakt konnte nicht gelöscht werden.");
+    }
+  });
+}
+
 
 function removeContactFromUI(contactDiv) {
   var container = contactDiv.parentElement; // .contact-container
@@ -212,11 +223,8 @@ function removeContactFromUI(contactDiv) {
     }
     container.remove();
   }
-}
-
-  
-  
-  
+}  
+ 
 // Räumt die Detailanzeige auf, wenn der aktive Kontakt gelöscht wird
 function clearDetails() {
   var ds = document.querySelector(".contact-detail"),
@@ -403,9 +411,14 @@ function showEditContactPopup() {
   }
   
 
-function deleteAndCloseEdit() {
-    processContactDeletion();
-    closeEditContactPopup();
+  function deleteAndCloseEdit() {
+    processContactDeletion().then(success => {
+      if (success) {
+        closeEditContactPopup();
+      } else {
+        console.error("Der Kontakt konnte nicht gelöscht werden.");
+      }
+    });
   }
   
 function hoverEdit(isHover) {
