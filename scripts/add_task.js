@@ -107,6 +107,7 @@ function clearAll() {
     clearSubtasks();
     clearSelection();
     clearAssignedTo();
+    clearErrorMessages();
 }
 
 function clearInput() {
