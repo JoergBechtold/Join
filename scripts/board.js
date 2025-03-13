@@ -31,15 +31,15 @@ function updateHTML() {
 function getPlaceholderMessage(category) {
   switch (category) {
     case "open":
-      return "No Task To do";
+      return "No task To do";
     case "in-progress":
-      return "No Task in Progress";
+      return "No task Progress";
     case "await-feedback":
-      return "No Task in Await feedback";
+      return "No Task Await feedback";
     case "done":
-      return "No Task";
+      return "No task Done";
     default:
-      return "No Task";
+      return "No task";
   }
 }
 
