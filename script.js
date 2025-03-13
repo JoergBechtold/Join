@@ -57,3 +57,7 @@ async function loadUserData() {
     return null;
   }
 }
+
+function back() {
+  window.history.back();
+}
