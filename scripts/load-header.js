@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         hideLoggedInLinks(); //in script.js
       }
-      loadInitialsColorUserIcon();
+      loadInitialsUserIcon();
     })
 
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
@@ -31,8 +31,18 @@ document.addEventListener('click', function (event) {
   }
 });
 
-async function loadInitialsColorUserIcon() {
+async function loadInitialsUserIcon() {
   let userProfileCircleRef = document.getElementById('user_profile_circle');
   const user = await loadUserData();
   userProfileCircleRef.innerHTML = `${user.initials}`;
+}
+
+function toHrefFocus(url, element) {
+  document.querySelectorAll('.link-button').forEach((li) => {
+    li.classList.remove('active');
+  });
+  element.closest('li').classList.add('active');
+
+  // Navigiere zur URL
+  // window.location.href = url;
 }
