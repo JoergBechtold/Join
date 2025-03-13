@@ -33,7 +33,8 @@
           <div class="form-column left-container">
             <div class="form-group">
               <label for="title">Title <span class="red">*</span></label>
-              <input class="input-base" type="text" name="title" placeholder="Enter a title" required />
+              <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" required />
+              <div class="error-message-required d-none" id="error_message_title">This field is required</div>
             </div>
 
             <div class="form-group">
@@ -44,9 +45,11 @@
             <div class="form-group">
               <label for="due-date">Due date <span class="red">*</span></label>
               <div class="input-container">
-                <input class="input-base" type="text" name="due-date" placeholder="dd/mm/yyyy" required />
+                <input id="due_date" class="input-base" type="text" name="due-date" placeholder="dd/mm/yyyy" required />
                 <img class="input-base-icon" src="/assets/icons/event.svg" alt="Calendar" />
               </div>
+              <div class="error-message-required d-none" id="error_message_date">This field is required</div>
+              <div class="error-message-format d-none" id="error_message_format">Invalid format. Use dd/mm/yyyy.</div>
             </div>
           </div>
 
@@ -93,7 +96,7 @@
             <div class="form-group">
               <label for="category">Category <span class="red">*</span></label>
               <div class="custom-select-container">
-                <div class="custom-select" onclick="toggleDropdown()">
+                <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()">
                   <span id="selected_option">Select task category</span>
                   <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
@@ -102,6 +105,7 @@
                   <div class="custom-select-option" onclick="selectOption('User Story')">User Story</div>
                 </div>
               </div>
+              <div class="error-message-required d-none" id="error_message_category">This selection is required</div>
             </div>
 
             <div class="form-group">
@@ -176,7 +180,7 @@
               <img class="button-clear-white-hover-img" src="/assets/icons/x-mark-blue.svg" alt="Clear" />
             </div>
           </button>
-          <button disabled type="submit" class="button-create-task-gray align">
+          <button type="submit" class="button-create-task-gray align" onclick="validateInput()">
             Create Task
             <img src="/assets/icons/check.svg" alt="Check" />
           </button>
