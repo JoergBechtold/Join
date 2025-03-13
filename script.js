@@ -53,7 +53,7 @@ async function loadUserData() {
     }
   } else {
     console.error('Benutzer-ID nicht gefunden.');
-    goToUrl('login.html');
+
     return null;
   }
 }
