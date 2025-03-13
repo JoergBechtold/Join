@@ -35,7 +35,7 @@ function getPlaceholderMessage(category) {
     case "in-progress":
       return "No task Progress";
     case "await-feedback":
-      return "No Task Await feedback";
+      return "No task Await feedback";
     case "done":
       return "No task Done";
     default:
