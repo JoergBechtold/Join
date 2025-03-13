@@ -13,6 +13,7 @@ function guestLogIn() {
 function logOut() {
   window.showButtonLinksSidebar = false;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+  sessionStorage.removeItem('loggedInUserId');
   goToUrl('login_register.html');
 }
 
@@ -35,4 +36,24 @@ function showLoggedInLinks() {
   Array.from(loggedInLink).forEach((element) => {
     element.classList.add('d-none');
   });
+}
+
+async function loadUserData() {
+  const userId = sessionStorage.getItem('loggedInUserId');
+  if (userId) {
+    try {
+      const user = await loadData(`/user/${userId}`);
+      if (user) {
+        return user;
+      } else {
+        console.error('Benutzerdaten nicht gefunden.');
+      }
+    } catch (error) {
+      console.error('Fehler beim Laden der Benutzerdaten:', error);
+    }
+  } else {
+    console.error('Benutzer-ID nicht gefunden.');
+    goToUrl('login.html');
+    return null;
+  }
 }

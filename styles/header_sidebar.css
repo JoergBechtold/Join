@@ -148,7 +148,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 2px solid var(--primary-color-gray);
+  border: 3px solid var(--primary-color-gray);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,8 +160,8 @@
 }
 
 .user-profile:hover {
-  border: 3px solid #2a3647;
-  transform: scale(1.1);
+  /* border: 3px solid #2a3647; */
+  /* transform: scale(1.1); */
   background: linear-gradient(0deg, rgba(12, 46, 98, 0.12), rgba(12, 46, 98, 0.12));
 }
 

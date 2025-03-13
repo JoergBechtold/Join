@@ -7,15 +7,34 @@
 
     <link rel="stylesheet" href="styles/header_sidebar.css" />
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="styles/assets.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
+    <script src="scripts/firebase.js"></script>
 
     <!-- Embedding the favicon -->
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
   </head>
 
   <body class="body-header-sidebar">
+    <div class="header">
+      <h1>Kanban Project Management Tool</h1>
+      <div class="header-icons hide-before-log-in">
+        <a href="help.html"><img src="./assets/icons/help.png" alt="Help Icon" /></a>
+
+        <div class="user-profile-container">
+          <div id="user_profile_circle" class="user-profile" onclick="toggleSubmenu()"></div>
+
+          <div id="user-submenu" class="submenu hidden">
+            <a href="privacy_policy.html">Privacy Policy</a>
+            <a href="legal_notice.html">Legal Notice</a>
+            <a onclick="logOut(); return false;" href="login_register.html">Log Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="sidebar">
       <div class="logo">
         <img src="./assets/icons/Logo1.svg" alt="Logo Join" />
@@ -55,23 +74,6 @@
       <div class="footer">
         <a href="privacy_policy.html">Privacy Policy</a>
         <a href="legal_notice.html">Legal Notice</a>
-      </div>
-    </div>
-
-    <div class="header">
-      <h1>Kanban Project Management Tool</h1>
-      <div class="header-icons hide-before-log-in">
-        <a href="help.html"><img src="./assets/icons/help.png" alt="Help Icon" /></a>
-
-        <div class="user-profile-container">
-          <div class="user-profile" onclick="toggleSubmenu()">SM</div>
-
-          <div id="user-submenu" class="submenu hidden">
-            <a href="privacy_policy.html">Privacy Policy</a>
-            <a href="legal_notice.html">Legal Notice</a>
-            <a onclick="logOut(); return false;" href="login_register.html">Log Out</a>
-          </div>
-        </div>
       </div>
     </div>
   </body>

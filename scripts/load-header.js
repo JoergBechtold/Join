@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         hideLoggedInLinks(); //in script.js
       }
+      loadInitialsColorUserIcon();
     })
+
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
 
@@ -28,3 +30,9 @@ document.addEventListener('click', function (event) {
     submenu.classList.add('hidden');
   }
 });
+
+async function loadInitialsColorUserIcon() {
+  let userProfileCircleRef = document.getElementById('user_profile_circle');
+  const user = await loadUserData();
+  userProfileCircleRef.innerHTML = `${user.initials}`;
+}

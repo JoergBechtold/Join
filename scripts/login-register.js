@@ -275,6 +275,8 @@ async function checkUserIsPresent(parameter = false) {
             passwordLogInRef.value = '';
             window.showButtonLinksSidebar = true;
             sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+            sessionStorage.setItem('loggedInUserId', userId);
+            await loadUserData();
             goToUrl('summary.html');
             return true;
           }
