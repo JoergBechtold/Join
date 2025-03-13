@@ -450,7 +450,6 @@ function clearErrorMessages() {
     dateErrorMessageRequired.classList.add('d-none');
     dateErrorMessageFormat.classList.add('d-none');
     dateInput.classList.remove('red-border');
-    const selectedOption = document.getElementById('selected_option');
     const categoryErrorMessage = document.getElementById('error_message_category');
     const customSelect = document.getElementById('costum_select_category'); 
     categoryErrorMessage.classList.add('d-none');
