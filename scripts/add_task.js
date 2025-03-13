@@ -367,25 +367,19 @@ function filterContacts() {
     });
   }
 
-function validateInput(){
-    validateInputTitle();
-    validateInputDate();
-    validateCategory();
-}
-
-
 function validateInputTitle() {
     const inputField = document.getElementById('title');
     const errorMessage = document.getElementById('error_message_title');
     if (inputField.value.trim() === '') {
       errorMessage.classList.remove('d-none');
       inputField.classList.add('red-border')
+      return false;
     } else {
       errorMessage.classList.add('d-none');
       inputField.classList.remove('red-border');
+      return true;
     }
 }
-
 
 function validateInputDate() {
     const inputField = document.getElementById('due_date');
@@ -456,6 +450,20 @@ function clearErrorMessages() {
     categoryErrorMessage.classList.add('d-none');
     customSelect.classList.remove('red-border');
 }
+
+function updateButtonState() {
+    const isTitleValid = validateInputTitle();
+    const isDateValid = validateInputDate();
+    const isCategoryValid = validateCategory();
+    const submitButton = document.querySelector('.button-create-task-gray');
+    if (isTitleValid && isDateValid && isCategoryValid) {
+        submitButton.disabled = false; 
+    } else {
+        submitButton.disabled = true;
+    }
+}
+
+
   
   
   
