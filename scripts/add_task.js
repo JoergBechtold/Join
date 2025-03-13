@@ -438,6 +438,24 @@ function validateCategory() {
       return true;
     }
   }
+
+function clearErrorMessages() {
+    const titleInput = document.getElementById('title');
+    const titleErrorMessage = document.getElementById('error_message_title');
+    titleErrorMessage.classList.add('d-none');
+    titleInput.classList.remove('red-border');
+    const dateInput = document.getElementById('due_date');
+    const dateErrorMessageRequired = document.getElementById('error_message_date');
+    const dateErrorMessageFormat = document.getElementById('error_message_format');
+    dateErrorMessageRequired.classList.add('d-none');
+    dateErrorMessageFormat.classList.add('d-none');
+    dateInput.classList.remove('red-border');
+    const selectedOption = document.getElementById('selected_option');
+    const categoryErrorMessage = document.getElementById('error_message_category');
+    const customSelect = document.getElementById('costum_select_category'); 
+    categoryErrorMessage.classList.add('d-none');
+    customSelect.classList.remove('red-border');
+}
   
   
   
