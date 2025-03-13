@@ -451,19 +451,13 @@ function clearErrorMessages() {
     customSelect.classList.remove('red-border');
 }
 
-function updateButtonState() {
-    const isTitleValid = validateInputTitle();
-    const isDateValid = validateInputDate();
-    const isCategoryValid = validateCategory();
-    const submitButton = document.querySelector('.button-create-task-gray');
-    if (isTitleValid && isDateValid && isCategoryValid) {
-        submitButton.disabled = false; 
-    } else {
-        submitButton.disabled = true;
-    }
+
+function checkandSubmit() {
+    validateInputTitle();
+    validateInputDate();
+    validateCategory();
+    pushTasktoFirebase();
 }
-
-
   
   
   
