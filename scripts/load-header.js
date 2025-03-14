@@ -22,36 +22,60 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((response) => response.text())
     .then((data) => {
       document.getElementById('header_container').innerHTML = data;
-
       const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
 
-      if (buttonLinksSidebar === 'true') {
-        showLoggedInLinks(); // in script.js
-
-        // Setze Summary-Link aktiv
-        const summaryLink = document.querySelector('.link-button');
-        if (summaryLink) {
-          summaryLink.classList.add('active');
-          sessionStorage.setItem('activePage', 'summary.html'); // Speichere summary.html
-        }
-      } else {
-        hideLoggedInLinks(); // in script.js
-      }
-
+      ifButtonLinkSidebar(buttonLinksSidebar);
+      // if (buttonLinksSidebar === 'true') {
+      //   showLoggedInLinks(); // in script.js
+      // } else {
+      //   hideLoggedInLinks(); // in script.js
+      // }
       loadInitialsUserIcon();
 
-      // Wiederherstellen des aktiven Links
-      const activePage = sessionStorage.getItem('activePage');
-      if (activePage) {
-        document.querySelectorAll('.link-button a').forEach((a) => {
-          if (a.getAttribute('href') === activePage) {
-            a.closest('li').classList.add('active');
-          }
-        });
-      }
+      ifActivePage();
+      // const activePage = sessionStorage.getItem('activePage');
+      // if (activePage) {
+      //   document.querySelectorAll('.link-button a').forEach((a) => {
+      //     if (a.getAttribute('href') === activePage) {
+      //       a.closest('li').classList.add('active');
+      //     }
+      //   });
+      // } else {
+      //   const firstLink = document.querySelector('.link-button a');
+      //   if (firstLink) {
+      //     firstLink.closest('li').classList.add('active');
+      //     sessionStorage.setItem('activePage', firstLink.getAttribute('href'));
+      //   }
+      // }
     })
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
+
+function ifButtonLinkSidebar(buttonLinksSidebar) {
+  if (buttonLinksSidebar === 'true') {
+    showLoggedInLinks(); // in script.js
+  } else {
+    hideLoggedInLinks(); // in script.js
+  }
+}
+
+function ifActivePage() {
+  const activePage = sessionStorage.getItem('activePage');
+
+  if (activePage) {
+    document.querySelectorAll('.link-button a').forEach((a) => {
+      if (a.getAttribute('href') === activePage) {
+        a.closest('li').classList.add('active');
+      }
+    });
+  } else {
+    const firstLink = document.querySelector('.link-button a');
+    if (firstLink) {
+      firstLink.closest('li').classList.add('active');
+      sessionStorage.setItem('activePage', firstLink.getAttribute('href'));
+    }
+  }
+}
 
 function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
@@ -74,17 +98,11 @@ async function loadInitialsUserIcon() {
 }
 
 async function toHrefFocus(url, element) {
-  // Entferne 'active' von allen Links
   document.querySelectorAll('.link-button').forEach((li) => {
     li.classList.remove('active');
   });
 
-  // Füge 'active' zum angeklickten Link hinzu
   element.closest('li').classList.add('active');
-
-  // Speichere die aktive URL im sessionStorage
   sessionStorage.setItem('activePage', url);
-
-  // Navigiere zur neuen Seite
   window.location.href = url;
 }

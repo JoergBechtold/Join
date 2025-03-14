@@ -15,6 +15,7 @@ function logOut() {
   window.showButtonLinksSidebar = false;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
   sessionStorage.removeItem('loggedInUserId');
+  sessionStorage.removeItem('activePage');
   goToUrl('login_register.html');
 }
 
