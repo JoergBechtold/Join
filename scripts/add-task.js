@@ -208,8 +208,6 @@ function clearSelection() {
   selectedOption.textContent = 'Select task category';
 }
 
-// const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
-
 function toggleContactsDropdown() {
   const optionsContainer = document.getElementById('contacts_options_container');
   const arrowIcon = document.getElementById('contacts_select_arrow');
