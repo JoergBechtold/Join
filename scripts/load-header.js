@@ -1,22 +1,3 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//   fetch('header_sidebar.html')
-//     .then((response) => response.text())
-//     .then((data) => {
-//       document.getElementById('header_container').innerHTML = data;
-
-//       const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
-
-//       if (buttonLinksSidebar === 'true') {
-//         showLoggedInLinks(); //in script.js
-//       } else {
-//         hideLoggedInLinks(); //in script.js
-//       }
-//       loadInitialsUserIcon();
-//     })
-
-//     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
-// });
-
 document.addEventListener('DOMContentLoaded', function () {
   fetch('header_sidebar.html')
     .then((response) => response.text())
