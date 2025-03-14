@@ -202,6 +202,14 @@
   cursor: pointer;
 }
 
+.input-base[type='date']::-moz-appearance {
+  appearance: textfield;
+}
+
+.input-base[type='date']::-ms-clear {
+  display: none;
+}
+
 .vertical-line-subtask {
   width: 1px;
   background-color: var(--light-gray-placeholder);
