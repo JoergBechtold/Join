@@ -13,9 +13,13 @@ function setPriority(buttonId) {
 }
 
 function resetActiveButton() {
-  activeButton.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
-  const prevImg = document.getElementById(activeButton.id + '_img');
-  prevImg.src = prevImg.src.replace('-event', '');
+  if (activeButton) {
+    activeButton.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
+    const prevImg = document.getElementById(activeButton.id + '_img');
+    if (prevImg) {
+      prevImg.src = prevImg.src.replace('-event', '');
+    }
+  }
 }
 
 function activateButton(button) {
@@ -204,7 +208,7 @@ function clearSelection() {
   selectedOption.textContent = 'Select task category';
 }
 
-const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
+// const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
 
 function toggleContactsDropdown() {
   const optionsContainer = document.getElementById('contacts_options_container');
