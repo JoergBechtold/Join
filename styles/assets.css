@@ -298,7 +298,8 @@ button[disabled]:hover {
 
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
-.input-base[type='text']:focus-visible {
+.input-base[type='text']:focus-visible,
+.input-base[type='date']:focus-visible {
   outline: none;
   border: 1px solid var(--blue);
   opacity: 1;
