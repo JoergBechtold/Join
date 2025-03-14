@@ -53,7 +53,7 @@ function addClickEvents() {
 document.addEventListener('DOMContentLoaded', async () => {
   updateGreeting();
   updateDate();
-  // updateTaskData();
+  updateTaskData();
   addClickEvents();
   const user = await loadUserData();
   greetingName(user);
