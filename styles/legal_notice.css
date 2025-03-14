@@ -7,6 +7,8 @@ body {
 }
 
 .legal {
+  margin-right: 80px;
+
   position: absolute;
   top: 190px;
   left: 328px;
