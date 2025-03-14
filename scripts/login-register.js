@@ -1,3 +1,7 @@
+/**
+ *
+ *
+ */
 const randomColors = [
   '#ff7a00', // orange
   '#ff5eb3', // pink

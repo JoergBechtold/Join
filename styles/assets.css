@@ -350,3 +350,34 @@ button[disabled]:hover {
   font-size: var(--font-size-20);
   color: var(--light-gray-placeholder);
 }
+
+.arrow-left-sign-up {
+  position: absolute;
+  top: 60px;
+  left: 80px;
+}
+
+.arrow-left,
+.arrow-left-sign-up {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.arrow-left img,
+.arrow-left-sign-up img {
+  width: 21px;
+}
+
+.arrow-left:hover,
+.arrow-left-sign-up:hover {
+  background-color: var(--light-gray-bg);
+}
+
+.arrow-left:hover img,
+.arrow-left-sign-up:hover img {
+  transform: scale(1.1);
+}

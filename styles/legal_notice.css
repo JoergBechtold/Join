@@ -1,68 +1,70 @@
 body {
-    font-family: 'inter';
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    color: #333;
+  font-family: 'inter';
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
-.legal{
-    position: absolute;
-    top: 190px;
-    left: 328px;
-    padding-bottom: 90px;
+.legal {
+  position: absolute;
+  top: 190px;
+  left: 328px;
+  padding-bottom: 90px;
 }
 
 .legal h1 {
-    font-size: var(--font-size-61);
-    font-weight: var(--font-weight-700);
+  font-size: var(--font-size-61);
+  font-weight: var(--font-weight-700);
 }
 
 p {
-    line-height: 1.6;
-    font-size: 16px;
-    margin: 10px 0;
-    padding: 0 15px;
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 0 15px;
 }
 
 strong {
-    color: #004080;
+  color: #004080;
 }
 
 a {
-    color: #0073e6;
-    text-decoration: none;
+  color: #0073e6;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .impressum-container {
-    background-color: white;
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .impressum-container p {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
 .impressum-container p:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .headline-img-container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
 }
 
-.headline-img-container img {
+/* .headline-img-container img {
     margin-right: 80px;
     width: 32px;
     height: 32px;
@@ -74,19 +76,19 @@ a:hover {
     background-color: rgb(233, 233, 233);
     border-radius: 50%;
     padding: 1px;
-}
+} */
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 24px;
-    }
+  h1 {
+    font-size: 24px;
+  }
 
-    .impressum-container {
-        width: 95%;
-        padding: 15px;
-    }
+  .impressum-container {
+    width: 95%;
+    padding: 15px;
+  }
 
-    p {
-        font-size: 14px;
-    }
+  p {
+    font-size: 14px;
+  }
 }

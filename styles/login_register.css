@@ -200,30 +200,6 @@
   border-radius: var(--border-radius);
 }
 
-.arrow-left {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  top: 60px;
-  left: 80px;
-  width: 35px;
-  aspect-ratio: 1 / 1;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-.arrow-left img {
-  width: 21px;
-}
-
-.arrow-left:hover {
-  background-color: var(--light-gray-bg);
-}
-
-.arrow-left:hover img {
-  transform: scale(1.1);
-}
-
 .visibility-eye-off-icon {
   display: none;
 }

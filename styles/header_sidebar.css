@@ -145,6 +145,7 @@
 }
 
 .user-profile {
+  font-size: var(--font-size-21);
   width: 56px;
   height: 56px;
   border-radius: 50%;
