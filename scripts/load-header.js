@@ -25,28 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
 
       ifButtonLinkSidebar(buttonLinksSidebar);
-      // if (buttonLinksSidebar === 'true') {
-      //   showLoggedInLinks(); // in script.js
-      // } else {
-      //   hideLoggedInLinks(); // in script.js
-      // }
       loadInitialsUserIcon();
-
       ifActivePage();
-      // const activePage = sessionStorage.getItem('activePage');
-      // if (activePage) {
-      //   document.querySelectorAll('.link-button a').forEach((a) => {
-      //     if (a.getAttribute('href') === activePage) {
-      //       a.closest('li').classList.add('active');
-      //     }
-      //   });
-      // } else {
-      //   const firstLink = document.querySelector('.link-button a');
-      //   if (firstLink) {
-      //     firstLink.closest('li').classList.add('active');
-      //     sessionStorage.setItem('activePage', firstLink.getAttribute('href'));
-      //   }
-      // }
     })
     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
 });
