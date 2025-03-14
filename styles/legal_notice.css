@@ -1,6 +1,6 @@
 body {
   font-family: 'inter';
-  background-color: #f9f9f9;
+  background-color: white;
   margin: 0;
   padding: 0;
   color: #333;
@@ -63,20 +63,6 @@ a:hover {
   align-items: center;
   margin-right: 10px;
 }
-
-/* .headline-img-container img {
-    margin-right: 80px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-}
-
-.headline-img-container img:hover {
-    transform: scale(1.05);
-    background-color: rgb(233, 233, 233);
-    border-radius: 50%;
-    padding: 1px;
-} */
 
 @media (max-width: 768px) {
   h1 {
