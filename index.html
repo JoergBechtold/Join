@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Board</title>
+    <title>Join</title>
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="styles/header_sidebar.css">
+    <link rel="stylesheet" href="styles/header_sidebar.css" />
   </head>
   <body onload="updateHTML()">
     <!-- hier kommt das board rein al index.html -->
@@ -42,51 +42,61 @@
 
       <div class="card-container">
         <div>
-          <span class="column-title">To do
+          <span class="column-title"
+            >To do
             <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
-          <div class="drag-area" id="open"
-               ondrop="moveTo('open')" 
-               ondragleave="removeHighlight('open')" 
-               ondragover="allowDrop(event); highlight('open')">
-          </div>
+          <div
+            class="drag-area"
+            id="open"
+            ondrop="moveTo('open')"
+            ondragleave="removeHighlight('open')"
+            ondragover="allowDrop(event); highlight('open')"
+          ></div>
         </div>
-    
+
         <div>
-          <span class="column-title">In Progress
+          <span class="column-title"
+            >In Progress
             <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
-          <div class="drag-area" id="in-progress"
-               ondrop="moveTo('in-progress')" 
-               ondragleave="removeHighlight('in-progress')" 
-               ondragover="allowDrop(event); highlight('in-progress')">
-          </div>
+          <div
+            class="drag-area"
+            id="in-progress"
+            ondrop="moveTo('in-progress')"
+            ondragleave="removeHighlight('in-progress')"
+            ondragover="allowDrop(event); highlight('in-progress')"
+          ></div>
         </div>
-    
+
         <div>
-          <span class="column-title">Await feedback
+          <span class="column-title"
+            >Await feedback
             <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
-          <div class="drag-area" id="await-feedback"
-               ondrop="moveTo('await-feedback')" 
-               ondragleave="removeHighlight('await-feedback')" 
-               ondragover="allowDrop(event); highlight('await-feedback')">
-          </div>
+          <div
+            class="drag-area"
+            id="await-feedback"
+            ondrop="moveTo('await-feedback')"
+            ondragleave="removeHighlight('await-feedback')"
+            ondragover="allowDrop(event); highlight('await-feedback')"
+          ></div>
         </div>
-    
+
         <div>
           <span class="column-title">Done</span>
-          <div class="drag-area" id="done"
-               ondrop="moveTo('done')" 
-               ondragleave="removeHighlight('done')" 
-               ondragover="allowDrop(event); highlight('done')">
-          </div>
+          <div
+            class="drag-area"
+            id="done"
+            ondrop="moveTo('done')"
+            ondragleave="removeHighlight('done')"
+            ondragover="allowDrop(event); highlight('done')"
+          ></div>
         </div>
       </div>
-        
     </main>
 
     <script src="script.js"></script>
     <script src="./scripts/load-header.js"></script>
   </body>
-</html> 
+</html>

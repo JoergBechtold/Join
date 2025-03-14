@@ -7,6 +7,7 @@ function goToUrl(url) {
 function guestLogIn() {
   window.showButtonLinksSidebar = true;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+
   goToUrl('summary.html');
 }
 
