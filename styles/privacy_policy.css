@@ -22,11 +22,10 @@ p {
   line-height: 1.6;
   font-size: 16px;
   margin: 10px 0;
-  padding: 0 20px;
 }
 
 ul {
-  padding-left: 40px;
+  padding-left: 20px;
 }
 
 li {
