@@ -383,7 +383,7 @@ function validateInputTitle() {
   }
 }
 
-function validateInputDate() {
+/* function validateInputDate() {
   const inputField = document.getElementById('due_date');
   const errorMessageRequired = document.getElementById('error_message_date');
   const errorMessageFormat = document.getElementById('error_message_format');
@@ -419,7 +419,23 @@ function isValidDateFormat(inputField, errorMessage) {
     inputField.classList.remove('red-border');
     return true;
   }
+} */
+
+function validateInputDate() {
+    const inputField = document.getElementById('due_date');
+    const errorMessage = document.getElementById('error_message_date');
+  
+    if (inputField.value.trim() === '') {
+      errorMessage.classList.remove('d-none');
+      inputField.classList.add('red-border');
+      return false;
+    } else {
+      errorMessage.classList.add('d-none');
+      inputField.classList.remove('red-border');
+      return true;
+    }
 }
+  
 
 function validateCategory() {
   const selectedOption = document.getElementById('selected_option');
