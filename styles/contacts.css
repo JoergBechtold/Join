@@ -406,6 +406,7 @@ input:focus {
     font-size: 20px;
     line-height: 120%;
     letter-spacing: 0%;
+    border: 1px solid black;
 }
 
 .cancel-btn:hover {
@@ -432,7 +433,6 @@ input:focus {
     border-radius: 10px;
     gap: 4px;
     padding: 16px;
-    font-family: 'Inter';
     font-weight: 600;
     font-size: 21px;
     line-height: 120%;

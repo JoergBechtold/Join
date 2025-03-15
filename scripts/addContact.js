@@ -1,6 +1,3 @@
-const BASE_URL = 'https://join-435-default-rtdb.europe-west1.firebasedatabase.app/';
-
-// Globaler Status und Farbvariablen
 var activeContact = null;
 var colorVariables = [
   "--circle-bg-color-orange", "--circle-bg-color-pink",
@@ -90,20 +87,43 @@ function getOrCreateGroupContainer(firstLetter) {
 }
   
 // Baut den neuen Kontakt als Element auf
-function buildContactElement(name, email, phone) {
-  var c = document.createElement("div"); c.classList.add("contact"); 
+function buildContactElement(name, email, phone, color) {
+  var c = document.createElement("div"); 
+  c.classList.add("contact"); 
   c.setAttribute("data-phone", phone);
-  var a = document.createElement("div"); a.classList.add("contact-avatar");
-  var r = colorVariables[Math.floor(Math.random() * colorVariables.length)];
-  a.style.backgroundColor = getComputedStyle(document.documentElement)
-                           .getPropertyValue(r).trim();
-  a.textContent = name.split(" ").map(function(w){ return w.charAt(0).toUpperCase(); }).join("");
-  var i = document.createElement("div"); i.classList.add("contact-info");
-  var np = document.createElement("p"); np.classList.add("contact-name"); np.textContent = name;
-  var ea = document.createElement("a"); ea.classList.add("contact-email"); ea.textContent = email;
-  i.appendChild(np); i.appendChild(ea); c.appendChild(a); c.appendChild(i);
+  
+  var a = document.createElement("div"); 
+  a.classList.add("contact-avatar");
+  
+  // Falls kein Farbwert übergeben wurde, wähle zufällig einen aus
+  if (!color) {
+    var randomColorVar = colorVariables[Math.floor(Math.random() * colorVariables.length)];
+    color = getComputedStyle(document.documentElement).getPropertyValue(randomColorVar).trim();
+  }
+  a.style.backgroundColor = color;
+  a.textContent = name.split(" ").map(function(w){ 
+    return w.charAt(0).toUpperCase(); 
+  }).join("");
+  
+  var i = document.createElement("div"); 
+  i.classList.add("contact-info");
+  
+  var np = document.createElement("p"); 
+  np.classList.add("contact-name"); 
+  np.textContent = name;
+  
+  var ea = document.createElement("a"); 
+  ea.classList.add("contact-email"); 
+  ea.textContent = email;
+  
+  i.appendChild(np); 
+  i.appendChild(ea); 
+  c.appendChild(a); 
+  c.appendChild(i);
+  
   return c;
 }
+
   
 // Fügt den Kontakt sortiert in den Container ein
 function insertContactSorted(container, contactEl, name) {
@@ -131,13 +151,19 @@ function createContact(event) {
   }
   
   var firstLetter = inputs.name.charAt(0).toUpperCase(),
-      container = getOrCreateGroupContainer(firstLetter),
-      contactEl = buildContactElement(inputs.name, inputs.email, inputs.phone);
+      container = getOrCreateGroupContainer(firstLetter);
+  
+  // Bestimme den zufälligen Farbvariablenwert und errechne den tatsächlichen Farbwert
+  var randomColorVar = colorVariables[Math.floor(Math.random() * colorVariables.length)];
+  var computedColor = getComputedStyle(document.documentElement).getPropertyValue(randomColorVar).trim();
+  
+  // Übergib den computedColor an buildContactElement
+  var contactEl = buildContactElement(inputs.name, inputs.email, inputs.phone, computedColor);
   
   // Füge den Kontakt sortiert in die Gruppe ein
   insertContactSorted(container, contactEl, inputs.name);
   
-  // Speichere den neuen Kontakt in Firebase und setze die Firebase-ID ins UI-Element
+  // Speichere den neuen Kontakt in Firebase inklusive Farbwert
   fetch(`${BASE_URL}/contacts.json`, {
     method: 'POST',
     headers: {
@@ -147,14 +173,14 @@ function createContact(event) {
       name: inputs.name,
       email: inputs.email,
       phone: inputs.phone,
+      color: computedColor, // Farbwert wird gespeichert
       createdAt: new Date().toISOString()
     })
   })
   .then(response => response.json())
   .then(data => {
     console.log("Kontakt erfolgreich in Firebase gespeichert:", data);
-    // Firebase gibt als Rückgabeobjekt z. B. { name: "-OL0NGwivvBFv7JPL_5E" } zurück.
-    // Setze diese ID im UI-Element, damit sie später zum Löschen verwendet werden kann.
+    // Setze die Firebase-ID ins UI-Element
     contactEl.setAttribute('data-id', data.name);
   })
   .catch(error => {
@@ -442,11 +468,11 @@ function loadContacts() {
       if (data) {
         Object.keys(data).forEach(key => {
           const contact = data[key];
-          // Nur fortfahren, wenn contact existiert und eine name-Eigenschaft hat
           if (contact && typeof contact.name === 'string') {
             const firstLetter = contact.name.charAt(0).toUpperCase();
             const container = getOrCreateGroupContainer(firstLetter);
-            const contactEl = buildContactElement(contact.name, contact.email, contact.phone);
+            // Übergib den Farbwert, falls vorhanden
+            const contactEl = buildContactElement(contact.name, contact.email, contact.phone, contact.color);
             contactEl.setAttribute('data-id', key);
             insertContactSorted(container, contactEl, contact.name);
           } else {
@@ -460,7 +486,5 @@ function loadContacts() {
     });
 }
 
-// Aufruf beim Laden der Seite
-window.addEventListener('DOMContentLoaded', loadContacts);
 
   

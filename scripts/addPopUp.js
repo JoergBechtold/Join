@@ -1,81 +1,62 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const addContactBtn = document.querySelector(".add-contact-btn");
-    const contactForm = document.querySelector(".container-add");
-    const closeBtn = document.querySelector(".close-btn");
-    const cancelBtn = document.querySelector(".cancel-btn");
-    const overlay = document.querySelector(".overlay");
-
-    function closeForm() {
-        contactForm.classList.remove("active");
-        overlay.classList.remove("active");
-
-        setTimeout(() => {
-            contactForm.classList.add("hidden");
-        }, 500);
-    }
-
-    addContactBtn.addEventListener("click", function() {
-        contactForm.classList.remove("hidden");
-        overlay.classList.add("active");
-        setTimeout(() => {
-            contactForm.classList.add("active");
-        }, 10);
-    });
-
-    closeBtn.addEventListener("click", closeForm);
-    overlay.addEventListener("click", closeForm);    
-    cancelBtn.addEventListener("click", closeForm);  
-
-    const icon = cancelBtn.querySelector("img");
-
-    cancelBtn.addEventListener("mouseenter", function() {
-        icon.src = "./assets/icons/x-mark-blue.svg";
-    });
-
-    cancelBtn.addEventListener("mouseleave", function() {
-        icon.src = "./assets/icons/cancel.svg";
-    });
-});
-
-function showSuccessPopup() {
-    const popup = document.getElementById("success-popup");
-
-    popup.classList.remove("popup-hidden");
-    popup.classList.add("show"); 
-
-    setTimeout(() => {
-        popup.classList.add("popup-hidden"); 
-        popup.classList.remove("show");
-    }, 3000);
+function init(){
+  setupFormEvents();
+  setupCancelHover();
+  setupCreateButton();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const createBtn = document.querySelector(".create-btn");
-    const contactForm = document.querySelector(".container-add");
-    const overlay = document.querySelector(".overlay");           
-    const cancelBtn = document.querySelector(".cancel-btn");    
-    const closeBtn = document.querySelector(".close-btn"); 
+function setupFormEvents(){
+  var addBtn = document.querySelector(".add-contact-btn"),
+      form = document.querySelector(".container-add"),
+      closeBtn = document.querySelector(".close-btn"),
+      overlay = document.querySelector(".overlay"),
+      cancelBtn = document.querySelector(".cancel-btn");
+  addBtn.onclick = function(){
+    form.classList.remove("hidden");
+    overlay.classList.add("active");
+    setTimeout(function(){ form.classList.add("active"); }, 10);
+  };
+  var closeForm = function(){
+    form.classList.remove("active");
+    overlay.classList.remove("active");
+    setTimeout(function(){ form.classList.add("hidden"); }, 500);
+  };
+  closeBtn.onclick = closeForm;
+  overlay.onclick = closeForm;
+  cancelBtn.onclick = closeForm;
+}
 
-    function closeForm() {
-        contactForm.classList.add("hidden");
-        overlay.classList.remove("active");
+function setupCancelHover(){
+  var cancelBtn = document.querySelector(".cancel-btn"),
+      cancelIcon = cancelBtn.querySelector("img");
+  cancelBtn.onmouseenter = function(){
+    cancelIcon.src = "./assets/icons/x-mark-blue.svg";
+  };
+  cancelBtn.onmouseleave = function(){
+    cancelIcon.src = "./assets/icons/cancel.svg";
+  };
+}
+
+function setupCreateButton(){
+  var createBtn = document.querySelector(".create-btn"),
+      overlay = document.querySelector(".overlay"),
+      form = document.querySelector(".container-add");
+  createBtn.onclick = function(e){
+    e.preventDefault();
+    if(overlay.classList.contains("active")){
+      overlay.classList.remove("active");
     }
+    form.classList.add("hidden");
+    showSuccessPopup();
+  };
+}
 
-    createBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        if (overlay.classList.contains("active")) {
-            overlay.classList.remove("active");
-        }
-
-        contactForm.classList.add("hidden");
-
-        showSuccessPopup();
-    });
-
-    cancelBtn.addEventListener("click", closeForm);
-    closeBtn.addEventListener("click", closeForm);
-    overlay.addEventListener("click", closeForm);
-});
-
-
+function showSuccessPopup(){
+  var popup = document.getElementById("success-popup");
+  popup.classList.remove("popup-hidden");
+  popup.classList.add("show");
+  setTimeout(function(){
+    popup.classList.add("popup-hidden");
+    popup.classList.remove("show");
+  }, 3000);
+}
+  

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,8 @@
 
     <link rel="stylesheet" href="styles/contacts.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
   </head>
-  <body>
+  <body onload="loadContacts(); init();">
     <div id="header_container"></div>
 
     <div class="contacts-container">
@@ -154,6 +153,7 @@
     <script src="scripts/load-header.js"></script>
     <script src="scripts/login-register.js"></script>
     <script src="scripts/addContact.js"></script>
+    <script src="./scripts/addPopUp.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
