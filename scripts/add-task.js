@@ -252,8 +252,8 @@ function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, se
 function closeDropdownOnBodyClick(event) {
   const clickedElement = event.target;
   if (
-    dropdownOpen &&
-    !clickedElement.closest('#custom_select') &&
+    dropdownOpen && 
+    !clickedElement.closest('#custom_select') && 
     !clickedElement.closest('#contacts_options_container')
   ) {
     const optionsContainer = document.getElementById('contacts_options_container');
