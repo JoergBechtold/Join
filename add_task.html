@@ -122,6 +122,7 @@
                   name="subtasks"
                   placeholder="Add new subtask"
                   onclick="handleSubtaskInput()"
+                  onkeydown="if(event.key === 'Enter'){ event.preventDefault(); handleSubtaskSave(); }"
                 />
                 <div class="close-and-check">
                   <img
@@ -150,7 +151,7 @@
               </div>
               <div class="subtask-enum"></div>
               <div class="input-container">
-                <input id="edit_subtask_input" class="input-base-V2 d-none" type="text" name="edit-subtasks" placeholder="Edit subtask" />
+                <input id="edit_subtask_input" class="input-base-V2 d-none" type="text" name="edit-subtasks" placeholder="Edit subtask" onkeydown="if(event.key === 'Enter'){ event.preventDefault(); saveEditedSubtask(); }" />
                 <div class="close-and-check">
                   <img
                     id="edit_delete_icon"
