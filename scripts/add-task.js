@@ -208,6 +208,8 @@ function clearSelection() {
   selectedOption.textContent = 'Select task category';
 }
 
+let dropdownOpen = false; 
+
 function toggleContactsDropdown() {
   const optionsContainer = document.getElementById('contacts_options_container');
   const arrowIcon = document.getElementById('contacts_select_arrow');
@@ -229,6 +231,7 @@ function openDropdown(optionsContainer, arrowIcon, inputField, customSelect, sel
   inputField.placeholder = '';
   inputField.focus();
   customSelect.classList.replace('custom-select', 'custom-select-focused');
+  dropdownOpen = true;
 }
 
 function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
@@ -243,7 +246,25 @@ function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, se
   contactOptions.forEach((option) => {
     option.style.display = 'block';
   });
+  dropdownOpen = false;
 }
+
+function closeDropdownOnBodyClick(event) {
+  const clickedElement = event.target;
+  if (
+    dropdownOpen &&
+    !clickedElement.closest('#custom_select') &&
+    !clickedElement.closest('#contacts_options_container')
+  ) {
+    const optionsContainer = document.getElementById('contacts_options_container');
+    const arrowIcon = document.getElementById('contacts_select_arrow');
+    const inputField = document.getElementById('selected_contact');
+    const customSelect = document.getElementById('custom_select');
+    const selectedContactsContainer = document.querySelector('.show-selected-contacts');
+    closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
+  }
+}
+
 
 async function loadContacts() {
   const optionsContainer = document.getElementById('contacts_options_container');
