@@ -436,7 +436,6 @@ function validateInputDate() {
     }
 }
   
-
 function validateCategory() {
   const selectedOption = document.getElementById('selected_option');
   const errorMessage = document.getElementById('error_message_category');
@@ -459,9 +458,7 @@ function clearErrorMessages() {
   titleInput.classList.remove('red-border');
   const dateInput = document.getElementById('due_date');
   const dateErrorMessageRequired = document.getElementById('error_message_date');
-  const dateErrorMessageFormat = document.getElementById('error_message_format');
   dateErrorMessageRequired.classList.add('d-none');
-  dateErrorMessageFormat.classList.add('d-none');
   dateInput.classList.remove('red-border');
   const categoryErrorMessage = document.getElementById('error_message_category');
   const customSelect = document.getElementById('costum_select_category');
@@ -470,8 +467,10 @@ function clearErrorMessages() {
 }
 
 function checkandSubmit() {
-  validateInputTitle();
-  validateInputDate();
-  validateCategory();
-  pushTasktoFirebase();
+  const title = validateInputTitle();
+  const date = validateInputDate();
+  const category =validateCategory();
+  if(title && date && category) {
+    pushTasktoFirebase();
+  } 
 }
