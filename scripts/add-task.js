@@ -539,7 +539,8 @@ async function pushTaskToFirebase() {
     due_date: dueDate,
     priority: priority,
     assigned_to: selectedContacts,
-    category: selectedCategory
+    category: selectedCategory,
+    subtasks: subtasks
   };
   try {
     const response = await postData('tasks', taskData);
