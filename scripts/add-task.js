@@ -504,11 +504,39 @@ function clearErrorMessages() {
   customSelect.classList.remove('red-border');
 }
 
-function checkandSubmit() {
-  const title = validateInputTitle();
+/*  const title = validateInputTitle();
   const date = validateInputDate();
   const category =validateCategory();
   if(title && date && category) {
     pushTasktoFirebase();
-  } 
+  }  */
+
+function checkandSubmit() {
+ pushTaskToFirebase();
 }
+
+async function pushTaskToFirebase() {
+  const titleInput = document.getElementById('title');
+  const descriptionInput = document.getElementById('description');
+  const title = titleInput.value.trim();
+  const description = descriptionInput.value.trim();
+  const taskData = {
+    title: title,
+    description: description || ''
+  };
+  try {
+    const response = await postData('tasks', taskData);
+    console.log('Gespeicherte Daten:', response);
+    if (response) {
+      alert('Task erfolgreich gespeichert!');
+      titleInput.value = '';
+      descriptionInput.value = '';
+    } else {
+      throw new Error('Keine Antwort von Firebase erhalten.');
+    }
+  } catch (error) {
+    console.error('Fehler beim Speichern des Tasks:', error);
+    alert('Es gab einen Fehler beim Speichern des Tasks. Bitte versuche es erneut.');
+  }
+}
+
