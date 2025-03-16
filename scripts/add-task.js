@@ -523,17 +523,29 @@ async function pushTaskToFirebase() {
   const title = titleInput.value.trim();
   const description = descriptionInput.value.trim();
   const dueDate = dueDateInput.value.trim();
+  let priority;
+  if (activeButton && activeButton.id === 'urgent_button') {
+    priority = 'Urgent';
+  } else if (activeButton && activeButton.id === 'medium_button') {
+    priority = 'Medium';
+  } else if (activeButton && activeButton.id === 'low_button') {
+    priority = 'Low';
+  } else {
+    priority = 'No Priority'; 
+  }  
   const taskData = {
     title: title,
     description: description || '',
     due_date: dueDate,
+    priority: priority,
+    assigned_to: selectedContacts,
     category: selectedCategory
   };
   try {
     const response = await postData('tasks', taskData);
     console.log('Gespeicherte Daten:', response);
     if (response) {
-      alert('Task erfolgreich gespeichert!');
+      alert('Task erfolgreich gespeichert!'); /* hier später popup aufrufen*/
       clearAll();
     } else {
       throw new Error('Keine Antwort von Firebase erhalten.');
