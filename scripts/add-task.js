@@ -266,13 +266,30 @@ function closeDropdownOnBodyClick(event) {
 }
 
 
-async function loadContacts() {
+/* async function loadContacts() {
   const optionsContainer = document.getElementById('contacts_options_container');
   if (optionsContainer.childElementCount) return;
   try {
-    const res = await fetch(`${BASE_URL}/user.json`); /* Ändern */
+    const res = await fetch(`${BASE_URL}/user.json`); 
     const data = await res.json();
     optionsContainer.innerHTML = renderContactsHtml(data);
+  } catch (e) {
+    console.error('Error loading contacts:', e);
+    optionsContainer.innerHTML = '<div class="error-select-option">Error loading contacts.</div>';
+  }
+}
+ */ 
+
+async function loadContacts() {
+  const optionsContainer = document.getElementById('contacts_options_container');  
+  if (optionsContainer.childElementCount) return;
+  try {
+    const data = await loadData('user'); /* Ändern in contacts */
+    if (data) {
+      optionsContainer.innerHTML = renderContactsHtml(data);
+    } else {
+      throw new Error('Keine Daten erhalten');
+    }
   } catch (e) {
     console.error('Error loading contacts:', e);
     optionsContainer.innerHTML = '<div class="error-select-option">Error loading contacts.</div>';
