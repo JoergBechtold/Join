@@ -508,7 +508,7 @@ function clearErrorMessages() {
   const date = validateInputDate();
   const category =validateCategory();
   if(title && date && category) {
-    pushTasktoFirebase();
+    pushTaskToFirebase();
   }  */
 
 function checkandSubmit() {
@@ -518,19 +518,23 @@ function checkandSubmit() {
 async function pushTaskToFirebase() {
   const titleInput = document.getElementById('title');
   const descriptionInput = document.getElementById('description');
+  const dueDateInput = document.getElementById('due_date');
+  const selectedCategory = document.getElementById('selected_option').textContent.trim();
   const title = titleInput.value.trim();
   const description = descriptionInput.value.trim();
+  const dueDate = dueDateInput.value.trim();
   const taskData = {
     title: title,
-    description: description || ''
+    description: description || '',
+    due_date: dueDate,
+    category: selectedCategory
   };
   try {
     const response = await postData('tasks', taskData);
     console.log('Gespeicherte Daten:', response);
     if (response) {
       alert('Task erfolgreich gespeichert!');
-      titleInput.value = '';
-      descriptionInput.value = '';
+      clearAll();
     } else {
       throw new Error('Keine Antwort von Firebase erhalten.');
     }
