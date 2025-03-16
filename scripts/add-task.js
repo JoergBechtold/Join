@@ -504,15 +504,14 @@ function clearErrorMessages() {
   customSelect.classList.remove('red-border');
 }
 
-/*  const title = validateInputTitle();
+
+function checkandSubmit() {
+  const title = validateInputTitle();
   const date = validateInputDate();
   const category =validateCategory();
   if(title && date && category) {
     pushTaskToFirebase();
-  }  */
-
-function checkandSubmit() {
- pushTaskToFirebase();
+  }
 }
 
 async function pushTaskToFirebase() {
