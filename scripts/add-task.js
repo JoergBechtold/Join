@@ -516,35 +516,9 @@ function checkandSubmit() {
 }
 
 async function pushTaskToFirebase() {
-  const titleInput = document.getElementById('title');
-  const descriptionInput = document.getElementById('description');
-  const dueDateInput = document.getElementById('due_date');
-  const selectedCategory = document.getElementById('selected_option').textContent.trim();
-  const title = titleInput.value.trim();
-  const description = descriptionInput.value.trim();
-  const dueDate = dueDateInput.value.trim();
-  let priority;
-  if (activeButton && activeButton.id === 'urgent_button') {
-    priority = 'Urgent';
-  } else if (activeButton && activeButton.id === 'medium_button') {
-    priority = 'Medium';
-  } else if (activeButton && activeButton.id === 'low_button') {
-    priority = 'Low';
-  } else {
-    priority = 'No Priority'; 
-  }  
-  const taskData = {
-    title: title,
-    description: description || '',
-    due_date: dueDate,
-    priority: priority,
-    assigned_to: selectedContacts,
-    category: selectedCategory,
-    subtasks: subtasks
-  };
+  const taskData = createTaskData();
   try {
     const response = await postData('tasks', taskData);
-    console.log('Gespeicherte Daten:', response);
     if (response) {
       alert('Task erfolgreich gespeichert!'); /* hier später popup aufrufen*/
       clearAll();
@@ -553,7 +527,38 @@ async function pushTaskToFirebase() {
     }
   } catch (error) {
     console.error('Fehler beim Speichern des Tasks:', error);
-    alert('Es gab einen Fehler beim Speichern des Tasks. Bitte versuche es erneut.');
   }
 }
+
+function createTaskData() {
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const dueDate = document.getElementById('due_date').value.trim();
+  const selectedCategory = document.getElementById('selected_option').textContent.trim();
+  const priority = getPriority(); 
+  const subtasksArray = Array.isArray(subtasks) && subtasks.length > 0 ? subtasks : '';
+  const assignedTo = Array.isArray(selectedContacts) && selectedContacts.length > 0 ? selectedContacts : '';
+  return {
+    title: title,
+    description: description || '',
+    due_date: dueDate,
+    priority: priority,
+    assigned_to: assignedTo,
+    category: selectedCategory,
+    subtasks: subtasksArray
+  };
+}
+
+function getPriority() {
+  if (activeButton && activeButton.id === 'urgent_button') {
+    return 'Urgent';
+  } else if (activeButton && activeButton.id === 'medium_button') {
+    return 'Medium';
+  } else if (activeButton && activeButton.id === 'low_button') {
+    return 'Low';
+  } else {
+    return 'No Priority'; 
+  }
+}
+
 
