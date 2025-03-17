@@ -155,6 +155,42 @@ function reducerFunction(subtasksList) {
   return { closed, total };
 }
 
+function createSubtaskCounter(key, task) {
+  let subtaskContainer = document.getElementById(key + "-subtask");
+  let subtasksCounter = document.createElement("span");
+  subtasksCounter.id = key + "-subtask-counter";
+  let subtasksList = getSubtasksList(task);
+  let counter = reducerFunction(subtasksList);
+  subtasksCounter.textContent = `${counter.closed}/${counter.total} Subtasks`;
+  subtaskContainer.appendChild(subtasksCounter);
+}
+
+function createProgressContainer(key) {
+  let subtaskContainer = document.getElementById(key + "-subtask");
+  let progressContainer = document.createElement("div");
+  progressContainer.id = key + "-progress";
+  progressContainer.className = "progress-container";
+  subtaskContainer.appendChild(progressContainer);
+}
+
+function createProgressBar(key, task) {
+  let progressContainer = document.getElementById(key + "-progress");
+  let progressBar = document.createElement("div");
+  progressBar.id = key + "-progress-bar";
+  progressBar.className = "progress-bar";
+  progressContainer.appendChild(progressBar);
+  let subtasksList = getSubtasksList(task);
+  let total = subtasksList.length;
+  let completed = 0;
+  let progress = total > 0 ? (completed / total) * 100 : 0;
+  progressBar.style.width = `${progress}%`;
+  let progressLabel = document.createElement("span");
+  progressLabel.id = key + "-subtask-counter";
+  progressLabel.className = "subtask-counter";
+  progressLabel.textContent = `${completed}/${total} Subtasks`;
+  progressContainer.appendChild(progressLabel);
+}
+
 function createContactsAndPrioContainer(key) {
   let underDiv = document.getElementById(key + "-under-container");
   let assignmentPrioContainer = document.createElement("div");
@@ -198,6 +234,33 @@ function createAssignedContacts(key, task) {
   }
 }
 
+function createPrioContainer(key) {
+  let assignmentPrioContainer = document.getElementById(key + "-contacts-prio");
+  let prioContainer = document.createElement("div");
+  prioContainer.id = key + "-prio-container";
+  prioContainer.className = "prio-container";
+  assignmentPrioContainer.appendChild(prioContainer);
+}
+
+function createPrio(key, task) {
+  let prioContainer = document.getElementById(key + "-prio-container");
+  prioContainer.innerHTML = "";
+  let prioImage = document.createElement("img");
+  prioImage.id = key + "-prio";
+  let priority = task.priority ? task.priority.toLowerCase() : "";
+  if (priority === "urgent") {
+    prioImage.src = "/assets/icons/prio-high-event.svg";
+    prioImage.alt = "High Priority";
+  } else if (priority === "medium") {
+    prioImage.src = "/assets/icons/prio-medium-event.svg";
+    prioImage.alt = "Medium Priority";
+  } else if (priority === "low") {
+    prioImage.src = "/assets/icons/prio-low-event.svg";
+    prioImage.alt = "Low Priority";
+  }
+  prioContainer.appendChild(prioImage);
+}
+
 function createCard(key, container, task) {
   createCardContainer(key, container);
   createUnderContainer(key);
@@ -206,9 +269,17 @@ function createCard(key, container, task) {
   createTitle(key, task);
   createDescription(key, task);
   createSubtaskContainer(key);
+  let subtasksList = getSubtasksList(task);
+  if (subtasksList.length > 0) {
+    createProgressContainer(key);
+    createProgressBar(key, task);
+    createSubtaskCounter(key, task);
+  }
   createContactsAndPrioContainer(key);
   createAssignedContactsContainer(key);
   createAssignedContacts(key, task);
+  createPrioContainer(key);
+  createPrio(key, task);
 }
 
 function renderCards() {
@@ -252,3 +323,22 @@ function updateEmptyColumns() {
   });
 }
 
+function searchCards() {
+  let searchQuery = document.getElementById("find_cards").value.toLowerCase();
+  if (searchQuery.length < 3) {
+    renderCards();
+    return;
+  }
+  let tasks = JSON.parse(sessionStorage.getItem("tasks")) || {};
+  let allColumns = document.querySelectorAll(".drag-area");
+  allColumns.forEach(column => (column.innerHTML = ""));
+  Object.keys(tasks).forEach((key) => {
+    let task = tasks[key];
+    if (task.title.toLowerCase().includes(searchQuery)) {
+      let stateColumn = document.getElementById(task.state);
+      if (stateColumn) {
+        createCard(key, stateColumn, task);
+      }
+    }
+  });
+}
