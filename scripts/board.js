@@ -78,7 +78,6 @@ function createCardContainer(key, container) {
   cardDiv.draggable = true;
   cardDiv.ondragstart = startDragging;
   cardDiv.ondragend = endDragging;
-  cardDiv.onclick = () => openPopup(key);
   container.appendChild(cardDiv);
 }
 
