@@ -63,3 +63,11 @@ async function loadUserData() {
 function back() {
   window.history.back();
 }
+
+function showPupupOverlaySignUp() {
+  const { popupOverlaySignUpRef } = getIdRefs();
+  popupOverlaySignUpRef.classList.add('d-flex');
+  setTimeout(function () {
+    popupOverlaySignUpRef.classList.remove('d-flex');
+  }, 1000);
+}

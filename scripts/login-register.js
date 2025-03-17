@@ -1,7 +1,3 @@
-/**
- *
- *
- */
 const randomColors = [
   '#ff7a00', // orange
   '#ff5eb3', // pink
@@ -300,12 +296,4 @@ function showLoginError() {
   errorMessageLogInRef.classList.add('d-flex');
   emailLogInRef.classList.add('not-valide-error');
   passwordLogInRef.classList.add('not-valide-error');
-}
-
-function showPupupOverlaySignUp() {
-  const { popupOverlaySignUpRef } = getIdRefs();
-  popupOverlaySignUpRef.classList.add('d-flex');
-  setTimeout(function () {
-    popupOverlaySignUpRef.classList.remove('d-flex');
-  }, 1000);
 }
