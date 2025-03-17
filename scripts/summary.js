@@ -32,47 +32,53 @@ async function updateTaskData() {
     document.querySelector('.urgentnmb').textContent = taskData.urgent || 0;
 
     let taskNumbers = document.querySelectorAll('.tasknmb');
-    [taskNumbers[0].textContent, taskNumbers[1].textContent, taskNumbers[2].textContent] = [
-      taskData.tasksInBoard || 0,
-      taskData.tasksInProgress || 0,
-      taskData.awaitingFeedback || 0,
-    ];
+    if (taskNumbers[0]) taskNumbers[0].textContent = taskData.tasksInBoard || 0;
+    if (taskNumbers[1]) taskNumbers[1].textContent = taskData.tasksInProgress || 0;
+    if (taskNumbers[2]) taskNumbers[2].textContent = taskData.awaitingFeedback || 0;
   } catch (error) {
     console.error('Error loading task data:', error);
   }
 }
 
 function addClickEvents() {
-  const redirectToBoard = () => (window.location.href = 'index.html');
+  const redirectToBoard = () => { window.location.href = 'index.html'; };
 
-  document.querySelector('.tasks')?.addEventListener('click', redirectToBoard);
-  document.querySelector('.urgent')?.addEventListener('click', redirectToBoard);
-  document.querySelectorAll('.pencil').forEach((el) => el.addEventListener('click', redirectToBoard));
+  const tasksElement = document.querySelector('.tasks');
+  if (tasksElement) tasksElement.onclick = redirectToBoard;
+
+  const urgentElement = document.querySelector('.urgent');
+  if (urgentElement) urgentElement.onclick = redirectToBoard;
+
+  document.querySelectorAll('.pencil').forEach((el) => {
+    el.onclick = redirectToBoard;
+  });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
+  if (!container || !imgElement) return;
+  container.onmouseover = () => { imgElement.src = hoverSrc; };
+  container.onmouseout = () => { imgElement.src = defaultSrc; };
+}
+
+var previousOnload = window.onload;
+
+window.onload = async function () {
+  if (typeof previousOnload === 'function') {
+    previousOnload();
+  }
+  
   updateGreeting();
   updateDate();
   updateTaskData();
   addClickEvents();
   const user = await loadUserData();
   greetingName(user);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
-    if (!container || !imgElement) return;
-
-    container.addEventListener('mouseover', () => (imgElement.src = hoverSrc));
-    container.addEventListener('mouseout', () => (imgElement.src = defaultSrc));
-  }
 
   let pencilContainer = document.querySelector('.pencil:first-child');
-  let pencilImg = pencilContainer?.querySelector('img');
-
+  let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
   let doneContainer = document.querySelector('.pencil:nth-child(2)');
-  let doneImg = doneContainer?.querySelector('img');
+  let doneImg = doneContainer ? doneContainer.querySelector('img') : null;
 
   addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
   addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
-});
+};

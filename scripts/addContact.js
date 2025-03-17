@@ -12,14 +12,19 @@ var colorVariables = [
 
 // Öffnet das Popup zum Hinzufügen eines Kontakts
 function showAddContactPopup() {
-  document.querySelector('.overlay').classList.remove('hidden');
-  document.querySelector('.container-add').classList.remove('hidden');
+  const popup = document.querySelector('.container-add');
+  popup.classList.remove('hidden');
+  popup.classList.add('active'); // Damit getInputValues() den richtigen Container findet
+  document.querySelector('.overlay').classList.add('active');
 }
 
 // Schließt das Popup zum Hinzufügen eines Kontakts
+// Schließt das Popup zum Hinzufügen eines Kontakts
 function closeAddContactPopup() {
-  document.querySelector('.overlay').classList.add('hidden');
-  document.querySelector('.container-add').classList.add('hidden');
+  const popup = document.querySelector('.container-add');
+  popup.classList.add('hidden');
+  popup.classList.remove('active');
+  document.querySelector('.overlay').classList.remove('active');
 }
 
 // Aktualisierte checkInputs-Funktion für beide Popups (Add und Edit)
@@ -142,7 +147,7 @@ function resetForm() {
   checkInputs(); closeAddContactPopup();
 }
   
-function createContact(event) {
+function createContact(event) { 
   event.preventDefault();
   var inputs = getInputValues();
   if (!inputs.name || !inputs.email || !inputs.phone) { 
@@ -191,7 +196,17 @@ function createContact(event) {
 }
 
 function processContactDeletion(deleteBtn) {
-  var contactDiv = deleteBtn ? deleteBtn.closest(".contact") : activeContact;
+  // Wenn kein deleteBtn übergeben wird, nutze activeContact
+  var contactDiv;
+  if (deleteBtn && typeof deleteBtn.closest === 'function') {
+    contactDiv = deleteBtn.closest(".contact");
+  } else if (activeContact) {
+    contactDiv = activeContact;
+  } else {
+    console.error("Kein gültiger Kontakt zum Löschen gefunden.");
+    return Promise.resolve(false);
+  }
+  
   if (!contactDiv) return Promise.resolve(false);
   
   if (!confirm("Are you sure you want to delete this contact?")) {
@@ -204,17 +219,17 @@ function processContactDeletion(deleteBtn) {
     return fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
       method: 'DELETE'
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Fehler beim Löschen des Kontakts in Firebase');
-      }
-      removeContactFromUI(contactDiv);
-      return true;
-    })
-    .catch(error => {
-      console.error("Fehler beim Löschen des Kontakts in Firebase:", error);
-      return false;
-    });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Fehler beim Löschen des Kontakts in Firebase');
+        }
+        removeContactFromUI(contactDiv);
+        return true;
+      })
+      .catch(error => {
+        console.error("Fehler beim Löschen des Kontakts in Firebase:", error);
+        return false;
+      });
   } else {
     removeContactFromUI(contactDiv);
     return Promise.resolve(true);
@@ -285,11 +300,14 @@ function showContactDetails(contactDiv) {
   da.textContent = avatarValue, da.style.backgroundColor = avatarColor, ds.classList.add("visible");
 }
   
-// Hauptfunktion: Behandelt Klicks in der Kontaktliste
 function handleContactListClick(event) {
-  var deleteBtn = event.target.closest(".delete-btn");
-  if (deleteBtn) { processContactDeletion(deleteBtn); return; }
-  var contactDiv = event.target.closest(".contact");
+  var target = event.target.nodeType === 3 ? event.target.parentElement : event.target;
+  var deleteBtn = target.closest(".delete-btn");
+  if (deleteBtn) {
+    processContactDeletion(deleteBtn);
+    return;
+  }
+  var contactDiv = target.closest(".contact");
   showContactDetails(contactDiv);
 }
 
@@ -485,6 +503,3 @@ function loadContacts() {
       console.error("Fehler beim Laden der Kontakte aus Firebase:", error);
     });
 }
-
-
-  
