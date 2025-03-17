@@ -11,7 +11,7 @@
 }
 
 .form-add-task {
-  height: 500px;
+  height: 600px;
 }
 
 .h1-add-task {
@@ -253,9 +253,11 @@
 }
 
 .subtask-enum {
-  padding: 0 10px;
+    padding: 0 10px;
+    max-height: 120px;
+    overflow-y: auto;
 }
-
+  
 .subtask-text {
   flex-grow: 1;
   margin-right: 10px;
@@ -349,7 +351,7 @@
   background-color: white;
   border-radius: var(--border-radius-input-fields);
   border: var(--border-input-fields);
-  max-height: 100px; /* 240px entspricht ca. 5 Optionen à ~48px Höhe */
+  max-height: 190px;
   overflow-y: auto;
 }
 
