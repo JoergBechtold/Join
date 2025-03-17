@@ -84,7 +84,7 @@ body {
     transition: border 0.3s ease-in-out;
 }
 
-.no-tasks {
+.no-task {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,4 +149,153 @@ body {
     line-height: 120%;
     letter-spacing: 0%;
     color: white;
+}
+
+/* To do Cards */
+
+.todo-card {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;   
+}
+
+.under-container {
+    display: flex;
+    width: 220px;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.technical-cards-headline-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 144px;
+    height: 27px;
+    padding: 4px 16px 4px 16px;
+    gap: 10px;
+    border-radius: 8px;
+    background: rgba(31, 215, 193, 1);
+}
+
+.user-cards-headline-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 113px;
+    height: 27px;
+    padding: 4px 16px 4px 16px;
+    gap: 10px;
+    border-radius: 8px;
+    background: rgba(0, 56, 255, 1);
+}
+
+.cards-headline {
+    width: 112px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.cards-title {
+    font-size: 16px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+
+.cards-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+    color: #A8A8A8;
+}
+
+.assigned-contacts-container {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    padding: 10px;
+}
+
+.initials-span {
+    width: 32px;
+    height: 32px;
+    border-radius: 45px;
+    background: #FF7A00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #FFFFFF;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-left: -10px;
+}
+
+.extra-contacts-span {
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.card-subtask-container {
+    display: flex;
+    align-items: center;
+    height: 16px;
+    gap: 8px;
+}
+
+.progress-container {
+    width: 128px;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #4589FF;
+    border-radius: 16px 0 0 15px;
+    transition: width 0.2s ease-in-out;
+}
+
+[id$="-subtask-counter"] {
+    font-size: 12px;
+  }
+  
+
+.prio-container {
+    display: flex;
+    align-items: center;
+}
+
+.contacts-prio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tilted {
+    transform: rotate(+5deg);
+    transition: transform 0.2s ease;
 }

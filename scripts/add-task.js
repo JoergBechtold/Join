@@ -537,6 +537,7 @@ function createTaskData() {
   const priority = getPriority(); 
   const subtasksArray = Array.isArray(subtasks) && subtasks.length > 0 ? subtasks : '';
   const assignedTo = Array.isArray(selectedContacts) && selectedContacts.length > 0 ? selectedContacts : '';
+
   return {
     title: title,
     description: description || '',
@@ -544,7 +545,10 @@ function createTaskData() {
     priority: priority,
     assigned_to: assignedTo,
     category: selectedCategory,
-    subtasks: subtasksArray
+    subtasks: subtasksArray,
+
+    // Hier den State mitgeben, z. B. "open"
+    state: 'open'
   };
 }
 
