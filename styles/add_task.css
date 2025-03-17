@@ -25,7 +25,7 @@
   max-width: 976px;
   display: flex;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 10 !important;
   margin-bottom: 200px;
 }
 
