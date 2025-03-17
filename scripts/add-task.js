@@ -481,8 +481,11 @@ async function pushTaskToFirebase() {
   try {
     const response = await postData('tasks', taskData);
     if (response) {
-      alert('Task erfolgreich gespeichert!'); /* hier später popup aufrufen*/
+      showPupupOverlayTaskAdded();
       clearAll();
+      setTimeout(() => {
+        goToUrl('index.html');
+      }, 1700);
     } else {
       throw new Error('Keine Antwort von Firebase erhalten.');
     }
@@ -508,8 +511,6 @@ function createTaskData() {
     assigned_to: assignedTo,
     category: selectedCategory,
     subtasks: subtasksArray,
-
-    // Hier den State mitgeben, z. B. "open"
     state: 'open'
   };
 }
@@ -524,6 +525,14 @@ function getPriority() {
   } else {
     return 'No Priority'; 
   }
+}
+
+function showPupupOverlayTaskAdded() {
+  const taskAdded = document.getElementById('popup_overlay_task_added');
+  taskAdded.classList.add('d-flex');
+  setTimeout(function () {
+    taskAdded.classList.remove('d-flex');
+  }, 800);
 }
 
 
