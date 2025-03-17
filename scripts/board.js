@@ -342,3 +342,23 @@ function searchCards() {
     }
   });
 }
+
+function openBoardAddTaskForm() {
+  openForm("board_add_task");
+}
+
+function openForm(formId) {
+  document.getElementById(formId).classList.add("show");
+  document.getElementById("overlay").style.display = "flex";
+  document.body.classList.add("modal-open");
+}
+
+function closeBoardAddTask() {
+  closeForm("board_add_task");
+}
+
+function closeForm(formId) {
+  document.getElementById(formId).classList.remove("show");
+  document.getElementById("overlay").style.display = "none";
+  document.body.classList.remove("modal-open");
+}

@@ -20,6 +20,14 @@
     <!-- hier kommt das board rein al index.html -->
     <div id="header_container"></div>
 
+    <div id="overlay" class="overlay"></div>
+    
+    <div class="board-add-task" id="board_add_task">
+      <button onclick="closeBoardAddTask()">
+        <img src="assets/icons/close.png" alt="">
+      </button>
+    </div>
+
     <main class="main-board">
       <div class="headline-input-container">
         <span>Board</span>
@@ -29,7 +37,7 @@
             <div class="placeholder"></div>
             <img src="./assets/icons/search.icon.png" class="search-icon" alt="" />
           </div>
-          <button onclick="openAddTaskForm()" class="button-primary-dark-gray">Add Task +</button>
+          <button onclick="openBoardAddTaskForm()" class="button-primary-dark-gray">Add Task +</button>
         </div>
       </div>
 
