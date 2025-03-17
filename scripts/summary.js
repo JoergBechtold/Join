@@ -26,15 +26,44 @@ function updateDate() {
 
 async function updateTaskData() {
   try {
-    let taskData = (await loadData('tasks')) || {};
-    document.querySelector('.summarynmb.todo').textContent = taskData.todo || 0;
-    document.querySelector('.summarynmb.done').textContent = taskData.done || 0;
-    document.querySelector('.urgentnmb').textContent = taskData.urgent || 0;
+    const response = await fetch(`${BASE_URL}/tasks.json`);
+    if (!response.ok) {
+      throw new Error(`Fehler beim Abrufen der Daten: ${response.status}`);
+    }
+    const tasks = (await response.json()) || {};
+
+    let todo = 0;
+    let done = 0;
+    let urgent = 0;
+    let tasksInBoard = 0;
+    let tasksInProgress = 0;
+    let awaitingFeedback = 0;
+
+    Object.values(tasks).forEach(task => {
+      tasksInBoard++; 
+      if (task.state === 'open') {
+        todo++;
+      } else if (task.state === 'done') {
+        done++;
+      } else if (task.state === 'in-progress') {
+        tasksInProgress++;
+      } else if (task.state === 'await-feedback') {
+        awaitingFeedback++;
+      }
+      if (task.priority && task.priority.toLowerCase() === 'urgent') {
+        urgent++;
+      }
+    });
+
+    document.querySelector('.summarynmb.todo').textContent = todo;
+    document.querySelector('.summarynmb.done').textContent = done;
+    document.querySelector('.urgentnmb').textContent = urgent;
 
     let taskNumbers = document.querySelectorAll('.tasknmb');
-    if (taskNumbers[0]) taskNumbers[0].textContent = taskData.tasksInBoard || 0;
-    if (taskNumbers[1]) taskNumbers[1].textContent = taskData.tasksInProgress || 0;
-    if (taskNumbers[2]) taskNumbers[2].textContent = taskData.awaitingFeedback || 0;
+    if (taskNumbers[0]) taskNumbers[0].textContent = tasksInBoard;
+    if (taskNumbers[1]) taskNumbers[1].textContent = tasksInProgress;
+    if (taskNumbers[2]) taskNumbers[2].textContent = awaitingFeedback;
+
   } catch (error) {
     console.error('Error loading task data:', error);
   }
@@ -70,6 +99,7 @@ window.onload = async function () {
   updateGreeting();
   updateDate();
   updateTaskData();
+  setInterval(updateTaskData, 5000);
   addClickEvents();
   const user = await loadUserData();
   greetingName(user);
