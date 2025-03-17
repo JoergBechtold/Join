@@ -421,44 +421,6 @@ function validateInputTitle() {
   }
 }
 
-/* function validateInputDate() {
-  const inputField = document.getElementById('due_date');
-  const errorMessageRequired = document.getElementById('error_message_date');
-  const errorMessageFormat = document.getElementById('error_message_format');
-  if (isDateFieldEmpty(inputField, errorMessageRequired)) {
-    return false;
-  }
-  if (!isValidDateFormat(inputField, errorMessageFormat)) {
-    return false;
-  }
-  return true;
-}
-
-function isDateFieldEmpty(inputField, errorMessage) {
-  if (inputField.value.trim() === '') {
-    errorMessage.classList.remove('d-none');
-    inputField.classList.add('red-border');
-    return true;
-  } else {
-    errorMessage.classList.add('d-none');
-    inputField.classList.remove('red-border');
-    return false;
-  }
-}
-
-function isValidDateFormat(inputField, errorMessage) {
-  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
-  if (!dateRegex.test(inputField.value.trim())) {
-    errorMessage.classList.remove('d-none');
-    inputField.classList.add('red-border');
-    return false;
-  } else {
-    errorMessage.classList.add('d-none');
-    inputField.classList.remove('red-border');
-    return true;
-  }
-} */
-
 function validateInputDate() {
     const inputField = document.getElementById('due_date');
     const errorMessage = document.getElementById('error_message_date');
