@@ -14,21 +14,16 @@
 
     <div class="contacts-container">
       <aside class="sidebarContact">
-        <!-- Button zum Öffnen des Add-Popups -->
         <button class="add-contact-btn" onclick="showAddContactPopup()">
           <span>Add new contact</span>
           <img src="assets/icons/person_add.svg" alt="Add User" />
         </button>
-        <!-- Kontaktliste – alle Klicks werden an handleContactListClick(event) weitergegeben -->
         <div class="contact-list" onclick="handleContactListClick(event)">
-          <!-- Kontakte werden hier dynamisch eingefügt -->
         </div>
       </aside>
 
-      <!-- Gemeinsames Overlay für beide Popups -->
       <div class="overlay hidden"></div>
 
-      <!-- Add Contact Popup -->
       <div class="container-add hidden">
         <div class="left-section">
           <div class="left-section-logo">
@@ -43,7 +38,7 @@
           <div class="profile-image">
             <img src="assets/icons/graycontactperson.svg" alt="Profilbild" />
           </div>
-          <!-- Formular ruft createContact(event) auf -->
+
           <form onsubmit="createContact(event)">
             <div class="input-group">
               <input type="text" placeholder="Name" oninput="checkInputs()" />
@@ -85,7 +80,7 @@
           <div class="profile-image">
             <img src="assets/icons/graycontactperson.svg" alt="Profilbild" />
           </div>
-          <!-- Formular ruft saveContact(event) auf -->
+
           <form onsubmit="saveContact(event)">
             <div class="input-group">
               <input type="text" placeholder="Name" oninput="checkInputs()" />
@@ -145,14 +140,22 @@
           </div>
         </div>
       </div>
+
+      <div class="confirm-popup hidden">
+        <div class="confirm-popup-content">
+          <p class="confirm-message">Do you really want to delete this contact?</p>
+          <button class="confirm-yes">Delete</button>
+          <button class="confirm-no">NO</button>
+        </div>
+      </div>      
+
     </div>
 
-    <!-- Embedding scripts -->
-    <!-- Scripts/templates must always be included before the normal scripts.js! -->
     <script src="scripts/firebase.js"></script>
     <script src="scripts/load-header.js"></script>
     <script src="scripts/login-register.js"></script>
-    <script src="scripts/add-Contact.js"></script>
+    <script src="./scripts/contact-function.js"></script>
+    <script src="./scripts/ui-contact.js"></script>
     <script src="./scripts/add-PopUp.js"></script>
     <script src="script.js"></script>
   </body>

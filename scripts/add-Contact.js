@@ -29,29 +29,62 @@ function closeAddContactPopup() {
 
 // Aktualisierte checkInputs-Funktion für beide Popups (Add und Edit)
 function checkInputs() {
-    // Ermittelt den aktiven Popup-Container (falls vorhanden)
-    var container = document.querySelector('.container-edit.active') ||
-                    document.querySelector('.container-add.active');
-    if (!container) return; // falls keins aktiv ist, nichts tun
-  
-    var nameInput = container.querySelector('input[placeholder="Name"]');
-    var emailInput = container.querySelector('input[placeholder="Email"]');
-    var phoneInput = container.querySelector('input[placeholder="Phone"]');
-    var btn = container.querySelector('.create-btn'); // Bei Add: "Create contact", bei Edit: "Save contact"
-    
-    // Validierung: Email muss ein vollständiges Format haben, Phone nur Ziffern
-    var isPhoneValid = /^[0-9]+$/.test(phoneInput.value.trim());
-    var isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
-    
-    if (nameInput.value.trim() !== "" && isEmailValid && phoneInput.value.trim() !== "" && isPhoneValid) {
-      btn.disabled = false;
-      btn.classList.remove("disabled");
-    } else {
-      btn.disabled = true;
-      btn.classList.add("disabled");
+  // Ermittelt den aktiven Popup-Container (Add oder Edit)
+  var container = document.querySelector('.container-edit.active') ||
+                  document.querySelector('.container-add.active');
+  if (!container) return; // falls kein Popup aktiv ist, nichts tun
+
+  var nameInput = container.querySelector('input[placeholder="Name"]');
+  var emailInput = container.querySelector('input[placeholder="Email"]');
+  var phoneInput = container.querySelector('input[placeholder="Phone"]');
+  var btn = container.querySelector('.create-btn'); // Bei Add: "Create contact", bei Edit: "Save contact"
+
+  // Validierung: Email muss ein vollständiges Format haben, Phone nur Ziffern
+  var isPhoneValid = /^[0-9]+$/.test(phoneInput.value.trim());
+  var isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+
+  // Email-Fehlermeldung
+  var emailError = container.querySelector('.email-error');
+  if (!isEmailValid && emailInput.value.trim() !== "") {
+    if (!emailError) {
+      emailError = document.createElement('span');
+      emailError.className = 'email-error';
+      emailError.style.color = 'red';
+      emailError.textContent = 'Invalid email address';
+      emailInput.parentNode.insertBefore(emailError, emailInput.nextSibling);
+    }
+  } else {
+    if (emailError) {
+      emailError.remove();
     }
   }
-   
+
+  // Phone-Fehlermeldung
+  var phoneError = container.querySelector('.phone-error');
+  if (!isPhoneValid && phoneInput.value.trim() !== "") {
+    if (!phoneError) {
+      phoneError = document.createElement('span');
+      phoneError.className = 'phone-error';
+      phoneError.style.color = 'red';
+      phoneError.textContent = 'Invalid phone number';
+      phoneInput.parentNode.insertBefore(phoneError, phoneInput.nextSibling);
+    }
+  } else {
+    if (phoneError) {
+      phoneError.remove();
+    }
+  }
+
+  // Button aktivieren, wenn alle Felder korrekt sind
+  if (nameInput.value.trim() !== "" && isEmailValid && phoneInput.value.trim() !== "" && isPhoneValid) {
+    btn.disabled = false;
+    btn.classList.remove("disabled");
+  } else {
+    btn.disabled = true;
+    btn.classList.add("disabled");
+  }
+}
+
 
   function getInputValues() {
     // Prüfe, ob das Edit-Popup aktiv ist; wenn ja, verwende dessen Felder,
@@ -151,52 +184,63 @@ function createContact(event) {
   event.preventDefault();
   var inputs = getInputValues();
   if (!inputs.name || !inputs.email || !inputs.phone) { 
-    alert("Bitte fülle alle Felder aus!"); 
+    alert("Please fill in all fields!"); 
     return; 
   }
   
   var firstLetter = inputs.name.charAt(0).toUpperCase(),
       container = getOrCreateGroupContainer(firstLetter);
   
-  // Bestimme den zufälligen Farbvariablenwert und errechne den tatsächlichen Farbwert
+  // Bestimme zufälligen Farbvariablenwert und ermittle den tatsächlichen Farbwert
   var randomColorVar = colorVariables[Math.floor(Math.random() * colorVariables.length)];
   var computedColor = getComputedStyle(document.documentElement).getPropertyValue(randomColorVar).trim();
   
-  // Übergib den computedColor an buildContactElement
+  // Aufteilen des vollständigen Namens in Vorname und Nachname
+  var nameParts = inputs.name.trim().split(' ');
+  var firstname = nameParts[0];
+  var lastname = nameParts.slice(1).join(' '); // Falls nur ein Wort eingegeben wurde, bleibt lastname leer
+  
+  // Berechne die Initials (alle ersten Buchstaben der einzelnen Wörter, in Großbuchstaben)
+  var initials = inputs.name.split(' ').map(function(w) {
+    return w.charAt(0).toUpperCase();
+  }).join('');
+  
+  // Erstelle das Kontakt-Element (UI)
   var contactEl = buildContactElement(inputs.name, inputs.email, inputs.phone, computedColor);
   
   // Füge den Kontakt sortiert in die Gruppe ein
   insertContactSorted(container, contactEl, inputs.name);
   
-  // Speichere den neuen Kontakt in Firebase inklusive Farbwert
+  // Speichere den neuen Kontakt in Firebase mit der neuen Datenstruktur
   fetch(`${BASE_URL}/contacts.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: inputs.name,
+      firstname: firstname,
+      lastname: lastname,
       email: inputs.email,
       phone: inputs.phone,
-      color: computedColor, // Farbwert wird gespeichert
+      contactColor: computedColor,  // statt color
+      initials: initials,           // speichere die Initials
       createdAt: new Date().toISOString()
     })
   })
   .then(response => response.json())
   .then(data => {
-    console.log("Kontakt erfolgreich in Firebase gespeichert:", data);
-    // Setze die Firebase-ID ins UI-Element
+    console.log("Contact successfully saved in Firebase:", data);
+    // Setze die Firebase-ID im UI-Element
     contactEl.setAttribute('data-id', data.name);
   })
   .catch(error => {
-    console.error("Fehler beim Speichern des Kontakts in Firebase:", error);
+    console.error("Error saving contact in Firebase:", error);
   });
   
   resetForm();
 }
 
 function processContactDeletion(deleteBtn) {
-  // Wenn kein deleteBtn übergeben wird, nutze activeContact
   var contactDiv;
   if (deleteBtn && typeof deleteBtn.closest === 'function') {
     contactDiv = deleteBtn.closest(".contact");
@@ -206,35 +250,40 @@ function processContactDeletion(deleteBtn) {
     console.error("Kein gültiger Kontakt zum Löschen gefunden.");
     return Promise.resolve(false);
   }
-  
   if (!contactDiv) return Promise.resolve(false);
   
-  if (!confirm("Are you sure you want to delete this contact?")) {
-    return Promise.resolve(false);
-  }
-  
-  var firebaseId = contactDiv.getAttribute('data-id');
-  
-  if (firebaseId) {
-    return fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
-      method: 'DELETE'
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Fehler beim Löschen des Kontakts in Firebase');
-        }
+  // Statt confirm() verwenden wir unser Popup
+  return new Promise((resolve) => {
+    showConfirmPopup("Do you really want to delete this contact?", function(confirmed) {
+      if (!confirmed) {
+        resolve(false);
+        return;
+      }
+      
+      var firebaseId = contactDiv.getAttribute('data-id');
+      if (firebaseId) {
+        fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
+          method: 'DELETE'
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Fehler beim Löschen des Kontakts in Firebase');
+            }
+            removeContactFromUI(contactDiv);
+            resolve(true);
+          })
+          .catch(error => {
+            console.error("Fehler beim Löschen des Kontakts in Firebase:", error);
+            resolve(false);
+          });
+      } else {
         removeContactFromUI(contactDiv);
-        return true;
-      })
-      .catch(error => {
-        console.error("Fehler beim Löschen des Kontakts in Firebase:", error);
-        return false;
-      });
-  } else {
-    removeContactFromUI(contactDiv);
-    return Promise.resolve(true);
-  }
+        resolve(true);
+      }
+    });
+  });
 }
+
 
 function deleteAndCloseEdit() {
   processContactDeletion().then(success => {
@@ -364,7 +413,7 @@ function showEditContactPopup() {
     var phoneInput = container.querySelector('input[placeholder="Phone"]');
     
     if (!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim()) {
-      alert("Bitte fülle alle Felder aus!");
+      alert("Please fill in all fields!");
       return;
     }
     
@@ -372,21 +421,22 @@ function showEditContactPopup() {
     var newEmail = emailInput.value.trim();
     var newPhone = phoneInput.value.trim();
     
-    // Ermittle alte Werte und Gruppenzugehörigkeit
-    var oldName = activeContact.querySelector('.contact-name').textContent;
-    var oldFirstLetter = oldName.charAt(0).toUpperCase();
-    var newFirstLetter = newName.charAt(0).toUpperCase();
+    // Aufteilen in Vor- und Nachname sowie Initials berechnen
+    var nameParts = newName.split(' ');
+    var firstname = nameParts[0];
+    var lastname = nameParts.slice(1).join(' ');
+    var initials = newName.split(' ').map(function(w) {
+      return w.charAt(0).toUpperCase();
+    }).join('');
     
     // Aktualisiere die UI des Kontakts
     activeContact.querySelector('.contact-name').textContent = newName;
     activeContact.querySelector('.contact-email').textContent = newEmail;
     activeContact.setAttribute('data-phone', newPhone);
     
-    // Aktualisiere den Avatar (Initialen)
+    // Aktualisiere den Avatar (Initials)
     var avatarDiv = activeContact.querySelector('.contact-avatar');
-    avatarDiv.textContent = newName.split(" ").map(function(w) {
-      return w.charAt(0).toUpperCase();
-    }).join("");
+    avatarDiv.textContent = initials;
     
     // Aktualisiere die Detailanzeige
     var detailName = document.getElementById('detail-name');
@@ -397,14 +447,14 @@ function showEditContactPopup() {
     if (detailEmail) detailEmail.textContent = newEmail;
     if (detailPhone) detailPhone.textContent = newPhone;
     if (detailAvatar) {
-      detailAvatar.textContent = newName.split(" ").map(function(w) {
-        return w.charAt(0).toUpperCase();
-      }).join("");
-      // Übernimm die Hintergrundfarbe vom Listenelement
+      detailAvatar.textContent = initials;
       detailAvatar.style.backgroundColor = avatarDiv.style.backgroundColor;
     }
     
     // Falls sich der erste Buchstabe geändert hat, verschiebe den Kontakt in die richtige Gruppe
+    var oldName = activeContact.querySelector('.contact-name').textContent;
+    var oldFirstLetter = oldName.charAt(0).toUpperCase();
+    var newFirstLetter = newName.charAt(0).toUpperCase();
     if (oldFirstLetter !== newFirstLetter) {
       var currentContainer = activeContact.parentElement; // .contact-container
       activeContact.remove();
@@ -423,7 +473,7 @@ function showEditContactPopup() {
       insertContactSorted(newContainer, activeContact, newName);
     }
     
-    // Aktualisiere den Kontakt in Firebase per PATCH-Request
+    // Aktualisiere den Kontakt in Firebase per PATCH-Request mit den neuen Feldern
     var firebaseId = activeContact.getAttribute('data-id');
     if (firebaseId) {
       fetch(`${BASE_URL}/contacts/${firebaseId}.json`, {
@@ -432,27 +482,29 @@ function showEditContactPopup() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: newName,
+          firstname: firstname,
+          lastname: lastname,
           email: newEmail,
-          phone: newPhone
+          phone: newPhone,
+          initials: initials
         })
       })
       .then(response => {
         if (!response.ok) {
-          throw new Error("Fehler beim Aktualisieren des Kontakts in Firebase");
+          throw new Error("Error updating contact in Firebase");
         }
         return response.json();
       })
       .then(data => {
-        console.log("Kontakt erfolgreich in Firebase aktualisiert:", data);
+        console.log("Contact successfully updated in Firebase:", data);
       })
       .catch(error => {
-        console.error("Fehler beim Aktualisieren des Kontakts in Firebase:", error);
+        console.error("Error updating contact in Firebase:", error);
       });
     }
     
     closeEditContactPopup();
-  }
+  }  
   
 
   function deleteAndCloseEdit() {
@@ -464,6 +516,34 @@ function showEditContactPopup() {
       }
     });
   }
+
+  function showConfirmPopup(message, callback) {
+    const popup = document.querySelector('.confirm-popup');
+    const messageElement = popup.querySelector('.confirm-message');
+    const btnYes = popup.querySelector('.confirm-yes');
+    const btnNo = popup.querySelector('.confirm-no');
+  
+    // Setze den Nachrichtentext
+    messageElement.textContent = message;
+  
+    // Zeige das Popup an
+    popup.classList.remove('hidden');
+    popup.classList.add('active');
+  
+    // Definiere Handler für "Ja" und "Nein"
+    btnYes.onclick = function() {
+      popup.classList.add('hidden');
+      popup.classList.remove('active');
+      callback(true);
+    };
+  
+    btnNo.onclick = function() {
+      popup.classList.add('hidden');
+      popup.classList.remove('active');
+      callback(false);
+    };
+  }
+  
   
 function hoverEdit(isHover) {
   var img = document.getElementById("edit-icon");
@@ -486,20 +566,22 @@ function loadContacts() {
       if (data) {
         Object.keys(data).forEach(key => {
           const contact = data[key];
-          if (contact && typeof contact.name === 'string') {
-            const firstLetter = contact.name.charAt(0).toUpperCase();
+          if (contact && typeof contact.firstname === 'string') {
+            // Erstelle den vollständigen Namen aus Vor- und Nachname
+            const fullName = contact.lastname ? `${contact.firstname} ${contact.lastname}` : contact.firstname;
+            const firstLetter = contact.firstname.charAt(0).toUpperCase();
             const container = getOrCreateGroupContainer(firstLetter);
-            // Übergib den Farbwert, falls vorhanden
-            const contactEl = buildContactElement(contact.name, contact.email, contact.phone, contact.color);
+            // Verwende contact.contactColor statt contact.color
+            const contactEl = buildContactElement(fullName, contact.email, contact.phone, contact.contactColor);
             contactEl.setAttribute('data-id', key);
-            insertContactSorted(container, contactEl, contact.name);
+            insertContactSorted(container, contactEl, fullName);
           } else {
-            console.warn("Ungültiger Kontakt für Schlüssel", key, contact);
+            console.warn("Invalid contact for key", key, contact);
           }
         });
       }
     })
     .catch(error => {
-      console.error("Fehler beim Laden der Kontakte aus Firebase:", error);
+      console.error("Error loading contacts from Firebase:", error);
     });
 }
