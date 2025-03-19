@@ -345,3 +345,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
 }
+
+.add-button-img-column {
+    cursor: pointer;
+}
