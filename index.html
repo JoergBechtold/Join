@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/header_sidebar.css" />
+    <link rel="stylesheet" href="/styles/add_task.css" />
   </head>
   <body onload="initBoard()">
     <!-- hier kommt das board rein al index.html -->
@@ -23,9 +24,7 @@
     <div id="overlay" class="overlay"></div>
     
     <div class="board-add-task" id="board_add_task">
-      <button onclick="closeBoardAddTask()">
-        <img src="assets/icons/close.png" alt="">
-      </button>
+      
     </div>
 
     <main class="main-board">
@@ -97,6 +96,187 @@
       </div>
     </main>
 
+    <!-- Template für Add Task Formular -->
+  <template id="addTaskTemplate">
+    <div class="popup-add-task">
+      <div class="addtask-template-headline-container">
+        <h1 class="h1-add-task">Add Task</h1>
+        <button onclick="closeBoardAddTask()">
+          <img src="assets/icons/close.png" alt="">
+        </button>
+      </div>
+      <form class="form-add-task">
+        <div class="add-task-content">
+          <div class="form-column left-container">
+            
+            <div class="form-group">
+              <label for="title">Title <span class="red">*</span></label>
+              <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" />
+              <div class="error-message-required d-none" id="error_message_title">This field is required</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="due_date">Due date <span class="red">*</span></label>
+              <div class="input-container">
+                <input lang="en" id="due_date" class="input-base due-date" type="date" name="due-date" title="Select a date" required />
+              </div>
+              <div class="error-message-required d-none" id="error_message_date">This field is required</div>
+            </div>
+          </div>
+
+          <div class="vertical-line"></div>
+
+          <div class="form-column right-container">
+            
+            <div class="form-group">
+              <label>Priority</label>
+              <div class="prio-buttons">
+                <button type="button" class="prio" id="urgent_button" onclick="setPriority('urgent_button')">
+                  Urgent
+                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img" />
+                </button>
+                <button type="button" class="prio" id="medium_button" onclick="setPriority('medium_button')">
+                  Medium
+                  <img src="/assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" id="medium_button_img" />
+                </button>
+                <button type="button" class="prio" id="low_button" onclick="setPriority('low_button')">
+                  Low
+                  <img src="/assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" id="low_button_img" />
+                </button>
+              </div>
+            </div>
+
+           
+            <div class="form-group">
+              <label for="assigned_to">Assigned to</label>
+              <div class="custom-select-container">
+                <div class="custom-select" id="custom_select" onclick="toggleContactsDropdown()">
+                  <input
+                    class="custom-input"
+                    type="text"
+                    id="selected_contact"
+                    placeholder="Select contacts to assign"
+                    oninput="filterContacts()"
+                    autocomplete="off"
+                  />
+                  <img class="select-icon" id="contacts_select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
+                </div>
+                <div class="contacts-custom-options d-none" id="contacts_options_container"></div>
+                <div class="show-selected-contacts"></div>
+              </div>
+            </div>
+
+            
+            <div class="form-group">
+              <label for="category">Category <span class="red">*</span></label>
+              <div class="custom-select-container">
+                <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()">
+                  <span id="selected_option">Select task category</span>
+                  <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
+                </div>
+                <div class="custom-options d-none" id="options_container">
+                  <div class="custom-select-option" onclick="selectOption('Technical Task')">Technical Task</div>
+                  <div class="custom-select-option" onclick="selectOption('User Story')">User Story</div>
+                </div>
+              </div>
+              <div class="error-message-required d-none" id="error_message_category">This selection is required</div>
+            </div>
+
+            
+            <div class="form-group">
+              <label for="subtasks">Subtasks</label>
+              <div class="input-container">
+                <input
+                  id="subtask_input"
+                  class="input-base"
+                  type="text"
+                  name="subtasks"
+                  placeholder="Add new subtask"
+                  onclick="handleSubtaskInput()"
+                  onkeydown="if(event.key === 'Enter'){ event.preventDefault(); handleSubtaskSave(); }"
+                />
+                <div class="close-and-check">
+                  <img
+                    id="close_subtask_icon"
+                    class="input-base-icon d-none"
+                    src="/assets/icons/blackclose.svg"
+                    alt="Close subtask"
+                    onclick="handleSubtaskDelete()"
+                  />
+                  <div class="vertical-line-subtask"></div>
+                  <img
+                    id="check_subtask_icon"
+                    class="input-base-icon d-none"
+                    src="/assets/icons/blackcheck.svg"
+                    alt="Save subtask"
+                    onclick="handleSubtaskSave()"
+                  />
+                  <img
+                    id="add_subtask_icon"
+                    class="input-base-icon"
+                    src="/assets/icons/add.svg"
+                    alt="Add subtask"
+                    onclick="handleSubtaskInputImg()"
+                  />
+                </div>
+              </div>
+              <div class="subtask-enum"></div>
+              <div class="input-container">
+                <input id="edit_subtask_input" class="input-base-V2 d-none" type="text" name="edit-subtasks" placeholder="Edit subtask" onkeydown="if(event.key === 'Enter'){ event.preventDefault(); saveEditedSubtask(); }" />
+                <div class="close-and-check">
+                  <img
+                    id="edit_delete_icon"
+                    class="input-base-V2-icon-active d-none"
+                    src="/assets/icons/paperbasketdelet.svg"
+                    alt="Delete"
+                    onclick="cancelEditSubtask()"
+                  />
+                  <div class="vertical-line-subtask"></div>
+                  <img
+                    id="edit_save_icon"
+                    class="input-base-V2-icon-active d-none"
+                    src="/assets/icons/blackcheck.svg"
+                    alt="Save"
+                    onclick="saveEditedSubtask()"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="spacer"></div>
+        </div>
+      </form>
+      <div class="footer-add-task">
+        <div class="required-text"><span class="red">*</span> This field is required</div>
+        <div class="align-with-gap">
+          <button type="button" class="button-clear-white align" onclick="clearAll()">
+            Clear
+            <div class="button-clear-white-img-box">
+              <img class="button-clear-white-standard-img" src="/assets/icons/cancel.svg" alt="Clear" />
+              <img class="button-clear-white-hover-img" src="/assets/icons/x-mark-blue.svg" alt="Clear" />
+            </div>
+          </button>
+          <button type="submit" class="button-create-task-gray align" onclick="checkandSubmit()">
+            Create Task
+            <img src="/assets/icons/check.svg" alt="Check" />
+          </button>
+        </div>
+      </div>
+      <div class="popup-overlay-small-gray" id="popup_overlay_task_added">
+        <div class="popup-small-gray custom-task" id="popup_task_added">
+          <span>Task added to board</span>
+          <img src="./assets/icons/boardicon.svg" alt="Board Icon"> 
+        </div>
+      </div> 
+    </div>
+  </template>
+
+
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
     <script src="scripts/firebase.js"></script>
@@ -104,5 +284,6 @@
     <script src="scripts/login-register.js"></script>
     <script src="scripts/board.js"></script>
     <script src="script.js"></script>
+    <script src="scripts/add-task.js"></script>
   </body>
 </html>

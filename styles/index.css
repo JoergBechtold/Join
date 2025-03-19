@@ -339,3 +339,9 @@ body {
     opacity: 1;
     display: block;
 }
+
+.addtask-template-headline-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}

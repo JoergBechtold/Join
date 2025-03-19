@@ -364,8 +364,14 @@ function closeForm(formId) {
 }
 
 function openBoardAddTaskForm() {
+  const boardAddTaskContainer = document.getElementById("board_add_task");
+  boardAddTaskContainer.innerHTML = "";
+  const template = document.getElementById("addTaskTemplate");
+  const clone = template.content.cloneNode(true);
+  boardAddTaskContainer.appendChild(clone);
   openForm("board_add_task");
 }
+
 
 function closeBoardAddTask() {
   closeForm("board_add_task");
