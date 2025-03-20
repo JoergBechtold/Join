@@ -1,5 +1,44 @@
+/**
+ * An array of random hexadecimal color codes.
+ *
+ * @type {array}
+ */
+const randomColors = [
+  '#ff7a00', // orange
+  '#ff5eb3', // pink
+  '#6e52ff', // violet
+  '#9327ff', // purple
+  '#00bee8', // turquoise
+  '#1fd7c1', // mint
+  '#ff745e', // coral
+  '#ffa35e', // peach
+  '#fc71ff', // magenta
+  '#ffc701', // yellow
+  '#0038ff', // blue
+  '#c3ff2b', // lime
+  '#ffe62b', // lemon
+  '#ff4646', // red
+  '#ffbb2b', // gold
+];
+
+/**
+ * Controls the visibility of the button links sidebar.
+ *
+ * @type {boolean}
+ * @default false
+ * @example
+ * window.showButtonLinksSidebar = true; // Shows the sidebar
+ * window.showButtonLinksSidebar = false; // Hides the sidebar
+ */
 window.showButtonLinksSidebar = false;
 
+/**
+ * Navigates the current browser window to the specified URL.
+ *
+ * @param {string} url - The URL to navigate to.
+ * @example
+ * goToUrl('summary.html'); // Navigates to example.com
+ */
 function goToUrl(url) {
   window.location.href = url;
 }
@@ -55,7 +94,6 @@ async function loadUserData() {
     }
   } else {
     console.error('Benutzer-ID nicht gefunden.');
-
     return null;
   }
 }

@@ -1,21 +1,3 @@
-const randomColors = [
-  '#ff7a00', // orange
-  '#ff5eb3', // pink
-  '#6e52ff', // violet
-  '#9327ff', // purple
-  '#00bee8', // turquoise
-  '#1fd7c1', // mint
-  '#ff745e', // coral
-  '#ffa35e', // peach
-  '#fc71ff', // magenta
-  '#ffc701', // yellow
-  '#0038ff', // blue
-  '#c3ff2b', // lime
-  '#ffe62b', // lemon
-  '#ff4646', // red
-  '#ffbb2b', // gold
-];
-
 function getIdRefs() {
   return {
     animationJoinLogoRef: document.getElementById('animation_join_logo'),
