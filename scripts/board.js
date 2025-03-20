@@ -78,8 +78,10 @@ function createCardContainer(key, container) {
   cardDiv.draggable = true;
   cardDiv.ondragstart = startDragging;
   cardDiv.ondragend = endDragging;
+  cardDiv.setAttribute("onclick", `openPopup('${key}')`);
   container.appendChild(cardDiv);
 }
+
 
 function createUnderContainer(key) {
   let cardDiv = document.getElementById(key);
@@ -371,7 +373,6 @@ function openBoardAddTaskForm() {
   boardAddTaskContainer.appendChild(clone);
   openForm("board_add_task");
 }
-
 
 function closeBoardAddTask() {
   closeForm("board_add_task");

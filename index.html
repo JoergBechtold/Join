@@ -16,12 +16,13 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/header_sidebar.css" />
     <link rel="stylesheet" href="/styles/add_task.css" />
+    <link rel="stylesheet" href="/styles/board-task-popup.css">
   </head>
   <body onload="initBoard()">
     <!-- hier kommt das board rein al index.html -->
     <div id="header_container"></div>
 
-    <div id="overlay" class="overlay"></div>
+    <div id="overlay" class="overlay" onclick="if(event.target === this){ closePopup(); }"></div>
     
     <div class="board-add-task" id="board_add_task">
       
@@ -95,6 +96,11 @@
         </div>
       </div>
     </main>
+
+    <!-- Popup-Container -->
+    <div class="popup-container" id="popupContainer" style="display:none;">
+      <div id="popup" class="popup"></div>
+    </div>
 
     <!-- Template für Add Task Formular -->
   <template id="addTaskTemplate">
@@ -282,8 +288,11 @@
     <script src="scripts/firebase.js"></script>
     <script src="scripts/load-header.js"></script>
     <script src="scripts/login-register.js"></script>
-    <script src="scripts/board.js"></script>
     <script src="script.js"></script>
     <script src="scripts/add-task.js"></script>
+    <script src="scripts/board.js"></script>
+    <script src="scripts/template/extended-Taskcard-popup.js"></script>
+    <script src="scripts/board-task-popup.js"></script>
+
   </body>
 </html>
