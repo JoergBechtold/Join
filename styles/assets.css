@@ -35,6 +35,7 @@ button[disabled]:hover {
   scale: unset;
   box-shadow: unset;
   border: var(--border-buttons-gray);
+  scale: unset;
 }
 
 /* button primary gray */
@@ -167,7 +168,7 @@ button[disabled]:hover {
 /* button delete white */
 .button-delete-white {
   border: var(--border-buttons-gray);
-  gap: 10px;
+  gap: 4px;
   white-space: nowrap;
   border-radius: var(--border-radius-buttons);
   background-color: white;
@@ -208,7 +209,8 @@ button[disabled]:hover {
   box-shadow: var(--box-shadow-button);
 }
 
-.button-clear-white-img-box {
+.button-clear-white-img-box,
+.button-cancel-white-gray-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,6 +219,10 @@ button[disabled]:hover {
 }
 
 .button-clear-white-img-box img {
+  display: block;
+}
+
+.button-cancel-white-gray img {
   display: block;
 }
 
@@ -235,21 +241,23 @@ button[disabled]:hover {
 /* button save gray */
 .button-save-gray {
   gap: 4px;
-  white-space: nowrap;
-  border-radius: var(--border-radius-input-fields);
   background-color: var(--primary-color-gray);
-  box-shadow: none;
   color: white;
-  transition: var(--transition-hover-effect);
-  font-size: var(--font-size-21);
-  padding: 16px;
+  box-shadow: none;
+  padding: 15px 24px 15px 24px;
+  border-radius: var(--border-radius-buttons);
+  white-space: nowrap;
   font-weight: var(--font-weight-700);
+  font-size: var(--font-size-16-21);
+  transition: var(--transition-hover-effect);
+  border: var(--border-buttons-gray);
 }
 
 .button-save-gray:hover {
   scale: var(--scale-hover);
-  color: var(--blue);
+  background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
+  border: var(--border-buttons-blue);
 }
 
 /* all properties for input */

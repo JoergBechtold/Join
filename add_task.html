@@ -25,18 +25,18 @@
         <div class="add-task-content">
           <div class="form-column left-container">
             <div class="form-group">
-              <label for="title">Title <span class="red">*</span></label>
+              <label for="title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
               <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" />
               <div class="error-message-required d-none" id="error_message_title">This field is required</div>
             </div>
 
             <div class="form-group">
-              <label for="description">Description</label>
+              <label for="description"><span class="label-text">Description</span></label>
               <textarea id="description" class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
             </div>
 
             <div class="form-group">
-              <label for="due_date">Due date <span class="red">*</span></label>
+              <label for="due_date"> <span class="label-text">Due date</span> <span class="red-star">*</span></label>
               <div class="input-container">
                 <input lang="en" id="due_date" class="input-base due-date" type="date" name="due-date" title="Select a date" required />
               </div>
@@ -48,7 +48,7 @@
 
           <div class="form-column right-container">
             <div class="form-group">
-              <label>Priority</label>
+              <label> <span class="label-text">Priority</span></label>
               <div class="prio-buttons">
                 <button type="button" class="prio" id="urgent_button" onclick="setPriority('urgent_button')">
                   Urgent
@@ -66,7 +66,7 @@
             </div>
 
             <div class="form-group">
-              <label for="assigned_to">Assigned to</label>
+              <label for="assigned_to"> <span class="label-text">Assigned to</span></label>
               <div class="custom-select-container">
                 <div class="custom-select" id="custom_select" onclick="toggleContactsDropdown()">
                   <input
@@ -85,10 +85,10 @@
             </div>
 
             <div class="form-group">
-              <label for="category">Category <span class="red">*</span></label>
+              <label for="category"> <span class="label-text">Category</span> <span class="red-star">*</span></label>
               <div class="custom-select-container">
                 <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()">
-                  <span id="selected_option">Select task category</span>
+                  <span id="selected_option"> <span class="label-text">Select task category</span></span>
                   <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
                 <div class="custom-options d-none" id="options_container">
@@ -100,7 +100,7 @@
             </div>
 
             <div class="form-group">
-              <label for="subtasks">Subtasks</label>
+              <label for="subtasks"> <span class="label-text">Subtasks</span></label>
               <div class="input-container">
                 <input
                   id="subtask_input"
@@ -138,7 +138,14 @@
               </div>
               <div class="subtask-enum"></div>
               <div class="input-container">
-                <input id="edit_subtask_input" class="input-base-V2 d-none" type="text" name="edit-subtasks" placeholder="Edit subtask" onkeydown="if(event.key === 'Enter'){ event.preventDefault(); saveEditedSubtask(); }" />
+                <input
+                  id="edit_subtask_input"
+                  class="input-base-V2 d-none"
+                  type="text"
+                  name="edit-subtasks"
+                  placeholder="Edit subtask"
+                  onkeydown="if(event.key === 'Enter'){ event.preventDefault(); saveEditedSubtask(); }"
+                />
                 <div class="close-and-check">
                   <img
                     id="edit_delete_icon"
@@ -159,11 +166,11 @@
               </div>
             </div>
           </div>
-          <div class="spacer"></div>
+          <!-- <div class="spacer"></div> -->
         </div>
       </form>
       <div class="footer-add-task">
-        <div class="required-text"><span class="red">*</span> This field is required</div>
+        <div class="required-text"><span class="red-star">*</span> <span class="text">This field is required</span></div>
         <div class="align-with-gap">
           <button type="button" class="button-clear-white align" onclick="clearAll()">
             Clear
@@ -181,9 +188,9 @@
       <div class="popup-overlay-small-gray" id="popup_overlay_task_added">
         <div class="popup-small-gray custom-task" id="popup_task_added">
           <span>Task added to board</span>
-          <img src="./assets/icons/boardicon.svg" alt="Board Icon"> 
+          <img src="./assets/icons/boardicon.svg" alt="Board Icon" />
         </div>
-      </div> 
+      </div>
     </main>
 
     <!-- Embedding scripts -->

@@ -8,6 +8,11 @@
   font-family: 'inter';
 }
 
+.d-flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
 .d-none {
   display: none;
 }
@@ -136,10 +141,14 @@ a {
   --margin-left-main: 328px;
 
   /* padding top main */
-  --padding-top-main: 220px;
+  /* --padding-top-main: 220px; */
+  --padding-top-main: 190px;
 
   /* main container width */
   --main-container-width: 1014px;
+
+  /* scollbar-width-thin */
+  --scollbar-width-thin: 4px;
 }
 
 /* width */

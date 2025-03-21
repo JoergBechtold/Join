@@ -18,8 +18,7 @@
           <span>Add new contact</span>
           <img src="assets/icons/person_add.svg" alt="Add User" />
         </button>
-        <div class="contact-list" onclick="handleContactListClick(event)">
-        </div>
+        <div class="contact-list" onclick="handleContactListClick(event)"></div>
       </aside>
 
       <div class="overlay hidden"></div>
@@ -34,7 +33,9 @@
           <div class="underline"></div>
         </div>
         <div class="right-section">
-          <button class="close-btn" onclick="closeAddContactPopup()">&times;</button>
+          <!-- <button class="close-btn" onclick="closeAddContactPopup()">&times;</button> -->
+          <button class="close-btn" onclick="closeAddContactPopup()"><img src="assets/icons/cancel.svg" alt="Cancel Icon" /></button>
+
           <div class="profile-image">
             <img src="assets/icons/graycontactperson.svg" alt="Profilbild" />
           </div>
@@ -53,11 +54,14 @@
               <img class="icon" src="assets/icons/call.svg" alt="Icon" />
             </div>
             <div class="button-group">
-              <button type="button" class="cancel-btn" onclick="closeAddContactPopup()">
+              <button type="button" class="button-cancel-white-gray d-flex-align-center" onclick="closeAddContactPopup()">
                 Cancel
-                <img src="assets/icons/cancel.svg" alt="Cancel Icon" />
+                <div class="button-cancel-white-gray-box">
+                  <img src="assets/icons/cancel.svg" alt="Cancel Icon" />
+                </div>
               </button>
-              <button type="submit" class="create-btn" disabled onclick="createContact(event)">
+
+              <button type="submit" class="button-save-gray d-flex-align-center create-button" disabled onclick="createContact(event)">
                 Create contact
                 <img src="assets/icons/check.svg" alt="Check Icon" />
               </button>
@@ -76,7 +80,9 @@
           <div class="underline"></div>
         </div>
         <div class="right-section">
-          <button class="close-btn" onclick="closeEditContactPopup()">&times;</button>
+          <!-- <button class="close-btn" onclick="closeEditContactPopup()">&times;</button> -->
+          <button class="close-btn" onclick="closeEditContactPopup()"><img src="assets/icons/cancel.svg" alt="Cancel Icon" /></button>
+
           <div class="profile-image">
             <img src="assets/icons/graycontactperson.svg" alt="Profilbild" />
           </div>
@@ -94,13 +100,23 @@
               <input type="tel" placeholder="Phone" oninput="this.value = this.value.replace(/\D/g, ''); checkInputs()" />
               <img class="icon" src="assets/icons/call.svg" alt="Icon" />
             </div>
+
             <div class="button-group">
+              <button type="button" class="button-delete-white d-flex-align-center" onclick="deleteAndCloseEdit()">Delete</button>
+
+              <button type="submit" class="button-save-gray d-flex-align-center create-button" disabled>
+                Save
+                <img src="assets/icons/check.svg" alt="Check Icon" />
+              </button>
+            </div>
+
+            <!-- <div class="button-group">
               <button type="button" class="cancel-btn" onclick="deleteAndCloseEdit()">Delete</button>
               <button type="submit" class="create-btn" disabled>
                 Save contact
                 <img src="assets/icons/check.svg" alt="Check Icon" />
               </button>
-            </div>
+            </div> -->
           </form>
         </div>
       </div>
@@ -119,13 +135,29 @@
           <div class="detail-info">
             <h1 id="detail-name">Anton Mayer</h1>
             <div class="actions">
+              <div class="action-box edit" onclick="processContactEdition()">
+                <div class="edit-icon">
+                  <img src="assets/icons/edit-black.png" alt="Edit" id="edit_icon" />
+                </div>
+                <span class="edit-btn">Edit </span>
+              </div>
+
+              <div class="action-box delete" onclick="processContactDeletion()">
+                <div class="delete-icon">
+                  <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
+                </div>
+                <span class="delete-btn">Delete</span>
+              </div>
+            </div>
+
+            <!-- <div class="actions">
               <span class="edit-btn" onmouseover="hoverEdit(true)" onmouseout="hoverEdit(false)" onclick="processContactEdition()">
                 <img src="assets/icons/edit.svg" alt="Edit" id="edit-icon" /> Edit
               </span>
               <span class="delete-btn" onmouseover="hoverDelete(true)" onmouseout="hoverDelete(false)" onclick="processContactDeletion()">
                 <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete-icon" /> Delete
               </span>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="contact-info-section">
@@ -147,8 +179,7 @@
           <button class="confirm-yes">Delete</button>
           <button class="confirm-no">NO</button>
         </div>
-      </div>      
-
+      </div>
     </div>
 
     <script src="scripts/firebase.js"></script>

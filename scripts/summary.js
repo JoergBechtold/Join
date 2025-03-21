@@ -7,11 +7,12 @@ function updateGreeting() {
 
 function greetingName(user) {
   const nameElement = document.querySelector('.name');
+
   if (nameElement && user) {
     if (user.firstname && user.lastname) {
       nameElement.innerHTML = `${user.firstname} ${user.lastname}`;
     } else {
-      nameElement.innerHTML = '';
+      nameElement.innerHTML = 'guest';
     }
   }
 }
@@ -39,8 +40,8 @@ async function updateTaskData() {
     let tasksInProgress = 0;
     let awaitingFeedback = 0;
 
-    Object.values(tasks).forEach(task => {
-      tasksInBoard++; 
+    Object.values(tasks).forEach((task) => {
+      tasksInBoard++;
       if (task.state === 'open') {
         todo++;
       } else if (task.state === 'done') {
@@ -63,14 +64,15 @@ async function updateTaskData() {
     if (taskNumbers[0]) taskNumbers[0].textContent = tasksInBoard;
     if (taskNumbers[1]) taskNumbers[1].textContent = tasksInProgress;
     if (taskNumbers[2]) taskNumbers[2].textContent = awaitingFeedback;
-
   } catch (error) {
     console.error('Error loading task data:', error);
   }
 }
 
 function addClickEvents() {
-  const redirectToBoard = () => { window.location.href = 'index.html'; };
+  const redirectToBoard = () => {
+    window.location.href = 'index.html';
+  };
 
   const tasksElement = document.querySelector('.tasks');
   if (tasksElement) tasksElement.onclick = redirectToBoard;
@@ -85,30 +87,56 @@ function addClickEvents() {
 
 function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
   if (!container || !imgElement) return;
-  container.onmouseover = () => { imgElement.src = hoverSrc; };
-  container.onmouseout = () => { imgElement.src = defaultSrc; };
+  container.onmouseover = () => {
+    imgElement.src = hoverSrc;
+  };
+  container.onmouseout = () => {
+    imgElement.src = defaultSrc;
+  };
 }
 
-var previousOnload = window.onload;
+// var previousOnload = window.onload;
 
-window.onload = async function () {
-  if (typeof previousOnload === 'function') {
-    previousOnload();
+// window.onload = async function () {
+//   if (typeof previousOnload === 'function') {
+//     previousOnload();
+//   }
+
+//   updateGreeting();
+//   updateDate();
+//   updateTaskData();
+//   setInterval(updateTaskData, 5000);
+//   addClickEvents();
+//   const user = await loadUserData();
+//   greetingName(user);
+
+//   let pencilContainer = document.querySelector('.pencil:first-child');
+//   let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
+//   let doneContainer = document.querySelector('.pencil:nth-child(2)');
+//   let doneImg = doneContainer ? doneContainer.querySelector('img') : null;
+
+//   addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
+//   addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
+// };
+
+async function initializeSummaryPage() {
+  try {
+    updateGreeting();
+    updateDate();
+    updateTaskData();
+    setInterval(updateTaskData, 5000);
+    addClickEvents();
+    const user = await loadUserData();
+    greetingName(user);
+
+    let pencilContainer = document.querySelector('.pencil:first-child');
+    let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
+    let doneContainer = document.querySelector('.pencil:nth-child(2)');
+    let doneImg = doneContainer ? doneContainer.querySelector('img') : null;
+
+    addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
+    addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
+  } catch (error) {
+    console.error('Error initializing the summary page', error);
   }
-  
-  updateGreeting();
-  updateDate();
-  updateTaskData();
-  setInterval(updateTaskData, 5000);
-  addClickEvents();
-  const user = await loadUserData();
-  greetingName(user);
-
-  let pencilContainer = document.querySelector('.pencil:first-child');
-  let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
-  let doneContainer = document.querySelector('.pencil:nth-child(2)');
-  let doneImg = doneContainer ? doneContainer.querySelector('img') : null;
-
-  addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
-  addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
-};
+}
