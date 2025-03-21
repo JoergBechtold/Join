@@ -79,7 +79,7 @@
 
 .nav-log-in span {
   font-weight: var(--font-weight-400);
-  font-size: 20px;
+  font-size: var(--font-size-20);
   line-height: 24px;
   letter-spacing: 0%;
 }
@@ -110,7 +110,7 @@
 
 .headline-vector h1 {
   font-weight: var(--font-weight-700);
-  font-size: var(--font-size-61);
+  font-size: var(--font-size-47-61);
   line-height: 73.2px;
   letter-spacing: 0%;
   text-align: center;
@@ -151,7 +151,7 @@
   border-radius: var(--border-radius-buttons);
   white-space: nowrap;
   font-weight: var(--font-weight-700);
-  font-size: var(--font-size-21);
+  font-size: var(--font-size-16-21);
   transition: var(--transition-hover-effect);
   border: var(--border-buttons-gray);
 }
@@ -173,7 +173,7 @@
   border-radius: var(--border-radius-buttons);
   color: var(--primary-color-gray);
   font-weight: var(--font-weight-700);
-  font-size: var(--font-size-21);
+  font-size: var(--font-size-16-21);
   white-space: nowrap;
 }
 
