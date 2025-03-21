@@ -54,8 +54,17 @@ document.addEventListener('click', function (event) {
 
 async function loadInitialsUserIcon() {
   let userProfileCircleRef = document.getElementById('user_profile_circle');
-  const user = await loadUserData();
-  userProfileCircleRef.innerHTML = `${user.initials}`;
+
+  try {
+    const user = await loadUserData();
+    if (user && user.initials) {
+      userProfileCircleRef.innerHTML = user.initials;
+    } else {
+      userProfileCircleRef.innerHTML = 'G';
+    }
+  } catch (error) {
+    console.error('Error loading user data', error);
+  }
 }
 
 async function toHrefFocus(url, element) {

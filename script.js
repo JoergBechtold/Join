@@ -87,14 +87,15 @@ async function loadUserData() {
       if (user) {
         return user;
       } else {
-        console.error('Benutzerdaten nicht gefunden.');
+        console.error('User data not found.');
+        return { initials: null };
       }
     } catch (error) {
-      console.error('Fehler beim Laden der Benutzerdaten:', error);
+      console.error('Error loading user data', error);
+      return { initials: null };
     }
   } else {
-    console.error('Benutzer-ID nicht gefunden.');
-    return null;
+    return { initials: null };
   }
 }
 
