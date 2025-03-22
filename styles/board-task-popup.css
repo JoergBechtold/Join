@@ -89,6 +89,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 8px;
 }
 
 .action-separator {
@@ -114,14 +115,34 @@
   vertical-align: middle;  
 }
 
+.priority-container {
+  display: flex;
+  gap: 8px;
+}
+
+.info-item-assigned {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .assigned-contact {
   display: inline-block;
-  margin-right: 8px;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 50%;
-  font-weight: bold;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
   text-align: center;
+  vertical-align: middle;
 }
 
 .subtasks-list {
