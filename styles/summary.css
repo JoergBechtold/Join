@@ -319,7 +319,7 @@ main {
 }
 
 .tasknmb {
-  width: 40px;
+  /* width: 40px; */
   height: 77px;
   gap: 0px;
   opacity: 0px;

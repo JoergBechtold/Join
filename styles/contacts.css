@@ -120,10 +120,15 @@ body {
   gap: 35px;
 }
 
-.contact-container:hover {
+.contact:not(.active-contact):hover {
   background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 50%, #e0e0e0 100%);
   transition: background 0.3s ease-in-out;
   border-radius: 10px;
+}
+
+.contact.active-contact {
+  background-color: #2a3647 !important;
+  cursor: pointer;
 }
 
 .contact-avatar {
@@ -706,17 +711,6 @@ input:focus {
 #detail-phone {
   color: rgba(0, 0, 0, 1);
   cursor: default;
-}
-
-/* ✅ Aktiver Kontakt bleibt stabil blau */
-.contact.active-contact {
-  background-color: #2a3647 !important; /* Blaue Hintergrundfarbe bleibt stabil */
-  cursor: pointer;
-}
-
-/* ✅ Kein Hover-Farbwechsel beim aktiven Kontakt */
-.active-contact:hover {
-  background-color: #2a3647 !important; /* Blau bleibt stabil */
 }
 
 /* ✅ Name und Avatar im aktiven Kontakt */
