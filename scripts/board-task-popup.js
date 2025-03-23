@@ -1,11 +1,25 @@
 function getAssignedHTML(task) {
   let html = "";
+  let allContacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
   if (task.assigned_to) {
-    const contacts = Object.values(task.assigned_to);
-    contacts.forEach(contact => {
-      html += `<div class="assigned-contact" style="background-color:${contact.randomColor};">
-                 ${contact._initials || contact.initials}
-               </div>`;
+    let assignedArray = Object.values(task.assigned_to);
+    assignedArray.forEach(assignedItem => {
+      let allContactsArray = Object.values(allContacts);
+      let foundContact = allContactsArray.find(contactObj => {
+        return contactObj.initials === assignedItem.initials;
+      });
+      if (foundContact) {
+        html += `
+          <div class="assigned-contact-container">
+              <div class="assigned-contact" style="background-color:${foundContact.contactColor || foundContact.randomColor || assignedItem.randomColor || "#ccc"};">
+                <span class="contact-initials">${foundContact.initials}</span>
+              </div>
+              <div>
+                <span class="contact-fullname">${foundContact.firstname} ${foundContact.lastname}</span>
+              </div>
+          </div>
+        `;
+      }
     });
   } else {
     html = "<span>No contacts assigned</span>";
@@ -27,6 +41,26 @@ function getCategoryBg(task) {
   if (task.category === "User Story") return "background-color: #0038FF;";
   if (task.category === "Technical Task") return "background-color: #1FD7C1;";
   return "";
+}
+
+function openPopup(taskKey) {
+  let tasks = JSON.parse(sessionStorage.getItem("tasks")),
+      task = tasks ? tasks[taskKey] : null,
+      popupContainer = document.getElementById("popupContainer"),
+      popup = document.getElementById("popup");
+  if (task) {
+    let assignedHTML = getAssignedHTML(task),
+        subtasksHTML = getSubtasksHTML(task),
+        categoryBackground = getCategoryBg(task);
+    popup.innerHTML = getPopupContent(task, assignedHTML, subtasksHTML, categoryBackground);
+  } else {
+    popup.innerHTML = `<div class="popup-header">
+                         <h2>Task Not Found</h2>
+                         <button class="close-button" onclick="closePopup()">X</button>
+                       </div>`;
+  }
+  popupContainer.style.display = "flex";
+  document.getElementById("overlay").style.display = "block";
 }
 
 function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
@@ -72,26 +106,6 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
               <span class="action-label">Edit</span>
             </button>
           </div>`;
-}
-
-function openPopup(taskKey) {
-  let tasks = JSON.parse(sessionStorage.getItem("tasks")),
-      task = tasks ? tasks[taskKey] : null,
-      popupContainer = document.getElementById("popupContainer"),
-      popup = document.getElementById("popup");
-  if (task) {
-    let a = getAssignedHTML(task),
-        s = getSubtasksHTML(task),
-        c = getCategoryBg(task);
-    popup.innerHTML = getPopupContent(task, a, s, c);
-  } else {
-    popup.innerHTML = `<div class="popup-header">
-                         <h2>Task Not Found</h2>
-                         <button class="close-button" onclick="closePopup()">X</button>
-                       </div>`;
-  }
-  popupContainer.style.display = "flex";
-  document.getElementById("overlay").style.display = "block";
 }
 
 function closePopup() {
