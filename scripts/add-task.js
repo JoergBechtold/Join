@@ -42,8 +42,6 @@ function clearSelection() {
   selectedOption.textContent = 'Select task category';
 }
 
-
-
 function validateInputTitle() {
   const inputField = document.getElementById('title');
   const errorMessage = document.getElementById('error_message_title');
@@ -139,7 +137,6 @@ function createTaskData() {
   const priority = getPriority(); 
   const subtasksArray = Array.isArray(subtasks) && subtasks.length > 0 ? subtasks : '';
   const assignedTo = Array.isArray(selectedContacts) && selectedContacts.length > 0 ? selectedContacts : '';
-
   return {
     title: title,
     description: description || '',
