@@ -39,3 +39,9 @@ function updateButtonStyle(buttonType) {
   activeButton.classList.add(className);
   document.getElementById(activeButton.id + '_img').src = `/assets/icons/prio-${iconType}-event.svg`;
 }
+
+function clearButtons() {
+    if (activeButton) {
+      resetActiveButton();
+    }
+}
