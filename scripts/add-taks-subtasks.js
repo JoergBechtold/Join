@@ -45,20 +45,11 @@ function updateSubtaskDisplay() {
     const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
     let subtaskHtml = '';
     for (let i = 0; i < subtasks.length; i++) {
-      subtaskHtml += `
-              <div class="subtask-item">
-                  <span class="subtask-text" ondblclick="editSubtask(${i})">• ${subtasks[i]}</span>
-                  <div class="subtask-icons">
-                      <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon" onclick="editSubtask(${i})">
-                      <div class="vertical-line-subtask-dark"></div>
-                      <img src="assets/icons/paperbasketdelet.svg" alt="Delete" class="subtask-icon delete-icon" onclick="deleteSubtask(${i})">
-                  </div>
-              </div>
-          `;
+        subtaskHtml += subtasksItem(subtasks[i], i);
     }
     subtaskEnum.innerHTML = subtaskHtml;
 }
-  
+      
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
     updateSubtaskDisplay();

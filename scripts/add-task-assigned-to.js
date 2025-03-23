@@ -73,31 +73,14 @@ async function loadContacts() {
 }
 
 function renderContactsHtml(data) {
-  if (!data || Object.keys(data).length === 0) {
-    return '<div class="error-select-option">No contacts found.</div>';
-  }
-  return Object.values(data)
-    .map((contacts) => {
-      const initials = contacts.initials || 'NN'; // Fallback auf "NN" wenn initials leer oder undefined
-      return `
-          <div class="contacts-custom-select-option" onclick="toggleSelectedContact(this)">
-            <div class="name-and-img">
-              <div class="circle-and-name">
-                <div class="circle" style="background-color: ${contacts.contactColor};">
-                  ${initials}
-                </div>
-                <div >${contacts.firstname} ${contacts.lastname}</div>
-              </div>
-              <div>
-              <img  src="/assets/icons/Square_box.svg" alt="Checkbox">
-              </div>
-            </div>
-          </div>
-        `;
-    })
-    .join('');
+    if (!data || Object.keys(data).length === 0) {
+        return '<div class="error-select-option">No contacts found.</div>';
+    }
+    return Object.values(data)
+        .map((contacts) => contactsCustomSelectOptionHtml(contacts))
+        .join('');
 }
-
+      
 function toggleSelectedContact(element) {
   toggleClass(element);
   updateSelectedContacts(element);
