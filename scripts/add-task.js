@@ -265,26 +265,11 @@ function closeDropdownOnBodyClick(event) {
   }
 }
 
-
-/* async function loadContacts() {
-  const optionsContainer = document.getElementById('contacts_options_container');
-  if (optionsContainer.childElementCount) return;
-  try {
-    const res = await fetch(`${BASE_URL}/user.json`); 
-    const data = await res.json();
-    optionsContainer.innerHTML = renderContactsHtml(data);
-  } catch (e) {
-    console.error('Error loading contacts:', e);
-    optionsContainer.innerHTML = '<div class="error-select-option">Error loading contacts.</div>';
-  }
-}
- */ 
-
 async function loadContacts() {
   const optionsContainer = document.getElementById('contacts_options_container');  
   if (optionsContainer.childElementCount) return;
   try {
-    const data = await loadData('user'); /* Ändern in contacts */
+    const data = await loadData('contacts'); 
     if (data) {
       optionsContainer.innerHTML = renderContactsHtml(data);
     } else {
@@ -301,16 +286,16 @@ function renderContactsHtml(data) {
     return '<div class="error-select-option">No contacts found.</div>';
   }
   return Object.values(data)
-    .map((user) => {
-      const initials = user.initials || 'NN'; // Fallback auf "NN" wenn initials leer oder undefined
+    .map((contacts) => {
+      const initials = contacts.initials || 'NN'; // Fallback auf "NN" wenn initials leer oder undefined
       return `
           <div class="contacts-custom-select-option" onclick="toggleSelectedContact(this)">
             <div class="name-and-img">
               <div class="circle-and-name">
-                <div class="circle" style="background-color: ${user.randomColors};">
+                <div class="circle" style="background-color: ${contacts.contactColor};">
                   ${initials}
                 </div>
-                <div >${user.firstname} ${user.lastname}</div>
+                <div >${contacts.firstname} ${contacts.lastname}</div>
               </div>
               <div>
               <img  src="/assets/icons/Square_box.svg" alt="Checkbox">
