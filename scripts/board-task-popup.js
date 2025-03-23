@@ -63,7 +63,19 @@ function openPopup(taskKey) {
   document.getElementById("overlay").style.display = "block";
 }
 
+function getPriorityIcon(priority) {
+  if (priority === "low") {
+    return "./assets/icons/prio-low.svg";
+  } else if (priority === "medium") {
+    return "./assets/icons/prio-medium.svg";
+  } else if (priority === "urgent") {
+    return "./assets/icons/prio-high.svg";
+  }
+}
+
 function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
+  const priorityIconSrc = getPriorityIcon(task.priority);
+
   return `<div class="popup-header">
             <div style="${categoryBg}" class="tag-container" id="tag-container">
               <span class="tag" id="Tag">${task.category}</span>
@@ -83,7 +95,7 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
               <span class="label">Priority:</span>
               <div class="priority-lable-container">
                 <span id="priority-label">${task.priority || "No Priority"}</span>
-                <img id="priority-icon" />
+                <img id="priority-icon" src="${priorityIconSrc}" alt="${task.priority || "No Priority"}" />
               </div>
             </div>
             <div class="info-item-assigned">
