@@ -121,10 +121,10 @@ async function pushTaskToFirebase() {
         goToUrl('index.html');
       }, 1700);
     } else {
-      throw new Error('Keine Antwort von Firebase erhalten.');
+      throw new Error('No response received from Firebase.');
     }
   } catch (error) {
-    console.error('Fehler beim Speichern des Tasks:', error);
+    console.error('Error saving task', error);
   }
 }
 
@@ -181,9 +181,9 @@ async function fetchAddTask() {
         document.getElementById('add_task_fetch_template').innerHTML = data;
       })
       .catch((error) => {
-        console.error('Fehler beim Laden des Templates:', error);
+        console.error('Error loading template', error);
       });
   } catch (error) {
-    console.error('Unerwarteter Fehler:', error);
+    console.error('Unexpected error', error);
   }
 }
