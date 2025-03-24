@@ -110,3 +110,12 @@ function showPupupOverlaySignUp() {
     popupOverlaySignUpRef.classList.remove('d-flex');
   }, 1000);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  fetch('template_add_task.html')
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById('add_task_fetch_template').innerHTML = data;
+    })
+    .catch((error) => console.error('Fehler beim Laden des Headers:', error));
+});
