@@ -57,20 +57,20 @@ function validateInputTitle() {
 }
 
 function validateInputDate() {
-    const inputField = document.getElementById('due_date');
-    const errorMessage = document.getElementById('error_message_date');
-  
-    if (inputField.value.trim() === '') {
-      errorMessage.classList.remove('d-none');
-      inputField.classList.add('red-border');
-      return false;
-    } else {
-      errorMessage.classList.add('d-none');
-      inputField.classList.remove('red-border');
-      return true;
-    }
+  const inputField = document.getElementById('due_date');
+  const errorMessage = document.getElementById('error_message_date');
+
+  if (inputField.value.trim() === '') {
+    errorMessage.classList.remove('d-none');
+    inputField.classList.add('red-border');
+    return false;
+  } else {
+    errorMessage.classList.add('d-none');
+    inputField.classList.remove('red-border');
+    return true;
+  }
 }
-  
+
 function validateCategory() {
   const selectedOption = document.getElementById('selected_option');
   const errorMessage = document.getElementById('error_message_category');
@@ -101,12 +101,11 @@ function clearErrorMessages() {
   customSelect.classList.remove('red-border');
 }
 
-
 function checkandSubmit() {
   const title = validateInputTitle();
   const date = validateInputDate();
-  const category =validateCategory();
-  if(title && date && category) {
+  const category = validateCategory();
+  if (title && date && category) {
     pushTaskToFirebase();
   }
 }
@@ -134,7 +133,7 @@ function createTaskData() {
   const description = document.getElementById('description').value.trim();
   const dueDate = document.getElementById('due_date').value.trim();
   const selectedCategory = document.getElementById('selected_option').textContent.trim();
-  const priority = getPriority(); 
+  const priority = getPriority();
   const subtasksArray = Array.isArray(subtasks) && subtasks.length > 0 ? subtasks : '';
   const assignedTo = Array.isArray(selectedContacts) && selectedContacts.length > 0 ? selectedContacts : '';
   return {
@@ -145,7 +144,7 @@ function createTaskData() {
     assigned_to: assignedTo,
     category: selectedCategory,
     subtasks: subtasksArray,
-    state: 'open'
+    state: 'open',
   };
 }
 
@@ -157,7 +156,7 @@ function getPriority() {
   } else if (activeButton && activeButton.id === 'low_button') {
     return 'Low';
   } else {
-    return 'No Priority'; 
+    return 'No Priority';
   }
 }
 
@@ -169,4 +168,22 @@ function showPupupOverlayTaskAdded() {
   }, 800);
 }
 
-
+async function fetchAddTask() {
+  try {
+    fetch('template_add_task.html')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        document.getElementById('add_task_fetch_template').innerHTML = data;
+      })
+      .catch((error) => {
+        console.error('Fehler beim Laden des Templates:', error);
+      });
+  } catch (error) {
+    console.error('Unerwarteter Fehler:', error);
+  }
+}
