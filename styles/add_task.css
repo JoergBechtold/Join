@@ -1,11 +1,11 @@
 .body-add-task {
-  min-height: calc(100dvh - 96px); 
+  min-height: calc(100dvh - 96px);
   width: 100%;
   background-color: var(--light-gray-bg);
 }
 
 .main-add-task {
-  height: 100dvh; 
+  height: 100dvh;
   max-width: 976px;
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
@@ -22,7 +22,7 @@
   max-width: 976px;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 30px; 
+  padding-bottom: 30px;
 }
 
 .required-text {
@@ -47,10 +47,10 @@
 .right-container {
   flex: 1;
   position: relative;
-  overflow-x: hidden; 
-  overflow-y: auto; 
-  height: 450px; 
-  scrollbar-gutter: stable; 
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 450px;
+  scrollbar-gutter: stable;
 }
 
 .left-container::-webkit-scrollbar,
@@ -79,14 +79,14 @@
 
 .red-star {
   color: var(--red);
-  font-size: var(--font-size-16-20); 
-  font-weight: var(--font-weight-400); 
+  font-size: var(--font-size-16-20);
+  font-weight: var(--font-weight-400);
 }
 
 .text {
   color: var(--primary-color-gray);
-  font-size: var(--font-size-16); 
-  font-weight: var(--font-weight-400); 
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-400);
 }
 
 .input-container {
@@ -161,7 +161,7 @@
 .subtask-enum {
   padding: 0 10px;
   max-height: 120px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .subtask-text {
@@ -266,7 +266,7 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  border: 2px solid white; 
+  border: 2px solid white;
   box-sizing: border-box;
 }
 
