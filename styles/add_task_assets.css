@@ -72,6 +72,11 @@
     border: 1px solid var(--blue);
     opacity: 1;
 }
+
+.active-prio {
+    color: white;
+    font-weight: bold;
+}
   
 .input-base[type='date'] {
     background-image: url(../assets/icons/event.svg);
@@ -91,6 +96,24 @@
   
 .input-base[type='date']::-ms-clear {
     display: none;
+}
+
+.input-base-icon-active:hover,
+.input-base-icon:hover {
+  background-color: var(--light-gray-bg);
+  border-radius: 50%;
+}
+
+.input-base-icon-active {
+  position: static;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  object-fit: scale-down;
+  cursor: pointer;
 }
 
 .input-base-V2 {
