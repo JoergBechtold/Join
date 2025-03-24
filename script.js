@@ -111,11 +111,30 @@ function showPupupOverlaySignUp() {
   }, 1000);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  fetch('template_add_task.html')
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById('add_task_fetch_template').innerHTML = data;
-    })
-    .catch((error) => console.error('Fehler beim Laden des Headers:', error));
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//   fetch('template_add_task.html')
+//     .then((response) => response.text())
+//     .then((data) => {
+//       document.getElementById('add_task_fetch_template').innerHTML = data;
+//     })
+//     .catch((error) => console.error('Fehler beim Laden des Headers:', error));
+// });
+async function fetchAddTask() {
+  try {
+    fetch('template_add_task.html')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        document.getElementById('add_task_fetch_template').innerHTML = data;
+      })
+      .catch((error) => {
+        console.error('Fehler beim Laden des Templates:', error);
+      });
+  } catch (error) {
+    console.error('Unerwarteter Fehler:', error);
+  }
+}
