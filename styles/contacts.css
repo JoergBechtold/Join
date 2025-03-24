@@ -300,24 +300,6 @@ body {
   align-items: center;
 }
 
-.close-btn {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  aspect-ratio: 1 /1;
-  position: absolute;
-  border: none;
-  background: none;
-  cursor: pointer;
-  top: 48px;
-  left: 750px;
-  border-radius: 50%;
-}
-
-.close-btn:hover {
-  background-color: #f0f0f0;
-}
-
 /* hinzugefügt */
 /* .button-delete-white:hover .button-clear-white-img-box img {
   content: url('../assets/icons/x-mark-blue.svg');

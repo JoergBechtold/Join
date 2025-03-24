@@ -38,6 +38,35 @@ button[disabled]:hover {
   scale: unset;
 }
 
+.close-btn,
+.close-button-popup {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  aspect-ratio: 1 /1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 48px;
+  left: 750px;
+}
+
+.close-button-popup {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.close-btn:hover,
+.close-button-popup:hover {
+  background-color: #f0f0f0;
+}
+
 /* button primary gray */
 .button-primary-gray {
   white-space: nowrap;
