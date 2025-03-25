@@ -101,7 +101,25 @@
       <div id="popup" class="popup"></div>
     </div>
 
+<<<<<<< HEAD
     <div id="edit_popup" class="edit-popup"></div>
+=======
+    <div id="edit_popup" class="edit-popup">
+      <template id="addTaskTemplate">
+        <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
+          <div class="addtask-template-headline-container">
+            <h1 class="h1-add-task">Add Task</h1>
+            <button class="close-button-popup" onclick="closeBoardAddTask()">
+              <img src="assets/icons/close.png" alt="" />
+            </button>
+          </div>
+  
+          <!-- fetch template popup add task -->
+          <div id="add_task_fetch_template"></div>
+        </div>
+      </template>
+    </div>
+>>>>>>> 72f2ee0063eb520ae82fc94dba1888a8b917cf4d
 
     <!-- Template für Add Task Formular -->
     <template id="addTaskTemplate">

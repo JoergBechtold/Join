@@ -77,6 +77,14 @@
   gap: 10px;
   padding-top: 10px;
   border: none;
+  max-height: 780px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+.drag-area::-webkit-scrollbar {
+  width: var(--scollbar-width-thin);
 }
 
 .drag-area-highlight {
