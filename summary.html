@@ -9,72 +9,74 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
   </head>
-  <body onload="initializeSummaryPage()">
+  <body class="body-summary" onload="initializeSummaryPage()">
     <div id="header_container"></div>
 
-    <div class="titeljoin">
-      <h1>Join 360</h1>
-      <div class="victor"></div>
-      <p>Key Metrics at a Glance</p>
-    </div>
-    <div class="goodmorning">
-      <p class="good">Good Morning,</p>
-      <div class="d-flex">
-        <p class="name"></p>
+    <main class="main-summary">
+      <div class="titeljoin">
+        <h1>Join 360</h1>
+        <div class="victor"></div>
+        <p>Key Metrics at a Glance</p>
       </div>
-    </div>
-    <div class="details">
-      <div class="checkpencil">
-        <div class="pencil">
-          <div><img class="summaryimg" src="assets/icons/Pencil.svg" alt="pencil" /></div>
-          <div class="summaryp">
-            <p class="summarynmb todo">1</p>
-            <p class="summarymission">To-Do</p>
-          </div>
-        </div>
-        <div class="pencil">
-          <div><img class="summaryimg" src="assets/icons/done.svg" alt="pencil" /></div>
-          <div class="summaryp">
-            <p class="summarynmb done">1</p>
-            <p class="summarymission">Done</p>
-          </div>
+      <div class="goodmorning">
+        <p class="good">Good Morning,</p>
+        <div class="d-flex">
+          <p class="name"></p>
         </div>
       </div>
-      <div class="urgent">
-        <div class="numimg">
-          <img class="urgentimg" src="assets/icons/urgent.svg" alt="Urgent" />
-          <div class="nmbtext">
-            <p class="urgentnmb">1</p>
-            <p class="urgenttext">Urgent</p>
+      <div class="details">
+        <div class="checkpencil">
+          <div class="pencil">
+            <div><img class="summaryimg" src="assets/icons/Pencil.svg" alt="pencil" /></div>
+            <div class="summaryp">
+              <p class="summarynmb todo">1</p>
+              <p class="summarymission">To-Do</p>
+            </div>
+          </div>
+          <div class="pencil">
+            <div><img class="summaryimg" src="assets/icons/done.svg" alt="pencil" /></div>
+            <div class="summaryp">
+              <p class="summarynmb done">1</p>
+              <p class="summarymission">Done</p>
+            </div>
           </div>
         </div>
-        <div class="vectorurgent"></div>
-        <div class="datetext">
-          <p class="date">October 16, 2022</p>
-          <p class="underdate">Upcoming Deadline</p>
+        <div class="urgent">
+          <div class="numimg">
+            <img class="urgentimg" src="assets/icons/urgent.svg" alt="Urgent" />
+            <div class="nmbtext">
+              <p class="urgentnmb">1</p>
+              <p class="urgenttext">Urgent</p>
+            </div>
+          </div>
+          <div class="vectorurgent"></div>
+          <div class="datetext">
+            <p class="date">October 16, 2022</p>
+            <p class="underdate">Upcoming Deadline</p>
+          </div>
+        </div>
+        <div class="tasks">
+          <div class="undertask">
+            <div class="underundertask">
+              <p class="tasknmb">5</p>
+              <p class="tasktext">Tasks in Board</p>
+            </div>
+          </div>
+          <div class="undertask">
+            <div class="underundertask">
+              <p class="tasknmb">2</p>
+              <p class="tasktext">Tasks in Progress</p>
+            </div>
+          </div>
+          <div class="undertask">
+            <div class="underundertask">
+              <p class="tasknmb">2</p>
+              <p class="tasktext">Awaiting Feedback</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="tasks">
-        <div class="undertask">
-          <div class="underundertask">
-            <p class="tasknmb">5</p>
-            <p class="tasktext">Tasks in Board</p>
-          </div>
-        </div>
-        <div class="undertask">
-          <div class="underundertask">
-            <p class="tasknmb">2</p>
-            <p class="tasktext">Tasks in Progress</p>
-          </div>
-        </div>
-        <div class="undertask">
-          <div class="underundertask">
-            <p class="tasknmb">2</p>
-            <p class="tasktext">Awaiting Feedback</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->

@@ -575,20 +575,6 @@ function showConfirmPopup(message, callback) {
   };
 }
 
-// function hoverEdit(isHover) {
-//   let img = document.getElementById('edit_icon');
-//   if (img) {
-//     img.src = isHover ? 'assets/icons/editblau.svg' : 'assets/icons/edit.svg';
-//   }
-// }
-
-// function hoverDelete(isHover) {
-//   let img = document.getElementById('delete_icon');
-//   if (img) {
-//     img.src = isHover ? 'assets/icons/delete.svg' : 'assets/icons/paperbasketdelet.svg';
-//   }
-// }
-
 function loadContacts() {
   fetch(`${BASE_URL}/contacts.json`)
     .then((response) => response.json())

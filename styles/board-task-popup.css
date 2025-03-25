@@ -119,6 +119,10 @@
   overflow: auto;
 }
 
+.assignee-container::-webkit-scrollbar {
+  width: var(--scollbar-width-thin);
+}
+
 .contact-fullname {
   font-weight: 400;
   font-size: 19px;
