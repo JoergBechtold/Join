@@ -94,18 +94,6 @@ button[disabled]:hover {
   font-weight: var(--font-weight-700);
 }
 
-.action-box.edit:hover .edit-icon img {
-  content: url('../assets/icons/editblue.svg');
-}
-
-.action-box.delete:hover .delete-icon img {
-  content: url('../assets/icons/delete.svg');
-}
-
-.button-cancel-white-gray:hover img {
-  content: url('../assets/icons/x-mark-blue.svg');
-}
-
 .edit-icon,
 .delete-icon {
   width: 24px;
@@ -117,9 +105,21 @@ button[disabled]:hover {
 
 .edit-icon img,
 .delete-icon img {
-  width: 100%;
-  height: auto;
+  /* width: 100%;
+  height: auto; */
   display: block;
+}
+
+.action-box.edit:hover .edit-icon img {
+  content: url('../assets/icons/editblue.svg');
+}
+
+.action-box.delete:hover .delete-icon img {
+  content: url('../assets/icons/delete.svg');
+}
+
+.button-cancel-white-gray:hover img {
+  content: url('../assets/icons/x-mark-blue.svg');
 }
 
 /* button primary gray */

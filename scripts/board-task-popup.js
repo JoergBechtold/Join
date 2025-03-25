@@ -80,7 +80,7 @@ function getPriorityIcon(priority) {
 function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
   const priorityIconSrc = getPriorityIcon(task.priority);
 
-  return ` <div class="popup-header">
+  return `  <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
         <span class="tag" id="Tag">${task.category}</span>
       </div>
@@ -120,13 +120,17 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
         </div>
         <span class="delete-btn">Delete</span>
       </div>
+
+      <div>
+        <img src="assets/icons/vector-horizontal-3.svg" alt="horizontal dividing line" />
+      </div>
       <div class="action-box edit" onclick="editTask()">
         <div class="edit-icon">
           <img src="assets/icons/edit-black.png" alt="Edit" id="edit_icon" />
         </div>
         <span class="edit-btn">Edit </span>
       </div>
-    </div> `;
+    </div>`;
 }
 
 function closePopup() {
