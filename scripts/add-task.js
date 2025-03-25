@@ -167,23 +167,3 @@ function showPupupOverlayTaskAdded() {
     taskAdded.classList.remove('d-flex');
   }, 800);
 }
-
-async function fetchAddTask() {
-  try {
-    fetch('template_add_task.html')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
-      })
-      .then((data) => {
-        document.getElementById('add_task_fetch_template').innerHTML = data;
-      })
-      .catch((error) => {
-        console.error('Error loading template', error);
-      });
-  } catch (error) {
-    console.error('Unexpected error', error);
-  }
-}
