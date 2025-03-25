@@ -44,7 +44,7 @@
         <div>
           <span class="column-title"
             >To do
-            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -58,7 +58,7 @@
         <div>
           <span class="column-title"
             >In Progress
-            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -72,7 +72,7 @@
         <div>
           <span class="column-title"
             >Await feedback
-            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -101,6 +101,9 @@
       <div id="popup" class="popup"></div>
     </div>
 
+<<<<<<< HEAD
+    <div id="edit_popup" class="edit-popup"></div>
+=======
     <div id="edit_popup" class="edit-popup">
       <form class="form-add-task">
         <div class="add-task-content popup">
@@ -262,6 +265,7 @@
       </div>
       
     </div>
+>>>>>>> 72f2ee0063eb520ae82fc94dba1888a8b917cf4d
 
     <!-- Template für Add Task Formular -->
     <template id="addTaskTemplate">
@@ -283,7 +287,6 @@
     <script src="scripts/firebase.js"></script>
     <script src="scripts/load-header.js"></script>
     <script src="scripts/login-register.js"></script>
-    <script src="script.js"></script>
     <script src="scripts/add-task-templates.js"></script>
     <script src="scripts/add-task.js"></script>
     <script src="scripts/add-taks-priority-buttons.js"></script>
@@ -292,5 +295,6 @@
     <script src="scripts/board.js"></script>
     <script src="scripts/template/extended-Taskcard-popup.js"></script>
     <script src="scripts/board-task-popup.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
