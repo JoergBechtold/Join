@@ -53,15 +53,16 @@ function openPopup(taskKey) {
     popupContainer = document.getElementById('popupContainer'),
     popup = document.getElementById('popup');
   if (task) {
-    let assignedHTML = getAssignedHTML(task),
-      subtasksHTML = getSubtasksHTML(task),
-      categoryBackground = getCategoryBg(task);
+    let assignedHTML = getAssignedHTML(task);
+    let subtasksHTML = getSubtasksHTML(task);
+    let categoryBackground = getCategoryBg(task);
     popup.innerHTML = getPopupContent(task, assignedHTML, subtasksHTML, categoryBackground);
   } else {
-    popup.innerHTML = `<div class="popup-header">
-                         <h2>Task Not Found</h2>
-                         <button class="close-button" onclick="closePopup()">X</button>
-                       </div>`;
+    popup.innerHTML = `
+    <div class="popup-header">
+      <h2>Task Not Found</h2>
+      <button class="close-button" onclick="closePopup()">X</button>
+    </div>`;
   }
   popupContainer.style.display = 'flex';
   document.getElementById('overlay').style.display = 'block';
