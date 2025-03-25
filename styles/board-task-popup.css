@@ -28,7 +28,7 @@
   line-height: 120%;
 }
 
-.popup-container {
+.popup-container, .edit-popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -80,7 +80,17 @@
 
 .priority-container {
   display: flex;
+  align-items: center;
   gap: 40px;
+}
+
+.priority-lable-container {
+  display: flex;
+  gap: 10px;
+}
+
+#priority-icon {
+  width: 17px;
 }
 
 .popup-body {
@@ -114,6 +124,29 @@
   font-size: 19px;
   line-height: 120%;
   vertical-align: middle;
+}
+
+.popup-subtasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.subtasks-list span {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.subtasks-list img {
+  cursor: pointer;
 }
 
 .action-separator {
@@ -168,9 +201,4 @@
   display: flex;
   align-items: center;
   gap: 20px;
-}
-
-.subtasks-list {
-  list-style-type: disc;
-  margin-left: 20px;
 }

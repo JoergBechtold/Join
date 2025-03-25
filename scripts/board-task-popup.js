@@ -33,10 +33,10 @@ function getSubtasksHTML(task) {
   let html = '';
   if (task.subtasks) {
     Object.values(task.subtasks).forEach((subtask) => {
-      html += `<li>${subtask}</li>`;
+      html += `<span>${subtask}</span>`;
     });
   } else {
-    html = '<li>No subtasks</li>';
+    html = '<span>No subtasks</span>';
   }
   return html;
 }
@@ -68,13 +68,16 @@ function openPopup(taskKey) {
 }
 
 function getPriorityIcon(priority) {
+  if (!priority) return '';
+  priority = priority.toLowerCase();
   if (priority === 'low') {
-    return './assets/icons/prio-low.svg';
+    return '/assets/icons/prio-low.svg';
   } else if (priority === 'medium') {
-    return './assets/icons/prio-medium.svg';
+    return '/assets/icons/prio-medium.svg';
   } else if (priority === 'urgent') {
-    return './assets/icons/prio-high.svg';
+    return '/assets/icons/prio-high.svg';
   }
+  return '';
 }
 
 function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
@@ -108,9 +111,9 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
       </div>
       <div class="popup-subtasks">
         <span class="subtasks-label">Subtasks:</span>
-        <ul class="subtasks-list" id="subtasks-list">
+        <div class="subtasks-list" id="subtasks-list">
           ${subtasksHTML}
-        </ul>
+        </div>
       </div>
     </div>
     <div class="popup-actions">
@@ -127,6 +130,40 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
         <span class="edit-btn">Edit </span>
       </div>
     </div> `;
+}
+
+function editTask() {
+  const popupContainer = document.getElementById('popupContainer');
+  if (popupContainer) {
+    popupContainer.style.display = 'none';
+  }
+  
+  let editPopup = document.getElementById('edit_popup');
+  if (!editPopup) {
+    editPopup = document.createElement('div');
+    editPopup.id = 'edit_popup';
+    document.body.appendChild(editPopup);
+  }
+  editPopup.style.display = 'flex';
+}
+
+function getSubtasksHTML(task) {
+  let html = '';
+  if (task.subtasks && task.subtasks.length > 0) {
+    task.subtasks.forEach((subtask, index) => {
+      const icon = subtask.completed 
+        ? '/assets/icons/checked.png.png' 
+        : '/assets/icons/checkbox.png';
+      
+      html += `<span data-index="${index}" onclick="toggleSubtask(this, '${task.id}')">
+                <img src="${icon}" alt="Checkbox" class="subtask-checkbox" />
+                ${subtask.description}
+              </span>`;
+    });
+  } else {
+    html = '<span>No subtasks</span>';
+  }
+  return html;
 }
 
 function closePopup() {
