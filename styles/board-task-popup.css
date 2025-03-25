@@ -35,7 +35,7 @@
   transform: translate(-50%, -50%);
   background: #fff;
   max-width: 525px;
-  max-height: 931px;
+  max-height: 780px;
   width: 100%;
   z-index: 101;
   flex-direction: column;
@@ -47,6 +47,10 @@
   padding-left: 40px;
   gap: 24px;
   box-shadow: 0px 0px 4px 0px #00000029;
+}
+
+.edit-popup {
+  overflow-y: auto;
 }
 
 .popup-header {
