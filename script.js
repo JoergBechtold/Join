@@ -21,6 +21,12 @@ const randomColors = [
   '#ffbb2b', // gold
 ];
 
+/**
+ * Retrieves references to all HTML elements needed in script.js for the add task form.
+ *
+ * @returns {object} An object containing references to HTML elements.
+ *
+ */
 function getIdRefsScript() {
   return {
     h1AddTaskRef: document.getElementById('h1_add_task'),
