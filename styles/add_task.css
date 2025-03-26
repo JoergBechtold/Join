@@ -38,10 +38,8 @@
 
 .add-task-content-board-popup {
   display: flex;
-  margin-bottom: 70px;
   flex-direction: column;
   scrollbar-gutter: stable;
-
   overflow-y: auto;
 }
 

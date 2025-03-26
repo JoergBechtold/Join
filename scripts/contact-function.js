@@ -49,7 +49,7 @@ function validateEmail(emailInput, container) {
 }
 
 function validatePhone(phoneInput, container) {
-  const isValid = /^[0-9]+$/.test(phoneInput.value.trim());
+  const isValid = /^\+?[0-9]+$/.test(phoneInput.value.trim());
   let err = container.querySelector('.phone-error');
   if (!isValid && phoneInput.value.trim() !== '') {
     if (!err) {
