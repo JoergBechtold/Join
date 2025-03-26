@@ -72,11 +72,11 @@ function getPriorityIcon(priority) {
   if (!priority) return '';
   priority = priority.toLowerCase();
   if (priority === 'low') {
-    return '/assets/icons/prio-low.svg';
+    return 'assets/icons/prio-low.svg';
   } else if (priority === 'medium') {
-    return '/assets/icons/prio-medium.svg';
+    return 'assets/icons/prio-medium.svg';
   } else if (priority === 'urgent') {
-    return '/assets/icons/prio-high.svg';
+    return 'assets/icons/prio-high.svg';
   }
   return '';
 }
@@ -85,13 +85,12 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
   const priorityIconSrc = getPriorityIcon(task.priority);
   document.body.style.overflow = 'hidden';
 
-
   return `  <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
         <span class="tag" id="Tag">${task.category}</span>
       </div>
       <button class="close-button" type="button" onclick="closePopup()">
-        <img src="./assets/icons/close.png" alt="Close" class="close-icon" />
+        <img src="assets/icons/close.png" alt="Close" class="close-icon" />
       </button>
     </div>
     <div class="popup-info">
@@ -172,17 +171,17 @@ function getSubtasksHTML(task) {
 }
 
 async function deleteTask(taskId) {
-  if (confirm("Are you sure you want to delete this task?")) {
-      try {
-          await deleteData(`tasks/${taskId}`);
-          let tasks = JSON.parse(sessionStorage.getItem("tasks"));
-          delete tasks[taskId];
-          sessionStorage.setItem("tasks", JSON.stringify(tasks));
-          closePopup();
-          renderCards();
-      } catch (error) {
-          console.error("Error deleting the task:", error);
-      }
+  if (confirm('Are you sure you want to delete this task?')) {
+    try {
+      await deleteData(`tasks/${taskId}`);
+      let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+      delete tasks[taskId];
+      sessionStorage.setItem('tasks', JSON.stringify(tasks));
+      closePopup();
+      renderCards();
+    } catch (error) {
+      console.error('Error deleting the task:', error);
+    }
   }
 }
 

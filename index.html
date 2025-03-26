@@ -7,6 +7,7 @@
 
     <!-- Embedding the favicon -->
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
+    <base href="./" />
 
     <!-- Embedding the css -->
 
@@ -36,7 +37,7 @@
             <div class="placeholder"></div>
             <img src="assets/icons/search.icon.png" class="search-icon" alt="" />
           </div>
-          <button onclick="openBoardAddTaskForm(); fetchAddTask()" class="button-primary-dark-gray">Add Task +</button>
+          <button onclick="openBoardAddTaskForm()" class="button-primary-dark-gray">Add Task +</button>
         </div>
       </div>
 
@@ -44,7 +45,7 @@
         <div>
           <span class="column-title"
             >To do
-            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -58,7 +59,7 @@
         <div>
           <span class="column-title"
             >In Progress
-            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -72,7 +73,7 @@
         <div>
           <span class="column-title"
             >Await feedback
-            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -99,21 +100,16 @@
     <!-- Popup-Container -->
     <div class="popup-container" id="popupContainer" style="display: none">
       <div id="popup" class="popup"></div>
-      
     </div>
 
     <div id="edit_popup" class="edit-popup"></div>
     <div id="edit_popup" class="edit-popup">
-<<<<<<< HEAD
-      <!-- fetch template popup add task -->
-      <!-- <div id="add_task_fetch_template"></div> -->
-=======
       <div class="edit-close-buttton-container">
         <button class="close-button" type="button" onclick="closePopup()">
-          <img src="./assets/icons/close.png" alt="Close" class="close-icon" />
+          <img src="assets/icons/close.png" alt="Close" class="close-icon" />
         </button>
       </div>
->>>>>>> efe2b989bdcf511457ef821674696d5747279807
+
       <form class="form-add-task">
         <div class="add-task-content popup">
           <div class="form-column left-container edit-popup-form-column">
@@ -145,15 +141,15 @@
               <div class="prio-buttons">
                 <button type="button" class="prio" id="urgent_button" onclick="setPriority('urgent_button')">
                   Urgent
-                  <img src="/assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img" />
+                  <img src="assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img" />
                 </button>
                 <button type="button" class="prio" id="medium_button" onclick="setPriority('medium_button')">
                   Medium
-                  <img src="/assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" id="medium_button_img" />
+                  <img src="assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" id="medium_button_img" />
                 </button>
                 <button type="button" class="prio" id="low_button" onclick="setPriority('low_button')">
                   Low
-                  <img src="/assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" id="low_button_img" />
+                  <img src="assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" id="low_button_img" />
                 </button>
               </div>
             </div>
@@ -170,7 +166,7 @@
                     oninput="filterContacts()"
                     autocomplete="off"
                   />
-                  <img class="select-icon" id="contacts_select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
+                  <img class="select-icon" id="contacts_select_arrow" src="assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
                 <div class="contacts-custom-options d-none" id="contacts_options_container"></div>
                 <div class="show-selected-contacts"></div>
@@ -273,7 +269,19 @@
     </div>
 
     <!-- Template für Add Task Formular -->
-    <template id="addTaskTemplate">
+
+    <template class="add-task-template-container" id="addTaskTemplate">
+      <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
+        <button class="close-button-popup" onclick="closeBoardAddTask()">
+          <img src="assets/icons/close.png" alt="" />
+        </button>
+
+        <!-- fetch template popup add task -->
+        <div id="add_task_fetch_template"></div>
+      </div>
+    </template>
+
+    <!-- <template id="addTaskTemplate">
       <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
         <div class="addtask-template-headline-container">
           <h1 class="h1-add-task">Add Task</h1>
@@ -282,10 +290,10 @@
           </button>
         </div>
 
-        <!-- fetch template popup add task -->
+        
         <div id="add_task_fetch_template"></div>
       </div>
-    </template>
+    </template> -->
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->

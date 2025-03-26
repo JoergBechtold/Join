@@ -57,10 +57,16 @@ button[disabled]:hover {
   left: 750px;
 }
 
-.close-button-popup {
+/* .close-button-popup {
   position: absolute;
   top: 0px;
   right: 0px;
+} */
+
+.close-button-popup {
+  position: absolute;
+  top: 60px;
+  right: 60px;
 }
 
 .close-btn:hover,
