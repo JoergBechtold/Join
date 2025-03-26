@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles/header_sidebar.css" />
     <link rel="stylesheet" href="/styles/add_task.css" />
     <link rel="stylesheet" href="/styles/add_task_assets.css" />
-    <link rel="stylesheet" href="/styles/board-task-popup.css" />
+    <link rel="stylesheet" href="/styles/board_task_popup.css" />
     <link rel="stylesheet" href="styles/assets.css" />
   </head>
   <body class="body-board" onload="initBoard()">
@@ -34,7 +34,7 @@
           <div class="search-input-div">
             <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text" />
             <div class="placeholder"></div>
-            <img src="./assets/icons/search.icon.png" class="search-icon" alt="" />
+            <img src="assets/icons/search.icon.png" class="search-icon" alt="" />
           </div>
           <button onclick="openBoardAddTaskForm(); fetchAddTask()" class="button-primary-dark-gray">Add Task +</button>
         </div>
@@ -101,7 +101,8 @@
       <div id="popup" class="popup"></div>
       
     </div>
-    
+
+    <div id="edit_popup" class="edit-popup"></div>
     <div id="edit_popup" class="edit-popup">
       <div class="edit-close-buttton-container">
         <button class="close-button" type="button" onclick="closePopup()">
@@ -116,12 +117,12 @@
               <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" />
               <div class="error-message-required d-none" id="error_message_title">This field is required</div>
             </div>
-      
+
             <div class="form-group">
               <label for="description"><span class="label-text">Description</span></label>
               <textarea id="description" class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
             </div>
-      
+
             <div class="form-group">
               <label for="due_date"> <span class="label-text">Due date</span> <span class="red-star">*</span></label>
               <div class="input-container">
@@ -130,9 +131,9 @@
               <div class="error-message-required d-none" id="error_message_date">This field is required</div>
             </div>
           </div>
-      
+
           <div class="vertical-line"></div>
-      
+
           <div class="form-column right-container">
             <div class="form-group">
               <label> <span class="label-text">Priority</span></label>
@@ -151,7 +152,7 @@
                 </button>
               </div>
             </div>
-      
+
             <div class="form-group">
               <label for="assigned_to"> <span class="label-text">Assigned to</span></label>
               <div class="custom-select-container">
@@ -170,13 +171,13 @@
                 <div class="show-selected-contacts"></div>
               </div>
             </div>
-      
+
             <div class="form-group">
               <label for="category"> <span class="label-text">Category</span> <span class="red-star">*</span></label>
               <div class="custom-select-container">
                 <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()">
                   <span id="selected_option"> <span class="label-text">Select task category</span></span>
-                  <img class="select-icon" id="select_arrow" src="/assets/icons/arrow_drop_down.svg" alt="Arrow" />
+                  <img class="select-icon" id="select_arrow" src="assets/icons/arrow_drop_down.svg" alt="Arrow" />
                 </div>
                 <div class="custom-options d-none" id="options_container">
                   <div class="custom-select-option" onclick="selectOption('Technical Task')">Technical Task</div>
@@ -185,7 +186,7 @@
               </div>
               <div class="error-message-required d-none" id="error_message_category">This selection is required</div>
             </div>
-      
+
             <div class="form-group">
               <label for="subtasks"> <span class="label-text">Subtasks</span></label>
               <div class="input-container">
@@ -202,7 +203,7 @@
                   <img
                     id="close_subtask_icon"
                     class="input-base-icon d-none"
-                    src="/assets/icons/blackclose.svg"
+                    src="assets/icons/blackclose.svg"
                     alt="Close subtask"
                     onclick="handleSubtaskDelete()"
                   />
@@ -210,11 +211,11 @@
                   <img
                     id="check_subtask_icon"
                     class="input-base-icon d-none"
-                    src="/assets/icons/blackcheck.svg"
+                    src="assets/icons/blackcheck.svg"
                     alt="Save subtask"
                     onclick="handleSubtaskSave()"
                   />
-                  <img id="add_subtask_icon" class="input-base-icon" src="/assets/icons/add.svg" alt="Add subtask" onclick="handleSubtaskInputImg()" />
+                  <img id="add_subtask_icon" class="input-base-icon" src="assets/icons/add.svg" alt="Add subtask" onclick="handleSubtaskInputImg()" />
                 </div>
               </div>
               <div class="subtask-enum"></div>
@@ -231,7 +232,7 @@
                   <img
                     id="edit_delete_icon"
                     class="input-base-V2-icon-active d-none"
-                    src="/assets/icons/paperbasketdelet.svg"
+                    src="assets/icons/paperbasketdelet.svg"
                     alt="Delete"
                     onclick="cancelEditSubtask()"
                   />
@@ -239,7 +240,7 @@
                   <img
                     id="edit_save_icon"
                     class="input-base-V2-icon-active d-none"
-                    src="/assets/icons/blackcheck.svg"
+                    src="assets/icons/blackcheck.svg"
                     alt="Save"
                     onclick="saveEditedSubtask()"
                   />
@@ -251,24 +252,20 @@
       </form>
       <div class="footer-add-task ok-btn-container">
         <div class="align-with-gap">
-            <div class="button-clear-white-img-box">
-            </div>
-          </button>
+          <div class="button-clear-white-img-box"></div>
           <button type="submit" class="button-create-task-gray align" onclick="checkandSubmit()">
             Ok
-            <img src="/assets/icons/check.svg" alt="Check" />
+            <img src="assets/icons/check.svg" alt="Check" />
           </button>
         </div>
       </div>
       <div class="popup-overlay-small-gray" id="popup_overlay_task_added">
         <div class="popup-small-gray custom-task" id="popup_task_added">
           <span>Task added to board</span>
-          <img src="./assets/icons/boardicon.svg" alt="Board Icon" />
+          <img src="assets/icons/boardicon.svg" alt="Board Icon" />
         </div>
       </div>
-      
     </div>
->>>>>>> 72f2ee0063eb520ae82fc94dba1888a8b917cf4d
 
     <!-- Template für Add Task Formular -->
     <template id="addTaskTemplate">
