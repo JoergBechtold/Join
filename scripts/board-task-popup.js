@@ -83,6 +83,8 @@ function getPriorityIcon(priority) {
 
 function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
   const priorityIconSrc = getPriorityIcon(task.priority);
+  document.body.style.overflow = 'hidden';
+
 
   return `  <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
@@ -169,7 +171,23 @@ function getSubtasksHTML(task) {
   return html;
 }
 
+async function deleteTask(taskId) {
+  if (confirm("Are you sure you want to delete this task?")) {
+      try {
+          await deleteData(`tasks/${taskId}`);
+          let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+          delete tasks[taskId];
+          sessionStorage.setItem("tasks", JSON.stringify(tasks));
+          closePopup();
+          renderCards();
+      } catch (error) {
+          console.error("Error deleting the task:", error);
+      }
+  }
+}
+
 function closePopup() {
   document.getElementById('popupContainer').style.display = 'none';
+  document.getElementById('edit_popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }

@@ -99,14 +99,24 @@
     <!-- Popup-Container -->
     <div class="popup-container" id="popupContainer" style="display: none">
       <div id="popup" class="popup"></div>
+      
     </div>
 
+    <div id="edit_popup" class="edit-popup"></div>
     <div id="edit_popup" class="edit-popup">
+<<<<<<< HEAD
       <!-- fetch template popup add task -->
       <!-- <div id="add_task_fetch_template"></div> -->
+=======
+      <div class="edit-close-buttton-container">
+        <button class="close-button" type="button" onclick="closePopup()">
+          <img src="./assets/icons/close.png" alt="Close" class="close-icon" />
+        </button>
+      </div>
+>>>>>>> efe2b989bdcf511457ef821674696d5747279807
       <form class="form-add-task">
         <div class="add-task-content popup">
-          <div class="form-column left-container">
+          <div class="form-column left-container edit-popup-form-column">
             <div class="form-group">
               <label for="title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
               <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" />
@@ -245,7 +255,7 @@
           </div>
         </div>
       </form>
-      <div class="footer-add-task">
+      <div class="footer-add-task ok-btn-container">
         <div class="align-with-gap">
           <div class="button-clear-white-img-box"></div>
           <button type="submit" class="button-create-task-gray align" onclick="checkandSubmit()">
