@@ -1,4 +1,4 @@
-let dropdownOpen = false; 
+let dropdownOpen = false;
 let selectedContacts = [];
 
 function toggleContactsDropdown() {
@@ -16,7 +16,7 @@ function toggleContactsDropdown() {
 
 function openDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
   optionsContainer.classList.remove('d-none');
-  arrowIcon.src = '/assets/icons/arrow_drop_down_up.svg';
+  arrowIcon.src = 'assets/icons/arrow_drop_down_up.svg';
   selectedContactsContainer.classList.add('d-none');
   loadContacts();
   inputField.placeholder = '';
@@ -27,7 +27,7 @@ function openDropdown(optionsContainer, arrowIcon, inputField, customSelect, sel
 
 function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
   optionsContainer.classList.add('d-none');
-  arrowIcon.src = '/assets/icons/arrow_drop_down.svg';
+  arrowIcon.src = 'assets/icons/arrow_drop_down.svg';
   inputField.value = '';
   inputField.placeholder = 'Select contacts to assign';
   customSelect.classList.replace('custom-select-focused', 'custom-select');
@@ -42,11 +42,7 @@ function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, se
 
 function closeDropdownOnBodyClick(event) {
   const clickedElement = event.target;
-  if (
-    dropdownOpen && 
-    !clickedElement.closest('#custom_select') && 
-    !clickedElement.closest('#contacts_options_container')
-  ) {
+  if (dropdownOpen && !clickedElement.closest('#custom_select') && !clickedElement.closest('#contacts_options_container')) {
     const optionsContainer = document.getElementById('contacts_options_container');
     const arrowIcon = document.getElementById('contacts_select_arrow');
     const inputField = document.getElementById('selected_contact');
@@ -57,10 +53,10 @@ function closeDropdownOnBodyClick(event) {
 }
 
 async function loadContacts() {
-  const optionsContainer = document.getElementById('contacts_options_container');  
+  const optionsContainer = document.getElementById('contacts_options_container');
   if (optionsContainer.childElementCount) return;
   try {
-    const data = await loadData('contacts'); 
+    const data = await loadData('contacts');
     if (data) {
       optionsContainer.innerHTML = renderContactsHtml(data);
     } else {
@@ -73,14 +69,14 @@ async function loadContacts() {
 }
 
 function renderContactsHtml(data) {
-    if (!data || Object.keys(data).length === 0) {
-        return '<div class="error-select-option">No contacts found.</div>';
-    }
-    return Object.values(data)
-        .map((contacts) => contactsCustomSelectOptionHtml(contacts))
-        .join('');
+  if (!data || Object.keys(data).length === 0) {
+    return '<div class="error-select-option">No contacts found.</div>';
+  }
+  return Object.values(data)
+    .map((contacts) => contactsCustomSelectOptionHtml(contacts))
+    .join('');
 }
-      
+
 function toggleSelectedContact(element) {
   toggleClass(element);
   updateSelectedContacts(element);
@@ -118,9 +114,9 @@ function updateImage(element) {
   const imgElement = element.querySelector('img');
   if (imgElement) {
     if (element.classList.contains('contacts-custom-select-option-selected')) {
-      imgElement.src = '/assets/icons/checked_box.svg';
+      imgElement.src = 'assets/icons/checked_box.svg';
     } else {
-      imgElement.src = '/assets/icons/Square_box.svg';
+      imgElement.src = 'assets/icons/Square_box.svg';
     }
   }
 }
@@ -146,7 +142,7 @@ function clearAssignedTo() {
     option.classList.add('contacts-custom-select-option');
     const imgElement = option.querySelector('img');
     if (imgElement) {
-      imgElement.src = '/assets/icons/Square_box.svg';
+      imgElement.src = 'assets/icons/Square_box.svg';
     }
   });
 }

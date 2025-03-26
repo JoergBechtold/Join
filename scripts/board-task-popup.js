@@ -142,7 +142,7 @@ function editTask() {
   if (popupContainer) {
     popupContainer.style.display = 'none';
   }
-  
+
   let editPopup = document.getElementById('edit_popup');
   if (!editPopup) {
     editPopup = document.createElement('div');
@@ -156,10 +156,8 @@ function getSubtasksHTML(task) {
   let html = '';
   if (task.subtasks && task.subtasks.length > 0) {
     task.subtasks.forEach((subtask, index) => {
-      const icon = subtask.completed 
-        ? '/assets/icons/checked.png.png' 
-        : '/assets/icons/checkbox.png';
-      
+      const icon = subtask.completed ? '/assets/icons/checked.png.png' : '/assets/icons/checkbox.png';
+
       html += `<span data-index="${index}" onclick="toggleSubtask(this, '${task.id}')">
                 <img src="${icon}" alt="Checkbox" class="subtask-checkbox" />
                 ${subtask.description}

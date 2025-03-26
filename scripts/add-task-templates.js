@@ -1,6 +1,6 @@
 function contactsCustomSelectOptionHtml(contacts) {
-    const initials = contacts.initials || 'NN'; 
-    return `
+  const initials = contacts.initials || 'NN';
+  return `
       <div class="contacts-custom-select-option" onclick="toggleSelectedContact(this)">
         <div class="name-and-img">
           <div class="circle-and-name">
@@ -10,7 +10,7 @@ function contactsCustomSelectOptionHtml(contacts) {
             <div>${contacts.firstname} ${contacts.lastname}</div>
           </div>
           <div>
-            <img src="/assets/icons/Square_box.svg" alt="Checkbox">
+            <img src="assets/icons/Square_box.svg" alt="Checkbox">
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@ function contactsCustomSelectOptionHtml(contacts) {
 }
 
 function subtasksItem(subtask, index) {
-    return `
+  return `
       <div class="subtask-item">
         <span class="subtask-text" ondblclick="editSubtask(${index})">• ${subtask}</span>
         <div class="subtask-icons">
@@ -29,4 +29,3 @@ function subtasksItem(subtask, index) {
       </div>
     `;
 }
-  
