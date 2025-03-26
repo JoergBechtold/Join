@@ -249,13 +249,13 @@ function createPrio(key, task) {
   prioImage.id = key + '-prio';
   let priority = task.priority ? task.priority.toLowerCase() : '';
   if (priority === 'urgent') {
-    prioImage.src = '/assets/icons/prio-high.svg';
+    prioImage.src = 'assets/icons/prio-high.svg';
     prioImage.alt = 'High Priority';
   } else if (priority === 'medium') {
-    prioImage.src = '/assets/icons/prio-medium.svg';
+    prioImage.src = 'assets/icons/prio-medium.svg';
     prioImage.alt = 'Medium Priority';
   } else if (priority === 'low') {
-    prioImage.src = '/assets/icons/prio-low.svg';
+    prioImage.src = 'assets/icons/prio-low.svg';
     prioImage.alt = 'Low Priority';
   }
   prioContainer.appendChild(prioImage);
