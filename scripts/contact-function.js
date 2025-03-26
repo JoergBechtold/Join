@@ -247,26 +247,7 @@ function saveContactToFirebase(contactData, callback) {
     });
 }
 
-// function prepareContact(event) {
-//   var inputs = extractInputs(event);
-//   if (!inputs) return null;
-//   var firstLetter = inputs.name.charAt(0).toUpperCase(),
-//     container = getOrCreateGroupContainer(firstLetter),
-//     compColor = getRandomColor(),
-//     nameParts = computeNameParts(inputs.name),
-//     contactEl = buildContactElement(inputs.name, inputs.email, inputs.phone, compColor);
-//   insertContactSorted(container, contactEl, inputs.name);
-//   var contactData = {
-//     firstname: nameParts.firstName,
-//     lastname: nameParts.lastName,
-//     email: inputs.email,
-//     phone: inputs.phone,
-//     contactColor: compColor,
-//     initials: nameParts.initials,
-//     createdAt: new Date().toISOString(),
-//   };
-//   return { data: contactData, el: contactEl };
-// }
+
 
 function prepareContact(event) {
   var inputs = extractInputs(event);

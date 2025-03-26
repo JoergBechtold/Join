@@ -8,6 +8,7 @@
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
   height: 100dvh;
+  overflow: hidden;
 }
 
 .headline-input-container {
@@ -63,11 +64,12 @@
 
 .card-container {
   width: 100%;
-  height: calc(100% - 113px);
+  height: calc(80dvh - 113px);
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  overflow: hidden;
 }
 
 .drag-area {
@@ -75,9 +77,9 @@
   flex-direction: column;
   width: 252px;
   gap: 10px;
-  padding-top: 10px;
+  padding: 10px 0 35px 0;
   border: none;
-  max-height: 780px;
+  height: calc(80dvh - 137px);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;
@@ -361,5 +363,5 @@
 
 .add-button-img-column {
   cursor: pointer;
-  padding-right: 4px;
+  
 }

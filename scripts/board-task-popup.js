@@ -1,3 +1,6 @@
+
+let taskKey;
+
 function getAssignedHTML(task) {
   let html = '';
   let allContacts = JSON.parse(sessionStorage.getItem('contacts')) || {};
@@ -47,7 +50,8 @@ function getCategoryBg(task) {
   return '';
 }
 
-function openPopup(taskKey) {
+function openPopup(Key) {
+  taskKey = Key
   let tasks = JSON.parse(sessionStorage.getItem('tasks')),
     task = tasks ? tasks[taskKey] : null,
     popupContainer = document.getElementById('popup_container'),
@@ -56,7 +60,9 @@ function openPopup(taskKey) {
     let assignedHTML = getAssignedHTML(task);
     let subtasksHTML = getSubtasksHTML(task);
     let categoryBackground = getCategoryBg(task);
-    popup.innerHTML = getPopupContent(task, assignedHTML, subtasksHTML, categoryBackground);
+    const priorityIconSrc = getPriorityIcon(task.priority);
+    document.body.style.overflow = 'hidden';
+    popup.innerHTML = getPopupContentHtml(task, assignedHTML, subtasksHTML, categoryBackground,priorityIconSrc);
   } else {
     popup.innerHTML = `
     <div class="popup-header">
@@ -81,11 +87,9 @@ function getPriorityIcon(priority) {
   return '';
 }
 
-function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
-  const priorityIconSrc = getPriorityIcon(task.priority);
-  document.body.style.overflow = 'hidden';
-
-  return `  <div class="popup-header">
+function getPopupContentHtml(task, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
+  return /*html*/`
+     <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
         <span class="tag" id="Tag">${task.category}</span>
       </div>
@@ -104,7 +108,7 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
         <span class="label">Priority:</span>
         <div class="priority-lable-container">
           <span id="priority-label">${task.priority || 'No Priority'}</span>
-          <img id="priority-icon" src="${priorityIconSrc}" alt="${task.priority || 'No Priority'}" />
+          ${checkImgAvailable(priorityIconSrc, task.priority)}
         </div>
       </div>
       <div class="info-item-assigned">
@@ -120,11 +124,11 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
     </div>
     <div class="popup-actions">
       <div class="action-box delete" onclick="deleteTask()">
-        <div class="delete-icon">
-          <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
-        </div>
-        <span class="delete-btn">Delete</span>
+      <div class="delete-icon">
+        <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
       </div>
+      <span class="delete-btn">Delete</span>
+    </div>
 
       <div>
         <img src="assets/icons/vector-horizontal-3.svg" alt="horizontal dividing line" />
@@ -135,7 +139,17 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
         </div>
         <span class="edit-btn">Edit </span>
       </div>
-    </div>`;
+    </div>
+  `;
+  }
+
+
+function checkImgAvailable(priorityIconSrc, priority){
+  if (priorityIconSrc) {
+    return `<img id="priority-icon" src="${priorityIconSrc}" alt="${priority || 'No Priority'}" />`;
+  } else {
+    return `<img id="priority-icon" src="" alt="" />`;
+  }
 }
 
 function editTask() {
@@ -172,36 +186,31 @@ function getSubtasksHTML(task) {
   return html;
 }
 
-async function deleteTask(taskId) {
+async function deleteTask() {
   if (confirm('Are you sure you want to delete this task?')) {
     try {
-      await deleteData(`tasks/${taskId}`);
-      let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-      delete tasks[taskId];
-      sessionStorage.setItem('tasks', JSON.stringify(tasks));
+      if (!taskKey) {
+        console.error('taskKey is undefined.');
+        return;
+      }
+
+      await deleteData('tasks', `${taskKey}`);
+
+      let tasksString = sessionStorage.getItem('tasks');
+      if (tasksString) {
+        let tasks = JSON.parse(tasksString);
+        delete tasks[taskKey];
+        sessionStorage.setItem('tasks', JSON.stringify(tasks));
+      } else {
+          console.log("No tasks found in sessionStorage.");
+      }
       closePopup();
-      renderCards();
+      renderCards();  
     } catch (error) {
       console.error('Error deleting the task:', error);
     }
   }
 }
-
-// async function deleteTask(taskId) {
-  
-//     try {
-//       await deleteData(`tasks/${taskId}`);
-//       let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-//       delete tasks[taskId];
-//       sessionStorage.setItem('tasks', JSON.stringify(tasks));
-//       closePopup();
-//       renderCards();
-//     } catch (error) {
-//       console.error('Error deleting the task:', error);
-    
-//   }
-// }
-
 
 function closePopup() {
   document.getElementById('popup_container').style.display = 'none';

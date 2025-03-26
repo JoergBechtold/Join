@@ -11,7 +11,7 @@ async function loadData(path = '') {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Fehler beim Laden der Daten:', error);
+    console.error('rror loading data', error);
     return null;
   }
 }
@@ -52,15 +52,14 @@ async function updateData(path = '', data = {}) {
   }
 }
 
-async function deleteData(path = '') {
+async function deleteData(path = '', taskKey) {
   try {
-    const response = await fetch(BASE_URL + path + '.json', {
+    const response = await fetch(`${BASE_URL}${path}/${taskKey}.json`, {
       method: 'DELETE',
     });
 
     if (response.headers.get('content-length') !== '0') {
       const responseToJson = await response.json();
-      console.log('Firebase-Antwort:', responseToJson);
       return responseToJson;
     } else {
       return null;
@@ -70,9 +69,3 @@ async function deleteData(path = '') {
   }
 }
 
-async function deleteData(path) {
-  const response = await fetch(`${BASE_URL}/${path}.json`, {
-    method: 'DELETE'
-  });
-  return response.json();
-}
