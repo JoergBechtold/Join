@@ -50,7 +50,7 @@ function getCategoryBg(task) {
 function openPopup(taskKey) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks')),
     task = tasks ? tasks[taskKey] : null,
-    popupContainer = document.getElementById('popupContainer'),
+    popupContainer = document.getElementById('popup_container'),
     popup = document.getElementById('popup');
   if (task) {
     let assignedHTML = getAssignedHTML(task);
@@ -139,7 +139,7 @@ function getPopupContent(task, assignedHTML, subtasksHTML, categoryBg) {
 }
 
 function editTask() {
-  const popupContainer = document.getElementById('popupContainer');
+  const popupContainer = document.getElementById('popup_container');
   if (popupContainer) {
     popupContainer.style.display = 'none';
   }
@@ -157,7 +157,7 @@ function getSubtasksHTML(task) {
   let html = '';
   if (task.subtasks && task.subtasks.length > 0) {
     task.subtasks.forEach((subtask, index) => {
-      const icon = subtask.completed ? '/assets/icons/checked.png.png' : '/assets/icons/checkbox.png';
+      const icon = subtask.completed ? 'assets/icons/checked.png.png' : 'assets/icons/checkbox.png';
 
       html += `<span data-index="${index}" onclick="toggleSubtask(this, '${task.id}')">
                 <img src="${icon}" alt="Checkbox" class="subtask-checkbox" />
@@ -186,7 +186,7 @@ async function deleteTask(taskId) {
 }
 
 function closePopup() {
-  document.getElementById('popupContainer').style.display = 'none';
+  document.getElementById('popup_container').style.display = 'none';
   document.getElementById('edit_popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }

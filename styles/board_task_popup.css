@@ -15,6 +15,21 @@
   flex-direction: column;
   gap: 24px;
   overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding-right: 10px;
+}
+
+.popup::-webkit-scrollbar,
+.popup-info::-webkit-scrollbar,
+.assignee-container::-webkit-scrollbar {
+  width: var(--scollbar-width-thin);
+}
+
+.popup::-webkit-scrollbar-thumb,
+.popup-info::-webkit-scrollbar-thumb,
+.assignee-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color-gray);
+  border-radius: 10px;
 }
 
 .popup-info h1 {
@@ -29,7 +44,8 @@
   line-height: 120%;
 }
 
-.popup-container, .edit-popup {
+.popup-container,
+.edit-popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -54,7 +70,6 @@
   display: flex;
   justify-content: end;
   width: 100%;
-
 }
 
 .form-add-task {
@@ -62,10 +77,10 @@
 }
 
 .edit-popup-form-column {
-    overflow-x: hidden;
-    overflow-y: hidden; 
-    height: 450px;
-    scrollbar-gutter: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 450px;
+  scrollbar-gutter: none;
 }
 
 .ok-btn-container {
@@ -140,10 +155,7 @@
   padding-left: 16px;
   max-height: 155px;
   overflow: auto;
-}
-
-.assignee-container::-webkit-scrollbar {
-  width: var(--scollbar-width-thin);
+  scrollbar-gutter: stable;
 }
 
 .contact-fullname {

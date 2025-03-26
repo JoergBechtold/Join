@@ -98,7 +98,7 @@
     </main>
 
     <!-- Popup-Container -->
-    <div class="popup-container" id="popupContainer" style="display: none">
+    <div class="popup-container" id="popup_container" style="display: none">
       <div id="popup" class="popup"></div>
     </div>
 
@@ -269,7 +269,6 @@
     </div>
 
     <!-- Template für Add Task Formular -->
-
     <template class="add-task-template-container" id="addTaskTemplate">
       <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
         <button class="close-button-popup" onclick="closeBoardAddTask()">
@@ -280,20 +279,6 @@
         <div id="add_task_fetch_template"></div>
       </div>
     </template>
-
-    <!-- <template id="addTaskTemplate">
-      <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
-        <div class="addtask-template-headline-container">
-          <h1 class="h1-add-task">Add Task</h1>
-          <button class="close-button-popup" onclick="closeBoardAddTask()">
-            <img src="assets/icons/close.png" alt="" />
-          </button>
-        </div>
-
-        
-        <div id="add_task_fetch_template"></div>
-      </div>
-    </template> -->
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
