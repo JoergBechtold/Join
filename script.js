@@ -21,27 +21,8 @@ const randomColors = [
   '#ffbb2b', // gold
 ];
 
-function getIdRefs() {
+function getIdRefsScript() {
   return {
-    bodyRef: document.body,
-    loadingSpinnerRef: document.getElementById('loading_spinner'),
-    showMoreBtnRef: document.getElementById('show_more_btn'),
-    loadingDotsRef: document.getElementById('loading_dots'),
-    showAllCardsContainerRef: document.getElementById('show_all_cards_container'),
-    searchAllCardsContainerREef: document.getElementById('search_all_cards_container'),
-    showMoreBtnContainerRef: document.getElementById('show_more_btn_container'),
-    dataCouldNotLoadedContainerRef: document.getElementById('data_could_not_loaded_container'),
-    dataCouldNotBeLoadedRef: document.getElementById('data_could_not_be_loaded'),
-    loadingOverlayRef: document.getElementById('loading_overlay'),
-    cardOverlayFullScreenRef: document.getElementById('card_overlay_full_screen'),
-    cardContainerFullScreenRef: document.getElementById('card_container_full_screen'),
-    searchInputRef: document.getElementById('Search_input'),
-    notValideMessageContainer: document.getElementById('not_valide_message_container'),
-    lengthMessageRef: document.getElementById('length_message'),
-    errorMessageRef: document.getElementById('error_message'),
-    pokemonCouldNotFoundContainerRef: document.getElementById('pokemon_could_not_found_container'),
-    btnLeftRef: document.getElementById('btn_left'),
-    btnRightRef: document.getElementById('btn_right'),
     h1AddTaskRef: document.getElementById('h1_add_task'),
     footerddTaskRef: document.getElementById('footer_add_task'),
     verticalLineRef: document.getElementById('vertical_line'),
@@ -49,17 +30,6 @@ function getIdRefs() {
     rightContainerRef: document.getElementById('right_container'),
     leftContainerRef: document.getElementById('left_container'),
     addTaskfetchTemplateRef: document.getElementById('add_task_fetch_template'),
-  };
-}
-
-function setIdRefValueTrim() {
-  return {
-    name: document.getElementById('name_sign_up').value.trim(),
-    email: document.getElementById('email_sign-up').value.trim(),
-    password: document.getElementById('password_sign_up').value.trim(),
-    confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
-    emailLogIn: document.getElementById('email_log_in').value.trim(),
-    passwordLogIn: document.getElementById('password_log_in').value.trim(),
   };
 }
 
@@ -179,7 +149,7 @@ async function fetchAddTask(parameter = false) {
 
 function setAllPropertysForEditPopup() {
   const { h1AddTaskRef, footerddTaskRef, verticalLineRef, addTaskContentRef, rightContainerRef, leftContainerRef, addTaskfetchTemplateRef } =
-    getIdRefs();
+    getIdRefsScript();
 
   h1AddTaskRef.classList.add('d-none');
   footerddTaskRef.classList.add('d-none');
