@@ -172,8 +172,23 @@ function getSubtasksHTML(task) {
   return html;
 }
 
+// async function deleteTask(taskId) {
+//   if (confirm('Are you sure you want to delete this task?')) {
+//     try {
+//       await deleteData(`tasks/${taskId}`);
+//       let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+//       delete tasks[taskId];
+//       sessionStorage.setItem('tasks', JSON.stringify(tasks));
+//       closePopup();
+//       renderCards();
+//     } catch (error) {
+//       console.error('Error deleting the task:', error);
+//     }
+//   }
+// }
+
 async function deleteTask(taskId) {
-  if (confirm('Are you sure you want to delete this task?')) {
+  
     try {
       await deleteData(`tasks/${taskId}`);
       let tasks = JSON.parse(sessionStorage.getItem('tasks'));
@@ -183,9 +198,10 @@ async function deleteTask(taskId) {
       renderCards();
     } catch (error) {
       console.error('Error deleting the task:', error);
-    }
+    
   }
 }
+
 
 function closePopup() {
   document.getElementById('popup_container').style.display = 'none';

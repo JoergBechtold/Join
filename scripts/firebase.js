@@ -66,7 +66,7 @@ async function deleteData(path = '') {
       return null;
     }
   } catch (error) {
-    console.error('Fehler beim Löschen der Daten:', error);
+    console.error('Error deleting data', error);
   }
 }
 
