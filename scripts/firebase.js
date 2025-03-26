@@ -69,3 +69,10 @@ async function deleteData(path = '') {
     console.error('Fehler beim Löschen der Daten:', error);
   }
 }
+
+async function deleteData(path) {
+  const response = await fetch(`${BASE_URL}/${path}.json`, {
+    method: 'DELETE'
+  });
+  return response.json();
+}

@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  overflow-y: auto;
 }
 
 .popup-info h1 {
@@ -49,8 +50,26 @@
   box-shadow: 0px 0px 4px 0px #00000029;
 }
 
-.edit-popup {
+.edit-close-buttton-container {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+
+}
+
+.form-add-task {
   overflow-y: auto;
+}
+
+.edit-popup-form-column {
+    overflow-x: hidden;
+    overflow-y: hidden; 
+    height: 450px;
+    scrollbar-gutter: none;
+}
+
+.ok-btn-container {
+  justify-content: end;
 }
 
 .popup-header {
