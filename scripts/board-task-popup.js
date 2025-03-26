@@ -151,6 +151,8 @@ function editTask() {
     document.body.appendChild(editPopup);
   }
   editPopup.style.display = 'flex';
+
+  fetchAddTask(true);
 }
 
 function getSubtasksHTML(task) {

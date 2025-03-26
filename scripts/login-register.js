@@ -1,39 +1,39 @@
-function getIdRefs() {
-  return {
-    animationJoinLogoRef: document.getElementById('animation_join_logo'),
-    animationFinishedRef: document.getElementById('animation_finished'),
-    navLogInRef: document.getElementById('nav_log_in'),
-    loginContainerRef: document.getElementById('login_container'),
-    signUpContainerRef: document.getElementById('sign_up_container'),
-    footerLoginRegisterRef: document.getElementById('footer_login_register'),
-    imgPasswordLogInRef: document.getElementById('img_password_log_in'),
-    nameSignUpRef: document.getElementById('name_sign_up'),
-    emailSignUpRef: document.getElementById('email_sign-up'),
-    emailLogInRef: document.getElementById('email_log_in'),
-    passwordLogInRef: document.getElementById('password_log_in'),
-    passwordSignUpRef: document.getElementById('password_sign_up'),
-    confirmPasswordSignUpRef: document.getElementById('confirm_sign_up'),
-    checkboxRef: document.getElementById('checkbox'),
-    signUpButtonRef: document.getElementById('sign_up_button'),
-    customCheckmarkRef: document.getElementById('custom_checkmark'),
-    errorMessageNameRef: document.getElementById('error_message_name'),
-    errorMessageLogInRef: document.getElementById('error_message_log_in'),
-    errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
-    errorMessageEmailRef: document.getElementById('error_message_email'),
-    popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
-  };
-}
+// function getIdRefs() {
+//   return {
+//     animationJoinLogoRef: document.getElementById('animation_join_logo'),
+//     animationFinishedRef: document.getElementById('animation_finished'),
+//     navLogInRef: document.getElementById('nav_log_in'),
+//     loginContainerRef: document.getElementById('login_container'),
+//     signUpContainerRef: document.getElementById('sign_up_container'),
+//     footerLoginRegisterRef: document.getElementById('footer_login_register'),
+//     imgPasswordLogInRef: document.getElementById('img_password_log_in'),
+//     nameSignUpRef: document.getElementById('name_sign_up'),
+//     emailSignUpRef: document.getElementById('email_sign-up'),
+//     emailLogInRef: document.getElementById('email_log_in'),
+//     passwordLogInRef: document.getElementById('password_log_in'),
+//     passwordSignUpRef: document.getElementById('password_sign_up'),
+//     confirmPasswordSignUpRef: document.getElementById('confirm_sign_up'),
+//     checkboxRef: document.getElementById('checkbox'),
+//     signUpButtonRef: document.getElementById('sign_up_button'),
+//     customCheckmarkRef: document.getElementById('custom_checkmark'),
+//     errorMessageNameRef: document.getElementById('error_message_name'),
+//     errorMessageLogInRef: document.getElementById('error_message_log_in'),
+//     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
+//     errorMessageEmailRef: document.getElementById('error_message_email'),
+//     popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
+//   };
+// }
 
-function setIdRefValueTrim() {
-  return {
-    name: document.getElementById('name_sign_up').value.trim(),
-    email: document.getElementById('email_sign-up').value.trim(),
-    password: document.getElementById('password_sign_up').value.trim(),
-    confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
-    emailLogIn: document.getElementById('email_log_in').value.trim(),
-    passwordLogIn: document.getElementById('password_log_in').value.trim(),
-  };
-}
+// function setIdRefValueTrim() {
+//   return {
+//     name: document.getElementById('name_sign_up').value.trim(),
+//     email: document.getElementById('email_sign-up').value.trim(),
+//     password: document.getElementById('password_sign_up').value.trim(),
+//     confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
+//     emailLogIn: document.getElementById('email_log_in').value.trim(),
+//     passwordLogIn: document.getElementById('password_log_in').value.trim(),
+//   };
+// }
 
 function checkAndShowAnimation() {
   const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();

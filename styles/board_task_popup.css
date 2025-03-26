@@ -19,15 +19,21 @@
   padding-right: 10px;
 }
 
+.overflow-y {
+  overflow-y: auto;
+}
+
 .popup::-webkit-scrollbar,
 .popup-info::-webkit-scrollbar,
-.assignee-container::-webkit-scrollbar {
+.assignee-container::-webkit-scrollbar,
+.overflow-y::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
 
 .popup::-webkit-scrollbar-thumb,
 .popup-info::-webkit-scrollbar-thumb,
-.assignee-container::-webkit-scrollbar-thumb {
+.assignee-container::-webkit-scrollbar-thumb,
+.overflow-y::-webkit-scrollbar-thumb {
   background: var(--primary-color-gray);
   border-radius: 10px;
 }

@@ -21,6 +21,48 @@ const randomColors = [
   '#ffbb2b', // gold
 ];
 
+function getIdRefs() {
+  return {
+    bodyRef: document.body,
+    loadingSpinnerRef: document.getElementById('loading_spinner'),
+    showMoreBtnRef: document.getElementById('show_more_btn'),
+    loadingDotsRef: document.getElementById('loading_dots'),
+    showAllCardsContainerRef: document.getElementById('show_all_cards_container'),
+    searchAllCardsContainerREef: document.getElementById('search_all_cards_container'),
+    showMoreBtnContainerRef: document.getElementById('show_more_btn_container'),
+    dataCouldNotLoadedContainerRef: document.getElementById('data_could_not_loaded_container'),
+    dataCouldNotBeLoadedRef: document.getElementById('data_could_not_be_loaded'),
+    loadingOverlayRef: document.getElementById('loading_overlay'),
+    cardOverlayFullScreenRef: document.getElementById('card_overlay_full_screen'),
+    cardContainerFullScreenRef: document.getElementById('card_container_full_screen'),
+    searchInputRef: document.getElementById('Search_input'),
+    notValideMessageContainer: document.getElementById('not_valide_message_container'),
+    lengthMessageRef: document.getElementById('length_message'),
+    errorMessageRef: document.getElementById('error_message'),
+    pokemonCouldNotFoundContainerRef: document.getElementById('pokemon_could_not_found_container'),
+    btnLeftRef: document.getElementById('btn_left'),
+    btnRightRef: document.getElementById('btn_right'),
+    h1AddTaskRef: document.getElementById('h1_add_task'),
+    footerddTaskRef: document.getElementById('footer_add_task'),
+    verticalLineRef: document.getElementById('vertical_line'),
+    addTaskContentRef: document.getElementById('add_task_content'),
+    rightContainerRef: document.getElementById('right_container'),
+    leftContainerRef: document.getElementById('left_container'),
+    addTaskfetchTemplateRef: document.getElementById('add_task_fetch_template'),
+  };
+}
+
+function setIdRefValueTrim() {
+  return {
+    name: document.getElementById('name_sign_up').value.trim(),
+    email: document.getElementById('email_sign-up').value.trim(),
+    password: document.getElementById('password_sign_up').value.trim(),
+    confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
+    emailLogIn: document.getElementById('email_log_in').value.trim(),
+    passwordLogIn: document.getElementById('password_log_in').value.trim(),
+  };
+}
+
 /**
  * Controls the visibility of the button links sidebar.
  *
@@ -111,7 +153,7 @@ function showPupupOverlaySignUp() {
   }, 1000);
 }
 
-async function fetchAddTask() {
+async function fetchAddTask(parameter = false) {
   try {
     fetch('template_add_task.html')
       .then((response) => {
@@ -122,6 +164,10 @@ async function fetchAddTask() {
       })
       .then((data) => {
         document.getElementById('add_task_fetch_template').innerHTML = data;
+
+        if (parameter) {
+          setAllPropertysForEditPopup();
+        }
       })
       .catch((error) => {
         console.error('Error loading template', error);
@@ -129,4 +175,21 @@ async function fetchAddTask() {
   } catch (error) {
     console.error('Unexpected error', error);
   }
+}
+
+function setAllPropertysForEditPopup() {
+  const { h1AddTaskRef, footerddTaskRef, verticalLineRef, addTaskContentRef, rightContainerRef, leftContainerRef, addTaskfetchTemplateRef } =
+    getIdRefs();
+
+  h1AddTaskRef.classList.add('d-none');
+  footerddTaskRef.classList.add('d-none');
+  verticalLineRef.classList.add('d-none');
+  addTaskContentRef.classList.remove('add-task-content');
+  addTaskContentRef.classList.add('add-task-content-board-popup');
+  rightContainerRef.style.overflowX = 'unset';
+  rightContainerRef.style.overflowY = 'unset';
+  leftContainerRef.style.overflowX = 'unset';
+  leftContainerRef.style.overflowY = 'unset';
+  leftContainerRef.style.marginBottom = '24px';
+  addTaskfetchTemplateRef.classList.add('overflow-y');
 }

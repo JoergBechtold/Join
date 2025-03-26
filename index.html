@@ -10,7 +10,6 @@
     <base href="./" />
 
     <!-- Embedding the css -->
-
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/header_sidebar.css" />
@@ -37,7 +36,7 @@
             <div class="placeholder"></div>
             <img src="assets/icons/search.icon.png" class="search-icon" alt="" />
           </div>
-          <button onclick="openBoardAddTaskForm()" class="button-primary-dark-gray">Add Task +</button>
+          <button onclick="openBoardAddTaskForm(); fetchAddTask()" class="button-primary-dark-gray">Add Task +</button>
         </div>
       </div>
 
@@ -45,7 +44,7 @@
         <div>
           <span class="column-title"
             >To do
-            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -59,7 +58,7 @@
         <div>
           <span class="column-title"
             >In Progress
-            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm(); fetchAddTask() " src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -73,7 +72,7 @@
         <div>
           <span class="column-title"
             >Await feedback
-            <img onclick="openBoardAddTaskForm()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
+            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.png" alt="add icon" class="add-button-img-column" />
           </span>
           <div
             class="drag-area"
@@ -102,7 +101,7 @@
       <div id="popup" class="popup"></div>
     </div>
 
-    <div id="edit_popup" class="edit-popup"></div>
+    <!-- <div id="edit_popup" class="edit-popup"></div> -->
     <div id="edit_popup" class="edit-popup">
       <div class="edit-close-buttton-container">
         <button class="close-button" type="button" onclick="closePopup()">
@@ -110,7 +109,9 @@
         </button>
       </div>
 
-      <form class="form-add-task">
+      <div id="add_task_fetch_template"></div>
+
+      <!-- <form class="form-add-task">
         <div class="add-task-content popup">
           <div class="form-column left-container edit-popup-form-column">
             <div class="form-group">
@@ -250,7 +251,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </form> -->
       <div class="footer-add-task ok-btn-container">
         <div class="align-with-gap">
           <div class="button-clear-white-img-box"></div>

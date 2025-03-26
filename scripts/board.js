@@ -365,7 +365,7 @@ function closeForm(formId) {
 }
 
 function openBoardAddTaskForm() {
-  fetchAddTask();
+  // fetchAddTask();
   const boardAddTaskContainer = document.getElementById('board_add_task');
   boardAddTaskContainer.innerHTML = '';
   const template = document.getElementById('addTaskTemplate');
