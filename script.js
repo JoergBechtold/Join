@@ -62,15 +62,26 @@ function goToUrl(url) {
 }
 
 function guestLogIn() {
+  loginSuccessful()
+  // localStorage.setItem('loggedIn', 'true');
+  // window.showButtonLinksSidebar = true;
+  // sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+
+  // goToUrl('summary.html');
+}
+
+function loginSuccessful() {
+  sessionStorage.setItem('loggedIn', 'true');
   window.showButtonLinksSidebar = true;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-
-  goToUrl('summary.html');
+  // sessionStorage.setItem('loggedInUserId', userId);
+  goToUrl('summary.html'); // Weiterleitung zur summary.html nach erfolgreichem Login
 }
 
 function logOut() {
   window.showButtonLinksSidebar = false;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+  sessionStorage.removeItem('loggedIn'); 
   sessionStorage.removeItem('loggedInUserId');
   sessionStorage.removeItem('activePage');
   goToUrl('login_register.html');

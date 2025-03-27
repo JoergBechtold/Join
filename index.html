@@ -18,6 +18,14 @@
     <link rel="stylesheet" href="styles/board_task_popup.css" />
     <link rel="stylesheet" href="styles/assets.css" />
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Checks whether the user is logged in. If not then links to login_register.html -->
+    <script>
+      if (sessionStorage.getItem('loggedIn') === null) {
+          window.location.href = 'login_register.html';
+      }
+  </script>
+
   </head>
   <body class="body-board" onload="initBoard()">
     <!-- hier kommt das board rein al index.html -->

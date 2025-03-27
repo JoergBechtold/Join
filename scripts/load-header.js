@@ -67,7 +67,7 @@ async function loadInitialsUserIcon() {
   }
 }
 
-async function toHrefFocus(url, element) {
+function toHrefFocus(url, element) {
   document.querySelectorAll('.link-button').forEach((li) => {
     li.classList.remove('active');
   });

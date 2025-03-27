@@ -35,6 +35,17 @@ function setIdRefValueTrim() {
   };
 }
 
+
+
+// function logout() {
+//   localStorage.removeItem('loggedIn');
+//   sessionStorage.removeItem('loggedIn'); 
+//   sessionStorage.removeItem('linksSidebarBoolienKey');
+//   sessionStorage.removeItem('loggedInUserId');
+//   goToUrl('login_register.html');
+// }
+
+
 function checkAndShowAnimation() {
   const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
   animationJoinLogoRef.classList.remove('d-none');
@@ -255,11 +266,12 @@ async function checkUserIsPresent(parameter = false) {
           if (user.email === emailLogIn && user.password === passwordLogIn) {
             emailLogInRef.value = '';
             passwordLogInRef.value = '';
-            window.showButtonLinksSidebar = true;
-            sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
+            // window.showButtonLinksSidebar = true;
+            // sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
             sessionStorage.setItem('loggedInUserId', userId);
             await loadUserData();
-            goToUrl('summary.html');
+            loginSuccessful(); // Hier wird loginSuccessful() aufgerufen
+            // goToUrl('summary.html');
             return true;
           }
         }
