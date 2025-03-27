@@ -63,19 +63,13 @@ function goToUrl(url) {
 
 function guestLogIn() {
   loginSuccessful()
-  // localStorage.setItem('loggedIn', 'true');
-  // window.showButtonLinksSidebar = true;
-  // sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-
-  // goToUrl('summary.html');
 }
 
 function loginSuccessful() {
   sessionStorage.setItem('loggedIn', 'true');
   window.showButtonLinksSidebar = true;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-  // sessionStorage.setItem('loggedInUserId', userId);
-  goToUrl('summary.html'); // Weiterleitung zur summary.html nach erfolgreichem Login
+  goToUrl('summary.html'); 
 }
 
 function logOut() {
