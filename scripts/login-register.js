@@ -179,8 +179,8 @@ function resetProberties() {
   toggleCheckbox(true);
 }
 
-async function createUser(firstname, lastname, email, password, randomColors, initials) {
-  const newUser = { firstname, lastname, email, password, randomColors, initials };
+async function createUser(firstname, lastname, email, password, randomColor, initials) {
+  const newUser = { firstname, lastname, email, password, randomColor, initials };
 
   try {
     await postData('/user', newUser);
