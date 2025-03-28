@@ -35,17 +35,6 @@ function setIdRefValueTrim() {
   };
 }
 
-
-
-// function logout() {
-//   localStorage.removeItem('loggedIn');
-//   sessionStorage.removeItem('loggedIn'); 
-//   sessionStorage.removeItem('linksSidebarBoolienKey');
-//   sessionStorage.removeItem('loggedInUserId');
-//   goToUrl('login_register.html');
-// }
-
-
 function checkAndShowAnimation() {
   const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
   animationJoinLogoRef.classList.remove('d-none');
@@ -188,18 +177,6 @@ function checkPasswordConfirm(password, confirmPassword) {
 function resetProberties() {
   document.getElementById('sign_up_form').reset();
   toggleCheckbox(true);
-}
-
-function getRandomColor() {
-  if (randomColors.length === 0) {
-    console.error('Keine Farben mehr verfügbar');
-    return null;
-  }
-
-  const randomIndex = Math.floor(Math.random() * randomColors.length);
-  const selectedColor = randomColors[randomIndex];
-  randomColors.splice(randomIndex, 1);
-  return selectedColor;
 }
 
 async function createUser(firstname, lastname, email, password, randomColors, initials) {

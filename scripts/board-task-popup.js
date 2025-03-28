@@ -62,7 +62,7 @@ function openPopup(Key) {
     let categoryBackground = getCategoryBg(task);
     const priorityIconSrc = getPriorityIcon(task.priority);
     document.body.style.overflow = 'hidden';
-    popup.innerHTML = getPopupContentHtml(task, assignedHTML, subtasksHTML, categoryBackground,priorityIconSrc);
+    popup.innerHTML = getPopupContentHtml(task,taskKey, assignedHTML, subtasksHTML, categoryBackground,priorityIconSrc);
   } else {
     popup.innerHTML = `
     <div class="popup-header">
@@ -87,7 +87,7 @@ function getPriorityIcon(priority) {
   return '';
 }
 
-function getPopupContentHtml(task, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
+function getPopupContentHtml(task,taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
   return /*html*/`
      <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
@@ -123,7 +123,7 @@ function getPopupContentHtml(task, assignedHTML, subtasksHTML, categoryBg, prior
       </div>
     </div>
     <div class="popup-actions">
-      <div class="action-box delete" onclick="deleteTask()">
+      <div class="action-box delete" onclick="deleteTask(taskKey)">
       <div class="delete-icon">
         <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
       </div>
@@ -186,31 +186,62 @@ function getSubtasksHTML(task) {
   return html;
 }
 
-async function deleteTask() {
-  if (confirm('Are you sure you want to delete this task?')) {
-    try {
-      if (!taskKey) {
-        console.error('taskKey is undefined.');
-        return;
-      }
+async function deleteTask(taskKey) {
+  try {
+    const confirmed = await showConfirmation('Are you sure you want to delete this task?'); 
 
-      await deleteData('tasks', `${taskKey}`);
-
-      let tasksString = sessionStorage.getItem('tasks');
-      if (tasksString) {
-        let tasks = JSON.parse(tasksString);
-        delete tasks[taskKey];
-        sessionStorage.setItem('tasks', JSON.stringify(tasks));
-      } else {
-          console.log("No tasks found in sessionStorage.");
-      }
-      closePopup();
-      renderCards();  
-    } catch (error) {
-      console.error('Error deleting the task:', error);
+    if (!confirmed) {
+      return; 
     }
+
+    if (!taskKey) {
+      console.error('taskKey is undefined.');
+      return;
+    }
+
+    await deleteData('tasks', `${taskKey}`);
+
+    let tasksString = sessionStorage.getItem('tasks');
+    if (tasksString) {
+      let tasks = JSON.parse(tasksString);
+      delete tasks[taskKey];
+      sessionStorage.setItem('tasks', JSON.stringify(tasks));
+    } else {
+      console.log("No tasks found in sessionStorage.");
+    }
+
+    closePopup();
+    renderCards();
+  } catch (error) {
+    console.error('Error deleting the task:', error);
   }
 }
+
+// async function deleteTask() {
+//   if (confirm('Are you sure you want to delete this task?')) {
+//     try {
+//       if (!taskKey) {
+//         console.error('taskKey is undefined.');
+//         return;
+//       }
+
+//       await deleteData('tasks', `${taskKey}`);
+
+//       let tasksString = sessionStorage.getItem('tasks');
+//       if (tasksString) {
+//         let tasks = JSON.parse(tasksString);
+//         delete tasks[taskKey];
+//         sessionStorage.setItem('tasks', JSON.stringify(tasks));
+//       } else {
+//           console.log("No tasks found in sessionStorage.");
+//       }
+//       closePopup();
+//       renderCards();  
+//     } catch (error) {
+//       console.error('Error deleting the task:', error);
+//     }
+//   }
+// }
 
 function closePopup() {
   document.getElementById('popup_container').style.display = 'none';

@@ -11,7 +11,7 @@ async function loadData(path = '') {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('rror loading data', error);
+    console.error('Error loading data', error);
     return null;
   }
 }
@@ -29,7 +29,7 @@ async function postData(path = '', data = {}) {
     let responseToJson = await response.json();
     return responseToJson;
   } catch (error) {
-    console.error('Fehler in postData:', error);
+    console.error('Error in postData', error);
     return null;
   }
 }
@@ -47,7 +47,7 @@ async function updateData(path = '', data = {}) {
     const responseToJson = await response.json();
     return responseToJson;
   } catch (error) {
-    console.error('Fehler beim Aktualisieren der Daten:', error);
+    console.error('Error updating data', error);
     return null;
   }
 }

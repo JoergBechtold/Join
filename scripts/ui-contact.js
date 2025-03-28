@@ -50,7 +50,7 @@ function closeEditContactPopup() {
 }
 
 function processContactEdition() {
-  if (!activeContact) { alert("Bitte wähle einen Kontakt aus!"); return; }
+  if (!activeContact) { ; return; }
   const n = document.querySelector('.container-edit input[placeholder="Name"]'),
         e = document.querySelector('.container-edit input[placeholder="Email"]'),
         p = document.querySelector('.container-edit input[placeholder="Phone"]');
@@ -108,51 +108,43 @@ function updateContactFirebase(id, firstname, lastname, newEmail, newPhone, init
 }
 
 function getEditFormValues() {
-  var container = document.querySelector('.container-edit');
-  var nameInput = container.querySelector('input[placeholder="Name"]');
-  var emailInput = container.querySelector('input[placeholder="Email"]');
-  var phoneInput = container.querySelector('input[placeholder="Phone"]');
-  var nameVal = nameInput.value.trim();
-  var emailVal = emailInput.value.trim();
-  var phoneVal = phoneInput.value.trim();
+  let container = document.querySelector('.container-edit');
+  let nameInput = container.querySelector('input[placeholder="Firstname Lastname"]');
+  let emailInput = container.querySelector('input[placeholder="Email"]');
+  let phoneInput = container.querySelector('input[placeholder="Phone"]');
+  let nameVal = nameInput.value.trim();
+  let emailVal = emailInput.value.trim();
+  let phoneVal = phoneInput.value.trim();
   if (!nameVal || !emailVal || !phoneVal) {
-    alert("Please fill in all fields!");
+    
     return null;
   }
   return { name: nameVal, email: emailVal, phone: phoneVal };
 }
 
 function prepareContactData(fullData) {
-  var newName = fullData.name;
-  var newEmail = fullData.email;
-  var newPhone = fullData.phone;
-  var parts = newName.split(' ');
-  var firstName = parts[0];
-  var lastName = parts.slice(1).join(' ');
-  var initials = newName.split(' ').map(w => w.charAt(0).toUpperCase()).join('');
-  var id = activeContact.getAttribute('data-id');
+  let newName = fullData.name;
+  let newEmail = fullData.email;
+  let newPhone = fullData.phone;
+  let parts = newName.split(' ');
+  let firstName = parts[0];
+  let lastName = parts.slice(1).join(' ');
+  let initials = newName.split(' ').map(w => w.charAt(0).toUpperCase()).join('');
+  let id = activeContact.getAttribute('data-id');
   return { newName, newEmail, newPhone, firstName, lastName, initials, id };
 }
 
 function saveContact(event) {
   event.preventDefault();
-  var formValues = getEditFormValues();
+  let formValues = getEditFormValues();
   if (!formValues) return;
-  var data = prepareContactData(formValues);
+  let data = prepareContactData(formValues);
   updateContactUI(data.newName, data.newEmail, data.newPhone, data.initials);
   updateContactFirebase(data.id, data.firstName, data.lastName, data.newEmail, data.newPhone, data.initials);
   closeEditContactPopup();
 }
       
-function showConfirmPopup(msg, callback) {
-  const p = document.querySelector('.confirm-popup'),
-        m = p.querySelector('.confirm-message'),
-        y = p.querySelector('.confirm-yes'),
-        n = p.querySelector('.confirm-no');
-  m.textContent = msg; p.classList.remove('hidden'); p.classList.add('active');
-  y.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(true); };
-  n.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(false); };
-}
+
 
 function hoverEdit(isH) { const i = document.getElementById("edit-icon"); if(i) i.src = isH ? "assets/icons/editblau.svg" : "assets/icons/edit.svg"; }
 function hoverDelete(isH) { const i = document.getElementById("delete-icon"); if(i) i.src = isH ? "assets/icons/delete.svg" : "assets/icons/paperbasketdelet.svg"; }

@@ -3,23 +3,110 @@
  *
  * @type {array}
  */
-const randomColors = [
-  '#ff7a00', // orange
-  '#ff5eb3', // pink
-  '#6e52ff', // violet
-  '#9327ff', // purple
-  '#00bee8', // turquoise
-  '#1fd7c1', // mint
-  '#ff745e', // coral
-  '#ffa35e', // peach
-  '#fc71ff', // magenta
-  '#ffc701', // yellow
-  '#0038ff', // blue
-  '#c3ff2b', // lime
-  '#ffe62b', // lemon
-  '#ff4646', // red
-  '#ffbb2b', // gold
-];
+// const randomColors = [
+//   '#ff7a00',  // Vivid Orange
+//     '#ff5eb3',  // Bright Pink
+//     '#6e52ff',  // Deep Violet
+//     '#9327ff',  // Rich Purple
+//     '#00bee8',  // Light Turquoise
+//     '#1fd7c1',  // Fresh Mint
+//     '#ff745e',  // Coral Red
+//     '#ffa35e',  // Soft Peach
+//     '#fc71ff',  // Electric Magenta
+//     '#ffc701',  // Sunny Yellow
+//     '#0038ff',  // Royal Blue
+//     '#c3ff2b',  // Vibrant Lime
+//     '#ffe62b',  // Zesty Lemon
+//     '#ff4646',  // Fiery Red
+//     '#ffbb2b',  // Gleaming Gold
+//     '#00a86b',  // Emerald Green
+//     '#00ced1',  // Dark Turquoise
+//     '#b19cd9',  // Light Lavender
+//     '#8b008b',  // Dark Magenta
+//     '#228b22',  // Forest Green
+//     '#d2691e',  // Chocolate Brown
+//     '#808000',  // Olive Green
+//     '#4682b4',  // Steel Blue
+//     '#a0522d',  // Sienna Brown
+//     '#8fbc8f',  // Dark Sea Green
+//     '#ee82ee',  // Medium Violet
+//     '#a52a2a',  // Brown
+//     '#008080',  // Teal
+//     '#da70d6',  // Orchid
+//     '#f0e68c',  // Khaki
+//     '#00fa9a',  // Medium Spring Green
+//     '#cd5c5c',  // Indian Red
+//     '#f5f5dc',  // Beige
+//     '#98fb98',  // Pale Green
+//     '#d8bfd8',  // Thistle
+//     '#e9967a',  // Dark Salmon
+//     '#fffacd',  // Lemon Chiffon
+//     '#90ee90',  // Light Green
+//     '#dda0dd',  // Plum
+//     '#87ceeb',  // Sky Blue
+//     '#f08080',  // Light Salmon
+// ];
+
+
+// function getRandomColor() {
+//   if (randomColors.length === 0) {
+//     console.error('No more colors available');
+//     return null;
+//   }
+
+//   const randomIndex = Math.floor(Math.random() * randomColors.length);
+//   const selectedColor = randomColors[randomIndex];
+//   randomColors.splice(randomIndex, 1);
+//   return selectedColor;
+// }
+
+function showConfirmation(message) {
+  return new Promise((resolve) => {
+    showConfirmPopup(message, (confirmed) => {
+      resolve(confirmed);
+    });
+  });
+}
+
+function showConfirmPopup(msg, callback) {
+  const p = document.querySelector('.confirm-popup'),
+        m = p.querySelector('.confirm-message'),
+        y = p.querySelector('.confirm-yes'),
+        n = p.querySelector('.confirm-no');
+  m.textContent = msg; p.classList.remove('hidden'); p.classList.add('active');
+  y.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(true); };
+  n.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(false); };
+}
+
+
+async function getRandomColor() {
+  try {
+    let randomColorsJson = await loadData('randomColorsJson');
+
+  
+    if (!randomColorsJson || randomColorsJson.length === 0) {
+      console.error('No more colors available or invalid data from Firebase');
+      return null;
+    }
+
+    const randomIndex = Math.floor(Math.random() * randomColorsJson.length);
+    const selectedColor = randomColorsJson[randomIndex];
+
+   randomColorsJson.splice(randomIndex, 1);
+    const updateResult =  await updateData('randomColorsJson', randomColorsJson);
+
+    if (!updateResult) {
+      console.error('Failed to update colors in Firebase.');
+      return null; 
+    }
+
+    return selectedColor;
+  } catch (error) {
+    console.error('Error getting random color:', error);
+    return null;
+  }
+}
+
 
 /**
  * Retrieves references to all HTML elements needed in script.js for the add task form.
@@ -136,7 +223,7 @@ function showPupupOverlaySignUp() {
 
 async function fetchAddTask(parameter = false) {
   try {
-    fetch('template_add_task.html')
+    fetch('assets/templates/template_add_task.html')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

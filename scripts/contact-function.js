@@ -1,21 +1,21 @@
-var activeContact = null;
-var colorVariables = [
-  '--circle-bg-color-orange',
-  '--circle-bg-color-pink',
-  '--circle-bg-color-violet',
-  '--circle-bg-color-purple',
-  '--circle-bg-color-turquoise',
-  '--circle-bg-color-mint',
-  '--circle-bg-color-coral',
-  '--circle-bg-color-peach',
-  '--circle-bg-color-magenta',
-  '--circle-bg-color-yellow',
-  '--circle-bg-color-blue',
-  '--circle-bg-color-lime',
-  '--circle-bg-color-lemon',
-  '--circle-bg-color-red',
-  '--circle-bg-color-gold',
-];
+let activeContact = null;
+// let colorVariables = [
+//   '--circle-bg-color-orange',
+//   '--circle-bg-color-pink',
+//   '--circle-bg-color-violet',
+//   '--circle-bg-color-purple',
+//   '--circle-bg-color-turquoise',
+//   '--circle-bg-color-mint',
+//   '--circle-bg-color-coral',
+//   '--circle-bg-color-peach',
+//   '--circle-bg-color-magenta',
+//   '--circle-bg-color-yellow',
+//   '--circle-bg-color-blue',
+//   '--circle-bg-color-lime',
+//   '--circle-bg-color-lemon',
+//   '--circle-bg-color-red',
+//   '--circle-bg-color-gold',
+// ];
 
 function showAddContactPopup() {
   const p = document.querySelector('.container-add');
@@ -49,14 +49,16 @@ function validateEmail(emailInput, container) {
 }
 
 function validatePhone(phoneInput, container) {
-  const isValid = /^\+?[0-9]+$/.test(phoneInput.value.trim());
+  const phoneValue = phoneInput.value.trim();
+  const isValid = /^\+?[0-9]+$/.test(phoneValue) && phoneValue.length >= 7 && phoneValue.length <= 15;
   let err = container.querySelector('.phone-error');
-  if (!isValid && phoneInput.value.trim() !== '') {
+
+  if (!isValid && phoneValue !== '') {
     if (!err) {
       err = document.createElement('span');
       err.className = 'phone-error';
       err.style.color = 'red';
-      err.textContent = 'Invalid phone number';
+      err.textContent = 'Invalid phone number (7-15 digits)';
       phoneInput.parentNode.insertBefore(err, phoneInput.nextSibling);
     }
   } else if (err) {
@@ -65,15 +67,33 @@ function validatePhone(phoneInput, container) {
   return isValid;
 }
 
+// function validatePhone(phoneInput, container) {
+//   const isValid = /^\+?[0-9]+$/.test(phoneInput.value.trim());
+//   let err = container.querySelector('.phone-error');
+//   if (!isValid && phoneInput.value.trim() !== '') {
+//     if (!err) {
+//       err = document.createElement('span');
+//       err.className = 'phone-error';
+//       err.style.color = 'red';
+//       err.textContent = 'Invalid phone number';
+//       phoneInput.parentNode.insertBefore(err, phoneInput.nextSibling);
+//     }
+//   } else if (err) {
+//     err.remove();
+//   }
+//   return isValid;
+// }
+
 function checkInputs() {
   const container = document.querySelector('.container-edit.active') || document.querySelector('.container-add.active');
   if (!container) return;
-  const nameIn = container.querySelector('input[placeholder="Name"]'),
+  const nameIn = container.querySelector('input[placeholder="Firstname Lastname"]'),
     emailIn = container.querySelector('input[placeholder="Email"]'),
     phoneIn = container.querySelector('input[placeholder="Phone"]'),
     btn = container.querySelector('.create-button'),
     validE = validateEmail(emailIn, container),
     validP = validatePhone(phoneIn, container);
+
   if (nameIn.value.trim() !== '' && validE && phoneIn.value.trim() !== '' && validP) {
     btn.disabled = false;
     btn.classList.remove('disabled');
@@ -85,7 +105,7 @@ function checkInputs() {
 
 function getInputValues() {
   const container = document.querySelector('.container-edit.active') || document.querySelector('.container-add.active') || document;
-  const n = container.querySelector('input[placeholder="Name"]'),
+  const n = container.querySelector('input[placeholder="Firstname Lastname"]'),
     e = container.querySelector('input[placeholder="Email"]'),
     p = container.querySelector('input[placeholder="Phone"]');
   return {
@@ -136,54 +156,137 @@ function getOrCreateGroupContainer(letter) {
   return cc;
 }
 
-function createContactAvatar(name, color) {
-  const avatar = document.createElement('div');
-  avatar.classList.add('contact-avatar');
-  if (!color) {
-    const randomVar = colorVariables[Math.floor(Math.random() * colorVariables.length)];
-    color = getComputedStyle(document.documentElement).getPropertyValue(randomVar).trim();
-  }
-  avatar.style.backgroundColor = color;
-  avatar.textContent = name
-    .split(' ')
-    .map((w) => w.charAt(0).toUpperCase())
-    .join('');
-  return avatar;
-}
-
-function createContactInfo(name, email) {
-  const info = document.createElement('div');
-  info.classList.add('contact-info');
-  const namePara = document.createElement('p');
-  namePara.classList.add('contact-name');
-  namePara.textContent = name;
-  const emailLink = document.createElement('a');
-  emailLink.classList.add('contact-email');
-  emailLink.textContent = email;
-  info.appendChild(namePara);
-  info.appendChild(emailLink);
-  return info;
-}
 
 function buildContactElement(name, email, phone, color) {
-  const contact = document.createElement('div');
-  contact.classList.add('contact');
-  contact.setAttribute('data-phone', phone);
-  const avatar = createContactAvatar(name, color);
-  const info = createContactInfo(name, email);
-  contact.appendChild(avatar);
-  contact.appendChild(info);
-  return contact;
+  try {
+    const contact = document.createElement('div');
+    contact.classList.add('contact');
+    contact.setAttribute('data-phone', phone);
+    const avatar = createContactAvatar(name, color);
+    const info = createContactInfo(name, email);
+
+    contact.appendChild(avatar);
+    contact.appendChild(info);
+    return contact;
+  } catch (error) {
+    console.error('Error in buildContactElement:', error);
+    return null; // 
+  }
 }
+
+// function buildContactElement(name, email, phone, color) {
+//   const contact = document.createElement('div');
+//   contact.classList.add('contact');
+//   contact.setAttribute('data-phone', phone);
+//   const avatar = createContactAvatar(name, color);
+//   const info = createContactInfo(name, email);
+
+//   contact.appendChild(avatar);
+//   contact.appendChild(info);
+//   return contact;
+// }
+
+
+function createContactAvatar(name, color) {
+  try {
+    const avatar = document.createElement('div');
+    avatar.classList.add('contact-avatar');
+    if (!color) {
+      console.error('No color available. Contact will be created without color.');
+      color = '#808080';
+    }
+    avatar.style.backgroundColor = color;
+    avatar.textContent = name
+      .split(' ')
+      .map((w) => w.charAt(0).toUpperCase())
+      .join('');
+    return avatar;
+  } catch (error) {
+    console.error('Error in createContactAvatar:', error);
+    return document.createElement('div');
+  }
+}
+
+// function createContactAvatar(name, color) {
+//   const avatar = document.createElement('div');
+//   avatar.classList.add('contact-avatar');
+//   if (!color) {
+//     console.error('No color available. Contact will be created without color.');
+//      color = '#808080'; 
+   
+//   }
+//   avatar.style.backgroundColor = color;
+//   avatar.textContent = name
+//     .split(' ')
+//     .map((w) => w.charAt(0).toUpperCase())
+//     .join('');
+//   return avatar;
+// }
+
+// const randomIndex = Math.floor(Math.random() * randomColors.length);
+// const selectedColor = randomColors[randomIndex];
+// randomColors.splice(randomIndex, 1);
+// return selectedColor;
+
+
+// function () {
+//   let rv = colorVariables[Math.floor(Math.random() * colorVariables.length)];
+//   let compColor = getComputedStyle(document.documentElement).getPropertyValue(rv).trim();
+//   return compColor;
+// }
+
+
+function createContactInfo(name, email) {
+  try {
+    const info = document.createElement('div');
+    info.classList.add('contact-info');
+    const namePara = document.createElement('p');
+    namePara.classList.add('contact-name');
+    namePara.textContent = name;
+    const emailLink = document.createElement('a');
+    emailLink.classList.add('contact-email');
+    emailLink.textContent = email;
+    info.appendChild(namePara);
+    info.appendChild(emailLink);
+    return info;
+  } catch (error) {
+    console.error('Error in createContactInfo:', error);
+    return document.createElement('div'); 
+  }
+}
+
+// function createContactInfo(name, email) {
+//   const info = document.createElement('div');
+//   info.classList.add('contact-info');
+//   const namePara = document.createElement('p');
+//   namePara.classList.add('contact-name');
+//   namePara.textContent = name;
+//   const emailLink = document.createElement('a');
+//   emailLink.classList.add('contact-email');
+//   emailLink.textContent = email;
+//   info.appendChild(namePara);
+//   info.appendChild(emailLink);
+//   return info;
+// }
 
 function insertContactSorted(container, contactEl, name) {
-  const contacts = [].slice.call(container.querySelectorAll('.contact')),
-    next = contacts.find((c) => c.querySelector('.contact-name').textContent.trim() > name);
-  next ? container.insertBefore(contactEl, next) : container.appendChild(contactEl);
+  try {
+    const contacts = [].slice.call(container.querySelectorAll('.contact')),
+      next = contacts.find((c) => c.querySelector('.contact-name').textContent.trim() > name);
+    next ? container.insertBefore(contactEl, next) : container.appendChild(contactEl);
+  } catch (error) {
+    console.error('Error in insertContactSorted:', error);
+  }
 }
 
+// function insertContactSorted(container, contactEl, name) {
+//   const contacts = [].slice.call(container.querySelectorAll('.contact')),
+//     next = contacts.find((c) => c.querySelector('.contact-name').textContent.trim() > name);
+//   next ? container.insertBefore(contactEl, next) : container.appendChild(contactEl);
+// }
+
 function resetForm() {
-  const n = document.querySelector('input[placeholder="Name"]'),
+  const n = document.querySelector('input[placeholder="Firstname Lastname"]'),
     e = document.querySelector('input[placeholder="Email"]'),
     p = document.querySelector('input[placeholder="Phone"]');
   n.value = '';
@@ -203,7 +306,7 @@ function showSuccessPopup() {
 
 function extractInputs(event) {
   event.preventDefault();
-  var inputs = getInputValues();
+  let inputs = getInputValues();
   if (!inputs.name || !inputs.email || !inputs.phone) {
     alert('Please fill in all fields!');
     return null;
@@ -212,10 +315,10 @@ function extractInputs(event) {
 }
 
 function computeNameParts(fullName) {
-  var parts = fullName.trim().split(' ');
-  var firstName = parts[0];
-  var lastName = parts.slice(1).join(' ');
-  var initials = fullName
+  let parts = fullName.trim().split(' ');
+  let firstName = parts[0];
+  let lastName = parts.slice(1).join(' ');
+  let initials = fullName
     .split(' ')
     .map(function (word) {
       return word.charAt(0).toUpperCase();
@@ -224,60 +327,115 @@ function computeNameParts(fullName) {
   return { firstName: firstName, lastName: lastName, initials: initials };
 }
 
-function getRandomColor() {
-  var rv = colorVariables[Math.floor(Math.random() * colorVariables.length)];
-  var compColor = getComputedStyle(document.documentElement).getPropertyValue(rv).trim();
-  return compColor;
+async function saveContactToFirebase(contactData, callback) {
+  try {
+    const data = await postData('/contacts', contactData);
+    callback(null, data);
+  } catch (err) {
+    console.error('Error saving contact:', err);
+    callback(err, null);
+  }
 }
 
-function saveContactToFirebase(contactData, callback) {
-  fetch(`${BASE_URL}/contacts.json`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(contactData),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      callback(null, data);
-    })
-    .catch(function (err) {
-      callback(err, null);
-    });
-}
+// function saveContactToFirebase(contactData, callback) {
+//   fetch(`${BASE_URL}/contacts.json`, {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(contactData),
+//   })
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       callback(null, data);
+//     })
+//     .catch(function (err) {
+//       callback(err, null);
+//     });
+// }
 
-
-
-function prepareContact(event) {
-  var inputs = extractInputs(event);
+async function prepareContact(event) {
+  let inputs = extractInputs(event);
   if (!inputs) return null;
 
   let phoneNumber = inputs.phone;
   if (phoneNumber.startsWith('0')) {
-    phoneNumber = phoneNumber.substring(1); 
+    phoneNumber = phoneNumber.substring(1);
   }
-  phoneNumber = '+49' + phoneNumber; 
+  phoneNumber = '+49' + phoneNumber;
 
-  var firstLetter = inputs.name.charAt(0).toUpperCase(),
-    container = getOrCreateGroupContainer(firstLetter),
-    compColor = getRandomColor(),
-    nameParts = computeNameParts(inputs.name),
-    contactEl = buildContactElement(inputs.name, inputs.email, phoneNumber, compColor); 
+  let firstLetter = inputs.name.charAt(0).toUpperCase();
+  let container = getOrCreateGroupContainer(firstLetter);
+
+  let compColor;
+  try {
+    compColor = await getRandomColor();
+    console.log('getRandomColor:', compColor);
+  } catch (error) {
+    console.error('Error in getRandomColor:', error);
+    compColor = '#808080';
+  }
+
+  let nameParts = computeNameParts(inputs.name);
+  let contactEl = buildContactElement(inputs.name, inputs.email, phoneNumber, compColor);
+  console.log('contactEl nach buildContactElement:', contactEl);
+
   insertContactSorted(container, contactEl, inputs.name);
 
-  var contactData = {
+  if (!compColor) {
+    console.error('No color available. Contact will be created without color.');
+    compColor = '#808080';
+  }
+
+  let contactData = {
     firstname: nameParts.firstName,
     lastname: nameParts.lastName,
     email: inputs.email,
-    phone: phoneNumber, 
+    phone: phoneNumber,
     contactColor: compColor,
     initials: nameParts.initials,
     createdAt: new Date().toISOString(),
   };
-
+  
   return { data: contactData, el: contactEl };
 }
+
+//  async function prepareContact(event) {
+//   let inputs = extractInputs(event);
+//   if (!inputs) return null;
+
+//   let phoneNumber = inputs.phone;
+//   if (phoneNumber.startsWith('0')) {
+//     phoneNumber = phoneNumber.substring(1); 
+//   }
+//   phoneNumber = '+49' + phoneNumber; 
+
+//   let firstLetter = inputs.name.charAt(0).toUpperCase(),
+//     container = getOrCreateGroupContainer(firstLetter),
+//     compColor = await getRandomColor() // in script.js
+
+//     nameParts = computeNameParts(inputs.name),
+//     contactEl = buildContactElement(inputs.name, inputs.email, phoneNumber, compColor); 
+//   insertContactSorted(container, contactEl, inputs.name);
+
+//   if (!compColor) {
+//     console.error('No color available. Contact will be created without color.');
+//     compColor = '#808080'; 
+//   }
+
+//   let contactData = {
+//     firstname: nameParts.firstName,
+//     lastname: nameParts.lastName,
+//     email: inputs.email,
+//     phone: phoneNumber, 
+//     contactColor: compColor,
+//     initials: nameParts.initials,
+//     createdAt: new Date().toISOString(),
+//   };
+
+//   return { data: contactData, el: contactEl };
+// }
+
 
 function finalizeContact(contactData, contactEl) {
   saveContactToFirebase(contactData, function (err, data) {
@@ -285,25 +443,102 @@ function finalizeContact(contactData, contactEl) {
       console.error('Error saving contact:', err);
       return;
     }
-    console.log('Contact saved:', data);
-    contactEl.setAttribute('data-id', data.name);
-    showSuccessPopup();
+    
+    if (contactEl) {
+      contactEl.setAttribute('data-id', data.name);
+      showSuccessPopup();
+    } else {
+      console.error('contactEl is undefined.');
+    }
   });
   resetForm();
 }
 
-function createContact(event) {
+
+
+// function finalizeContact(contactData, contactEl) {
+//   saveContactToFirebase(contactData, function (err, data) {
+//     if (err) {
+//       console.error('Error saving contact:', err);
+//       return;
+//     }
+
+//     if (contactEl) { 
+//       contactEl.setAttribute('data-id', data.name);
+//       showSuccessPopup();
+//     } else {
+//       console.error('contactEl is undefined.');
+//     }
+//   });
+//   resetForm();
+// }
+
+// function finalizeContact(contactData, contactEl) {
+//  saveContactToFirebase(contactData, function (err, data) {
+//     if (err) {
+//       console.error('Error saving contact:', err);
+//       return;
+//     }
+    
+//     contactEl.setAttribute('data-id', data.name);
+//     showSuccessPopup();
+//   });
+//   resetForm();
+// }
+
+
+async function createContact(event) {
   event.preventDefault();
-  var info = prepareContact(event);
+  let info = await prepareContact(event); 
+  console.log('info in createContact:', info);
   if (info) {
+    console.log('info.el in createContact:', info.el);
     finalizeContact(info.data, info.el);
   }
 }
+
+//  function createContact(event) {
+//   event.preventDefault();
+//   let info = prepareContact(event);
+//   if (info) {
+//     finalizeContact(info.data, info.el);
+//   }
+// }
+
 
 function getContactDiv(deleteBtn) {
   let contactDiv = deleteBtn ? deleteBtn.closest('.contact') : activeContact;
   return contactDiv;
 }
+// erstmal ausgeblendet muss noch überarbeitet werden
+
+// function confirmAndDeleteContact(contactDiv) {
+//   return new Promise(async (resolve) => {
+//     const confirmed = await showConfirmation('Do you really want to delete this contact?');
+
+//     if (!confirmed) {
+//       resolve(false);
+//       return;
+//     }
+
+//     const firebaseId = contactDiv.getAttribute('data-id');
+//     if (firebaseId) {
+//       fetch(`${BASE_URL}/contacts/${firebaseId}.json`, { method: 'DELETE' })
+//         .then((r) => {
+//           if (!r.ok) throw new Error('Deletion error');
+//           removeContactFromUI(contactDiv);
+//           resolve(true);
+//         })
+//         .catch((err) => {
+//           console.error('Deletion error:', err);
+//           resolve(false);
+//         });
+//     } else {
+//       removeContactFromUI(contactDiv);
+//       resolve(true);
+//     }
+//   });
+// }
 
 function confirmAndDeleteContact(contactDiv) {
   return new Promise((resolve) => {

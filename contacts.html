@@ -40,9 +40,9 @@
             <img src="assets/icons/graycontactperson.svg" alt="Profilbild" />
           </div>
 
-          <form onsubmit="createContact(event)">
+          <form>
             <div class="input-group">
-              <input type="text" placeholder="Name" oninput="checkInputs()" />
+              <input type="text" placeholder="Firstname Lastname" oninput="checkInputs()" />
               <img class="icon" src="assets/icons/gray-person.svg" alt="Icon" />
             </div>
             <div class="input-group">
@@ -61,7 +61,7 @@
                 </div>
               </button>
 
-              <button type="submit" class="button-save-gray d-flex-align-center create-button" disabled onclick="createContact(event)">
+              <button onclick="createContact(event)" type="submit" class="button-save-gray d-flex-align-center create-button" disabled ">
                 Create contact
                 <img src="assets/icons/check.svg" alt="Check Icon" />
               </button>
@@ -97,7 +97,7 @@
               <img class="icon" src="assets/icons/mail.svg" alt="Icon" />
             </div>
             <div class="input-group">
-              <input type="tel" placeholder="Phone" oninput="this.value = this.value.replace(/\D/g, ''); checkInputs()" />
+              <input  type="tel" placeholder="Phone" oninput="this.value = this.value.replace(/\D/g, ''); checkInputs()"  />
               <img class="icon" src="assets/icons/call.svg" alt="Icon" />
             </div>
 

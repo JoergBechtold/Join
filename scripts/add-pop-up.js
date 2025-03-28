@@ -6,7 +6,7 @@ window.onload = function () {
   var addForm = document.querySelector('.container-add form');
   if (addForm) {
     addForm.onsubmit = function (event) {
-      createContact(event);
+      ;
     };
   }
 
