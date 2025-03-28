@@ -123,7 +123,7 @@ async function handleSignUp() {
     const nameParts = name.split(' ');
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ');
-    const randomColor = getRandomColor();
+    const randomColor = await getRandomColor();
     const initials = firstName[0].toUpperCase() + lastName[0].toUpperCase();
 
     if (!checkNamePartsLength(nameParts)) {

@@ -57,10 +57,12 @@ async function loadInitialsUserIcon() {
 
   try {
     const user = await loadUserData();
-    if (user && user.initials) {
+    if (user && user.initials && user.randomColors) {
       userProfileCircleRef.innerHTML = user.initials;
+      userProfileCircleRef.style.backgroundColor = user.randomColors;
     } else {
       userProfileCircleRef.innerHTML = 'G';
+      userProfileCircleRef.style.backgroundColor = '';
     }
   } catch (error) {
     console.error('Error loading user data', error);
