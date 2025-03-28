@@ -54,7 +54,7 @@ a {
   --red: #ff001f;
 
   /* color for circle */
-  --circle-bg-color-orange: #ff7a00;
+  /* --circle-bg-color-orange: #ff7a00;
   --circle-bg-color-pink: #ff5eb3;
   --circle-bg-color-violet: #6e52ff;
   --circle-bg-color-purple: #9327ff;
@@ -68,7 +68,7 @@ a {
   --circle-bg-color-lime: #c3ff2b;
   --circle-bg-color-lemon: #ffe62b;
   --circle-bg-color-red: #ff4646;
-  --circle-bg-color-gold: #ffbb2b;
+  --circle-bg-color-gold: #ffbb2b; */
 
   /* gap */
   --form-gap: 32px;

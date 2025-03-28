@@ -523,22 +523,24 @@ input:focus {
   height: 19px;
 }
 
-.info-block p {
+#detail-email a,#detail-phone a {
   margin: 0;
-  color: rgba(0, 124, 238, 1);
   cursor: pointer;
-  /* font-family: 'Inter'; */
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 120%;
-  letter-spacing: 0%;
-  vertical-align: middle;
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-16);
 }
 
-#detail-phone {
-  color: rgba(0, 0, 0, 1);
-  cursor: default;
+#detail-email a{
+color: var(--blue);
 }
+
+#detail-phone a {
+  color:var(--primary-color-dark-gray) ;
+  
+}#detail-phone a:hover,#detail-email a:hover{
+  font-weight: var(--font-weight-700);
+}
+
 
 /* ✅ Name und Avatar im aktiven Kontakt */
 .active-contact .contact-name {
