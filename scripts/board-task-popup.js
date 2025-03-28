@@ -207,7 +207,7 @@ async function deleteTask(taskKey) {
       delete tasks[taskKey];
       sessionStorage.setItem('tasks', JSON.stringify(tasks));
     } else {
-      console.log("No tasks found in sessionStorage.");
+      console.error("No tasks found in sessionStorage.");
     }
 
     closePopup();

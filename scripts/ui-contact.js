@@ -102,7 +102,7 @@ function updateContactFirebase(id, firstname, lastname, newEmail, newPhone, init
     fetch(`${BASE_URL}/contacts/${id}.json`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ firstname, lastname, email: newEmail, phone: newPhone, initials })
     }).then(r => { if (!r.ok) throw new Error(); return r.json(); })
-      .then(data => { console.log("Contact updated:", data); })
+      .then(data => { console.error("Contact updated:", data); })
       .catch(err => { console.error("Error updating contact:", err); });
   }
 }

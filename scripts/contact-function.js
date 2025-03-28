@@ -370,7 +370,6 @@ async function prepareContact(event) {
   let compColor;
   try {
     compColor = await getRandomColor();
-    console.log('getRandomColor:', compColor);
   } catch (error) {
     console.error('Error in getRandomColor:', error);
     compColor = '#808080';
@@ -378,8 +377,6 @@ async function prepareContact(event) {
 
   let nameParts = computeNameParts(inputs.name);
   let contactEl = buildContactElement(inputs.name, inputs.email, phoneNumber, compColor);
-  console.log('contactEl nach buildContactElement:', contactEl);
-
   insertContactSorted(container, contactEl, inputs.name);
 
   if (!compColor) {
@@ -490,9 +487,7 @@ function finalizeContact(contactData, contactEl) {
 async function createContact(event) {
   event.preventDefault();
   let info = await prepareContact(event); 
-  console.log('info in createContact:', info);
   if (info) {
-    console.log('info.el in createContact:', info.el);
     finalizeContact(info.data, info.el);
   }
 }
