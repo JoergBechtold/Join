@@ -1,5 +1,5 @@
 body {
-  font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
   margin: 0;
   padding: 0;
   background-color: #f6f7f8;
@@ -41,7 +41,7 @@ body {
 .add-contact-btn {
   background-color: #2a3647;
   color: white;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 21px;
   line-height: 120%;
@@ -87,7 +87,7 @@ body {
   padding-bottom: 17px;
   padding-left: 36px;
   gap: 8px;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -140,7 +140,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 12px;
   line-height: 120%;
@@ -159,7 +159,7 @@ body {
 .contact-name {
   color: #111;
   margin: 0;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -170,7 +170,7 @@ body {
 .contact-email {
   color: rgba(0, 124, 238, 1);
   margin: 0;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
@@ -189,7 +189,7 @@ body {
   margin: 0;
   display: flex;
   align-items: center;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 61px;
   line-height: 120%;
@@ -204,7 +204,7 @@ body {
 
 .subtitle {
   color: #2a3647;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 27px;
   line-height: 120%;
@@ -258,7 +258,7 @@ body {
 .left-section h1 {
   width: 366px;
   height: 73px;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 61px;
   line-height: 120%;
@@ -269,7 +269,7 @@ body {
 .left-section p {
   width: 371px;
   height: 32px;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 27px;
   line-height: 120%;
@@ -337,7 +337,7 @@ body {
 }
 
 .input-group ::placeholder {
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -402,7 +402,7 @@ input:focus {
   transition: opacity 0.4s ease, visibility 0.4s ease;
   z-index: 999;
   backdrop-filter: none;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -477,7 +477,7 @@ input:focus {
   margin-bottom: 10px;
   color: rgba(0, 0, 0, 1);
   height: 56px;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 500;
   font-size: 47px;
   line-height: 120%;
@@ -495,7 +495,7 @@ input:focus {
   width: 207px;
   height: 60px;
   gap: 59px;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -505,16 +505,16 @@ input:focus {
 
 .info-block {
   margin-top: 30px;
-  width: 140px;
-  height: 53px;
+  /* width: 140px; */
+  /* height: 53px; */
   gap: 15px;
 }
 
 .info-block strong {
   display: block;
   color: rgba(0, 0, 0, 1);
-  margin-bottom: 20px;
-  font-family: 'Inter';
+  margin-bottom: 10px;
+  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 16px;
   line-height: 120%;
@@ -527,7 +527,7 @@ input:focus {
   margin: 0;
   color: rgba(0, 124, 238, 1);
   cursor: pointer;
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;

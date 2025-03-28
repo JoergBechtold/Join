@@ -124,7 +124,7 @@ function checkInputs() {
     validE = validateEmail(emailIn, container),
     validP = validatePhone(phoneIn, container);
 
-  if (nameIn.value.trim() !== '' && validE && phoneIn.value.trim() !== '' && validP) {
+  if (nameIn.value.trim() !== '' && validE && phoneIn.value.trim() !== '' && validP && validN) {
     btn.disabled = false;
     btn.classList.remove('disabled');
   } else {

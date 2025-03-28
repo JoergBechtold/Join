@@ -10,20 +10,53 @@ function activateContact(contactDiv) {
 
 function updateContactDetailPanel(contactDiv) {
   const ds = document.querySelector(".contact-detail"),
-        dn = document.getElementById("detail-name"),
-        de = document.getElementById("detail-email"),
-        dp = document.getElementById("detail-phone"),
-        da = document.getElementById("detail-avatar");
+    dn = document.getElementById("detail-name"),
+    de = document.getElementById("detail-email"),
+    dp = document.getElementById("detail-phone"),
+    da = document.getElementById("detail-avatar");
+
   const nameVal = contactDiv.querySelector(".contact-name").textContent,
-        emailVal = contactDiv.querySelector(".contact-email").textContent,
-        phoneVal = contactDiv.getAttribute("data-phone") || "Keine Nummer vorhanden";
+    emailVal = contactDiv.querySelector(".contact-email").textContent,
+    phoneVal = contactDiv.getAttribute("data-phone") || "Keine Nummer vorhanden";
+
   const ad = contactDiv.querySelector(".contact-avatar"),
-        avVal = ad.textContent.trim(),
-        avColor = window.getComputedStyle(ad).backgroundColor;
-  dn.textContent = nameVal; de.textContent = emailVal; dp.textContent = phoneVal;
-  da.textContent = avVal; da.style.backgroundColor = avColor;
+    avVal = ad.textContent.trim(),
+    avColor = window.getComputedStyle(ad).backgroundColor;
+
+  dn.textContent = nameVal;
+
+  createPhoneAndEmailLink(de, emailVal, `mailto:${emailVal}`); 
+  createPhoneAndEmailLink(dp, phoneVal, `tel:${phoneVal}`); 
+
+  da.textContent = avVal;
+  da.style.backgroundColor = avColor;
   ds.classList.add("visible");
 }
+
+function createPhoneAndEmailLink(parentElement, linkText, linkHref) {
+  const linkElement = document.createElement("a");
+  linkElement.textContent = linkText;
+  linkElement.href = linkHref;
+  parentElement.innerHTML = ""; 
+  parentElement.appendChild(linkElement);
+}
+
+// function updateContactDetailPanel(contactDiv) {
+//   const ds = document.querySelector(".contact-detail"),
+//         dn = document.getElementById("detail-name"),
+//         de = document.getElementById("detail-email"),
+//         dp = document.getElementById("detail-phone"),
+//         da = document.getElementById("detail-avatar");
+//   const nameVal = contactDiv.querySelector(".contact-name").textContent,
+//         emailVal = contactDiv.querySelector(".contact-email").textContent,
+//         phoneVal = contactDiv.getAttribute("data-phone") || "Keine Nummer vorhanden";
+//   const ad = contactDiv.querySelector(".contact-avatar"),
+//         avVal = ad.textContent.trim(),
+//         avColor = window.getComputedStyle(ad).backgroundColor;
+//   dn.textContent = nameVal; de.textContent = emailVal; dp.textContent = phoneVal;
+//   da.textContent = avVal; da.style.backgroundColor = avColor;
+//   ds.classList.add("visible");
+// }
 
 function showContactDetails(contactDiv) {
   if (activateContact(contactDiv)) {
