@@ -524,7 +524,7 @@ input:focus {
 }
 
 #detail-email a,#detail-phone a {
-  margin: 0;
+  
   cursor: pointer;
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-16);
