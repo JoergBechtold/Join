@@ -186,7 +186,7 @@ async function createUser(firstname, lastname, email, password, randomColor, ini
     await postData('/user', newUser);
     await postData('/contacts', newUser);
   } catch (error) {
-    console.error('Fehler beim Posten der Daten:', error);
+    console.error('Error posting data', error);
   }
 }
 
@@ -243,12 +243,10 @@ async function checkUserIsPresent(parameter = false) {
           if (user.email === emailLogIn && user.password === passwordLogIn) {
             emailLogInRef.value = '';
             passwordLogInRef.value = '';
-            // window.showButtonLinksSidebar = true;
-            // sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
             sessionStorage.setItem('loggedInUserId', userId);
             await loadUserData();
-            loginSuccessful(); // Hier wird loginSuccessful() aufgerufen
-            // goToUrl('summary.html');
+            loginSuccessful(); 
+            
             return true;
           }
         }
@@ -257,7 +255,7 @@ async function checkUserIsPresent(parameter = false) {
       return false;
     }
   } catch (error) {
-    console.error('Fehler beim Überprüfen des Benutzers:', error);
+    console.error('rror verifying user', error);
     return false;
   }
 }

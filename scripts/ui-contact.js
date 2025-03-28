@@ -149,18 +149,44 @@ function saveContact(event) {
 function hoverEdit(isH) { const i = document.getElementById("edit-icon"); if(i) i.src = isH ? "assets/icons/editblau.svg" : "assets/icons/edit.svg"; }
 function hoverDelete(isH) { const i = document.getElementById("delete-icon"); if(i) i.src = isH ? "assets/icons/delete.svg" : "assets/icons/paperbasketdelet.svg"; }
 
-function loadContacts() {
-  fetch(`${BASE_URL}/contacts.json`).then(r => r.json()).then(data => {
-    if (data) Object.keys(data).forEach(key => {
-      const c = data[key];
-      if (c && typeof c.firstname === 'string') {
-        const fullName = c.lastname ? `${c.firstname} ${c.lastname}` : c.firstname,
-              letter = c.firstname.charAt(0).toUpperCase(),
-              cont = getOrCreateGroupContainer(letter),
-              el = buildContactElement(fullName, c.email, c.phone, c.contactColor);
-        el.setAttribute('data-id', key); insertContactSorted(cont, el, fullName);
-      } else console.warn("Invalid contact for key", key, c);
-    });
-  }).catch(err => { console.error("Error loading contacts:", err); });
+
+async function loadContacts() {
+  try {
+    const data = await loadData('/contacts'); 
+
+    if (data) {
+      Object.keys(data).forEach(key => {
+        const c = data[key];
+        if (c && typeof c.firstname === 'string') {
+          const fullName = c.lastname ? `${c.firstname} ${c.lastname}` : c.firstname;
+          const letter = c.firstname.charAt(0).toUpperCase();
+          const cont = getOrCreateGroupContainer(letter);
+          const el = buildContactElement(fullName, c.email, c.phone, c.contactColor);
+          el.setAttribute('data-id', key);
+          insertContactSorted(cont, el, fullName);
+        } else {
+          console.warn("Invalid contact for key", key, c);
+        }
+      });
+    }
+  } catch (err) {
+    console.error("Error loading contacts:", err);
+  }
 }
+
+
+// function loadContacts() {
+//   fetch(`${BASE_URL}/contacts.json`).then(r => r.json()).then(data => {
+//     if (data) Object.keys(data).forEach(key => {
+//       const c = data[key];
+//       if (c && typeof c.firstname === 'string') {
+//         const fullName = c.lastname ? `${c.firstname} ${c.lastname}` : c.firstname,
+//               letter = c.firstname.charAt(0).toUpperCase(),
+//               cont = getOrCreateGroupContainer(letter),
+//               el = buildContactElement(fullName, c.email, c.phone, c.contactColor);
+//         el.setAttribute('data-id', key); insertContactSorted(cont, el, fullName);
+//       } else console.warn("Invalid contact for key", key, c);
+//     });
+//   }).catch(err => { console.error("Error loading contacts:", err); });
+// }
   
