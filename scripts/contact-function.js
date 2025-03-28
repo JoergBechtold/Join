@@ -535,25 +535,28 @@ function getContactDiv(deleteBtn) {
 //   });
 // }
 
-function confirmAndDeleteContact(contactDiv) {
-  return new Promise((resolve) => {
-    showConfirmPopup('Do you really want to delete this contact?', (confirmed) => {
+async function confirmAndDeleteContact(contactDiv) {
+  return new Promise(async (resolve) => {
+    showConfirmPopup('Do you really want to delete this contact?', async (confirmed) => {
       if (!confirmed) {
         resolve(false);
         return;
       }
       const firebaseId = contactDiv.getAttribute('data-id');
       if (firebaseId) {
-        fetch(`${BASE_URL}/contacts/${firebaseId}.json`, { method: 'DELETE' })
-          .then((r) => {
-            if (!r.ok) throw new Error('Deletion error');
+        try {
+          const deletionResult = await deleteData('/contacts', firebaseId);
+          if (deletionResult === null) {
             removeContactFromUI(contactDiv);
             resolve(true);
-          })
-          .catch((err) => {
-            console.error('Deletion error:', err);
+          } else {
+            console.error('Deletion error from deleteData:', deletionResult);
             resolve(false);
-          });
+          }
+        } catch (err) {
+          console.error('Deletion error:', err);
+          resolve(false);
+        }
       } else {
         removeContactFromUI(contactDiv);
         resolve(true);
@@ -561,6 +564,33 @@ function confirmAndDeleteContact(contactDiv) {
     });
   });
 }
+
+// function confirmAndDeleteContact(contactDiv) {
+//   return new Promise((resolve) => {
+//     showConfirmPopup('Do you really want to delete this contact?', (confirmed) => {
+//       if (!confirmed) {
+//         resolve(false);
+//         return;
+//       }
+//       const firebaseId = contactDiv.getAttribute('data-id');
+//       if (firebaseId) {
+//         fetch(`${BASE_URL}/contacts/${firebaseId}.json`, { method: 'DELETE' })
+//           .then((r) => {
+//             if (!r.ok) throw new Error('Deletion error');
+//             removeContactFromUI(contactDiv);
+//             resolve(true);
+//           })
+//           .catch((err) => {
+//             console.error('Deletion error:', err);
+//             resolve(false);
+//           });
+//       } else {
+//         removeContactFromUI(contactDiv);
+//         resolve(true);
+//       }
+//     });
+//   });
+// }
 
 function processContactDeletion(deleteBtn) {
   let contactDiv = getContactDiv(deleteBtn);
