@@ -181,11 +181,8 @@ function resetProberties() {
 
 async function createUser(firstname, lastname, email, password, randomColor, initials) {
   const newUser = { firstname, lastname, email, password, randomColor, initials };
-  const newContact = { firstname, lastname, email, password, contactColor: randomColor, initials };
-
   try {
     await postData('/user', newUser);
-    await postData('/contacts', newContact);
   } catch (error) {
     console.error('Error posting data', error);
   }

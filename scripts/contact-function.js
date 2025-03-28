@@ -545,12 +545,12 @@ async function confirmAndDeleteContact(contactDiv) {
       const firebaseId = contactDiv.getAttribute('data-id');
       if (firebaseId) {
         try {
-          const deletionResult = await deleteData('/contacts', firebaseId);
-          if (deletionResult === null) {
+          const deleteContacts = await deleteData('/contacts', firebaseId);
+          if (deleteContacts === null) {
             removeContactFromUI(contactDiv);
             resolve(true);
           } else {
-            console.error('Deletion error from deleteData:', deletionResult);
+            console.error('Deletion error from deleteData:', deleteContacts, deleteUser);
             resolve(false);
           }
         } catch (err) {
