@@ -566,6 +566,20 @@ function getContactDiv(deleteBtn) {
 //   });
 // }
 
+let randomColorsJson = null; 
+
+async function initializeRandomColors() {
+  try {
+    randomColorsJson = await loadData('randomColorsJson');
+    if (!randomColorsJson) {
+      console.error('Failed to load randomColorsJson.');
+    }
+  } catch (error) {
+    console.error('Error initializing randomColorsJson:', error);
+  }
+}
+
+
 async function confirmAndDeleteContact(contactDiv) {
   return new Promise(async (resolve) => {
     showConfirmPopup('Do you really want to delete this contact?', async (confirmed) => {
@@ -580,9 +594,13 @@ async function confirmAndDeleteContact(contactDiv) {
          
           const avatar = contactDiv.querySelector('.contact-avatar');
           const contactColor = avatar.getAttribute('data-color');
-         
-          
-          await postData('/randomColorsJson', contactColor);
+
+          if (!randomColorsJson) {
+            await initializeRandomColors();
+        }
+
+          const key = Object.keys(randomColorsJson)[0]; 
+          await postData(`randomColorsJson/${key}`, contactColor);
 
 
           const deleteContacts = await deleteData('/contacts', firebaseId);

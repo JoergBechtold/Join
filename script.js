@@ -92,6 +92,11 @@
 //   ]);
 //  }
 
+async function startProcess() {
+  initBoard()
+  await initializeRandomColors();
+  
+}
 
 function showConfirmation(message) {
   return new Promise((resolve) => {
