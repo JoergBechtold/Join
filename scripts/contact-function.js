@@ -1,3 +1,4 @@
+let randomColorsJson = null;
 let activeContact = null;
 // let colorVariables = [
 //   '--circle-bg-color-orange',
@@ -566,7 +567,7 @@ function getContactDiv(deleteBtn) {
 //   });
 // }
 
-let randomColorsJson = null; 
+ 
 
 async function initializeRandomColors() {
   try {

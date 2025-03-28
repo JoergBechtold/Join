@@ -60,37 +60,37 @@
 //   return selectedColor;
 // }
 
-//  async function loadColorToFirebase(){
-//   await postData('/randomColorsJson',  [
-//     "#ff5eb3",
-//     "#6e52ff",
-//     "#9327ff",
-//     "#00bee8",
-//     "#1fd7c1",
-//     "#ff745e",
-//     "#ffa35e",
-//     "#fc71ff",
-//     "#ffc701",
-//     "#0038ff",
-//     "#c3ff2b",
-//     "#ffe62b",
-//     "#ff4646",
-//     "#ffbb2b",
-//     "#00a86b",
-//     "#00ced1",
-//     "#b19cd9",
-//     "#8b008b",
-//     "#228b22",
-//     "#d2691e",
-//     "#808000",
-//     "#4682b4",
-//     "#a0522d",
-//     "#8fbc8f",
-//     "#ee82ee",
-//     "#a52a2a",
-//     "#008080",
-//   ]);
-//  }
+ async function manuellloadColorToFirebase(){
+  await postData('/randomColorsJson',  [
+    "#ff5eb3",
+    "#6e52ff",
+    "#9327ff",
+    "#00bee8",
+    "#1fd7c1",
+    "#ff745e",
+    "#ffa35e",
+    "#fc71ff",
+    "#ffc701",
+    "#0038ff",
+    "#c3ff2b",
+    "#ffe62b",
+    "#ff4646",
+    "#ffbb2b",
+    "#00a86b",
+    "#00ced1",
+    "#b19cd9",
+    "#8b008b",
+    "#228b22",
+    "#d2691e",
+    "#808000",
+    "#4682b4",
+    "#a0522d",
+    "#8fbc8f",
+    "#ee82ee",
+    "#a52a2a",
+    "#008080",
+  ]);
+ }
 
 async function startProcess() {
   initBoard()
