@@ -121,14 +121,17 @@ async function handleSignUp() {
 
   try {
     const nameParts = name.split(' ');
+
+    if (!checkNamePartsLength(nameParts)) {
+      return;
+    }
+
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ');
     const randomColor = await getRandomColor();
     const initials = firstName[0].toUpperCase() + lastName[0].toUpperCase();
 
-    if (!checkNamePartsLength(nameParts)) {
-      return;
-    }
+    
 
     if (!checkPasswordConfirm(password, confirmPassword)) {
       return;
@@ -148,14 +151,14 @@ async function handleSignUp() {
       resetProberties();
     }, 1700);
   } catch (error) {
-    console.error('Fehler beim Erstellen des Benutzers:', error);
+    console.error('Error creating user', error);
   }
 }
 
 function checkNamePartsLength(nameParts) {
   const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
 
-  if (nameParts.length < 2) {
+  if (nameParts.length !== 2) {
     errorMessageNameRef.classList.add('d-flex');
     nameSignUpRef.classList.add('not-valide-error');
     return false;

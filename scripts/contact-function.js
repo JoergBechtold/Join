@@ -48,6 +48,35 @@ function validateEmail(emailInput, container) {
   return isValid;
 }
 
+function validateName(nameInput, container) {
+  const nameValue = nameInput.value.trim();
+  const nameParts = nameValue.split(' ');
+
+  let isValid = false;
+
+  if (nameParts.length === 2) {
+    const firstName = nameParts[0].trim();
+    const lastName = nameParts[1].trim();
+
+    if (firstName !== '' && lastName !== '') {
+      isValid = true;
+    }
+  }
+  let err = container.querySelector('.name-error');
+  if (!isValid && nameValue !== '') {
+    if (!err) {
+      err = document.createElement('span');
+      err.className = 'name-error';
+      err.style.color = 'red';
+      err.textContent = 'Please enter your first and last name with spaces.';
+      nameInput.parentNode.insertBefore(err, nameInput.nextSibling);
+    }
+  } else if (err) {
+    err.remove();
+  }
+  return isValid;
+}
+
 function validatePhone(phoneInput, container) {
   const phoneValue = phoneInput.value.trim();
   const isValid = /^\+?[0-9]+$/.test(phoneValue) && phoneValue.length >= 7 && phoneValue.length <= 15;
@@ -91,6 +120,7 @@ function checkInputs() {
     emailIn = container.querySelector('input[placeholder="Email"]'),
     phoneIn = container.querySelector('input[placeholder="Phone"]'),
     btn = container.querySelector('.create-button'),
+    validN = validateName(nameIn, container),
     validE = validateEmail(emailIn, container),
     validP = validatePhone(phoneIn, container);
 
