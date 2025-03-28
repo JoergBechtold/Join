@@ -36,12 +36,27 @@ function getSubtasksHTML(task) {
   let html = '';
   if (task.subtasks) {
     Object.values(task.subtasks).forEach((subtask) => {
-      html += `<span>${subtask}</span>`;
+      html += `<div class="subtasks-elements-container"><img src="/assets/icons/checkbox.png"><span>${subtask}</span></div>`;
     });
   } else {
     html = '<span>No subtasks</span>';
   }
   return html;
+}
+
+function toggleSubtask(element, taskId) {
+  let index = element.getAttribute('data-index');
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  let task = tasks[taskId];
+  if (!task || !task.subtasks || !task.subtasks[index]) return;
+  
+  task.subtasks[index].completed = !task.subtasks[index].completed;
+  sessionStorage.setItem('tasks', JSON.stringify(tasks));
+  
+  let checkbox = element.querySelector('.subtask-checkbox');
+  if (checkbox) {
+    checkbox.classList.toggle('checked', task.subtasks[index].completed);
+  }
 }
 
 function getCategoryBg(task) {
@@ -87,7 +102,7 @@ function getPriorityIcon(priority) {
   return '';
 }
 
-function getPopupContentHtml(task,taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
+function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
   return /*html*/`
      <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
@@ -123,7 +138,7 @@ function getPopupContentHtml(task,taskKey, assignedHTML, subtasksHTML, categoryB
       </div>
     </div>
     <div class="popup-actions">
-      <div class="action-box delete" onclick="deleteTask(taskKey)">
+      <div class="action-box delete" onclick="deleteTask(${taskKey})">
       <div class="delete-icon">
         <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
       </div>
@@ -167,23 +182,6 @@ function editTask() {
   editPopup.style.display = 'flex';
 
   fetchAddTask(true);
-}
-
-function getSubtasksHTML(task) {
-  let html = '';
-  if (task.subtasks && task.subtasks.length > 0) {
-    task.subtasks.forEach((subtask, index) => {
-      const icon = subtask.completed ? 'assets/icons/checked.png.png' : 'assets/icons/checkbox.png';
-
-      html += `<span data-index="${index}" onclick="toggleSubtask(this, '${task.id}')">
-                <img src="${icon}" alt="Checkbox" class="subtask-checkbox" />
-                ${subtask.description}
-              </span>`;
-    });
-  } else {
-    html = '<span>No subtasks</span>';
-  }
-  return html;
 }
 
 async function deleteTask(taskKey) {

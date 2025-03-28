@@ -222,4 +222,3 @@ async function loadContacts() {
 //     });
 //   }).catch(err => { console.error("Error loading contacts:", err); });
 // }
-  
