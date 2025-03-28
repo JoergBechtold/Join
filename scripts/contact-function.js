@@ -226,6 +226,7 @@ function createContactAvatar(name, color) {
       color = '#808080';
     }
     avatar.style.backgroundColor = color;
+    avatar.setAttribute('data-color', color); 
     avatar.textContent = name
       .split(' ')
       .map((w) => w.charAt(0).toUpperCase())
@@ -574,7 +575,16 @@ async function confirmAndDeleteContact(contactDiv) {
       }
       const firebaseId = contactDiv.getAttribute('data-id');
       if (firebaseId) {
+
         try {
+         
+          const avatar = contactDiv.querySelector('.contact-avatar');
+          const contactColor = avatar.getAttribute('data-color');
+         
+          
+          await postData('/randomColorsJson', contactColor);
+
+
           const deleteContacts = await deleteData('/contacts', firebaseId);
           if (deleteContacts === null) {
             removeContactFromUI(contactDiv);

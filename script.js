@@ -60,6 +60,39 @@
 //   return selectedColor;
 // }
 
+//  async function loadColorToFirebase(){
+//   await postData('/randomColorsJson',  [
+//     "#ff5eb3",
+//     "#6e52ff",
+//     "#9327ff",
+//     "#00bee8",
+//     "#1fd7c1",
+//     "#ff745e",
+//     "#ffa35e",
+//     "#fc71ff",
+//     "#ffc701",
+//     "#0038ff",
+//     "#c3ff2b",
+//     "#ffe62b",
+//     "#ff4646",
+//     "#ffbb2b",
+//     "#00a86b",
+//     "#00ced1",
+//     "#b19cd9",
+//     "#8b008b",
+//     "#228b22",
+//     "#d2691e",
+//     "#808000",
+//     "#4682b4",
+//     "#a0522d",
+//     "#8fbc8f",
+//     "#ee82ee",
+//     "#a52a2a",
+//     "#008080",
+//   ]);
+//  }
+
+
 function showConfirmation(message) {
   return new Promise((resolve) => {
     showConfirmPopup(message, (confirmed) => {
@@ -83,17 +116,21 @@ async function getRandomColor() {
   try {
     let randomColorsJson = await loadData('randomColorsJson');
 
-  
-    if (!randomColorsJson || randomColorsJson.length === 0) {
+    if (randomColorsJson) {
+
+      const key = Object.keys(randomColorsJson)[0]; 
+      const singelColorFromJson = randomColorsJson[key];
+
+    if (!singelColorFromJson || singelColorFromJson.length === 0) {
       console.error('No more colors available or invalid data from Firebase');
       return null;
     }
+  
+    const randomIndex = Math.floor(Math.random() * singelColorFromJson.length);
+    const selectedColor = singelColorFromJson[randomIndex];
 
-    const randomIndex = Math.floor(Math.random() * randomColorsJson.length);
-    const selectedColor = randomColorsJson[randomIndex];
-
-   randomColorsJson.splice(randomIndex, 1);
-    const updateResult =  await updateData('randomColorsJson', randomColorsJson);
+    singelColorFromJson.splice(randomIndex, 1);
+    const updateResult =  await updateData(`randomColorsJson/${key}`, singelColorFromJson);
 
     if (!updateResult) {
       console.error('Failed to update colors in Firebase.');
@@ -101,11 +138,12 @@ async function getRandomColor() {
     }
 
     return selectedColor;
-  } catch (error) {
+  } }catch (error) {
     console.error('Error getting random color:', error);
     return null;
   }
 }
+
 
 
 /**
