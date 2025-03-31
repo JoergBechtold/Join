@@ -150,7 +150,7 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
       </div>
       <div class="action-box edit" onclick="editTask()">
         <div class="edit-icon">
-          <img src="assets/icons/edit-black.png" alt="Edit" id="edit_icon" />
+          <img src="assets/icons/edit-black.svg" alt="Edit" id="edit_icon" />
         </div>
         <span class="edit-btn">Edit </span>
       </div>
