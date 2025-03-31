@@ -592,7 +592,8 @@ async function confirmAndDeleteContact(contactDiv) {
         }
 
           const key = Object.keys(randomColorsJson)[0]; 
-          await postData(`randomColorsJson/${key}`, contactColor);
+          
+          await addColorToExistingArray(key, contactColor);
 
 
           const deleteContacts = await deleteData('/contacts', firebaseId);

@@ -88,7 +88,7 @@
     "#8fbc8f",
     "#ee82ee",
     "#a52a2a",
-    "#008080",
+    
   ]);
  }
 
@@ -109,6 +109,7 @@
   } catch (error) {
     console.error('Error initializing randomColorsJson', error);
   }
+  
 }
 
 

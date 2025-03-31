@@ -69,6 +69,22 @@ async function deleteData(path = '', taskKey) {
   }
 }
 
+async function addColorToExistingArray(key, contactColor) {
+  const path = '/randomColorsJson';
+
+  try {
+    const existingData = await loadData(path);
+    if (!existingData || !existingData[key]) {
+      console.error('Key not found or data is invalid.');
+      return;
+    }
+    existingData[key].push(contactColor);
+    await updateData(path, existingData);
+  } catch (error) {
+    console.error('Error adding color', error);
+  }
+}
+
 
 
 
