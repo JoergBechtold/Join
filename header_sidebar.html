@@ -15,7 +15,11 @@
   </head>
 
   <body class="body-header-sidebar">
-    <div class="header">
+    <div class="header ">
+      <div class="header-logo-responsive">
+        <img src="assets/img/loginLogo.svg" alt="Join Logo" />
+      </div>
+
       <h1>Kanban Project Management Tool</h1>
       <div class="header-icons hide-before-log-in">
         <a href="help.html"><img src="assets/icons/help.svg" alt="Help Icon" /></a>
@@ -32,39 +36,55 @@
       </div>
     </div>
 
-    <div class="sidebar">
+    <div class="sidebar ">
       <div class="logo">
         <img src="assets/icons/Logo1.svg" alt="Logo Join" />
       </div>
       <ul class="nav-links">
         <li class="link-button hide-before-log-in">
+          
           <a onclick="toHrefFocus('summary.html', this); return false;" href="summary.html">
+            <div class="img-box">
             <img class="boaimg" src="assets/icons/summaryicon.svg" alt="Summary Icon" />
+          </div>
             <span>Summary</span>
+          
           </a>
         </li>
         <li class="link-button hide-before-log-in">
           <a onclick="toHrefFocus('add_task.html',this); return false;" href="add_task.html">
+            <div class="img-box">
             <img class="boaimg" src="assets/icons/addtaskicon.svg" alt="Task Icon" />
+            </div>
             <span>Add Task</span>
+          
           </a>
         </li>
         <li class="link-button hide-before-log-in">
           <a onclick="toHrefFocus('index.html', this); return false;" href="index.html">
+            <div class="img-box">
             <img class="boaimg" src="assets/icons/boardicon.svg" alt="Board Icon" />
+          </div>
             <span>Board</span>
+          
           </a>
         </li>
         <li class="link-button hide-before-log-in">
           <a onclick="toHrefFocus('contacts.html', this); return false;" href="contacts.html">
+            <div class="img-box">
             <img class="boaimg" src="assets/icons/contacticon.svg" alt="Contacts Icon" />
+          </div>
             <span>Contacts</span>
+         
           </a>
         </li>
         <li class="hide-after-log-in">
           <a onclick="logOut(); return false;" href="login_register.html">
+            <div class="img-box">
             <img class="boaimg" src="assets/icons/LogInSide.svg" alt="Contacts Icon" />
+          </div>
             <span>Log In</span>
+          
           </a>
         </li>
       </ul>
@@ -73,6 +93,9 @@
         <a href="legal_notice.html">Legal Notice</a>
       </div>
     </div>
+
+
+    
 
     <script src="scripts/firebase.js"></script>
     <script src="script.js"></script>

@@ -184,62 +184,62 @@ function editTask() {
   fetchAddTask(true);
 }
 
-async function deleteTask(taskKey) {
-  try {
-    const confirmed = await showConfirmation('Are you sure you want to delete this task?'); 
+// async function deleteTask(taskKey) {
+//   try {
+//     const confirmed = await showConfirmation('Are you sure you want to delete this task?'); 
 
-    if (!confirmed) {
-      return; 
-    }
-
-    if (!taskKey) {
-      console.error('taskKey is undefined.');
-      return;
-    }
-
-    await deleteData('tasks', `${taskKey}`);
-
-    let tasksString = sessionStorage.getItem('tasks');
-    if (tasksString) {
-      let tasks = JSON.parse(tasksString);
-      delete tasks[taskKey];
-      sessionStorage.setItem('tasks', JSON.stringify(tasks));
-    } else {
-      console.error("No tasks found in sessionStorage.");
-    }
-
-    closePopup();
-    renderCards();
-  } catch (error) {
-    console.error('Error deleting the task:', error);
-  }
-}
-
-// async function deleteTask() {
-//   if (confirm('Are you sure you want to delete this task?')) {
-//     try {
-//       if (!taskKey) {
-//         console.error('taskKey is undefined.');
-//         return;
-//       }
-
-//       await deleteData('tasks', `${taskKey}`);
-
-//       let tasksString = sessionStorage.getItem('tasks');
-//       if (tasksString) {
-//         let tasks = JSON.parse(tasksString);
-//         delete tasks[taskKey];
-//         sessionStorage.setItem('tasks', JSON.stringify(tasks));
-//       } else {
-//           console.log("No tasks found in sessionStorage.");
-//       }
-//       closePopup();
-//       renderCards();  
-//     } catch (error) {
-//       console.error('Error deleting the task:', error);
+//     if (!confirmed) {
+//       return; 
 //     }
+
+//     if (!taskKey) {
+//       console.error('taskKey is undefined.');
+//       return;
+//     }
+
+//     await deleteData('tasks', `${taskKey}`);
+
+//     let tasksString = sessionStorage.getItem('tasks');
+//     if (tasksString) {
+//       let tasks = JSON.parse(tasksString);
+//       delete tasks[taskKey];
+//       sessionStorage.setItem('tasks', JSON.stringify(tasks));
+//     } else {
+//       console.error("No tasks found in sessionStorage.");
+//     }
+
+//     closePopup();
+//     renderCards();
+//   } catch (error) {
+//     console.error('Error deleting the task:', error);
 //   }
 // }
+
+async function deleteTask(taskKey) {
+  if (confirm('Are you sure you want to delete this task?')) {
+    try {
+      if (!taskKey) {
+        console.error('taskKey is undefined.');
+        return;
+      }
+
+      await deleteData('tasks', `${taskKey}`);
+
+      let tasksString = sessionStorage.getItem('tasks');
+      if (tasksString) {
+        let tasks = JSON.parse(tasksString);
+        delete tasks[taskKey];
+        sessionStorage.setItem('tasks', JSON.stringify(tasks));
+      } else {
+          console.log("No tasks found in sessionStorage.");
+      }
+      closePopup();
+      renderCards();  
+    } catch (error) {
+      console.error('Error deleting the task:', error);
+    }
+  }
+}
 
 function closePopup() {
   document.getElementById('popup_container').style.display = 'none';
