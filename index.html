@@ -120,147 +120,6 @@
 
       <div id="add_task_fetch_template"></div>
 
-      <!-- <form class="form-add-task">
-        <div class="add-task-content popup">
-          <div class="form-column left-container edit-popup-form-column">
-            <div class="form-group">
-              <label for="title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
-              <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" />
-              <div class="error-message-required d-none" id="error_message_title">This field is required</div>
-            </div>
-
-            <div class="form-group">
-              <label for="description"><span class="label-text">Description</span></label>
-              <textarea id="description" class="textarea-base" name="description" placeholder="Enter a Description"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="due_date"> <span class="label-text">Due date</span> <span class="red-star">*</span></label>
-              <div class="input-container">
-                <input lang="en" id="due_date" class="input-base due-date" type="date" name="due-date" title="Select a date" required />
-              </div>
-              <div class="error-message-required d-none" id="error_message_date">This field is required</div>
-            </div>
-          </div>
-
-          <div class="vertical-line"></div>
-
-          <div class="form-column right-container">
-            <div class="form-group">
-              <label> <span class="label-text">Priority</span></label>
-              <div class="prio-buttons">
-                <button type="button" class="prio" id="urgent_button" onclick="setPriority('urgent_button')">
-                  Urgent
-                  <img src="assets/icons/prio-high.svg" alt="High Priority" class="prio-icon" id="urgent_button_img" />
-                </button>
-                <button type="button" class="prio" id="medium_button" onclick="setPriority('medium_button')">
-                  Medium
-                  <img src="assets/icons/prio-medium.svg" alt="Medium Priority" class="prio-icon" id="medium_button_img" />
-                </button>
-                <button type="button" class="prio" id="low_button" onclick="setPriority('low_button')">
-                  Low
-                  <img src="assets/icons/prio-low.svg" alt="Low Priority" class="prio-icon" id="low_button_img" />
-                </button>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="assigned_to"> <span class="label-text">Assigned to</span></label>
-              <div class="custom-select-container">
-                <div class="custom-select" id="custom_select" onclick="toggleContactsDropdown()">
-                  <input
-                    class="custom-input"
-                    type="text"
-                    id="selected_contact"
-                    placeholder="Select contacts to assign"
-                    oninput="filterContacts()"
-                    autocomplete="off"
-                  />
-                  <img class="select-icon" id="contacts_select_arrow" src="assets/icons/arrow_drop_down.svg" alt="Arrow" />
-                </div>
-                <div class="contacts-custom-options d-none" id="contacts_options_container"></div>
-                <div class="show-selected-contacts"></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="category"> <span class="label-text">Category</span> <span class="red-star">*</span></label>
-              <div class="custom-select-container">
-                <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()">
-                  <span id="selected_option"> <span class="label-text">Select task category</span></span>
-                  <img class="select-icon" id="select_arrow" src="assets/icons/arrow_drop_down.svg" alt="Arrow" />
-                </div>
-                <div class="custom-options d-none" id="options_container">
-                  <div class="custom-select-option" onclick="selectOption('Technical Task')">Technical Task</div>
-                  <div class="custom-select-option" onclick="selectOption('User Story')">User Story</div>
-                </div>
-              </div>
-              <div class="error-message-required d-none" id="error_message_category">This selection is required</div>
-            </div>
-
-            <div class="form-group">
-              <label for="subtasks"> <span class="label-text">Subtasks</span></label>
-              <div class="input-container">
-                <input
-                  id="subtask_input"
-                  class="input-base"
-                  type="text"
-                  name="subtasks"
-                  placeholder="Add new subtask"
-                  onclick="handleSubtaskInput()"
-                  onkeydown="if(event.key === 'Enter'){ event.preventDefault(); handleSubtaskSave(); }"
-                />
-                <div class="close-and-check">
-                  <img
-                    id="close_subtask_icon"
-                    class="input-base-icon d-none"
-                    src="assets/icons/blackclose.svg"
-                    alt="Close subtask"
-                    onclick="handleSubtaskDelete()"
-                  />
-                  <div class="vertical-line-subtask"></div>
-                  <img
-                    id="check_subtask_icon"
-                    class="input-base-icon d-none"
-                    src="assets/icons/blackcheck.svg"
-                    alt="Save subtask"
-                    onclick="handleSubtaskSave()"
-                  />
-                  <img id="add_subtask_icon" class="input-base-icon" src="assets/icons/add.svg" alt="Add subtask" onclick="handleSubtaskInputImg()" />
-                </div>
-              </div>
-              <div class="subtask-enum"></div>
-              <div class="input-container">
-                <input
-                  id="edit_subtask_input"
-                  class="input-base-V2 d-none"
-                  type="text"
-                  name="edit-subtasks"
-                  placeholder="Edit subtask"
-                  onkeydown="if(event.key === 'Enter'){ event.preventDefault(); saveEditedSubtask(); }"
-                />
-                <div class="close-and-check">
-                  <img
-                    id="edit_delete_icon"
-                    class="input-base-V2-icon-active d-none"
-                    src="assets/icons/paperbasketdelet.svg"
-                    alt="Delete"
-                    onclick="cancelEditSubtask()"
-                  />
-                  <div class="vertical-line-subtask"></div>
-                  <img
-                    id="edit_save_icon"
-                    class="input-base-V2-icon-active d-none"
-                    src="assets/icons/blackcheck.svg"
-                    alt="Save"
-                    onclick="saveEditedSubtask()"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form> -->
       <div class="footer-add-task ok-btn-container">
         <div class="align-with-gap">
           <div class="button-clear-white-img-box"></div>
@@ -290,13 +149,13 @@
       </div>
     </template>
 
-    <div class="confirm-popup hidden">
+    <!-- <div class="confirm-popup hidden">
       <div class="confirm-popup-content">
         <p class="confirm-message">h</p>
         <button class="confirm-yes">Delete</button>
         <button class="confirm-no">NO</button>
       </div>
-    </div>
+    </div> -->
 
     
 
