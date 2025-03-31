@@ -1,5 +1,12 @@
 let activeButton = null;
 
+/**
+ * Toggles the active state of a button by its ID.
+ * If another button is already active, it resets the active button
+ * before activating the new one. Clicking the same button again deactivates it.
+ *
+ * @param {string} buttonId - The ID of the button to activate or deactivate.
+ */
 function setPriority(buttonId) {
   const button = document.getElementById(buttonId);
   if (activeButton) {
@@ -11,6 +18,7 @@ function setPriority(buttonId) {
     activeButton = null;
   }
 }
+
 
 function resetActiveButton() {
   if (activeButton) {
