@@ -19,7 +19,13 @@ function setPriority(buttonId) {
   }
 }
 
-
+/**
+ * Resets the currently active button by removing its priority-related CSS classes
+ * and restoring the original image source if an associated image exists.
+ *
+ * This function ensures that the previously active button is visually reset
+ * to its default state.
+ */
 function resetActiveButton() {
   if (activeButton) {
     activeButton.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
@@ -30,12 +36,19 @@ function resetActiveButton() {
   }
 }
 
+/**
+ * Activates a button by setting it as the currently active button,
+ * applying priority-related CSS classes, and updating its style based on its type.
+ *
+ * @param {HTMLElement} button - The button element to activate.
+ */
 function activateButton(button) {
   activeButton = button;
   button.classList.add('active-prio');
   const buttonType = button.id.split('_')[0];
   updateButtonStyle(buttonType);
 }
+
 
 function updateButtonStyle(buttonType) {
   const prioStyles = {
