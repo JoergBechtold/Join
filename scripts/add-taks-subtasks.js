@@ -1,6 +1,10 @@
 let subtasks = [];
 let currentEditIndex = null;
 
+/**
+ * Handles the visual state of subtask input icons when the input field is active.
+ * Updates the visibility and styles of the "add", "check", and "close" icons.
+ */
 function handleSubtaskInput() {
     const addIcon = document.getElementById('add_subtask_icon');
     const checkIcon = document.getElementById('check_subtask_icon');
@@ -11,12 +15,20 @@ function handleSubtaskInput() {
     checkIcon.classList.remove('d-none');
     closeIcon.classList.remove('d-none');
 }
-  
+
+/**
+ * Activates the subtask input field and focuses on it.
+ * Also updates the visual state of subtask input icons by calling `handleSubtaskInput`.
+ */
 function handleSubtaskInputImg() {
     handleSubtaskInput();
     document.getElementById('subtask_input').focus();
 }
-  
+
+/**
+ * Resets the subtask input field and restores the default state of the icons.
+ * Clears the input value and hides the "check" and "close" icons while showing the "add" icon.
+ */
 function handleSubtaskDelete() {
     const inputField = document.getElementById('subtask_input');
     const addIcon = document.getElementById('add_subtask_icon');
@@ -29,18 +41,26 @@ function handleSubtaskDelete() {
     closeIcon.classList.replace('input-base-icon-active', 'input-base-icon');
     closeIcon.classList.add('d-none');
 }
-  
+
+/**
+ * Saves a new subtask to the global `subtasks` array and updates the display.
+ * Clears the input field after saving and resets its visual state using `handleSubtaskDelete`.
+ */
 function handleSubtaskSave() {
     const subtaskInput = document.getElementById('subtask_input');
     const subtaskValue = subtaskInput.value.trim();
     if (subtaskValue !== '') {
-      subtasks.push(subtaskValue);
-      subtaskInput.value = '';
-      handleSubtaskDelete();
-      updateSubtaskDisplay();
+        subtasks.push(subtaskValue);
+        subtaskInput.value = '';
+        handleSubtaskDelete();
+        updateSubtaskDisplay();
     }
 }
-  
+
+/**
+ * Updates the HTML display of all subtasks in the global `subtasks` array.
+ * Generates HTML for each subtask using the `subtasksItem` function and renders it in the DOM.
+ */
 function updateSubtaskDisplay() {
     const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
     let subtaskHtml = '';
@@ -49,19 +69,35 @@ function updateSubtaskDisplay() {
     }
     subtaskEnum.innerHTML = subtaskHtml;
 }
-      
+
+/**
+ * Deletes a subtask from the global `subtasks` array by its index.
+ * Updates the display after deletion using `updateSubtaskDisplay`.
+ *
+ * @param {number} index - The index of the subtask to delete from the array.
+ */
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
     updateSubtaskDisplay();
 }
 
+/**
+ * Clears all subtasks from the global `subtasks` array and resets the input field.
+ * Updates the display to reflect an empty list using `updateSubtaskDisplay`.
+ */
 function clearSubtasks() {
     document.getElementById('subtask_input').value = '';
     subtasks = [];
     handleSubtaskDelete();
     updateSubtaskDisplay();
 }
-  
+
+/**
+ * Enables editing mode for a specific subtask by its index.
+ * Displays an input field with the current value of the subtask, along with save and delete icons.
+ *
+ * @param {number} index - The index of the subtask to edit in the global array.
+ */
 function editSubtask(index) {
     const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
     const editInput = document.getElementById('edit_subtask_input');
@@ -75,23 +111,31 @@ function editSubtask(index) {
     editInput.focus();
     currentEditIndex = index;
 }
-  
+
+/**
+ * Cancels editing mode for a subtask and restores its previous state.
+ * Removes any changes made during editing and updates the display to show all subtasks.
+ */
 function cancelEditSubtask() {
     const subtaskEnum = document.getElementsByClassName('subtask-enum')[0];
     const editInput = document.getElementById('edit_subtask_input');
     const deleteIcon = document.getElementById('edit_delete_icon');
     const saveIcon = document.getElementById('edit_save_icon');
     if (currentEditIndex !== null) {
-      subtasks.splice(currentEditIndex, 1);
-    }
-    editInput.classList.add('d-none');
-    deleteIcon.classList.add('d-none');
-    saveIcon.classList.add('d-none');
-    subtaskEnum.style.display = 'block';
-    updateSubtaskDisplay();
-    currentEditIndex = null;
+        subtasks.splice(currentEditIndex, 1);
+        currentEditIndex = null;
+        updateSubtaskDisplay();
+        editInput.classList.add('d-none');
+        deleteIcon.classList.add('d-none');
+        saveIcon.classList.add('d-none');
+        subtaskEnum.style.display = 'block';
+      }
 }
-  
+
+/**
+ * Saves changes made to an edited subtask by updating its value in the global array.
+ * Restores normal mode after saving and updates the display to reflect changes.
+ */
 function saveEditedSubtask() {
     const editInput = document.getElementById('edit_subtask_input');
     const editedValue = editInput.value.trim();
