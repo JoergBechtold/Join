@@ -61,7 +61,7 @@
 // }
 
  async function manuellloadColorToFirebase(){
-  await postData('/randomColorsJson',  [
+  await postData('randomColorsJson',  [
     "#ff5eb3",
     "#6e52ff",
     "#9327ff",
@@ -92,11 +92,26 @@
   ]);
  }
 
-async function startProcess() {
+ let randomColorsJson = null;
+
+ async function startProcess() {
   initBoard()
   await initializeRandomColors();
   
 }
+
+ async function initializeRandomColors() {
+  try {
+    randomColorsJson = await loadData('randomColorsJson');
+    if (!randomColorsJson) {
+      console.error('Failed to load randomColorsJson.');
+    }
+  } catch (error) {
+    console.error('Error initializing randomColorsJson', error);
+  }
+}
+
+
 
 function showConfirmation(message) {
   return new Promise((resolve) => {

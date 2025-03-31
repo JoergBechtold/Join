@@ -1,4 +1,4 @@
-let randomColorsJson = null;
+
 let activeContact = null;
 // let colorVariables = [
 //   '--circle-bg-color-orange',
@@ -569,16 +569,7 @@ function getContactDiv(deleteBtn) {
 
  
 
-async function initializeRandomColors() {
-  try {
-    randomColorsJson = await loadData('randomColorsJson');
-    if (!randomColorsJson) {
-      console.error('Failed to load randomColorsJson.');
-    }
-  } catch (error) {
-    console.error('Error initializing randomColorsJson:', error);
-  }
-}
+
 
 
 async function confirmAndDeleteContact(contactDiv) {
