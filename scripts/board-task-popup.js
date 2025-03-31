@@ -109,7 +109,7 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
         <span class="tag" id="Tag">${task.category}</span>
       </div>
       <button class="close-button" type="button" onclick="closePopup()">
-        <img src="assets/icons/close.png" alt="Close" class="close-icon" />
+        <img src="assets/icons/cancel.svg" alt="Close" class="close-icon" />
       </button>
     </div>
     <div class="popup-info">
@@ -150,7 +150,7 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
       </div>
       <div class="action-box edit" onclick="editTask()">
         <div class="edit-icon">
-          <img src="assets/icons/edit-black.svg" alt="Edit" id="edit_icon" />
+          <img src="assets/icons/edit.svg" alt="Edit" id="edit_icon" />
         </div>
         <span class="edit-btn">Edit </span>
       </div>
