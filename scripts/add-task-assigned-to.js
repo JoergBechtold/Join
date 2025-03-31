@@ -102,6 +102,13 @@ async function loadContacts() {
   }
 }
 
+/**
+ * Generates HTML for a list of contacts.
+ * If no data is provided or the data object is empty, an error message is returned.
+ *
+ * @param {Object} data - An object containing contact details.
+ * @returns {string} The generated HTML string for the contacts or an error message.
+ */
 function renderContactsHtml(data) {
   if (!data || Object.keys(data).length === 0) {
     return '<div class="error-select-option">No contacts found.</div>';
@@ -111,16 +118,32 @@ function renderContactsHtml(data) {
     .join('');
 }
 
+/**
+ * Toggles the selection state of a contact and updates the UI accordingly.
+ *
+ * @param {HTMLElement} element - The contact element that was clicked.
+ */
 function toggleSelectedContact(element) {
   toggleClass(element);
   updateSelectedContacts(element);
   updateImage(element);
 }
 
+/**
+ * Toggles the CSS class for a contact element to mark it as selected or unselected.
+ *
+ * @param {HTMLElement} element - The contact element to toggle.
+ */
 function toggleClass(element) {
   element.classList.toggle('contacts-custom-select-option-selected');
 }
 
+/**
+ * Updates the global `selectedContacts` array based on the selection state of a contact.
+ * Ensures that selected contacts are sorted alphabetically by their initials.
+ *
+ * @param {HTMLElement} element - The contact element that was clicked.
+ */
 function updateSelectedContacts(element) {
   const initials = element.querySelector('.circle').textContent.trim();
   const randomColor = element.querySelector('.circle').style.backgroundColor;
@@ -135,6 +158,12 @@ function updateSelectedContacts(element) {
   renderSelectedContacts();
 }
 
+/**
+ * Sorts an array of contacts alphabetically by their initials.
+ *
+ * @param {Array} contacts - An array of contact objects with `initials` and `randomColor`.
+ * @returns {Array} A sorted array of contacts.
+ */
 function sortContacts(contacts) {
   return contacts.sort((a, b) => {
     if (a.initials[0] !== b.initials[0]) {
@@ -144,6 +173,11 @@ function sortContacts(contacts) {
   });
 }
 
+/**
+ * Updates the checkbox image of a contact element based on its selection state.
+ *
+ * @param {HTMLElement} element - The contact element to update.
+ */
 function updateImage(element) {
   const imgElement = element.querySelector('img');
   if (imgElement) {
@@ -155,6 +189,9 @@ function updateImage(element) {
   }
 }
 
+/**
+ * Renders the currently selected contacts in the UI by displaying their initials in colored circles.
+ */
 function renderSelectedContacts() {
   const container = document.querySelector('.show-selected-contacts');
   container.innerHTML = '';
@@ -167,6 +204,9 @@ function renderSelectedContacts() {
   });
 }
 
+/**
+ * Clears all selected contacts and resets their visual state in the UI.
+ */
 function clearAssignedTo() {
   selectedContacts = [];
   renderSelectedContacts();
@@ -181,6 +221,9 @@ function clearAssignedTo() {
   });
 }
 
+/**
+ * Filters the displayed contacts in the dropdown menu based on the search input value.
+ */
 function filterContacts() {
   const searchValue = document.getElementById('selected_contact').value.toLowerCase();
   const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
@@ -193,3 +236,4 @@ function filterContacts() {
     }
   });
 }
+
