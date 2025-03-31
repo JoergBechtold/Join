@@ -1,6 +1,10 @@
 let dropdownOpen = false;
 let selectedContacts = [];
 
+/**
+ * Toggles the visibility of the contacts dropdown menu.
+ * Opens the dropdown if it is currently closed, and closes it if it is open.
+ */
 function toggleContactsDropdown() {
   const optionsContainer = document.getElementById('contacts_options_container');
   const arrowIcon = document.getElementById('contacts_select_arrow');
@@ -14,6 +18,16 @@ function toggleContactsDropdown() {
   }
 }
 
+/**
+ * Opens the contacts dropdown menu and updates its visual state.
+ * Loads the contact options and focuses on the input field.
+ *
+ * @param {HTMLElement} optionsContainer - The container element for the contact options.
+ * @param {HTMLElement} arrowIcon - The arrow icon indicating the dropdown state.
+ * @param {HTMLElement} inputField - The input field for selecting contacts.
+ * @param {HTMLElement} customSelect - The custom select container element.
+ * @param {HTMLElement} selectedContactsContainer - The container displaying selected contacts.
+ */
 function openDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
   optionsContainer.classList.remove('d-none');
   arrowIcon.src = 'assets/icons/arrow_drop_down_up.svg';
@@ -25,6 +39,15 @@ function openDropdown(optionsContainer, arrowIcon, inputField, customSelect, sel
   dropdownOpen = true;
 }
 
+/**
+ * Closes the contacts dropdown menu and resets its visual state.
+ *
+ * @param {HTMLElement} optionsContainer - The container element for the contact options.
+ * @param {HTMLElement} arrowIcon - The arrow icon indicating the dropdown state.
+ * @param {HTMLElement} inputField - The input field for selecting contacts.
+ * @param {HTMLElement} customSelect - The custom select container element.
+ * @param {HTMLElement} selectedContactsContainer - The container displaying selected contacts.
+ */
 function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer) {
   optionsContainer.classList.add('d-none');
   arrowIcon.src = 'assets/icons/arrow_drop_down.svg';
@@ -40,6 +63,11 @@ function closeDropdown(optionsContainer, arrowIcon, inputField, customSelect, se
   dropdownOpen = false;
 }
 
+/**
+ * Closes the contacts dropdown menu when a click occurs outside of it.
+ *
+ * @param {Event} event - The click event that triggered this function.
+ */
 function closeDropdownOnBodyClick(event) {
   const clickedElement = event.target;
   if (dropdownOpen && !clickedElement.closest('#custom_select') && !clickedElement.closest('#contacts_options_container')) {
@@ -52,13 +80,19 @@ function closeDropdownOnBodyClick(event) {
   }
 }
 
+/**
+ * Loads contact data asynchronously and renders it in the dropdown menu.
+ * If data is already loaded (i.e., `optionsContainer` has child elements), no action is taken.
+ *
+ * @returns {Promise<void>} A promise that resolves when the contacts are loaded and rendered.
+ */
 async function loadContacts() {
   const optionsContainer = document.getElementById('contacts_options_container');
   if (optionsContainer.childElementCount) return;
   try {
-    const data = await loadData('contacts');
+    const data = await loadData('contacts'); 
     if (data) {
-      optionsContainer.innerHTML = renderContactsHtml(data);
+      optionsContainer.innerHTML = renderContactsHtml(data); 
     } else {
       throw new Error('Keine Daten erhalten');
     }
