@@ -49,7 +49,13 @@ function activateButton(button) {
   updateButtonStyle(buttonType);
 }
 
-
+/**
+ * Updates the style of the currently active button based on its priority type.
+ * Adds the corresponding CSS class to the button and updates the associated icon image.
+ *
+ * @param {string} buttonType - The priority type of the button (e.g., "urgent", "medium", "low").
+ *                              This determines the CSS class and icon to apply.
+ */
 function updateButtonStyle(buttonType) {
   const prioStyles = {
     urgent: ['red-prio', 'high'],
@@ -61,8 +67,12 @@ function updateButtonStyle(buttonType) {
   document.getElementById(activeButton.id + '_img').src = `/assets/icons/prio-${iconType}-event.svg`;
 }
 
+/**
+ * Clears the active button by resetting its state.
+ * If there is a currently active button, its priority-related styles and associated changes are removed.
+ */
 function clearButtons() {
-    if (activeButton) {
+  if (activeButton) {
       resetActiveButton();
-    }
+  }
 }
