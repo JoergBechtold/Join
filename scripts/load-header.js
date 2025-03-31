@@ -1,22 +1,31 @@
-document.addEventListener('DOMContentLoaded', function () {
-  fetch('header_sidebar.html')
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById('header_container').innerHTML = data;
-      const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
+let headerContainer = document.getElementById('header_container');
+if (!headerContainer) {
+  headerContainer = document.createElement('div');
+  headerContainer.id = 'header_container';
+  document.body.insertBefore(headerContainer, document.body.firstChild);
+}
 
-      ifButtonLinkSidebar(buttonLinksSidebar);
-      loadInitialsUserIcon();
-      ifActivePage();
-    })
-    .catch((error) => console.error('Fehler beim Laden des Headers:', error));
-});
+fetch('header_sidebar.html')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Fehler beim Abrufen des Headers: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then(data => {
+    headerContainer.innerHTML = data;
+    const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
+    ifButtonLinkSidebar(buttonLinksSidebar);
+    loadInitialsUserIcon();
+    ifActivePage();
+  })
+  .catch(error => console.error('Fehler beim Laden des Headers:', error));
 
 function ifButtonLinkSidebar(buttonLinksSidebar) {
   if (buttonLinksSidebar === 'true') {
-    showLoggedInLinks(); // in script.js
+    showLoggedInLinks(); 
   } else {
-    hideLoggedInLinks(); // in script.js
+    hideLoggedInLinks(); 
   }
 }
 
@@ -43,14 +52,15 @@ function toggleSubmenu() {
   submenu.classList.toggle('hidden');
 }
 
-document.addEventListener('click', function (event) {
+document.onclick = function(event) {
   let profile = document.querySelector('.user-profile');
   let submenu = document.getElementById('user-submenu');
 
   if (!profile.contains(event.target) && !submenu.contains(event.target)) {
     submenu.classList.add('hidden');
   }
-});
+};
+
 
 async function loadInitialsUserIcon() {
   let userProfileCircleRef = document.getElementById('user_profile_circle');
@@ -59,8 +69,6 @@ async function loadInitialsUserIcon() {
     const user = await loadUserData();
     if (user && user.initials && user.randomColor) {
       userProfileCircleRef.innerHTML = user.initials;
-     
-      
     } else {
       userProfileCircleRef.innerHTML = 'G';
       console.log('Fehler');

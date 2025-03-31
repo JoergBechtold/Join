@@ -97,23 +97,6 @@ function validatePhone(phoneInput, container) {
   return isValid;
 }
 
-// function validatePhone(phoneInput, container) {
-//   const isValid = /^\+?[0-9]+$/.test(phoneInput.value.trim());
-//   let err = container.querySelector('.phone-error');
-//   if (!isValid && phoneInput.value.trim() !== '') {
-//     if (!err) {
-//       err = document.createElement('span');
-//       err.className = 'phone-error';
-//       err.style.color = 'red';
-//       err.textContent = 'Invalid phone number';
-//       phoneInput.parentNode.insertBefore(err, phoneInput.nextSibling);
-//     }
-//   } else if (err) {
-//     err.remove();
-//   }
-//   return isValid;
-// }
-
 function checkInputs() {
   const container = document.querySelector('.container-edit.active') || document.querySelector('.container-add.active');
   if (!container) return;
@@ -205,19 +188,6 @@ function buildContactElement(name, email, phone, color) {
   }
 }
 
-// function buildContactElement(name, email, phone, color) {
-//   const contact = document.createElement('div');
-//   contact.classList.add('contact');
-//   contact.setAttribute('data-phone', phone);
-//   const avatar = createContactAvatar(name, color);
-//   const info = createContactInfo(name, email);
-
-//   contact.appendChild(avatar);
-//   contact.appendChild(info);
-//   return contact;
-// }
-
-
 function createContactAvatar(name, color) {
   try {
     const avatar = document.createElement('div');
@@ -239,35 +209,6 @@ function createContactAvatar(name, color) {
   }
 }
 
-// function createContactAvatar(name, color) {
-//   const avatar = document.createElement('div');
-//   avatar.classList.add('contact-avatar');
-//   if (!color) {
-//     console.error('No color available. Contact will be created without color.');
-//      color = '#808080'; 
-   
-//   }
-//   avatar.style.backgroundColor = color;
-//   avatar.textContent = name
-//     .split(' ')
-//     .map((w) => w.charAt(0).toUpperCase())
-//     .join('');
-//   return avatar;
-// }
-
-// const randomIndex = Math.floor(Math.random() * randomColors.length);
-// const selectedColor = randomColors[randomIndex];
-// randomColors.splice(randomIndex, 1);
-// return selectedColor;
-
-
-// function () {
-//   let rv = colorVariables[Math.floor(Math.random() * colorVariables.length)];
-//   let compColor = getComputedStyle(document.documentElement).getPropertyValue(rv).trim();
-//   return compColor;
-// }
-
-
 function createContactInfo(name, email) {
   try {
     const info = document.createElement('div');
@@ -287,20 +228,6 @@ function createContactInfo(name, email) {
   }
 }
 
-// function createContactInfo(name, email) {
-//   const info = document.createElement('div');
-//   info.classList.add('contact-info');
-//   const namePara = document.createElement('p');
-//   namePara.classList.add('contact-name');
-//   namePara.textContent = name;
-//   const emailLink = document.createElement('a');
-//   emailLink.classList.add('contact-email');
-//   emailLink.textContent = email;
-//   info.appendChild(namePara);
-//   info.appendChild(emailLink);
-//   return info;
-// }
-
 function insertContactSorted(container, contactEl, name) {
   try {
     const contacts = [].slice.call(container.querySelectorAll('.contact')),
@@ -310,12 +237,6 @@ function insertContactSorted(container, contactEl, name) {
     console.error('Error in insertContactSorted:', error);
   }
 }
-
-// function insertContactSorted(container, contactEl, name) {
-//   const contacts = [].slice.call(container.querySelectorAll('.contact')),
-//     next = contacts.find((c) => c.querySelector('.contact-name').textContent.trim() > name);
-//   next ? container.insertBefore(contactEl, next) : container.appendChild(contactEl);
-// }
 
 function resetForm() {
   const n = document.querySelector('input[placeholder="Firstname Lastname"]'),
@@ -369,23 +290,6 @@ async function saveContactToFirebase(contactData, callback) {
   }
 }
 
-// function saveContactToFirebase(contactData, callback) {
-//   fetch(`${BASE_URL}/contacts.json`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(contactData),
-//   })
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       callback(null, data);
-//     })
-//     .catch(function (err) {
-//       callback(err, null);
-//     });
-// }
-
 async function prepareContact(event) {
   let inputs = extractInputs(event);
   if (!inputs) return null;
@@ -429,43 +333,6 @@ async function prepareContact(event) {
   return { data: contactData, el: contactEl };
 }
 
-//  async function prepareContact(event) {
-//   let inputs = extractInputs(event);
-//   if (!inputs) return null;
-
-//   let phoneNumber = inputs.phone;
-//   if (phoneNumber.startsWith('0')) {
-//     phoneNumber = phoneNumber.substring(1); 
-//   }
-//   phoneNumber = '+49' + phoneNumber; 
-
-//   let firstLetter = inputs.name.charAt(0).toUpperCase(),
-//     container = getOrCreateGroupContainer(firstLetter),
-//     compColor = await getRandomColor() // in script.js
-
-//     nameParts = computeNameParts(inputs.name),
-//     contactEl = buildContactElement(inputs.name, inputs.email, phoneNumber, compColor); 
-//   insertContactSorted(container, contactEl, inputs.name);
-
-//   if (!compColor) {
-//     console.error('No color available. Contact will be created without color.');
-//     compColor = '#808080'; 
-//   }
-
-//   let contactData = {
-//     firstname: nameParts.firstName,
-//     lastname: nameParts.lastName,
-//     email: inputs.email,
-//     phone: phoneNumber, 
-//     contactColor: compColor,
-//     initials: nameParts.initials,
-//     createdAt: new Date().toISOString(),
-//   };
-
-//   return { data: contactData, el: contactEl };
-// }
-
-
 function finalizeContact(contactData, contactEl) {
   saveContactToFirebase(contactData, function (err, data) {
     if (err) {
@@ -483,39 +350,6 @@ function finalizeContact(contactData, contactEl) {
   resetForm();
 }
 
-
-
-// function finalizeContact(contactData, contactEl) {
-//   saveContactToFirebase(contactData, function (err, data) {
-//     if (err) {
-//       console.error('Error saving contact:', err);
-//       return;
-//     }
-
-//     if (contactEl) { 
-//       contactEl.setAttribute('data-id', data.name);
-//       showSuccessPopup();
-//     } else {
-//       console.error('contactEl is undefined.');
-//     }
-//   });
-//   resetForm();
-// }
-
-// function finalizeContact(contactData, contactEl) {
-//  saveContactToFirebase(contactData, function (err, data) {
-//     if (err) {
-//       console.error('Error saving contact:', err);
-//       return;
-//     }
-    
-//     contactEl.setAttribute('data-id', data.name);
-//     showSuccessPopup();
-//   });
-//   resetForm();
-// }
-
-
 async function createContact(event) {
   event.preventDefault();
   let info = await prepareContact(event); 
@@ -524,53 +358,10 @@ async function createContact(event) {
   }
 }
 
-//  function createContact(event) {
-//   event.preventDefault();
-//   let info = prepareContact(event);
-//   if (info) {
-//     finalizeContact(info.data, info.el);
-//   }
-// }
-
-
 function getContactDiv(deleteBtn) {
   let contactDiv = deleteBtn ? deleteBtn.closest('.contact') : activeContact;
   return contactDiv;
 }
-// erstmal ausgeblendet muss noch überarbeitet werden
-
-// function confirmAndDeleteContact(contactDiv) {
-//   return new Promise(async (resolve) => {
-//     const confirmed = await showConfirmation('Do you really want to delete this contact?');
-
-//     if (!confirmed) {
-//       resolve(false);
-//       return;
-//     }
-
-//     const firebaseId = contactDiv.getAttribute('data-id');
-//     if (firebaseId) {
-//       fetch(`${BASE_URL}/contacts/${firebaseId}.json`, { method: 'DELETE' })
-//         .then((r) => {
-//           if (!r.ok) throw new Error('Deletion error');
-//           removeContactFromUI(contactDiv);
-//           resolve(true);
-//         })
-//         .catch((err) => {
-//           console.error('Deletion error:', err);
-//           resolve(false);
-//         });
-//     } else {
-//       removeContactFromUI(contactDiv);
-//       resolve(true);
-//     }
-//   });
-// }
-
- 
-
-
-
 
 async function confirmAndDeleteContact(contactDiv) {
   return new Promise(async (resolve) => {
@@ -615,33 +406,6 @@ async function confirmAndDeleteContact(contactDiv) {
     });
   });
 }
-
-// function confirmAndDeleteContact(contactDiv) {
-//   return new Promise((resolve) => {
-//     showConfirmPopup('Do you really want to delete this contact?', (confirmed) => {
-//       if (!confirmed) {
-//         resolve(false);
-//         return;
-//       }
-//       const firebaseId = contactDiv.getAttribute('data-id');
-//       if (firebaseId) {
-//         fetch(`${BASE_URL}/contacts/${firebaseId}.json`, { method: 'DELETE' })
-//           .then((r) => {
-//             if (!r.ok) throw new Error('Deletion error');
-//             removeContactFromUI(contactDiv);
-//             resolve(true);
-//           })
-//           .catch((err) => {
-//             console.error('Deletion error:', err);
-//             resolve(false);
-//           });
-//       } else {
-//         removeContactFromUI(contactDiv);
-//         resolve(true);
-//       }
-//     });
-//   });
-// }
 
 function processContactDeletion(deleteBtn) {
   let contactDiv = getContactDiv(deleteBtn);

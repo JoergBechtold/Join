@@ -25,47 +25,58 @@ function updateDate() {
   }
 }
 
+async function fetchTaskData() {
+  const response = await fetch(`${BASE_URL}/tasks.json`);
+  if (!response.ok)
+      throw new Error(`Fehler beim Abrufen der Daten: ${response.status}`);
+  return (await response.json()) || {};
+}
+
+function computeTaskStats(tasks) {
+  let stats = {
+      todo: 0,
+      done: 0,
+      urgent: 0,
+      tasksInBoard: 0,
+      tasksInProgress: 0,
+      awaitingFeedback: 0
+  };
+  Object.values(tasks).forEach(task => {
+      stats.tasksInBoard++;
+      if (task.state === 'open')
+          stats.todo++;
+      else if (task.state === 'done')
+          stats.done++;
+      else if (task.state === 'in-progress')
+          stats.tasksInProgress++;
+      else if (task.state === 'await-feedback')
+          stats.awaitingFeedback++;
+      if (task.priority && task.priority.toLowerCase() === 'urgent')
+          stats.urgent++;
+  });
+  return stats;
+}
+
+function updateTaskSummaryDisplay(stats) {
+  document.querySelector('.summarynmb.todo').textContent = stats.todo;
+  document.querySelector('.summarynmb.done').textContent = stats.done;
+  document.querySelector('.urgentnmb').textContent = stats.urgent;
+  let taskNumbers = document.querySelectorAll('.tasknmb');
+  if (taskNumbers[0])
+      taskNumbers[0].textContent = stats.tasksInBoard;
+  if (taskNumbers[1])
+      taskNumbers[1].textContent = stats.tasksInProgress;
+  if (taskNumbers[2])
+      taskNumbers[2].textContent = stats.awaitingFeedback;
+}
+
 async function updateTaskData() {
   try {
-    const response = await fetch(`${BASE_URL}/tasks.json`);
-    if (!response.ok) {
-      throw new Error(`Fehler beim Abrufen der Daten: ${response.status}`);
-    }
-    const tasks = (await response.json()) || {};
-
-    let todo = 0;
-    let done = 0;
-    let urgent = 0;
-    let tasksInBoard = 0;
-    let tasksInProgress = 0;
-    let awaitingFeedback = 0;
-
-    Object.values(tasks).forEach((task) => {
-      tasksInBoard++;
-      if (task.state === 'open') {
-        todo++;
-      } else if (task.state === 'done') {
-        done++;
-      } else if (task.state === 'in-progress') {
-        tasksInProgress++;
-      } else if (task.state === 'await-feedback') {
-        awaitingFeedback++;
-      }
-      if (task.priority && task.priority.toLowerCase() === 'urgent') {
-        urgent++;
-      }
-    });
-
-    document.querySelector('.summarynmb.todo').textContent = todo;
-    document.querySelector('.summarynmb.done').textContent = done;
-    document.querySelector('.urgentnmb').textContent = urgent;
-
-    let taskNumbers = document.querySelectorAll('.tasknmb');
-    if (taskNumbers[0]) taskNumbers[0].textContent = tasksInBoard;
-    if (taskNumbers[1]) taskNumbers[1].textContent = tasksInProgress;
-    if (taskNumbers[2]) taskNumbers[2].textContent = awaitingFeedback;
+      const tasks = await fetchTaskData();
+      const stats = computeTaskStats(tasks);
+      updateTaskSummaryDisplay(stats);
   } catch (error) {
-    console.error('Error loading task data:', error);
+      console.error('Error loading task data:', error);
   }
 }
 
@@ -94,30 +105,6 @@ function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
     imgElement.src = defaultSrc;
   };
 }
-
-// var previousOnload = window.onload;
-
-// window.onload = async function () {
-//   if (typeof previousOnload === 'function') {
-//     previousOnload();
-//   }
-
-//   updateGreeting();
-//   updateDate();
-//   updateTaskData();
-//   setInterval(updateTaskData, 5000);
-//   addClickEvents();
-//   const user = await loadUserData();
-//   greetingName(user);
-
-//   let pencilContainer = document.querySelector('.pencil:first-child');
-//   let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
-//   let doneContainer = document.querySelector('.pencil:nth-child(2)');
-//   let doneImg = doneContainer ? doneContainer.querySelector('img') : null;
-
-//   addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
-//   addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
-// };
 
 async function initializeSummaryPage() {
   try {
