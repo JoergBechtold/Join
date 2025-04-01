@@ -17,6 +17,11 @@
   margin-bottom: 40px;
 }
 
+label {
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-16-20);
+}
+
 .footer-add-task {
   width: 100%;
   max-width: 976px;
@@ -90,8 +95,8 @@
 
 .text {
   color: var(--primary-color-gray);
-  font-size: var(--font-size-16);
   font-weight: var(--font-weight-400);
+  font-size: var(--font-size-16-20);
 }
 
 .input-container {
@@ -163,7 +168,6 @@
 .subtask-enum {
   padding: 0 10px;
   max-height: 120px;
-  /* overflow-y: auto; */
 }
 
 .subtask-text {
@@ -221,7 +225,7 @@
   padding: 12px 21px;
   cursor: pointer;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16-20);
 }
 
 .custom-select-option:hover {
@@ -238,14 +242,14 @@
 .error-select-option {
   padding: 12px 21px;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16-20);
 }
 
 .contacts-custom-select-option {
   padding: 12px 21px;
   cursor: pointer;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-16);
+  font-size: var(--font-size-16-20);
   display: flex;
   flex-direction: column;
 }
@@ -283,7 +287,7 @@
 .custom-select-focused {
   padding: 12px 21px 12px 21px;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16-20);
   background-color: white;
   height: 48px;
   border-radius: var(--border-radius-input-fields);
@@ -299,7 +303,7 @@
   padding: 12px 21px;
   cursor: pointer;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-16);
+  font-size: var(--font-size-16-20);
   background-color: var(--primary-color-gray) !important;
   border-radius: var(--border-radius-buttons);
   display: flex;
@@ -316,7 +320,7 @@
 .custom-input {
   color: black;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16-20);
   border: none;
   outline: none;
 }

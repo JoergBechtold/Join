@@ -445,7 +445,7 @@ button[disabled]:hover {
   display: flex;
   align-items: center;
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16-20);
   color: var(--light-gray-placeholder);
 }
 

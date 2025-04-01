@@ -31,7 +31,7 @@
     border: var(--border-input-fields);
     background-color: white;
     font-weight: var(--font-weight-400);
-    font-size: var(--font-size-18);
+    font-size: var(--font-size-16-20);
     display: flex;
     align-items: center;
     justify-content: center;
