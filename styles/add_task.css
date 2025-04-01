@@ -88,12 +88,6 @@
   font-size: var(--font-size-16-20);
 }
 
-.red-star {
-  color: var(--red);
-  font-size: var(--font-size-16-20);
-  font-weight: var(--font-weight-400);
-}
-
 .text {
   color: var(--primary-color-gray);
   font-size: var(--font-size-16);
@@ -103,10 +97,6 @@
 .input-container {
   position: relative;
   width: 100%;
-}
-
-.input-base-icon {
-  cursor: pointer;
 }
 
 .align {
@@ -119,6 +109,7 @@
   flex-direction: row;
   gap: 10px;
 }
+
 .close-and-check {
   position: absolute;
   top: 50%;
@@ -186,10 +177,6 @@
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
-}
-
-.subtask-icon {
-  cursor: pointer;
 }
 
 .edit-icon {
@@ -357,3 +344,5 @@
   align-items: center;
   gap: 15px;
 }
+
+
