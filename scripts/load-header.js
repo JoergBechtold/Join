@@ -56,14 +56,14 @@ function ifActivePage() {
 //   }
 // }
 
-function toggleSubmenu() {
-  let submenu = document.getElementById('user-submenu');
+// function toggleSubmenu() {
+//   let submenu = document.getElementById('user-submenu');
  
    
   
-    submenu.classList.toggle('hidden');
+//     submenu.classList.toggle('hidden');
   
-}
+// }
 
 
 
