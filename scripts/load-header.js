@@ -8,7 +8,7 @@ if (!headerContainer) {
 fetch('header_sidebar.html')
   .then(response => {
     if (!response.ok) {
-      throw new Error(`Fehler beim Abrufen des Headers: ${response.status}`);
+      throw new Error(`Error retrieving header ${response.status}`);
     }
     return response.text();
   })
@@ -19,7 +19,7 @@ fetch('header_sidebar.html')
     loadInitialsUserIcon();
     ifActivePage();
   })
-  .catch(error => console.error('Fehler beim Laden des Headers:', error));
+  .catch(error => console.error('Error loading header', error));
 
 function ifButtonLinkSidebar(buttonLinksSidebar) {
   if (buttonLinksSidebar === 'true') {
