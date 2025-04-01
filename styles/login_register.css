@@ -305,3 +305,12 @@
   color: var(--blue);
   scale: var(--scale-hover);
 }
+
+
+@media only screen and (max-width: 360px){
+.nav-log-in{
+  top: unset;
+  right: unset;
+  bottom: 140px;
+}
+}

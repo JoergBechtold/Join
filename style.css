@@ -54,23 +54,6 @@ a {
   --gray-a-links: #a8a8a8;
   --red: #ff001f;
 
-  /* color for circle */
-  /* --circle-bg-color-orange: #ff7a00;
-  --circle-bg-color-pink: #ff5eb3;
-  --circle-bg-color-violet: #6e52ff;
-  --circle-bg-color-purple: #9327ff;
-  --circle-bg-color-turquoise: #00bee8;
-  --circle-bg-color-mint: #1fd7c1;
-  --circle-bg-color-coral: #ff745e;
-  --circle-bg-color-peach: #ffa35e;
-  --circle-bg-color-magenta: #fc71ff;
-  --circle-bg-color-yellow: #ffc701;
-  --circle-bg-color-blue: #0038ff;
-  --circle-bg-color-lime: #c3ff2b;
-  --circle-bg-color-lemon: #ffe62b;
-  --circle-bg-color-red: #ff4646;
-  --circle-bg-color-gold: #ffbb2b; */
-
   /* gap */
   --form-gap: 32px;
   --button-gap: 35px;
