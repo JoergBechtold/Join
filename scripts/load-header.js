@@ -47,9 +47,36 @@ function ifActivePage() {
   }
 }
 
+// function toggleSubmenu() {
+//   let submenu = document.getElementById('user-submenu');
+//   if (window.innerWidth >= 768) {
+//     submenu.classList.toggle('submenu-slide-in');
+//   } else {
+//     submenu.classList.toggle('hidden');
+//   }
+// }
+
 function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
-  submenu.classList.toggle('hidden');
+ 
+   
+  
+    submenu.classList.toggle('hidden');
+  
+}
+
+
+
+function toggleSubmenu() {
+  let submenu = document.getElementById('user-submenu');
+
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    submenu.classList.toggle('submenu-slide-in');
+  } else {
+    submenu.classList.remove('submenu-slide-in');
+    submenu.classList.toggle('hidden');
+
+  }
 }
 
 document.onclick = function(event) {

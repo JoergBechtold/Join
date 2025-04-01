@@ -36,9 +36,9 @@
   gap: 15px;
 }
 
-.header-icons a:hover {
+/* .header-icons a:hover {
   transform: scale(1.2);
-}
+} */
 
 .header-icons span {
   font-size: 18px;
@@ -59,6 +59,8 @@
 .header-logo-responsive img{
   width: 100%;
 }
+
+
 
 .sidebar {
   width: 232px;
@@ -202,6 +204,8 @@
   flex-direction: column;
   width: 160px;
   z-index: 100;
+ 
+
 }
 
 .submenu a {
@@ -209,10 +213,10 @@
   color: #cdcdcd;
   display: block;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   transition: background 0.3s ease-in-out;
-  width: 130;
-  height: 46;
+  /* width: 130;
+  height: 46; */
   border-radius: 8px;
   padding-top: 8px;
   padding-right: 16px;
@@ -224,7 +228,11 @@
 
 .submenu a:hover {
   background: rgba(42, 61, 89, 1);
-  transform: scale(0.9);
+  /* transform: scale(0.9); */
+}
+
+.submenu a:nth-child(1){
+  display: none;
 }
 
 .hidden {
@@ -235,9 +243,14 @@
   position: relative;
 }
 
+/* .submenu-slide-in{
+  transform: translate(0);
+} */
+
+
 
 @media screen and (max-width: 992px) {
-  .header-icons a{
+  .header-icons a:nth-child(1){
     display: none;
   }
 
@@ -255,6 +268,17 @@
 }
 
 @media screen and (max-width: 768px) {
+.submenu{
+  display: flex;
+  transform: translate(250px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.submenu-slide-in{
+  transform: translate(0);
+}
+
+
   .header {
     width: 100%;
     left: 0;
@@ -295,6 +319,16 @@
   padding: unset;
   }
 
+  .submenu {
+    top: 40px;
+    right: 0;
+   
+  }
+
+  .submenu a:nth-child(1){
+    display: flex;
+  }
+
   .header-logo-responsive{
     display: block;
   }
@@ -314,7 +348,6 @@
     display: none;
   }
 
-  
   .nav-links {
     display: flex;
     flex-direction: unset;
@@ -323,7 +356,6 @@
     height: 100%;
     width: 100%;
     padding: 2px 40px 2px 40px; 
-   
     gap: 10px;
   }
 
@@ -352,13 +384,10 @@
     white-space: nowrap;
   }
 
-  
-  
   .nav-links a:hover span {
     color: #b0b0b0;
   }
 
- 
   .boaimg {
     margin-right: 0;
   }
@@ -377,18 +406,14 @@
     padding-left: 0;
   }
 
-  
-  
   .link-button a{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
     padding-block: 15px;
-   
    }
   
-
    .img-box{
     width: 24px;
     height: 24px;
