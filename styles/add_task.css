@@ -349,44 +349,24 @@ label {
   gap: 15px;
 }
 
-@media screen and (max-width: 1400px){
+@media screen and (max-width: 1400px) {
   .main-add-task {
-    max-width: 900px;
+    max-width: calc(900px - (1400px - 100vw) * 0.25);
+    padding-right: 80px;
   }
 }
 
-@media screen and (max-width: 1330px){
+@media screen and (max-width: 1150px) {
   .main-add-task {
-    max-width: 850px;
+    max-width: 750px; 
+    padding-right: 100px;
   }
 }
 
-@media screen and (max-width: 1250px){
-  .main-add-task {
-    max-width: 800px;
-  }
-}
 
-@media screen and (max-width: 1200px){
-  .main-add-task {
-    max-width: 750px;
-  }
-}
 
-@media screen and (max-width: 1150px){
-  .main-add-task {
-    max-width: 700px;
-  }
-}
 
-@media screen and (max-width: 1100px){
-  .main-add-task {
-    max-width: 650px;
-  }
-}
 
-@media screen and (max-width: 1050px){
-  .main-add-task {
-    max-width: 600px;
-  }
-}
+
+
+
