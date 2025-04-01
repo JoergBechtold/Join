@@ -110,17 +110,20 @@
       <div id="popup" class="popup"></div>
     </div>
 
+    <!--Edit Popup-->
     <div id="edit_popup" class="edit-popup">
       <div class="close-div">
         <button class="close-button" type="button" onclick="closePopup()">
           <img src="assets/icons/cancel.svg" alt="Close" class="close-icon" />
         </button>
       </div>
+
+      
       <div class="edit-close-buttton-container edit-overflow">
         <div id="edit_task_template">
           <form class="form-add-task">
-            <div class="add-task-content edit-content">
-              <div class="form-column left-container edit-form-column">
+            <div class="add-task-content edit-content" id="add-task-content">
+              <div class="form-column left-container edit-form-column" id="left-container">
                 <div class="form-group">
                   <label for="edit_title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
                   <input id="edit_title" class="input-base" type="text" placeholder="Enter a title" />
@@ -245,6 +248,10 @@
     <script src="scripts/add-taks-priority-buttons.js"></script>
     <script src="scripts/add-taks-subtasks.js"></script>
     <script src="scripts/add-task-assigned-to.js"></script>
+    <script src="scripts/edit-popup.js"></script>
+    <script src="scripts/edit-assigned-to.js"></script>
+    <script src="scripts/edit-subtasks.js"></script>
+    <script src="scripts/edit-prio-buttons.js"></script>
     <script src="scripts/board.js"></script>
     <script src="scripts/edit-popup.js"></script>
     <script src="scripts/board-task-popup.js"></script>
