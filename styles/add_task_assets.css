@@ -162,3 +162,17 @@
 .custom-select:hover {
     border: 1px solid grey;
 }
+
+.red-star {
+    color: var(--red);
+    font-size: var(--font-size-16-20);
+    font-weight: var(--font-weight-400);
+}
+
+.input-base-icon {
+    cursor: pointer;
+}
+
+.subtask-icon {
+    cursor: pointer;
+}

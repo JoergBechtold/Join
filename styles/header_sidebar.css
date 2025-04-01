@@ -131,7 +131,7 @@
 .nav-links a:hover {
   background-color: #3a4756;
   color: white;
-  padding-left: 25px;
+  /* padding-left: 25px; */
 }
 
 .nav-links a:hover span {
@@ -239,6 +239,18 @@
 @media screen and (max-width: 992px) {
   .header-icons a{
     display: none;
+  }
+
+  .sidebar{ 
+  width: unset;
+  }
+
+  .nav-links{
+    width: unset;
+  }
+
+  .header{
+    left: 162px;
   }
 }
 
