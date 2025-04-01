@@ -6,7 +6,7 @@
     border-radius: var(--border-radius-input-fields);
     border: var(--border-input-fields);
     font-weight: var(--font-weight-400);
-    font-size: var(--font-size-20);
+    font-size: var(--font-size-16-20);
 }
   
 .textarea-base::placeholder {
@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     font-weight: var(--font-weight-400);
-    font-size: var(--font-size-20);
+    font-size: var(--font-size-16-20);
     color: var(--light-gray-placeholder);
 }
   
@@ -46,7 +46,7 @@
 .prio-buttons {
     display: flex;
     width: 100%;
-    gap: 10px; /* Abstand zwischen den Buttons */
+    gap: 10px;
 }
   
 .prio-icon {
@@ -119,7 +119,7 @@
 .input-base-V2 {
     color: black;
     font-weight: var(--font-weight-400);
-    font-size: var(--font-size-16);
+    font-size: var(--font-size-16-20);
     width: 100%;
     height: 32px;
     padding: 12px 21px 12px 21px;
@@ -147,7 +147,7 @@
 .custom-select {
     padding: 12px 21px 12px 21px;
     font-weight: var(--font-weight-400);
-    font-size: var(--font-size-20);
+    font-size: var(--font-size-16-20);
     background-color: white;
     height: 48px;
     border-radius: var(--border-radius-input-fields);
