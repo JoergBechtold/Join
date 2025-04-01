@@ -357,9 +357,18 @@ label {
 }
 
 @media screen and (max-width: 1150px) {
-  .main-add-task {
-    max-width: 750px; 
-    padding-right: 100px;
+  .required-text {
+    display: none;
+  }
+
+  .add-task-content {
+    flex-direction: column;
+    gap: 30px;
+
+  }
+
+  .vertical-line {
+    display:none;
   }
 }
 
