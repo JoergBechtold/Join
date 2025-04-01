@@ -1,0 +1,7 @@
+.edit-content {
+    flex-direction: column;
+}
+
+.edit-popup {
+    overflow-y: auto;
+}

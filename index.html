@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="styles/add_task_assets.css" />
     <link rel="stylesheet" href="styles/board_task_popup.css" />
     <link rel="stylesheet" href="styles/assets.css" />
+    <link rel="stylesheet" href="styles/edit_popup.css">
     <link rel="stylesheet" href="style.css" />
 
     <!-- Checks whether the user is logged in. If not then links to login_register.html -->
@@ -114,9 +115,94 @@
         <button class="close-button" type="button" onclick="closePopup()">
           <img src="assets/icons/cancel.svg" alt="Close" class="close-icon" />
         </button>
+        <div id="edit_task_template">
+          <form class="form-add-task">
+            <div class="add-task-content edit-content">
+              <div class="form-column left-container">
+                <div class="form-group">
+                  <label for="edit_title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
+                  <input id="edit_title" class="input-base" type="text" placeholder="Enter a title" />
+                  <div class="error-message-required d-none" id="edit_error_title">This field is required</div>
+                </div>
+        
+                <div class="form-group">
+                  <label for="edit_description"><span class="label-text">Description</span></label>
+                  <textarea id="edit_description" class="textarea-base" placeholder="Enter a Description"></textarea>
+                </div>
+        
+                <div class="form-group">
+                  <label for="edit_due_date"><span class="label-text">Due date</span> <span class="red-star">*</span></label>
+                  <div class="input-container">
+                    <input id="edit_due_date" class="input-base due-date" type="date" />
+                  </div>
+                  <div class="error-message-required d-none" id="edit_error_date">This field is required</div>
+                </div>
+              </div>
+        
+              <div class="vertical-line"></div>
+        
+              <div class="form-column right-container">
+                <div class="form-group">
+                  <label><span class="label-text">Priority</span></label>
+                  <div class="prio-buttons">
+                    <button type="button" class="prio" id="edit_urgent_button" onclick="setEditPriority('edit_urgent_button')">
+                      Urgent
+                      <img src="/assets/icons/prio-high.svg" class="prio-icon" id="edit_urgent_img" />
+                    </button>
+                    <button type="button" class="prio" id="edit_medium_button" onclick="setEditPriority('edit_medium_button')">
+                      Medium
+                      <img src="/assets/icons/prio-medium.svg" class="prio-icon" id="edit_medium_img" />
+                    </button>
+                    <button type="button" class="prio" id="edit_low_button" onclick="setEditPriority('edit_low_button')">
+                      Low
+                      <img src="/assets/icons/prio-low.svg" class="prio-icon" id="edit_low_img" />
+                    </button>
+                  </div>
+                </div>
+        
+                <div class="form-group">
+                  <label><span class="label-text">Assigned to</span></label>
+                  <div class="custom-select-container">
+                    <div class="custom-select" id="edit_custom_select" onclick="toggleEditContactsDropdown()">
+                      <input class="custom-input" type="text" id="edit_selected_contact" placeholder="Select contacts to assign" oninput="filterEditContacts()" />
+                      <img class="select-icon" id="edit_contacts_arrow" src="/assets/icons/arrow_drop_down.svg" />
+                    </div>
+                    <div class="contacts-custom-options d-none" id="edit_contacts_options"></div>
+                    <div class="show-selected-contacts" id="edit_selected_contact_circles"></div>
+                  </div>
+                </div>
+        
+                <div class="form-group">
+                  <label><span class="label-text">Category</span> <span class="red-star">*</span></label>
+                  <div class="custom-select-container">
+                    <div class="custom-select" id="edit_custom_category" onclick="toggleEditCategoryDropdown()">
+                      <span id="edit_selected_option">Select task category</span>
+                      <img class="select-icon" id="edit_select_arrow" src="/assets/icons/arrow_drop_down.svg" />
+                    </div>
+                    <div class="custom-options d-none" id="edit_options_container">
+                      <div class="custom-select-option" onclick="selectEditOption('Technical Task')">Technical Task</div>
+                      <div class="custom-select-option" onclick="selectEditOption('User Story')">User Story</div>
+                    </div>
+                  </div>
+                  <div class="error-message-required d-none" id="edit_error_category">This selection is required</div>
+                </div>
+        
+                <div class="form-group">
+                  <label><span class="label-text">Subtasks</span></label>
+                  <div class="input-container">
+                    <input id="edit_subtask_input" class="input-base" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskKey(event)" />
+                    <img id="edit_add_subtask_icon" class="input-base-icon" src="/assets/icons/add.svg" onclick="handleEditSubtaskAdd()" />
+                  </div>
+                  <div class="subtask-enum" id="edit_subtask_enum"></div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <div id="add_task_fetch_template"></div>
+      
+
 
       <div class="footer-add-task ok-btn-container">
         <div class="align-with-gap">
@@ -163,6 +249,7 @@
     <script src="scripts/add-task-assigned-to.js"></script>
     <script src="scripts/board.js"></script>
     <script src="scripts/template/extended-Taskcard-popup.js"></script>
+    <script src="scripts/edit-popup.js"></script>
     <script src="scripts/board-task-popup.js"></script>
     <script src="script.js"></script>
   </body>
