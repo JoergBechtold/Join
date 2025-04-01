@@ -176,3 +176,9 @@
 .subtask-icon {
     cursor: pointer;
 }
+
+@media screen and (max-width: 380px) {
+    .prio-buttons {
+      gap: 5px;
+    }
+  }

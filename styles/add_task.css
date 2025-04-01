@@ -378,11 +378,17 @@ label {
     justify-content: flex-end;
     padding-bottom: 30px;
   }
+
+  .main-add-task {
+    margin-left: 360px ; 
+    padding-right: 150px;
+  }
 }
 
 @media screen and (max-width: 992px) {
   .main-add-task {
     margin-left: 230px;
+    padding-right: 80px;
   }
 }
 
@@ -394,24 +400,13 @@ label {
 
 @media screen and (max-width: 600px) {
   .main-add-task {
-    margin-left: 60px;
-    padding-right: 60px;
+    margin-left: calc(60px - (600px - 100vw) * 0.17); 
+    padding-right: calc(60px - (600px - 100vw) * 0.19);
   }
 }
 
-@media screen and (max-width: 480px) {
-  .main-add-task {
-    margin-left: 30px;
-    padding-right: 30px;
-  }
-}
 
-@media screen and (max-width: 360px) {
-  .main-add-task {
-    margin-left: 15px;
-    padding-right: 15px;
-  }
-}
+
 
 
 
