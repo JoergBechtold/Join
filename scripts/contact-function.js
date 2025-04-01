@@ -1,22 +1,6 @@
 
 let activeContact = null;
-// let colorVariables = [
-//   '--circle-bg-color-orange',
-//   '--circle-bg-color-pink',
-//   '--circle-bg-color-violet',
-//   '--circle-bg-color-purple',
-//   '--circle-bg-color-turquoise',
-//   '--circle-bg-color-mint',
-//   '--circle-bg-color-coral',
-//   '--circle-bg-color-peach',
-//   '--circle-bg-color-magenta',
-//   '--circle-bg-color-yellow',
-//   '--circle-bg-color-blue',
-//   '--circle-bg-color-lime',
-//   '--circle-bg-color-lemon',
-//   '--circle-bg-color-red',
-//   '--circle-bg-color-gold',
-// ];
+
 
 function showAddContactPopup() {
   const p = document.querySelector('.container-add');
