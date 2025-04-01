@@ -71,7 +71,7 @@ async function loadInitialsUserIcon() {
       userProfileCircleRef.innerHTML = user.initials;
     } else {
       userProfileCircleRef.innerHTML = 'G';
-      console.log('Fehler');
+     
     }
   } catch (error) {
     console.error('Error loading user data', error);
