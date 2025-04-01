@@ -11,3 +11,7 @@
     display: flex;
     justify-content: end;
 }
+
+.edit-form-column {
+    margin-bottom: 30px;
+}
