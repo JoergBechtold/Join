@@ -2,6 +2,12 @@
     flex-direction: column;
 }
 
-.edit-popup {
+.edit-overflow {
     overflow-y: auto;
+}
+
+.close-div {
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }

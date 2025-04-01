@@ -77,7 +77,7 @@
 
 .edit-close-buttton-container {
   display: flex;
-  justify-content: end;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -94,6 +94,7 @@
 
 .ok-btn-container {
   justify-content: end;
+  padding-bottom: 0;
 }
 
 .popup-header {
