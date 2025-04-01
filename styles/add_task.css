@@ -363,7 +363,7 @@ label {
 
   .footer-add-task {
     justify-content: flex-end;
-    padding-bottom: 30px;
+    margin-bottom: 180px;
   }
 
   .main-add-task {
