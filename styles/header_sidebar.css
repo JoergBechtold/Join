@@ -243,12 +243,6 @@
   position: relative;
 }
 
-/* .submenu-slide-in{
-  transform: translate(0);
-} */
-
-
-
 @media screen and (max-width: 992px) {
  
 
@@ -319,6 +313,7 @@
   align-items: center;
   justify-content: center;
   padding: unset;
+  z-index: 999;
   }
 
   .submenu {
