@@ -30,22 +30,58 @@ function ifButtonLinkSidebar(buttonLinksSidebar) {
 }
 
 function ifActivePage() {
-  const activePage = sessionStorage.getItem('activePage');
+  const currentPath = window.location.pathname;
+  const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1); 
 
-  if (activePage) {
-    document.querySelectorAll('.link-button a').forEach((a) => {
-      if (a.getAttribute('href') === activePage) {
-        a.closest('li').classList.add('active');
-      }
-    });
-  } else {
-    const firstLink = document.querySelector('.link-button a');
-    if (firstLink) {
-      firstLink.closest('li').classList.add('active');
-      sessionStorage.setItem('activePage', firstLink.getAttribute('href'));
+  document.querySelectorAll('.link-button a').forEach((a) => {
+    const linkHref = a.getAttribute('href');
+    if (linkHref === currentPage) {
+      a.closest('li').classList.add('active');
+      sessionStorage.setItem('activePage', linkHref); 
+    } else {
+      a.closest('li').classList.remove('active'); 
+      
     }
-  }
+  });
 }
+
+
+
+// function ifActivePage() {
+//   const currentPath = window.location.pathname;
+//   const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1); // Extrahiert den Dateinamen
+
+//   document.querySelectorAll('.link-button a').forEach((a) => {
+//     const linkHref = a.getAttribute('href');
+//     const linkPath = linkHref.substring(linkHref.lastIndexOf('/') + 1); // Extrahiert den Dateinamen
+
+//     if (linkPath === currentPage) {
+//       a.closest('li').classList.add('active');
+//       sessionStorage.setItem('activePage', linkHref); // Speichert die aktive Seite im sessionStorage
+//     } else {
+//       a.closest('li').classList.remove('active'); // Entfernt die 'active' Klasse von anderen Links
+//     }
+//   });
+// }
+
+
+// function ifActivePage() {
+//   const activePage = sessionStorage.getItem('activePage');
+
+//   if (activePage) {
+//     document.querySelectorAll('.link-button a').forEach((a) => {
+//       if (a.getAttribute('href') === activePage) {
+//         a.closest('li').classList.add('active');
+//       }
+//     });
+//   } else {
+//     const firstLink = document.querySelector('.link-button a');
+//     if (firstLink) {
+//       firstLink.closest('li').classList.add('active');
+//       sessionStorage.setItem('activePage', firstLink.getAttribute('href'));
+//     }
+//   }
+// }
 
 function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
@@ -89,7 +125,20 @@ function toHrefFocus(url, element) {
     li.classList.remove('active');
   });
 
-  element.closest('li').classList.add('active');
+  if (element) {
+    element.closest('li').classList.add('active');
+  }
+
   sessionStorage.setItem('activePage', url);
   window.location.href = url;
 }
+
+// function toHrefFocus(url, element) {
+//   document.querySelectorAll('.link-button').forEach((li) => {
+//     li.classList.remove('active');
+//   });
+
+//   element.closest('li').classList.add('active');
+//   sessionStorage.setItem('activePage', url);
+//   window.location.href = url;
+// }

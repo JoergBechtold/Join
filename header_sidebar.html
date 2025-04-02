@@ -28,9 +28,9 @@
           <div id="user_profile_circle" class="user-profile" onclick="toggleSubmenu()"></div>
 
           <div id="user-submenu" class="submenu hidden">
-            <a href="help.html">Help</a>
-            <a href="privacy_policy.html">Privacy Policy</a>
-            <a href="legal_notice.html">Legal Notice</a>
+            <a onclick="toHrefFocus('help.html', this); return false;" href="help.html">Help</a>
+            <a onclick="toHrefFocus('privacy_policy.html', this); return false;" href="privacy_policy.html">Privacy Policy</a>
+            <a onclick="toHrefFocus('legal_notice.html', this); return false;" href="legal_notice.html">Legal Notice</a>
             <a onclick="logOut(); return false;" href="login_register.html">Log Out</a>
           </div>
         </div>
@@ -82,15 +82,27 @@
             <span>Log In</span>
           </a>
         </li>
+
+        <div class="mobil-view-links-container">
+        <!-- show in mobile view -->
+        <li class="link-button mobile-links">
+          <a onclick="toHrefFocus('privacy_policy.html', this); return false;" href="privacy_policy.html">
+            <span>Privacy Policy</span>
+          </a>
+        </li>
+
+        <li class="link-button mobile-links">
+          <a onclick="toHrefFocus('legal_notice.html', this); return false;" href="legal_notice.html">
+            <span>Legal Notice</span>
+          </a>
+        </li>
+      </div>
       </ul>
       <div class="footer">
         <a href="privacy_policy.html">Privacy Policy</a>
         <a href="legal_notice.html">Legal Notice</a>
       </div>
     </div>
-
-
-    
 
     <script src="scripts/firebase.js"></script>
     <script src="script.js"></script>

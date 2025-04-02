@@ -386,6 +386,14 @@ button[disabled]:hover {
   aspect-ratio: 1 / 1;
   object-fit: scale-down;
 }
+/* 
+.input-base[type="email"],
+.input-base[type="password"],
+.input-base[type="text"],
+.input-base[type="date"] {
+  padding-top: 6px;
+  
+} */
 
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
@@ -434,7 +442,7 @@ button[disabled]:hover {
 }
 
 .input-base::placeholder {
-  transform: translateY(2px);
+  transform: translateY(-1px);
   display: flex;
   align-items: center;
   font-weight: var(--font-weight-400);
