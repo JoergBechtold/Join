@@ -36,7 +36,7 @@ function getSubtasksHTML(task) {
   let html = '';
   if (task.subtasks) {
     Object.values(task.subtasks).forEach((subtask) => {
-      html += `<div class="subtasks-elements-container"><img src="/assets/icons/checkbox.png"><span>${subtask}</span></div>`;
+      html += `<div class="subtasks-elements-container"><img src="/assets/icons/checkbox-empty.svg"><span>${subtask}</span></div>`;
     });
   } else {
     html = '<span>No subtasks</span>';

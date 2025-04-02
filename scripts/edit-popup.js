@@ -1,60 +1,56 @@
-let editSubtasks = [];
-let selectedContacts = [];
-let activeButton = null;
-let taskKey = null;
+let editPopupSubtasks = [];
+let editPopupSelectedContacts = [];
+let editPopupActiveButton = null;
+let editPopupTaskKey = null;
+let editPopupCurrentSubtaskIndex = null;
 
 function editTask(key) {
-  taskKey = key;
+  editPopupTaskKey = key;
   document.getElementById('popup_container').style.display = 'none';
   document.getElementById('overlay').style.display = 'block';
-  loadEditForm(taskKey);
+  loadEditForm(editPopupTaskKey);
 }
 
-function loadEditForm(taskKey) {
+function loadEditForm(key) {
   const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  const task = tasks[taskKey];
+  const task = tasks[key];
   if (!task) return;
 
-  // Fill values
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
 
-  // Priority
   if (task.priority) {
     setEditPriority(`edit_${task.priority.toLowerCase()}_button`);
   }
 
-  // Category
   if (task.category) {
     document.getElementById('edit_selected_option').textContent = task.category;
   }
 
-  // Subtasks
-  editSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
+  editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
   updateEditSubtaskDisplay();
 
-  // Contacts
-  selectedContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
+  editPopupSelectedContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
   renderSelectedEditContacts();
 
   document.getElementById('edit_popup').style.display = 'flex';
 }
 
 function setEditPriority(buttonId) {
-  if (activeButton) {
-    activeButton.classList.remove('active-prio');
+  if (editPopupActiveButton) {
+    editPopupActiveButton.classList.remove('active-prio');
   }
 
   const button = document.getElementById(buttonId);
   button.classList.add('active-prio');
-  activeButton = button;
+  editPopupActiveButton = button;
 }
 
 function getEditPriority() {
-  if (activeButton?.id === 'edit_urgent_button') return 'Urgent';
-  if (activeButton?.id === 'edit_medium_button') return 'Medium';
-  if (activeButton?.id === 'edit_low_button') return 'Low';
+  if (editPopupActiveButton?.id === 'edit_urgent_button') return 'Urgent';
+  if (editPopupActiveButton?.id === 'edit_medium_button') return 'Medium';
+  if (editPopupActiveButton?.id === 'edit_low_button') return 'Low';
   return 'No Priority';
 }
 
@@ -80,7 +76,7 @@ function submitEditTask() {
   }
 
   const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  const task = tasks[taskKey];
+  const task = tasks[editPopupTaskKey];
   if (!task) return;
 
   task.title = title;
@@ -88,11 +84,11 @@ function submitEditTask() {
   task.due_date = due_date;
   task.category = category;
   task.priority = getEditPriority();
-  task.subtasks = [...editSubtasks];
-  task.assigned_to = [...selectedContacts];
+  task.subtasks = [...editPopupSubtasks];
+  task.assigned_to = [...editPopupSelectedContacts];
 
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
-  closePopup();
+  closeEditPopup();
   renderCards();
 }
 
@@ -100,7 +96,7 @@ function handleEditSubtaskAdd() {
   const input = document.getElementById('edit_subtask_input');
   const value = input.value.trim();
   if (value) {
-    editSubtasks.push(value);
+    editPopupSubtasks.push(value);
     input.value = '';
     updateEditSubtaskDisplay();
   }
@@ -116,7 +112,7 @@ function handleEditSubtaskKey(e) {
 function updateEditSubtaskDisplay() {
   const container = document.getElementById('edit_subtask_enum');
   container.innerHTML = '';
-  editSubtasks.forEach((subtask, index) => {
+  editPopupSubtasks.forEach((subtask, index) => {
     const item = document.createElement('div');
     item.className = 'subtask-item';
     item.innerHTML = `<span>${subtask}</span><button onclick="deleteEditSubtask(${index})">X</button>`;
@@ -125,7 +121,7 @@ function updateEditSubtaskDisplay() {
 }
 
 function deleteEditSubtask(index) {
-  editSubtasks.splice(index, 1);
+  editPopupSubtasks.splice(index, 1);
   updateEditSubtaskDisplay();
 }
 
@@ -152,11 +148,11 @@ function loadEditContacts() {
 }
 
 function toggleEditContact(contact) {
-  const exists = selectedContacts.find(c => c.initials === contact.initials);
+  const exists = editPopupSelectedContacts.find(c => c.initials === contact.initials);
   if (exists) {
-    selectedContacts = selectedContacts.filter(c => c.initials !== contact.initials);
+    editPopupSelectedContacts = editPopupSelectedContacts.filter(c => c.initials !== contact.initials);
   } else {
-    selectedContacts.push(contact);
+    editPopupSelectedContacts.push(contact);
   }
   renderSelectedEditContacts();
 }
@@ -164,7 +160,7 @@ function toggleEditContact(contact) {
 function renderSelectedEditContacts() {
   const container = document.getElementById('edit_selected_contact_circles');
   container.innerHTML = '';
-  selectedContacts.forEach(contact => {
+  editPopupSelectedContacts.forEach(contact => {
     const div = document.createElement('div');
     div.className = 'circle';
     div.textContent = contact.initials;
@@ -191,12 +187,10 @@ function toggleEditCategoryDropdown() {
 }
 
 function cancelEditTask() {
-  closePopup();
+  closeEditPopup();
 }
 
-function closePopup() {
+function closeEditPopup() {
   document.getElementById('edit_popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }
-
-  
