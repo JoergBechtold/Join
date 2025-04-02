@@ -85,9 +85,13 @@
 }
 
 .login-container {
-  padding: 48px 115px 48px 115px;
+  padding: 48px clamp(16px, -3.8px + 6.1875vw, 115px) 48px clamp(16px, -3.8px + 6.1875vw, 115px);
+ /* padding-block: 48px;
+ margin-inline: auto; */
+  /* padding: 48px 115px 48px 115px; */
   gap: 20px;
-  width: 652px;
+  max-width: 652px;
+  width: clamp(300px, 229.6px + 22vw, 652px);
   min-height: 450px;
   display: flex;
   flex-direction: column;

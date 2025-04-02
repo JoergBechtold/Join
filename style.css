@@ -25,8 +25,13 @@
   overflow: hidden;
 }
 
-.width-422px {
+/* .width-422px {
   width: 422px;
+} */
+
+.with-100-percent-max-width-422px{
+  width: 100%;
+  max-width: 422px;
 }
 
 .cursor-pointer {

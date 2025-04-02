@@ -4,6 +4,7 @@ const PATH_TO_TASKS = 'tasks';
 let currentDraggedElement;
 
 async function initBoard() {
+  showLoggedInLinks() 
   await sessionStoreContacts();
   await sessionStoreTasks();
   renderCards();
