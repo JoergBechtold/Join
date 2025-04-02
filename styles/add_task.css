@@ -9,6 +9,15 @@
   max-width: 976px;
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
+  flex: 1;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.main-add-task::-webkit-scrollbar{
+  width: var(--scollbar-width-thin);
 }
 
 .h1-add-task {
@@ -363,7 +372,7 @@ label {
 
   .footer-add-task {
     justify-content: flex-end;
-    margin-bottom: 180px;
+    margin-bottom: 100px;
   }
 
   .main-add-task {
