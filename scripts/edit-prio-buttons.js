@@ -6,9 +6,15 @@ let activeEditButton = null;
  */
 function setEditPriority(buttonId) {
   const button = document.getElementById(buttonId);
+  if (!button) {
+    console.warn(`Priority button with ID "${buttonId}" not found.`);
+    return;
+  }
+
   if (activeEditButton) {
     resetActiveEditButton();
   }
+
   if (activeEditButton !== button) {
     activateEditButton(button);
   } else {

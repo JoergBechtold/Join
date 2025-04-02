@@ -248,7 +248,9 @@ function createPrio(key, task) {
   prioContainer.innerHTML = '';
   let prioImage = document.createElement('img');
   prioImage.id = key + '-prio';
-  let priority = task.priority ? task.priority.toLowerCase() : '';
+  prioImage.className = 'prio-icon';
+
+  const priority = task.priority?.toLowerCase();
   if (priority === 'urgent') {
     prioImage.src = 'assets/icons/prio-high.svg';
     prioImage.alt = 'High Priority';
@@ -258,7 +260,10 @@ function createPrio(key, task) {
   } else if (priority === 'low') {
     prioImage.src = 'assets/icons/prio-low.svg';
     prioImage.alt = 'Low Priority';
+  } else {
+    return; 
   }
+
   prioContainer.appendChild(prioImage);
 }
 

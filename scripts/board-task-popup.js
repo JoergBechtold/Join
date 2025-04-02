@@ -1,4 +1,3 @@
-
 let taskKey;
 
 function getAssignedHTML(task) {
@@ -139,25 +138,59 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
     </div>
     <div class="popup-actions">
       <div class="action-box delete" onclick="deleteTask(${taskKey})">
-      <div class="delete-icon">
-        <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
+        <div class="delete-icon">
+          <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
+        </div>
+        <span class="delete-btn">Delete</span>
       </div>
-      <span class="delete-btn">Delete</span>
-    </div>
 
       <div>
         <img src="assets/icons/vector-horizontal-3.svg" alt="horizontal dividing line" />
       </div>
-      <div class="action-box edit" onclick="editTask()">
+      <div class="action-box edit" onclick="editPopupTask('${taskKey}')">
         <div class="edit-icon">
           <img src="assets/icons/edit.svg" alt="Edit" id="edit_icon" />
         </div>
-        <span class="edit-btn">Edit </span>
+        <span class="edit-btn">Edit</span>
       </div>
     </div>
   `;
+}
+
+function editPopupTask(key) {
+  const popupContainer = document.getElementById('popup_container');
+  popupContainer.style.display = 'none';
+
+  const editPopup = document.getElementById('edit_popup');
+  editPopup.style.display = 'flex';
+
+  const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
+  const task = tasks[key];
+  if (!task) return;
+
+  document.getElementById('edit_title').value = task.title || '';
+  document.getElementById('edit_description').value = task.description || '';
+  document.getElementById('edit_due_date').value = task.due_date || '';
+
+  if (task.category) {
+    document.getElementById('edit_selected_option').textContent = task.category;
   }
 
+  if (task.priority) {
+    const priorityId = `edit_${task.priority.toLowerCase()}_button`;
+    setEditPriority(priorityId);
+  }
+
+  editPopupSelectedContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
+  renderSelectedEditContacts();
+
+  editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
+  updateEditSubtaskDisplay();
+
+  editPopupTaskKey = key;
+
+  document.getElementById('overlay').style.display = 'block';
+}
 
 function checkImgAvailable(priorityIconSrc, priority){
   if (priorityIconSrc) {
@@ -180,8 +213,6 @@ function editTask() {
     document.body.appendChild(editPopup);
   }
   editPopup.style.display = 'flex';
-
-  fetchAddTask(true);
 }
 
 // async function deleteTask(taskKey) {
