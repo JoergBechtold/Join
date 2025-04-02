@@ -185,7 +185,7 @@ function editPopupTask(key) {
   renderSelectedEditContacts();
 
   editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
-  updateEditSubtaskDisplay();
+  renderEditSubtasks();
 
   editPopupTaskKey = key;
 

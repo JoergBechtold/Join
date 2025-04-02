@@ -1,5 +1,4 @@
 let editPopupSubtasks = [];
-let editPopupSelectedContacts = [];
 let editPopupActiveButton = null;
 let editPopupTaskKey = null;
 let editPopupCurrentSubtaskIndex = null;
@@ -25,7 +24,7 @@ function loadEditForm(key) {
     if (['urgent', 'medium', 'low'].includes(prio)) {
       setEditPriority(`edit_${prio}_button`);
     }
-  }  
+  }
 
   if (task.category) {
     document.getElementById('edit_selected_option').textContent = task.category;
@@ -34,20 +33,10 @@ function loadEditForm(key) {
   editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
   updateEditSubtaskDisplay();
 
-  editPopupSelectedContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
-  renderSelectedEditContacts();
+  selectedEditContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
+  renderEditSelectedContacts();
 
   document.getElementById('edit_popup').style.display = 'flex';
-}
-
-function setEditPriority(buttonId) {
-  if (editPopupActiveButton) {
-    editPopupActiveButton.classList.remove('active-prio');
-  }
-
-  const button = document.getElementById(buttonId);
-  button.classList.add('active-prio');
-  editPopupActiveButton = button;
 }
 
 function setEditPriority(buttonId) {
@@ -107,8 +96,16 @@ function submitEditTask() {
   updateData('tasks', tasks);
   closeEditPopup();
   renderCards();
-  console.log('Saved Priority:', task.priority);
+}
 
+function applyEditedTaskData(task) {
+  task.title = document.getElementById('edit_title').value.trim();
+  task.description = document.getElementById('edit_description').value.trim();
+  task.due_date = document.getElementById('edit_due_date').value.trim();
+  task.category = document.getElementById('edit_selected_option').textContent.trim();
+  task.priority = getEditPriority();
+  task.subtasks = [...editPopupSubtasks];
+  task.assigned_to = [...selectedEditContacts];
 }
 
 function validateEditInputs() {
@@ -129,93 +126,6 @@ function validateEditInputs() {
     return false;
   }
   return true;
-}
-
-function applyEditedTaskData(task) {
-  task.title = document.getElementById('edit_title').value.trim();
-  task.description = document.getElementById('edit_description').value.trim();
-  task.due_date = document.getElementById('edit_due_date').value.trim();
-  task.category = document.getElementById('edit_selected_option').textContent.trim();
-  task.priority = getEditPriority().toLowerCase();
-  task.subtasks = [...editPopupSubtasks];
-  task.assigned_to = [...editPopupSelectedContacts];
-}
-
-function handleEditSubtaskAdd() {
-  const input = document.getElementById('edit_subtask_input');
-  const value = input.value.trim();
-  if (value) {
-    editPopupSubtasks.push(value);
-    input.value = '';
-    updateEditSubtaskDisplay();
-  }
-}
-
-function handleEditSubtaskKey(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    handleEditSubtaskAdd();
-  }
-}
-
-function updateEditSubtaskDisplay() {
-  const container = document.getElementById('edit_subtask_enum');
-  container.innerHTML = '';
-  editPopupSubtasks.forEach((subtask, index) => {
-    const item = document.createElement('div');
-    item.className = 'subtask-item';
-    item.innerHTML = `<span>${subtask}</span><button onclick="deleteEditSubtask(${index})">X</button>`;
-    container.appendChild(item);
-  });
-}
-
-function deleteEditSubtask(index) {
-  editPopupSubtasks.splice(index, 1);
-  updateEditSubtaskDisplay();
-}
-
-function toggleEditContactsDropdown() {
-  const options = document.getElementById('edit_contacts_options');
-  options.classList.toggle('d-none');
-  loadEditContacts();
-}
-
-function loadEditContacts() {
-  const container = document.getElementById('edit_contacts_options');
-  container.innerHTML = '';
-  const contacts = JSON.parse(sessionStorage.getItem('contacts')) || {};
-  Object.values(contacts).forEach(contact => {
-    const option = document.createElement('div');
-    option.className = 'contacts-custom-select-option';
-    option.innerHTML = `
-      <div class="circle" style="background:${contact.randomColor}">${contact.initials}</div>
-      <div>${contact.firstname} ${contact.lastname}</div>
-    `;
-    option.onclick = () => toggleEditContact(contact);
-    container.appendChild(option);
-  });
-}
-
-function toggleEditContact(contact) {
-  const exists = editPopupSelectedContacts.find(c => c.initials === contact.initials);
-  if (exists) {
-    editPopupSelectedContacts = editPopupSelectedContacts.filter(c => c.initials !== contact.initials);
-  } else {
-    editPopupSelectedContacts.push(contact);
-  }
-  renderSelectedEditContacts();
-}
-
-function renderSelectedEditContacts() {
-  const container = document.getElementById('edit_selected_contact_circles');
-  container.innerHTML = '';
-  editPopupSelectedContacts.forEach(contact => {
-    const div = document.createElement('div');
-    div.className = 'circle';
-    div.textContent = contact.initials;
-    div.style.backgroundColor = contact.randomColor;
-    container.appendChild(div);
-  });
 }
 
 function selectEditOption(value) {
