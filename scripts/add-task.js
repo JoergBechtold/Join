@@ -95,8 +95,8 @@ function validateInputDate() {
     inputField.classList.remove('red-border');
     return true;
   }
-}
-
+} 
+ 
 /**
  * Validates the selected category and displays an error message if no category is selected.
  *
@@ -115,7 +115,7 @@ function validateCategory() {
     customSelect.classList.remove('red-border');
     return true;
   }
-}
+} 
 
 /**
  * Clears all displayed error messages and removes red borders from invalid fields.
