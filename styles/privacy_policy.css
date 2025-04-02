@@ -11,30 +11,30 @@
   font-weight: var(--font-weight-700);
 }
 
-p {
+.priv p {
   line-height: 1.6;
   font-size: 16px;
   margin: 10px 0;
 }
 
-ul {
+.priv ul {
   padding-left: 20px;
 }
 
-li {
+.priv li {
   margin-bottom: 10px;
 }
 
-strong {
+.priv strong {
   color: #004080;
 }
 
-a {
+.priv a {
   color: #0073e6;
   text-decoration: none;
 }
 
-a:hover {
+.priv a:hover {
   text-decoration: underline;
 }
 
