@@ -57,12 +57,6 @@ button[disabled]:hover {
   left: 750px;
 }
 
-/* .close-button-popup {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-} */
-
 .close-button-popup {
   position: absolute;
   top: 60px;
@@ -111,13 +105,12 @@ button[disabled]:hover {
 
 .edit-icon img,
 .delete-icon img {
-  /* width: 100%;
-  height: auto; */
   display: block;
 }
 
 .action-box.edit:hover .edit-icon img {
   content: url('../assets/icons/editblue.svg');
+  transform: translateY(0.6px);
 }
 
 .action-box.delete:hover .delete-icon img {
