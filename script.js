@@ -22,6 +22,8 @@
 
 
 
+
+
 function showConfirmation(message) {
   return new Promise((resolve) => {
     showConfirmPopup(message, (confirmed) => {
@@ -146,6 +148,8 @@ function hideLoggedInLinks() {
 function showLoggedInLinks() {
   const htmlLinks = document.getElementsByClassName('hide-before-log-in');
   const loggedInLink = document.getElementsByClassName('hide-after-log-in');
+  const mobilViewLinksContainer = document.getElementsByClassName('mobil-view-links-container');
+
 
   Array.from(htmlLinks).forEach((element) => {
     element.classList.remove('d-none');
@@ -154,6 +158,12 @@ function showLoggedInLinks() {
   Array.from(loggedInLink).forEach((element) => {
     element.classList.add('d-none');
   });
+
+  Array.from(mobilViewLinksContainer).forEach((element) => {
+    element.classList.add('d-none');
+  });
+
+  
 }
 
 async function loadUserData() {
