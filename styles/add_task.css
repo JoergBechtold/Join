@@ -359,7 +359,7 @@ label {
   .add-task-content {
     flex-direction: column;
     gap: 30px;
-
+    margin-bottom: 30px;
   }
 
   .vertical-line {
@@ -378,10 +378,6 @@ label {
   .main-add-task {
     margin-left: 360px ; 
     padding-right: 150px;
-  }
-
-  .add-task-content {
-    margin-bottom: 30px;
   }
 }
 
