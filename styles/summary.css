@@ -2,6 +2,7 @@
   min-height: calc(100dvh - 96px);
   width: 100%;
   background-color: var(--light-gray-bg);
+  overflow: hidden;
 }
 
 .main-summary {

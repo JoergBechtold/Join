@@ -40,6 +40,7 @@ function ifActivePage() {
       sessionStorage.setItem('activePage', linkHref); 
     } else {
       a.closest('li').classList.remove('active'); 
+      
     }
   });
 }

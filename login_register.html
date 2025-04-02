@@ -24,18 +24,15 @@
       <img src="assets/img/loginLogo.svg" alt="Join Logo" />
     </div>
 
-    <!-- <nav class="nav-log-in" id="nav_log_in">
-      <span>Not a Join user?</span>
-      <button onclick="showSignUp()" class="button-base-gray">Sign up</button>
-    </nav> -->
-
     <main>
       <!-- log in section -->
       <section>
         <div class="login-container" id="login_container">
           <div class="headline-vector">
             <h1>Log in</h1>
-            <div class="vector-login"><img src="assets/icons/vector-horizontal.svg" alt="Blue dividing line" /></div>
+            <!-- <div class="vector-login"><img src="assets/icons/vector-horizontal.svg" alt="Blue dividing line" /></div> -->
+            <div class="vector-login"></div> <!--vector is inserted into css-->
+
           </div>
 
           <form onsubmit="checkUserIsPresent();return false" class="form with-100-percent-max-width-422px">
@@ -72,7 +69,7 @@
 
             <div class="button-container">
               <button class="button-log-in">Log in</button>
-              <button onclick="guestLogIn()" class="button-guest-log-in">Guest Log in</button>
+              <button class="button-guest-log-in" onclick="guestLogIn()">Guest Log in</button>
             </div>
           </form>
         </div>
@@ -87,7 +84,9 @@
 
           <div class="headline-vector">
             <h1>Sign up</h1>
-            <div class="vector"><img src="assets/icons/vector-horizontal.svg" alt="Blaue Trennlinie" /></div>
+            <!-- <div class="vector-sign-up"><img src="assets/icons/vector-horizontal.svg" alt="Blaue Trennlinie" /></div> -->
+            <div class="vector-sign-up"></div>
+
           </div>
 
           <form onsubmit="handleSignUp(); return false;" class="form width-422px" id="sign_up_form">
