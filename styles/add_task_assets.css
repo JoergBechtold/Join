@@ -1,7 +1,9 @@
 .textarea-base {
+    resize: none;
     min-width: 100%; 
-    max-width: 100%; 
+    /* max-width: 100%;  */
     min-height: 168px;
+    /* max-height: 168px; */
     padding: 12px 21px 12px 21px;
     border-radius: var(--border-radius-input-fields);
     border: var(--border-input-fields);

@@ -72,13 +72,16 @@ label {
 .right-container {
   flex: 1;
   position: relative;
+  
+}
+
+.right-container {
   overflow-x: hidden;
   overflow-y: auto;
   height: 450px;
   scrollbar-gutter: stable;
 }
 
-.left-container::-webkit-scrollbar,
 .right-container::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
