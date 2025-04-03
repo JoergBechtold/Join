@@ -59,7 +59,7 @@ a {
 
   /* gap */
   --form-gap: 32px;
-  --button-gap: 35px;
+  --button-gap: clamp(10px, 5px + 1.5625vw, 35px);
   --input-gap: 20px;
 
   /* shadow */
@@ -139,9 +139,6 @@ a {
   /* --padding-top-main: 220px; */
   /* --padding-top-main: 190px; */
   --padding-top-main: clamp(145px, 136px + 2.8125vw, 190px);
-
-
-  
 
   /* main container width */
   --main-container-width: 1014px;

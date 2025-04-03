@@ -46,7 +46,8 @@
   position: absolute;
   top: 60px;
   left: 60px;
-  width: 100px;
+  width: fit-content;
+  height: clamp(80px, 71.6px + 2.625vw, 122px);
   transform: none;
 }
 
@@ -56,7 +57,7 @@
   right: 80px;
   display: flex;
   align-items: center;
-  width: 279px;
+  /* width: 279px; */
   height: 49px;
   gap: 35px;
   opacity: 0;
@@ -156,7 +157,7 @@
 }
 
 .button-container {
-  width: 322px;
+  /* width: 322px; */
   margin-top: 18px;
   gap: var(--button-gap);
   display: flex;
@@ -311,7 +312,6 @@
   align-items: center;
   background-color: var(--light-gray-bg);
   height: 35px;
-  /* width: 246px; */
   opacity: 0;
   gap: 25px;
 }
@@ -330,6 +330,20 @@
 }
 
 
+@media only screen and (max-width: 922px){
+  
+}
+@media only screen and (max-width: 768px){
+  
+}
+@media only screen and (max-width: 600px){
+  .nav-log-in {
+    top: unset;
+    right: unset;
+    bottom: 145px;
+  }
+}
+
 @media only screen and (max-width: 360px){
 
   .login-register-main{
@@ -337,8 +351,7 @@
   }
 
 .nav-log-in{
-  top: unset;
-  right: unset;
+  
   bottom: 94px;
 }
 
@@ -357,22 +370,8 @@
     height: 32px;
     width: fit-content;
     transform: none;
-    /* top: 38px;
-    left: 38px;
-    height: 78px;
-    width: 64px;
-    transform: none; */
   }
 }
-
-/* .animation-finished {
-  top: 38px;
-  left: 38px;
-  width: 64px;
-  width: fit-content;
-  height: 78px;
-} */
-
 
 .animation-finished {
   top: 15px;
@@ -383,7 +382,6 @@
 
 .login-container {
   padding: 16px clamp(16px, -3.8px + 6.1875vw, 115px) 16px clamp(16px, -3.8px + 6.1875vw, 115px);
-  /* transform: translateY(-40px); */
   gap: 4px;
   min-height: unset;
 
