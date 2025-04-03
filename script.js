@@ -199,7 +199,9 @@ function showPupupOverlaySignUp() {
 }
 
 async function fetchAddTask(parameter = false) {
+ 
   try {
+    await showLoggedInLinks(); 
     fetch('assets/templates/template_add_task.html')
       .then((response) => {
         if (!response.ok) {

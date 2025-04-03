@@ -191,7 +191,7 @@ button[disabled]:hover {
   box-shadow: none;
   color: white;
   transition: var(--transition-hover-effect);
-  font-size: var(--font-size-21);
+  font-size: var(--font-size-16-21);
   padding: 16px;
   font-weight: var(--font-weight-700);
 }
@@ -280,7 +280,7 @@ button[disabled]:hover {
   box-shadow: none;
   color: var(--primary-color-gray);
   transition: var(--transition-hover-effect);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16-21);
   padding: 16px;
   font-weight: var(--font-weight-400);
 }
