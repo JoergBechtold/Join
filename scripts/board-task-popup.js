@@ -33,14 +33,75 @@ function getAssignedHTML(task) {
 
 function getSubtasksHTML(task) {
   let html = '';
-  if (task.subtasks) {
-    Object.values(task.subtasks).forEach((subtask) => {
-      html += `<div class="subtasks-elements-container"><img src="/assets/icons/checkbox-empty.svg"><span>${subtask}</span></div>`;
+  if (task.subtasks && Array.isArray(task.subtasks)) {
+    task.subtasks.forEach((subtask) => {
+      const title = subtask.title || subtask; // fallback für alte Daten
+      const isChecked = subtask.completed;
+      const checkboxImg = isChecked 
+        ? 'assets/icons/checkbox-checked.svg' 
+        : 'assets/icons/checkbox-empty.svg';
+
+      html += `
+        <div class="subtasks-elements-container" onclick="toggleSubtaskCheckbox(this)">
+          <img class="subtask-checkbox-img" src="${checkboxImg}" alt="Checkbox" />
+          <span>${title}</span>
+        </div>`;
     });
   } else {
     html = '<span>No subtasks</span>';
   }
   return html;
+}
+
+function toggleSubtaskCheckbox(element) {
+  const checkboxImg = element.querySelector('.subtask-checkbox-img');
+  const subtaskTitle = element.querySelector('span')?.textContent;
+
+  if (!checkboxImg || !subtaskTitle) return;
+  const isChecked = checkboxImg.src.includes('checkbox-checked.svg');
+  checkboxImg.src = isChecked 
+    ? 'assets/icons/checkbox-empty.svg' 
+    : 'assets/icons/checkbox-checked.svg';
+
+  checkboxImg.alt = isChecked 
+    ? 'Checkbox not Checked' 
+    : 'Checkbox Checked';
+
+  const taskId = taskKey;
+  let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
+  let task = tasks[taskId];
+
+  if (!task || !Array.isArray(task.subtasks)) return;
+  task.subtasks = task.subtasks.map((subtask) => {
+    if (typeof subtask === 'string') {
+      return { title: subtask, completed: false };
+    }
+    return subtask;
+  });
+
+  const subtaskObj = task.subtasks.find((st) => st.title === subtaskTitle);
+  if (subtaskObj) {
+    subtaskObj.completed = !isChecked;
+  }
+
+  sessionStorage.setItem('tasks', JSON.stringify(tasks));
+  updateProgress(taskId, task);
+}
+
+function updateProgress(taskId, task) {
+  const subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
+  const total = subtasks.length;
+  const completed = subtasks.filter(st => st.completed).length;
+  const progressPercent = total > 0 ? (completed / total) * 100 : 0;
+  const bar = document.getElementById(`${taskId}-progress-bar`);
+  if (bar) {
+    bar.style.width = `${progressPercent}%`;
+  }
+
+  const label = document.getElementById(`${taskId}-progress-label`);
+  if (label) {
+    label.textContent = `${completed}/${total} Subtasks`;
+  }
 }
 
 function toggleSubtask(element, taskId) {

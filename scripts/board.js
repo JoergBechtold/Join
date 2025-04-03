@@ -186,7 +186,7 @@ function createProgressBar(key, task) {
   let progress = total > 0 ? (completed / total) * 100 : 0;
   progressBar.style.width = `${progress}%`;
   let progressLabel = document.createElement('span');
-  progressLabel.id = key + '-subtask-counter';
+  progressLabel.id = key + '-progress-label';
   progressLabel.className = 'subtask-counter';
   progressLabel.textContent = `${completed}/${total} Subtasks`;
   progressContainer.appendChild(progressLabel);
