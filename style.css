@@ -106,6 +106,11 @@ a {
   --font-size-47-61: clamp(47px, 44.2px + 0.875vw, 61px);
   --font-size-47-64: clamp(47px, 43.6px + 1.0625vw, 64px);
 
+  /* responsive size new */
+  --font-size-37-61:clamp(37px, 32.2px + 1.5vw, 61px);
+  
+
+
   /* font weight */
   --font-weight-700: 700;
   --font-weight-500: 500;
