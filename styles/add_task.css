@@ -20,6 +20,16 @@
   width: var(--scollbar-width-thin);
 }
 
+.form-add-task::-webkit-scrollbar {
+  width: var(--scollbar-width-thin);
+}
+
+/* eingefügt */
+.add-task-fetch-template{
+  height: 100%;
+  overflow-y: hidden;
+}
+
 .h1-add-task {
   font-size: var(--font-size-47-61);
   font-weight: var(--font-weight-700);
@@ -42,6 +52,11 @@ label {
 .required-text {
   display: flex;
   align-items: flex-end;
+}
+
+/* eingefügt */
+.required-text-mobile-view{
+  display: none;
 }
 
 .add-task-content {
@@ -72,6 +87,8 @@ label {
 .right-container {
   flex: 1;
   position: relative;
+  scrollbar-gutter: stable;
+
   
 }
 
@@ -79,12 +96,13 @@ label {
   overflow-x: hidden;
   overflow-y: auto;
   height: 450px;
-  scrollbar-gutter: stable;
 }
 
 .right-container::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
+
+
 
 .form-group {
   position: relative;
@@ -359,6 +377,10 @@ label {
     display: none;
   }
 
+  .required-text-mobile-view{
+    display: flex;
+  }
+
   .add-task-content {
     flex-direction: column;
     gap: 30px;
@@ -373,10 +395,23 @@ label {
     gap: 20px;
   }
 
+  /* eingefügt */
+.form-add-task{
+  overflow-y: auto;
+  height: calc(100% - 200px);
+}
+
+  /* eingefügt */
   .footer-add-task {
+    position: absolute;
+    right: 80px;
+    bottom: 15px;
     justify-content: flex-end;
-    margin-bottom: 100px;
+    padding-bottom: 0;
+    /* margin-bottom: 100px; */
   }
+
+  
 
   .main-add-task {
     margin-left: 360px ; 

@@ -258,6 +258,7 @@ function processContact(key, contact) {
 }
 
 async function loadContacts() {
+  showLoggedInLinks() 
   try {
     const contacts = await fetchContacts();
     for (const key in contacts) {
