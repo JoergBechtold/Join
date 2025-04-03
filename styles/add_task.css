@@ -24,7 +24,6 @@
   width: var(--scollbar-width-thin);
 }
 
-/* eingefügt */
 .add-task-fetch-template{
   height: 100%;
   overflow-y: hidden;
@@ -54,7 +53,6 @@ label {
   align-items: flex-end;
 }
 
-/* eingefügt */
 .required-text-mobile-view{
   display: none;
 }
@@ -88,8 +86,6 @@ label {
   flex: 1;
   position: relative;
   scrollbar-gutter: stable;
-
-  
 }
 
 .right-container {
@@ -101,8 +97,6 @@ label {
 .right-container::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
-
-
 
 .form-group {
   position: relative;
@@ -373,7 +367,6 @@ label {
 }
 
 @media screen and (max-width: 1150px) {
-  
   .main-add-task {
     margin-left: 340px;
     padding-right: 85px;
@@ -387,9 +380,8 @@ label {
   .align-with-gap {
     gap: 32px;
   }
-
-
-    .required-text {
+  
+  .required-text {
     display: none;
   }
 
@@ -435,12 +427,11 @@ label {
   }
 
   .form-add-task{
-   
-    height: calc(100% - 280px);
+  height: calc(100% - 280px);
   }
 
   .footer-add-task {
-    bottom: 100px;
+  bottom: 100px;
   }
 }
 
