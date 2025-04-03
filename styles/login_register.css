@@ -85,9 +85,9 @@
 }
 
 .login-container {
-  padding: 48px clamp(16px, -3.8px + 6.1875vw, 115px) 48px clamp(16px, -3.8px + 6.1875vw, 115px);
+  /* padding: 48px clamp(16px, -3.8px + 6.1875vw, 115px) 48px clamp(16px, -3.8px + 6.1875vw, 115px); */
 
-  /* padding: 48px 115px 48px 115px; */
+  padding: 48px 115px 48px 115px;
   gap: 20px;
   max-width: 652px;
   width: clamp(300px, 229.6px + 22vw, 652px);
@@ -207,17 +207,21 @@
   box-shadow: var(--box-shadow-button);
 }
 
+
 /* sign up section */
 .sign-up-container {
   position: relative;
-  padding: 48px 115px 48px 115px;
+  /* padding: 48px 115px 48px 115px; */
+  padding: 48px clamp(16px, -3.8px + 6.1875vw, 115px) 48px clamp(16px, -3.8px + 6.1875vw, 115px);
   gap: 20px;
-  width: 652px;
+  /* width: 652px; */
+  width: clamp(300px, 240px + 18.75vw, 600px);
+  max-width: 652px;
   min-height: 450px;
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: white;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
@@ -345,19 +349,18 @@
 }
 
 @media only screen and (max-width: 360px){
-
   .login-register-main{
     transform: translateY(-40px);
   }
 
-.nav-log-in{
   
-  bottom: 94px;
-}
 
+  .nav-log-in{
+  
+    bottom: 94px;
+  }
 
-
-@keyframes logoAnimation {
+  @keyframes logoAnimation {
   from {
     top: 50%;
     left: 50%;
@@ -371,80 +374,86 @@
     width: fit-content;
     transform: none;
   }
-}
+  }
 
-.animation-finished {
+  .animation-finished {
   top: 15px;
   left: 15px;
   width: fit-content;
   height: 64px;
-}
+  }
 
-.login-container {
+  .login-container,.sign-up-container {
   padding: 16px clamp(16px, -3.8px + 6.1875vw, 115px) 16px clamp(16px, -3.8px + 6.1875vw, 115px);
   gap: 4px;
   min-height: unset;
+  }
 
-}
-
-.vector-login,.vector-sign-up{
+  .vector-login,.vector-sign-up{
   background-image: url(../assets/icons/vector-mobile.svg);
   background-repeat: no-repeat;
   background-size: 100%;
-}
+  }
 
-.vector-login{ 
+  .vector-login{ 
   height: 3px;
   width: 90px;
   
-}
+  }
 
-.vector-sign-up{
+  .vector-sign-up{
   height: 3px;
   width: 95px;
   
+  }
+
+  .headline-vector{
+    gap: 4px;
+    width: 100%;
+  }
+
+  .nav-log-in {
+    justify-content: center;
+  }
+  
+  .form{
+    gap: 20px;
+  }
+  
+  .button-container {
+    width: 180px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    gap: 21px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .button-log-in, .button-sign-up, .button-guest-log-in {
+    padding: 10px 15px 10px 15px;
+  }
+  
+  .button-log-in,.button-guest-log-in{
+    width: 100%;
+   
+  }
+  
+  .footer-login-register {
+    bottom: 24px;
+    gap: 15px;
+  }
+
+
+  .sign-up-container{
+    transform: translateY(52px);
+  }
+
+  .arrow-left-sign-up {
+    position: absolute;
+    top: 18px;
+    left: 35px;
 }
-
-.headline-vector{
-  gap: 4px;
-  width: 100%;
-}
-
-.nav-log-in {
-  justify-content: center;
-}
-
-.form{
-  gap: 20px;
-}
-
-.button-container {
-  width: 180px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  gap: 21px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.button-log-in, .button-sign-up, .button-guest-log-in {
-  padding: 10px 15px 10px 15px;
-}
-
-.button-log-in,.button-guest-log-in{
-  width: 100%;
- 
-}
-
-.footer-login-register {
-  bottom: 24px;
-  gap: 15px;
-}
-
-
-
-
 }
