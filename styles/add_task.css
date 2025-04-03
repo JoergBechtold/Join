@@ -35,11 +35,6 @@
   margin-bottom: 40px;
 }
 
-label {
-  font-weight: var(--font-weight-400);
-  font-size: var(--font-size-16-20);
-}
-
 .footer-add-task {
   width: 100%;
   max-width: 976px;
@@ -72,13 +67,6 @@ label {
 
 .add-task-content-board-popup::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
-}
-
-.vertical-line {
-  width: 2px;
-  background-color: var(--light-gray-placeholder);
-  margin: 0 40px;
-  height: auto;
 }
 
 .left-container,
@@ -147,19 +135,6 @@ label {
   display: flex;
 }
 
-.vertical-line-subtask {
-  width: 1px;
-  background-color: var(--light-gray-placeholder);
-  margin-left: 5px;
-  height: auto;
-}
-
-.vertical-line-subtask-dark {
-  width: 1px;
-  background-color: grey;
-  height: 20px;
-}
-
 .subtask-item {
   display: flex;
   justify-content: space-between;
@@ -178,10 +153,6 @@ label {
   align-items: center;
   gap: 6px;
   padding-right: 4px;
-}
-
-.subtask-icon {
-  cursor: pointer;
 }
 
 .subtask-item:hover .subtask-icons {
@@ -204,16 +175,6 @@ label {
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
-}
-
-.edit-icon {
-  width: 18px;
-  height: 18px;
-}
-
-.delete-icon {
-  width: 22px;
-  height: 22px;
 }
 
 .custom-select-container {
@@ -349,10 +310,6 @@ label {
   color: red;
 }
 
-.red-border {
-  border: 1px solid red !important;
-}
-
 .custom-task {
   display: flex;
   align-items: center;
@@ -373,7 +330,6 @@ label {
   }
 
   .right-container {
-    
     scrollbar-gutter: unset;
   }
 
@@ -393,10 +349,6 @@ label {
     flex-direction: column;
     gap: 30px;
     margin-bottom: 30px;
-  }
-
-  .vertical-line {
-    display:none;
   }
 
   .form-add-task{
