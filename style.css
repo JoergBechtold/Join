@@ -91,7 +91,10 @@ a {
   --font-size-21: 21px;
   --font-size-16-20: clamp(16px, 15.2px + 0.25vw, 20px);
   --font-size-16-21: clamp(16px, 15px + 0.3125vw, 21px);
+  --font-size-18-21: clamp(18px, 17.4px + 0.1875vw, 21px);
   --font-size-16-23: clamp(16px, 14.6px + 0.4375vw, 23px);
+
+
 
   /*font size for to do, in progress, Await feedback, done*/
   --font-size-27-20: clamp(20px, 28.4px + -0.4375vw, 27px);
@@ -134,7 +137,11 @@ a {
 
   /* padding top main */
   /* --padding-top-main: 220px; */
-  --padding-top-main: 190px;
+  /* --padding-top-main: 190px; */
+  --padding-top-main: clamp(145px, 136px + 2.8125vw, 190px);
+
+
+  
 
   /* main container width */
   --main-container-width: 1014px;

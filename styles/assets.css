@@ -161,6 +161,8 @@ button[disabled]:hover {
 
 /* button cancel white gray */
 .button-cancel-white-gray {
+  display: flex;
+  align-items: center;
   gap: 4px;
   white-space: nowrap;
   border-radius: var(--border-radius-buttons);
@@ -169,7 +171,7 @@ button[disabled]:hover {
   box-shadow: none;
   color: var(--primary-color-gray);
   transition: var(--transition-hover-effect);
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-18-21);
   padding: 16px;
   font-weight: var(--font-weight-400);
 }
@@ -183,6 +185,8 @@ button[disabled]:hover {
 
 /* button create task gray */
 .button-create-task-gray {
+  display: flex;
+  align-items: center;
   border: var(--border-buttons-gray);
   gap: 4px;
   white-space: nowrap;
@@ -191,7 +195,7 @@ button[disabled]:hover {
   box-shadow: none;
   color: white;
   transition: var(--transition-hover-effect);
-  font-size: var(--font-size-16-21);
+  font-size: var(--font-size-18-21);
   padding: 16px;
   font-weight: var(--font-weight-700);
 }
@@ -206,6 +210,8 @@ button[disabled]:hover {
 
 /* button add new contact gray */
 .button-add-new-contact-gray {
+  display: flex;
+  align-items: center;
   border: var(--border-buttons-gray);
   gap: 16px;
   white-space: nowrap;
@@ -214,7 +220,7 @@ button[disabled]:hover {
   box-shadow: none;
   color: white;
   transition: var(--transition-hover-effect);
-  font-size: var(--font-size-21);
+  font-size: var(--font-size-18-21);
   padding: 12px 16px 12px 16px;
   font-weight: var(--font-weight-700);
 }
@@ -272,6 +278,8 @@ button[disabled]:hover {
 
 /* button clear white */
 .button-clear-white {
+  display: flex;
+  align-items: center;
   border: var(--border-buttons-gray);
   gap: 4px;
   white-space: nowrap;
@@ -280,7 +288,7 @@ button[disabled]:hover {
   box-shadow: none;
   color: var(--primary-color-gray);
   transition: var(--transition-hover-effect);
-  font-size: var(--font-size-16-21);
+  font-size: var(--font-size-18-21);
   padding: 16px;
   font-weight: var(--font-weight-400);
 }
