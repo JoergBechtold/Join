@@ -329,10 +329,15 @@
     padding-right: 85px;
   }
 
+  .h1-add-task {
+    margin-bottom: 15px;
+}
+
   .right-container {
     scrollbar-gutter: unset;
   }
 
+  
   .align-with-gap {
     gap: 32px;
   }
@@ -353,7 +358,11 @@
 
   .form-add-task{
   overflow-y: auto;
-  height: calc(100% - 200px);
+  height: calc(100% - 255px);
+  }
+
+  .form-add-task::-webkit-scrollbar {
+    display: none;
   }
 
   .footer-add-task {

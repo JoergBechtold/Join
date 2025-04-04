@@ -338,7 +338,11 @@
   
 }
 @media only screen and (max-width: 768px){
-  
+  /* .login-container,.sign-up-container {
+    padding: 16px clamp(16px, -3.8px + 6.1875vw, 115px) 16px clamp(16px, -3.8px + 6.1875vw, 115px);
+    gap: 4px;
+    min-height: unset;
+    } */
 }
 @media only screen and (max-width: 600px){
   .nav-log-in {
@@ -346,6 +350,8 @@
     right: unset;
     bottom: 145px;
   }
+
+ 
 }
 
 @media only screen and (max-width: 360px){
@@ -353,10 +359,7 @@
     transform: translateY(-40px);
   }
 
-  
-
   .nav-log-in{
-  
     bottom: 94px;
   }
 
