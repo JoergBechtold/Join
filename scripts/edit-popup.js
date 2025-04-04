@@ -104,8 +104,8 @@ function applyEditedTaskData(task) {
   task.due_date = document.getElementById('edit_due_date').value.trim();
   task.category = document.getElementById('edit_selected_option').textContent.trim();
   task.priority = getEditPriority();
-  task.subtasks = [...editPopupSubtasks];
-  task.assigned_to = [...selectedEditContacts];
+  task.subtasks = editPopupSubtasks.slice();
+  task.assigned_to = selectedEditContacts.slice();
 }
 
 function validateEditInputs() {
