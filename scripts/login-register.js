@@ -36,6 +36,7 @@ function setIdRefValueTrim() {
 }
 
 function checkAndShowAnimation() {
+ 
   const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
   animationJoinLogoRef.classList.remove('d-none');
 

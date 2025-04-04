@@ -1,17 +1,35 @@
 let randomColorsJson = null;
 
-const portraitOverlay = document.getElementById('portrait_overlay');
-window.addEventListener('orientationchange', function() {
-  if (screen.orientation.type.startsWith('landscape')) {
-    portraitOverlay.style.display = 'flex'; 
-  } else {
-    portraitOverlay.style.display = 'none';
-  }
-});
+// const portraitOverlay = document.getElementById('portrait_overlay');
+// window.addEventListener('orientationchange', function() {
+//   if (screen.orientation.type.startsWith('landscape')) {
+//     portraitOverlay.style.display = 'flex'; 
+//   } else {
+//     portraitOverlay.style.display = 'none';
+//   }
+// });
 
-if (screen.orientation.type.startsWith('landscape')) {
-  portraitOverlay.style.display = 'flex';
-}
+// if (screen.orientation.type.startsWith('landscape')) {
+//   portraitOverlay.style.display = 'flex';
+// }
+
+// screen.orientation.lock("portrait")
+
+// const portraitOverlay = document.getElementById('portrait_overlay');
+// const maxWidthMobile = 320;
+
+// function checkOrientation() {
+//   if (window.innerWidth <= maxWidthMobile && screen.orientation.type.startsWith('landscape')) {
+//     portraitOverlay.style.display = 'flex';
+//   } else {
+//     portraitOverlay.style.display = 'none';
+//   }
+// }
+
+// window.addEventListener('orientationchange', checkOrientation);
+
+// checkOrientation();
+// window.addEventListener('resize', checkOrientation);
 
 async function startProcess() {
   initBoard()
