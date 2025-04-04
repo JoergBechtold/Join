@@ -1,11 +1,20 @@
 let randomColorsJson = null;
 
+// const portraitOverlay = document.getElementById('portrait_overlay');
+// window.addEventListener('orientationchange', function() {
+//   if (screen.orientation.type.startsWith('landscape')) {
+//     portraitOverlay.style.display = 'flex'; 
+//   } else {
+//     portraitOverlay.style.display = 'none';
+//   }
+// });
+
 const portraitOverlay = document.getElementById('portrait_overlay');
 window.addEventListener('orientationchange', function() {
-  if (screen.orientation.type.startsWith('landscape')) {
-    portraitOverlay.style.display = 'flex'; 
+  if (screen.orientation.type.startsWith('portrait')) {
+    portraitOverlay.style.display = 'none'; 
   } else {
-    portraitOverlay.style.display = 'none';
+    portraitOverlay.style.display = 'flex';
   }
 });
 
@@ -24,7 +33,6 @@ async function initializeRandomColors() {
   } catch (error) {
     console.error('Error initializing randomColorsJson', error);
   }
-  
 }
 
 function showConfirmation(message) {
@@ -77,8 +85,6 @@ async function getRandomColor() {
     return null;
   }
 }
-
-
 
 /**
  * Retrieves references to all HTML elements needed in script.js for the add task form.
@@ -152,7 +158,6 @@ function showLoggedInLinks() {
   const htmlLinks = document.getElementsByClassName('hide-before-log-in');
   const loggedInLink = document.getElementsByClassName('hide-after-log-in');
   const mobilViewLinksContainer = document.getElementsByClassName('mobil-view-links-container');
-
 
   Array.from(htmlLinks).forEach((element) => {
     element.classList.remove('d-none');
