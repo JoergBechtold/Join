@@ -1,5 +1,6 @@
 /* This is where the style of buttons, for example, comes in */
 .portrait-overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
