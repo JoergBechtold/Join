@@ -36,7 +36,6 @@ function setIdRefValueTrim() {
 }
 
 function checkAndShowAnimation() {
- 
   const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
   animationJoinLogoRef.classList.remove('d-none');
 
@@ -48,14 +47,14 @@ function checkAndShowAnimation() {
   }
 
   setTimeout(function () {
-    animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards';
+    animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
     addFadeInAnimation(loginContainerRef);
     addFadeInAnimation(navLogInRef);
     addFadeInAnimation(footerLoginRegisterRef);
     setTimeout(function () {
       animationJoinLogoRef.classList.add('d-none');
       animationFinishedRef.classList.add('d-flex');
-    }, 1000);
+    }, 2000);
   }, 500);
 
   sessionStorage.setItem('animationShown', 'true');
@@ -63,7 +62,7 @@ function checkAndShowAnimation() {
 }
 
 function addFadeInAnimation(element) {
-  element.style.animation = 'fadeIn 0.8s ease-in-out forwards';
+  element.style.animation = 'fadeIn 0.8s ease-in-out forwards 0.6s';
 }
 
 function showSignUp() {

@@ -117,8 +117,11 @@ a {
   --transition-animations-overlay: all 1s ease;
 
   /* animation */
-  --animation-opacity-overlay: fadeIn 1s ease-in-out forwards;
-  --animation-logo-overlay: logoAnimation 1s ease forwards;
+  /* --animation-opacity-overlay: fadeIn 1s ease-in-out forwards 1s;
+  --animation-logo-overlay: logoAnimation 1s ease forwards 1s; */
+
+  --animation-opacity-overlay: fadeIn 0.8s ease-in-out forwards 0.6s;
+  --animation-logo-overlay: logoAnimation 0.7s ease forwards 1s;
 
   /* hover-scale */
   --scale-hover: 1.01;
