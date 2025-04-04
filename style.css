@@ -1,5 +1,4 @@
 /* Everything that is global comes in here */
-
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -25,8 +24,6 @@
   overflow: hidden;
 }
 
-
-
 .with-100-percent-max-width-422px{
   width: 100%;
   max-width: 422px;
@@ -45,7 +42,6 @@ a {
 }
 
 :root {
- 
   /* color */
   --light-gray-placeholder: #d1d1d1;
   --light-gray-bg: #f6f7f8;
@@ -94,11 +90,8 @@ a {
   --font-size-18-21: clamp(18px, 17.4px + 0.1875vw, 21px);
   --font-size-16-23: clamp(16px, 14.6px + 0.4375vw, 23px);
 
-
-
   /*font size for to do, in progress, Await feedback, done*/
   --font-size-27-20: clamp(20px, 28.4px + -0.4375vw, 27px);
-
   --font-size-27: 27px;
   --font-size-20-27: clamp(20px, 18.6px + 0.4375vw, 27px);
   --font-size-30: 30px;
@@ -112,8 +105,6 @@ a {
   /* responsive size new */
   --font-size-37-61:clamp(37px, 32.2px + 1.5vw, 61px);
   
-
-
   /* font weight */
   --font-weight-700: 700;
   --font-weight-500: 500;
@@ -136,8 +127,6 @@ a {
   --margin-left-main: 328px;
 
   /* padding top main */
-  /* --padding-top-main: 220px; */
-  /* --padding-top-main: 190px; */
   --padding-top-main: clamp(115px, 100px + 4.6875vw, 190px);
 
   /* main container width */
