@@ -154,6 +154,7 @@ function updateSelectedContacts(element) {
   } else {
     selectedContacts = selectedContacts.filter((contact) => contact.initials !== initials);
   }
+  console.log('Aktueller Inhalt von selectedContacts:', selectedContacts);
   selectedContacts = sortContacts(selectedContacts);
   renderSelectedContacts();
 }
