@@ -1,5 +1,5 @@
 body {
-  /* font-family: 'Inter', sans-serif; */
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f6f7f8;
@@ -29,11 +29,8 @@ body {
   flex-direction: column;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  /* scrollbar-width: thin;
-  scrollbar-color: #b0bec5 #f0f0f0; */
 }
 
-/* hinzugefügt */
 .sidebarContact::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
@@ -41,7 +38,6 @@ body {
 .add-contact-btn {
   background-color: #2a3647;
   color: white;
-  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 21px;
   line-height: 120%;
@@ -87,7 +83,6 @@ body {
   padding-bottom: 17px;
   padding-left: 36px;
   gap: 8px;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -140,7 +135,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 12px;
   line-height: 120%;
@@ -159,7 +153,6 @@ body {
 .contact-name {
   color: #111;
   margin: 0;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -170,7 +163,6 @@ body {
 .contact-email {
   color: rgba(0, 124, 238, 1);
   margin: 0;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
@@ -178,18 +170,11 @@ body {
   vertical-align: middle;
 }
 
-.main-content {
-  width: 100vh;
-  height: 73px;
-  gap: 30px;
-}
-
 .main-content h1 {
   color: rgba(0, 0, 0, 1);
   margin: 0;
   display: flex;
   align-items: center;
-  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 61px;
   line-height: 120%;
@@ -204,7 +189,6 @@ body {
 
 .subtitle {
   color: #2a3647;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 27px;
   line-height: 120%;
@@ -258,7 +242,6 @@ body {
 .left-section h1 {
   width: 366px;
   height: 73px;
-  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 61px;
   line-height: 120%;
@@ -269,7 +252,6 @@ body {
 .left-section p {
   width: 371px;
   height: 32px;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 27px;
   line-height: 120%;
@@ -308,7 +290,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* font-size: 24px; */
   margin-right: 150px;
   margin-left: 100px;
   margin-bottom: 30px;
@@ -337,7 +318,6 @@ body {
 }
 
 .input-group ::placeholder {
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -402,7 +382,6 @@ input:focus {
   transition: opacity 0.4s ease, visibility 0.4s ease;
   z-index: 999;
   backdrop-filter: none;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -456,19 +435,18 @@ input:focus {
   gap: 54px;
 }
 
-/* Avatar im Detailbereich */
 #detail-avatar {
   width: 120px;
   height: 120px;
   border-radius: 70px;
   border-width: 3px;
   gap: 10px;
-  color: #fff; /* Text bleibt weiß */
+  color: #fff; 
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 32px; /* Größer als im Kontaktbereich */
+  font-size: 32px; 
   border: 3px solid rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
@@ -477,7 +455,6 @@ input:focus {
   margin-bottom: 10px;
   color: rgba(0, 0, 0, 1);
   height: 56px;
-  /* font-family: 'Inter'; */
   font-weight: 500;
   font-size: 47px;
   line-height: 120%;
@@ -495,7 +472,6 @@ input:focus {
   width: 207px;
   height: 60px;
   gap: 59px;
-  /* font-family: 'Inter'; */
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -505,8 +481,6 @@ input:focus {
 
 .info-block {
   margin-top: 30px;
-  /* width: 140px; */
-  /* height: 53px; */
   gap: 15px;
 }
 
@@ -514,7 +488,6 @@ input:focus {
   display: block;
   color: rgba(0, 0, 0, 1);
   margin-bottom: 10px;
-  /* font-family: 'Inter'; */
   font-weight: 700;
   font-size: 16px;
   line-height: 120%;
@@ -541,22 +514,20 @@ color: var(--blue);
   font-weight: var(--font-weight-700);
 }
 
-
-/* ✅ Name und Avatar im aktiven Kontakt */
 .active-contact .contact-name {
-  color: #fff; /* Weißer Text */
+  color: #fff; 
 }
 
 .active-contact .contact-avatar {
-  border: 2px solid #fff; /* Weißer Rahmen um Avatar */
+  border: 2px solid #fff; 
 }
 
 .contact-detail {
-  display: none; /* Standardmäßig versteckt */
+  display: none; 
 }
 
 .contact-detail.visible {
-  display: block; /* Beim Klick sichtbar machen */
+  display: block; 
 }
 
 .confirm-popup {
@@ -597,4 +568,97 @@ color: var(--blue);
 .confirm-popup .confirm-yes:hover {
   background: linear-gradient(180deg, #ff0000, #ff4d4d);
   color: #ffffff;
+}
+
+.main-content-responsive{
+  display: none;
+  /* justify-content: space-between; */
+  width: 100vh;
+  height: 150px;
+  padding: 20px 10px;
+  flex-direction: column;
+}
+
+.main-responsive{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .contacts-container{
+    padding-left: 0px;
+    height: 100%;
+  }
+
+  .sidebarContact{
+    width: 100vh;
+    padding: 10px 0px;
+    margin-bottom: 80px;
+  }
+
+  .contact-list {
+    width: 100%;
+    margin-top: 0;
+    padding: 0px 10px;
+  }
+
+  .add-contact-btn {
+    display: none;
+  }
+
+  .main-content {
+    display: none;
+  }
+
+  /* .main-content-responsive{
+    display: flex;
+  } */
+
+  .responsive-h1{
+    display: flex;
+    flex-direction: column;
+    width: 213px;
+    height: 104px;
+    gap: 8px;
+  }
+
+  .responsive-h1 h1{
+    font-weight: 700;
+    font-size: 47px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    width: 211px;
+    height: 56px;
+  }
+
+  .subtitle{
+    width: 175px;
+    height: 24px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+  }
+
+  .contact-detail {
+    position: unset;
+    display: none;
+    width: 100vh;
+    height: 100%;
+    gap: 21px;
+    transition: none;
+    padding: 50px 60px;
+  }
+  .divider {
+    width: 90px;             
+    height: 3px;
+    margin: 10px;      
+  }  
+
+  .actions{
+    display: none !important;
+  }
+
 }

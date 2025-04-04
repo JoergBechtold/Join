@@ -44,6 +44,7 @@ function buildContactElement(name, email, phone, color) {
     const contact = document.createElement('div');
     contact.classList.add('contact');
     contact.setAttribute('data-phone', phone);
+    contact.setAttribute('onclick', 'showContactDetail()');
     const avatar = createContactAvatar(name, color);
     const info = createContactInfo(name, email);
     contact.appendChild(avatar);
@@ -91,7 +92,7 @@ function createContactInfo(name, email) {
     return info;
   } catch (error) {
     console.error('Error in createContactInfo:', error);
-    return document.createElement('div');
+    return document.createElement('div'); 
   }
 }
 

@@ -118,9 +118,92 @@
 
       <div class="main-content">
         <h1>Contacts <span class="divider"></span> <span class="subtitle">Better with a team</span></h1>
+        <div class="contact-detail invisible">
+          <div class="detail-header">
+            <div class="avatar" id="detail-avatar">AM</div>
+            <div class="detail-info">
+              <h1 id="detail-name">Anton Mayer</h1>
+              <div class="actions">
+                <div class="action-box edit" onclick="processContactEdition()">
+                  <div class="edit-icon">
+                    <img src="assets/icons/edit-black.svg" alt="Edit" id="edit_icon" />
+                  </div>
+                  <span class="edit-btn">Edit </span>
+                </div>
+  
+                <div class="action-box delete" onclick="processContactDeletion()">
+                  <div class="delete-icon">
+                    <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
+                  </div>
+                  <span class="delete-btn">Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="contact-info-section">
+            <h3>Contact Information</h3>
+            <div class="info-block">
+              <strong>Email</strong>
+              <p id="detail-email">antom@gmail.com</p>
+            </div>
+            <div class="info-block">
+              <strong>Phone</strong>
+              <p id="detail-phone">Keine Nummer vorhanden</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="contact-detail invisible">
+      <div class="main-content-responsive">
+        <div class="main-responsive">
+        <div class="responsive-h1">
+          <h1>Contacts</h1>
+          <span class="subtitle">Better with a team</span>
+          <span class="divider"></span>
+        </div>
+        <div class="arrow-left">
+          <img onclick="hideContactDetail()" src="/assets/icons/arrow-left.svg" alt="Help Icon" />
+        </div>
+        </div>
+        <div class="contact-detail invisible">
+          <div class="detail-header">
+            <div class="avatar" id="detail-avatar">AM</div>
+            <div class="detail-info">
+              <h1 id="detail-name">Anton Mayer</h1>
+              <div class="actions">
+                <div class="action-box edit" onclick="processContactEdition()">
+                  <div class="edit-icon">
+                    <img src="assets/icons/edit-black.svg" alt="Edit" id="edit_icon" />
+                  </div>
+                  <span class="edit-btn">Edit </span>
+                </div>
+  
+                <div class="action-box delete" onclick="processContactDeletion()">
+                  <div class="delete-icon">
+                    <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
+                  </div>
+                  <span class="delete-btn">Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="contact-info-section">
+            <h3>Contact Information</h3>
+            <div class="info-block">
+              <strong>Email</strong>
+              <p id="detail-email">antom@gmail.com</p>
+            </div>
+            <div class="info-block">
+              <strong>Phone</strong>
+              <p id="detail-phone">Keine Nummer vorhanden</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="contact-detail invisible">
         <div class="detail-header">
           <div class="avatar" id="detail-avatar">AM</div>
           <div class="detail-info">
@@ -154,7 +237,7 @@
             <p id="detail-phone">Keine Nummer vorhanden</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="confirm-popup hidden">
         <div class="confirm-popup-content">
@@ -174,6 +257,7 @@
     <script src="scripts/contact-Validation.js"></script>
     <script src="scripts/ui-contact.js"></script>
     <script src="scripts/contact-add-pop-up.js"></script>
+    <script src="scripts/contact-responsive.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
