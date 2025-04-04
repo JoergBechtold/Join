@@ -329,7 +329,7 @@
 .board-add-task {
   position: fixed;
   top: 50%;
-  right: -300%;
+  right: -360%;
   width: 1116px;
   height: 870px;
   padding: 60px;
@@ -364,4 +364,16 @@
 .add-button-img-column {
   cursor: pointer;
   
+}
+
+@media screen and (max-width: 320px)  {
+  .main-board {
+    margin-left: 0;
+  }
+
+  .headline-input-container {
+    justify-content: unset;
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

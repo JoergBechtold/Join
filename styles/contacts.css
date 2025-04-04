@@ -29,6 +29,7 @@ body {
   flex-direction: column;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebarContact::-webkit-scrollbar {
@@ -599,6 +600,7 @@ color: var(--blue);
   }
 
   .contact-list {
+    flex-direction: column;
     width: 100%;
     margin-top: 0;
     padding: 0px 10px;

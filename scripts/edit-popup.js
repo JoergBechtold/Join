@@ -84,7 +84,7 @@ function getEditPriority() {
   return '';
 }
 
-function submitEditTask() {
+async function submitEditTask() {
   if (!validateEditInputs()) return;
 
   const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
@@ -93,7 +93,7 @@ function submitEditTask() {
 
   applyEditedTaskData(task);
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
-  updateData('tasks', tasks);
+  await updateData(`tasks/${editPopupTaskKey}`, task);
   closeEditPopup();
   renderCards();
 }
