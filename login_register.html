@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="checkAndShowAnimation()" class="body-login-register">
+    <div class="portrait-overlay" id="portrait_overlay" style="display: none;">
+      <h1>Please use portrait mode</h1>
+    </div>
+
+
     <!-- animations logo -->
     <div class="animation-join-logo d-none" id="animation_join_logo">
       <img src="assets/img/loginLogo.svg" alt="Join Logo" />
@@ -30,7 +35,6 @@
         <div class="login-container" id="login_container">
           <div class="headline-vector">
             <h1>Log in</h1>
-            <!-- <div class="vector-login"><img src="assets/icons/vector-horizontal.svg" alt="Blue dividing line" /></div> -->
             <div class="vector-login"></div> <!--vector is inserted into css-->
 
           </div>
@@ -66,7 +70,6 @@
               </div>
               <span class="error-message-log-in" id="error_message_log_in">Check your email and password. Please try again.</span>
             </label>
-
             <div class="button-container">
               <button class="button-log-in">Log in</button>
               <button class="button-guest-log-in" onclick="guestLogIn()">Guest Log in</button>
@@ -78,18 +81,15 @@
       <!-- sign up section -->
       <section>
         <div class="sign-up-container" id="sign_up_container">
-          <div onclick="showLogIn()" class="arrow-left-sign-up">
-            <img src="assets/icons/arrow-left.svg" alt="Pfeil nach links" />
-          </div>
-
           <div class="headline-vector">
+            <div onclick="showLogIn()" class="arrow-left-sign-up">
+              <img src="assets/icons/arrow-left.svg" alt="Pfeil nach links" />
+            </div>
             <h1>Sign up</h1>
-            <!-- <div class="vector-sign-up"><img src="assets/icons/vector-horizontal.svg" alt="Blaue Trennlinie" /></div> -->
             <div class="vector-sign-up"></div>
-
           </div>
 
-          <form onsubmit="handleSignUp(); return false;" class="form width-422px" id="sign_up_form">
+          <form onsubmit="handleSignUp(); return false;" class="form with-100-percent-max-width-422px" id="sign_up_form">
             <label class="input-base-container" for="name">
               <input
                 title="Please enter your first and last name with spaces."
@@ -181,7 +181,6 @@
       <button onclick="showSignUp()" class="button-base-gray">Sign up</button>
     </nav>
 
-
     <footer class="footer-login-register" id="footer_login_register">
       <a onclick="toHrefFocus('privacy_policy.html', this); return false;" href="privacy_policy.html">
         <span>Privacy Policy</span>
@@ -189,8 +188,6 @@
       <a onclick="toHrefFocus('legal_notice.html', this); return false;" href="legal_notice.html">
         <span>Legal Notice</span>
       </a>
-      <!-- <a href="privacy_policy.html">Privacy Policy</a>
-      <a href="legal_notice.html">Legal notice</a> -->
     </footer>
 
     <div id="popup_overlay_sign_up" class="popup-overlay-small-gray">

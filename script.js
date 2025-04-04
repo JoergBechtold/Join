@@ -1,6 +1,18 @@
+let randomColorsJson = null;
 
+const portraitOverlay = document.getElementById('portrait_overlay');
+window.addEventListener('orientationchange', function() {
+  if (screen.orientation.type.startsWith('landscape')) {
+    portraitOverlay.style.display = 'flex'; 
+  } else {
+    portraitOverlay.style.display = 'none';
+  }
+});
 
- let randomColorsJson = null;
+if (screen.orientation.type.startsWith('landscape')) {
+  portraitOverlay.style.display = 'flex';
+}
+
 
  async function startProcess() {
   initBoard()

@@ -1,4 +1,23 @@
 /* This is where the style of buttons, for example, comes in */
+.portrait-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color-dark-gray); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.portrait-overlay h1 {
+  color: white;
+  font-size:40px; 
+  text-align: center;
+}
+
 .name-color-circle {
   display: flex;
   justify-content: center;
@@ -377,7 +396,7 @@ button[disabled]:hover {
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-20);
   width: 100%;
-  height: 48px;
+  height: clamp(43px, 42px + 0.3125vw, 48px);
   padding: 12px 21px 12px 21px;
   border-radius: var(--border-radius-input-fields);
   border: var(--border-input-fields);
@@ -395,14 +414,6 @@ button[disabled]:hover {
   aspect-ratio: 1 / 1;
   object-fit: scale-down;
 }
-/* 
-.input-base[type="email"],
-.input-base[type="password"],
-.input-base[type="text"],
-.input-base[type="date"] {
-  padding-top: 6px;
-  
-} */
 
 .input-base[type='email']:focus-visible,
 .input-base[type='password']:focus-visible,
@@ -462,7 +473,8 @@ button[disabled]:hover {
 .arrow-left-sign-up {
   position: absolute;
   top: 60px;
-  left: 80px;
+  /* left: 80px; */
+  left: clamp(35px, 26px + 2.8125vw, 80px);
 }
 
 .arrow-left,
@@ -541,4 +553,20 @@ button[disabled]:hover {
   font-size: var(--font-size-20);
   line-height: 120%;
   color: white;
+}
+
+@media only screen and (max-width: 360px){
+  .arrow-left-sign-up {
+    position: absolute;
+    top: 18px;
+  }
+
+  .arrow-left-sign-up {
+    width: 32px;
+  }
+  
+  .arrow-left-sign-up img {
+    width: 19px;
+  }
+
 }

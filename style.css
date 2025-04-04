@@ -144,7 +144,6 @@ a {
 /* Track */
 ::-webkit-scrollbar-track {
   background-color: transparent;
-  /* border-radius: 10px; */
 }
 
 /* Handle */
@@ -155,32 +154,11 @@ a {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  /* background: var(--light-blue); */
   cursor: grab;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  /* background: var(--light-blue); */
   cursor: grabbing;
 }
 
-/* Responsive Breakpoints!!
-Smartphones	320 - 480
-Tablets	481 - 768
-Laptops	769 - 1024
-Desktops	1025 - 1440
-Große Screens	1441+ */
-/* Extra small devices (phones, 600px and down) */
-/* @media only screen and (max-width: 600px)  */
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-/* @media only screen and (min-width: 600px)  */
-
-/* Medium devices (landscape tablets, 768px and up) */
-/* @media only screen and (min-width: 768px)  */
-
-/* Large devices (laptops/desktops, 992px and up) */
-/* @media only screen and (min-width: 992px)  */
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-/* @media only screen and (min-width: 1200px)  */
