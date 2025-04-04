@@ -361,9 +361,7 @@
   height: calc(100% - 255px);
   }
 
-  .form-add-task::-webkit-scrollbar {
-    display: none;
-  }
+  
 
   .footer-add-task {
   position: absolute;
@@ -387,8 +385,13 @@
     margin-left: 80px;
   }
 
+
   .form-add-task{
   height: calc(100% - 280px);
+  }
+
+  .form-add-task::-webkit-scrollbar {
+    display: none;
   }
 
   .footer-add-task {
