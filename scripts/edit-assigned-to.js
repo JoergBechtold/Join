@@ -95,6 +95,7 @@ function updateEditSelectedContacts(element) {
     selectedEditContacts = selectedEditContacts.filter((c) => c.initials !== initials);
   }
 
+
   selectedEditContacts = sortContacts(selectedEditContacts);
   renderEditSelectedContacts();
 }
