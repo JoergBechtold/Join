@@ -24,7 +24,6 @@ async function initializeRandomColors() {
   } catch (error) {
     console.error('Error initializing randomColorsJson', error);
   }
-  
 }
 
 function showConfirmation(message) {
@@ -77,8 +76,6 @@ async function getRandomColor() {
     return null;
   }
 }
-
-
 
 /**
  * Retrieves references to all HTML elements needed in script.js for the add task form.
@@ -152,7 +149,6 @@ function showLoggedInLinks() {
   const htmlLinks = document.getElementsByClassName('hide-before-log-in');
   const loggedInLink = document.getElementsByClassName('hide-after-log-in');
   const mobilViewLinksContainer = document.getElementsByClassName('mobil-view-links-container');
-
 
   Array.from(htmlLinks).forEach((element) => {
     element.classList.remove('d-none');
