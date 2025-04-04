@@ -401,7 +401,7 @@
 
 @media screen and (max-width: 600px) {
   .main-add-task {
-    margin-left: calc(60px - (600px - 100vw) * 0.17); 
+    margin-left: calc(54px - (600px - 100vw) * 0.17); 
     padding-right: calc(60px - (600px - 100vw) * 0.19);
   }
 
