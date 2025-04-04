@@ -13,14 +13,13 @@ if (screen.orientation.type.startsWith('landscape')) {
   portraitOverlay.style.display = 'flex';
 }
 
-
- async function startProcess() {
+async function startProcess() {
   initBoard()
   await initializeRandomColors();
   
 }
 
- async function initializeRandomColors() {
+async function initializeRandomColors() {
   try {
     randomColorsJson = await loadData('randomColorsJson');
     if (!randomColorsJson) {
@@ -31,10 +30,6 @@ if (screen.orientation.type.startsWith('landscape')) {
   }
   
 }
-
-
-
-
 
 function showConfirmation(message) {
   return new Promise((resolve) => {
@@ -211,7 +206,6 @@ function showPupupOverlaySignUp() {
 }
 
 async function fetchAddTask(parameter = false) {
- 
   try {
     await showLoggedInLinks(); 
     fetch('assets/templates/template_add_task.html')
@@ -237,8 +231,7 @@ async function fetchAddTask(parameter = false) {
 }
 
 function setAllPropertysForEditPopup() {
-  const { h1AddTaskRef, footerddTaskRef, verticalLineRef, addTaskContentRef, rightContainerRef, leftContainerRef, addTaskfetchTemplateRef } =
-    getIdRefsScript();
+  const { h1AddTaskRef, footerddTaskRef, verticalLineRef, addTaskContentRef, rightContainerRef, leftContainerRef, addTaskfetchTemplateRef } = getIdRefsScript();
 
   h1AddTaskRef.classList.add('d-none');
   footerddTaskRef.classList.add('d-none');
@@ -255,34 +248,34 @@ function setAllPropertysForEditPopup() {
 
 
 // manual function to load the colors into the array in the firebase
-async function manuellloadColorToFirebase(){
-  await postData('randomColorsJson',  [
-    "#ff5eb3",
-    "#6e52ff",
-    "#9327ff",
-    "#00bee8",
-    "#1fd7c1",
-    "#ff745e",
-    "#ffa35e",
-    "#fc71ff",
-    "#ffc701",
-    "#0038ff",
-    "#c3ff2b",
-    "#ffe62b",
-    "#ff4646",
-    "#ffbb2b",
-    "#00a86b",
-    "#00ced1",
-    "#b19cd9",
-    "#8b008b",
-    "#228b22",
-    "#d2691e",
-    "#808000",
-    "#4682b4",
-    "#a0522d",
-    "#8fbc8f",
-    "#ee82ee",
-    "#a52a2a",
+// async function manuellloadColorToFirebase(){
+//   await postData('randomColorsJson',  [
+//     "#ff5eb3",
+//     "#6e52ff",
+//     "#9327ff",
+//     "#00bee8",
+//     "#1fd7c1",
+//     "#ff745e",
+//     "#ffa35e",
+//     "#fc71ff",
+//     "#ffc701",
+//     "#0038ff",
+//     "#c3ff2b",
+//     "#ffe62b",
+//     "#ff4646",
+//     "#ffbb2b",
+//     "#00a86b",
+//     "#00ced1",
+//     "#b19cd9",
+//     "#8b008b",
+//     "#228b22",
+//     "#d2691e",
+//     "#808000",
+//     "#4682b4",
+//     "#a0522d",
+//     "#8fbc8f",
+//     "#ee82ee",
+//     "#a52a2a",
     
-  ]);
- }
+//   ]);
+//  }
