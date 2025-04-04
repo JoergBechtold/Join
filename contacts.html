@@ -12,9 +12,12 @@
   </head>
 
   <body onload="loadContacts()">   <!-- delete init() function  -->
-    <!-- no landscape mode allowed overlay -->
-    <div class="portrait-overlay" id="portrait_overlay" style="display: none;">
-      <h1>Please use portrait mode</h1>
+     <!-- no landscape mode allowed overlay -->
+     <div class="portrait-overlay" id="portrait_overlay" style="display: none;">
+      <div class="portrait-overlay-content">
+        <h1>Please use portrait mode</h1>
+        <div class="portrait-overlay-vector"></div> 
+      </div>
     </div>
     
     <div id="header_container"></div>

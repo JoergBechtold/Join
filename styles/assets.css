@@ -12,10 +12,34 @@
   z-index: 1000;
 }
 
+.portrait-overlay-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 315px; */
+    gap: 16px;
+  
+}
+
 .portrait-overlay h1 {
   color: white;
   font-size:40px; 
   text-align: center;
+}
+
+.vector-login,.vector-sign-up{
+  background-image: url(../assets/icons/vector-horizontal.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 5px;
+  width: 150px;
+}
+
+.portrait-overlay-vector{
+  height: 3px;
+  width: 360px;
+  background-color: var(--blue);
+  border-radius: 16px;
 }
 
 .name-color-circle {
