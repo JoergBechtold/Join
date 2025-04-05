@@ -1,3 +1,7 @@
+/**
+ * Adds a new subtask to the edit form if the input is not empty.
+ * Clears the input field and updates the subtask list display.
+ */
 function handleEditSubtaskAdd() {
   const input = document.getElementById('edit_subtask_input');
   const value = input.value.trim();
@@ -8,6 +12,12 @@ function handleEditSubtaskAdd() {
   }
 }
 
+/**
+ * Handles the Enter key event when typing a subtask in the edit form.
+ * Prevents the default action and triggers subtask addition.
+ *
+ * @param {KeyboardEvent} event - The keyboard event triggered in the input field.
+ */
 function handleEditSubtaskKey(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
@@ -15,6 +25,10 @@ function handleEditSubtaskKey(event) {
   }
 }
 
+/**
+ * Renders the list of subtasks in the edit popup.
+ * Clears the container and appends each subtask using the template function.
+ */
 function renderEditSubtasks() {
   const container = document.getElementById('edit_subtask_enum');
   container.innerHTML = '';
@@ -36,11 +50,23 @@ function editSubtaskItem(subtask, index) {
   `;
 }
 
+/**
+ * Deletes a subtask from the edit popup by its index.
+ * Updates the UI after removal by re-rendering the subtask list.
+ *
+ * @param {number} index - The index of the subtask to delete.
+ */
 function deleteEditSubtask(index) {
   editPopupSubtasks.splice(index, 1);
   renderEditSubtasks();
 }
 
+/**
+ * Initiates inline editing for a specific subtask in the edit popup.
+ * Replaces the subtask item with an input field and sets focus to it.
+ *
+ * @param {number} index - The index of the subtask to be edited.
+ */
 function editExistingSubtask(index) {
   const container = document.getElementById('edit_subtask_enum');
   const currentText = editPopupSubtasks[index];
@@ -51,6 +77,14 @@ function editExistingSubtask(index) {
   editPopupCurrentSubtaskIndex = index;
 }
 
+/**
+ * Handles submission or cancellation of subtask inline editing.
+ * On Enter: updates the subtask with new value and re-renders the list.
+ * On Escape: cancels editing and re-renders the original subtasks.
+ *
+ * @param {KeyboardEvent} event - The keyboard event triggered during input.
+ * @param {number} index - The index of the subtask being edited.
+ */
 function submitEditedSubtask(event, index) {
   const input = document.getElementById('edit_subtask_inline_input');
   if (event.key === 'Enter') {
@@ -67,6 +101,10 @@ function submitEditedSubtask(event, index) {
   }
 }
 
+/**
+ * Renders the selected contacts in the edit form.
+ * Each contact is displayed as a colored circle with their initials.
+ */
 function renderSelectedEditContacts() {
   const container = document.getElementById('edit_selected_contact_circles');
   container.innerHTML = '';

@@ -1,15 +1,35 @@
 let taskKey;
 
+/**
+ * Generates the HTML for the assigned contacts of a task.
+ * Loads all contacts from the database and matches them with the task's assigned users.
+ *
+ * @param {Object} task - The task object containing assigned user data.
+ * @returns {Promise<string>} The generated HTML string for displaying assigned contacts.
+ */
 async function getAssignedHTML(task) {
   const allContacts = await loadData('contacts');
   if (!allContacts) return '<span>No contacts found</span>';
   return generateAssignedHTML(task.assigned_to, allContacts);
 }
 
+/**
+ * Generates the HTML for displaying the subtasks of a given task.
+ * Delegates the actual HTML generation to the helper function `generateSubtasksHTML`.
+ *
+ * @param {Object} task - The task object containing subtasks.
+ * @returns {string} The generated HTML string for the subtasks section.
+ */
 function getSubtasksHTML(task) {
   return generateSubtasksHTML(task.subtasks);
 }
 
+/**
+ * Toggles the checkbox state of a subtask element, updates its completion state,
+ * saves the changes to Firebase, and refreshes the UI including progress and task card.
+ *
+ * @param {HTMLElement} element - The clicked subtask DOM element.
+ */
 async function toggleSubtaskCheckbox(element) {
   const checkboxImg = element.querySelector('.subtask-checkbox-img');
   const subtaskTitle = element.querySelector('span')?.textContent;
@@ -31,6 +51,13 @@ async function toggleSubtaskCheckbox(element) {
   }
 }
 
+/**
+ * Updates the visual progress bar and label for a task's subtasks.
+ * Calculates the percentage of completed subtasks and reflects it in the UI.
+ *
+ * @param {string} taskId - The unique ID of the task.
+ * @param {Object} task - The task object containing the subtasks array.
+ */
 function updateProgress(taskId, task) {
   const subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
   const total = subtasks.length;
@@ -47,6 +74,12 @@ function updateProgress(taskId, task) {
   }
 }
 
+/**
+ * Toggles the completion state of a specific subtask in the UI and sessionStorage.
+ *
+ * @param {HTMLElement} element - The DOM element representing the subtask.
+ * @param {string} taskId - The ID of the task to which the subtask belongs.
+ */
 function toggleSubtask(element, taskId) {
   let index = element.getAttribute('data-index');
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
@@ -62,12 +95,24 @@ function toggleSubtask(element, taskId) {
   }
 }
 
+/**
+ * Returns the background color style based on the task's category.
+ *
+ * @param {Object} task - The task object containing the category.
+ * @returns {string} - The CSS background-color string or an empty string if no match.
+ */
 function getCategoryBg(task) {
   if (task.category === 'User Story') return 'background-color: #0038FF;';
   if (task.category === 'Technical Task') return 'background-color: #1FD7C1;';
   return '';
 }
 
+/**
+ * Opens the task details popup for a given task key.
+ * Loads the task data from Firebase and renders the popup content.
+ *
+ * @param {string} key - The key of the task to display in the popup.
+ */
 async function openPopup(key) {
   taskKey = key;
 
@@ -95,6 +140,12 @@ async function openPopup(key) {
   document.getElementById('overlay').style.display = 'block';
 }
 
+/**
+ * Returns the file path of the corresponding priority icon based on the task's priority level.
+ *
+ * @param {string} priority - The priority level ('low', 'medium', 'urgent').
+ * @returns {string} The path to the appropriate priority icon, or an empty string if invalid.
+ */
 function getPriorityIcon(priority) {
   if (!priority) return '';
   priority = priority.toLowerCase();
@@ -108,17 +159,31 @@ function getPriorityIcon(priority) {
   return '';
 }
 
+/**
+ * Generates the full HTML content for the board task popup by delegating to a template generator function.
+ *
+ * @param {Object} task - The task object containing all task details.
+ * @param {string} taskKey - The unique key identifying the task.
+ * @param {string} assignedHTML - The HTML representing the assigned contacts.
+ * @param {string} subtasksHTML - The HTML representing the task's subtasks.
+ * @param {string} categoryBg - The CSS background style for the task category.
+ * @param {string} priorityIconSrc - The path to the priority icon image.
+ * @returns {string} The complete HTML markup for the task popup.
+ */
 function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
   return generateBoardPopupHTML(task, taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc);
 }
 
+/**
+ * Opens the edit popup and fills the form with data from the selected task.
+ *
+ * @param {string} key - The unique identifier of the task to be edited.
+ */
 function editPopupTask(key) {
   const popupContainer = document.getElementById('popup_container');
   popupContainer.style.display = 'none';
-
   const editPopup = document.getElementById('edit_popup');
   editPopup.style.display = 'flex';
-
   const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
   const task = tasks[key];
   if (!task) return;
@@ -135,19 +200,23 @@ function editPopupTask(key) {
     const priorityId = `edit_${task.priority.toLowerCase()}_button`;
     setEditPriority(priorityId);
   }
-
   editPopupSelectedContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
   renderSelectedEditContacts();
-
   editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
   renderEditSubtasks();
-
   editPopupTaskKey = key;
-
   document.getElementById('overlay').style.display = 'block';
 }
 
-function checkImgAvailable(priorityIconSrc, priority){
+/**
+ * Returns an HTML <img> element as a string for the given priority icon.
+ * If no icon source is provided, returns an empty image element.
+ *
+ * @param {string} priorityIconSrc - The source URL of the priority icon.
+ * @param {string} priority - The priority level (e.g., "low", "medium", "urgent").
+ * @returns {string} - The HTML string for the priority icon image element.
+ */
+function checkImgAvailable(priorityIconSrc, priority) {
   if (priorityIconSrc) {
     return `<img id="priority-icon" src="${priorityIconSrc}" alt="${priority || 'No Priority'}" />`;
   } else {
@@ -155,6 +224,11 @@ function checkImgAvailable(priorityIconSrc, priority){
   }
 }
 
+/**
+ * Opens the edit popup for a task.
+ * Hides the task detail popup if open and shows the edit popup.
+ * If the edit popup does not exist yet in the DOM, it is created dynamically.
+ */
 function editTask() {
   const popupContainer = document.getElementById('popup_container');
   if (popupContainer) {
@@ -201,6 +275,12 @@ function editTask() {
 //   }
 // }
 
+/**
+ * Deletes a task from Firebase and updates the UI accordingly.
+ * Prompts the user for confirmation before proceeding with deletion.
+ *
+ * @param {string} taskKey - The unique key of the task to be deleted.
+ */
 async function deleteTask(taskKey) {
   if (confirm('Are you sure you want to delete this task?')) {
     try {
@@ -209,24 +289,19 @@ async function deleteTask(taskKey) {
         return;
       }
 
-      await deleteData('tasks', `${taskKey}`);
-
-      let tasksString = sessionStorage.getItem('tasks');
-      if (tasksString) {
-        let tasks = JSON.parse(tasksString);
-        delete tasks[taskKey];
-        sessionStorage.setItem('tasks', JSON.stringify(tasks));
-      } else {
-          console.log("No tasks found in sessionStorage.");
-      }
+      await deleteData(`tasks/${taskKey}`);
       closePopup();
-      renderCards();  
+      renderCards();
     } catch (error) {
       console.error('Error deleting the task:', error);
     }
   }
 }
 
+/**
+ * Closes all popup elements on the board view.
+ * Hides the task detail popup, edit popup, and the overlay.
+ */
 function closePopup() {
   document.getElementById('popup_container').style.display = 'none';
   document.getElementById('edit_popup').style.display = 'none';
