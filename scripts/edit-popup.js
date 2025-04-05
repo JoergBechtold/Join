@@ -4,20 +4,80 @@ let editPopupTaskKey = null;
 let editPopupCurrentSubtaskIndex = null;
 let editSelectedContact = [];
 
-
-
-
-function editTask(key) {
+async function editTask(key) {
   editPopupTaskKey = key;
   document.getElementById('popup_container').style.display = 'none';
   document.getElementById('overlay').style.display = 'block';
-  loadEditForm(editPopupTaskKey);
+
+  const task = await loadData(`tasks/${key}`);
+  if (!task) return;
+
+  renderEditPreview(task);
+  loadEditFormData(task); 
+  document.getElementById('edit_popup').style.display = 'flex';
 }
 
-function loadEditForm(key) {
-  const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  const task = tasks[key];
+function renderEditPreview(task) {
+  const container = document.getElementById('edit_preview_info');
+  if (!container) return;
+
+  const assignedHTML = getAssignedHTML(task);
+  const subtasksHTML = getSubtasksHTML(task);
+  const categoryBg = getCategoryBg(task);
+  const priorityIcon = getPriorityIcon(task.priority);
+
+  container.innerHTML = `
+    <div class="popup-header">
+      <div style="${categoryBg}" class="tag-container">
+        <span class="tag">${task.category}</span>
+      </div>
+    </div>
+    <h2>${task.title}</h2>
+    <p>${task.description}</p>
+    <div class="info-item-date"><strong>Due:</strong> ${task.due_date}</div>
+    <div class="priority-container">
+      <strong>Priority:</strong> 
+      <img src="${priorityIcon}" style="width: 20px;"> ${task.priority}
+    </div>
+    <div class="info-item-assigned">
+      <strong>Assigned To:</strong>
+      ${assignedHTML}
+    </div>
+    <div class="popup-subtasks">
+      <strong>Subtasks:</strong>
+      ${subtasksHTML}
+    </div>
+  `;
+}
+
+function loadEditFormData(task) {
+  document.getElementById('edit_title').value = task.title || '';
+  document.getElementById('edit_description').value = task.description || '';
+  document.getElementById('edit_due_date').value = task.due_date || '';
+
+  if (task.priority) {
+    const prio = task.priority.toLowerCase();
+    if (['urgent', 'medium', 'low'].includes(prio)) {
+      setEditPriority(`edit_${prio}_button`);
+    }
+  }
+
+  if (task.category) {
+    document.getElementById('edit_selected_option').textContent = task.category;
+  }
+
+  editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
+  updateEditSubtaskDisplay();
+
+  selectedEditContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
+  renderEditSelectedContacts();
+}
+
+async function loadEditForm(key) {
+  const task = await loadData(`tasks/${key}`);
   if (!task) return;
+
+  renderEditPreview(task);
 
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
@@ -45,10 +105,7 @@ function loadEditForm(key) {
 
 function setEditPriority(buttonId) {
   const button = document.getElementById(buttonId);
-  if (!button) {
-    console.warn(`Priority button with ID "${buttonId}" not found.`);
-    return;
-  }
+  if (!button) return;
   if (editPopupActiveButton) resetEditPriorityButton();
   if (editPopupActiveButton !== button) activateEditPriorityButton(button);
 }
@@ -73,7 +130,6 @@ function applyEditPriorityStyle(type) {
     medium: ['orange-prio', 'medium'],
     low: ['green-prio', 'low']
   };
-  if (!styles[type]) return;
   const [className, icon] = styles[type];
   editPopupActiveButton.classList.add(className);
   const img = document.getElementById(`edit_${type}_img`);
@@ -91,15 +147,18 @@ function getEditPriority() {
 async function submitEditTask() {
   if (!validateEditInputs()) return;
 
-  const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  const task = tasks[editPopupTaskKey];
+  const task = await loadData(`tasks/${editPopupTaskKey}`);
   if (!task) return;
 
   applyEditedTaskData(task);
-  sessionStorage.setItem('tasks', JSON.stringify(tasks));
   await updateData(`tasks/${editPopupTaskKey}`, task);
   closeEditPopup();
-  renderCards();
+
+  const updatedTask = await loadData(`tasks/${editPopupTaskKey}`);
+  if (updatedTask) {
+    updateCardInBoard(editPopupTaskKey, updatedTask);
+    updatePopup(editPopupTaskKey, updatedTask);
+  }
 }
 
 function applyEditedTaskData(task) {
@@ -108,40 +167,34 @@ function applyEditedTaskData(task) {
   task.due_date = document.getElementById('edit_due_date').value.trim();
   task.category = document.getElementById('edit_selected_option').textContent.trim();
   task.priority = getEditPriority();
-<<<<<<< HEAD
-  task.subtasks = editPopupSubtasks;
-  task.assigned_to = selectedEditContacts;
-=======
-  
-  
   task.subtasks = checkSubtasks();
   task.assigned_to = checkAssignedTo();
-  // task.subtasks = [...editPopupSubtasks];
-  // task.assigned_to = [...selectedEditContacts];
 }
 
-function checkSubtasks(){
-  
-  editPopupSubtasks = document.getElementById('edit_subtask_enum').textContent.trim();
+function checkSubtasks() {
+  const elements = document.querySelectorAll('#edit_subtask_enum .subtask-text');
+  let subtasks = [];
 
-  if (!editPopupSubtasks) {
-    return '';
-  } else {
-    return editPopupSubtasks;
-  };
-  
+  elements.forEach(el => {
+    const text = el.textContent.replace('• ', '').trim();
+    if (text) {
+      subtasks.push({ title: text, completed: false });
+    }
+  });
+
+  return subtasks;
 }
 
-function checkAssignedTo(){
-  editSelectedContact = document.getElementById('edit_selected_contact_circles').textContent.trim();
+function checkAssignedTo() {
+  const container = document.getElementById('edit_selected_contact_circles');
+  const circles = container.querySelectorAll('.circle');
 
-  if (!editSelectedContact) {
-    return '';
-  } else {
-    return editSelectedContact;
-  };
-  
->>>>>>> 22327537a5253d1a4ffd32ce35eee7609646af62
+  const contacts = Array.from(circles).map(circle => ({
+    initials: circle.textContent.trim(),
+    randomColor: circle.style.backgroundColor
+  }));
+
+  return contacts;
 }
 
 function validateEditInputs() {
@@ -188,4 +241,22 @@ function cancelEditTask() {
 function closeEditPopup() {
   document.getElementById('edit_popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
+}
+
+async function updateCardInBoard(taskKey, task) {
+  const container = document.getElementById(task.state);
+  const oldCard = document.getElementById(taskKey);
+  if (oldCard) oldCard.remove();
+  createCard(taskKey, container, task);
+}
+
+function updatePopup(taskKey, task) {
+  const assignedHTML = getAssignedHTML(task);
+  const subtasksHTML = getSubtasksHTML(task);
+  const categoryBackground = getCategoryBg(task);
+  const priorityIconSrc = getPriorityIcon(task.priority);
+  const popup = document.getElementById('popup');
+  popup.innerHTML = getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, categoryBackground, priorityIconSrc);
+  document.getElementById('popup_container').style.display = 'flex';
+  document.getElementById('overlay').style.display = 'block';
 }

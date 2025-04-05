@@ -1,26 +1,24 @@
 let taskKey;
 
-function getAssignedHTML(task) {
+async function getAssignedHTML(task) {
   let html = '';
-  let allContacts = JSON.parse(sessionStorage.getItem('contacts')) || {};
-  if (task.assigned_to) {
-    let assignedArray = Object.values(task.assigned_to);
-    assignedArray.forEach((assignedItem) => {
-      let allContactsArray = Object.values(allContacts);
-      let foundContact = allContactsArray.find((contactObj) => {
-        return contactObj.initials === assignedItem.initials;
-      });
+  const allContacts = await loadData('contacts');
+  if (!allContacts) return '<span>No contacts found</span>';
+
+  if (task.assigned_to && Array.isArray(task.assigned_to)) {
+    task.assigned_to.forEach((assignedItem) => {
+      const foundContact = Object.values(allContacts).find(c => c.initials === assignedItem.initials);
       if (foundContact) {
         html += `
           <div class="assigned-contact-container">
-              <div class="assigned-contact" style="background-color:${
-                foundContact.contactColor || foundContact.randomColor || assignedItem.randomColor || '#ccc'
-              };">
-                <span class="contact-initials">${foundContact.initials}</span>
-              </div>
-              <div>
-                <span class="contact-fullname">${foundContact.firstname} ${foundContact.lastname}</span>
-              </div>
+            <div class="assigned-contact" style="background-color:${
+              foundContact.contactColor || foundContact.randomColor || assignedItem.randomColor || '#ccc'
+            };">
+              <span class="contact-initials">${foundContact.initials}</span>
+            </div>
+            <div>
+              <span class="contact-fullname">${foundContact.firstname} ${foundContact.lastname}</span>
+            </div>
           </div>
         `;
       }
@@ -28,6 +26,7 @@ function getAssignedHTML(task) {
   } else {
     html = '<span>No contacts assigned</span>';
   }
+
   return html;
 }
 
@@ -35,7 +34,7 @@ function getSubtasksHTML(task) {
   let html = '';
   if (task.subtasks && Array.isArray(task.subtasks)) {
     task.subtasks.forEach((subtask) => {
-      const title = subtask.title || subtask; // fallback für alte Daten
+      const title = subtask.title || subtask;
       const isChecked = subtask.completed;
       const checkboxImg = isChecked 
         ? 'assets/icons/checkbox-checked.svg' 
@@ -53,39 +52,25 @@ function getSubtasksHTML(task) {
   return html;
 }
 
-function toggleSubtaskCheckbox(element) {
+async function toggleSubtaskCheckbox(element) {
   const checkboxImg = element.querySelector('.subtask-checkbox-img');
   const subtaskTitle = element.querySelector('span')?.textContent;
 
-  if (!checkboxImg || !subtaskTitle) return;
   const isChecked = checkboxImg.src.includes('checkbox-checked.svg');
   checkboxImg.src = isChecked 
     ? 'assets/icons/checkbox-empty.svg' 
     : 'assets/icons/checkbox-checked.svg';
 
-  checkboxImg.alt = isChecked 
-    ? 'Checkbox not Checked' 
-    : 'Checkbox Checked';
-
-  const taskId = taskKey;
-  let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  let task = tasks[taskId];
-
+  const task = await loadData(`tasks/${taskKey}`);
   if (!task || !Array.isArray(task.subtasks)) return;
-  task.subtasks = task.subtasks.map((subtask) => {
-    if (typeof subtask === 'string') {
-      return { title: subtask, completed: false };
-    }
-    return subtask;
-  });
 
-  const subtaskObj = task.subtasks.find((st) => st.title === subtaskTitle);
-  if (subtaskObj) {
-    subtaskObj.completed = !isChecked;
+  const subtask = task.subtasks.find(st => st.title === subtaskTitle);
+  if (subtask) {
+    subtask.completed = !isChecked;
+    await updateData(`tasks/${taskKey}`, task);
+    updateProgress(taskKey, task);
+    updateCardInBoard(taskKey, task);
   }
-
-  sessionStorage.setItem('tasks', JSON.stringify(tasks));
-  updateProgress(taskId, task);
 }
 
 function updateProgress(taskId, task) {
@@ -125,26 +110,29 @@ function getCategoryBg(task) {
   return '';
 }
 
-function openPopup(Key) {
-  taskKey = Key
-  let tasks = JSON.parse(sessionStorage.getItem('tasks')),
-    task = tasks ? tasks[taskKey] : null,
-    popupContainer = document.getElementById('popup_container'),
-    popup = document.getElementById('popup');
+async function openPopup(key) {
+  taskKey = key;
+
+  const task = await loadData(`tasks/${key}`);
+  const popupContainer = document.getElementById('popup_container');
+  const popup = document.getElementById('popup');
+
   if (task) {
-    let assignedHTML = getAssignedHTML(task);
-    let subtasksHTML = getSubtasksHTML(task);
-    let categoryBackground = getCategoryBg(task);
+    const assignedHTML = await getAssignedHTML(task);
+    const subtasksHTML = getSubtasksHTML(task);
+    const categoryBackground = getCategoryBg(task);
     const priorityIconSrc = getPriorityIcon(task.priority);
+
     document.body.style.overflow = 'hidden';
-    popup.innerHTML = getPopupContentHtml(task,taskKey, assignedHTML, subtasksHTML, categoryBackground,priorityIconSrc);
+    popup.innerHTML = getPopupContentHtml(task, key, assignedHTML, subtasksHTML, categoryBackground, priorityIconSrc);
   } else {
     popup.innerHTML = `
-    <div class="popup-header">
-      <h2>Task Not Found</h2>
-      <button class="close-button" onclick="closePopup()">X</button>
-    </div>`;
+      <div class="popup-header">
+        <h2>Task Not Found</h2>
+        <button class="close-button" onclick="closePopup()">X</button>
+      </div>`;
   }
+
   popupContainer.style.display = 'flex';
   document.getElementById('overlay').style.display = 'block';
 }
