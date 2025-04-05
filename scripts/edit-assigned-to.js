@@ -94,6 +94,8 @@ function updateEditSelectedContacts(element) {
   } else {
     selectedEditContacts = selectedEditContacts.filter((c) => c.initials !== initials);
   }
+  console.log('Aktueller Inhalt von selectedEditContacts:', selectedEditContacts);
+
 
   selectedEditContacts = sortContacts(selectedEditContacts);
   renderEditSelectedContacts();
