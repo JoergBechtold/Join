@@ -2,6 +2,10 @@ let editPopupSubtasks = [];
 let editPopupActiveButton = null;
 let editPopupTaskKey = null;
 let editPopupCurrentSubtaskIndex = null;
+let editSelectedContact = [];
+
+
+
 
 function editTask(key) {
   editPopupTaskKey = key;
@@ -104,8 +108,35 @@ function applyEditedTaskData(task) {
   task.due_date = document.getElementById('edit_due_date').value.trim();
   task.category = document.getElementById('edit_selected_option').textContent.trim();
   task.priority = getEditPriority();
-  task.subtasks = [...editPopupSubtasks];
-  task.assigned_to = [...selectedEditContacts];
+  
+  
+  task.subtasks = checkSubtasks();
+  task.assigned_to = checkAssignedTo();
+  // task.subtasks = [...editPopupSubtasks];
+  // task.assigned_to = [...selectedEditContacts];
+}
+
+function checkSubtasks(){
+  
+  editPopupSubtasks = document.getElementById('edit_subtask_enum').textContent.trim();
+
+  if (!editPopupSubtasks) {
+    return '';
+  } else {
+    return editPopupSubtasks;
+  };
+  
+}
+
+function checkAssignedTo(){
+  editSelectedContact = document.getElementById('edit_selected_contact_circles').textContent.trim();
+
+  if (!editSelectedContact) {
+    return '';
+  } else {
+    return editSelectedContact;
+  };
+  
 }
 
 function validateEditInputs() {
