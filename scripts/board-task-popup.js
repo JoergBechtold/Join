@@ -179,15 +179,13 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
  *
  * @param {string} key - The unique identifier of the task to be edited.
  */
-function editPopupTask(key) {
+async function editPopupTask(key) {
   const popupContainer = document.getElementById('popup_container');
   popupContainer.style.display = 'none';
   const editPopup = document.getElementById('edit_popup');
   editPopup.style.display = 'flex';
-  const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  const task = tasks[key];
+  const task = await loadData(`tasks/${key}`);
   if (!task) return;
-
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
