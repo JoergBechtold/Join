@@ -108,6 +108,7 @@ function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
 
 async function initializeSummaryPage() {
   try {
+    await loadHeaderAndInitialize();
     updateGreeting();
     updateDate();
     updateTaskData();

@@ -1,7 +1,7 @@
 let randomColorsJson = null;
 
 async function startProcess() {
-  // loadHeaderAndInitialize()
+ await loadHeaderAndInitialize()
   initBoard()
   await initializeRandomColors();
 }
@@ -188,7 +188,7 @@ function showPupupOverlaySignUp() {
 
 async function fetchAddTask(parameter = false) {
   try {
-    // await loadHeaderAndInitialize();
+    await loadHeaderAndInitialize();
     await showLoggedInLinks(); 
     fetch('assets/templates/template_add_task.html')
       .then((response) => {

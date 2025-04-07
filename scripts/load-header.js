@@ -1,51 +1,51 @@
-let headerContainer = document.getElementById('header_container');
-if (!headerContainer) {
-  headerContainer = document.createElement('div');
-  headerContainer.id = 'header_container';
-  document.body.insertBefore(headerContainer, document.body.firstChild);
-}
+// let headerContainer = document.getElementById('header_container');
+// if (!headerContainer) {
+//   headerContainer = document.createElement('div');
+//   headerContainer.id = 'header_container';
+//   document.body.insertBefore(headerContainer, document.body.firstChild);
+// }
 
-fetch('header_sidebar.html')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Error retrieving header ${response.status}`);
-    }
-    return response.text();
-  })
-  .then(data => {
-    headerContainer.innerHTML = data;
-    const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
-    ifButtonLinkSidebar(buttonLinksSidebar);
-    loadInitialsUserIcon();
-    ifActivePage();
-  })
-  .catch(error => console.error('Error loading header', error));
-
-
-// async function loadHeaderAndInitialize() {
-//   let headerContainer = document.getElementById('header_container');
-//   if (!headerContainer) {
-//     headerContainer = document.createElement('div');
-//     headerContainer.id = 'header_container';
-//     document.body.insertBefore(headerContainer, document.body.firstChild);
-//   }
-
-//   try {
-//     const response = await fetch('header_sidebar.html');
+// fetch('header_sidebar.html')
+//   .then(response => {
 //     if (!response.ok) {
 //       throw new Error(`Error retrieving header ${response.status}`);
 //     }
-//     const data = await response.text();
+//     return response.text();
+//   })
+//   .then(data => {
 //     headerContainer.innerHTML = data;
 //     const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
-//     ifButtonLinkSidebar(buttonLinksSidebar); 
+//     ifButtonLinkSidebar(buttonLinksSidebar);
 //     loadInitialsUserIcon();
 //     ifActivePage();
+//   })
+//   .catch(error => console.error('Error loading header', error));
 
-//   } catch (error) {
-//     console.error('Error loading header', error);
-//   }
-// }
+
+async function loadHeaderAndInitialize() {
+  let headerContainer = document.getElementById('header_container');
+  if (!headerContainer) {
+    headerContainer = document.createElement('div');
+    headerContainer.id = 'header_container';
+    document.body.insertBefore(headerContainer, document.body.firstChild);
+  }
+
+  try {
+    const response = await fetch('header_sidebar.html');
+    if (!response.ok) {
+      throw new Error(`Error retrieving header ${response.status}`);
+    }
+    const data = await response.text();
+    headerContainer.innerHTML = data;
+    const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
+    ifButtonLinkSidebar(buttonLinksSidebar); 
+    loadInitialsUserIcon();
+    ifActivePage();
+
+  } catch (error) {
+    console.error('Error loading header', error);
+  }
+}
 
 
 
