@@ -58,13 +58,10 @@ function generateAssignedHTML(assignedTo = [], allContacts = {}) {
     if (!Array.isArray(assignedTo) || assignedTo.length === 0) {
       return '<span>No contacts assigned</span>';
     }
-  
     let html = '';
     const contactList = Object.values(allContacts);
-  
     assignedTo.forEach((assignedItem) => {
       const foundContact = contactList.find(c => c.initials === assignedItem.initials);
-  
       if (foundContact) {
         html += `
           <div class="assigned-contact-container">
@@ -80,7 +77,6 @@ function generateAssignedHTML(assignedTo = [], allContacts = {}) {
         `;
       }
     });
-  
     return html;
 }
   
@@ -88,7 +84,6 @@ function generateSubtasksHTML(subtasks = []) {
     if (!Array.isArray(subtasks) || subtasks.length === 0) {
       return '<span>No subtasks</span>';
     }
-  
     return subtasks
       .map(subtask => {
         const title = subtask.title || subtask;
@@ -96,7 +91,6 @@ function generateSubtasksHTML(subtasks = []) {
         const checkboxImg = isChecked
           ? 'assets/icons/checkbox-checked.svg'
           : 'assets/icons/checkbox-empty.svg';
-  
         return `
           <div class="subtasks-elements-container" onclick="toggleSubtaskCheckbox(this)">
             <img class="subtask-checkbox-img" src="${checkboxImg}" alt="Checkbox" />
