@@ -50,74 +50,7 @@
   }
 }
 
-/* .animation-join-logo img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: contain;
-  opacity: 0;
-  animation-fill-mode: forwards;
-}
 
-.logo-white {
-  animation: fadeOutLogo 2s ease-in-out forwards;
-  z-index: 2;
-}
-
-.logo-gray {
-  animation: fadeInLogo 2s ease-in-out forwards;
-  z-index: 1;
-}
-
-@keyframes fadeOutLogo {
-  0% {
-    opacity: 1;
-  }
-  15% {
-    opacity: 0.8;
-  }
-  25% {
-    opacity: 0.5;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes backgroundTransition {
-  0% {
-    background-color: var(--primary-color-gray);
-  }
-  100% {
-    background-color: var(--light-gray-bg);
-  }
-}
-
-@keyframes fadeInLogo {
-  0% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.3;
-  }
-  30% {
-    opacity: 0.6;
-  }
-  40% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
 
 .animation-finished {
   display: none;
@@ -374,18 +307,95 @@
   scale: var(--scale-hover);
 }
 
-/* .portrait-overlay{
-  display: none;
-} */
 
 @media only screen and (max-width: 922px){ 
 }
 
-/* @media (max-width: 768px) and (orientation: landscape) and (pointer: coarse) {
-  .portrait-overlay{
-    display: flex;
+@media only screen and (max-width: 768px){
+  
+  .body-login-register {
+    /* background-color: var(--primary-color-gray); */
+    animation: backgroundTransition 2s ease-in-out forwards;
   }
-} */
+
+
+  .animation-join-logo {
+    transition: var(--transition-animations-overlay);
+  }
+
+
+
+  .animation-join-logo img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.logo-white {
+  animation: fadeOutLogo 2s ease-in-out forwards;
+  z-index: 2;
+  opacity: 0;
+}
+
+.logo-gray {
+  animation: fadeInLogo 2s ease-in-out forwards;
+  z-index: 1;
+  opacity: 1;
+}
+
+@keyframes fadeOutLogo {
+  0% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes backgroundTransition {
+  0% {
+    background-color: var(--primary-color-gray);
+  }
+  100% {
+    background-color: var(--light-gray-bg);
+  }
+}
+
+@keyframes fadeInLogo {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 0.6;
+  }
+  40% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+}
 
 @media only screen and (max-width: 600px){
   .nav-log-in {

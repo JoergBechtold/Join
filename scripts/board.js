@@ -235,12 +235,16 @@ function createProgressBar(key, task) {
   const progressContainer = document.getElementById(key + '-progress');
   const progressBar = document.createElement('div');
   progressBar.className = 'progress-bar';
+  progressBar.style.width = '0%'; 
 
   const subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
   const completed = subtasks.filter(st => st.completed).length;
   const percent = subtasks.length > 0 ? (completed / subtasks.length) * 100 : 0;
 
-  progressBar.style.width = `${percent}%`;
+  // progressBar.style.width = `${percent}%`;
+  setTimeout(() => {
+    progressBar.style.width = `${percent}%`;
+  }, 10); 
   progressContainer.appendChild(progressBar);
 
   const label = document.createElement('span');
