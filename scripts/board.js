@@ -369,6 +369,34 @@ function createCard(key, container, task) {
   createPrio(key, task);
 }
 
+async function updateAssignedContactsOnBoard() {
+  const tasks = await loadData(PATH_TO_TASKS); 
+  const allColumns = document.querySelectorAll('.drag-area');
+  
+  allColumns.forEach(col => col.innerHTML = ''); 
+  for (const [key, task] of Object.entries(tasks)) {
+    const column = document.getElementById(task.state);
+    if (column) {
+      createCard(key, column, task);
+    }
+  }
+  updateEmptyColumns();  
+}
+
+async function processContactDeletion(deleteBtn) {
+  const contactDiv = getContactDiv(deleteBtn);
+  if (!contactDiv) {
+    console.error('No valid contact to delete.');
+    return Promise.resolve(false);
+  }
+  
+  const success = await confirmAndDeleteContact(contactDiv);
+  if (success) {
+    await updateAssignedContactsOnBoard(); 
+  }
+  return success;
+}
+
 /**
  * Fetches all tasks from the database and renders them into their respective columns on the board.
  * Clears previous cards before re-rendering. Also updates the empty column placeholders.

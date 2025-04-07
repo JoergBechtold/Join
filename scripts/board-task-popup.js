@@ -67,12 +67,12 @@ function updateProgress(taskId, task) {
   if (bar) {
     bar.style.width = `${progressPercent}%`;
   }
-
   const label = document.getElementById(`${taskId}-progress-label`);
   if (label) {
     label.textContent = `${completed}/${total} Subtasks`;
   }
 }
+
 
 /**
  * Toggles the completion state of a specific subtask in the UI and sessionStorage.
@@ -189,11 +189,9 @@ async function editPopupTask(key) {
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
-
   if (task.category) {
     document.getElementById('edit_selected_option').textContent = task.category;
   }
-
   if (task.priority) {
     const priorityId = `edit_${task.priority.toLowerCase()}_button`;
     setEditPriority(priorityId);
@@ -205,6 +203,7 @@ async function editPopupTask(key) {
   editPopupTaskKey = key;
   document.getElementById('overlay').style.display = 'block';
 }
+
 
 /**
  * Returns an HTML <img> element as a string for the given priority icon.
