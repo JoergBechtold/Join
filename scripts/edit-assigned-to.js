@@ -11,7 +11,6 @@ function toggleEditContactsDropdown() {
   const inputField = document.getElementById('edit_selected_contact');
   const customSelect = document.getElementById('edit_custom_select');
   const selectedContactsContainer = document.getElementById('edit_selected_contact_circles');
-
   if (optionsContainer.classList.contains('d-none')) {
     openEditDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
   } else {
@@ -58,7 +57,6 @@ function closeEditDropdown(optionsContainer, arrowIcon, inputField, customSelect
   customSelect.classList.replace('custom-select-focused', 'custom-select');
   selectedContactsContainer.classList.remove('d-none');
   inputField.blur();
-
   const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
   contactOptions.forEach((option) => {
     option.style.display = 'block';
@@ -73,7 +71,6 @@ function closeEditDropdown(optionsContainer, arrowIcon, inputField, customSelect
 function filterEditContacts() {
   const searchValue = document.getElementById('edit_selected_contact').value.toLowerCase();
   const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
-
   contactOptions.forEach((option) => {
     const contactName = option.querySelector('.circle-and-name div:nth-child(2)').textContent.toLowerCase();
     option.style.display = contactName.includes(searchValue) ? 'block' : 'none';
@@ -88,7 +85,6 @@ function filterEditContacts() {
 async function loadEditContacts() {
   const optionsContainer = document.getElementById('edit_contacts_options');
   if (optionsContainer.childElementCount) return;
-
   try {
     const data = await loadData('contacts');
     if (data) {
@@ -139,7 +135,6 @@ function toggleEditSelectedContact(element) {
 function updateEditSelectedContacts(element) {
   const initials = element.querySelector('.circle').textContent.trim();
   const randomColor = element.querySelector('.circle').style.backgroundColor;
-
   if (element.classList.contains('contacts-custom-select-option-selected')) {
     if (!selectedEditContacts.some((c) => c.initials === initials)) {
       selectedEditContacts.push({ initials, randomColor });
@@ -147,7 +142,6 @@ function updateEditSelectedContacts(element) {
   } else {
     selectedEditContacts = selectedEditContacts.filter((c) => c.initials !== initials);
   }
-
   selectedEditContacts = sortContacts(selectedEditContacts);
   renderEditSelectedContacts();
 }
@@ -175,7 +169,6 @@ function renderEditSelectedContacts() {
 function clearEditAssignedTo() {
   selectedEditContacts = [];
   renderEditSelectedContacts();
-
   const selectedOptions = document.getElementsByClassName('contacts-custom-select-option-selected');
   Array.from(selectedOptions).forEach((option) => {
     option.classList.remove('contacts-custom-select-option-selected');
