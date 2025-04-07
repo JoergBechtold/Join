@@ -241,7 +241,6 @@ function createProgressBar(key, task) {
   const completed = subtasks.filter(st => st.completed).length;
   const percent = subtasks.length > 0 ? (completed / subtasks.length) * 100 : 0;
 
-  // progressBar.style.width = `${percent}%`;
   setTimeout(() => {
     progressBar.style.width = `${percent}%`;
   }, 10); 
