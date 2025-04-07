@@ -81,6 +81,7 @@ a {
   --font-size-12: 12px;
   --font-size-14: 14px;
   --font-size-16: 16px;
+  --font-size-12-16: clamp(12px, 11.2px + 0.25vw, 16px);
   --font-size-14-16: clamp(14px, 13.6px + 0.125vw, 16px);
   --font-size-16-19: clamp(16px, 15.4px + 0.1875vw, 19px);
   --font-size-20: 20px;
@@ -103,6 +104,7 @@ a {
   --font-size-47-64: clamp(47px, 43.6px + 1.0625vw, 64px);
 
   /* responsive size new */
+  --font-size-36-61:clamp(36px, 31px + 1.5625vw, 61px);
   --font-size-37-61:clamp(37px, 32.2px + 1.5vw, 61px);
   --font-size-47-20:clamp(20px, 52.4px + -1.6875vw, 47px);
   

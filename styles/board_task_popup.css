@@ -41,15 +41,13 @@
 
 .popup-info h1 {
   font-weight: 700;
-  font-size: 61px;
-  /* line-height: 120%; */
-  /* word-break: break-all; */
+  font-size: var(--font-size-36-61);
   white-space: pre-line;
 }
 
 .popup-subtitle {
   font-weight: 400;
-  font-size: 20px;
+  font-size: var(--font-size-16-20);
   line-height: 120%;
 }
 
@@ -117,8 +115,9 @@
 
 .tag-container span {
   font-weight: 400;
-  font-size: 23px;
+  font-size: var(--font-size-16-23);
   color: white;
+  white-space: nowrap;
 }
 
 .info-item-date {
@@ -139,11 +138,6 @@
 
 #priority-icon {
   width: 17px;
-}
-
-.popup-body {
-  font-size: 1rem;
-  line-height: 1.4;
 }
 
 .popup-actions {
@@ -170,8 +164,7 @@
 
 .contact-fullname {
   font-weight: 400;
-  font-size: 19px;
-  line-height: 120%;
+  font-size: var(--font-size-16-19);
   vertical-align: middle;
 }
 
@@ -235,17 +228,6 @@
   gap: 8px;
 }
 
-.action-button img {
-  width: 24px;
-  height: 24px;
-}
-
-.action-button span {
-  font-weight: 400;
-  font-size: 16px;
-  vertical-align: middle;
-}
-
 .info-item-assigned {
   display: flex;
   flex-direction: column;
@@ -262,11 +244,8 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  font-family: 'Inter';
   font-weight: 400;
-  font-size: 16px;
-  line-height: 120%;
-  letter-spacing: 0%;
+  font-size: var(--font-size-12-16);
   text-align: center;
   vertical-align: middle;
 }

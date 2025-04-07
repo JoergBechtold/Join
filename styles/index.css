@@ -67,13 +67,6 @@
   width: 100%;
 }
 
-/* .search-icon {
-  position: absolute;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-} */
-
 .card-container {
   width: 100%;
   height: calc(80dvh - 113px);
