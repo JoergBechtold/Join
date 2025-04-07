@@ -388,6 +388,23 @@ async function renderCards() {
   updateEmptyColumns();
 }
 
+async function renderCards() {
+  const tasks = await loadData(PATH_TO_TASKS);
+  const allColumns = document.querySelectorAll('.drag-area');
+  
+  allColumns.forEach(col => col.innerHTML = ''); // Alle vorherigen Karten löschen
+
+  for (const [key, task] of Object.entries(tasks)) {
+    const column = document.getElementById(task.state);
+    if (column) {
+      createCard(key, column, task);  // Neue Karten erstellen
+    }
+  }
+
+  updateEmptyColumns();  // Sicherstellen, dass die Platzhalter für leere Spalten aktualisiert werden
+}
+
+
 /**
  * Checks each column on the board and updates its state based on whether tasks exist.
  * If a column is empty, it appends a placeholder message.
