@@ -4,6 +4,11 @@
 
 .edit-overflow {
     overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.edit-overflow::-webkit-scrollbar {
+    width: var(--scollbar-width-thin);
 }
 
 .close-div {

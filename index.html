@@ -48,9 +48,11 @@
         <span>Board</span>
         <div class="search-input-add-button-div">
           <div class="search-input-div">
-            <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text" />
+            <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text" placeholder="Find Card"/>
             <div class="placeholder"></div>
+            <div class="search-box">
             <img src="assets/icons/search.svg" class="search-icon" alt="" />
+          </div>
           </div>
           <button onclick="openBoardAddTaskForm(); fetchAddTask()" class="button-primary-dark-gray">Add Task +</button>
         </div>

@@ -73,6 +73,10 @@
 .right-container {
   flex: 1;
   position: relative;
+  
+}
+
+.left-container{
   scrollbar-gutter: stable;
 }
 

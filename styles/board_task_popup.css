@@ -17,7 +17,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;
-  padding-right: 10px;
   width: 100%;
 }
 
@@ -43,8 +42,9 @@
 .popup-info h1 {
   font-weight: 700;
   font-size: 61px;
-  line-height: 120%;
-  word-break: break-all;
+  /* line-height: 120%; */
+  /* word-break: break-all; */
+  white-space: pre-line;
 }
 
 .popup-subtitle {

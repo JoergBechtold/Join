@@ -18,9 +18,8 @@
 }
 
 .headline-input-container span {
-  font-size: 61px;
+  font-size: var(--font-size-47-61);
   font-weight: 700;
-  line-height: 73.2px;
 }
 
 .search-input-add-button-div {
@@ -55,12 +54,25 @@
   border-left: 1px solid lightgray;
 }
 
-.search-icon {
+.search-box{
+  position: absolute;
+  right: 22px;
+  width: 16px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+}
+
+.search-box img{
+  width: 100%;
+}
+
+/* .search-icon {
   position: absolute;
   right: 10px;
   width: 32px;
   height: 32px;
-}
+} */
 
 .card-container {
   width: 100%;
@@ -122,7 +134,7 @@
 .column-title {
   width: 252px;
   height: 24px;
-  font-size: 20px;
+  font-size: var(--font-size-47-20);
   font-weight: 700;
   line-height: 24px;
   display: flex;
@@ -152,18 +164,15 @@
   background: #0038ff;
 }
 
-.card-headline {
+/* .card-headline {
   width: 81px;
   height: 19px;
   font-weight: 400;
   font-size: 16px;
-  line-height: 120%;
-  letter-spacing: 0%;
   color: white;
-}
+} */
 
 /* To do Cards */
-
 .todo-card {
   display: flex;
   gap: 10px;
@@ -210,7 +219,6 @@
   height: 19px;
   font-size: 16px;
   font-weight: 400;
-  line-height: 19.2px;
   text-align: center;
   color: rgba(255, 255, 255, 1);
 }
