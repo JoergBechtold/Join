@@ -668,4 +668,124 @@ color: var(--blue);
     display: none !important;
   }
 
+  .add-contact-btn {
+    position: fixed;
+    left: 650px;
+    top: 600px;
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    display: flex;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    z-index: 1;
+  }
+
+  .add-contact-btn span{
+    display: none;
+  }
+
+    .container-add {
+      width: 80%;
+      height: 80%;
+      border: 1px solid rgba(42, 54, 71, 1);
+      flex-direction: column; /* Übereinander stapeln */
+    }
+
+    .left-section {
+      width: 100%;
+      height: 40%;
+      padding: 30px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      border-bottom-left-radius: 0px;
+    }
+  
+    .left-section-logo img{
+      display: none;
+    }
+
+    .left-section h1 {
+      font-size: 42px;
+      height: 0;
+      margin-bottom: 45px;
+    }
+  
+    .left-section p {
+      font-size: 16px;
+      margin-bottom: 16px;
+      height: 0;
+    }
+  
+    .underline {
+      margin-bottom: 20px;
+    }
+ 
+    .right-section {
+      width: 100%;
+      height: 60%;
+      padding: 20px;
+      flex-direction: column;
+    }
+  
+    /* Profilbild etwas kleiner */
+    .profile-image {
+      width: 60px;
+      height: 60px;
+      margin-top: -60px;
+      margin-left: 160px;
+      margin-bottom: 50px;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .input-group input {
+      font-size: 14px;
+      padding: 10px 14px;
+    }
+  
+    .button-group {
+      flex-direction: column;
+    }
+  
+    .button-cancel-white-gray,
+    .button-save-gray {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .d-flex-align-center{
+      display: none !important;
+    }
+
+    .button-save-gray{
+      display: flex !important;
+    }
+
+    .button-cancel-white-gray{
+      display: none !important;
+    }
+
+    .button-group{
+      width: 100%;
+    }
+
 }
+
+@media screen and (max-width: 340px){
+  .add-contact-btn {
+    position: fixed;
+    left: 250px;
+    top: 600px;
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    display: flex;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    z-index: 1;
+  }
+}
+
+
+
