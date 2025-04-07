@@ -33,15 +33,12 @@ function getSubtasksHTML(task) {
 async function toggleSubtaskCheckbox(element) {
   const checkboxImg = element.querySelector('.subtask-checkbox-img');
   const subtaskTitle = element.querySelector('span')?.textContent;
-
   const isChecked = checkboxImg.src.includes('checkbox-checked.svg');
   checkboxImg.src = isChecked 
     ? 'assets/icons/checkbox-empty.svg' 
     : 'assets/icons/checkbox-checked.svg';
-
   const task = await loadData(`tasks/${taskKey}`);
   if (!task || !Array.isArray(task.subtasks)) return;
-
   const subtask = task.subtasks.find(st => st.title === subtaskTitle);
   if (subtask) {
     subtask.completed = !isChecked;
@@ -73,7 +70,6 @@ function updateProgress(taskId, task) {
   }
 }
 
-
 /**
  * Toggles the completion state of a specific subtask in the UI and sessionStorage.
  *
@@ -85,10 +81,8 @@ function toggleSubtask(element, taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
   if (!task || !task.subtasks || !task.subtasks[index]) return;
-  
   task.subtasks[index].completed = !task.subtasks[index].completed;
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
-  
   let checkbox = element.querySelector('.subtask-checkbox');
   if (checkbox) {
     checkbox.classList.toggle('checked', task.subtasks[index].completed);
@@ -115,17 +109,14 @@ function getCategoryBg(task) {
  */
 async function openPopup(key) {
   taskKey = key;
-
   const task = await loadData(`tasks/${key}`);
   const popupContainer = document.getElementById('popup_container');
   const popup = document.getElementById('popup');
-
   if (task) {
     const assignedHTML = await getAssignedHTML(task);
     const subtasksHTML = getSubtasksHTML(task);
     const categoryBackground = getCategoryBg(task);
     const priorityIconSrc = getPriorityIcon(task.priority);
-
     document.body.style.overflow = 'hidden';
     popup.innerHTML = getPopupContentHtml(task, key, assignedHTML, subtasksHTML, categoryBackground, priorityIconSrc);
   } else {
@@ -135,7 +126,6 @@ async function openPopup(key) {
         <button class="close-button" onclick="closePopup()">X</button>
       </div>`;
   }
-
   popupContainer.style.display = 'flex';
   document.getElementById('overlay').style.display = 'block';
 }
@@ -204,7 +194,6 @@ async function editPopupTask(key) {
   document.getElementById('overlay').style.display = 'block';
 }
 
-
 /**
  * Returns an HTML <img> element as a string for the given priority icon.
  * If no icon source is provided, returns an empty image element.
@@ -231,7 +220,6 @@ function editTask() {
   if (popupContainer) {
     popupContainer.style.display = 'none';
   }
-
   let editPopup = document.getElementById('edit_popup');
   if (!editPopup) {
     editPopup = document.createElement('div');
@@ -285,7 +273,6 @@ async function deleteTask(taskKey) {
         console.error('taskKey is undefined.');
         return;
       }
-
       await deleteData(`tasks/${taskKey}`);
       closePopup();
       renderCards();
