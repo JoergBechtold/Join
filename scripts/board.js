@@ -81,7 +81,6 @@ function removeHighlight(columnId) {
 async function moveTo(state) {
   const task = await loadData(`${PATH_TO_TASKS}/${currentDraggedElement}`);
   if (!task) return;
-
   task.state = state;
   await updateData(`${PATH_TO_TASKS}/${currentDraggedElement}`, task);
   await renderCards();
@@ -245,7 +244,6 @@ function createProgressBar(key, task) {
     progressBar.style.width = `${percent}%`;
   }, 10); 
   progressContainer.appendChild(progressBar);
-
   const label = document.createElement('span');
   label.id = key + '-progress-label';
   label.className = 'subtask-counter';
@@ -291,7 +289,6 @@ function createAssignedContactsContainer(key) {
 function createAssignedContacts(key, task) {
   const assignedContainer = document.getElementById(key + '-assigned-contacts');
   assignedContainer.innerHTML = '';
-
   const assignedContacts = Array.isArray(task.assigned_to) ? task.assigned_to : [];
   assignedContacts.slice(0, 4).forEach((contact) => {
     const span = document.createElement('span');
@@ -300,7 +297,6 @@ function createAssignedContacts(key, task) {
     span.style.backgroundColor = contact.randomColor;
     assignedContainer.appendChild(span);
   });
-
   if (assignedContacts.length > 4) {
     const extra = document.createElement('span');
     extra.className = 'extra-contacts-span';
@@ -331,13 +327,11 @@ function createPrio(key, task) {
   const container = document.getElementById(key + '-contacts-prio').querySelector('.prio-container');
   const img = document.createElement('img');
   img.className = 'prio-icon';
-
   const prio = task.priority?.toLowerCase();
   if (prio === 'urgent') img.src = 'assets/icons/prio-high.svg';
   else if (prio === 'medium') img.src = 'assets/icons/prio-medium.svg';
   else if (prio === 'low') img.src = 'assets/icons/prio-low.svg';
   else return;
-
   img.alt = `${prio} priority`;
   container.appendChild(img);
 }
@@ -358,13 +352,11 @@ function createCard(key, container, task) {
   createTitle(key, task);
   createDescription(key, task);
   createSubtaskContainer(key);
-
   if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
     createProgressContainer(key);
     createProgressBar(key, task);
     createSubtaskCounter(key, task);
   }
-
   createContactsAndPrioContainer(key);
   createAssignedContactsContainer(key);
   createAssignedContacts(key, task);
@@ -375,7 +367,6 @@ function createCard(key, container, task) {
 async function updateAssignedContactsOnBoard() {
   const tasks = await loadData(PATH_TO_TASKS); 
   const allColumns = document.querySelectorAll('.drag-area');
-  
   allColumns.forEach(col => col.innerHTML = ''); 
   for (const [key, task] of Object.entries(tasks)) {
     const column = document.getElementById(task.state);
@@ -392,7 +383,6 @@ async function processContactDeletion(deleteBtn) {
     console.error('No valid contact to delete.');
     return Promise.resolve(false);
   }
-  
   const success = await confirmAndDeleteContact(contactDiv);
   if (success) {
     await updateAssignedContactsOnBoard(); 
@@ -408,7 +398,6 @@ async function renderCards() {
   const tasks = await loadData(PATH_TO_TASKS);
   const allColumns = document.querySelectorAll('.drag-area');
   allColumns.forEach(col => col.innerHTML = '');
-
   for (const [key, task] of Object.entries(tasks)) {
     const column = document.getElementById(task.state);
     if (column) {
@@ -422,16 +411,13 @@ async function renderCards() {
 async function renderCards() {
   const tasks = await loadData(PATH_TO_TASKS);
   const allColumns = document.querySelectorAll('.drag-area');
-  
   allColumns.forEach(col => col.innerHTML = ''); // Alle vorherigen Karten löschen
-
   for (const [key, task] of Object.entries(tasks)) {
     const column = document.getElementById(task.state);
     if (column) {
       createCard(key, column, task);  // Neue Karten erstellen
     }
   }
-
   updateEmptyColumns();  // Sicherstellen, dass die Platzhalter für leere Spalten aktualisiert werden
 }
 
@@ -446,7 +432,6 @@ function updateEmptyColumns() {
   columns.forEach((column) => {
     const hasTasks = column.querySelector('.todo-card');
     let placeholder = column.querySelector('.empty-task-container');
-
     if (!hasTasks && !placeholder) {
       placeholder = document.createElement('div');
       placeholder.className = 'empty-task-container';
@@ -472,11 +457,9 @@ async function searchCards() {
     renderCards();
     return;
   }
-
   const tasks = await loadData(PATH_TO_TASKS);
   const allColumns = document.querySelectorAll('.drag-area');
   allColumns.forEach((column) => (column.innerHTML = ''));
-
   Object.entries(tasks).forEach(([key, task]) => {
     if (task.title.toLowerCase().includes(searchQuery)) {
       const column = document.getElementById(task.state);
@@ -494,11 +477,9 @@ async function searchCards() {
 function openForm(formId) {
   const modal = document.getElementById(formId);
   modal.classList.add('show');
-
   const overlay = document.getElementById('overlay');
   overlay.style.display = 'flex';
   document.body.classList.add('modal-open');
-
   overlay.onclick = function (event) {
     if (event.target === overlay) {
       closeBoardAddTask();
@@ -526,11 +507,9 @@ function closeForm(formId) {
 function openBoardAddTaskForm() {
   const boardAddTaskContainer = document.getElementById('board_add_task');
   boardAddTaskContainer.innerHTML = '';
-
   const template = document.getElementById('addTaskTemplate');
   const clone = template.content.cloneNode(true);
   boardAddTaskContainer.appendChild(clone);
-
   openForm('board_add_task');
 }
 
