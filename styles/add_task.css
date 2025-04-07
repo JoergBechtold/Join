@@ -130,15 +130,6 @@
   gap: 10px;
 }
 
-.close-and-check {
-  position: absolute;
-  top: 50%;
-  right: 0px;
-  padding-right: 21px;
-  transform: translateY(-50%);
-  display: flex;
-}
-
 .subtask-item {
   display: flex;
   justify-content: space-between;
@@ -203,10 +194,6 @@
   max-height: 190px;
   overflow-y: auto;
   scrollbar-gutter: stable;
-}
-
-.contacts-custom-options::-webkit-scrollbar {
-  width: var(--scollbar-width-thin);
 }
 
 .custom-select-option {
@@ -386,7 +373,6 @@
   .main-add-task {
     margin-left: 80px;
   }
-
 
   .form-add-task{
   height: calc(100% - 250px);
