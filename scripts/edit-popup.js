@@ -14,10 +14,8 @@ async function editTask(key) {
   editPopupTaskKey = key;
   document.getElementById('popup_container').style.display = 'none';
   document.getElementById('overlay').style.display = 'block';
-
   const task = await loadData(`tasks/${key}`);
   if (!task) return;
-
   renderEditPreview(task);
   loadEditFormData(task); 
   document.getElementById('edit_popup').style.display = 'flex';
@@ -32,12 +30,10 @@ async function editTask(key) {
 function renderEditPreview(task) {
   const container = document.getElementById('edit_preview_info');
   if (!container) return;
-
   const assignedHTML = getAssignedHTML(task);
   const subtasksHTML = getSubtasksHTML(task);
   const categoryBg = getCategoryBg(task);
   const priorityIcon = getPriorityIcon(task.priority);
-
   container.innerHTML = generateEditPreviewHTML(task, assignedHTML, subtasksHTML, categoryBg, priorityIcon);
 }
 
@@ -51,21 +47,17 @@ function loadEditFormData(task) {
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
-
   if (task.priority) {
     const prio = task.priority.toLowerCase();
     if (['urgent', 'medium', 'low'].includes(prio)) {
       setEditPriority(`edit_${prio}_button`);
     }
   }
-
   if (task.category) {
     document.getElementById('edit_selected_option').textContent = task.category;
   }
-
   editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
   updateEditSubtaskDisplay();
-
   selectedEditContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
   renderEditSelectedContacts();
 }
@@ -79,23 +71,19 @@ function loadEditFormData(task) {
 async function loadEditForm(key) {
   const task = await loadData(`tasks/${key}`);
   if (!task) return;
-
   renderEditPreview(task);
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
-
   if (task.priority) {
     const prio = task.priority.toLowerCase();
     if (['urgent', 'medium', 'low'].includes(prio)) {
       setEditPriority(`edit_${prio}_button`);
     }
   }
-
   if (task.category) {
     document.getElementById('edit_selected_option').textContent = task.category;
   }
-
   editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
   updateEditSubtaskDisplay();
   selectedEditContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
@@ -178,14 +166,11 @@ function getEditPriority() {
  */
 async function submitEditTask() {
   if (!validateEditInputs()) return;
-
   const task = await loadData(`tasks/${editPopupTaskKey}`);
   if (!task) return;
-
   applyEditedTaskData(task);
   await updateData(`tasks/${editPopupTaskKey}`, task);
   closeEditPopup();
-
   const updatedTask = await loadData(`tasks/${editPopupTaskKey}`);
   if (updatedTask) {
     updateCardInBoard(editPopupTaskKey, updatedTask);
@@ -219,7 +204,6 @@ function applyEditedTaskData(task) {
 function checkSubtasks() {
   const elements = document.querySelectorAll('#edit_subtask_enum .subtask-text');
   let subtasks = [];
-
   elements.forEach(el => {
     const text = el.textContent.replace('• ', '').trim();
     if (text) {
@@ -239,12 +223,10 @@ function checkSubtasks() {
 function checkAssignedTo() {
   const container = document.getElementById('edit_selected_contact_circles');
   const circles = container.querySelectorAll('.circle');
-
   const contacts = Array.from(circles).map(circle => ({
     initials: circle.textContent.trim(),
     randomColor: circle.style.backgroundColor
   }));
-
   return contacts;
 }
 
@@ -258,22 +240,18 @@ function validateEditInputs() {
   const title = document.getElementById('edit_title').value.trim();
   const due_date = document.getElementById('edit_due_date').value.trim();
   const category = document.getElementById('edit_selected_option').textContent.trim();
-
   if (!title) {
     document.getElementById('edit_error_title').classList.remove('d-none');
     return false;
   }
-  
   if (!due_date) {
     document.getElementById('edit_error_date').classList.remove('d-none');
     return false;
   }
-
   if (category === 'Select task category') {
     document.getElementById('edit_error_category').classList.remove('d-none');
     return false;
   }
-
   return true;
 }
 
