@@ -1,18 +1,9 @@
 let randomColorsJson = null;
 
-// const portraitOverlay = document.getElementById('portrait_overlay');
-// window.addEventListener('orientationchange', function() {
-//   if (screen.orientation.type.startsWith('portrait')) {
-//     portraitOverlay.style.display = 'none'; 
-//   } else {
-//     portraitOverlay.style.display = 'flex';
-//   }
-// });
-
 async function startProcess() {
+  // loadHeaderAndInitialize()
   initBoard()
   await initializeRandomColors();
-  
 }
 
 async function initializeRandomColors() {
@@ -161,8 +152,6 @@ function showLoggedInLinks() {
   Array.from(mobilViewLinksContainer).forEach((element) => {
     element.classList.add('d-none');
   });
-
-  
 }
 
 async function loadUserData() {
