@@ -59,8 +59,9 @@
   transform: translate(-50%, -50%);
   background: #fff;
   max-width: 525px;
+  width:  clamp(300px, 255px + 14.0625vw, 525px);
   max-height: 780px;
-  width: 100%;
+  height: clamp(560px, 516px + 13.75vw, 780px);
   z-index: 101;
   flex-direction: column;
   display: none;
@@ -104,8 +105,6 @@
 }
 
 .tag-container {
-  width: 164px;
-  height: 36px;
   border-radius: 8px;
   padding-top: 4px;
   padding-right: 24px;
@@ -254,4 +253,10 @@
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+@media only screen and (max-width: 360px){
+  .popup-container{
+    transform: translate(-50%, -56%);
+  }
 }
