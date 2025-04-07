@@ -21,6 +21,34 @@ fetch('header_sidebar.html')
   })
   .catch(error => console.error('Error loading header', error));
 
+
+// async function loadHeaderAndInitialize() {
+//   let headerContainer = document.getElementById('header_container');
+//   if (!headerContainer) {
+//     headerContainer = document.createElement('div');
+//     headerContainer.id = 'header_container';
+//     document.body.insertBefore(headerContainer, document.body.firstChild);
+//   }
+
+//   try {
+//     const response = await fetch('header_sidebar.html');
+//     if (!response.ok) {
+//       throw new Error(`Error retrieving header ${response.status}`);
+//     }
+//     const data = await response.text();
+//     headerContainer.innerHTML = data;
+//     const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
+//     ifButtonLinkSidebar(buttonLinksSidebar); 
+//     loadInitialsUserIcon();
+//     ifActivePage();
+
+//   } catch (error) {
+//     console.error('Error loading header', error);
+//   }
+// }
+
+
+
 function ifButtonLinkSidebar(buttonLinksSidebar) {
   if (buttonLinksSidebar === 'true') {
     showLoggedInLinks(); 

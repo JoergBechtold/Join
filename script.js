@@ -2,21 +2,12 @@ let randomColorsJson = null;
 
 // const portraitOverlay = document.getElementById('portrait_overlay');
 // window.addEventListener('orientationchange', function() {
-//   if (screen.orientation.type.startsWith('landscape')) {
-//     portraitOverlay.style.display = 'flex'; 
+//   if (screen.orientation.type.startsWith('portrait')) {
+//     portraitOverlay.style.display = 'none'; 
 //   } else {
-//     portraitOverlay.style.display = 'none';
+//     portraitOverlay.style.display = 'flex';
 //   }
 // });
-
-const portraitOverlay = document.getElementById('portrait_overlay');
-window.addEventListener('orientationchange', function() {
-  if (screen.orientation.type.startsWith('portrait')) {
-    portraitOverlay.style.display = 'none'; 
-  } else {
-    portraitOverlay.style.display = 'flex';
-  }
-});
 
 async function startProcess() {
   initBoard()
@@ -208,6 +199,7 @@ function showPupupOverlaySignUp() {
 
 async function fetchAddTask(parameter = false) {
   try {
+    // await loadHeaderAndInitialize();
     await showLoggedInLinks(); 
     fetch('assets/templates/template_add_task.html')
       .then((response) => {
