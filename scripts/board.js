@@ -23,7 +23,7 @@ async function initBoard() {
  */
 function startDragging(event) {
   currentDraggedElement = event.target.id;
-  // event.target.classList.add('tilted');
+  event.target.classList.add('tilted');
 }
 
 /**
