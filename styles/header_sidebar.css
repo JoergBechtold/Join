@@ -285,13 +285,15 @@
     display: none;
   }
 
-  
+  .header{
+    height: 80px;
+  }
 
- .submenu{
-   display: flex;
-   transform: translate(250px);
-   transition: transform 0.3s ease-in-out;
- }
+  .submenu{
+    display: flex;
+    transform: translate(250px);
+    transition: transform 0.3s ease-in-out;
+  }
  
  .submenu-slide-in{
    transform: translate(0);

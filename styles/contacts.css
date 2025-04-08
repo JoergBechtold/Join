@@ -596,6 +596,7 @@ color: var(--blue);
   .contacts-container{
     padding-left: 0px;
     height: 100%;
+    padding-top: 80px;
   }
 
   .sidebarContact{
