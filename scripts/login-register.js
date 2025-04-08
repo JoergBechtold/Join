@@ -131,8 +131,6 @@ async function handleSignUp() {
     const randomColor = await getRandomColor();
     const initials = firstName[0].toUpperCase() + lastName[0].toUpperCase();
 
-    
-
     if (!checkPasswordConfirm(password, confirmPassword)) {
       return;
     }
@@ -220,8 +218,6 @@ function passwordMatch(password, confirmPassword) {
 }
 
 async function checkUserIsPresent(parameter = false) {
-  const { passwordLogInRef, emailLogInRef, emailSignUpRef, errorMessageEmailRef } = getIdRefs();
-  const { email, emailLogIn, passwordLogIn } = setIdRefValueTrim();
   try {
     const users = await loadData('/user');
 
@@ -231,26 +227,8 @@ async function checkUserIsPresent(parameter = false) {
       for (let index = 0; index < userIds.length; index++) {
         const userId = userIds[index];
         const user = users[userId];
-
-        if (parameter) {
-          if (user.email === email) {
-            errorMessageEmailRef.classList.add('d-flex');
-            emailSignUpRef.classList.add('not-valide-error');
-            return true;
-          }
-        }
-
-        if (!parameter) {
-          if (user.email === emailLogIn && user.password === passwordLogIn) {
-            emailLogInRef.value = '';
-            passwordLogInRef.value = '';
-            sessionStorage.setItem('loggedInUserId', userId);
-            await loadUserData();
-            loginSuccessful(); 
-            
-            return true;
-          }
-        }
+        ifParameterTrue(parameter, user);
+        await ifParameterFalse(parameter, user, userId);
       }
       showLoginError();
       return false;
@@ -258,6 +236,35 @@ async function checkUserIsPresent(parameter = false) {
   } catch (error) {
     console.error('rror verifying user', error);
     return false;
+  }
+}
+
+function ifParameterTrue(parameter, user){
+  const { email } = setIdRefValueTrim();
+  const { emailSignUpRef, errorMessageEmailRef } = getIdRefs();
+
+  if (parameter) {
+    if (user.email === email) {
+      errorMessageEmailRef.classList.add('d-flex');
+      emailSignUpRef.classList.add('not-valide-error');
+      return true;
+    }
+  }
+}
+
+async function ifParameterFalse(parameter, user, userId){
+  const { emailLogIn, passwordLogIn } = setIdRefValueTrim();
+  const { passwordLogInRef, emailLogInRef } = getIdRefs();
+
+  if (!parameter) {
+    if (user.email === emailLogIn && user.password === passwordLogIn) {
+      emailLogInRef.value = '';
+      passwordLogInRef.value = '';
+      sessionStorage.setItem('loggedInUserId', userId);
+      await loadUserData();
+      loginSuccessful(); 
+      return true;
+    }
   }
 }
 
