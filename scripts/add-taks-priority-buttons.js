@@ -64,7 +64,7 @@ function updateButtonStyle(buttonType) {
   };
   const [className, iconType] = prioStyles[buttonType];
   activeButton.classList.add(className);
-  document.getElementById(activeButton.id + '_img').src = `../assets/icons/prio-${iconType}-event.svg`;
+  document.getElementById(activeButton.id + '_img').src = `assets/icons/prio-${iconType}-event.svg`;
 }
 
 /**
