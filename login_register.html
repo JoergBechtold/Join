@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/login_register.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="checkAndShowAnimation()" class="body-login-register">
+  <body id="body_login_register" onload="checkAndShowAnimation()" class="body-login-register">
 
     <!-- no landscape mode allowed overlay -->
     <div class="portrait-overlay" id="portrait_overlay">
@@ -25,9 +25,9 @@
     </div>
 
     <!-- animations logo -->
-    <div class="animation-join-logo " id="animation_join_logo"> 
-      <img class="logo-white" src="assets/img/loginLogoResponsive.svg" alt="Join Logo Mobile View" />
-      <img class="logo-gray" src="assets/img/loginLogo.svg" alt="Join Logo" />
+    <div class="animation-join-logo d-none " id="animation_join_logo"> 
+      <img id="logo_white" class="logo-white" src="assets/img/loginLogoResponsive.svg" alt="Join Logo Mobile View" />
+      <img id="logo_gray" class="logo-gray" src="assets/img/loginLogo.svg" alt="Join Logo" />
     </div>
 
     <div class="animation-finished" id="animation_finished">

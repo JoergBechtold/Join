@@ -51,29 +51,64 @@ function setIdRefValueTrim() {
 
 function checkAndShowAnimation() {
   const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
+  const root = document.documentElement;
+  let animationValue;
+
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    animationValue = window.getComputedStyle(root).getPropertyValue('--animation-logo-overlay-responsive');
+  } else {
+    animationValue = window.getComputedStyle(root).getPropertyValue('--animation-logo-overlay');
+  }
+
   animationJoinLogoRef.classList.remove('d-none');
 
   if (sessionStorage.getItem('animationShown')) {
-    // animationFinishedRef.classList.add('d-flex');
-    // animationJoinLogoRef.classList.add('d-none');
+    animationFinishedRef.classList.add('d-flex');
+    animationJoinLogoRef.classList.add('d-none');
     removeAnimation();
     return;
   }
 
-  // setTimeout(function () {
-  //   animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
-  //   addFadeInAnimation(loginContainerRef);
-  //   addFadeInAnimation(navLogInRef);
-  //   addFadeInAnimation(footerLoginRegisterRef);
-  //   setTimeout(function () {
-  //     animationJoinLogoRef.classList.add('d-none');
-  //     animationFinishedRef.classList.add('d-flex');
-  //   }, 2000);
-  // }, 500);
+  setTimeout(function () {
+    animationJoinLogoRef.style.animation = animationValue;
+    addFadeInAnimation(loginContainerRef);
+    addFadeInAnimation(navLogInRef);
+    addFadeInAnimation(footerLoginRegisterRef);
+    setTimeout(function () {
+      animationJoinLogoRef.classList.add('d-none');
+      animationFinishedRef.classList.add('d-flex');
+    }, 2000);
+  }, 500);
 
   sessionStorage.setItem('animationShown', 'true');
   sessionStorage.getItem('linksSidebarBoolienKey');
 }
+
+// function checkAndShowAnimation() {
+//   const {animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
+//   animationJoinLogoRef.classList.remove('d-none');
+
+//   if (sessionStorage.getItem('animationShown')) {
+//     animationFinishedRef.classList.add('d-flex');
+//     animationJoinLogoRef.classList.add('d-none');
+//     removeAnimation();
+//     return;
+//   }
+
+//   setTimeout(function () {
+//     animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
+//     addFadeInAnimation(loginContainerRef);
+//     addFadeInAnimation(navLogInRef);
+//     addFadeInAnimation(footerLoginRegisterRef);
+//     setTimeout(function () {
+//       animationJoinLogoRef.classList.add('d-none');
+//       animationFinishedRef.classList.add('d-flex');
+//     }, 2000);
+//   }, 500);
+
+//   sessionStorage.setItem('animationShown', 'true');
+//   sessionStorage.getItem('linksSidebarBoolienKey');
+// }
 
 function addFadeInAnimation(element) {
   element.style.animation = 'fadeIn 0.8s ease-in-out forwards 0.6s';

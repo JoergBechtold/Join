@@ -497,7 +497,6 @@ button[disabled]:hover {
 .arrow-left-sign-up {
   position: absolute;
   top: 60px;
-  /* left: 80px; */
   left: clamp(35px, 26px + 2.8125vw, 80px);
 }
 
@@ -589,10 +588,10 @@ button[disabled]:hover {
   }
 }
 
-@media only screen and (max-width: 360px){
+@media only screen and (max-width: 375px){
   .arrow-left-sign-up {
     position: absolute;
-    top: 18px;
+    top: 20px;
   }
 
   .arrow-left-sign-up {

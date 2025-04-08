@@ -3,8 +3,6 @@
   height: 100dvh;
   width: 100%;
   background-color: var(--light-gray-bg);
-  /* background-color: var(--primary-color-gray); */
-  /* animation: backgroundTransition 2s ease-in-out forwards; */
 
   display: flex;
   flex-direction: column;
@@ -14,9 +12,6 @@
 }
 
 .animation-join-logo {
-  /* width: 274px; */
-  /* width: 250px; */
-  /* height: 335px; */
   height: clamp(122px, 79.4px + 13.3125vw, 335px);
   z-index: 2;
   display: flex;
@@ -24,14 +19,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* transition: var(--transition-animations-overlay); */
+  transition: var(--transition-animations-overlay);
   animation: var(--animation-logo-overlay);
 }
 
-.animation-join-logo img {
+
+/* .animation-join-logo img {
   display: block;
   width: 100%;
-}
+} */
 
 @keyframes logoAnimation {
   0% {
@@ -94,7 +90,7 @@
 }
 
 .login-container {
-  padding: 48px 20px 48px 20px;
+  padding: clamp(20px, 14.4px + 1.75vw, 48px) 20px clamp(20px, 14.4px + 1.75vw, 48px) 20px;
   gap: 20px;
   max-width: 652px;
   width: clamp(300px, 229.6px + 22vw, 652px);
@@ -307,24 +303,15 @@
   scale: var(--scale-hover);
 }
 
+.logo-white{
+  opacity: 0;
+}
+
 
 @media only screen and (max-width: 922px){ 
 }
 
 @media only screen and (max-width: 768px){
-  
-  .body-login-register {
-    /* background-color: var(--primary-color-gray); */
-    animation: backgroundTransition 2s ease-in-out forwards;
-  }
-
-
-  .animation-join-logo {
-    transition: var(--transition-animations-overlay);
-  }
-
-
-
   .animation-join-logo img {
   position: absolute;
   width: 100%;
@@ -405,7 +392,7 @@
   }
 }
 
-@media only screen and (max-width: 360px){
+@media only screen and (max-width: 376px){
   .login-register-main{
     transform: translateY(-40px);
   }
