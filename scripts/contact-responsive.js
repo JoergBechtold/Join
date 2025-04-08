@@ -3,7 +3,7 @@ function showContactDetail() {
         document.querySelector('.main-content-responsive').style.display = 'flex';
         document.querySelector('.contact-list').style.display = 'none';
         document.querySelector('.sidebarContact').style.display = 'none';
-        document.querySelector('.contact-detail').style.display = 'flex';
+        // document.querySelector('.contact-detail').style.display = 'flex';
       }
   }
 
