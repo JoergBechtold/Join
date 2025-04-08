@@ -58,7 +58,7 @@ function updateEditButtonStyle(buttonType) {
   activeEditButton.classList.add(className);
   const icon = document.getElementById(`edit_${buttonType}_img`);
   if (icon) {
-    icon.src = `/assets/icons/prio-${iconType}-event.svg`;
+    icon.src = `assets/icons/prio-${iconType}-event.svg`;
   }
 }
 

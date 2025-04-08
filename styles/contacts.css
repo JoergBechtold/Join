@@ -776,7 +776,7 @@ color: var(--blue);
   }
 
   .close-btn img {
-    content: url('/assets/icons/Close.svg');
+    content: url('../assets/icons/Close.svg');
   }
 }
 
@@ -865,7 +865,7 @@ color: var(--blue);
 }
 
 .close-btn img {
-  content: url('/assets/icons/Close.svg');
+  content: url('../assets/icons/Close.svg');
 }
 }
 
