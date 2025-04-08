@@ -1,3 +1,10 @@
+
+/**
+ * 
+ * @description Retrieves references to various DOM elements by their IDs and returns them as an object.
+ * @returns {object} An object containing references to various DOM elements. The keys of the object correspond to the reference names (e.g., `animationJoinLogoRef`), and the values are the corresponding DOM elements.
+ * 
+ */
 function getIdRefs() {
   return {
     animationJoinLogoRef: document.getElementById('animation_join_logo'),
@@ -24,6 +31,13 @@ function getIdRefs() {
   };
 }
 
+/**
+ *
+ * @description Retrieves the trimmed values from specific input fields in the DOM and returns them as an object.
+ * The `trim()` method is used to remove whitespace from both ends of the input values.
+ * @returns {object} An object containing the trimmed values of various input fields.
+ * 
+ */
 function setIdRefValueTrim() {
   return {
     name: document.getElementById('name_sign_up').value.trim(),
@@ -40,22 +54,22 @@ function checkAndShowAnimation() {
   animationJoinLogoRef.classList.remove('d-none');
 
   if (sessionStorage.getItem('animationShown')) {
-    animationFinishedRef.classList.add('d-flex');
-    animationJoinLogoRef.classList.add('d-none');
+    // animationFinishedRef.classList.add('d-flex');
+    // animationJoinLogoRef.classList.add('d-none');
     removeAnimation();
     return;
   }
 
-  setTimeout(function () {
-    animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
-    addFadeInAnimation(loginContainerRef);
-    addFadeInAnimation(navLogInRef);
-    addFadeInAnimation(footerLoginRegisterRef);
-    setTimeout(function () {
-      animationJoinLogoRef.classList.add('d-none');
-      animationFinishedRef.classList.add('d-flex');
-    }, 2000);
-  }, 500);
+  // setTimeout(function () {
+  //   animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
+  //   addFadeInAnimation(loginContainerRef);
+  //   addFadeInAnimation(navLogInRef);
+  //   addFadeInAnimation(footerLoginRegisterRef);
+  //   setTimeout(function () {
+  //     animationJoinLogoRef.classList.add('d-none');
+  //     animationFinishedRef.classList.add('d-flex');
+  //   }, 2000);
+  // }, 500);
 
   sessionStorage.setItem('animationShown', 'true');
   sessionStorage.getItem('linksSidebarBoolienKey');
@@ -239,6 +253,15 @@ async function checkUserIsPresent(parameter = false) {
   }
 }
 
+/**
+ * 
+ * @description Checks if a given parameter is true. If it is, it compares the provided user's email with the trimmed value from the signup email input field.
+ * If the emails match, it displays an error message and visually indicates an error on the email input field.
+ * @param {*} parameter - The parameter to check for truthiness.
+ * @param {object} user - An object containing the user's email property.
+ * @returns {boolean|void} - Returns `true` if the parameter is true and the emails match. Returns `void` otherwise.
+ * 
+ */
 function ifParameterTrue(parameter, user){
   const { email } = setIdRefValueTrim();
   const { emailSignUpRef, errorMessageEmailRef } = getIdRefs();
@@ -252,6 +275,16 @@ function ifParameterTrue(parameter, user){
   }
 }
 
+/**
+ * 
+ * @description Checks if a given parameter is false. If it is, it compares the provided user's email and password with the values in the login input fields.
+ * If they match, it clears the login input fields, stores the user ID in sessionStorage, loads user data, and indicates a successful login.
+ * @param {*} parameter - The parameter to check for falsiness.
+ * @param {object} user - An object containing the user's email and password properties.
+ * @param {string} userId - The ID of the user to store in sessionStorage upon successful login.
+ * @returns {Promise<boolean|void>} - Returns `true` if the parameter is false and the login is successful. Returns `void` otherwise.
+ * 
+ */
 async function ifParameterFalse(parameter, user, userId){
   const { emailLogIn, passwordLogIn } = setIdRefValueTrim();
   const { passwordLogInRef, emailLogInRef } = getIdRefs();
@@ -268,6 +301,12 @@ async function ifParameterFalse(parameter, user, userId){
   }
 }
 
+/**
+ * 
+ * @description Retrieves references to the login error message, email input, and password input elements using `getIdRefs()`.
+ * It then adds the 'd-flex' class to the error message to make it visible and the 'not-valide-error' class to both the email and password input fields to visually indicate an error.
+ * 
+ */
 function showLoginError() {
   const { errorMessageLogInRef, passwordLogInRef, emailLogInRef } = getIdRefs();
   errorMessageLogInRef.classList.add('d-flex');
