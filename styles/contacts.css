@@ -587,7 +587,6 @@ color: var(--blue);
 
 
 @media screen and (max-width: 768px) {
-
   .contact-list{
     display: flex;
     flex-direction: column;

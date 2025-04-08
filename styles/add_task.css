@@ -371,7 +371,7 @@
 
 @media screen and (max-width: 768px) {
   .main-add-task {
-    margin-left: 80px;
+    margin-left: var(--margin-left-main-responsive);
   }
 
   .form-add-task{

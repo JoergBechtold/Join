@@ -374,6 +374,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .main-board{
+    margin-left: var(--margin-left-main-responsive);
+  }
+}
+
 @media screen and (max-width: 360px)  {
   .main-board {
     margin-left: 0;

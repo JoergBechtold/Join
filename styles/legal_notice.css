@@ -64,6 +64,10 @@
 }
 
 @media (max-width: 768px) {
+  .main-legal{
+    margin-left: var(--margin-left-main-responsive);
+  }
+
   h1 {
     font-size: 24px;
   }
