@@ -340,3 +340,11 @@
   text-align: center;
   color: #2a3647;
 }
+
+
+@media screen and (max-width: 992px)  {
+  .main-summary {
+    margin-left: 230px;
+    padding-right: 80px;
+  }
+}

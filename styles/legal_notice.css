@@ -1,33 +1,32 @@
-.legal {
+.main-legal {
   margin-right: 80px;
-
   position: absolute;
-  top: 190px;
-  left: 328px;
   padding-bottom: 90px;
+  margin-left: var(--margin-left-main);
+  padding-top: var(--padding-top-main);
 }
 
-.legal h1 {
+.main-legal h1 {
   font-size: var(--font-size-47-61);
   font-weight: var(--font-weight-700);
 }
 
-.legal p {
+.main-legal p {
   line-height: 1.6;
   font-size: 16px;
   margin: 10px 0;
 }
 
-.legal strong {
+.main-legal strong {
   color: #004080;
 }
 
-.legal a {
+.main-legal a {
   color: #0073e6;
   text-decoration: none;
 }
 
-.legal a:hover {
+.main-legal a:hover {
   text-decoration: underline;
 }
 
@@ -57,6 +56,13 @@
   margin-right: 10px;
 }
 
+@media screen and (max-width: 992px)  {
+  .main-legal {
+    margin-left: 230px;
+    padding-right: 80px;
+  }
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 24px;
@@ -71,3 +77,5 @@
     font-size: 14px;
   }
 }
+
+

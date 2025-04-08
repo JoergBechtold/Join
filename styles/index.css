@@ -367,7 +367,14 @@
   
 }
 
-@media screen and (max-width: 320px)  {
+@media screen and (max-width: 992px)  {
+  .main-board {
+    margin-left: 230px;
+    padding-right: 80px;
+  }
+}
+
+@media screen and (max-width: 360px)  {
   .main-board {
     margin-left: 0;
   }
