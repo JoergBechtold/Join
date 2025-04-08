@@ -275,10 +275,10 @@ function toggleEditCategoryDropdown() {
   const arrow = document.getElementById('edit_select_arrow');
   if (options.classList.contains('d-none')) {
     options.classList.remove('d-none');
-    arrow.src = '/assets/icons/arrow_drop_down_up.svg';
+    arrow.src = 'assets/icons/arrow_drop_down_up.svg';
   } else {
     options.classList.add('d-none');
-    arrow.src = '/assets/icons/arrow_drop_down.svg';
+    arrow.src = 'assets/icons/arrow_drop_down.svg';
   }
 }
 

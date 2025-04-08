@@ -160,15 +160,15 @@
                   <div class="prio-buttons">
                     <button type="button" class="prio" id="edit_urgent_button" onclick="setEditPriority('edit_urgent_button')">
                       Urgent
-                      <img src="/assets/icons/prio-high.svg" class="prio-icon" id="edit_urgent_img" />
+                      <img src="assets/icons/prio-high.svg" class="prio-icon" id="edit_urgent_img" />
                     </button>
                     <button type="button" class="prio" id="edit_medium_button" onclick="setEditPriority('edit_medium_button')">
                       Medium
-                      <img src="/assets/icons/prio-medium.svg" class="prio-icon" id="edit_medium_img" />
+                      <img src="assets/icons/prio-medium.svg" class="prio-icon" id="edit_medium_img" />
                     </button>
                     <button type="button" class="prio" id="edit_low_button" onclick="setEditPriority('edit_low_button')">
                       Low
-                      <img src="/assets/icons/prio-low.svg" class="prio-icon" id="edit_low_img" />
+                      <img src="assets/icons/prio-low.svg" class="prio-icon" id="edit_low_img" />
                     </button>
                   </div>
                 </div>
@@ -178,7 +178,7 @@
                   <div class="custom-select-container">
                     <div class="custom-select" id="edit_custom_select" onclick="toggleEditContactsDropdown()">
                       <input class="custom-input" type="text" id="edit_selected_contact" placeholder="Select contacts to assign" oninput="filterEditContacts()" />
-                      <img class="select-icon" id="edit_contacts_arrow" src="/assets/icons/arrow_drop_down.svg" />
+                      <img class="select-icon" id="edit_contacts_arrow" src="assets/icons/arrow_drop_down.svg" />
                     </div>
                     <div class="contacts-custom-options d-none" id="edit_contacts_options"></div>
                     <div class="show-selected-contacts" id="edit_selected_contact_circles"></div>
@@ -190,7 +190,7 @@
                   <div class="custom-select-container">
                     <div class="custom-select" id="edit_custom_category" onclick="toggleEditCategoryDropdown()">
                       <span id="edit_selected_option">Select task category</span>
-                      <img class="select-icon" id="edit_select_arrow" src="/assets/icons/arrow_drop_down.svg" />
+                      <img class="select-icon" id="edit_select_arrow" src="assets/icons/arrow_drop_down.svg" />
                     </div>
                     <div class="custom-options d-none" id="edit_options_container">
                       <div class="custom-select-option" onclick="selectEditOption('Technical Task')">Technical Task</div>
@@ -204,7 +204,7 @@
                   <label><span class="label-text">Subtasks</span></label>
                   <div class="input-container">
                     <input id="edit_subtask_input" class="input-base" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskKey(event)" />
-                    <img id="edit_add_subtask_icon" class="input-base-icon" src="/assets/icons/add.svg" onclick="handleEditSubtaskAdd()" />
+                    <img id="edit_add_subtask_icon" class="input-base-icon" src="assets/icons/add.svg" onclick="handleEditSubtaskAdd()" />
                   </div>
                   <div class="subtask-enum" id="edit_subtask_enum"></div>
                 </div>

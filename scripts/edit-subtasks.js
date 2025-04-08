@@ -42,9 +42,9 @@ function editSubtaskItem(subtask, index) {
     <div class="subtask-item">
       <span class="subtask-text" id="subtask_text_${index}" ondblclick="editExistingSubtask(${index})">• ${subtask}</span>
       <div class="subtask-icons">
-        <img src="../assets/icons/edit.svg" class="subtask-icon edit-icon" onclick="editExistingSubtask(${index})">
+        <img src="assets/icons/edit.svg" class="subtask-icon edit-icon" onclick="editExistingSubtask(${index})">
         <div class="vertical-line-subtask-dark"></div>
-        <img src="../assets/icons/paperbasketdelet.svg" class="subtask-icon delete-icon" onclick="deleteEditSubtask(${index})">
+        <img src="assets/icons/paperbasketdelet.svg" class="subtask-icon delete-icon" onclick="deleteEditSubtask(${index})">
       </div>
     </div>
   `;
