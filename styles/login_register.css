@@ -3,13 +3,37 @@
   height: 100dvh;
   width: 100%;
   background-color: var(--light-gray-bg);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
+
+.animations-logo-overlay {
+  height: 100dvh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent; 
+  z-index: 999; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .animation-join-logo {
+  height: clamp(122px, 79.4px + 13.3125vw, 335px);
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition-animations-overlay);
+  
+} */
 
 .animation-join-logo {
   height: clamp(122px, 79.4px + 13.3125vw, 335px);
@@ -23,6 +47,21 @@
   animation: var(--animation-logo-overlay);
 }
 
+/* .animation-join-logo img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  opacity: 0;
+  animation-fill-mode: forwards;
+} */
+
+.logo-white {
+  display: none;
+}
+
 
 /* .animation-join-logo img {
   display: block;
@@ -34,7 +73,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  
+    /* width: auto; 
+    height: clamp(122px, 79.4px + 13.3125vw, 335px);  */
   }
 
   100% {
@@ -303,15 +343,18 @@
   scale: var(--scale-hover);
 }
 
-.logo-white{
-  opacity: 0;
-}
-
-
 @media only screen and (max-width: 922px){ 
 }
 
 @media only screen and (max-width: 768px){
+  .body-login-register {
+    background-color: var(--light-gray-bg); /* Standardhintergrund für kleinere Bildschirme beibehalten */
+  }
+
+  .animations-logo-overlay {
+    background-color: var(--primary-color-gray); /* Dunkelgrauer Hintergrund während der Animation */
+  }
+
   .animation-join-logo img {
   position: absolute;
   width: 100%;
@@ -324,18 +367,61 @@
 }
 
 .logo-white {
-  animation: fadeOutLogo 2s ease-in-out forwards;
-  z-index: 2;
-  opacity: 0;
+  display: block; /* Macht das weiße Logo standardmäßig sichtbar */
+  animation: fadeOutScaleLogo 1.5s ease-in-out forwards; /* Animation für das Ausblenden und Verkleinern */
+  z-index: 2; /* Über dem grauen Logo */
+  opacity: 1; /* Anfangs sichtbar */
 }
 
 .logo-gray {
+  animation: fadeInScaleLogo 1.5s ease-in-out forwards 0.75s; /* Animation für das Einblenden und Verkleinern mit Verzögerung */
+  z-index: 1; /* Unter dem weißen Logo */
+  opacity: 0; /* Anfangs unsichtbar */
+}
+
+/* .logo-white {
+  animation: fadeOutLogo 2s ease-in-out forwards;
+  z-index: 2;
+  opacity: 0;
+} */
+
+/* .logo-gray {
   animation: fadeInLogo 2s ease-in-out forwards;
   z-index: 1;
   opacity: 1;
+} */
+
+@keyframes fadeOutScaleLogo {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Startposition und Größe */
+  }
+  50% {
+    opacity: 0; /* Halbwegs ausgeblendet */
+    transform: translate(-50%, -50%) scale(0.8); /* Leicht verkleinert */
+  }
+  100% {
+    opacity: 0;
+    transform: translate(clamp(15px, 6px + 2.8125vw, 60px), clamp(15px, 6px + 2.8125vw, 60px)) scale(0.3); /* Endposition und Größe (ungefähre Anpassung an logoAnimation) */
+  }
 }
 
-@keyframes fadeOutLogo {
+@keyframes fadeInScaleLogo {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2); /* Startposition und leicht vergrößert */
+  }
+  50% {
+    opacity: 1; /* Halbwegs eingeblendet */
+    transform: translate(-50%, -50%) scale(1); /* Normale Größe */
+  }
+  100% {
+    opacity: 1;
+    transform: translate(clamp(15px, 6px + 2.8125vw, 60px), clamp(15px, 6px + 2.8125vw, 60px)) scale(0.3); /* Endposition und Größe (ungefähre Anpassung an logoAnimation) */
+  }
+}
+
+/* @keyframes fadeOutLogo {
   0% {
     opacity: 1;
   }
@@ -381,7 +467,7 @@
   100% {
     opacity: 1;
   }
-}
+} */
 }
 
 @media only screen and (max-width: 600px){

@@ -7,6 +7,8 @@
  */
 function getIdRefs() {
   return {
+    bodyLoginRegisterRef: document.getElementById('body_login_register'),
+    animationsLogoOverlayRef: document.getElementById('animations_logo_overlay'),
     animationJoinLogoRef: document.getElementById('animation_join_logo'),
     animationFinishedRef: document.getElementById('animation_finished'),
     navLogInRef: document.getElementById('nav_log_in'),
@@ -28,6 +30,8 @@ function getIdRefs() {
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
     errorMessageEmailRef: document.getElementById('error_message_email'),
     popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
+    logoWhiteRef: document.getElementById('logo_white'), 
+    logoGrayRef: document.getElementById('logo_gray'), 
   };
 }
 
@@ -49,17 +53,52 @@ function setIdRefValueTrim() {
   };
 }
 
+// function checkAndShowAnimation() {
+//   const {animationsLogoOverlayRef, animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef, logoWhiteRef, logoGrayRef } = getIdRefs();
+//   animationJoinLogoRef.classList.remove('d-none');
+
+//   if (sessionStorage.getItem('animationShown')) {
+//     animationFinishedRef.classList.add('d-flex');
+//     animationJoinLogoRef.classList.add('d-none');
+//     removeAnimation();
+//     return;
+//   }
+
+  
+//   if (window.innerWidth <= 768) {
+   
+//     animationsLogoOverlayRef.style.backgroundColor = 'var(--primary-color-gray)';
+
+//     setTimeout(function () {
+//       addFadeInAnimation(loginContainerRef);
+//       addFadeInAnimation(navLogInRef);
+//       addFadeInAnimation(footerLoginRegisterRef);
+//       setTimeout(function () {
+//         animationJoinLogoRef.classList.add('d-none');
+//         animationFinishedRef.classList.add('d-flex');
+//       }, 1500); 
+//     }, 500);
+//   } else {
+//     animationsLogoOverlayRef.style.backgroundColor = 'transparent';
+   
+//     setTimeout(function () {
+//       animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
+//       addFadeInAnimation(loginContainerRef);
+//       addFadeInAnimation(navLogInRef);
+//       addFadeInAnimation(footerLoginRegisterRef);
+//       setTimeout(function () {
+//         animationJoinLogoRef.classList.add('d-none');
+//         animationFinishedRef.classList.add('d-flex');
+//       }, 2000);
+//     }, 500);
+//   }
+
+//   sessionStorage.setItem('animationShown', 'true');
+//   sessionStorage.getItem('linksSidebarBoolienKey');
+// }
+
 function checkAndShowAnimation() {
-  const { animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
-  const root = document.documentElement;
-  let animationValue;
-
-  if (window.matchMedia('(max-width: 768px)').matches) {
-    animationValue = window.getComputedStyle(root).getPropertyValue('--animation-logo-overlay-responsive');
-  } else {
-    animationValue = window.getComputedStyle(root).getPropertyValue('--animation-logo-overlay');
-  }
-
+  const {animationJoinLogoRef,animationsLogoOverlayRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
   animationJoinLogoRef.classList.remove('d-none');
 
   if (sessionStorage.getItem('animationShown')) {
@@ -70,7 +109,7 @@ function checkAndShowAnimation() {
   }
 
   setTimeout(function () {
-    animationJoinLogoRef.style.animation = animationValue;
+    animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
     addFadeInAnimation(loginContainerRef);
     addFadeInAnimation(navLogInRef);
     addFadeInAnimation(footerLoginRegisterRef);
@@ -83,32 +122,6 @@ function checkAndShowAnimation() {
   sessionStorage.setItem('animationShown', 'true');
   sessionStorage.getItem('linksSidebarBoolienKey');
 }
-
-// function checkAndShowAnimation() {
-//   const {animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
-//   animationJoinLogoRef.classList.remove('d-none');
-
-//   if (sessionStorage.getItem('animationShown')) {
-//     animationFinishedRef.classList.add('d-flex');
-//     animationJoinLogoRef.classList.add('d-none');
-//     removeAnimation();
-//     return;
-//   }
-
-//   setTimeout(function () {
-//     animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
-//     addFadeInAnimation(loginContainerRef);
-//     addFadeInAnimation(navLogInRef);
-//     addFadeInAnimation(footerLoginRegisterRef);
-//     setTimeout(function () {
-//       animationJoinLogoRef.classList.add('d-none');
-//       animationFinishedRef.classList.add('d-flex');
-//     }, 2000);
-//   }, 500);
-
-//   sessionStorage.setItem('animationShown', 'true');
-//   sessionStorage.getItem('linksSidebarBoolienKey');
-// }
 
 function addFadeInAnimation(element) {
   element.style.animation = 'fadeIn 0.8s ease-in-out forwards 0.6s';

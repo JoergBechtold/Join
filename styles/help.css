@@ -63,7 +63,8 @@
 @media screen and (max-width: 992px) {
   .main-help {
     margin-left: 230px;
-    padding-right: 80px;
+    margin-right: 0;
+    padding-right: 20px;
     width: calc(750px + (300 * ((100vw - 1050px) / 310)));  
   }
 }

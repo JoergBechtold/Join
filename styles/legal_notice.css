@@ -59,16 +59,21 @@
 @media screen and (max-width: 992px)  {
   .main-legal {
     margin-left: 230px;
-    padding-right: 80px;
+    margin-right: 0;
+    padding-right: 20px;
+    width: calc(750px + (300 * ((100vw - 1050px) / 310)));  
+
   }
 }
 
 @media (max-width: 768px) {
   .main-legal{
     margin-left: var(--margin-left-main-responsive);
+    width: calc(300px + (400 * ((100vw - 480px) / 288)));
+
   }
 
-  h1 {
+  .main-legal h1 {
     font-size: 24px;
   }
 
@@ -77,8 +82,14 @@
     padding: 15px;
   }
 
-  p {
+  .main-legal p {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .main-legal {
+    width: calc(300px + 277 * (100vw - 320px) / 360);
   }
 }
 

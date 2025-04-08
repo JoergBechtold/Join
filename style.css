@@ -133,7 +133,7 @@ a {
 
   /* margin left main */
   --margin-left-main: 328px;
-  --margin-left-main-responsive:80px;
+  --margin-left-main-responsive:20px;
 
   /* padding top main */
   --padding-top-main: clamp(115px, 100px + 4.6875vw, 190px);
