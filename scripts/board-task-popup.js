@@ -109,23 +109,27 @@ function getCategoryBg(task) {
  */
 async function openPopup(key) {
   taskKey = key;
-  const task = await loadData(`tasks/${key}`);
+
+  const task = await loadData(`${PATH_TO_TASKS}/${key}`);
   const popupContainer = document.getElementById('popup_container');
   const popup = document.getElementById('popup');
+
   if (task) {
     const assignedHTML = await getAssignedHTML(task);
     const subtasksHTML = getSubtasksHTML(task);
     const categoryBackground = getCategoryBg(task);
     const priorityIconSrc = getPriorityIcon(task.priority);
-    document.body.style.overflow = 'hidden';
-    popup.innerHTML = getPopupContentHtml(task, key, assignedHTML, subtasksHTML, categoryBackground, priorityIconSrc);
+    const popupContent = getPopupContentHtml(task, key, assignedHTML, subtasksHTML, categoryBackground, priorityIconSrc);
+    popup.innerHTML = popupContent;
   } else {
     popup.innerHTML = `
       <div class="popup-header">
         <h2>Task Not Found</h2>
         <button class="close-button" onclick="closePopup()">X</button>
-      </div>`;
+      </div>
+    `;
   }
+
   popupContainer.style.display = 'flex';
   document.getElementById('overlay').style.display = 'block';
 }
