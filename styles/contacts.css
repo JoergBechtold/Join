@@ -174,7 +174,6 @@ body {
 .main-content h1 {
   color: rgba(0, 0, 0, 1);
   margin: 0;
-  display: flex;
   align-items: center;
   font-weight: 700;
   font-size: 61px;
@@ -421,6 +420,7 @@ input:focus {
   transform: translateX(100%);
   transition: transform 600.5s ease-in;
   will-change: transform;
+  margin-top: 30px;
 }
 
 .contact-detail.visible {
@@ -583,8 +583,12 @@ color: var(--blue);
 .main-responsive{
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
 
+.responsive-flex{
+  display: none;
+}
 
 @media screen and (max-width: 768px) {
   .contact-list{
@@ -617,6 +621,34 @@ color: var(--blue);
 
   .main-content {
     display: none;
+    padding-top: 10px;
+    padding-left: 30px;
+  }
+
+  .detail-info h1{
+    display: flex;
+    font-size: 28px;
+  }
+
+  .detail-header{
+    width: 300px;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .responsive-flex{
+    display: flex;
+    justify-content: space-between;
+    width: 290px;
+  }
+
+  #detail-avatar{
+    height: 80px;
+    width: 80px;
+  }
+
+  .contact-info-section h3{
+    margin: 0;
   }
 
   /* .main-content-responsive{
@@ -632,6 +664,7 @@ color: var(--blue);
   }
 
   .responsive-h1 h1{
+    display: flex;
     font-weight: 700;
     font-size: 47px;
     line-height: 120%;
@@ -650,13 +683,15 @@ color: var(--blue);
   }
 
   .contact-detail {
-    position: unset;
+    position: absolute;
+    left: 20px;
+    top: 250px;
     display: none;
-    width: 100vh;
+    flex-direction: column;
+    width: 0;
     height: 100%;
-    gap: 21px;
+    gap: 0;
     transition: none;
-    padding: 50px 60px;
   }
   .divider {
     width: 90px;             
