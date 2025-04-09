@@ -495,6 +495,9 @@ button[disabled]:hover {
 }
 
 .arrow-left-sign-up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 60px;
   left: clamp(35px, 26px + 2.8125vw, 80px);
@@ -502,13 +505,21 @@ button[disabled]:hover {
 
 .arrow-left,
 .arrow-left-sign-up {
-  display: grid;
-  place-items: center;
   width: 35px;
   aspect-ratio: 1 / 1;
   border-radius: 100%;
   cursor: pointer;
 }
+
+.arrow-left{
+padding-top: 10px;
+padding-left: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
 
 .arrow-left img,
 .arrow-left-sign-up img {

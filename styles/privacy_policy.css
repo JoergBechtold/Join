@@ -60,7 +60,7 @@
 .headline-img-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-right: 10px;
 }
 

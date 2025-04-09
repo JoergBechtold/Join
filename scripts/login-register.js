@@ -173,7 +173,7 @@ async function handleSignUp() {
     setTimeout(() => {
       goToUrl('login_register.html');
       resetProberties();
-    }, 1700);
+    }, 500);
   } catch (error) {
     console.error('Error creating user', error);
   }
@@ -249,7 +249,6 @@ async function checkUserIsPresent(parameter = false) {
 
     if (users) {
       const userIds = Object.keys(users);
-
       checkUserIsPresentForLoob(users,userIds, parameter)
       showLoginError();
       return false;
