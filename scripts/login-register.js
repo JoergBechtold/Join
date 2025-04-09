@@ -250,18 +250,22 @@ async function checkUserIsPresent(parameter = false) {
     if (users) {
       const userIds = Object.keys(users);
 
-      for (let index = 0; index < userIds.length; index++) {
-        const userId = userIds[index];
-        const user = users[userId];
-        ifParameterTrue(parameter, user);
-        await ifParameterFalse(parameter, user, userId);
-      }
+      checkUserIsPresentForLoob(users,userIds, parameter)
       showLoginError();
       return false;
     }
   } catch (error) {
     console.error('rror verifying user', error);
     return false;
+  }
+}
+
+async function checkUserIsPresentForLoob(users,userIds, parameter) {
+  for (let index = 0; index < userIds.length; index++) {
+    const userId = userIds[index];
+    const user = users[userId];
+    ifParameterTrue(parameter, user);
+    await ifParameterFalse(parameter, user, userId);
   }
 }
 
