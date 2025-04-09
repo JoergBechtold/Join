@@ -59,7 +59,7 @@
   transform: translate(-50%, -50%);
   background: #fff;
   max-width: 525px;
-  width:  clamp(300px, 255px + 14.0625vw, 525px);
+  width:  clamp(340px, 303px + 11.5625vw, 525px);
   max-height: 780px;
   height: clamp(560px, 516px + 13.75vw, 780px);
   z-index: 101;

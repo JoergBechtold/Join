@@ -377,17 +377,80 @@
 @media (max-width: 768px) {
   .main-board{
     margin-left: var(--margin-left-main-responsive);
-  }
-}
-
-@media screen and (max-width: 360px)  {
-  .main-board {
-    margin-left: 0;
+    overflow: auto;
   }
 
   .headline-input-container {
     justify-content: unset;
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .search-input-add-button-div {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 375px)  {
+  .main-board {
+    margin-left: 0;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
+  }
+
+  .headline-input-container {
+    justify-content: unset;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .column-title {
+    width: 320px;
+  }
+
+  .card-container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: auto;
+  }
+
+  .drag-area {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    flex-direction: unset;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    width: auto;
+  }
+
+  .drag-area::-webkit-scrollbar {
+    display: none;
+  }
+
+  .todo-card {
+    height: 244px;
+  }
+
+  .popup-container, .edit-popup {
+    padding: 48px 40px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #00000029;
+    background-color: #F6F7F8;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 646px;
+    box-sizing: border-box;
+    width: 340px;
+    top: 44% !important;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .popup-container, .edit-popup {
+    width: 300px !important;
   }
 }
