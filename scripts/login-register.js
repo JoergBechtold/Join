@@ -53,72 +53,36 @@ function setIdRefValueTrim() {
   };
 }
 
-// function checkAndShowAnimation() {
-//   const {animationsLogoOverlayRef, animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef, logoWhiteRef, logoGrayRef } = getIdRefs();
-//   animationJoinLogoRef.classList.remove('d-none');
-
-//   if (sessionStorage.getItem('animationShown')) {
-//     animationFinishedRef.classList.add('d-flex');
-//     animationJoinLogoRef.classList.add('d-none');
-//     removeAnimation();
-//     return;
-//   }
-
-  
-//   if (window.innerWidth <= 768) {
-   
-//     animationsLogoOverlayRef.style.backgroundColor = 'var(--primary-color-gray)';
-
-//     setTimeout(function () {
-//       addFadeInAnimation(loginContainerRef);
-//       addFadeInAnimation(navLogInRef);
-//       addFadeInAnimation(footerLoginRegisterRef);
-//       setTimeout(function () {
-//         animationJoinLogoRef.classList.add('d-none');
-//         animationFinishedRef.classList.add('d-flex');
-//       }, 1500); 
-//     }, 500);
-//   } else {
-//     animationsLogoOverlayRef.style.backgroundColor = 'transparent';
-   
-//     setTimeout(function () {
-//       animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
-//       addFadeInAnimation(loginContainerRef);
-//       addFadeInAnimation(navLogInRef);
-//       addFadeInAnimation(footerLoginRegisterRef);
-//       setTimeout(function () {
-//         animationJoinLogoRef.classList.add('d-none');
-//         animationFinishedRef.classList.add('d-flex');
-//       }, 2000);
-//     }, 500);
-//   }
-
-//   sessionStorage.setItem('animationShown', 'true');
-//   sessionStorage.getItem('linksSidebarBoolienKey');
-// }
-
 function checkAndShowAnimation() {
-  const {animationJoinLogoRef,animationsLogoOverlayRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef } = getIdRefs();
-  animationJoinLogoRef.classList.remove('d-none');
+  const {animationsLogoOverlayRef, animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef, logoWhiteRef, logoGrayRef } = getIdRefs();
+  animationsLogoOverlayRef.classList.remove('d-none');
 
   if (sessionStorage.getItem('animationShown')) {
     animationFinishedRef.classList.add('d-flex');
-    animationJoinLogoRef.classList.add('d-none');
+    animationsLogoOverlayRef.classList.add('d-none');
     removeAnimation();
     return;
   }
-
-  setTimeout(function () {
-    animationJoinLogoRef.style.animation = 'logoAnimation 0.7s ease forwards 1s';
-    addFadeInAnimation(loginContainerRef);
-    addFadeInAnimation(navLogInRef);
-    addFadeInAnimation(footerLoginRegisterRef);
     setTimeout(function () {
-      animationJoinLogoRef.classList.add('d-none');
-      animationFinishedRef.classList.add('d-flex');
-    }, 2000);
-  }, 500);
-
+      addFadeInAnimation(loginContainerRef);
+      addFadeInAnimation(navLogInRef);
+      addFadeInAnimation(footerLoginRegisterRef);
+      setTimeout(function () {
+        animationsLogoOverlayRef.classList.add('d-none');
+        animationFinishedRef.classList.add('d-flex');
+      }, 1500); 
+    }, 500);
+  
+    setTimeout(function () {
+      addFadeInAnimation(loginContainerRef);
+      addFadeInAnimation(navLogInRef);
+      addFadeInAnimation(footerLoginRegisterRef);
+      setTimeout(function () {
+        animationsLogoOverlayRef.classList.add('d-none');
+        animationFinishedRef.classList.add('d-flex');
+      }, 2000);
+    }, 500);
+  
   sessionStorage.setItem('animationShown', 'true');
   sessionStorage.getItem('linksSidebarBoolienKey');
 }

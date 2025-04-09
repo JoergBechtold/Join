@@ -22,6 +22,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  animation: var(--animation-logo-overlay-responsive);
 }
 
 /* .animation-join-logo {
@@ -35,7 +36,8 @@
   
 } */
 
-.animation-join-logo {
+/* .animation-join-logo {
+  width: 274px;
   height: clamp(122px, 79.4px + 13.3125vw, 335px);
   z-index: 2;
   display: flex;
@@ -45,28 +47,31 @@
   transform: translate(-50%, -50%);
   transition: var(--transition-animations-overlay);
   animation: var(--animation-logo-overlay);
-}
+} */
 
-/* .animation-join-logo img {
-  position: absolute;
+ .animation-join-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 274px;
+    height: clamp(122px, 79.4px + 13.3125vw, 335px);
+    z-index: 2;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    animation: logoAnimation 0.7s ease forwards 1s;        
+  }
+
+.animation-join-logo img {
+  position: absolute; 
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   object-fit: contain;
-  opacity: 0;
-  animation-fill-mode: forwards;
-} */
-
-.logo-white {
-  display: none;
+  transition: opacity 0.5s ease-in-out; 
 }
-
-
-/* .animation-join-logo img {
-  display: block;
-  width: 100%;
-} */
 
 @keyframes logoAnimation {
   0% {
@@ -80,22 +85,32 @@
   100% {
     top: clamp(15px, 6px + 2.8125vw, 60px);
     left: clamp(15px, 6px + 2.8125vw, 60px);
-    width: fit-content;
+    width: var(--width-64-100);
     height: clamp(60px, 47.6px + 3.875vw, 122px);
     transform: none;
   }
 }
 
+.logo-white {
+  opacity: 0;
+}
 
+.logo-gray {
+  opacity: 1;
+}
 
 .animation-finished {
   display: none;
   position: absolute;
   top: clamp(15px, 6px + 2.8125vw, 60px);
   left: clamp(15px, 6px + 2.8125vw, 60px);
-  width: fit-content;
+  width: var(--width-64-100);
   height: clamp(60px, 47.6px + 3.875vw, 122px);
   transform: none;
+}
+
+.animation-finished img {
+ width: 100%;
 }
 
 .nav-log-in {
@@ -346,129 +361,156 @@
 @media only screen and (max-width: 922px){ 
 }
 
-@media only screen and (max-width: 768px){
-  .body-login-register {
-    background-color: var(--light-gray-bg); /* Standardhintergrund für kleinere Bildschirme beibehalten */
-  }
-
+@media only screen and (max-width: 768px) {
   .animations-logo-overlay {
-    background-color: var(--primary-color-gray); /* Dunkelgrauer Hintergrund während der Animation */
-  }
-
-  .animation-join-logo img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: contain;
-  opacity: 0;
-  animation-fill-mode: forwards;
-}
-
-.logo-white {
-  display: block; /* Macht das weiße Logo standardmäßig sichtbar */
-  animation: fadeOutScaleLogo 1.5s ease-in-out forwards; /* Animation für das Ausblenden und Verkleinern */
-  z-index: 2; /* Über dem grauen Logo */
-  opacity: 1; /* Anfangs sichtbar */
-}
-
-.logo-gray {
-  animation: fadeInScaleLogo 1.5s ease-in-out forwards 0.75s; /* Animation für das Einblenden und Verkleinern mit Verzögerung */
-  z-index: 1; /* Unter dem weißen Logo */
-  opacity: 0; /* Anfangs unsichtbar */
-}
-
-/* .logo-white {
-  animation: fadeOutLogo 2s ease-in-out forwards;
-  z-index: 2;
-  opacity: 0;
-} */
-
-/* .logo-gray {
-  animation: fadeInLogo 2s ease-in-out forwards;
-  z-index: 1;
-  opacity: 1;
-} */
-
-@keyframes fadeOutScaleLogo {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1); /* Startposition und Größe */
-  }
-  50% {
-    opacity: 0; /* Halbwegs ausgeblendet */
-    transform: translate(-50%, -50%) scale(0.8); /* Leicht verkleinert */
-  }
-  100% {
-    opacity: 0;
-    transform: translate(clamp(15px, 6px + 2.8125vw, 60px), clamp(15px, 6px + 2.8125vw, 60px)) scale(0.3); /* Endposition und Größe (ungefähre Anpassung an logoAnimation) */
-  }
-}
-
-@keyframes fadeInScaleLogo {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.2); /* Startposition und leicht vergrößert */
-  }
-  50% {
-    opacity: 1; /* Halbwegs eingeblendet */
-    transform: translate(-50%, -50%) scale(1); /* Normale Größe */
-  }
-  100% {
-    opacity: 1;
-    transform: translate(clamp(15px, 6px + 2.8125vw, 60px), clamp(15px, 6px + 2.8125vw, 60px)) scale(0.3); /* Endposition und Größe (ungefähre Anpassung an logoAnimation) */
-  }
-}
-
-/* @keyframes fadeOutLogo {
-  0% {
-    opacity: 1;
-  }
-  15% {
-    opacity: 0.8;
-  }
-  25% {
-    opacity: 0.5;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes backgroundTransition {
-  0% {
     background-color: var(--primary-color-gray);
   }
-  100% {
-    background-color: var(--light-gray-bg);
-  }
-}
 
-@keyframes fadeInLogo {
-  0% {
+  .logo-white {
+    animation: fadeOutLogo 0.7s ease forwards 1s ;
+    z-index: 2;
+    opacity: 1;
+  }
+  
+  .logo-gray {
+    animation: fadeInLogo 0.7s ease forwards 1s ;
+    z-index: 1;
     opacity: 0;
   }
-  20% {
-    opacity: 0.3;
+
+  @keyframes backgroundAnimationResponsive {
+    0% {
+      
+      background-color: var(--primary-color-gray);
+    }
+    35% {
+      
+      background-color: var(--primary-color-gray);
+    }
+    40% {
+      
+      background-color: var(--primary-color-gray);
+    }
+    42% {
+      
+      background-color: var(--primary-color-gray);
+
+    }
+    44% {
+      
+      background-color: var(--primary-color-gray);
+
+    }
+    46% {
+      
+      background-color: var(--primary-color-gray);
+
+    }
+    48% {
+      
+      background-color: var(--primary-color-gray);
+
+    }
+    50% {
+    
+      background-color: transparent;
+
+    }
+    52% {
+     
+      background-color: transparent;
+
+    }
+    100% {
+     
+      background-color: transparent;
+
+    }
   }
-  30% {
-    opacity: 0.6;
-  }
-  40% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
-}
+
+  @keyframes fadeOutLogo {
+    0% {
+      opacity: 1;
+      background-color: var(--primary-color-gray);
+    }
+    35% {
+      opacity: 1;
+      background-color: var(--primary-color-gray);
+    }
+    40% {
+      opacity: 0.8;
+      background-color: var(--primary-color-gray);
+    }
+    42% {
+      opacity: 0.7;
+      background-color: var(--primary-color-gray);
+
+    }
+    44% {
+      opacity: 0.6;
+      background-color: var(--primary-color-gray);
+
+    }
+    46% {
+      opacity: 0.4;
+      background-color: var(--primary-color-gray);
+
+    }
+    48% {
+      opacity: 0.3;
+      background-color: var(--primary-color-gray);
+
+    }
+    50% {
+      opacity: 0.2;
+      background-color: var(--primary-color-gray);
+
+    }
+    52% {
+      opacity: 0;
+      background-color: transparent;
+
+    }
+    100% {
+      opacity: 0;
+      background-color: transparent;
+
+    }
+  } 
+  
+  @keyframes fadeInLogo {
+    0% {
+      opacity: 0;
+    }
+    48% {
+      opacity: 0.3;
+    }
+    50%{
+      opacity: 0.2;
+    }
+    52% {
+      opacity: 0.3;
+    }
+    54% {
+      opacity: 0.4;
+    }
+    56% {
+      opacity: 0.6;
+    }
+    60% {
+      opacity: 0.7;
+    }
+    65% {
+      opacity: 0.8;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  } 
+}   
 
 @media only screen and (max-width: 600px){
   .nav-log-in {

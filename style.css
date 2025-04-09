@@ -120,12 +120,15 @@ a {
   --transition-animations-overlay: all 1s ease;
 
   /* animation */
-  /* --animation-opacity-overlay: fadeIn 1s ease-in-out forwards 1s;
-  --animation-logo-overlay: logoAnimation 1s ease forwards 1s; */
+  --animation-opacity-overlay: fadeIn 1s ease-in-out forwards 1s;
+  /* --animation-logo-overlay: logoAnimation 1s ease forwards 1s; */
 
   --animation-opacity-overlay: fadeIn 0.8s ease-in-out forwards 0.6s;
   --animation-logo-overlay: logoAnimation 0.7s ease forwards 1s;
-  --animation-logo-overlay-responsive: logoAnimationResponsive 0.7s ease forwards 1s;
+  --animation-logo-overlay-responsive: backgroundAnimationResponsive 0.8s ease forwards 1s;
+
+  /* width */
+  --width-64-100:clamp(64px, 56.8px + 2.25vw, 100px);
 
 
   /* hover-scale */
