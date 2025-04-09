@@ -54,7 +54,7 @@ function setIdRefValueTrim() {
 }
 
 function checkAndShowAnimation() {
-  const {animationsLogoOverlayRef, animationJoinLogoRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef, logoWhiteRef, logoGrayRef } = getIdRefs();
+  const {animationsLogoOverlayRef, animationFinishedRef, navLogInRef, loginContainerRef, footerLoginRegisterRef, logoWhiteRef, logoGrayRef } = getIdRefs();
   animationsLogoOverlayRef.classList.remove('d-none');
 
   if (sessionStorage.getItem('animationShown')) {
@@ -63,16 +63,6 @@ function checkAndShowAnimation() {
     removeAnimation();
     return;
   }
-    setTimeout(function () {
-      addFadeInAnimation(loginContainerRef);
-      addFadeInAnimation(navLogInRef);
-      addFadeInAnimation(footerLoginRegisterRef);
-      setTimeout(function () {
-        animationsLogoOverlayRef.classList.add('d-none');
-        animationFinishedRef.classList.add('d-flex');
-      }, 1500); 
-    }, 500);
-  
     setTimeout(function () {
       addFadeInAnimation(loginContainerRef);
       addFadeInAnimation(navLogInRef);

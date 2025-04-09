@@ -512,8 +512,8 @@ button[disabled]:hover {
 }
 
 .arrow-left{
-padding-top: 10px;
-padding-left: 10px;
+margin-top: 10px;
+margin-left: 10px;
 display: flex;
 align-items: center;
 justify-content: center;
