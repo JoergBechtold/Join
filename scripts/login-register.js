@@ -244,7 +244,7 @@ async function checkUserIsPresent(parameter = false) {
       return false;
     }
   } catch (error) {
-    console.error('rror verifying user', error);
+    console.error('Error verifying user', error);
     return false;
   }
 }
@@ -296,10 +296,13 @@ async function ifParameterFalse(parameter, user, userId){
 
   if (!parameter) {
     if (user.email === emailLogIn && user.password === passwordLogIn) {
+      
+      sessionStorage.setItem('loggedInUserId', userId);
+
+      await loadUserData();
+      removeLoginError()
       emailLogInRef.value = '';
       passwordLogInRef.value = '';
-      sessionStorage.setItem('loggedInUserId', userId);
-      await loadUserData();
       loginSuccessful(); 
       return true;
     }
@@ -317,4 +320,11 @@ function showLoginError() {
   errorMessageLogInRef.classList.add('d-flex');
   emailLogInRef.classList.add('not-valide-error');
   passwordLogInRef.classList.add('not-valide-error');
+}
+
+function removeLoginError(){
+  const { errorMessageLogInRef, passwordLogInRef, emailLogInRef } = getIdRefs();
+  errorMessageLogInRef.classList.remove('d-flex');
+  emailLogInRef.classList.remove('not-valide-error');
+  passwordLogInRef.classList.remove('not-valide-error');
 }
