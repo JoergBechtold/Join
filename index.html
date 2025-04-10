@@ -11,12 +11,12 @@
 
     <!-- Embedding the css -->
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/header_sidebar.css" />
     <link rel="stylesheet" href="styles/add_task.css" />
     <link rel="stylesheet" href="styles/add_task_assets.css" />
     <link rel="stylesheet" href="styles/board_task_popup.css" />
     <link rel="stylesheet" href="styles/assets.css" />
+    <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/edit_popup.css">
     <link rel="stylesheet" href="style.css" />
 
@@ -45,7 +45,12 @@
 
     <main class="main-board">
       <div class="headline-input-container">
+        <div class="board-headline-plus-button">
         <span>Board</span>
+        <div onclick="goToUrl('add_task.html')" class="board-responsive-plus-button">
+          <img src="assets/icons/add-white.svg" alt="Plus Button" >
+        </div>
+      </div>
         <div class="search-input-add-button-div">
           <div class="search-input-div">
             <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text" placeholder="Find Card"/>
@@ -55,18 +60,16 @@
           </div>
           </div>
           <button onclick="openBoardAddTaskForm(); fetchAddTask()" class="button-primary-dark-gray">Add Task +</button>
-          <a class="add-task-responsive-button responsive-plus-button" href="add_task.html">
-            <img src="assets/icons/add-white.svg" alt="" >
-          </a>
         </div>
       </div>
 
       <div class="card-container">
         <div>
-          <span class="column-title"
-            >To do
-            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.svg" alt="add icon" class="add-button-img-column" />
-          </span>
+          <div class="column-title">
+            <span>To do</span>
+            <div class="card-container-plus-button" onclick="openBoardAddTaskForm(); fetchAddTask()">
+            </div>
+          </div>
           <div
             class="drag-area"
             id="open"
@@ -77,10 +80,11 @@
         </div>
 
         <div>
-          <span class="column-title"
-            >In Progress
-            <img onclick="openBoardAddTaskForm(); fetchAddTask() " src="assets/icons/plus-button.svg" alt="add icon" class="add-button-img-column" />
-          </span>
+          <div class="column-title">
+            <span>In Progress</span>
+            <div class="card-container-plus-button" onclick="openBoardAddTaskForm(); fetchAddTask()">
+            </div>
+          </div>
           <div
             class="drag-area"
             id="in-progress"
@@ -91,10 +95,11 @@
         </div>
 
         <div>
-          <span class="column-title"
-            >Await feedback
-            <img onclick="openBoardAddTaskForm(); fetchAddTask()" src="assets/icons/plus-button.svg" alt="add icon" class="add-button-img-column" />
-          </span>
+          <div class="column-title">
+            <span>Await feedback</span>
+            <div class="card-container-plus-button" onclick="openBoardAddTaskForm(); fetchAddTask()">
+            </div>
+          </div>
           <div
             class="drag-area"
             id="await-feedback"

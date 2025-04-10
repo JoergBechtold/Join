@@ -25,43 +25,19 @@
   animation: var(--animation-logo-overlay-responsive);
 }
 
-/* .animation-join-logo {
-  height: clamp(122px, 79.4px + 13.3125vw, 335px);
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: var(--transition-animations-overlay);
-  
-} */
-
-/* .animation-join-logo {
-  width: 274px;
-  height: clamp(122px, 79.4px + 13.3125vw, 335px);
-  z-index: 2;
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: var(--transition-animations-overlay);
-  animation: var(--animation-logo-overlay);
-} */
-
- .animation-join-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 274px;
-    height: clamp(122px, 79.4px + 13.3125vw, 335px);
-    z-index: 2;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    animation: logoAnimation 0.7s ease forwards 1s;        
-  }
+.animation-join-logo {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 274px;
+   height: clamp(122px, 79.4px + 13.3125vw, 335px);
+   z-index: 2;
+   display: flex;
+   justify-content: center; 
+   align-items: center;
+   animation: logoAnimation 0.7s ease forwards 1s;        
+ }
 
 .animation-join-logo img {
   position: absolute; 
@@ -78,8 +54,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* width: auto; 
-    height: clamp(122px, 79.4px + 13.3125vw, 335px);  */
   }
 
   100% {

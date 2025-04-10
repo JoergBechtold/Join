@@ -197,17 +197,7 @@ button[disabled]:hover {
   font-weight: var(--font-weight-400);
 }
 
-.responsive-plus-button {
-  white-space: nowrap;
-  border-radius: var(--border-radius-buttons);
-  background-color: var(--primary-color-dark-gray);
-  box-shadow: none;
-  color: white;
-  transition: var(--transition-hover-effect);
-  font-size: var(--font-size-16);
-  padding: 15px 24px 15px 24px;
-  font-weight: var(--font-weight-400);
-}
+
 
 
 .button-primary-dark-gray:hover {

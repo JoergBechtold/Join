@@ -11,6 +11,13 @@
   overflow: hidden;
 }
 
+.board-headline-plus-button{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .headline-input-container {
   display: flex;
   justify-content: space-between;
@@ -126,12 +133,11 @@
 
 .column-title {
   width: 252px;
-  height: 24px;
   font-size: var(--font-size-47-20);
   font-weight: 700;
-  line-height: 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .test-card {
@@ -351,10 +357,6 @@
   align-items: center;
 }
 
-.add-task-responsive-button {
-  display: none;
-}
-
 .addtask-template-headline-container {
   display: flex;
   justify-content: space-between;
@@ -366,9 +368,52 @@
   width: 100%;
 }
 
-.add-button-img-column {
+.card-container-plus-button {
+  background-image: url(../assets/icons/Plus-black.svg);
+  background-repeat: no-repeat;
+  width: 30px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-hover-effect);
   cursor: pointer;
-  
+  border-radius: 10px;
+ 
+}
+
+.card-container-plus-button:hover {
+  background-image: url(../assets/icons/Plus-blue.svg);
+  background-repeat: no-repeat;
+  scale: var(--scale-hover);
+  box-shadow: var(--box-shadow-button);
+}
+
+.board-responsive-plus-button {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: var(--primary-color-dark-gray);
+  box-shadow: none;
+  transition: var(--transition-hover-effect);
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.board-responsive-plus-button img{
+  width: 20px;
+  aspect-ratio: 1 / 1;
+}
+
+.board-responsive-plus-button:hover{
+  scale: var(--scale-hover);
+  background-color: var(--blue);
+  box-shadow: var(--box-shadow-button);
+  border: var(--border-buttons-blue);
 }
 
 @media screen and (max-width: 1440px) {
@@ -419,8 +464,8 @@
     display: none;
   }
 
-  .add-task-responsive-button {
-    display: block;
+  .board-responsive-plus-button {
+    display: flex;
   }
 
   .column-title {

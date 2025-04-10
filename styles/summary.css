@@ -31,7 +31,6 @@
 .titeljoin h1 {
   font-weight: 700;
   font-size: 61px;
-  line-height: 73.2px;
   color: black;
   height: 73px;
   width: 264px;
@@ -42,10 +41,8 @@
   height: 32px;
   gap: 0px;
   opacity: 0px;
-  font-family: 'inter';
   font-size: 27px;
   font-weight: 400;
-  line-height: 32.4px;
   text-align: left;
   color: #2a3647;
 }
@@ -59,15 +56,27 @@
   gap: 3px;
 }
 
+.mobile-view-greeting{
+  position: absolute;
+  display: flex;
+  height: 100dvh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--light-gray-bg);
+  z-index: 999; 
+  align-items: center;
+  justify-content: center;
+  /* animation: var(--animation-logo-overlay-responsive); */
+}
+
 .good {
   width: 375px;
   height: 56px;
   gap: 0px;
   opacity: 0px;
-  font-family: 'inter';
   font-size: 47px;
   font-weight: 500;
-  line-height: 56.4px;
   text-align: left;
   color: #2a3647;
   margin: 0;
@@ -79,10 +88,8 @@
   /* height: 77px; */
   gap: 0px;
   opacity: 0px;
-  font-family: 'inter';
   font-size: 64px;
   font-weight: 700;
-  line-height: 76.8px;
   text-align: left;
   color: #29abe2;
   margin: 0;
@@ -159,20 +166,16 @@
 
 .summarynmb {
   width: 50px;
-  height: 77px;
-  font-family: 'inter';
+  height: 77px; 
   font-size: 64px;
   font-weight: 600;
-  line-height: 76.8px;
   text-align: center;
   margin: 0;
 }
 
 .summarymission {
-  font-family: 'inter';
   font-size: 17px;
   font-weight: 400;
-  line-height: 24px;
   text-align: center;
   color: #2a3647;
   margin: 0;
@@ -216,10 +219,8 @@
   height: 77px;
   gap: 0px;
   opacity: 0px;
-  font-family: 'inter';
   font-size: 64px;
   font-weight: 600;
-  line-height: 76.8px;
   text-align: center;
   margin: 0;
 }
@@ -236,10 +237,8 @@
   height: 19px;
   gap: 0px;
   opacity: 0px;
-  font-family: 'inter';
   font-size: 16px;
   font-weight: 400;
-  line-height: 19.2px;
   text-align: left;
   color: #2a3647;
   margin: 0;
@@ -265,10 +264,8 @@
   height: 25px;
   gap: 0px;
   opacity: 0px;
-  font-family: 'inter';
   font-size: 21px;
   font-weight: 700;
-  line-height: 25.2px;
   text-align: left;
   color: #2a3647;
   margin: 0;
@@ -280,10 +277,8 @@
   gap: 0px;
   opacity: 0px;
   margin: 0;
-  font-family: 'inter';
   font-size: 16px;
   font-weight: 400;
-  line-height: 19.2px;
   text-align: left;
   color: #2a3647;
 }

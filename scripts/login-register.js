@@ -412,7 +412,7 @@ async function checkUserIsPresent(parameter = false) {
     if (users) {
       const userIds = Object.keys(users);
       checkUserIsPresentForLoob(users,userIds, parameter)
-      showLoginError();
+      // showLoginError();
       return false;
     }
   } catch (error) {
@@ -461,7 +461,7 @@ function ifParameterTrue(parameter, user){
       emailSignUpRef.classList.add('not-valide-error');
       return true;
     }
-  }
+  } 
 }
 
 /**
@@ -488,6 +488,8 @@ async function ifParameterFalse(parameter, user, userId){
       
       loginSuccessful(); 
       return true;
+    } else{
+      showLoginError(); 
     }
   }
 }
