@@ -144,6 +144,9 @@
   width: 100%;
   justify-content: flex-end;
   gap: 12px;
+  position: absolute;
+  bottom: 30px;
+  right: 18px;
 }
 
 .assignee-container {
