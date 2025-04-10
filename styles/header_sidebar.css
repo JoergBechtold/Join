@@ -70,6 +70,17 @@
   align-items: center;
   padding-top: 64px;
   padding-bottom: 64px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--gray-a-links);
+  /* border-radius: 10px; */
 }
 
 

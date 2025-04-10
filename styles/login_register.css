@@ -339,7 +339,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--light-gray-bg);
+  background-color: transparent;
   height: 35px;
   opacity: 0;
   gap: 25px;
