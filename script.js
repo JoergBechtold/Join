@@ -160,6 +160,7 @@ async function loadUserData() {
     try {
       const user = await loadData(`/user/${userId}`);
       if (user) {
+        removeLoginError()
         return user;
       } else {
         console.error('User data not found.');
