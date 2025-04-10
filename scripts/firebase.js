@@ -118,6 +118,42 @@ async function addColorToExistingArray(key, contactColor) {
   }
 }
 
+/**
+ * 
+ * @function fetchAddTask
+ * @description Asynchronously loads the header and initializes the logged-in links,
+ * then fetches the content of the 'template_add_task.html' file. Upon successful fetch,
+ * it inserts the template's content into the HTML element with the ID 'add_task_fetch_template'.
+ * If the `parameter` is true, it also calls `setAllPropertysForEditPopup`.
+ * It handles potential errors during the fetch process.
+ * @param {boolean} [parameter=false] - An optional boolean parameter to trigger additional setup for an edit popup.
+ */
+async function fetchAddTask(parameter = false) {
+  try {
+    await loadHeaderAndInitialize();
+    await showLoggedInLinks(); 
+    fetch('assets/templates/template_add_task.html')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        document.getElementById('add_task_fetch_template').innerHTML = data;
+
+        if (parameter) {
+          setAllPropertysForEditPopup();
+        }
+      })
+      .catch((error) => {
+        console.error('Error loading template', error);
+      });
+  } catch (error) {
+    console.error('Unexpected error', error);
+  }
+}
+
 
 
 

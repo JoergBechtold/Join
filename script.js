@@ -1,11 +1,24 @@
 let randomColorsJson = null;
 
+/**
+ * 
+ * @function startProcess
+ * @description Initializes the application by loading the header, initializing the board,
+ * and loading the random colors. It sequentially awaits the completion of each of these asynchronous operations.
+ */
 async function startProcess() {
  await loadHeaderAndInitialize()
   initBoard()
   await initializeRandomColors();
 }
 
+/**
+ * 
+ * @function initializeRandomColors
+ * @description Asynchronously loads the `randomColorsJson` data. If loading is successful,
+ * the data is stored in the global `randomColorsJson` variable. If loading fails,
+ * an error message is logged to the console.
+ */
 async function initializeRandomColors() {
   try {
     randomColorsJson = await loadData('randomColorsJson');
@@ -17,6 +30,15 @@ async function initializeRandomColors() {
   }
 }
 
+/**
+ * 
+ * @function showConfirmation
+ * @description Displays a confirmation popup with the given message and returns a Promise
+ * that resolves with a boolean value indicating whether the user confirmed (true) or canceled (false).
+ * It internally uses the `showConfirmPopup` function.
+ * @param {string} message - The message to display in the confirmation popup.
+ * @returns {Promise<boolean>} A Promise that resolves with `true` if the user confirms, and `false` otherwise.
+ */
 function showConfirmation(message) {
   return new Promise((resolve) => {
     showConfirmPopup(message, (confirmed) => {
@@ -25,6 +47,16 @@ function showConfirmation(message) {
   });
 }
 
+/**
+ * 
+ * @function showConfirmPopup
+ * @description Displays a custom confirmation popup with the specified message and provides "Yes" and "No" buttons.
+ * It takes a callback function that is executed with a boolean argument (`true` for "Yes", `false` for "No")
+ * when the user clicks a button.
+ * @param {string} msg - The message to display in the confirmation popup.
+ * @param {function(boolean)} callback - A callback function that accepts a boolean argument
+ * indicating the user's choice (true for Yes, false for No).
+ */
 function showConfirmPopup(msg, callback) {
   const p = document.querySelector('.confirm-popup'),
         m = p.querySelector('.confirm-message'),
@@ -41,10 +73,8 @@ async function getRandomColor() {
     let randomColorsJson = await loadData('randomColorsJson');
 
     if (randomColorsJson) {
-
       const key = Object.keys(randomColorsJson)[0]; 
       const singelColorFromJson = randomColorsJson[key];
-
     if (!singelColorFromJson || singelColorFromJson.length === 0) {
       console.error('No more colors available or invalid data from Firebase');
       return null;
@@ -52,7 +82,6 @@ async function getRandomColor() {
   
     const randomIndex = Math.floor(Math.random() * singelColorFromJson.length);
     const selectedColor = singelColorFromJson[randomIndex];
-
     singelColorFromJson.splice(randomIndex, 1);
     const updateResult =  await updateData(`randomColorsJson/${key}`, singelColorFromJson);
 
@@ -69,10 +98,10 @@ async function getRandomColor() {
 }
 
 /**
- * Retrieves references to all HTML elements needed in script.js for the add task form.
- *
- * @returns {object} An object containing references to HTML elements.
- *
+ * 
+ * @function getIdRefsScript
+ * @description Retrieves references to various HTML elements by their IDs that are specific to the add task functionality in script.js.
+ * @returns {object} An object containing references to specific DOM elements related to adding tasks.
  */
 function getIdRefsScript() {
   return {
@@ -87,31 +116,41 @@ function getIdRefsScript() {
 }
 
 /**
- * Controls the visibility of the button links sidebar.
- *
+ * 
  * @type {boolean}
  * @default false
- * @example
- * window.showButtonLinksSidebar = true; // Shows the sidebar
- * window.showButtonLinksSidebar = false; // Hides the sidebar
+ * @description Controls the visibility state of the button links sidebar.
+ * Setting this global variable to `true` will show the sidebar, and setting it to `false` will hide it.
  */
 window.showButtonLinksSidebar = false;
 
 /**
- * Navigates the current browser window to the specified URL.
- *
+ * 
+ * @function goToUrl
+ * @description Navigates the browser to the specified URL by setting the `window.location.href` property.
  * @param {string} url - The URL to navigate to.
- * @example
- * goToUrl('summary.html'); // Navigates to example.com
  */
 function goToUrl(url) {
   window.location.href = url;
 }
 
+/**
+ * 
+ * @function guestLogIn
+ * @description Simulates a guest login by calling the `loginSuccessful` function.
+ */
 function guestLogIn() {
   loginSuccessful()
 }
 
+/**
+ * 
+ * @function loginSuccessful
+ * @description Handles the actions to be performed after a successful login.
+ * It sets the 'loggedIn' flag in sessionStorage to 'true', sets the `window.showButtonLinksSidebar`
+ * to `true`, stores this boolean value in sessionStorage under the key 'linksSidebarBoolienKey',
+ * and then navigates the user to the 'summary.html' page.
+ */
 function loginSuccessful() {
   sessionStorage.setItem('loggedIn', 'true');
   window.showButtonLinksSidebar = true;
@@ -119,6 +158,13 @@ function loginSuccessful() {
   goToUrl('summary.html'); 
 }
 
+/**
+ * 
+ * @function logOut
+ * @description Handles the logout process. It sets the `window.showButtonLinksSidebar` to `false`,
+ * updates the 'linksSidebarBoolienKey' in sessionStorage, removes 'loggedIn', 'loggedInUserId',
+ * and 'activePage' from sessionStorage, and then navigates the user back to the 'login_register.html' page.
+ */
 function logOut() {
   window.showButtonLinksSidebar = false;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
@@ -128,6 +174,12 @@ function logOut() {
   goToUrl('login_register.html');
 }
 
+/**
+ * 
+ * @function hideLoggedInLinks
+ * @description Hides HTML elements with the class 'hide-before-log-in' by adding the 'd-none' class to them.
+ * This is typically used to hide links or sections that should only be visible to logged-in users.
+ */
 function hideLoggedInLinks() {
   const htmlLinks = document.getElementsByClassName('hide-before-log-in');
 
@@ -136,6 +188,13 @@ function hideLoggedInLinks() {
   });
 }
 
+/**
+ * 
+ * @function showLoggedInLinks
+ * @description Shows HTML elements with the class 'hide-before-log-in' by removing the 'd-none' class,
+ * and hides elements with the class 'hide-after-log-in' and 'mobil-view-links-container' by adding the 'd-none' class.
+ * This is used to dynamically adjust the visibility of links based on the login status.
+ */
 function showLoggedInLinks() {
   const htmlLinks = document.getElementsByClassName('hide-before-log-in');
   const loggedInLink = document.getElementsByClassName('hide-after-log-in');
@@ -154,6 +213,17 @@ function showLoggedInLinks() {
   });
 }
 
+/**
+ * 
+ * @function loadUserData
+ * @description Asynchronously loads user data based on the 'loggedInUserId' stored in sessionStorage.
+ * If a user ID is found, it attempts to fetch the user data from the `/user/${userId}` endpoint.
+ * If the data is successfully loaded, it calls `removeLoginError` and returns the user object.
+ * If the user data is not found or an error occurs, it logs an error and returns an object with `initials: null`.
+ * If no 'loggedInUserId' is found in sessionStorage, it also returns `{ initials: null }`.
+ * @returns {Promise<object>} A Promise that resolves with the user data object if found,
+ * or an object `{ initials: null }` if not found or an error occurs.
+ */
 async function loadUserData() {
   const userId = sessionStorage.getItem('loggedInUserId');
   if (userId) {
@@ -175,10 +245,21 @@ async function loadUserData() {
   }
 }
 
+/**
+ * 
+ * @function back
+ * @description Navigates the browser to the previous page in the history.
+ */
 function back() {
   window.history.back();
 }
 
+/**
+ * 
+ * @function showPupupOverlaySignUp
+ * @description Displays a popup overlay for sign-up confirmation by adding the 'd-flex' class.
+ * After a short delay (1000 milliseconds), it removes the 'd-flex' class to hide the overlay.
+ */
 function showPupupOverlaySignUp() {
   const { popupOverlaySignUpRef } = getIdRefs();
   popupOverlaySignUpRef.classList.add('d-flex');
@@ -187,32 +268,14 @@ function showPupupOverlaySignUp() {
   }, 1000);
 }
 
-async function fetchAddTask(parameter = false) {
-  try {
-    await loadHeaderAndInitialize();
-    await showLoggedInLinks(); 
-    fetch('assets/templates/template_add_task.html')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
-      })
-      .then((data) => {
-        document.getElementById('add_task_fetch_template').innerHTML = data;
 
-        if (parameter) {
-          setAllPropertysForEditPopup();
-        }
-      })
-      .catch((error) => {
-        console.error('Error loading template', error);
-      });
-  } catch (error) {
-    console.error('Unexpected error', error);
-  }
-}
-
+/**
+ * 
+ * @function setAllPropertysForEditPopup
+ * @description Modifies the styles and classes of various HTML elements to adapt the add task form
+ * for use as an edit popup on the board. It hides the main header and footer, the vertical line,
+ * adjusts the content layout, and sets overflow properties for the container elements.
+ */
 function setAllPropertysForEditPopup() {
   const { h1AddTaskRef, footerddTaskRef, verticalLineRef, addTaskContentRef, rightContainerRef, leftContainerRef, addTaskfetchTemplateRef } = getIdRefsScript();
 

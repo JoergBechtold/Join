@@ -482,9 +482,9 @@ async function ifParameterFalse(parameter, user, userId){
   if (!parameter) {
     if (user.email === emailLogIn && user.password === passwordLogIn) {
       sessionStorage.setItem('loggedInUserId', userId);
-      loginFormRef.reset();
 
       await loadUserData();
+      loginFormRef.reset();
       
       loginSuccessful(); 
       return true;
