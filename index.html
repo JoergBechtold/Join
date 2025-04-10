@@ -194,21 +194,6 @@
                 </div>
         
                 <div class="form-group">
-                  <label><span class="label-text">Category</span> <span class="red-star">*</span></label>
-                  <div class="custom-select-container">
-                    <div class="custom-select" id="edit_custom_category" onclick="toggleEditCategoryDropdown()">
-                      <span id="edit_selected_option">Select task category</span>
-                      <img class="select-icon" id="edit_select_arrow" src="assets/icons/arrow_drop_down.svg" />
-                    </div>
-                    <div class="custom-options d-none" id="edit_options_container">
-                      <div class="custom-select-option" onclick="selectEditOption('Technical Task')">Technical Task</div>
-                      <div class="custom-select-option" onclick="selectEditOption('User Story')">User Story</div>
-                    </div>
-                  </div>
-                  <div class="error-message-required d-none" id="edit_error_category">This selection is required</div>
-                </div>
-        
-                <div class="form-group">
                   <label><span class="label-text">Subtasks</span></label>
                   <div class="input-container">
                     <input id="edit_subtask_input" class="input-base" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskKey(event)" />

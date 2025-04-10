@@ -183,9 +183,6 @@ async function editPopupTask(key) {
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
-  if (task.category) {
-    document.getElementById('edit_selected_option').textContent = task.category;
-  }
   if (task.priority) {
     const priorityId = `edit_${task.priority.toLowerCase()}_button`;
     setEditPriority(priorityId);
