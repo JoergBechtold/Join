@@ -394,19 +394,19 @@ async function processContactDeletion(deleteBtn) {
  * Fetches all tasks from the database and renders them into their respective columns on the board.
  * Clears previous cards before re-rendering. Also updates the empty column placeholders.
  */
-async function renderCards() {
-  const tasks = await loadData(PATH_TO_TASKS);
-  const allColumns = document.querySelectorAll('.drag-area');
-  allColumns.forEach(col => col.innerHTML = '');
-  for (const [key, task] of Object.entries(tasks)) {
-    const column = document.getElementById(task.state);
-    if (column) {
-      createCard(key, column, task);
-    }
-  }
+// async function renderCards() {
+//   const tasks = await loadData(PATH_TO_TASKS);
+//   const allColumns = document.querySelectorAll('.drag-area');
+//   allColumns.forEach(col => col.innerHTML = '');
+//   for (const [key, task] of Object.entries(tasks)) {
+//     const column = document.getElementById(task.state);
+//     if (column) {
+//       createCard(key, column, task);
+//     }
+//   }
 
-  updateEmptyColumns();
-}
+//   updateEmptyColumns();
+// }
 
 async function renderCards() {
   const tasks = await loadData(PATH_TO_TASKS);

@@ -192,7 +192,6 @@ function applyEditedTaskData(task) {
   task.title = document.getElementById('edit_title').value.trim();
   task.description = document.getElementById('edit_description').value.trim();
   task.due_date = document.getElementById('edit_due_date').value.trim();
-  task.category = document.getElementById('edit_selected_option').textContent.trim();
   task.priority = getEditPriority();
   task.subtasks = checkSubtasks(); // Subtasks hier richtig anwenden
   task.assigned_to = checkAssignedTo(); // Kontakte hier richtig anwenden
@@ -242,17 +241,12 @@ function checkAssignedTo() {
 function validateEditInputs() {
   const title = document.getElementById('edit_title').value.trim();
   const due_date = document.getElementById('edit_due_date').value.trim();
-  const category = document.getElementById('edit_selected_option').textContent.trim();
   if (!title) {
     document.getElementById('edit_error_title').classList.remove('d-none');
     return false;
   }
   if (!due_date) {
     document.getElementById('edit_error_date').classList.remove('d-none');
-    return false;
-  }
-  if (category === 'Select task category') {
-    document.getElementById('edit_error_category').classList.remove('d-none');
     return false;
   }
   return true;
