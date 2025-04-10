@@ -168,13 +168,17 @@ async function submitEditTask() {
   if (!validateEditInputs()) return;
   const task = await loadData(`tasks/${editPopupTaskKey}`);
   if (!task) return;
+
   applyEditedTaskData(task);
+  task.subtasks = JSON.stringify(task.subtasks);
+  task.assigned_to = JSON.stringify(task.assigned_to); 
+  
   await updateData(`tasks/${editPopupTaskKey}`, task);
   closeEditPopup();
   const updatedTask = await loadData(`tasks/${editPopupTaskKey}`);
   if (updatedTask) {
     updateCardInBoard(editPopupTaskKey, updatedTask);
-    updatePopup(editPopupTaskKey, updatedTask);
+    updatePopup(editPopupTaskKey, updatedTask); 
   }
 }
 
@@ -190,8 +194,8 @@ function applyEditedTaskData(task) {
   task.due_date = document.getElementById('edit_due_date').value.trim();
   task.category = document.getElementById('edit_selected_option').textContent.trim();
   task.priority = getEditPriority();
-  task.subtasks = checkSubtasks();
-  task.assigned_to = checkAssignedTo();
+  task.subtasks = checkSubtasks(); // Subtasks hier richtig anwenden
+  task.assigned_to = checkAssignedTo(); // Kontakte hier richtig anwenden
 }
 
 /**
@@ -207,10 +211,9 @@ function checkSubtasks() {
   elements.forEach(el => {
     const text = el.textContent.replace('• ', '').trim();
     if (text) {
-      subtasks.push({ title: text, completed: false });
+      subtasks.push({ title: text, completed: false });  // Subtasks als Objekte speichern
     }
   });
-
   return subtasks;
 }
 

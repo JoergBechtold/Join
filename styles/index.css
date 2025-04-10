@@ -367,10 +367,27 @@
   
 }
 
+@media screen and (max-width: 1440px) {
+  .main-board {
+    overflow-y: auto;
+  }
+
+  .card-container {
+    overflow: auto;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .headline-input-container {
+    justify-content: unset;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width: 992px)  {
   .main-board {
     margin-left: 230px;
-    padding-right: 80px;
   }
 }
 
@@ -388,22 +405,6 @@
 
   .search-input-add-button-div {
     margin-right: 0px;
-  }
-}
-
-@media screen and (max-width: 375px)  {
-  .main-board {
-    margin-left: 0;
-    margin-right: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 80px;
-  }
-
-  .headline-input-container {
-    justify-content: unset;
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .column-title {
@@ -426,12 +427,26 @@
     width: auto;
   }
 
+  .todo-card {
+    height: 244px;
+  }
+
   .drag-area::-webkit-scrollbar {
     display: none;
   }
+}
 
-  .todo-card {
-    height: 244px;
+@media screen and (max-width: 375px)  {
+  .main-board {
+    margin-left: 0;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
+  }
+
+  .column-title {
+    width: 100%;
   }
 
   .popup-container, .edit-popup {
