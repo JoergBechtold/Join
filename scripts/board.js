@@ -102,6 +102,9 @@ function createCardContainer(key, container) {
   cardDiv.ondragend = endDragging;
   cardDiv.setAttribute('onclick', `openPopup('${key}')`);
   container.appendChild(cardDiv);
+  if (window.innerWidth < 768) {
+    setupTouchDrag(cardDiv); // cardDiv ist die erstellte Karte
+  }  
 }
 
 /**
