@@ -1,3 +1,15 @@
+/**
+ * Generates the HTML markup for the board task popup.
+ * Includes task metadata such as category, title, description, due date, priority, assigned contacts, and subtasks.
+ *
+ * @param {Object} task - The task object containing all task-related data.
+ * @param {string} taskKey - The unique key of the task used for identifying and interacting with it.
+ * @param {string} assignedHTML - The rendered HTML for the assigned contacts section.
+ * @param {string} subtasksHTML - The rendered HTML for the subtasks section.
+ * @param {string} categoryBg - The inline CSS background-color for the task category tag.
+ * @param {string} priorityIconSrc - The image source path for the task's priority icon.
+ * @returns {string} The complete HTML string for the task popup.
+ */
 function generateBoardPopupHTML(task, taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc, ) {
   return `
     <div class="popup-header">
@@ -54,6 +66,14 @@ function generateBoardPopupHTML(task, taskKey, assignedHTML, subtasksHTML, categ
   `;
 }
 
+/**
+ * Generates the HTML for displaying assigned contacts in the board popup.
+ * Matches initials from the task data with contact details from the contact list.
+ *
+ * @param {Array} assignedTo - An array of assigned contact objects containing initials and color info.
+ * @param {Object} allContacts - A dictionary of all contacts with their full data.
+ * @returns {string} The generated HTML string representing the assigned contacts.
+ */
 function generateAssignedHTML(assignedTo = [], allContacts = {}) {
     if (!Array.isArray(assignedTo) || assignedTo.length === 0) {
       return '<span>No contacts assigned</span>';
@@ -80,6 +100,13 @@ function generateAssignedHTML(assignedTo = [], allContacts = {}) {
     return html;
 }
   
+/**
+ * Generates the HTML for displaying a list of subtasks with checkbox status.
+ * Uses subtask data to build visual elements for each item in the list.
+ *
+ * @param {Array} subtasks - An array of subtask objects or strings.
+ * @returns {string} The generated HTML string for the subtasks section.
+ */
 function generateSubtasksHTML(subtasks = []) {
     if (!Array.isArray(subtasks) || subtasks.length === 0) {
       return '<span>No subtasks</span>';
