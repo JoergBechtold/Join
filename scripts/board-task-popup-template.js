@@ -126,4 +126,17 @@ function generateSubtasksHTML(subtasks = []) {
       })
       .join('');
 }
-  
+
+/**
+ * Renders a fallback message in the popup when a task cannot be found.
+ *
+ * @param {HTMLElement} popup - The popup container element.
+ */
+function renderTaskNotFound(popup) {
+  popup.innerHTML = `
+    <div class="popup-header">
+      <h2>Task Not Found</h2>
+      <button class="close-button" onclick="closePopup()">X</button>
+    </div>
+  `;
+}  

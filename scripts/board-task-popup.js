@@ -102,10 +102,10 @@ function getCategoryBg(task) {
 }
 
 /**
- * Opens the task details popup for a given task key.
- * Loads the task data from Firebase and renders the popup content.
+ * Opens the task popup by loading task data and rendering its content.
+ * If the task is not found, displays an error message instead.
  *
- * @param {string} key - The key of the task to display in the popup.
+ * @param {string} key - The unique identifier of the task.
  */
 async function openPopup(key) {
   taskKey = key;
@@ -113,21 +113,43 @@ async function openPopup(key) {
   const popupContainer = document.getElementById('popup_container');
   const popup = document.getElementById('popup');
   if (task) {
-    const assignedHTML = await getAssignedHTML(task);
-    const subtasksHTML = getSubtasksHTML(task);
-    const categoryBackground = getCategoryBg(task);
-    const priorityIconSrc = getPriorityIcon(task.priority);
-    const popupContent = getPopupContentHtml(task, key, assignedHTML, subtasksHTML, categoryBackground, priorityIconSrc);
-    popup.innerHTML = popupContent;
+    await renderPopupContent(popup, task, key);
   } else {
-    popup.innerHTML = `
-      <div class="popup-header">
-        <h2>Task Not Found</h2>
-        <button class="close-button" onclick="closePopup()">X</button>
-      </div>
-    `;
+    renderTaskNotFound(popup);
   }
-  popupContainer.style.display = 'flex';
+  showPopupOverlay(popupContainer);
+}
+
+/**
+ * Renders the content of the popup with full task details.
+ *
+ * @param {HTMLElement} popup - The popup container element.
+ * @param {Object} task - The task object containing all details.
+ * @param {string} key - The unique key of the task.
+ */
+async function renderPopupContent(popup, task, key) {
+  const assignedHTML = await getAssignedHTML(task);
+  const subtasksHTML = getSubtasksHTML(task);
+  const categoryBackground = getCategoryBg(task);
+  const priorityIconSrc = getPriorityIcon(task.priority);
+  const popupContent = getPopupContentHtml(
+    task,
+    key,
+    assignedHTML,
+    subtasksHTML,
+    categoryBackground,
+    priorityIconSrc
+  );
+  popup.innerHTML = popupContent;
+}
+
+/**
+ * Displays the popup and overlay elements on the board.
+ *
+ * @param {HTMLElement} container - The main popup container to be shown.
+ */
+function showPopupOverlay(container) {
+  container.style.display = 'flex';
   document.getElementById('overlay').style.display = 'block';
 }
 
@@ -166,29 +188,82 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
 }
 
 /**
- * Opens the edit popup and fills the form with data from the selected task.
+ * Opens the edit popup for a task and loads its data into the form.
  *
  * @param {string} key - The unique identifier of the task to be edited.
  */
 async function editPopupTask(key) {
-  const popupContainer = document.getElementById('popup_container');
-  popupContainer.style.display = 'none';
-  const editPopup = document.getElementById('edit_popup');
-  editPopup.style.display = 'flex';
+  hidePopupContainer();
+  showEditPopup();
   const task = await loadData(`tasks/${key}`);
   if (!task) return;
+  fillEditForm(task);
+  setEditContacts(task);
+  setEditSubtasks(task);
+  editPopupTaskKey = key;
+  showOverlay();
+}
+
+/**
+ * Hides the task details popup container if it's open.
+ */
+function hidePopupContainer() {
+  const popupContainer = document.getElementById('popup_container');
+  popupContainer.style.display = 'none';
+}
+
+/**
+ * Displays the edit task popup on the screen.
+ */
+function showEditPopup() {
+  const editPopup = document.getElementById('edit_popup');
+  editPopup.style.display = 'flex';
+}
+
+/**
+ * Fills the edit form fields with data from the task.
+ *
+ * @param {Object} task - The task object to populate the form.
+ */
+function fillEditForm(task) {
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
+  
   if (task.priority) {
     const priorityId = `edit_${task.priority.toLowerCase()}_button`;
     setEditPriority(priorityId);
   }
-  editPopupSelectedContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
+}
+
+/**
+ * Populates the assigned contacts section of the edit form.
+ *
+ * @param {Object} task - The task containing assigned contacts.
+ */
+function setEditContacts(task) {
+  editPopupSelectedContacts = Array.isArray(task.assigned_to)
+    ? [...task.assigned_to]
+    : [];
   renderSelectedEditContacts();
-  editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
+}
+
+/**
+ * Populates the subtasks section of the edit form.
+ *
+ * @param {Object} task - The task containing subtasks.
+ */
+function setEditSubtasks(task) {
+  editPopupSubtasks = Array.isArray(task.subtasks)
+    ? [...task.subtasks]
+    : [];
   renderEditSubtasks();
-  editPopupTaskKey = key;
+}
+
+/**
+ * Displays the global overlay used behind popups.
+ */
+function showOverlay() {
   document.getElementById('overlay').style.display = 'block';
 }
 
@@ -272,7 +347,6 @@ function closePopup(action = null) {
   const popupContainer = document.getElementById('popup_container');
   const editPopup = document.getElementById('edit_popup');
   const overlay = document.getElementById('overlay');
-
   if (action === 'cancelPopup') {
     if (popupContainer) popupContainer.style.display = 'none';
     if (editPopup) editPopup.style.display = 'none';
