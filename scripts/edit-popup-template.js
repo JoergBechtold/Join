@@ -1,3 +1,14 @@
+/**
+ * Generates the HTML markup for the task preview section inside the edit popup.
+ * Displays category, title, description, due date, priority, assigned contacts, and subtasks.
+ *
+ * @param {Object} task - The task object containing all relevant task data.
+ * @param {string} assignedHTML - The HTML string representing assigned contacts.
+ * @param {string} subtasksHTML - The HTML string representing subtasks.
+ * @param {string} categoryBg - The inline background-color style for the category tag.
+ * @param {string} priorityIcon - The URL path to the priority icon image.
+ * @returns {string} The complete HTML string for the edit popup preview section.
+ */
 function generateEditPreviewHTML(task, assignedHTML, subtasksHTML, categoryBg, priorityIcon) {
     return `
       <div class="popup-header">

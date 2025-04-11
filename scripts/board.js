@@ -101,11 +101,9 @@ function createCardContainer(key, container) {
   cardDiv.ondragstart = startDragging;
   cardDiv.ondragend = endDragging;
   cardDiv.setAttribute('onclick', `openPopup('${key}')`);
-  
   if (window.innerWidth < 768) {
     setupTouchDrag(cardDiv); 
-  }  
-
+  }
   container.appendChild(cardDiv);
 }
 
@@ -367,6 +365,12 @@ function createCard(key, container, task) {
   createPrio(key, task);
 }
 
+/**
+ * Updates the board by reloading all tasks and rendering them into their respective columns.
+ * Clears existing task cards and repopulates each column with up-to-date task data.
+ *
+ * @returns {Promise<void>} A promise that resolves when the board has been fully updated.
+ */
 async function updateAssignedContactsOnBoard() {
   const tasks = await loadData(PATH_TO_TASKS); 
   const allColumns = document.querySelectorAll('.drag-area');
@@ -380,6 +384,13 @@ async function updateAssignedContactsOnBoard() {
   updateEmptyColumns();  
 }
 
+/**
+ * Handles the deletion of a contact by confirming with the user and removing it from the board and database.
+ * If successful, updates the board to reflect the changes.
+ *
+ * @param {HTMLElement} deleteBtn - The delete button that was clicked to trigger the deletion.
+ * @returns {Promise<boolean>} A promise resolving to true if the deletion was successful, otherwise false.
+ */
 async function processContactDeletion(deleteBtn) {
   const contactDiv = getContactDiv(deleteBtn);
   if (!contactDiv) {
@@ -393,19 +404,24 @@ async function processContactDeletion(deleteBtn) {
   return success;
 }
 
+/**
+ * Loads all tasks from the database and renders them into their respective columns on the board.
+ * Clears previous tasks before rendering and updates empty column placeholders.
+ *
+ * @returns {Promise<void>} A promise that resolves when rendering is complete.
+ */
 async function renderCards() {
   const tasks = await loadData(PATH_TO_TASKS);
   const allColumns = document.querySelectorAll('.drag-area');
-  allColumns.forEach(col => col.innerHTML = ''); // Alle vorherigen Karten löschen
+  allColumns.forEach(col => col.innerHTML = '');
   for (const [key, task] of Object.entries(tasks)) {
     const column = document.getElementById(task.state);
     if (column) {
-      createCard(key, column, task);  // Neue Karten erstellen
+      createCard(key, column, task);
     }
   }
-  updateEmptyColumns();  // Sicherstellen, dass die Platzhalter für leere Spalten aktualisiert werden
+  updateEmptyColumns();
 }
-
 
 /**
  * Checks each column on the board and updates its state based on whether tasks exist.

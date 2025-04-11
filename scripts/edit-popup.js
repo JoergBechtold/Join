@@ -246,7 +246,7 @@ function cancelEditTask() {
  */
 function closeEditPopup() {
   document.getElementById('edit_popup').style.display = 'none';
-  document.getElementById('popup_container').style.display = 'none'; // 👈 das schließt das Task-Popup mit
+  document.getElementById('popup_container').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }
 
