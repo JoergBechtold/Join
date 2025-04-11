@@ -1,19 +1,30 @@
 function updateGreeting() {
-  const greetingElement = document.querySelector('.good');
+  const greetingElement = document.querySelectorAll('.good');
+  
   if (!greetingElement) return;
   const hours = new Date().getHours();
-  greetingElement.textContent = hours < 12 ? 'Good Morning,' : hours < 18 ? 'Good Afternoon,' : 'Good Evening,';
+  const greetingText = hours < 12 ? 'Good Morning,' : hours < 18 ? 'Good Afternoon,' : 'Good Evening,';
+
+  greetingElement.forEach(element => {
+    element.textContent = greetingText;
+  });
 }
 
 function greetingName(user) {
-  const nameElement = document.querySelector('.name');
+  const nameElements = document.querySelectorAll('.name');
 
-  if (nameElement && user) {
+  if (nameElements && user) {
+    let nameText; 
+
     if (user.firstname && user.lastname) {
-      nameElement.innerHTML = `${user.firstname} ${user.lastname}`;
+      nameText = `${user.firstname} ${user.lastname}`;
     } else {
-      nameElement.innerHTML = 'guest';
+      nameText = 'guest';
     }
+
+    nameElements.forEach(element => {
+      element.innerHTML = nameText;
+    });
   }
 }
 
@@ -116,6 +127,7 @@ async function initializeSummaryPage() {
     addClickEvents();
     const user = await loadUserData();
     greetingName(user);
+    checkAndShowAnimationSummary();
 
     let pencilContainer = document.querySelector('.pencil:first-child');
     let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
@@ -124,7 +136,22 @@ async function initializeSummaryPage() {
 
     addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
     addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
+    
   } catch (error) {
     console.error('Error initializing the summary page', error);
   }
+}
+
+function checkAndShowAnimationSummary() {
+  const mobileViewGreetinOverlayRef = document.getElementById('mobile_view_greetin_overlay');
+  // mobileViewGreetinOverlayRef.classList.remove('d-none');
+
+  if (sessionStorage.getItem('animationShownSummary')) {
+    mobileViewGreetinOverlayRef.classList.add('d-none');
+    return;
+  } 
+
+  mobileViewGreetinOverlayRef.classList.remove('d-none');
+  sessionStorage.setItem('animationShownSummary', 'true');
+  // startLoginAnimationsWithDelay(loginContainerRef,navLogInRef,footerLoginRegisterRef,animationsLogoOverlayRef,animationFinishedRef);
 }

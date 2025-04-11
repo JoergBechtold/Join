@@ -86,6 +86,7 @@ a {
   --font-size-16-19: clamp(16px, 15.4px + 0.1875vw, 19px);
   --font-size-20: 20px;
   --font-size-21: 21px;
+  --font-size-14-20:clamp(16px, 15.2px + 0.25vw, 20px);
   --font-size-16-20: clamp(16px, 15.2px + 0.25vw, 20px);
   --font-size-16-21: clamp(16px, 15px + 0.3125vw, 21px);
   --font-size-18-21: clamp(18px, 17.4px + 0.1875vw, 21px);
@@ -101,6 +102,7 @@ a {
   --font-size-47: 47px;
   --font-size-36-61: clamp(32px, 26.2px + 1.8125vw, 61px);
   --font-size-47-61: clamp(47px, 44.2px + 0.875vw, 61px);
+  --font-size-43-64: clamp(43px, 38.8px + 1.3125vw, 64px);
   --font-size-47-64: clamp(47px, 43.6px + 1.0625vw, 64px);
 
   /* responsive size new */
@@ -120,9 +122,6 @@ a {
 
   /* animation */
   --animation-opacity-overlay: fadeIn 1s ease-in-out forwards 1s;
-  /* --animation-logo-overlay: logoAnimation 1s ease forwards 1s; */
-
-  --animation-opacity-overlay: fadeIn 0.8s ease-in-out forwards 0.6s;
   --animation-logo-overlay: logoAnimation 0.7s ease forwards 1s;
   --animation-logo-overlay-responsive: backgroundAnimationResponsive 0.8s ease forwards 1s;
 
