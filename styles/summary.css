@@ -7,7 +7,8 @@
 
 .main-summary {
   height: 100dvh;
-  margin-left: var(--margin-left-main);
+  padding-left: 328px;
+  /* margin-left: var(--margin-left-main); */
   padding-top: var(--padding-top-main);
   display: flex;
   flex-direction: column;
@@ -94,7 +95,7 @@
 .name {
   white-space: nowrap;
   /* font-size: var(--font-size-43-64); */
-font-size: 64px;
+  font-size: 64px;
   font-weight: 700;
   text-align: left;
   color: #29abe2;
@@ -106,7 +107,7 @@ font-size: 64px;
   justify-content: flex-start;
   align-items: center;
   gap: clamp(50px, 31px + 5.9375vw, 145px);
-  width: 100%;
+  /* width: 100%; */
 }
 
 .content-details{
@@ -115,7 +116,8 @@ font-size: 64px;
   align-items: center;
   justify-content: center;
   gap: 25px;
- max-width: 560px;
+  max-width: 560px;
+  /* min-width: 100%; */
  min-width:  560px;
  
   
@@ -123,12 +125,13 @@ font-size: 64px;
 
 .checkpencil {
   width: 100%;
-  height: 168px;
-  /* height: clamp(110px, 98.4px + 3.625vw, 168px); */
+
+  /* height: 168px; */
+  height: clamp(110px, 98.4px + 3.625vw, 168px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 32px;
+  gap: clamp(20px, 12.809px + 2.2472vw, 32px);
   
 }
 
@@ -162,9 +165,9 @@ font-size: 64px;
   /* width: clamp(186px, 170.4px + 4.875vw, 264px); */
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 38px 58px 38px 58px;
+  /* padding: 38px 58px 38px 58px; */
   gap: 18px;
   border-radius: 30px 30px 30px 30px;
   background-color: #ffffff;
@@ -211,11 +214,11 @@ font-size: 64px;
 .urgent {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  /* height: clamp(110px, 98.4px + 3.625vw, 168px); */
-  height: 168px;
-  padding: 28px 48px 28px 48px;
+  height: clamp(110px, 98.4px + 3.625vw, 168px);
+  padding-inline: 10px;
+ 
   border-radius: 30px;
   background: #ffffff;
   box-shadow: 0px 0px 4px 0px #0000001a;
@@ -224,11 +227,11 @@ font-size: 64px;
 
 .numimg {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 130px;
   width: clamp(108px, 103.6px + 1.375vw, 130px);
-  gap: 18px;
+  gap: 8px;
 }
 
 .urgentimg {
@@ -261,7 +264,7 @@ font-size: 64px;
 }
 
 .vectorurgent {
-  height: 100%;
+  height: 60%;
   border: 1.5px solid #d1d1d1;
   border-radius: 50%;
 }
@@ -270,7 +273,7 @@ font-size: 64px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 13px;
+  gap: 5px;
  
 }
 
@@ -293,23 +296,25 @@ font-size: 64px;
 }
 
 .tasks {
-  /* height: clamp(110px, 98.4px + 3.625vw, 168px); */
-  height: 168px;
+  height: clamp(110px, 98.4px + 3.625vw, 168px);
+  /* height: 168px; */
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
   align-items: center;
+  gap: 13px;
 }
 
 .undertask {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 168px;
   /* width:  clamp(110px, 98.4px + 3.625vw, 168px); */
   height: 100%;
-  padding: 25px 0px 25px 0px;
-  gap: 13px;
+  /* padding: 25px 0px 25px 0px; */
+  /* gap: 13px; */
   border-radius: 30px;
   background: #ffffff;
   box-shadow: 0px 0px 4px 0px #0000001a;
@@ -377,11 +382,20 @@ font-size: 64px;
   .main-summary {
     margin-left: unset;
     padding-left: 230px;
-    padding-right: 50px;
+    padding-right: 60px;
   }
 }
 
 @media screen and (max-width: 910px)  {
+ /* .main-summary{
+  align-items: center;
+ } */
+
+ .content-details {
+  min-width: unset;
+  width: 100%;
+}
+
   .titeljoin h1 {
     font-size: clamp(47px, 39.4068px + 2.3729vw, 61px);
   }
@@ -398,14 +412,6 @@ font-size: 64px;
     font-size: clamp(43px, 31.6102px + 3.5593vw, 64px);
   }
 
-  /* .checkpencil {
-    height: clamp(110px, 98.4px + 3.625vw, 168px);
-  } */
-
-  .pencil {
-    width: clamp(186px, 143.6949px + 13.2203vw, 264px);
-  }
-
   .summary{
     width: clamp(40px, 23.1864px + 5.2542vw, 71px);
   }
@@ -418,10 +424,6 @@ font-size: 64px;
     font-size: clamp(14px, 10.7458px + 1.0169vw, 20px);
   }
   
-  /* .urgent {
-    height: clamp(110px, 98.4px + 3.625vw, 168px);
-  } */
-
   .urgentnmb {
     font-size: clamp(47px, 37.7797px + 2.8814vw, 64px);
   }
@@ -438,10 +440,6 @@ font-size: 64px;
     font-size: clamp(14px, 12.9153px + 0.339vw, 16px);
   }
   
-  /* .tasks {
-    height: clamp(110px, 98.4px + 3.625vw, 168px);
-  } */
-  
   .undertask {
     width:  clamp(110px, 78.5424px + 9.8305vw, 168px);
   }
@@ -456,9 +454,10 @@ font-size: 64px;
 }
 
 @media (max-width: 900px){
-  .content-details {
-    min-width: 100%;
-}
+  /* .content-details {
+    max-width: 100%;
+    width: 100%;
+} */
   
   .goodmorning {
     flex-direction: column;
@@ -497,23 +496,65 @@ font-size: 64px;
 
 
 
-@media (max-width: 835px){
-.pencil{
-  width: clamp(186px, 137.534px + 15.1456vw, 264px);
+@media (max-width: 854px){
+  /* .details{
+    min-width: clamp(300px, 138.4466px + 50.4854vw, 560px);
+  } */
+
+  .main-summary{
+    align-items: unset;
+  }
+
+  .content-details{
+    min-width: unset;
+  }
+
+  .tasknmb {
+    font-size: clamp(34px, 23.2135px + 3.3708vw, 52px);
 }
+
+.tasktext {
+  font-size: clamp(14px, 11.603px + 0.7491vw, 18px);
+}
+
+/* .undertask {
+  width: 140px;
+} */
 }
 
 @media (max-width: 768px) {
+  
+
+
   .main-summary{
     margin-left: unset;
-    padding-inline: 40px;
-    gap: 20px;
+    padding-inline: 20px;
+    gap: 35px;
+  }
+
+  .details{
+    width: 100%;
+    align-items: center;
+  }
+
+  .pencil {
+    justify-content: center;
+    gap: 18px;
+}
+
+  .content-details{
+    width: 100%;
+    padding-bottom: 110px;
   }
 
   .mobile-view-greeting-overlay.show {
     display: flex; /* Anzeigen des Overlays */
     opacity: 1; /* Volle Deckkraft beim Anzeigen */
     transition: opacity 1s ease-in-out; /* Transition für das Einblenden */
+  }
+
+  .urgent{
+    justify-content: space-evenly;
   }
 
   .goodmorning{
@@ -532,3 +573,25 @@ font-size: 64px;
     text-align: center;
 }
 }
+
+@media (max-width: 500px){
+  .urgent {
+    justify-content: space-evenly;
+}
+
+.checkpencil {
+  gap: 12px;
+}
+}
+
+@media (max-width: 376px){
+  .main-summary {
+    gap: 14px;
+}
+
+.main-summary::-webkit-scrollbar {
+  display: none;
+}
+}
+
+
