@@ -246,7 +246,7 @@ async function deleteTaskFromBoardPopup(taskKey) {
   if (!confirmed) return false;
 
   try {
-    await deleteData(`tasks/${taskKey}`);
+    await deleteData(`tasks/`, `${taskKey}`);
     closePopup();
     await renderCards();
     return true;
@@ -267,7 +267,17 @@ async function showConfirmDialog(message) {
  * Closes all popup elements on the board view.
  * Hides the task detail popup, edit popup, and the overlay.
  */
-function closePopup() {
-  document.getElementById('popup_container').style.display = 'none';
-  document.getElementById('overlay').style.display = 'none';
+function closePopup(action = null) {
+  const popupContainer = document.getElementById('popup_container');
+  const editPopup = document.getElementById('edit_popup');
+  const overlay = document.getElementById('overlay');
+
+  if (action === 'cancelPopup') {
+    if (popupContainer) popupContainer.style.display = 'none';
+    if (editPopup) editPopup.style.display = 'none';
+  } else {
+    if (popupContainer?.style.display === 'flex') popupContainer.style.display = 'none';
+    if (editPopup?.style.display === 'flex') editPopup.style.display = 'none';
+  }
+  if (overlay) overlay.style.display = 'none';
 }
