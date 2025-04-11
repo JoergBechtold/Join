@@ -505,7 +505,9 @@ font-size: 64px;
 
 @media (max-width: 768px) {
   .main-summary{
-    margin-left: var(--margin-left-main-responsive);
+    margin-left: unset;
+    padding-inline: 40px;
+    gap: 20px;
   }
 
   .mobile-view-greeting-overlay.show {
