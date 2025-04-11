@@ -170,8 +170,9 @@ async function submitEditTask() {
   if (!task) return;
 
   applyEditedTaskData(task);
-  task.subtasks = JSON.stringify(task.subtasks);
-  task.assigned_to = JSON.stringify(task.assigned_to); 
+  task.subtasks = checkSubtasks();
+  task.assigned_to = checkAssignedTo();
+
   
   await updateData(`tasks/${editPopupTaskKey}`, task);
   closeEditPopup();
@@ -198,11 +199,10 @@ function applyEditedTaskData(task) {
 }
 
 /**
- * Checks all subtasks from the edit form and returns an array of subtasks.
- * The subtasks are parsed from the `.subtask-text` elements within the edit form.
- * Each subtask is added with a `title` and a default `completed` status of `false`.
+ * Checks all subtasks from the edit form and returns an array of strings.
+ * This ensures subtasks are saved just like in 'add-task.js'.
  *
- * @returns {Array} An array of subtask objects, each containing a `title` and `completed` status.
+ * @returns {Array} Array of subtask strings
  */
 function checkSubtasks() {
   const elements = document.querySelectorAll('#edit_subtask_enum .subtask-text');
@@ -210,7 +210,10 @@ function checkSubtasks() {
   elements.forEach(el => {
     const text = el.textContent.replace('• ', '').trim();
     if (text) {
-      subtasks.push({ title: text, completed: false });  // Subtasks als Objekte speichern
+      subtasks.push({
+        title: text,
+        completed: false
+      });      
     }
   });
   return subtasks;
@@ -264,22 +267,6 @@ function selectEditOption(value) {
 }
 
 /**
- * Toggles the visibility of the category dropdown in the edit popup.
- * Changes the arrow icon based on whether the dropdown is open or closed.
- */
-function toggleEditCategoryDropdown() {
-  const options = document.getElementById('edit_options_container');
-  const arrow = document.getElementById('edit_select_arrow');
-  if (options.classList.contains('d-none')) {
-    options.classList.remove('d-none');
-    arrow.src = 'assets/icons/arrow_drop_down_up.svg';
-  } else {
-    options.classList.add('d-none');
-    arrow.src = 'assets/icons/arrow_drop_down.svg';
-  }
-}
-
-/**
  * Cancels the task editing process and closes the edit popup.
  */
 function cancelEditTask() {
@@ -292,6 +279,7 @@ function cancelEditTask() {
 function closeEditPopup() {
   document.getElementById('edit_popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
+  closePopup();
 }
 
 /**

@@ -33,7 +33,8 @@ function renderEditSubtasks() {
   const container = document.getElementById('edit_subtask_enum');
   container.innerHTML = '';
   editPopupSubtasks.forEach((subtask, index) => {
-    container.innerHTML += editSubtaskItem(subtask, index);
+    const text = typeof subtask === 'object' ? subtask.title : subtask;
+    container.innerHTML += editSubtaskItem(text, index);
   });
 }
 
