@@ -13,10 +13,10 @@ body {
   gap: 30px;
 }
 
-.main-content {
+/* .main-content {
   padding-top: 100px;
   padding-left: 50px;
-}
+} */
 
 .sidebarContact {
   width: 456px;
@@ -36,7 +36,8 @@ body {
   width: var(--scollbar-width-thin);
 }
 
-.add-contact-btn {
+.add-contact-btn,
+.edit-contact-btn {
   background-color: #2a3647;
   color: white;
   font-weight: 700;
@@ -58,6 +59,10 @@ body {
   padding-bottom: 12px;
   gap: 16px;
   margin-top: 10px;
+}
+
+.edit-contact-btn{
+  display: none;
 }
 
 .add-contact-btn img {
@@ -282,17 +287,23 @@ body {
   align-items: center;
 }
 
-.profile-image {
-  width: 70px;
-  height: 70px;
-  background-color: #ddd;
-  border-radius: 50%;
+.profile-image,
+.edit-mode {
+  width: 120px;
+  height: 120px;
+  border-radius: 70px;
+  border-width: 3px;
+  gap: 10px;
+  margin-left: 80px;
+  margin-right: 100px;
+  color: #fff;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-right: 150px;
-  margin-left: 100px;
-  margin-bottom: 30px;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 32px;
+  border: 3px solid rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .input-group {
@@ -549,7 +560,8 @@ color: var(--blue);
 }
 
 .confirm-popup-content {
-  background: #fff;
+  background: #2a3647;
+  color: #fff;
   font-size: 25px;
   padding: 100px;
   border-radius: 20px;
@@ -559,9 +571,9 @@ color: var(--blue);
 .confirm-popup button {
   margin-top: 50px;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #fff;
   font-size: 20px;
-  border: 1px solid var(--blue);
+  border: 2px solid var(--blue);
   box-shadow: var(--box-shadow-button);
   border-radius: 30px;
 }
@@ -569,15 +581,6 @@ color: var(--blue);
 .confirm-popup .confirm-yes:hover {
   background: linear-gradient(180deg, #ff0000, #ff4d4d);
   color: #ffffff;
-}
-
-.main-content-responsive{
-  display: none;
-  /* justify-content: space-between; */
-  width: 100vh;
-  height: 150px;
-  padding: 20px 10px;
-  flex-direction: column;
 }
 
 .main-responsive{
@@ -590,6 +593,12 @@ color: var(--blue);
   display: none;
 }
 
+.original-h1{
+  position: absolute;
+  top: 180px;
+  left: 750px;
+}
+
 @media screen and (max-width: 768px) {
   .contact-list{
     display: flex;
@@ -600,6 +609,10 @@ color: var(--blue);
     padding-left: 0px;
     height: 100%;
     padding-top: 80px;
+  }
+
+  .contact{
+    padding: 18px 15px;
   }
 
   .sidebarContact{
@@ -625,6 +638,13 @@ color: var(--blue);
     padding-left: 30px;
   }
 
+  .main-responsive{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100vh;
+  }
+
   .detail-info h1{
     display: flex;
     font-size: 28px;
@@ -640,6 +660,7 @@ color: var(--blue);
     display: flex;
     justify-content: space-between;
     width: 290px;
+    position: absolute;
   }
 
   #detail-avatar{
@@ -703,10 +724,11 @@ color: var(--blue);
     display: none !important;
   }
 
-  .add-contact-btn {
+  .add-contact-btn,
+  .edit-contact-btn {
     position: fixed;
-    left: 650px;
-    top: 600px;
+    left: 640px;
+    top: 800px;
     width: 56px;
     height: 56px;
     padding: 12px;
@@ -720,7 +742,8 @@ color: var(--blue);
     display: none;
   }
 
-    .container-add {
+    .container-add,
+    .container-edit {
       width: 95%;
       height: 80%;
       border: 1px solid rgba(42, 54, 71, 1);
@@ -764,11 +787,11 @@ color: var(--blue);
     }
 
     .profile-image {
-      width: 60px;
-      height: 60px;
-      margin-top: -60px;
-      margin-left: 160px;
-      margin-bottom: 50px;
+      width: 120px;
+      height: 120px;
+      margin-top: -100px;
+      margin-left: 100px;
+      margin-bottom: 30px;
       align-items: center;
       justify-content: center;
     }
@@ -784,7 +807,6 @@ color: var(--blue);
   
     .button-cancel-white-gray,
     .button-save-gray {
-      width: 100%;
       justify-content: center;
     }
 
@@ -806,20 +828,52 @@ color: var(--blue);
 
     .close-btn {
       position: absolute !important;
-      top: -230px !important;
+      top: -280px !important;
       left: 620px !important;
   }
 
   .close-btn img {
     content: url('../assets/icons/Close.svg');
   }
+
+  .input-group {
+    position: relative;
+    display: flex;
+    margin-bottom: 30px;
+    width: 422px;
+    height: 50px;
+    gap: 8px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action-responsive {
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 116px;
+    height: 100px;
+    top: 640px;
+    left: 255px;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
 }
 
 @media screen and (max-width: 450px){
-  .add-contact-btn {
+  .add-contact-btn,
+  .edit-contact-btn {
     position: fixed;
     left: 250px;
-    top: 600px;
+    top: 800px;
     width: 56px;
     height: 56px;
     padding: 12px;
@@ -830,13 +884,13 @@ color: var(--blue);
   }
 
   .left-section h1 {
-    font-size: 30px;
+    font-size: 40px;
     height: 0;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
   .left-section p {
-    font-size: 12px;
+    font-size: 15px;
     margin-bottom: 16px;
     height: 0;
   }
@@ -858,7 +912,7 @@ color: var(--blue);
   }
 
   .input-group input{
-    width: 70%;
+    width: 60%;
   }
 
   .input-group input::placeholder{
@@ -869,16 +923,12 @@ color: var(--blue);
     width: 50%;
   }
 
-  .profile-image img{
-    width: 110px;
-  }
-
   .profile-image{
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
 
   .input-group .icon {
-    right: 80px;
+    right: 100px;
   }
 
   .name-error{
@@ -895,7 +945,7 @@ color: var(--blue);
 
   .close-btn {
     position: absolute !important;
-    top: -250px !important;
+    top: -290px !important;
     left: 250px !important;
 }
 
@@ -906,73 +956,174 @@ color: var(--blue);
 
 
 @media (min-width: 350px) and (max-width: 400px) {
-  .add-contact-btn {
+  .add-contact-btn,
+  .edit-contact-btn {
       left: 290px; 
+      top: 800px;
   }
   .close-btn {
     left: 300px !important;
 }
+
+.input-group input{
+  width: 75%;
+}
+
+.input-group .icon {
+  right: 70px;
+}
 }
 
 @media (min-width: 400px) and (max-width: 450px) {
-  .add-contact-btn {
-      left: 350px; 
+  .add-contact-btn,
+  .edit-contact-btn {
+      left: 340px; 
   }
 
   .close-btn {
     left: 350px !important;
+    top: -280px !important;
+}
+
+.input-group input{
+  width: 85%;
+}
+
+.input-group .icon {
+  right: 50px;
 }
 }
 
 @media (min-width: 450px) and (max-width: 500px) {
-  .add-contact-btn {
-      left: 400px; 
+  .add-contact-btn,
+  .edit-contact-btn {
+      left: 390px; 
+      top: 800px;
   }
 
   .close-btn {
     left: 390px !important;
+    top: -280px !important;
+}
+
+.input-group input{
+  width: 85%;
+}
+
+.input-group .icon {
+  right: 50px;
 }
 }
 
 @media (min-width: 500px) and (max-width: 550px) {
-  .add-contact-btn {
-      left: 450px; 
+  .add-contact-btn,
+  .edit-contact-btn {
+      left: 440px; 
+      top: 800px;
   }
 
   .close-btn {
     left: 430px !important;
+    top: -280px !important;
 }
 }
 
 @media (min-width: 550px) and (max-width: 600px) {
-  .add-contact-btn {
-      left: 500px; 
+  .add-contact-btn,
+  .edit-contact-btn {
+      left: 490px; 
   }
 
   .close-btn {
-    top: -230px !important;
+    top: -280px !important;
     left: 490px !important;
 }
 }
 
 @media (min-width: 600px) and (max-width: 650px) {
-  .add-contact-btn {
-      left: 550px; 
+  .add-contact-btn,
+  .edit-contact-btn {
+      left: 540px; 
   }
 
   .close-btn {
-    top: -230px !important;
+    top: -280px !important;
     left: 500px !important;
 }
 }
 
 @media (min-width: 650px) and (max-width: 700px) {
-  .add-contact-btn {
-      left: 600px; 
+  .add-contact-btn,
+  .edit-contact-btn {
+      left: 590px; 
+  }
+
+  .close-btn {
+    top: -280px !important;
+    left: 550px !important;
+}
+}
+
+@media (min-height: 350px) and (max-height: 450px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 250px; 
+  }
+}
+
+@media (min-height: 450px) and (max-height: 550px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 350px; 
+  }
+}
+
+@media (min-height: 550px) and (max-height: 650px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 400px; 
+  }
+
+  .container-add {
+    height: 95%;
+  }
+}
+
+@media (min-height: 650px) and (max-height: 700px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 500px; 
+  }
+  .container-add {
+    height: 95%;
   }
 
   .close-btn {
     top: -230px !important;
-    left: 550px !important;
 }
 }
+
+@media (min-height: 700px) and (max-height: 800px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 550px; 
+  }
+}
+
+@media (min-height: 800px) and (max-height: 900px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 650px; 
+  }
+
+  .close-btn {
+    top: -270px !important;
+}
+}
+
+@media (min-height: 900px) and (max-height: 1000px) {
+  .add-contact-btn,
+  .edit-contact-btn {
+      top: 750px; 
+  }
+} 

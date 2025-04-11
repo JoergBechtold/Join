@@ -18,3 +18,24 @@ function showContactDetail() {
         document.querySelector('.original-h1').style.display = 'flex';
   }
 }
+
+function toggleActions(btn, event) {
+  event.stopPropagation();
+
+  let container = btn.parentNode;
+  let actionsEl = container.querySelector('.action-responsive');
+
+  if (actionsEl.style.display === 'flex') {
+    actionsEl.style.display = 'none';
+  } else {
+    actionsEl.style.display = 'flex';
+  }
+}
+
+function hideAllActions() {
+  let actionsList = document.getElementsByClassName('action-responsive');
+  for (let i = 0; i < actionsList.length; i++) {
+    actionsList[i].style.display = 'none';
+  }
+}
+

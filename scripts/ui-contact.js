@@ -93,17 +93,19 @@ function closeEditContactPopup() {
 }
 
 function processContactEdition() {
-  if (!activeContact) {
-    return;
-  }
+  if (!activeContact) {return;}
   const nameInput = document.querySelector('.container-edit input[placeholder="Firstname Lastname"]');
   const emailInput = document.querySelector('.container-edit input[placeholder="Email"]');
   const phoneInput = document.querySelector('.container-edit input[placeholder="Phone"]');
-
   nameInput.value = activeContact.querySelector('.contact-name').textContent;
   emailInput.value = activeContact.querySelector('.contact-email').textContent;
   phoneInput.value = activeContact.getAttribute('data-phone') || "";
-
+  const profileImageContainer = document.querySelector('.container-edit .profile-image');
+  profileImageContainer.innerHTML = ''; 
+  const activeAvatar = activeContact.querySelector('.contact-avatar');
+  profileImageContainer.textContent = activeAvatar.textContent.trim();
+  profileImageContainer.style.backgroundColor = activeAvatar.style.backgroundColor || '#ccc';
+  profileImageContainer.classList.add('edit-mode');
   showEditContactPopup();
   checkInputs();
 }
@@ -117,7 +119,7 @@ function updateBasicContactUI(newName, newEmail, newPhone, initials) {
   document.getElementById('detail-name').textContent = newName;
   document.getElementById('detail-email').textContent = newEmail;
   document.getElementById('detail-phone').textContent = newPhone;
-  const detailAvatar = document.getElementById('detail-avatar');
+  const detailAvatar = document.getElementById('detail-avatar, profile-avatar');
   if (detailAvatar) { 
     detailAvatar.textContent = initials;
     detailAvatar.style.backgroundColor = aDiv.style.backgroundColor;

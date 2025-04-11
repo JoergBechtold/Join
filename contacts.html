@@ -22,14 +22,16 @@
     
     <div id="header_container"></div>
 
-    <div class="contacts-container">
-      <aside class="sidebarContact">
-        <button class="add-contact-btn" onclick="showAddContactPopup()">
-          <span>Add new contact</span>
-          <img src="assets/icons/person_add.svg" alt="Add User" />
-        </button>
-        <div class="contact-list" onclick="handleContactListClick(event)"></div>
-      </aside>
+      <div class="contacts-container">
+        <div class="sidebarContact">
+          <button class="add-contact-btn" onclick="showAddContactPopup()">
+            <span>Add new contact</span>
+            <img src="assets/icons/person_add.svg" alt="Add User" />
+          </button>
+          <div class="contact-list" onclick="handleContactListClick(event)"></div>
+        </div>
+      </div>
+    </div>
 
       <div class="overlay hidden"></div>
 
@@ -90,8 +92,8 @@
         <div class="right-section">
           <button class="close-btn" onclick="closeEditContactPopup()"><img src="assets/icons/cancel.svg" alt="Cancel Icon" /></button>
 
-          <div class="profile-image">
-            <img src="assets/icons/graycontactperson.svg" alt="Profilbild" />
+          <div class="profile-image avatar" id="profile-avatar">
+            
           </div>
 
           <form onsubmit="saveContact(event)">
@@ -124,8 +126,29 @@
         <p>Contact successfully created</p>
       </div>
 
-      <div class="main-content">
+      <div class="main-content" onclick="hideAllActions()">
         <div class="main-responsive">
+          <div>
+            <div class="edit-contact-btn" onclick="toggleActions(this, event)">
+              <img src="./assets/icons/more_vert.svg" alt="">
+            </div>
+            <div class=" action-responsive" style="display: none;">
+              <div class="action-box edit" onclick="processContactEdition()">
+                <div class="edit-icon">
+                  <img src="assets/icons/edit-black.svg" alt="Edit" id="edit_icon" />
+                </div>
+                <span class="edit-btn">Edit </span>
+              </div>
+
+              <div class="action-box delete" onclick="processContactDeletion()">
+                <div class="delete-icon">
+                  <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
+                </div>
+                <span class="delete-btn">Delete</span>
+              </div>
+            </div>
+          </div>
+          
           <div class="responsive-flex">
           <div class="responsive-h1">
             <h1>Contacts</h1>
