@@ -289,6 +289,5 @@ async function deleteTask(taskKey) {
  */
 function closePopup() {
   document.getElementById('popup_container').style.display = 'none';
-  document.getElementById('edit_popup').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 }

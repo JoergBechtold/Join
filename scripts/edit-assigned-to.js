@@ -1,5 +1,4 @@
 let editDropdownOpen = false;
-let selectedEditContacts = [];
 
 /**
  * Toggles the visibility of the contact dropdown in the edit task form.
@@ -108,8 +107,40 @@ function renderEditContactsHtml(data) {
   if (!data || Object.keys(data).length === 0) {
     return '<div class="error-select-option">No contacts found.</div>';
   }
+
   return Object.values(data)
-    .map((contact) => contactsCustomSelectOptionHtml(contact))
+    .map((contact) => {
+      const initials = contact.initials || '';
+      const randomColor = contact.contactColor || '#ccc';
+
+      const isSelected = selectedEditContacts.some(
+        (c) => c.initials === initials && c.randomColor === randomColor
+      );
+
+      const checkboxSrc = isSelected
+        ? 'assets/icons/checked_box.svg'
+        : 'assets/icons/Square_box.svg';
+
+      const selectedClass = isSelected
+        ? 'contacts-custom-select-option-selected'
+        : 'contacts-custom-select-option';
+
+      return `
+        <div class="${selectedClass}" onclick="toggleEditSelectedContact(this)">
+          <div class="name-and-img">
+            <div class="circle-and-name">
+              <div class="circle" style="background-color: ${randomColor};">
+                ${initials}
+              </div>
+              <div>${contact.firstname} ${contact.lastname}</div>
+            </div>
+            <div>
+              <img src="${checkboxSrc}" alt="Checkbox">
+            </div>
+          </div>
+        </div>
+      `;
+    })
     .join('');
 }
 

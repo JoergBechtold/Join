@@ -2,7 +2,7 @@ let editPopupSubtasks = [];
 let editPopupActiveButton = null;
 let editPopupTaskKey = null;
 let editPopupCurrentSubtaskIndex = null;
-let editSelectedContact = [];
+let selectedEditContacts = [];
 
 /**
  * Loads the task data from Firebase and opens the edit popup.
@@ -58,37 +58,13 @@ function loadEditFormData(task) {
   }
   editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
   updateEditSubtaskDisplay();
-  selectedEditContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
+  selectedEditContacts = Array.isArray(task.assigned_to)
+    ? task.assigned_to.map(c => ({
+        initials: c.initials,
+        randomColor: c.randomColor
+      }))
+    : [];
   renderEditSelectedContacts();
-}
-
-/**
- * Loads a task from the database using its key and populates the edit form.
- * Also displays the visual preview and opens the edit popup.
- *
- * @param {string} key - The unique identifier of the task to edit.
- */
-async function loadEditForm(key) {
-  const task = await loadData(`tasks/${key}`);
-  if (!task) return;
-  renderEditPreview(task);
-  document.getElementById('edit_title').value = task.title || '';
-  document.getElementById('edit_description').value = task.description || '';
-  document.getElementById('edit_due_date').value = task.due_date || '';
-  if (task.priority) {
-    const prio = task.priority.toLowerCase();
-    if (['urgent', 'medium', 'low'].includes(prio)) {
-      setEditPriority(`edit_${prio}_button`);
-    }
-  }
-  if (task.category) {
-    document.getElementById('edit_selected_option').textContent = task.category;
-  }
-  editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
-  updateEditSubtaskDisplay();
-  selectedEditContacts = Array.isArray(task.assigned_to) ? [...task.assigned_to] : [];
-  renderEditSelectedContacts();
-  document.getElementById('edit_popup').style.display = 'flex';
 }
 
 /**
@@ -168,18 +144,14 @@ async function submitEditTask() {
   if (!validateEditInputs()) return;
   const task = await loadData(`tasks/${editPopupTaskKey}`);
   if (!task) return;
-
   applyEditedTaskData(task);
   task.subtasks = checkSubtasks();
   task.assigned_to = checkAssignedTo();
-
-  
   await updateData(`tasks/${editPopupTaskKey}`, task);
   closeEditPopup();
   const updatedTask = await loadData(`tasks/${editPopupTaskKey}`);
   if (updatedTask) {
     updateCardInBoard(editPopupTaskKey, updatedTask);
-    updatePopup(editPopupTaskKey, updatedTask); 
   }
 }
 
@@ -226,13 +198,9 @@ function checkSubtasks() {
  * @returns {Array} An array of contact objects, each containing the `initials` and `randomColor` of the contact.
  */
 function checkAssignedTo() {
-  const container = document.getElementById('edit_selected_contact_circles');
-  const circles = container.querySelectorAll('.circle');
-  const contacts = Array.from(circles).map(circle => ({
-    initials: circle.textContent.trim(),
-    randomColor: circle.style.backgroundColor
-  }));
-  return contacts;
+  return Array.isArray(selectedEditContacts) && selectedEditContacts.length > 0
+    ? [...selectedEditContacts]
+    : '';
 }
 
 /**
@@ -278,8 +246,8 @@ function cancelEditTask() {
  */
 function closeEditPopup() {
   document.getElementById('edit_popup').style.display = 'none';
+  document.getElementById('popup_container').style.display = 'none'; // 👈 das schließt das Task-Popup mit
   document.getElementById('overlay').style.display = 'none';
-  closePopup();
 }
 
 /**
