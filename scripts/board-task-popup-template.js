@@ -1,4 +1,4 @@
-function generateBoardPopupHTML(task, taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc) {
+function generateBoardPopupHTML(task, taskKey, assignedHTML, subtasksHTML, categoryBg, priorityIconSrc, ) {
   return `
     <div class="popup-header">
       <div style="${categoryBg}" class="tag-container" id="tag-container">
@@ -34,7 +34,7 @@ function generateBoardPopupHTML(task, taskKey, assignedHTML, subtasksHTML, categ
       </div>
     </div>
     <div class="popup-actions">
-      <div class="action-box delete" onclick="deleteTask(${taskKey})">
+      <div class="action-box delete" onclick="deleteTaskFromBoardPopup('${taskKey}')">
         <div class="delete-icon">
           <img src="assets/icons/paperbasketdelet.svg" alt="Delete" id="delete_icon" />
         </div>

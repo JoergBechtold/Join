@@ -238,11 +238,9 @@ function createProgressBar(key, task) {
   const progressBar = document.createElement('div');
   progressBar.className = 'progress-bar';
   progressBar.style.width = '0%'; 
-
   const subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
   const completed = subtasks.filter(st => st.completed).length;
   const percent = subtasks.length > 0 ? (completed / subtasks.length) * 100 : 0;
-
   setTimeout(() => {
     progressBar.style.width = `${percent}%`;
   }, 10); 
@@ -392,24 +390,6 @@ async function processContactDeletion(deleteBtn) {
   }
   return success;
 }
-
-/**
- * Fetches all tasks from the database and renders them into their respective columns on the board.
- * Clears previous cards before re-rendering. Also updates the empty column placeholders.
- */
-// async function renderCards() {
-//   const tasks = await loadData(PATH_TO_TASKS);
-//   const allColumns = document.querySelectorAll('.drag-area');
-//   allColumns.forEach(col => col.innerHTML = '');
-//   for (const [key, task] of Object.entries(tasks)) {
-//     const column = document.getElementById(task.state);
-//     if (column) {
-//       createCard(key, column, task);
-//     }
-//   }
-
-//   updateEmptyColumns();
-// }
 
 async function renderCards() {
   const tasks = await loadData(PATH_TO_TASKS);

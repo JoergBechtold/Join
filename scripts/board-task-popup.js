@@ -230,57 +230,37 @@ function editTask() {
   editPopup.style.display = 'flex';
 }
 
-// async function deleteTask(taskKey) {
-//   try {
-//     const confirmed = await showConfirmation('Are you sure you want to delete this task?'); 
-
-//     if (!confirmed) {
-//       return; 
-//     }
-
-//     if (!taskKey) {
-//       console.error('taskKey is undefined.');
-//       return;
-//     }
-
-//     await deleteData('tasks', `${taskKey}`);
-
-//     let tasksString = sessionStorage.getItem('tasks');
-//     if (tasksString) {
-//       let tasks = JSON.parse(tasksString);
-//       delete tasks[taskKey];
-//       sessionStorage.setItem('tasks', JSON.stringify(tasks));
-//     } else {
-//       console.error("No tasks found in sessionStorage.");
-//     }
-
-//     closePopup();
-//     renderCards();
-//   } catch (error) {
-//     console.error('Error deleting the task:', error);
-//   }
-// }
-
 /**
  * Deletes a task from Firebase and updates the UI accordingly.
  * Prompts the user for confirmation before proceeding with deletion.
  *
  * @param {string} taskKey - The unique key of the task to be deleted.
  */
-async function deleteTask(taskKey) {
-  if (confirm('Are you sure you want to delete this task?')) {
-    try {
-      if (!taskKey) {
-        console.error('taskKey is undefined.');
-        return;
-      }
-      await deleteData(`tasks/${taskKey}`);
-      closePopup();
-      renderCards();
-    } catch (error) {
-      console.error('Error deleting the task:', error);
-    }
+async function deleteTaskFromBoardPopup(taskKey) {
+  if (!taskKey) {
+    console.error('No task key provided.');
+    return false;
   }
+
+  const confirmed = await showConfirmDialog('Do you really want to delete this task?');
+  if (!confirmed) return false;
+
+  try {
+    await deleteData(`tasks/${taskKey}`);
+    closePopup();
+    await renderCards();
+    return true;
+  } catch (err) {
+    console.error('Task deletion failed:', err);
+    return false;
+  }
+}
+
+async function showConfirmDialog(message) {
+  return new Promise(resolve => {
+    const confirmed = confirm(message); // Oder deine eigene Modal
+    resolve(confirmed);
+  });
 }
 
 /**
