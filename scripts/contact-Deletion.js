@@ -1,11 +1,26 @@
+/**
+ * Returns the contact element associated with a delete button.
+ * If no delete button is provided, it returns the globally active contact.
+ *
+ * @param {HTMLElement} deleteBtn - The delete button element.
+ * @returns {HTMLElement} The associated contact element.
+ */
 function getContactDiv(deleteBtn) {
-    if (deleteBtn) {
-      return deleteBtn.closest('.contact');
-    } else {
-      return activeContact;
-    }
-  }  
+  if (deleteBtn) {
+    return deleteBtn.closest('.contact');
+  } else {
+    return activeContact;
+  }
+}
 
+/**
+ * Displays a confirmation dialog with the provided message.
+ * Returns a Promise that resolves with the user's confirmation (true or false).
+ *
+ * @async
+ * @param {string} message - The confirmation message to display.
+ * @returns {Promise<boolean>} A promise that resolves to the confirmation result.
+ */
 async function showConfirmDialog(message) {
   return new Promise(resolve => {
     showConfirmPopup(message, confirmed => {
@@ -14,6 +29,15 @@ async function showConfirmDialog(message) {
   });
 }
 
+/**
+ * Updates the color associated with a contact before deletion.
+ * It retrieves the contact's avatar color and adds it to an existing array in randomColorsJson.
+ * If randomColorsJson is not initialized, it calls initializeRandomColors().
+ *
+ * @async
+ * @param {HTMLElement} contactDiv - The contact element whose color will be updated.
+ * @returns {Promise<void>}
+ */
 async function updateColorForDeletion(contactDiv) {
   const avatar = contactDiv.querySelector('.contact-avatar');
   const contactColor = avatar.getAttribute('data-color');
@@ -24,11 +48,27 @@ async function updateColorForDeletion(contactDiv) {
   await addColorToExistingArray(key, contactColor);
 }
 
+/**
+ * Deletes a contact from Firebase by calling the deleteData API.
+ *
+ * @async
+ * @param {string} firebaseId - The Firebase ID of the contact to be deleted.
+ * @returns {Promise<*>} A promise that resolves to the result of the deletion.
+ */
 async function performFirebaseDeletion(firebaseId) {
   const deleteResult = await deleteData('/contacts', firebaseId);
   return deleteResult;
 }
 
+/**
+ * Processes the deletion of a contact from Firebase.
+ * It retrieves the Firebase ID from the contact element, updates the color before deletion,
+ * and then performs the deletion. If no Firebase ID is found, the contact is removed from the UI.
+ *
+ * @async
+ * @param {HTMLElement} contactDiv - The contact element to be deleted.
+ * @returns {Promise<boolean>} True if deletion was successful, otherwise false.
+ */
 async function processDeletionFromFirebase(contactDiv) {
   const firebaseId = contactDiv.getAttribute('data-id');
   if (!firebaseId) {
@@ -51,12 +91,26 @@ async function processDeletionFromFirebase(contactDiv) {
   }
 }
 
+/**
+ * Asks the user for confirmation and, if confirmed, processes the deletion of the contact.
+ *
+ * @async
+ * @param {HTMLElement} contactDiv - The contact element to be deleted.
+ * @returns {Promise<boolean>} True if deletion was confirmed and processed successfully, otherwise false.
+ */
 async function confirmAndDeleteContact(contactDiv) {
   const confirmed = await showConfirmDialog('Do you really want to delete this contact?');
   if (!confirmed) return false;
   return await processDeletionFromFirebase(contactDiv);
 }
 
+/**
+ * Processes the deletion of a contact.
+ * It first retrieves the contact element using getContactDiv and then calls confirmAndDeleteContact.
+ *
+ * @param {HTMLElement} deleteBtn - The delete button element that initiated the deletion.
+ * @returns {Promise<boolean>} A promise that resolves to true if deletion was successful, otherwise false.
+ */
 function processContactDeletion(deleteBtn) {
   const contactDiv = getContactDiv(deleteBtn);
   if (!contactDiv) {
@@ -66,6 +120,9 @@ function processContactDeletion(deleteBtn) {
   return confirmAndDeleteContact(contactDiv);
 }
 
+/**
+ * Deletes a contact and closes the edit popup if the deletion is successful.
+ */
 function deleteAndCloseEdit() {
   processContactDeletion().then((success) => {
     if (success) {
@@ -76,6 +133,13 @@ function deleteAndCloseEdit() {
   });
 }
 
+/**
+ * Removes a contact element from the UI.
+ * If the contact is the currently active contact, clear its details.
+ * Also removes the parent container's associated line and letter group if it becomes empty.
+ *
+ * @param {HTMLElement} contactDiv - The contact element to remove.
+ */
 function removeContactFromUI(contactDiv) {
   const container = contactDiv.parentElement;
   if (activeContact === contactDiv) clearDetails();
@@ -93,15 +157,19 @@ function removeContactFromUI(contactDiv) {
   }
 }
 
+/**
+ * Clears the contact detail view.
+ * It removes the "visible" class from the contact details and clears the displayed text.
+ * Also resets the active contact.
+ */
 function clearDetails() {
   const contactDetail = document.querySelector('.contact-detail'),
         detailName = document.getElementById('detail-name'),
         detailEmail = document.getElementById('detail-email'),
         detailPhone = document.getElementById('detail-phone'),
         detailAvatar = document.getElementById('detail-avatar');
-        contactDetail.classList.remove('visible');
+  contactDetail.classList.remove('visible');
   if (activeContact) activeContact.classList.remove('active-contact');
   activeContact = null;
   detailName.textContent = detailEmail.textContent = detailPhone.textContent = detailAvatar.textContent = '';
 }
-  

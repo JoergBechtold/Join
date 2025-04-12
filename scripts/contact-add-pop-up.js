@@ -1,3 +1,7 @@
+/**
+ * Initializes the contacts section by loading existing contacts and attaching
+ * a click event to the add contact button to display the add contact popup.
+ */
 function initContacts() {
   loadContacts();
   const addBtn = document.querySelector('.add-contact-btn');
@@ -6,6 +10,11 @@ function initContacts() {
   }
 }
 
+/**
+ * Initializes events for the add contact form.
+ * It prevents form submission by default and attaches click events to the close
+ * and cancel buttons to close the add contact popup.
+ */
 function initAddFormEvents() {
   const addForm = document.querySelector('.container-add form');
   if (addForm) {
@@ -19,6 +28,11 @@ function initAddFormEvents() {
   if (addCancelBtn) addCancelBtn.onclick = closeAddContactPopup;
 }
 
+/**
+ * Initializes the overlay click event.
+ * When the overlay is clicked, if there is an active add or edit contact popup,
+ * the corresponding popup is closed.
+ */
 function initOverlayEvent() {
   const overlay = document.querySelector('.overlay');
   if (overlay) {
@@ -33,6 +47,10 @@ function initOverlayEvent() {
   }
 }
 
+/**
+ * Initializes the hover effects for the cancel button in the add contact popup.
+ * Changes the cancel icon's source when the mouse enters or leaves the button.
+ */
 function initAddCancelHover() {
   const addCancelBtn = document.querySelector('.container-add .cancel-btn');
   if (addCancelBtn) {
@@ -48,6 +66,11 @@ function initAddCancelHover() {
   }
 }
 
+/**
+ * Initializes events for the edit contact form.
+ * It attaches the submit event handler to save changes and click events to the close
+ * and cancel buttons. The cancel button in edit mode deletes the contact and closes the popup.
+ */
 function initEditFormEvents() {
   const editForm = document.querySelector('.container-edit form');
   if (editForm) {
@@ -61,6 +84,11 @@ function initEditFormEvents() {
   if (editCancelBtn) editCancelBtn.onclick = deleteAndCloseEdit;
 }
 
+/**
+ * Initializes events for contact selection and editing.
+ * It attaches the click event handler to the contact list for handling contact clicks,
+ * and sets up hover events for the edit button.
+ */
 function initContactAndEditEvents() {
   const contactList = document.querySelector('.contact-list');
   if (contactList) {
@@ -78,6 +106,11 @@ function initContactAndEditEvents() {
   }
 }
 
+/**
+ * Initializes input events for both add and edit contact forms.
+ * Attaches an input event handler to all inputs in the add and edit contact containers
+ * to perform validation checks.
+ */
 function initInputEvents() {
   const inputs = document.querySelectorAll(
     '.container-add input, .container-edit input'
@@ -87,6 +120,11 @@ function initInputEvents() {
   });
 }
 
+/**
+ * Window onload event handler that initializes various parts of the contacts section.
+ * It initializes contacts, form events, overlay events, hover effects, form events for editing,
+ * contact selection/edit events, and input validation events.
+ */
 window.onload = function () {
   initContacts();
   initAddFormEvents();
@@ -97,6 +135,10 @@ window.onload = function () {
   initInputEvents();
 };
 
+/**
+ * Displays a success popup that indicates a successful operation.
+ * The popup is shown for 4 seconds before being hidden again.
+ */
 function showSuccessPopup() {
   const popup = document.getElementById('success-popup');
 
@@ -109,6 +151,10 @@ function showSuccessPopup() {
   }, 4000);
 }
 
+/**
+ * Displays the add contact popup by making the add contact container visible
+ * and activating the overlay.
+ */
 function showAddContactPopup() {
   const pop = document.querySelector('.container-add');
   pop.classList.remove('hidden');
@@ -116,6 +162,10 @@ function showAddContactPopup() {
   document.querySelector('.overlay').classList.add('active');
 }
 
+/**
+ * Closes the add contact popup by hiding the add contact container
+ * and deactivating the overlay.
+ */
 function closeAddContactPopup() {
   const pop = document.querySelector('.container-add');
   pop.classList.add('hidden');
