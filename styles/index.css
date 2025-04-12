@@ -415,6 +415,11 @@
   border: var(--border-buttons-blue);
 }
 
+.edit-prio-button {
+  appearance: none;
+  -webkit-appearance: none; /* iOS Safari */
+}
+
 @media screen and (max-width: 1440px) {
   .main-board {
     overflow-y: auto;
@@ -539,5 +544,13 @@
 @media screen and (max-width: 360px) {
   .popup-container, .edit-popup {
     width: 300px !important;
+  }
+
+  .edit-prio-button {
+    font-size: 10px;
+  }
+
+  .edit-prio-icon {
+    width: 16px;
   }
 }
