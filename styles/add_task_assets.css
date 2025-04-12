@@ -246,7 +246,6 @@ label {
     .vertical-line {
         display:none;
     }
-
 }
 
 @media screen and (max-width: 380px) {
