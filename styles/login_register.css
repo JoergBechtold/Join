@@ -332,9 +332,6 @@
   scale: var(--scale-hover);
 }
 
-@media only screen and (max-width: 922px){ 
-}
-
 @media only screen and (max-width: 768px) {
   .animations-logo-overlay {
     background-color: var(--primary-color-gray);
@@ -502,22 +499,6 @@
   .nav-log-in{
     bottom: 94px;
   }
-
-  /* @keyframes logoAnimation {
-   from {
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     width: 100px;
-   }
-   to {
-     top: 10px;
-     left: 10px;
-     height: 32px;
-     width: fit-content;
-     transform: none;
-   }
-  } */
 
   .login-container,.sign-up-container {
    padding: 16px clamp(16px, -3.8px + 6.1875vw, 115px) 16px clamp(16px, -3.8px + 6.1875vw, 115px);
