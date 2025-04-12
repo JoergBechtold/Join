@@ -1,3 +1,5 @@
+let redirectInterval = null;
+
 /**
  * Builds a complete task card and appends it to the given container.
  * Delegates rendering of content, subtasks, and assigned contacts.
@@ -105,14 +107,25 @@ function closeForm(formId) {
 /**
  * Opens the 'Add Task' form on the board by cloning the template
  * and displaying the modal with the provided form.
+ * Redirects to add_task.html if screen width is under 920px.
  */
 function openBoardAddTaskForm() {
+  if (window.innerWidth < 920) {
+    window.location.href = "add_task.html";
+    return;
+  }
   const boardAddTaskContainer = document.getElementById("board_add_task");
   boardAddTaskContainer.innerHTML = "";
   const template = document.getElementById("addTaskTemplate");
   const clone = template.content.cloneNode(true);
   boardAddTaskContainer.appendChild(clone);
   openForm("board_add_task");
+  redirectInterval = setInterval(() => {
+    if (window.innerWidth < 920) {
+      clearInterval(redirectInterval);
+      window.location.href = "add_task.html";
+    }
+  }, 500);
 }
 
 /**
@@ -121,4 +134,8 @@ function openBoardAddTaskForm() {
  */
 function closeBoardAddTask() {
   closeForm("board_add_task");
+  if (redirectInterval) {
+    clearInterval(redirectInterval);
+    redirectInterval = null;
+  }
 }
