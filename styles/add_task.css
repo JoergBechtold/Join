@@ -27,9 +27,10 @@
 
 .add-task-fetch-template{
   height: 100%;
-  overflow-y: auto; 
+  overflow-y: auto; /*neu*/
 }
 
+/*neu*/
 .add-task-fetch-template::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
