@@ -339,7 +339,6 @@
   left: 50%; /* statt right */
   transform: translate(-50%, -50%);
   width: 1116px;
-  height: 870px;
   padding: 60px;
   border-radius: 30px;
   background: #fff;
@@ -355,6 +354,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .addtask-template-headline-container {
