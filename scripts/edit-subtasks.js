@@ -46,7 +46,7 @@ function renderEditSubtasks() {
  */
 function deleteEditSubtask(index) {
   editPopupSubtasks.splice(index, 1);
-  renderEditSubtasks();
+  renderEditSubtasks();input-base-V2
 }
 
 /**
