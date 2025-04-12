@@ -50,7 +50,7 @@ function handleSubtaskSave() {
     const subtaskInput = document.getElementById('subtask_input');
     const subtaskValue = subtaskInput.value.trim();
     if (subtaskValue !== '') {
-        subtasks.push(subtaskValue);
+        subtasks.push({ title: subtaskValue, completed: false });
         subtaskInput.value = '';
         handleSubtaskDelete();
         updateSubtaskDisplay();
