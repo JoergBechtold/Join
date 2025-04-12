@@ -16,78 +16,6 @@ async function initBoard() {
 }
 
 /**
- * Handles the start of a drag operation on a task card.
- * Stores the ID of the dragged element and visually tilts the card.
- *
- * @param {DragEvent} event - The dragstart event triggered on the card.
- */
-function startDragging(event) {
-  currentDraggedElement = event.target.id;
-  event.target.classList.add('tilted');
-}
-
-/**
- * Handles the end of a drag operation on a task card.
- * Removes the visual "tilted" effect from the dragged card.
- *
- * @param {DragEvent} event - The dragend event triggered on the card.
- */
-function endDragging(event) {
-  if (currentDraggedElement) {
-    let draggedElement = document.getElementById(currentDraggedElement);
-    if (draggedElement) {
-      draggedElement.classList.remove('tilted');
-    }
-  }
-}
-
-/**
- * Enables dropping of dragged elements in valid drop zones
- * and adds a visual highlight to the target column.
- *
- * @param {DragEvent} event - The dragover event from the dragged element.
- */
-function allowDrop(event) {
-  event.preventDefault();
-  const dropColumn = event.target.closest('.drag-area');
-  if (dropColumn) dropColumn.classList.add('highlight-border');
-}
-
-/**
- * Adds a visual highlight to the specified drag area column.
- *
- * @param {string} columnId - The ID of the column element to highlight.
- */
-function highlight(columnId) {
-  const column = document.getElementById(columnId);
-  if (column) column.classList.add('drag-area-highlight');
-}
-
-/**
- * Removes the visual highlight from the specified drag area column.
- *
- * @param {string} columnId - The ID of the column element to remove the highlight from.
- */
-function removeHighlight(columnId) {
-  const column = document.getElementById(columnId);
-  if (column) column.classList.remove('drag-area-highlight');
-}
-
-/**
- * Moves the currently dragged task to a new state (column) and updates Firebase and the board view.
- *
- * @param {string} state - The new state (e.g., 'open', 'in-progress', etc.) to assign to the dragged task.
- */
-async function moveTo(state) {
-  const task = await loadData(`${PATH_TO_TASKS}/${currentDraggedElement}`);
-  if (!task) return;
-  task.state = state;
-  await updateData(`${PATH_TO_TASKS}/${currentDraggedElement}`, task);
-  await renderCards();
-  updateEmptyColumns();
-}
-
-/**
  * Creates a draggable task card container and appends it to the specified column.
  *
  * @param {string} key - The unique identifier for the task.
@@ -227,29 +155,19 @@ function createProgressContainer(key) {
 }
 
 /**
- * Creates and appends a progress bar and label showing the completion status
- * of subtasks within a task card.
+ * Creates and appends a progress bar and corresponding label to a task card.
+ * Delegates rendering of the visual bar and the completion label.
  *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing subtasks.
  */
 function createProgressBar(key, task) {
   const progressContainer = document.getElementById(key + '-progress');
-  const progressBar = document.createElement('div');
-  progressBar.className = 'progress-bar';
-  progressBar.style.width = '0%'; 
   const subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
   const completed = subtasks.filter(st => st.completed).length;
   const percent = subtasks.length > 0 ? (completed / subtasks.length) * 100 : 0;
-  setTimeout(() => {
-    progressBar.style.width = `${percent}%`;
-  }, 10); 
-  progressContainer.appendChild(progressBar);
-  const label = document.createElement('span');
-  label.id = key + '-progress-label';
-  label.className = 'subtask-counter';
-  label.textContent = `${completed}/${subtasks.length} Subtasks`;
-  progressContainer.appendChild(label);
+  renderProgressVisualBar(progressContainer, percent);
+  renderProgressLabel(progressContainer, key, completed, subtasks.length);
 }
 
 /**
@@ -281,8 +199,7 @@ function createAssignedContactsContainer(key) {
 }
 
 /**
- * Renders up to four assigned contact initials inside the task card.
- * If more than four contacts are assigned, displays a "+X" badge.
+ * Creates and appends the assigned contact initials and extra count to the given container.
  *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing assigned contacts.
@@ -291,18 +208,38 @@ function createAssignedContacts(key, task) {
   const assignedContainer = document.getElementById(key + '-assigned-contacts');
   assignedContainer.innerHTML = '';
   const assignedContacts = Array.isArray(task.assigned_to) ? task.assigned_to : [];
-  assignedContacts.slice(0, 4).forEach((contact) => {
+  renderAssignedInitials(assignedContacts, assignedContainer);
+  renderExtraAssignedIndicator(assignedContacts, assignedContainer);
+}
+
+/**
+ * Renders up to four assigned contact initials inside the container.
+ *
+ * @param {Array} contacts - The array of assigned contact objects.
+ * @param {HTMLElement} container - The DOM element where initials should be added.
+ */
+function renderAssignedInitials(contacts, container) {
+  contacts.slice(0, 4).forEach((contact) => {
     const span = document.createElement('span');
     span.className = 'initials-span';
     span.textContent = contact.initials;
     span.style.backgroundColor = contact.randomColor;
-    assignedContainer.appendChild(span);
+    container.appendChild(span);
   });
-  if (assignedContacts.length > 4) {
+}
+
+/**
+ * Appends a "+X" indicator if more than four contacts are assigned.
+ *
+ * @param {Array} contacts - The array of assigned contact objects.
+ * @param {HTMLElement} container - The DOM element where the indicator should be added.
+ */
+function renderExtraAssignedIndicator(contacts, container) {
+  if (contacts.length > 4) {
     const extra = document.createElement('span');
     extra.className = 'extra-contacts-span';
-    extra.textContent = `+${assignedContacts.length - 4}`;
-    assignedContainer.appendChild(extra);
+    extra.textContent = `+${contacts.length - 4}`;
+    container.appendChild(extra);
   }
 }
 
@@ -335,34 +272,6 @@ function createPrio(key, task) {
   else return;
   img.alt = `${prio} priority`;
   container.appendChild(img);
-}
-
-/**
- * Builds a complete task card and appends it to the given container.
- * It includes category, title, description, subtasks (with progress), assigned contacts, and priority.
- *
- * @param {string} key - The unique identifier of the task.
- * @param {HTMLElement} container - The DOM element where the card should be appended.
- * @param {Object} task - The task object containing all relevant data.
- */
-function createCard(key, container, task) {
-  createCardContainer(key, container);
-  createUnderContainer(key);
-  createCategoryTag(key, task);
-  createTagSpan(key, task);
-  createTitle(key, task);
-  createDescription(key, task);
-  createSubtaskContainer(key);
-  if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-    createProgressContainer(key);
-    createProgressBar(key, task);
-    createSubtaskCounter(key, task);
-  }
-  createContactsAndPrioContainer(key);
-  createAssignedContactsContainer(key);
-  createAssignedContacts(key, task);
-  createPrioContainer(key);
-  createPrio(key, task);
 }
 
 /**
@@ -442,8 +351,7 @@ function updateEmptyColumns() {
       placeholder.appendChild(span);
       column.appendChild(placeholder);
     } else if (hasTasks && placeholder) {
-      placeholder.remove();
-    }
+      placeholder.remove();}
   });
 }
 
@@ -486,38 +394,4 @@ function openForm(formId) {
       closeBoardAddTask();
     }
   };
-}
-
-/**
- * Closes a modal form by its ID and hides the overlay.
- * Also removes the 'modal-open' class from the body.
- *
- * @param {string} formId - The ID of the form/modal to be closed.
- */
-function closeForm(formId) {
-  document.getElementById(formId).classList.remove('show');
-  const overlay = document.getElementById('overlay');
-  overlay.style.display = 'none';
-  document.body.classList.remove('modal-open');
-}
-
-/**
- * Opens the 'Add Task' form on the board by cloning the template
- * and displaying the modal with the provided form.
- */
-function openBoardAddTaskForm() {
-  const boardAddTaskContainer = document.getElementById('board_add_task');
-  boardAddTaskContainer.innerHTML = '';
-  const template = document.getElementById('addTaskTemplate');
-  const clone = template.content.cloneNode(true);
-  boardAddTaskContainer.appendChild(clone);
-  openForm('board_add_task');
-}
-
-/**
- * Closes the 'Add Task' form modal on the board.
- * Calls the generic closeForm function with the form ID.
- */
-function closeBoardAddTask() {
-  closeForm('board_add_task');
 }

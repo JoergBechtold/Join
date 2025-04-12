@@ -1,0 +1,124 @@
+/**
+ * Builds a complete task card and appends it to the given container.
+ * Delegates rendering of content, subtasks, and assigned contacts.
+ *
+ * @param {string} key - The unique identifier of the task.
+ * @param {HTMLElement} container - The DOM element where the card should be appended.
+ * @param {Object} task - The task object containing all relevant data.
+ */
+function createCard(key, container, task) {
+  renderCardBaseStructure(key, container, task);
+  renderCardSubtasks(key, task);
+  renderCardFooter(key, task);
+}
+
+/**
+ * Renders the card layout including header, title, and description.
+ *
+ * @param {string} key - The unique identifier of the task.
+ * @param {HTMLElement} container - The column where the card will be placed.
+ * @param {Object} task - The task data.
+ */
+function renderCardBaseStructure(key, container, task) {
+  createCardContainer(key, container);
+  createUnderContainer(key);
+  createCategoryTag(key, task);
+  createTagSpan(key, task);
+  createTitle(key, task);
+  createDescription(key, task);
+  createSubtaskContainer(key);
+}
+
+/**
+ * Renders progress bar and subtask count if subtasks exist.
+ *
+ * @param {string} key - The unique identifier of the task.
+ * @param {Object} task - The task object with subtasks.
+ */
+function renderCardSubtasks(key, task) {
+  if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
+    createProgressContainer(key);
+    createProgressBar(key, task);
+    createSubtaskCounter(key, task);
+  }
+}
+
+/**
+ * Renders the assigned contacts and priority section of the card.
+ *
+ * @param {string} key - The unique identifier of the task.
+ * @param {Object} task - The task data.
+ */
+function renderCardFooter(key, task) {
+  createContactsAndPrioContainer(key);
+  createAssignedContactsContainer(key);
+  createAssignedContacts(key, task);
+  createPrioContainer(key);
+  createPrio(key, task);
+}
+
+/**
+ * Renders the visual progress bar with animated width based on completion percentage.
+ *
+ * @param {HTMLElement} container - The container where the bar will be added.
+ * @param {number} percent - The completion percentage.
+ */
+function renderProgressVisualBar(container, percent) {
+  const bar = document.createElement("div");
+  bar.className = "progress-bar";
+  bar.style.width = "0%";
+  setTimeout(() => {
+    bar.style.width = `${percent}%`;
+  }, 10);
+  container.appendChild(bar);
+}
+
+/**
+ * Appends a label showing completed subtasks relative to total subtasks.
+ *
+ * @param {HTMLElement} container - The container for the label.
+ * @param {string} key - The task key to generate a unique label ID.
+ * @param {number} completed - The number of completed subtasks.
+ * @param {number} total - The total number of subtasks.
+ */
+function renderProgressLabel(container, key, completed, total) {
+  const label = document.createElement("span");
+  label.id = key + "-progress-label";
+  label.className = "subtask-counter";
+  label.textContent = `${completed}/${total} Subtasks`;
+  container.appendChild(label);
+}
+
+/**
+ * Closes a modal form by its ID and hides the overlay.
+ * Also removes the 'modal-open' class from the body.
+ *
+ * @param {string} formId - The ID of the form/modal to be closed.
+ */
+function closeForm(formId) {
+  document.getElementById(formId).classList.remove("show");
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+  document.body.classList.remove("modal-open");
+}
+
+/**
+ * Opens the 'Add Task' form on the board by cloning the template
+ * and displaying the modal with the provided form.
+ */
+function openBoardAddTaskForm() {
+  const boardAddTaskContainer = document.getElementById("board_add_task");
+  boardAddTaskContainer.innerHTML = "";
+  const template = document.getElementById("addTaskTemplate");
+  const clone = template.content.cloneNode(true);
+  boardAddTaskContainer.appendChild(clone);
+  openForm("board_add_task");
+}
+
+/**
+ * Closes the 'Add Task' form modal on the board.
+ * Calls the generic closeForm function with the form ID.
+ */
+function closeBoardAddTask() {
+  closeForm("board_add_task");
+}
