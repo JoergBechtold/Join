@@ -1,20 +1,18 @@
 .body-add-task {
-  /* min-height: calc(100dvh - 80px); */
-  height: 100dvh; /* neu*/
+  min-height: calc(100dvh - 80px);
   width: 100%;
   background-color: var(--light-gray-bg);
 }
 
 .main-add-task {
   height: 100dvh;
-  max-width: 976px;
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
   flex: 1;
   position: relative;
   overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
+  overflow-y: auto; 
+  width: auto;
 }
 
 .main-add-task::-webkit-scrollbar{
@@ -27,12 +25,7 @@
 
 .add-task-fetch-template{
   height: 100%;
-  overflow-y: auto; /*neu*/
-}
-
-/*neu*/
-.add-task-fetch-template::-webkit-scrollbar {
-  width: var(--scollbar-width-thin);
+  max-width: 976px;
 }
 
 .h1-add-task {
@@ -315,8 +308,11 @@
 
 @media screen and (max-width: 1400px) {
   .main-add-task {
-    max-width: calc(900px - (1400px - 100vw) * 0.25);
     padding-right: 80px;
+  }
+
+  .add-task-fetch-template{
+    max-width: calc(900px - (1400px - 100vw) * 0.25);
   }
 }
 
