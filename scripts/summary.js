@@ -210,14 +210,41 @@ async function initializeSummaryPage() {
  */
 function checkAndShowAnimationSummary() {
   const mobileViewGreetingOverlayRef = document.getElementById('mobile_view_greetin_overlay');
-  // mobileViewGreetingOverlayRef.classList.remove('d-none');
+  const maxWidthForAnimation = 768; // Definiere die maximale Bildschirmbreite für die Animation in Pixeln
 
-  if (sessionStorage.getItem('animationShownSummary')) {
+  // Prüfen, ob die Animation im Session Storage als gezeigt markiert ist
+  const animationShown = sessionStorage.getItem('animationShownSummary');
+
+  // Prüfen, ob der Bildschirm breiter als der definierte Maximalwert ist
+  const isDesktopView = window.innerWidth > maxWidthForAnimation;
+
+  // Wenn die Animation bereits gezeigt wurde ODER die Bildschirmbreite größer ist,
+  // blende das Overlay aus und beende die Funktion.
+  if (animationShown || isDesktopView) {
     mobileViewGreetingOverlayRef.classList.add('d-none');
     return;
-  } 
+  }
 
+  // Wenn die Animation noch nicht gezeigt wurde UND die Bildschirmbreite nicht größer ist,
+  // zeige das Overlay an und markiere die Animation im Session Storage als gezeigt.
   mobileViewGreetingOverlayRef.classList.remove('d-none');
   sessionStorage.setItem('animationShownSummary', 'true');
-  // startLoginAnimationsWithDelay(loginContainerRef,navLogInRef,footerLoginRegisterRef,animationsLogoOverlayRef,animationFinishedRef);
 }
+
+
+// function checkAndShowAnimationSummary() {
+//   const mobileViewGreetingOverlayRef = document.getElementById('mobile_view_greetin_overlay');
+//   mobileViewGreetingOverlayRef.classList.remove('d-none');
+
+//   if (sessionStorage.getItem('animationShownSummary')) {
+//     mobileViewGreetingOverlayRef.classList.add('d-none');
+//     return;
+//   } 
+
+//   mobileViewGreetingOverlayRef.classList.remove('d-none');
+//   sessionStorage.setItem('animationShownSummary', 'true');
+//   startLoginAnimationsWithDelay(loginContainerRef,navLogInRef,footerLoginRegisterRef,animationsLogoOverlayRef,animationFinishedRef);
+// }
+
+
+ 
