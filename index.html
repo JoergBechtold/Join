@@ -196,41 +196,9 @@
                 <div class="form-group">
                   <label><span class="label-text">Subtasks</span></label>
                   <div class="input-container">
-                    <input
-                      id="edit_subtask_input"
-                      class="input-base"
-                      type="text"
-                      name="edit-subtasks"
-                      placeholder="Add new subtask"
-                      onclick="handleEditSubtaskInput()"
-                      onkeydown="handleEditSubtaskKey(event)"
-                    />
-                    <div class="close-and-check">
-                      <img
-                        id="edit_close_subtask_icon"
-                        class="input-base-icon d-none"
-                        src="assets/icons/blackclose.svg"
-                        alt="Cancel"
-                        onclick="handleEditSubtaskDelete()"
-                      />
-                      <div class="vertical-line-subtask"></div>
-                      <img
-                        id="edit_check_subtask_icon"
-                        class="input-base-icon d-none"
-                        src="assets/icons/blackcheck.svg"
-                        alt="Save"
-                        onclick="handleEditSubtaskSave()"
-                      />
-                      <img
-                        id="edit_add_subtask_icon"
-                        class="input-base-icon"
-                        src="assets/icons/add.svg"
-                        alt="Activate Input"
-                        onclick="handleEditSubtaskInputImg()"
-                      />
-                    </div>
+                    <input id="edit_subtask_input" class="input-base" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskKey(event)" />
+                    <img id="edit_add_subtask_icon" class="input-base-icon" src="assets/icons/add.svg" onclick="handleEditSubtaskAdd()" />
                   </div>
-                  
                   <div class="subtask-enum" id="edit_subtask_enum"></div>
                 </div>
               </div>

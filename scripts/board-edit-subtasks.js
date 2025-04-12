@@ -1,12 +1,13 @@
 /**
  * Adds a new subtask to the edit form if the input is not empty.
+ * Ensures the subtask is stored as an object with title and completed status.
  * Clears the input field and updates the subtask list display.
  */
 function handleEditSubtaskAdd() {
   const input = document.getElementById('edit_subtask_input');
   const value = input.value.trim();
   if (value) {
-    editPopupSubtasks.push(value);
+    editPopupSubtasks.push({ title: value, completed: false });
     input.value = '';
     renderEditSubtasks();
   }
@@ -57,7 +58,8 @@ function deleteEditSubtask(index) {
  */
 function editExistingSubtask(index) {
   const container = document.getElementById('edit_subtask_enum');
-  const currentText = editPopupSubtasks[index];
+  const subtask = editPopupSubtasks[index];
+  const currentText = typeof subtask === 'object' ? subtask.title : subtask;
   container.innerHTML = `
     <input id="edit_subtask_inline_input" class="input-base" value="${currentText}" onkeydown="submitEditedSubtask(event, ${index})">
   `;
@@ -79,7 +81,7 @@ function submitEditedSubtask(event, index) {
     event.preventDefault();
     const value = input.value.trim();
     if (value) {
-      editPopupSubtasks[index] = value;
+      editPopupSubtasks[index] = { title: value, completed: false };
     }
     renderEditSubtasks();
     editPopupCurrentSubtaskIndex = null;
