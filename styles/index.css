@@ -163,14 +163,6 @@
   background: #0038ff;
 }
 
-/* .card-headline {
-  width: 81px;
-  height: 19px;
-  font-weight: 400;
-  font-size: 16px;
-  color: white;
-} */
-
 /* To do Cards */
 .todo-card {
   display: flex;
@@ -180,6 +172,13 @@
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+
+.todo-card {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .under-container {
@@ -502,7 +501,8 @@
   }
 
   .popup-container, .edit-popup {
-    top: 44% !important;
+    top: 50% !important;
+    z-index: 1000;
   }
 
   .popup-actions {
