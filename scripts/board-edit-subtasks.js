@@ -90,19 +90,3 @@ function submitEditedSubtask(event, index) {
     editPopupCurrentSubtaskIndex = null;
   }
 }
-
-/**
- * Renders the selected contacts in the edit form.
- * Each contact is displayed as a colored circle with their initials.
- */
-function renderSelectedEditContacts() {
-  const container = document.getElementById('edit_selected_contact_circles');
-  container.innerHTML = '';
-  selectedEditContacts.forEach(contact => {
-    const div = document.createElement('div');
-    div.className = 'circle';
-    div.textContent = contact.initials;
-    div.style.backgroundColor = contact.randomColor;
-    container.appendChild(div);
-  });
-}

@@ -223,7 +223,7 @@ function renderAssignedInitials(contacts, container) {
     const span = document.createElement('span');
     span.className = 'initials-span';
     span.textContent = contact.initials;
-    span.style.backgroundColor = contact.randomColor;
+    span.style.backgroundColor = contact.randomColor || contact.contactColor || '#ccc';
     container.appendChild(span);
   });
 }

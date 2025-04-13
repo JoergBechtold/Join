@@ -128,10 +128,10 @@ function toggleEditSelectedContact(element) {
  */
 function updateEditSelectedContacts(element) {
   const initials = element.querySelector('.circle').textContent.trim();
-  const randomColor = element.querySelector('.circle').style.backgroundColor;
+  const contactColor = element.querySelector('.circle').style.backgroundColor;
   if (element.classList.contains('contacts-custom-select-option-selected')) {
     if (!selectedEditContacts.some((c) => c.initials === initials)) {
-      selectedEditContacts.push({ initials, randomColor });
+      selectedEditContacts.push({ initials, contactColor });
     }
   } else {
     selectedEditContacts = selectedEditContacts.filter((c) => c.initials !== initials);
@@ -150,8 +150,8 @@ function renderEditSelectedContacts() {
   selectedEditContacts.forEach((contact) => {
     const circle = document.createElement('div');
     circle.className = 'circle';
-    circle.style.backgroundColor = contact.randomColor;
     circle.textContent = contact.initials;
+    circle.style.backgroundColor = contact.contactColor || contact.randomColor || '#ccc';
     container.appendChild(circle);
   });
 }

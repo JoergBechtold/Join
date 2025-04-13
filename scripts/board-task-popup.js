@@ -3,7 +3,6 @@ let taskKey;
 /**
  * Generates the HTML for the assigned contacts of a task.
  * Loads all contacts from the database and matches them with the task's assigned users.
- *
  * @param {Object} task - The task object containing assigned user data.
  * @returns {Promise<string>} The generated HTML string for displaying assigned contacts.
  */
@@ -16,7 +15,6 @@ async function getAssignedHTML(task) {
 /**
  * Generates the HTML for displaying the subtasks of a given task.
  * Delegates the actual HTML generation to the helper function `generateSubtasksHTML`.
- *
  * @param {Object} task - The task object containing subtasks.
  * @returns {string} The generated HTML string for the subtasks section.
  */
@@ -27,7 +25,6 @@ function getSubtasksHTML(task) {
 /**
  * Toggles the checkbox state of a subtask element, updates its completion state,
  * saves the changes to Firebase, and refreshes the UI including progress and task card.
- *
  * @param {HTMLElement} element - The clicked subtask DOM element.
  */
 async function toggleSubtaskCheckbox(element) {
@@ -51,7 +48,6 @@ async function toggleSubtaskCheckbox(element) {
 /**
  * Updates the visual progress bar and label for a task's subtasks.
  * Calculates the percentage of completed subtasks and reflects it in the UI.
- *
  * @param {string} taskId - The unique ID of the task.
  * @param {Object} task - The task object containing the subtasks array.
  */
@@ -72,7 +68,6 @@ function updateProgress(taskId, task) {
 
 /**
  * Toggles the completion state of a specific subtask in the UI and sessionStorage.
- *
  * @param {HTMLElement} element - The DOM element representing the subtask.
  * @param {string} taskId - The ID of the task to which the subtask belongs.
  */
@@ -91,7 +86,6 @@ function toggleSubtask(element, taskId) {
 
 /**
  * Returns the background color style based on the task's category.
- *
  * @param {Object} task - The task object containing the category.
  * @returns {string} - The CSS background-color string or an empty string if no match.
  */
@@ -104,7 +98,6 @@ function getCategoryBg(task) {
 /**
  * Opens the task popup by loading task data and rendering its content.
  * If the task is not found, displays an error message instead.
- *
  * @param {string} key - The unique identifier of the task.
  */
 async function openPopup(key) {
@@ -122,7 +115,6 @@ async function openPopup(key) {
 
 /**
  * Renders the content of the popup with full task details.
- *
  * @param {HTMLElement} popup - The popup container element.
  * @param {Object} task - The task object containing all details.
  * @param {string} key - The unique key of the task.
@@ -145,7 +137,6 @@ async function renderPopupContent(popup, task, key) {
 
 /**
  * Displays the popup and overlay elements on the board.
- *
  * @param {HTMLElement} container - The main popup container to be shown.
  */
 function showPopupOverlay(container) {
@@ -155,7 +146,6 @@ function showPopupOverlay(container) {
 
 /**
  * Returns the file path of the corresponding priority icon based on the task's priority level.
- *
  * @param {string} priority - The priority level ('low', 'medium', 'urgent').
  * @returns {string} The path to the appropriate priority icon, or an empty string if invalid.
  */
@@ -174,7 +164,6 @@ function getPriorityIcon(priority) {
 
 /**
  * Generates the full HTML content for the board task popup by delegating to a template generator function.
- *
  * @param {Object} task - The task object containing all task details.
  * @param {string} taskKey - The unique key identifying the task.
  * @param {string} assignedHTML - The HTML representing the assigned contacts.
@@ -189,7 +178,6 @@ function getPopupContentHtml(task, taskKey, assignedHTML, subtasksHTML, category
 
 /**
  * Opens the edit popup for a task and loads its data into the form.
- *
  * @param {string} key - The unique identifier of the task to be edited.
  */
 async function editPopupTask(key) {
@@ -198,7 +186,7 @@ async function editPopupTask(key) {
   const task = await loadData(`tasks/${key}`);
   if (!task) return;
   fillEditForm(task);
-  setEditContacts(task);
+  await setEditContacts(task);
   setEditSubtasks(task);
   editPopupTaskKey = key;
   showOverlay();
@@ -222,7 +210,6 @@ function showEditPopup() {
 
 /**
  * Fills the edit form fields with data from the task.
- *
  * @param {Object} task - The task object to populate the form.
  */
 function fillEditForm(task) {
@@ -237,20 +224,47 @@ function fillEditForm(task) {
 }
 
 /**
- * Populates the assigned contacts section of the edit form.
- *
- * @param {Object} task - The task containing assigned contacts.
+ * Sets the selected contacts for the edit popup by comparing task.assigned_to
+ * with all available contacts. Ensures correct color mapping.
+ * @param {Object} task - The task object containing assigned contacts.
  */
-function setEditContacts(task) {
-  editPopupSelectedContacts = Array.isArray(task.assigned_to)
-    ? [...task.assigned_to]
-    : [];
+async function setEditContacts(task) {
+  const allContacts = await loadData('contacts');
+  const contactsArray = Object.values(allContacts || {});
+  if (Array.isArray(task.assigned_to)) {
+    editPopupSelectedContacts = contactsArray.filter(contact =>
+      task.assigned_to.some(assigned => assigned.initials === contact.initials)
+    );
+  } else {
+    editPopupSelectedContacts = [];
+  }
+  selectedEditContacts = editPopupSelectedContacts.map(c => ({
+    initials: c.initials,
+    contactColor: c.contactColor || c.randomColor || '#ccc'
+  }));
   renderSelectedEditContacts();
+  updateContactSelectionInList();
+}
+
+/**
+ * Renders the selected contacts in the edit form.
+ * Each contact is displayed as a colored circle with their initials.
+ */
+function renderSelectedEditContacts() {
+  const container = document.getElementById('edit_selected_contact_circles');
+  if (!container) return;
+  container.innerHTML = '';
+  selectedEditContacts.forEach(contact => {
+    const circle = document.createElement('div');
+    circle.className = 'circle';
+    circle.textContent = contact.initials;
+    circle.style.backgroundColor = contact.contactColor || '#ccc';
+    container.appendChild(circle);
+  });
 }
 
 /**
  * Populates the subtasks section of the edit form.
- *
  * @param {Object} task - The task containing subtasks.
  */
 function setEditSubtasks(task) {
@@ -258,6 +272,47 @@ function setEditSubtasks(task) {
     ? [...task.subtasks]
     : [];
   renderEditSubtasks();
+}
+
+/**
+ * Renders all subtasks into the edit popup based on the `editPopupSubtasks` array.
+ */
+function renderEditSubtasks() {
+  const container = document.getElementById('edit_subtask_enum');
+  if (!container) return;
+  container.innerHTML = '';
+  editPopupSubtasks.forEach((subtask, index) => {
+    const subtaskEl = document.createElement('div');
+    subtaskEl.classList.add('subtask-text');
+    subtaskEl.textContent = `• ${subtask.title}`;
+    subtaskEl.setAttribute('data-index', index);
+    container.appendChild(subtaskEl);
+  });
+}
+
+/**
+ * Updates the selection state of contacts in the contact list UI
+ * based on the `selectedEditContacts` array.
+ * Adds a 'selected' class or checks the checkbox for already selected contacts.
+ */
+function updateContactSelectionInList() {
+  const contactElements = document.querySelectorAll('.contacts-custom-select-option, .contacts-custom-select-option-selected');
+  contactElements.forEach(el => {
+    const initials = el.querySelector('.circle')?.textContent?.trim();
+    const bgColor = el.querySelector('.circle')?.style.backgroundColor?.trim();
+    const isSelected = selectedEditContacts.some(c =>
+      c.initials === initials && (c.contactColor === bgColor || c.randomColor === bgColor)
+    );
+    if (isSelected) {
+      el.classList.add('contacts-custom-select-option-selected');
+      el.classList.remove('contacts-custom-select-option');
+      el.querySelector('img')?.setAttribute('src', 'assets/icons/checked_box.svg');
+    } else {
+      el.classList.remove('contacts-custom-select-option-selected');
+      el.classList.add('contacts-custom-select-option');
+      el.querySelector('img')?.setAttribute('src', 'assets/icons/Square_box.svg');
+    }
+  });
 }
 
 /**
@@ -270,7 +325,6 @@ function showOverlay() {
 /**
  * Returns an HTML <img> element as a string for the given priority icon.
  * If no icon source is provided, returns an empty image element.
- *
  * @param {string} priorityIconSrc - The source URL of the priority icon.
  * @param {string} priority - The priority level (e.g., "low", "medium", "urgent").
  * @returns {string} - The HTML string for the priority icon image element.
@@ -284,28 +338,8 @@ function checkImgAvailable(priorityIconSrc, priority) {
 }
 
 /**
- * Opens the edit popup for a task.
- * Hides the task detail popup if open and shows the edit popup.
- * If the edit popup does not exist yet in the DOM, it is created dynamically.
- */
-function editTask() {
-  const popupContainer = document.getElementById('popup_container');
-  if (popupContainer) {
-    popupContainer.style.display = 'none';
-  }
-  let editPopup = document.getElementById('edit_popup');
-  if (!editPopup) {
-    editPopup = document.createElement('div');
-    editPopup.id = 'edit_popup';
-    document.body.appendChild(editPopup);
-  }
-  editPopup.style.display = 'flex';
-}
-
-/**
  * Deletes a task from Firebase and updates the UI accordingly.
  * Prompts the user for confirmation before proceeding with deletion.
- *
  * @param {string} taskKey - The unique key of the task to be deleted.
  */
 async function deleteTaskFromBoardPopup(taskKey) {
@@ -328,7 +362,6 @@ async function deleteTaskFromBoardPopup(taskKey) {
 
 /**
  * Displays a confirmation dialog with a custom message and returns the user's response.
- *
  * @param {string} message - The message to display in the confirmation dialog.
  * @returns {Promise<boolean>} A promise that resolves to true if the user confirms, false otherwise.
  */

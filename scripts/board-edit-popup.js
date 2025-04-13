@@ -166,8 +166,8 @@ function applyEditedTaskData(task) {
   task.description = document.getElementById('edit_description').value.trim();
   task.due_date = document.getElementById('edit_due_date').value.trim();
   task.priority = getEditPriority();
-  task.subtasks = checkSubtasks(); // Subtasks hier richtig anwenden
-  task.assigned_to = checkAssignedTo(); // Kontakte hier richtig anwenden
+  task.subtasks = checkSubtasks(); 
+  task.assigned_to = checkAssignedTo(); 
 }
 
 /**
@@ -198,9 +198,12 @@ function checkSubtasks() {
  * @returns {Array} An array of contact objects, each containing the `initials` and `randomColor` of the contact.
  */
 function checkAssignedTo() {
-  return Array.isArray(selectedEditContacts) && selectedEditContacts.length > 0
-    ? [...selectedEditContacts]
-    : '';
+  return Array.isArray(selectedEditContacts)
+    ? selectedEditContacts.map(c => ({
+        initials: c.initials,
+        randomColor: c.randomColor || c.contactColor || '#ccc'
+      }))
+    : [];
 }
 
 /**
