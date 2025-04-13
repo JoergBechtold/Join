@@ -110,7 +110,7 @@ function closeForm(formId) {
  * Redirects to add_task.html if screen width is under 920px.
  */
 function openBoardAddTaskForm() {
-  if (window.innerWidth < 920) {
+  if (window.innerWidth < 1151) {
     window.location.href = "add_task.html";
     return;
   }
@@ -121,7 +121,7 @@ function openBoardAddTaskForm() {
   boardAddTaskContainer.appendChild(clone);
   openForm("board_add_task");
   redirectInterval = setInterval(() => {
-    if (window.innerWidth < 920) {
+    if (window.innerWidth < 1151) {
       clearInterval(redirectInterval);
       window.location.href = "add_task.html";
     }
