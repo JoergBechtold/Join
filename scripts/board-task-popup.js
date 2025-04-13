@@ -335,41 +335,6 @@ function checkImgAvailable(priorityIconSrc, priority) {
 }
 
 /**
- * Deletes a task from Firebase and updates the UI accordingly.
- * Prompts the user for confirmation before proceeding with deletion.
- * @param {string} taskKey - The unique key of the task to be deleted.
- */
-async function deleteTaskFromBoardPopup(taskKey) {
-  if (!taskKey) {
-    console.error('No task key provided.');
-    return false;
-  }
-  const confirmed = await showConfirmDialog('Do you really want to delete this task?');
-  if (!confirmed) return false;
-  try {
-    await deleteData(`tasks/`, `${taskKey}`);
-    closePopup();
-    await renderCards();
-    return true;
-  } catch (err) {
-    console.error('Task deletion failed:', err);
-    return false;
-  }
-}
-
-/**
- * Displays a confirmation dialog with a custom message and returns the user's response.
- * @param {string} message - The message to display in the confirmation dialog.
- * @returns {Promise<boolean>} A promise that resolves to true if the user confirms, false otherwise.
- */
-async function showConfirmDialog(message) {
-  return new Promise(resolve => {
-    const confirmed = confirm(message);
-    resolve(confirmed);
-  });
-}
-
-/**
  * Closes all popup elements on the board view.
  * Hides the task detail popup, edit popup, and the overlay.
  */

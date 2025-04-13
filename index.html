@@ -235,6 +235,18 @@
       </div>
     </template>
 
+    <!-- Delete task message -->
+    <div id="custom_confirm_overlay" class="confirm-overlay d-none">
+      <div class="confirm-popup">
+        <p id="custom_confirm_message">Do you really want to permanently delete this task?</p>
+        <div class="confirm-buttons">
+          <button id="confirm_delete_btn" class="btn-delete" onclick="handleCustomConfirm(true)">Delete</button>
+          <button id="confirm_cancel_btn" class="btn-cancel" onclick="handleCustomConfirm(false)">Cancel</button>
+        </div>
+      </div>
+    </div>
+    
+
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
     <script src="scripts/firebase.js"></script>
