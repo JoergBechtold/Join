@@ -13,7 +13,6 @@
 }
 
 .board-headline-plus-button{
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -460,6 +459,10 @@
     justify-content: unset;
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .board-headline-plus-button {
+    width: 100%;
   }
 
   .search-input-add-button-div {

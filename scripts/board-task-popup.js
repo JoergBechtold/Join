@@ -275,18 +275,15 @@ function setEditSubtasks(task) {
 }
 
 /**
- * Renders all subtasks into the edit popup based on the `editPopupSubtasks` array.
+ * Renders the list of editable subtasks inside the edit popup.
+ * Uses the unified design from Add Task (editSubtaskItem) to ensure consistency.
  */
 function renderEditSubtasks() {
   const container = document.getElementById('edit_subtask_enum');
   if (!container) return;
   container.innerHTML = '';
   editPopupSubtasks.forEach((subtask, index) => {
-    const subtaskEl = document.createElement('div');
-    subtaskEl.classList.add('subtask-text');
-    subtaskEl.textContent = `• ${subtask.title}`;
-    subtaskEl.setAttribute('data-index', index);
-    container.appendChild(subtaskEl);
+    container.innerHTML += editSubtaskItem(subtask, index);
   });
 }
 

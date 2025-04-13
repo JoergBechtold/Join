@@ -1,23 +1,18 @@
 /**
- * Adds a new subtask to the edit form if the input is not empty.
- * Ensures the subtask is stored as an object with title and completed status.
- * Clears the input field and updates the subtask list display.
+ * Adds a new subtask in the edit popup if input is not empty.
  */
 function handleEditSubtaskAdd() {
   const input = document.getElementById('edit_subtask_input');
   const value = input.value.trim();
-  if (value) {
-    editPopupSubtasks.push({ title: value, completed: false });
-    input.value = '';
-    renderEditSubtasks();
-  }
+  if (!value) return;
+  editPopupSubtasks.push({ title: value, completed: false });
+  input.value = '';
+  renderEditSubtasks();
 }
 
 /**
- * Handles the Enter key event when typing a subtask in the edit form.
- * Prevents the default action and triggers subtask addition.
- *
- * @param {KeyboardEvent} event - The keyboard event triggered in the input field.
+ * Adds subtask on Enter key press in edit popup.
+ * @param {KeyboardEvent} event - The keyboard event.
  */
 function handleEditSubtaskKey(event) {
   if (event.key === 'Enter') {
@@ -27,23 +22,19 @@ function handleEditSubtaskKey(event) {
 }
 
 /**
- * Renders the list of subtasks in the edit popup.
- * Clears the container and appends each subtask using the template function.
+ * Renders all edit subtasks by injecting generated HTML.
  */
 function renderEditSubtasks() {
   const container = document.getElementById('edit_subtask_enum');
   container.innerHTML = '';
   editPopupSubtasks.forEach((subtask, index) => {
-    const text = typeof subtask === 'object' ? subtask.title : subtask;
-    container.innerHTML += editSubtaskItem(text, index);
+    container.innerHTML += editSubtaskItem(subtask, index);
   });
 }
 
 /**
- * Deletes a subtask from the edit popup by its index.
- * Updates the UI after removal by re-rendering the subtask list.
- *
- * @param {number} index - The index of the subtask to delete.
+ * Deletes a subtask in the edit popup and re-renders the list.
+ * @param {number} index - Index of subtask to remove.
  */
 function deleteEditSubtask(index) {
   editPopupSubtasks.splice(index, 1);
@@ -51,46 +42,34 @@ function deleteEditSubtask(index) {
 }
 
 /**
- * Initiates inline editing for a specific subtask in the edit popup.
- * Replaces the subtask item with an input field and sets focus to it.
- *
- * @param {number} index - The index of the subtask to be edited.
+ * Triggers inline editing of a subtask in the edit popup.
+ * @param {number} index - Index of subtask to edit.
  */
 function editExistingSubtask(index) {
   const container = document.getElementById('edit_subtask_enum');
-  const subtask = editPopupSubtasks[index];
-  const currentText = typeof subtask === 'object' ? subtask.title : subtask;
-  container.innerHTML = `
-    <input id="edit_subtask_inline_input" class="input-base" value="${currentText}" onkeydown="submitEditedSubtask(event, ${index})">
-  `;
+  container.innerHTML = editSubtaskEditForm(editPopupSubtasks[index], index);
   document.getElementById('edit_subtask_inline_input').focus();
   editPopupCurrentSubtaskIndex = index;
 }
 
 /**
- * Handles submission or cancellation of subtask inline editing.
- * On Enter: updates the subtask with new value and re-renders the list.
- * On Escape: cancels editing and re-renders the original subtasks.
- *
- * @param {KeyboardEvent} event - The keyboard event triggered during input.
- * @param {number} index - The index of the subtask being edited.
+ * Submits or cancels inline subtask editing in the popup.
+ * @param {KeyboardEvent|Object} event - Key press or click event.
+ * @param {number} index - Subtask index being edited.
  */
 function submitEditedSubtask(event, index) {
   const input = document.getElementById('edit_subtask_inline_input');
-  if (event.key === 'Enter') {
-    event.preventDefault();
+  if (!input) return;
+
+  if (event.key === 'Enter' || event.key === 'Save' || event.key === undefined) {
     const value = input.value.trim();
     if (value) {
-      const current = editPopupSubtasks[index];
-      editPopupSubtasks[index] = {
-        title: value,
-        completed: current.completed || false
-      };
+      editPopupSubtasks[index] = { ...editPopupSubtasks[index], title: value };
     }
     renderEditSubtasks();
-    editPopupCurrentSubtaskIndex = null;
   } else if (event.key === 'Escape') {
     renderEditSubtasks();
-    editPopupCurrentSubtaskIndex = null;
   }
+
+  editPopupCurrentSubtaskIndex = null;
 }
