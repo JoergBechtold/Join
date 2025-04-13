@@ -81,7 +81,11 @@ function submitEditedSubtask(event, index) {
     event.preventDefault();
     const value = input.value.trim();
     if (value) {
-      editPopupSubtasks[index] = { title: value, completed: false };
+      const current = editPopupSubtasks[index];
+      editPopupSubtasks[index] = {
+        title: value,
+        completed: current.completed || false
+      };
     }
     renderEditSubtasks();
     editPopupCurrentSubtaskIndex = null;

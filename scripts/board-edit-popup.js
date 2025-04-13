@@ -181,10 +181,12 @@ function checkSubtasks() {
   let subtasks = [];
   elements.forEach(el => {
     const text = el.textContent.replace('• ', '').trim();
+    const index = el.getAttribute('data-index');
+    const isCompleted = editPopupSubtasks[index]?.completed || false;
     if (text) {
       subtasks.push({
         title: text,
-        completed: false
+        completed: isCompleted
       });      
     }
   });

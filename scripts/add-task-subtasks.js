@@ -107,7 +107,7 @@ function editSubtask(index) {
     editInput.classList.remove('d-none');
     deleteIcon.classList.remove('d-none');
     saveIcon.classList.remove('d-none');
-    editInput.value = subtasks[index];
+    editInput.value = subtasks[index].title;
     editInput.focus();
     currentEditIndex = index;
 }
@@ -140,7 +140,7 @@ function saveEditedSubtask() {
     const editInput = document.getElementById('edit_subtask_input');
     const editedValue = editInput.value.trim();
     if (currentEditIndex !== null) {
-      subtasks[currentEditIndex] = editedValue;
+        subtasks[currentEditIndex].title = editedValue;
     }
     editInput.classList.add('d-none');
     document.getElementById('edit_delete_icon').classList.add('d-none');

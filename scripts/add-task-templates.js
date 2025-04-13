@@ -39,7 +39,7 @@ function contactsCustomSelectOptionHtml(contacts) {
 function subtasksItem(subtask, index) {
   return `
       <div class="subtask-item">
-        <span class="subtask-text" ondblclick="editSubtask(${index})">• ${subtask}</span>
+        <span class="subtask-text" ondblclick="editSubtask(${index})">• ${subtask.title}</span>
         <div class="subtask-icons">
           <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon" onclick="editSubtask(${index})">
           <div class="vertical-line-subtask-dark"></div>
