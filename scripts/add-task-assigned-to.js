@@ -205,12 +205,12 @@ function createCircle(backgroundColor, textContent) {
 
 /**
  * Renders the currently selected contacts in the UI by displaying their initials in colored circles.
- * Displays a maximum of 5 contacts and adds a "+" circle if there are more.
+ * Displays a maximum of 4 contacts and adds a "+" circle if there are more.
  */
 function renderSelectedContacts() {
   const container = document.querySelector('.show-selected-contacts');
   container.innerHTML = '';
-  const maxVisibleContacts = 5; 
+  const maxVisibleContacts = 4; 
   const visibleContacts = selectedContacts.slice(0, maxVisibleContacts);
   visibleContacts.forEach((contact) => {
     const circle = createCircle(contact.randomColor, contact.initials);
