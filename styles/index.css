@@ -467,6 +467,15 @@
   color: #333;
 }
 
+.extra-circle {
+  background-color: transparent;
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+}
 
 @media screen and (max-width: 1440px) {
   .main-board {
