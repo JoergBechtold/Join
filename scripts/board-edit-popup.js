@@ -1,14 +1,66 @@
+// === Helper Functions ===
+
+/**
+ * Returns today's date normalized to midnight.
+ * @returns {Date} Today's date with time set to 00:00:00.
+ */
+function getTodayNormalized() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+}
+
+/**
+ * Returns a Date object based on the provided date string, normalized to midnight.
+ * @param {string} dateStr - The date string (e.g., "2025-04-14").
+ * @returns {Date} A Date object with time set to 00:00:00.
+ */
+function getNormalizedDate(dateStr) {
+  const date = new Date(dateStr);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+/**
+ * Displays an error message on the given input field.
+ * @param {HTMLElement} inputField - The input element where the error occurred.
+ * @param {HTMLElement} errorElement - The element that displays the error message.
+ * @param {string} message - The error message to display.
+ */
+function displayError(inputField, errorElement, message) {
+  if (errorElement) {
+    errorElement.textContent = message;
+    errorElement.classList.remove('d-none');
+  }
+  inputField.classList.add('red-border');
+}
+
+/**
+ * Clears any error styling and hides the error message for the given input field.
+ * @param {HTMLElement} inputField - The input element to clear error styling from.
+ * @param {HTMLElement} errorElement - The element that displays the error message.
+ */
+function clearError(inputField, errorElement) {
+  if (errorElement) {
+    errorElement.classList.add('d-none');
+  }
+  inputField.classList.remove('red-border');
+}
+
+// === Global Variables for the Edit Popup ===
+
 let editPopupSubtasks = [];
 let editPopupActiveButton = null;
 let editPopupTaskKey = null;
 let editPopupCurrentSubtaskIndex = null;
 let selectedEditContacts = [];
 
+// === Functions for Editing a Task ===
+
 /**
  * Loads the task data from Firebase and opens the edit popup.
- * Displays a preview of the task and fills the form fields for editing.
  *
- * @param {string} key - The ID of the task to edit.
+ * @param {string} key - The ID of the task to be edited.
  */
 async function editTask(key) {
   editPopupTaskKey = key;
@@ -17,15 +69,14 @@ async function editTask(key) {
   const task = await loadData(`tasks/${key}`);
   if (!task) return;
   renderEditPreview(task);
-  loadEditFormData(task); 
+  loadEditFormData(task);
   document.getElementById('edit_popup').style.display = 'flex';
 }
 
 /**
- * Renders the task preview section in the edit popup with details from the given task.
- * This includes category, title, description, due date, priority, assigned contacts, and subtasks.
+ * Renders the task preview section in the edit popup.
  *
- * @param {Object} task - The task object containing all relevant data for rendering.
+ * @param {Object} task - The task object.
  */
 function renderEditPreview(task) {
   const container = document.getElementById('edit_preview_info');
@@ -38,10 +89,9 @@ function renderEditPreview(task) {
 }
 
 /**
- * Loads the provided task data into the edit form fields.
- * Sets title, description, due date, priority, category, subtasks, and assigned contacts.
+ * Loads the task data into the edit form.
  *
- * @param {Object} task - The task object containing data to populate the edit form.
+ * @param {Object} task - The task object.
  */
 function loadEditFormData(task) {
   document.getElementById('edit_title').value = task.title || '';
@@ -68,10 +118,9 @@ function loadEditFormData(task) {
 }
 
 /**
- * Sets the priority button as active in the edit popup.
- * If another priority button was already active, it resets it first.
+ * Sets the active priority button in the edit popup.
  *
- * @param {string} buttonId - The ID of the priority button to activate.
+ * @param {string} buttonId - The ID of the button to activate.
  */
 function setEditPriority(buttonId) {
   const button = document.getElementById(buttonId);
@@ -81,8 +130,7 @@ function setEditPriority(buttonId) {
 }
 
 /**
- * Resets the currently active priority button by removing all styling classes
- * and reverting its icon to the default state.
+ * Resets the currently active priority button.
  */
 function resetEditPriorityButton() {
   editPopupActiveButton.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
@@ -92,8 +140,7 @@ function resetEditPriorityButton() {
 }
 
 /**
- * Sets the given button as the active priority button.
- * Adds the active styling and applies the corresponding visual style based on its type.
+ * Activates the specified priority button.
  *
  * @param {HTMLElement} button - The button element to activate.
  */
@@ -105,8 +152,7 @@ function activateEditPriorityButton(button) {
 }
 
 /**
- * Applies the corresponding CSS class and icon to the active priority button 
- * based on the selected priority type (urgent, medium, low).
+ * Applies the corresponding CSS class and icon to the active priority button.
  *
  * @param {string} type - The priority type ('urgent', 'medium', or 'low').
  */
@@ -123,9 +169,9 @@ function applyEditPriorityStyle(type) {
 }
 
 /**
- * Returns the currently selected priority based on the active priority button.
+ * Returns the currently selected priority.
  *
- * @returns {string} The selected priority ('urgent', 'medium', 'low'), or an empty string if none is selected.
+ * @returns {string} 'urgent', 'medium', 'low' or ''.
  */
 function getEditPriority() {
   if (!editPopupActiveButton) return '';
@@ -136,9 +182,7 @@ function getEditPriority() {
 }
 
 /**
- * Handles the submission of the edited task.
- * Validates input, updates the task data in the database, closes the edit popup,
- * and updates both the board card and popup with the latest task information.
+ * Submits the edited task and saves the changes.
  */
 async function submitEditTask() {
   if (!validateEditInputs()) return;
@@ -156,25 +200,23 @@ async function submitEditTask() {
 }
 
 /**
- * Applies the edited form data to the given task object.
- * Extracts values from the edit form inputs and updates the task accordingly.
+ * Applies the edited form data to the task object.
  *
- * @param {Object} task - The task object to be updated with new values.
+ * @param {Object} task - The task object to update.
  */
 function applyEditedTaskData(task) {
   task.title = document.getElementById('edit_title').value.trim();
   task.description = document.getElementById('edit_description').value.trim();
   task.due_date = document.getElementById('edit_due_date').value.trim();
   task.priority = getEditPriority();
-  task.subtasks = checkSubtasks(); 
-  task.assigned_to = checkAssignedTo(); 
+  task.subtasks = checkSubtasks();
+  task.assigned_to = checkAssignedTo();
 }
 
 /**
- * Checks all subtasks from the edit form and returns an array of strings.
- * This ensures subtasks are saved just like in 'add-task.js'.
+ * Checks the subtasks entered in the edit popup and returns an array.
  *
- * @returns {Array} Array of subtask strings
+ * @returns {Array<Object>} An array of subtask objects.
  */
 function checkSubtasks() {
   const elements = document.querySelectorAll('#edit_subtask_enum .subtask-text');
@@ -187,17 +229,16 @@ function checkSubtasks() {
       subtasks.push({
         title: text,
         completed: isCompleted
-      });      
+      });
     }
   });
   return subtasks;
 }
 
 /**
- * Collects all selected contacts in the edit form and returns an array of contact objects.
- * Each contact object contains the `initials` of the contact and their `randomColor` (used for styling).
+ * Checks the assigned contacts in the edit popup and returns an array.
  *
- * @returns {Array} An array of contact objects, each containing the `initials` and `randomColor` of the contact.
+ * @returns {Array<Object>} An array of contact objects.
  */
 function checkAssignedTo() {
   return Array.isArray(selectedEditContacts)
@@ -209,30 +250,59 @@ function checkAssignedTo() {
 }
 
 /**
- * Validates the input fields in the edit form to ensure that the required fields are filled out.
- * Displays error messages if any field is missing or invalid.
+ * Validates all input fields in the edit popup (e.g., title and due date).
  *
- * @returns {boolean} Returns true if all required fields are valid, false otherwise.
+ * @returns {boolean} True if all fields are valid; otherwise, false.
  */
 function validateEditInputs() {
-  const title = document.getElementById('edit_title').value.trim();
-  const due_date = document.getElementById('edit_due_date').value.trim();
-  if (!title) {
-    document.getElementById('edit_error_title').classList.remove('d-none');
+  const isTitleValid = validateEditInputTitle();
+  const isDateValid = validateEditInputDate();
+  return isTitleValid && isDateValid;
+}
+
+/**
+ * Validates the title in the edit popup.
+ *
+ * @returns {boolean} True if the title is not empty.
+ */
+function validateEditInputTitle() {
+  const titleInput = document.getElementById('edit_title');
+  const errorMessage = document.getElementById('error_message_edit_title') || document.getElementById('error_message_title');
+  if (titleInput.value.trim() === '') {
+    displayError(titleInput, errorMessage, "This field is required.");
     return false;
   }
-  if (!due_date) {
-    document.getElementById('edit_error_date').classList.remove('d-none');
-    return false;
-  }
+  clearError(titleInput, errorMessage);
   return true;
 }
 
 /**
- * Selects an option from the edit category dropdown and updates the displayed category.
- * Hides the dropdown options container after selection.
+ * Validates the due date in the edit popup.
  *
- * @param {string} value - The selected category value to be displayed.
+ * @returns {boolean} True if a date is entered and it is not in the past.
+ */
+function validateEditInputDate() {
+  const dateInput = document.getElementById('edit_due_date');
+  const errorMessage = document.getElementById('error_message_edit_date') || document.getElementById('error_message_date');
+  const inputValue = dateInput.value.trim();
+  const today = getTodayNormalized();
+  if (inputValue === '') {
+    displayError(dateInput, errorMessage, "This field is required.");
+    return false;
+  }
+  const selectedDate = getNormalizedDate(inputValue);
+  if (selectedDate < today) {
+    displayError(dateInput, errorMessage, "Date cannot be in the past.");
+    return false;
+  }
+  clearError(dateInput, errorMessage);
+  return true;
+}
+
+/**
+ * Selects a category in the edit popup and updates the display.
+ *
+ * @param {string} value - The selected category name.
  */
 function selectEditOption(value) {
   document.getElementById('edit_selected_option').textContent = value;
@@ -256,10 +326,10 @@ function closeEditPopup() {
 }
 
 /**
- * Updates the task card in the board by removing the old card and creating a new one.
+ * Updates the task card on the board by removing the old card and creating a new one.
  *
- * @param {string} taskKey - The key of the task to be updated.
- * @param {Object} task - The updated task object.
+ * @param {string} taskKey - The key of the task.
+ * @param {Object} task - The task object.
  */
 async function updateCardInBoard(taskKey, task) {
   const container = document.getElementById(task.state);
@@ -269,10 +339,10 @@ async function updateCardInBoard(taskKey, task) {
 }
 
 /**
- * Updates the task popup with the provided task details.
- * 
- * @param {string} taskKey - The key of the task to be updated in the popup.
- * @param {Object} task - The task object containing the updated details.
+ * Updates the popup content with the task details.
+ *
+ * @param {string} taskKey - The key of the task.
+ * @param {Object} task - The task object.
  */
 function updatePopup(taskKey, task) {
   const assignedHTML = getAssignedHTML(task);

@@ -78,36 +78,56 @@ function validateInputTitle() {
   }
 }
 
-// Returns today's date normalized to midnight.
+/**
+ * Returns today's date normalized to midnight.
+ * @returns {Date} Today's date with the time set to 00:00:00.
+ */
 function getTodayNormalized() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return today;
 }
 
-// Returns a date (based on the input string) normalized to midnight.
+/**
+ * Returns a Date object based on the given date string, normalized to midnight.
+ * @param {string} dateStr - The date string (e.g., "2025-04-14") to convert.
+ * @returns {Date} The Date object with time set to 00:00:00.
+ */
 function getNormalizedDate(dateStr) {
   const date = new Date(dateStr);
   date.setHours(0, 0, 0, 0);
   return date;
 }
 
-// Displays an error message on the input field.
+/**
+ * Displays an error message for the given input field by updating the provided error element's text and style.
+ * Also adds a red border to the input field.
+ *
+ * @param {HTMLElement} inputField - The input field element where the error occurs.
+ * @param {HTMLElement} errorElement - The element that displays the error message.
+ * @param {string} message - The error message to display.
+ */
 function displayError(inputField, errorElement, message) {
   errorElement.textContent = message;
   errorElement.classList.remove('d-none');
   inputField.classList.add('red-border');
 }
 
-// Clears any error styling and messages for the input field.
+/**
+ * Clears any error styling and hides the error message for the given input field.
+ *
+ * @param {HTMLElement} inputField - The input field element to remove error styling from.
+ * @param {HTMLElement} errorElement - The element that displays the error message.
+ */
 function clearError(inputField, errorElement) {
   errorElement.classList.add('d-none');
   inputField.classList.remove('red-border');
 }
 
 /**
- * Validates the due date input field.
- * Returns true if the date is provided and is not in the past.
+ * Validates the due date input field, ensuring that a date is provided and that it is not in the past.
+ *
+ * @returns {boolean} True if the date is provided and is not in the past; otherwise, false.
  */
 function validateInputDate() {
   const inputField = document.getElementById('due_date');
