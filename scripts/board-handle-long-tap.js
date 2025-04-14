@@ -1,3 +1,6 @@
+let scrolling = false;
+let cardScrollDirection = 0;
+
 /**
  * Initializes the touch-based drag functionality for a task card.
  * Delegates to specific setup functions for touch start, move, and end.
@@ -9,10 +12,9 @@ function setupTouchDrag(card) {
   initTouchMove(card);
   initTouchEnd(card);
 }
-
 /**
- * Startet das lange Drücken und speichert Fingerposition.
- * @param {HTMLElement} card - Die Karte, die berührt wird.
+ * Starts long tap detection and stores initial finger offset.
+ * @param {HTMLElement} card - The task card element.
  */
 function initTouchStart(card) {
   card.ontouchstart = function (e) {
@@ -28,17 +30,23 @@ function initTouchStart(card) {
   };
 }
 
-
 /**
- * Aktiviert den Drag-Stil mit Positionierung relativ zur Berührungsstelle.
- * @param {HTMLElement} card - Die Karte, die gezogen wird.
+ * Applies styles for dragging behavior and disables scrolling globally.
+ * @param {HTMLElement} card - The card being dragged.
  */
 function activateDragStyle(card) {
+  const rect = card.getBoundingClientRect();
   card.style.position = 'fixed';
   card.style.zIndex = 999;
+  card.style.left = `${rect.left}px`;
+  card.style.top = `${rect.top}px`;
+  card.style.width = `${rect.width}px`;
+  card.style.height = `${rect.height}px`;
   card.style.pointerEvents = 'none';
-  card.style.width = `${card.offsetWidth}px`;
   card.classList.add('tilted');
+  document.querySelector('.main-board').classList.add('no-scroll');
+  document.body.classList.add('body-no-scroll');
+  document.documentElement.classList.add('body-no-scroll');
 }
 
 /**
@@ -56,26 +64,49 @@ function initTouchMove(card) {
 }
 
 /**
- * Positioniert die Karte unter dem Finger, egal wo sie gedrückt wurde.
- * @param {HTMLElement} card - Die gezogene Karte.
- * @param {Touch} touch - Die aktuelle Touch-Position.
+ * Updates card position based on finger movement.
+ * @param {HTMLElement} card - The card being dragged.
+ * @param {Touch} touch - The current touch position.
  */
 function positionCardOnTouch(card, touch) {
-  const rect = card.getBoundingClientRect();
-  const offsetX = card.dragOffsetX || rect.width / 2;
-  const offsetY = card.dragOffsetY || rect.height / 2;
+  const offsetX = card.dragOffsetX || 0;
+  const offsetY = card.dragOffsetY || 0;
   card.style.left = `${touch.clientX - offsetX}px`;
   card.style.top = `${touch.clientY - offsetY}px`;
 }
 
 /**
- * Automatically scrolls the page up or down when dragging near screen edges.
- *
- * @param {Touch} touch - The current touch point data.
+ * Smoothly scrolls .main-board while finger is near top/bottom edge.
+ * @param {Touch} touch - The current touch position.
  */
 function handleAutoScroll(touch) {
-  if (touch.clientY < 100) window.scrollBy(0, -10);
-  else if (touch.clientY > window.innerHeight - 100) window.scrollBy(0, 10);
+  const board = document.querySelector('.main-board');
+  const rect = board.getBoundingClientRect();
+  const topEdge = rect.top + 50;
+  const bottomEdge = rect.bottom - 50;
+
+  cardScrollDirection = 0;
+  if (touch.clientY < topEdge) cardScrollDirection = -1;
+  else if (touch.clientY > bottomEdge) cardScrollDirection = 1;
+
+  if (!scrolling) startSmoothScroll(board);
+}
+
+/**
+ * Starts smooth scroll animation in the desired direction.
+ * @param {HTMLElement} board - The board container.
+ */
+function startSmoothScroll(board) {
+  scrolling = true;
+  function scroll() {
+    if (cardScrollDirection !== 0) {
+      board.scrollTop += cardScrollDirection * 200;
+      requestAnimationFrame(scroll);
+    } else {
+      scrolling = false;
+    }
+  }
+  scroll();
 }
 
 /**
@@ -101,13 +132,15 @@ function initTouchEnd(card) {
 }
 
 /**
- * Resets the styling on a card after dragging ends.
- *
+ * Resets the card styles and re-enables scrolling globally.
  * @param {HTMLElement} card - The task card element to reset.
  */
 function resetDragStyle(card) {
-  card.classList.remove("tilted");
-  card.style = "";
+  card.classList.remove('tilted');
+  card.style = '';
+  document.querySelector('.main-board').classList.remove('no-scroll');
+  document.body.classList.remove('body-no-scroll');
+  document.documentElement.classList.remove('body-no-scroll');
 }
 
 /**

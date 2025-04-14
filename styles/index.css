@@ -500,10 +500,24 @@
 }
 
 @media (max-width: 768px) {
+  
+  body.body-no-scroll,
+  html.body-no-scroll {
+  overflow: hidden !important;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  touch-action: none;
+}
+
   .main-board{
     margin-left: var(--margin-left-main-responsive);
     overflow: auto;
   }
+
+  .main-board.no-scroll {
+    overflow-y: hidden !important;
+  }  
 
   .headline-input-container {
     justify-content: unset;
