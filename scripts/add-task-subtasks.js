@@ -133,36 +133,6 @@ function cancelEditSubtask() {
 }
 
 /**
- * Saves changes made to an edited subtask by updating its value in the global array.
- * Restores normal mode after saving and updates the display to reflect changes.
- */
-/* function saveEditedSubtask() {
-    const editInput = document.getElementById('edit_subtask_input');
-    const editedValue = editInput.value.trim();
-    if (editedValue === '') {
-        if (currentEditIndex !== null) {
-            editInput.value = subtasks[currentEditIndex].title; 
-        }
-        editInput.classList.add('d-none');
-        document.getElementById('edit_delete_icon').classList.add('d-none');
-        document.getElementById('edit_save_icon').classList.add('d-none');
-        document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
-        currentEditIndex = null;
-        return; 
-    }
-    if (currentEditIndex !== null) {
-        subtasks[currentEditIndex].title = editedValue;
-    }
-    editInput.classList.add('d-none');
-    document.getElementById('edit_delete_icon').classList.add('d-none');
-    document.getElementById('edit_save_icon').classList.add('d-none');
-    document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
-    updateSubtaskDisplay();
-    currentEditIndex = null;
-}
- */
-
-/**
  * Validates the edited subtask input. If the input is empty, restores the original value
  * and exits edit mode without saving changes.
  * @param {HTMLElement} editInput - The input element for editing the subtask.
