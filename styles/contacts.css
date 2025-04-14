@@ -217,11 +217,11 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Animations */
+/* Animations
 @keyframes slideInFromRight {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
-}
+} */
 
 .container-add.active,
 .container-edit.active {
@@ -760,17 +760,16 @@ color: var(--blue);
       scroll-behavior: smooth;
     }
 
-  /* Animation für mobile Container */
+  /* Animation für mobile Container
 @keyframes slideInFromBottom {
   from { transform: translate(-50%, 100%); opacity: 0; }
   to { transform: translate(-50%, 0); opacity: 1; }
-}
+} */
 
-   /* Aktiv-Zustand: Element soll sichtbar sein */
+   /* Aktiv-Zustand: Element soll sichtbar sein
    .container-add.active,
    .container-edit.active {
      bottom: 0; /* Das Element fährt nach oben in den sichtbaren Bereich */
-   }
 
     .left-section {
       width: 100%;
@@ -901,25 +900,18 @@ color: var(--blue);
 .button-responsive{
   display: flex !important;
   flex-direction: row !important;
-  margin-left: 60px !important;
-  width: 80% !important;
+  margin-left: 70px !important;
+  width: 70% !important;
 }
 
 .btn-responsive{
   display: flex !important;
 }
 
-/* Animations */
-@keyframes slideInFromRight {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideInFromBottom {
+/* @keyframes slideInFromBottom {
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-
+} */
 }
 
 @media screen and (max-width: 450px){

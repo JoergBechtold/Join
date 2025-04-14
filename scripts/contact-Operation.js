@@ -38,16 +38,15 @@ async function saveContactToFirebase(contactData, callback) {
 
 /**
  * Processes a phone number string by removing a leading zero (if present)
- * and prepending the country code "+49".
  *
  * @param {string} phone - The phone number to process.
- * @returns {string} The processed phone number.
+ * @returns {string} The processed phone number without leading zero.
  */
 function processPhoneNumber(phone) {
   if (phone.startsWith('0')) {
-    phone = phone.substring(1);
+    return phone.substring(1); // entfernt die führende 0
   }
-  return '+49' + phone;
+  return phone;
 }
 
 /**

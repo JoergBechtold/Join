@@ -8,9 +8,12 @@
  * @returns {boolean} True if the email is valid; otherwise, false.
  */
 function validateEmail(emailInput, container) {
-  const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+  const emailValue = emailInput.value.trim();
+  const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
   let err = container.querySelector('.email-error');
-  if (!isValid && emailInput.value.trim() !== '') {
+
+  // Fehler anzeigen bei leerem, nur Leerzeichen oder ungültiger Eingabe
+  if (!isValid || emailValue === '') {
     if (!err) {
       err = document.createElement('span');
       err.className = 'email-error';
@@ -21,8 +24,10 @@ function validateEmail(emailInput, container) {
   } else if (err) {
     err.remove();
   }
+
   return isValid;
 }
+
 
 /**
  * Checks whether the provided name string is valid.
@@ -50,8 +55,13 @@ function isNameValidValue(nameValue) {
  */
 function updateNameError(nameInput, container, isValid) {
   let err = container.querySelector('.name-error');
-  const nameValue = nameInput.value.trim();
-  if (!isValid && nameValue !== '') {
+  const nameValue = nameInput.value;
+
+  // Überprüfe, ob nur Leerzeichen oder nur ein einzelnes Wort eingegeben wurde
+  const trimmed = nameValue.trim();
+  const hasMultipleParts = trimmed.split(/\s+/).length >= 2;
+
+  if (!isValid || trimmed === '' || !hasMultipleParts) {
     if (!err) {
       err = document.createElement('span');
       err.className = 'name-error';
@@ -90,7 +100,9 @@ function validatePhone(phoneInput, container) {
   const phoneValue = phoneInput.value.trim();
   const isValid = /^\+?[0-9]+$/.test(phoneValue) && phoneValue.length >= 7 && phoneValue.length <= 15;
   let err = container.querySelector('.phone-error');
-  if (!isValid && phoneValue !== '') {
+
+  // Auch leere oder nur Leerzeichen sollen als ungültig gelten
+  if (!isValid || phoneValue === '') {
     if (!err) {
       err = document.createElement('span');
       err.className = 'phone-error';
@@ -101,8 +113,10 @@ function validatePhone(phoneInput, container) {
   } else if (err) {
     err.remove();
   }
+
   return isValid;
 }
+
 
 /**
  * Returns the active container element (either the "edit" or "add" contact container).
