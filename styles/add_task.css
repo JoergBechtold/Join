@@ -61,12 +61,12 @@
 .right-container {
   flex: 1;
   position: relative;
+  height: 500px;
 }
 
 .right-container {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 450px;
 }
 
 .right-container::-webkit-scrollbar {
