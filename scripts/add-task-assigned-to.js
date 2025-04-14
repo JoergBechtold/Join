@@ -154,7 +154,6 @@ function updateSelectedContacts(element) {
   } else {
     selectedContacts = selectedContacts.filter((contact) => contact.initials !== initials);
   }
-  console.log('Aktueller Inhalt von selectedContacts:', selectedContacts);
   selectedContacts = sortContacts(selectedContacts);
   renderSelectedContacts();
 }
@@ -191,18 +190,36 @@ function updateImage(element) {
 }
 
 /**
+ * Creates a circle element with the specified background color and text content.
+ * @param {string} backgroundColor - The background color of the circle.
+ * @param {string} textContent - The text content inside the circle.
+ * @returns {HTMLElement} - The created circle element.
+ */
+function createCircle(backgroundColor, textContent) {
+  const circle = document.createElement('div');
+  circle.className = 'circle';
+  circle.style.backgroundColor = backgroundColor;
+  circle.textContent = textContent;
+  return circle;
+}
+
+/**
  * Renders the currently selected contacts in the UI by displaying their initials in colored circles.
+ * Displays a maximum of 5 contacts and adds a "+" circle if there are more.
  */
 function renderSelectedContacts() {
   const container = document.querySelector('.show-selected-contacts');
   container.innerHTML = '';
-  selectedContacts.forEach((contact) => {
-    const circle = document.createElement('div');
-    circle.className = 'circle';
-    circle.style.backgroundColor = contact.randomColor;
-    circle.textContent = contact.initials;
+  const maxVisibleContacts = 5; 
+  const visibleContacts = selectedContacts.slice(0, maxVisibleContacts);
+  visibleContacts.forEach((contact) => {
+    const circle = createCircle(contact.randomColor, contact.initials);
     container.appendChild(circle);
   });
+  if (selectedContacts.length > maxVisibleContacts) {
+    const plusCircle = createCircle('#ccc', `+${selectedContacts.length - maxVisibleContacts}`);
+    container.appendChild(plusCircle);
+  }
 }
 
 /**
