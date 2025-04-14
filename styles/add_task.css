@@ -57,26 +57,11 @@
   justify-content: space-between;
 }
 
-/* .add-task-content-board-popup {
-  display: flex;
-  flex-direction: column;
-  scrollbar-gutter: stable;
-  overflow-y: auto;
-}
-
-.add-task-content-board-popup::-webkit-scrollbar {
-  width: var(--scollbar-width-thin);
-} */
-
 .left-container,
 .right-container {
   flex: 1;
   position: relative;
 }
-
-/* .left-container{
-  scrollbar-gutter: stable;
-} */
 
 .right-container {
   overflow-x: hidden;
