@@ -75,6 +75,7 @@ function toggleSubmenu() {
   let submenu = document.getElementById('user-submenu');
 
   if (window.matchMedia('(max-width: 768px)').matches) {
+    submenu.style.transition = 'transform 0.3s ease-in-out';
     submenu.classList.toggle('submenu-slide-in');
   } else {
     submenu.classList.remove('submenu-slide-in');
