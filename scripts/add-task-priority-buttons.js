@@ -1,78 +1,136 @@
 let activeButton = null;
 
 /**
- * Toggles the active state of a button by its ID.
- * If another button is already active, it resets the active button
- * before activating the new one. Clicking the same button again deactivates it.
+ * Sets the selected priority button as active while deactivating others.
  *
- * @param {string} buttonId - The ID of the button to activate or deactivate.
+ * @param {string} buttonId - ID of the clicked priority button (must match HTML ID)
+ * @returns {void}
  */
 function setPriority(buttonId) {
   const button = document.getElementById(buttonId);
-  if (activeButton) {
-    resetActiveButton();
-  }
-  if (activeButton !== button) {
-    activateButton(button);
-  } else {
-    activeButton = null;
-  }
+  activeButton = document.getElementById('medium_button');
+  console.log('Current activeButton:', activeButton); 
+  if (activeButton.id  === 'medium_button') {
+    resetMediumButton();
+  } 
+  activateButton(button);
+  deactivateOtherButtons(buttonId)
+  activeButton = button;
 }
 
 /**
- * Resets the currently active button by removing its priority-related CSS classes
- * and restoring the original image source if an associated image exists.
+ * Resets the medium priority button to its default inactive state.
  *
- * This function ensures that the previously active button is visually reset
- * to its default state.
+ * This function removes the active styles and classes from the medium button
+ * and updates its associated image to remove the "-event" suffix if present.
+ *
+ * @returns {void}
  */
-function resetActiveButton() {
-  if (activeButton) {
-    activeButton.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
-    const prevImg = document.getElementById(activeButton.id + '_img');
-    if (prevImg) {
-      prevImg.src = prevImg.src.replace('-event', '');
+function resetMediumButton() {
+  const mediumButton = document.getElementById('medium_button'); 
+  if (mediumButton) {
+    mediumButton.classList.remove('active-prio', 'orange-prio');
+    const mediumImg = document.getElementById('medium_button_img');
+    if (mediumImg) {
+      mediumImg.src = mediumImg.src.replace('-event', ''); 
     }
   }
 }
 
 /**
- * Activates a button by setting it as the currently active button,
- * applying priority-related CSS classes, and updating its style based on its type.
+ * Activates the specified priority button by adding appropriate styles and updating its associated image.
+ *
+ * This function visually marks the button as active by applying the `active-prio` class,
+ * along with a color-specific class based on the button's ID. Additionally, it updates
+ * the button's associated image to include the "-event" suffix, ensuring this change
+ * is applied only once.
  *
  * @param {HTMLElement} button - The button element to activate.
+ * @returns {void}
  */
 function activateButton(button) {
-  activeButton = button;
   button.classList.add('active-prio');
-  const buttonType = button.id.split('_')[0];
-  updateButtonStyle(buttonType);
+  if (button.id === 'urgent_button') {
+    button.classList.add('red-prio');
+  } else if (button.id === 'medium_button') {
+    button.classList.add('orange-prio');
+  } else if (button.id === 'low_button') {
+    button.classList.add('green-prio');
+  }
+  const img = document.getElementById(button.id + '_img');
+  if (img) {
+    if (!img.src.includes('-event')) {
+      img.src = img.src.replace('.svg', '-event.svg'); 
+    } else {
+    }
+  } 
 }
 
 /**
- * Updates the style of the currently active button based on its priority type.
- * Adds the corresponding CSS class to the button and updates the associated icon image.
+ * Deactivates all priority buttons except the currently active one.
  *
- * @param {string} buttonType - The priority type of the button (e.g., "urgent", "medium", "low").
- *                              This determines the CSS class and icon to apply.
+ * This function iterates through a predefined list of button IDs, checks if each button
+ * is not the currently active button, and removes all active-related styles and classes
+ * from those buttons. Additionally, it updates the associated images to remove the "-event"
+ * suffix if present.
+ *
+ * @param {string} activeButtonId - The ID of the currently active button (must match HTML ID).
+ * @returns {void}
  */
-function updateButtonStyle(buttonType) {
-  const prioStyles = {
-    urgent: ['red-prio', 'high'],
-    medium: ['orange-prio', 'medium'],
-    low: ['green-prio', 'low'],
-  };
-  const [className, iconType] = prioStyles[buttonType];
-  activeButton.classList.add(className);
-  document.getElementById(activeButton.id + '_img').src = `assets/icons/prio-${iconType}-event.svg`;
+function deactivateOtherButtons(activeButtonId) {
+  const allButtons = ['urgent_button', 'medium_button', 'low_button'];
+  allButtons.forEach(buttonId => {
+    if (buttonId !== activeButtonId) {
+      const button = document.getElementById(buttonId);
+      const img = document.getElementById(buttonId + '_img');
+      button.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
+      if (img && img.src.includes('-event')) {
+        img.src = img.src.replace('-event', '');
+      }
+    }
+  });
 }
 
 /**
- * Clears the active button by resetting its state.
- * If there is a currently active button, its priority-related styles and associated changes are removed.
+ * Resets all priority buttons to their default inactive state and reactivates the medium button.
+ *
+ * This function iterates through all priority buttons, removes active-related styles and classes,
+ * and resets their associated images to their default state (removing the "-event" suffix if present).
+ * After clearing all buttons, it calls `activateMediumButton()` to reactivate the medium button.
+ *
+ * @returns {void}
  */
 function clearButtons() {
-  if (activeButton) {
-      resetActiveButton();
-  }
+  const allButtons = ['urgent_button', 'medium_button', 'low_button'];
+  allButtons.forEach(buttonId => {
+    const button = document.getElementById(buttonId);
+    const img = document.getElementById(buttonId + '_img');
+    button.classList.remove('active-prio', 'red-prio', 'orange-prio', 'green-prio');
+    if (img && img.src.includes('-event')) {
+      img.src = img.src.replace('-event', '');
+    }
+  });
+  activateMediumButton();
 }
+
+/**
+ * Activates the medium priority button by adding appropriate styles and updating its associated image.
+ *
+ * This function sets the medium button as active by applying the `active-prio` and `orange-prio` classes
+ * and ensures that its associated image includes the "-event" suffix.
+ *
+ * @returns {void}
+ */
+function activateMediumButton() {
+  const mediumButton = document.getElementById('medium_button');
+  const mediumImg = document.getElementById('medium_button_img');
+  mediumButton.classList.add('active-prio', 'orange-prio');
+  if (mediumImg && !mediumImg.src.includes('-event')) {
+    mediumImg.src = mediumImg.src.replace('.svg', '-event.svg');
+  }
+  activeButton = mediumButton;
+}
+
+
+
+
