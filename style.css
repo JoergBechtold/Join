@@ -137,7 +137,7 @@ a {
   --margin-left-main-responsive:20px;
 
   /* padding top main */
-  --padding-top-main: clamp(115px, 100px + 4.6875vw, 190px);
+  --padding-top-main: clamp(95px, 76px + 5.9375vw, 190px);
 
   /* main container width */
   --main-container-width: 1014px;
