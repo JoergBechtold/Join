@@ -267,7 +267,7 @@
 .checkbox-accept-privacy-policy a {
   color: var(--light-blue);
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-14-16);
+  font-size: 16px;
   white-space: nowrap;
   width: 105px;
 }
@@ -281,7 +281,7 @@
 
 .checkbox-accept-privacy-policy span {
   font-weight: var(--font-weight-400);
-  font-size: var(--font-size-14-16);
+  font-size: 16px;
   white-space: nowrap;
 }
 
@@ -322,7 +322,7 @@
 .footer-login-register a {
   cursor: pointer;
   color: var(--gray-a-links);
-  font-size: var(--font-size-14-16);
+  font-size: 16px;
   font-weight: var(--font-weight-400);
 }
 
