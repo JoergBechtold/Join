@@ -247,20 +247,40 @@ async function setEditContacts(task) {
 }
 
 /**
- * Renders the selected contacts in the edit form.
- * Each contact is displayed as a colored circle with their initials.
+ * Renders up to 4 selected contacts as colored circles in the edit popup.
+ * If more than 4 are selected, appends a "+X" text indicator.
  */
 function renderSelectedEditContacts() {
   const container = document.getElementById('edit_selected_contact_circles');
   if (!container) return;
   container.innerHTML = '';
-  selectedEditContacts.forEach(contact => {
+  const maxVisible = 4;
+  const visibleContacts = selectedEditContacts.slice(0, maxVisible);
+  visibleContacts.forEach(contact => {
     const circle = document.createElement('div');
     circle.className = 'circle';
     circle.textContent = contact.initials;
     circle.style.backgroundColor = contact.contactColor || '#ccc';
     container.appendChild(circle);
   });
+  appendExtraContactIndicator(container, selectedEditContacts.length, maxVisible);
+}
+
+/**
+ * Appends a "+X" text indicator if more contacts exist than the visible limit.
+ *
+ * @param {HTMLElement} container - The container to append the indicator to.
+ * @param {number} total - Total number of selected contacts.
+ * @param {number} max - Maximum number of visible contacts.
+ */
+function appendExtraContactIndicator(container, total, max) {
+  const extraCount = total - max;
+  if (extraCount > 0) {
+    const extra = document.createElement('span');
+    extra.className = 'extra-circle';
+    extra.textContent = `+${extraCount}`;
+    container.appendChild(extra);
+  }
 }
 
 /**
