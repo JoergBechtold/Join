@@ -157,9 +157,7 @@
   gap: 8px;
   justify-content: space-between;
   padding-top: 7px;
-  padding-right: 16px;
   padding-bottom: 7px;
-  padding-left: 16px;
   max-height: 155px;
   overflow: auto;
   scrollbar-gutter: stable;
@@ -248,7 +246,7 @@
   align-items: center;
   gap: 10px;
   font-weight: 400;
-  font-size: var(--font-size-12-16);
+  font-size: 16px;
   text-align: center;
   vertical-align: middle;
 }
@@ -256,7 +254,10 @@
 .assigned-contact-container {
   display: flex;
   align-items: center;
-  gap: 20px;
+}
+
+.assigned-popup-name {
+  margin-left: 12px;
 }
 
 .close-check-edit-input {

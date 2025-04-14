@@ -90,7 +90,7 @@ function generateAssignedHTML(assignedTo = [], allContacts = {}) {
             };">
               <span class="contact-initials">${foundContact.initials}</span>
             </div>
-            <div>
+            <div class="assigned-popup-name">
               <span class="contact-fullname">${foundContact.firstname} ${foundContact.lastname}</span>
             </div>
           </div>

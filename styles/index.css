@@ -248,18 +248,16 @@
 }
 
 .initials-span {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 45px;
   background: #ff7a00;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   border: 2px solid #ffffff;
   color: white;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 16px;
   line-height: 14.4px;
   text-align: center;
   flex-shrink: 0;
@@ -280,7 +278,6 @@
 }
 
 .progress-container {
-  width: 128px;
   height: 8px;
   background-color: #e0e0e0;
   border-radius: 16px;
@@ -296,7 +293,7 @@
 }
 
 [id$='-subtask-counter'] {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .prio-container {
