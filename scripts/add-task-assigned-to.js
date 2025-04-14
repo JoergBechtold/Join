@@ -210,7 +210,7 @@ function createCircle(backgroundColor, textContent) {
 function renderSelectedContacts() {
   const container = document.querySelector('.show-selected-contacts');
   container.innerHTML = '';
-  const maxVisibleContacts = 4; 
+  const maxVisibleContacts = 5; 
   const visibleContacts = selectedContacts.slice(0, maxVisibleContacts);
   visibleContacts.forEach((contact) => {
     const circle = createCircle(contact.randomColor, contact.initials);
