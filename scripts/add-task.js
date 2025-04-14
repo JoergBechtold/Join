@@ -79,77 +79,23 @@ function validateInputTitle() {
 }
 
 /**
- * Returns today's date normalized to midnight.
- * @returns {Date} Today's date with the time set to 00:00:00.
- */
-function getTodayNormalized() {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return today;
-}
-
-/**
- * Returns a Date object based on the given date string, normalized to midnight.
- * @param {string} dateStr - The date string (e.g., "2025-04-14") to convert.
- * @returns {Date} The Date object with time set to 00:00:00.
- */
-function getNormalizedDate(dateStr) {
-  const date = new Date(dateStr);
-  date.setHours(0, 0, 0, 0);
-  return date;
-}
-
-/**
- * Displays an error message for the given input field by updating the provided error element's text and style.
- * Also adds a red border to the input field.
+ * Validates the due date input field and displays an error message if it is empty.
  *
- * @param {HTMLElement} inputField - The input field element where the error occurs.
- * @param {HTMLElement} errorElement - The element that displays the error message.
- * @param {string} message - The error message to display.
- */
-function displayError(inputField, errorElement, message) {
-  errorElement.textContent = message;
-  errorElement.classList.remove('d-none');
-  inputField.classList.add('red-border');
-}
-
-/**
- * Clears any error styling and hides the error message for the given input field.
- *
- * @param {HTMLElement} inputField - The input field element to remove error styling from.
- * @param {HTMLElement} errorElement - The element that displays the error message.
- */
-function clearError(inputField, errorElement) {
-  errorElement.classList.add('d-none');
-  inputField.classList.remove('red-border');
-}
-
-/**
- * Validates the due date input field, ensuring that a date is provided and that it is not in the past.
- *
- * @returns {boolean} True if the date is provided and is not in the past; otherwise, false.
+ * @returns {boolean} `true` if the date is valid, otherwise `false`.
  */
 function validateInputDate() {
   const inputField = document.getElementById('due_date');
   const errorMessage = document.getElementById('error_message_date');
-  const inputValue = inputField.value.trim();
-  const today = getTodayNormalized();
-  
-  if (inputValue === '') {
-    displayError(inputField, errorMessage, "This field is required.");
+  if (inputField.value.trim() === '') {
+    errorMessage.classList.remove('d-none');
+    inputField.classList.add('red-border');
     return false;
+  } else {
+    errorMessage.classList.add('d-none');
+    inputField.classList.remove('red-border');
+    return true;
   }
-  
-  const selectedDate = getNormalizedDate(inputValue);
-  if (selectedDate < today) {
-    displayError(inputField, errorMessage, "Date cannot be in the past.");
-    return false;
-  }
-  
-  clearError(inputField, errorMessage);
-  return true;
-}
-
+} 
  
 /**
  * Validates the selected category and displays an error message if no category is selected.
@@ -287,4 +233,20 @@ function showPupupOverlayTaskAdded() {
     taskAdded.classList.remove('d-flex');
   }, 800);
 }
+
+/**
+ * Sets the minimum selectable date for the due date input field to today.
+ * This ensures that users cannot select a date in the past when choosing a due date.
+ * The function is intended to be called, for example, when the input field is clicked.
+ */
+function setMinDate() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const minDate = `${yyyy}-${mm}-${dd}`;
+  document.getElementById('due_date').setAttribute('min', minDate);
+}
+
+
 
