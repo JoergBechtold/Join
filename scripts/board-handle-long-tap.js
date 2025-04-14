@@ -11,31 +11,34 @@ function setupTouchDrag(card) {
 }
 
 /**
- * Sets up the touchstart event handler to trigger long-tap detection.
- * Activates dragging after a 2-second hold on small screens.
- *
- * @param {HTMLElement} card - The task card element to apply the handler to.
+ * Startet das lange Drücken und speichert Fingerposition.
+ * @param {HTMLElement} card - Die Karte, die berührt wird.
  */
 function initTouchStart(card) {
   card.ontouchstart = function (e) {
     if (window.innerWidth >= 768) return;
-
+    const touch = e.touches[0];
+    const rect = card.getBoundingClientRect();
+    card.dragOffsetX = touch.clientX - rect.left;
+    card.dragOffsetY = touch.clientY - rect.top;
     card.longTapTimer = setTimeout(() => {
       card.isDragging = true;
       activateDragStyle(card);
-    }, 2000);
+    }, 500);
   };
 }
 
+
 /**
- * Applies styling to visually indicate that the card is being dragged.
- *
- * @param {HTMLElement} card - The task card currently being dragged.
+ * Aktiviert den Drag-Stil mit Positionierung relativ zur Berührungsstelle.
+ * @param {HTMLElement} card - Die Karte, die gezogen wird.
  */
 function activateDragStyle(card) {
-  card.style.position = "absolute";
+  card.style.position = 'fixed';
   card.style.zIndex = 999;
-  card.classList.add("tilted");
+  card.style.pointerEvents = 'none';
+  card.style.width = `${card.offsetWidth}px`;
+  card.classList.add('tilted');
 }
 
 /**
@@ -53,14 +56,16 @@ function initTouchMove(card) {
 }
 
 /**
- * Updates the card position to follow the touch point.
- *
- * @param {HTMLElement} card - The card being dragged.
- * @param {Touch} touch - The current touch point data.
+ * Positioniert die Karte unter dem Finger, egal wo sie gedrückt wurde.
+ * @param {HTMLElement} card - Die gezogene Karte.
+ * @param {Touch} touch - Die aktuelle Touch-Position.
  */
 function positionCardOnTouch(card, touch) {
-  card.style.left = `${touch.pageX - card.offsetWidth / 2}px`;
-  card.style.top = `${touch.pageY - card.offsetHeight / 2}px`;
+  const rect = card.getBoundingClientRect();
+  const offsetX = card.dragOffsetX || rect.width / 2;
+  const offsetY = card.dragOffsetY || rect.height / 2;
+  card.style.left = `${touch.clientX - offsetX}px`;
+  card.style.top = `${touch.clientY - offsetY}px`;
 }
 
 /**
