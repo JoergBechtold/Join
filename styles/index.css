@@ -597,6 +597,10 @@
     width: 100%;
   }
 
+  .board-responsive-plus-button {
+    margin-right: unset;
+  }
+
   .popup-container, .edit-popup {
     padding: 48px 40px;
     border-radius: 30px;
