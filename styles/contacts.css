@@ -750,7 +750,6 @@ color: var(--blue);
     .container-add,
     .container-edit {
       width: 600px;
-      height: 90%;
       bottom: -100%;
       transform: translateX(-50%);
       border: 1px solid rgba(42, 54, 71, 1);
@@ -934,7 +933,7 @@ color: var(--blue);
   .input-group {
     position: relative;
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: unset;
     width: 422px;
     height: 50px;
     gap: 8px;
@@ -956,7 +955,23 @@ color: var(--blue);
   }
 
   .profile-image{
-    margin-bottom: 50px;
+    margin-bottom: unset;
+    position: absolute;
+    top: 50px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .right-section form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .profile-image img{
+    width: 80px;
+    height: 80px;
   }
 
   .input-group .icon {
@@ -1160,10 +1175,6 @@ color: var(--blue);
 }
 
 @media (min-height: 550px) and (max-height: 700px) {
-  .container-add,
-  .container-edit {
-    height: 99%;
-  }
 
   .contact-detail{
     top: 200px;
