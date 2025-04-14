@@ -79,24 +79,64 @@ function validateInputTitle() {
 }
 
 /**
- * Validates the due date input field and displays an error message if it is empty.
+ * Shows an error message for the input field.
+ *
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {HTMLElement} errorMessage - The error message element.
+ * @param {string} message - The error message to display.
+ */
+function showInputError(inputField, errorMessage, message) {
+  errorMessage.textContent = message;
+  errorMessage.classList.remove('d-none');
+  inputField.classList.add('red-border');
+}
+
+/**
+ * Hides the error message for the input field.
+ *
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {HTMLElement} errorMessage - The error message element.
+ */
+function hideInputError(inputField, errorMessage) {
+  errorMessage.classList.add('d-none');
+  inputField.classList.remove('red-border');
+}
+
+/**
+ * Checks if the given date string (YYYY-MM-DD) is in the past.
+ *
+ * @param {string} dateString - The date string to check.
+ * @returns {boolean} `true` if the date is in the past, otherwise `false`.
+ */
+function isDateInPast(dateString) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const inputDate = new Date(dateString);
+  return inputDate < today;
+}
+
+/**
+ * Validates the due date input field and displays an error message if it is empty
+ * or if the selected date is in the past.
  *
  * @returns {boolean} `true` if the date is valid, otherwise `false`.
  */
 function validateInputDate() {
   const inputField = document.getElementById('due_date');
   const errorMessage = document.getElementById('error_message_date');
-  if (inputField.value.trim() === '') {
-    errorMessage.classList.remove('d-none');
-    inputField.classList.add('red-border');
+  const inputValue = inputField.value.trim();
+  if (inputValue === '') {
+    showInputError(inputField, errorMessage, 'This field is required');
     return false;
-  } else {
-    errorMessage.classList.add('d-none');
-    inputField.classList.remove('red-border');
-    return true;
   }
-} 
- 
+  if (isDateInPast(inputValue)) {
+    showInputError(inputField, errorMessage, 'Please select today or a future date');
+    return false;
+  }
+  hideInputError(inputField, errorMessage);
+  return true;
+}
+
 /**
  * Validates the selected category and displays an error message if no category is selected.
  *
