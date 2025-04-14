@@ -51,6 +51,8 @@
 }
 
 .mobile-view-greeting-overlay{
+  opacity: 1;
+  display: none;
   position: absolute;
   height: calc(100dvh - 160px);
   width: 100%;
@@ -60,9 +62,29 @@
   z-index: 999; 
   align-items: center;
   justify-content: center;
-  opacity: 1;
-  transition: opacity 1s ease-in-out 1s; 
+  animation: opacityGreetingOverlay 0.8s ease-in forwards 0.8s;
   
+}
+
+@keyframes opacityGreetingOverlay{
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0; 
+  }
 }
 
 .greeting-box{
@@ -457,8 +479,11 @@
 }
 
 @media (max-width: 768px) {
-  
-
+  .pencil:hover,
+  .urgent:hover,
+  .undertask:hover {
+    transform: unset;
+}
 
   .main-summary{
     margin-left: unset;
@@ -481,12 +506,6 @@
     padding-bottom: 110px;
   }
 
-  .mobile-view-greeting-overlay.show {
-    display: flex; /* Anzeigen des Overlays */
-    opacity: 1; /* Volle Deckkraft beim Anzeigen */
-    transition: opacity 1s ease-in-out; /* Transition für das Einblenden */
-  }
-
   .urgent{
     justify-content: space-evenly;
   }
@@ -505,7 +524,7 @@
     width: unset;
     white-space: unset;
     text-align: center;
-}
+  }
 }
 
 @media (max-width: 500px){

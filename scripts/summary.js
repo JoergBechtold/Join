@@ -174,10 +174,13 @@ function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
 }
 
 /**
- * Initializes the summary page by loading the header and user data, updating
- * greetings, date, and task statistics, and adding click and hover event handlers.
- *
- * @async
+ * 
+ * @function initializeSummaryPage
+ * @description Initializes the summary page by loading necessary data,
+ * updating UI elements, setting up recurring updates, and
+ * attaching event listeners. Handles potential errors during
+ * the initialization process.
+ * 
  */
 async function initializeSummaryPage() {
   try {
@@ -205,46 +208,30 @@ async function initializeSummaryPage() {
 }
 
 /**
- * Checks if the animation for the summary page has already been shown in the session storage.
- * If not, the corresponding overlay is displayed and the animation is marked as shown.
+ * 
+ * Checks if the animation summary has already been shown or if the current view is not a mobile view.
+ * If the animation summary has not been shown and it is a mobile view,
+ * the mobile greeting overlay is displayed, and an entry is set in the session storage to prevent future displays.
+ * After 2 seconds, the overlay is hidden again.
  */
 function checkAndShowAnimationSummary() {
   const mobileViewGreetingOverlayRef = document.getElementById('mobile_view_greetin_overlay');
-  const maxWidthForAnimation = 768; // Definiere die maximale Bildschirmbreite für die Animation in Pixeln
-
-  // Prüfen, ob die Animation im Session Storage als gezeigt markiert ist
   const animationShown = sessionStorage.getItem('animationShownSummary');
+  const isMobileView = window.matchMedia('(max-width: 768px)').matches;
 
-  // Prüfen, ob der Bildschirm breiter als der definierte Maximalwert ist
-  const isDesktopView = window.innerWidth > maxWidthForAnimation;
-
-  // Wenn die Animation bereits gezeigt wurde ODER die Bildschirmbreite größer ist,
-  // blende das Overlay aus und beende die Funktion.
-  if (animationShown || isDesktopView) {
-    mobileViewGreetingOverlayRef.classList.add('d-none');
-    return;
+  if (animationShown || !isMobileView) {
+    mobileViewGreetingOverlayRef.style.display = 'none';
+    return
   }
-
-  // Wenn die Animation noch nicht gezeigt wurde UND die Bildschirmbreite nicht größer ist,
-  // zeige das Overlay an und markiere die Animation im Session Storage als gezeigt.
-  mobileViewGreetingOverlayRef.classList.remove('d-none');
-  sessionStorage.setItem('animationShownSummary', 'true');
+    mobileViewGreetingOverlayRef.style.display = 'flex';
+    sessionStorage.setItem('animationShownSummary', 'true');
+    setTimeout(() => {
+      if (mobileViewGreetingOverlayRef) {
+        mobileViewGreetingOverlayRef.style.display = 'none';
+      }
+    }, 2000);
 }
 
-
-// function checkAndShowAnimationSummary() {
-//   const mobileViewGreetingOverlayRef = document.getElementById('mobile_view_greetin_overlay');
-//   mobileViewGreetingOverlayRef.classList.remove('d-none');
-
-//   if (sessionStorage.getItem('animationShownSummary')) {
-//     mobileViewGreetingOverlayRef.classList.add('d-none');
-//     return;
-//   } 
-
-//   mobileViewGreetingOverlayRef.classList.remove('d-none');
-//   sessionStorage.setItem('animationShownSummary', 'true');
-//   startLoginAnimationsWithDelay(loginContainerRef,navLogInRef,footerLoginRegisterRef,animationsLogoOverlayRef,animationFinishedRef);
-// }
 
 
  
