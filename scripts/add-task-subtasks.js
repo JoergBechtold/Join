@@ -149,9 +149,9 @@ function validateSubtaskInput(editInput) {
         document.getElementById('edit_save_icon').classList.add('d-none');
         document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
         currentEditIndex = null;
-        return false; //
+        return false; 
     }
-    return true; // 
+    return true; 
 }
 
 /**
