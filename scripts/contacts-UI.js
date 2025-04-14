@@ -230,19 +230,31 @@ function activateContact(contactDiv) {
     }
   }
   
-  /**
-   * Updates the contact UI and repositions the contact if required.
-   *
-   * @param {string} newName - The new name of the contact.
-   * @param {string} newEmail - The new email address.
-   * @param {string} newPhone - The new phone number.
-   * @param {string} initials - The initials to display in the avatar.
-   */
-  function updateContactUI(newName, newEmail, newPhone, initials) {
-    updateBasicContactUI(newName, newEmail, newPhone, initials);
-    repositionContactIfNeeded(newName);
+/**
+ * Updates the contact UI and repositions the contact if required.
+ *
+ * @param {string} newName - The new name of the contact.
+ * @param {string} newEmail - The new email address.
+ * @param {string} newPhone - The new phone number.
+ * @param {string} initials - The initials to display in the avatar.
+ */
+function updateContactUI(newName, newEmail, newPhone, initials) {
+  // Retrieve the original grouping letter from a custom data attribute.
+  // If not present, default to the current displayed first letter.
+  const originalFirstLetter =
+    activeContact.getAttribute('data-first-letter') ||
+    activeContact.querySelector('.contact-name').textContent.charAt(0).toUpperCase();
+  updateBasicContactUI(newName, newEmail, newPhone, initials);
+  document.getElementById('detail-avatar').textContent = initials;
+  const newFirstLetter = newName.charAt(0).toUpperCase();
+  if (originalFirstLetter !== newFirstLetter) {
+    removeContactFromContainer(activeContact);
+    const newGroupContainer = getOrCreateGroupContainer(newFirstLetter);
+    insertContactSorted(newGroupContainer, activeContact, newName);
   }
-  
+  activeContact.setAttribute('data-first-letter', newFirstLetter);
+}
+
   /**
    * Changes the icon of the edit button on mouseover.
    *

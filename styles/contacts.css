@@ -203,9 +203,9 @@ body {
 .container-add,
 .container-edit {
   position: fixed;
-  right: -500px;
+  /* right: -500px; */
   top: 50%;
-  transform: translateY(-50%);
+  /* transform: translate(-50%, -50%); */
   height: 592px;
   border-radius: 30px;
   display: flex;
@@ -213,6 +213,14 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: right 0.5s ease-in-out;
   z-index: 1000;
+  animation: slideInFromRight 0.3s ease-out;
+  scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 .container-add.active,
@@ -422,7 +430,7 @@ input:focus {
 }
 
 .contact-detail {
-  position: absolute;
+  position: fixed;
   width: 461px;
   height: 364px;
   top: 300px;
@@ -703,7 +711,7 @@ color: var(--blue);
   .contact-detail {
     position: fixed;
     left: 20px;
-    top: 250px;
+    top: 230px;
     display: none;
     flex-direction: column;
     width: 0;
@@ -743,9 +751,26 @@ color: var(--blue);
     .container-edit {
       width: 600px;
       height: 90%;
+      bottom: -100%;
+      transform: translateX(-50%);
       border: 1px solid rgba(42, 54, 71, 1);
       flex-direction: column; 
+      animation: slideInFromBottom 0.3s ease-out;
+      transition: bottom 0.5s ease-in-out;
+      scroll-behavior: smooth;
     }
+
+  /* Animation für mobile Container */
+@keyframes slideInFromBottom {
+  from { transform: translate(-50%, 100%); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+   /* Aktiv-Zustand: Element soll sichtbar sein */
+   .container-add.active,
+   .container-edit.active {
+     bottom: 0; /* Das Element fährt nach oben in den sichtbaren Bereich */
+   }
 
     .left-section {
       width: 100%;
@@ -871,6 +896,28 @@ color: var(--blue);
   position: fixed !important;
   top: 40px !important;
   left: 540px !important;
+}
+
+.button-responsive{
+  display: flex !important;
+  flex-direction: row !important;
+  margin-left: 60px !important;
+  width: 80% !important;
+}
+
+.btn-responsive{
+  display: flex !important;
+}
+
+/* Animations */
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 }
@@ -1077,17 +1124,65 @@ color: var(--blue);
   }
 }
 
-@media (min-height: 550px) and (max-height: 650px) {
+/* @media (min-height: 550px) and (max-height: 650px) {
   .container-add,
   .container-edit {
     height: 95%;
   }
+} */
+
+@media (min-height: 550px) and (max-height: 630px){
+  .contact-info-section h3{
+    margin-top: 30px;
+  }
+
+  .responsive-flex{
+    margin-top: 0 !important;
+  }
+
+  .contact-detail{
+    top: 230px !important;
+  }
+
+  .detail-header{
+    margin: 0 !important;
+  }
+
+  .contact-info-section{
+    margin: 0;
+  }
+
+  .container-add, .container-edit{
+    height: 97% !important;
+  }
+
+  .profile-image{
+    height: 100px !important;
+    width: 100px !important;
+    margin-top: -70px !important;
+  }
+
+  .input-group{
+    margin-bottom: 20px !important;
+  }
 }
 
-@media (min-height: 650px) and (max-height: 700px) {
+@media (min-height: 550px) and (max-height: 700px) {
   .container-add,
   .container-edit {
     height: 99%;
+  }
+
+  .contact-detail{
+    top: 200px;
+  }
+
+  .contact-info-section h3{
+    height: 40px;
+  }
+
+  .detail-header{
+    height: 95px;
   }
 }
 
@@ -1104,7 +1199,7 @@ color: var(--blue);
   }
 
   .sidebarContact{
-    width: 100vh;
+    width: 991px;
     padding: 10px 0px;
     margin-bottom: 80px;
   }
@@ -1112,7 +1207,7 @@ color: var(--blue);
   .contact-detail {
     position: fixed;
     left: 200px;
-    top: 250px;
+    top: 230px;
     display: none;
     flex-direction: column;
     width: 0;
@@ -1253,9 +1348,20 @@ color: var(--blue);
   top: 40px !important;
   left: 540px !important;
 }
+
+.button-responsive{
+  display: flex !important;
+  flex-direction: row !important;
+  margin-left: 60px !important;
+  width: 80% !important;
 }
 
-@media (min-width: 991px) and (max-width: 1024px){
+.btn-responsive{
+  display: flex !important;
+}
+}
+
+@media (min-width: 991px) and (max-width: 1087px){
   .contact-list{
     display: flex;
     flex-direction: column;
@@ -1268,7 +1374,7 @@ color: var(--blue);
   }
 
   .sidebarContact{
-    width: 100vh;
+    width: 1024px;
     padding: 10px 0px;
     margin-bottom: 80px;
   }
@@ -1417,4 +1523,69 @@ color: var(--blue);
   top: 40px !important;
   left: 540px !important;
 }
+
+.button-responsive{
+  display: flex !important;
+  flex-direction: row !important;
+  margin-left: 60px !important;
+  width: 80% !important;
+}
+
+.btn-responsive{
+  display: flex !important;
+}
+}
+
+@media (min-width: 1088px) and (max-width: 1350px){
+  .sidebarContact{
+    width: 400px;
+  }
+
+  .original-h1 {
+    left: 660px;
+  }
+
+  .main-content h1{
+    font-size: 40px;
+  }
+
+  .divider{
+    margin: 0 10px;
+  }
+
+  .subtitle{
+    font-size: 24px;
+  }
+
+  .detail-info h1{
+    font-size: 34px !important;
+  }
+
+  .contact-detail{
+    left: 650px;
+  }
+
+  .detail-header {
+    gap: 10px;
+  }
+
+  #detail-avatar{
+    height: 100px;
+    width: 100px;
+  }
+
+  .profile-image, .edit-mode{
+    height: 90px;
+    width: 90px;
+    margin-left: 0;
+    margin-right: 30px;
+  }
+  .left-section{
+    width: 440px;
+  }
+
+  .close-btn{
+    position: fixed !important;
+    left: 1000px !important;
+  }
 }

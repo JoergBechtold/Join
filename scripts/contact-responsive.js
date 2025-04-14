@@ -4,7 +4,7 @@
  * so that the contact detail view is visible and the contact list and sidebar are hidden.
  */
 function showContactDetail() {
-  if (window.innerWidth <= 1024) {
+  if (window.innerWidth <= 1087) {
     document.querySelector('.main-content').style.display = 'flex';
     document.querySelector('.contact-list').style.display = 'none';
     document.querySelector('.sidebarContact').style.display = 'none';
@@ -19,7 +19,7 @@ function showContactDetail() {
  * so that the contact detail view is hidden and the contact list and sidebar are shown.
  */
 function hideContactDetail() {
-  if (window.innerWidth <= 1024) {
+  if (window.innerWidth <= 1087) {
     document.querySelector(".contacts-container").style.display = "flex";
     document.querySelector('.sidebarContact').style.display = 'flex';
     document.querySelector(".contact-list").style.display = "flex";

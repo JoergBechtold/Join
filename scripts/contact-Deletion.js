@@ -134,28 +134,54 @@ function deleteAndCloseEdit() {
 }
 
 /**
+ * Checks if the given contact is the currently active contact.
+ * If so, clears its details and, on screens ≤ 1024px, hides the contact detail view.
+ *
+ * @param {HTMLElement} contactDiv - The contact element to check.
+ */
+function clearActiveContactIfNecessary(contactDiv) {
+  if (activeContact === contactDiv) {
+    clearDetails();
+    if (window.innerWidth <= 1087) {
+      hideContactDetail();
+    }
+  }
+}
+
+/**
+ * Cleans up the container element if it is empty by removing the associated
+ * line and letter group elements.
+ *
+ * @param {HTMLElement} container - The container element to clean up.
+ */
+function cleanupContainer(container) {
+  const line = container.previousElementSibling;
+  const letterGroup = line ? line.previousElementSibling : null;
+  if (letterGroup && letterGroup.classList.contains('letter-group')) {
+    letterGroup.remove();
+  }
+  if (line && line.classList.contains('line')) {
+    line.remove();
+  }
+  container.remove();
+}
+
+/**
  * Removes a contact element from the UI.
- * If the contact is the currently active contact, clear its details.
- * Also removes the parent container's associated line and letter group if it becomes empty.
+ * It checks and clears the contact's active status, removes the contact element,
+ * and cleans up its parent container if it becomes empty.
  *
  * @param {HTMLElement} contactDiv - The contact element to remove.
  */
 function removeContactFromUI(contactDiv) {
   const container = contactDiv.parentElement;
-  if (activeContact === contactDiv) clearDetails();
+  clearActiveContactIfNecessary(contactDiv);
   contactDiv.remove();
   if (container.children.length === 0) {
-    const line = container.previousElementSibling;
-    const letterGroup = line ? line.previousElementSibling : null;
-    if (letterGroup && letterGroup.classList.contains('letter-group')) {
-      letterGroup.remove();
-    }
-    if (line && line.classList.contains('line')) {
-      line.remove();
-    }
-    container.remove();
+    cleanupContainer(container);
   }
 }
+
 
 /**
  * Clears the contact detail view.
