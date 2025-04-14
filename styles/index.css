@@ -599,7 +599,7 @@
   }
 
   .popup-container, .edit-popup {
-    padding: 20px 5px 82px 5px;
+    padding: 30px 5px 35px 12px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
     background-color: #F6F7F8;
@@ -618,7 +618,6 @@
 
   .edit-prio-button {
     font-size: 16px;
-    padding: 0px 10px;
   }
 
   .edit-prio-icon {
