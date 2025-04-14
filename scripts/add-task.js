@@ -78,24 +78,58 @@ function validateInputTitle() {
   }
 }
 
+// Returns today's date normalized to midnight.
+function getTodayNormalized() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+}
+
+// Returns a date (based on the input string) normalized to midnight.
+function getNormalizedDate(dateStr) {
+  const date = new Date(dateStr);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+// Displays an error message on the input field.
+function displayError(inputField, errorElement, message) {
+  errorElement.textContent = message;
+  errorElement.classList.remove('d-none');
+  inputField.classList.add('red-border');
+}
+
+// Clears any error styling and messages for the input field.
+function clearError(inputField, errorElement) {
+  errorElement.classList.add('d-none');
+  inputField.classList.remove('red-border');
+}
+
 /**
- * Validates the due date input field and displays an error message if it is empty.
- *
- * @returns {boolean} `true` if the date is valid, otherwise `false`.
+ * Validates the due date input field.
+ * Returns true if the date is provided and is not in the past.
  */
 function validateInputDate() {
   const inputField = document.getElementById('due_date');
   const errorMessage = document.getElementById('error_message_date');
-  if (inputField.value.trim() === '') {
-    errorMessage.classList.remove('d-none');
-    inputField.classList.add('red-border');
+  const inputValue = inputField.value.trim();
+  const today = getTodayNormalized();
+  
+  if (inputValue === '') {
+    displayError(inputField, errorMessage, "This field is required.");
     return false;
-  } else {
-    errorMessage.classList.add('d-none');
-    inputField.classList.remove('red-border');
-    return true;
   }
-} 
+  
+  const selectedDate = getNormalizedDate(inputValue);
+  if (selectedDate < today) {
+    displayError(inputField, errorMessage, "Date cannot be in the past.");
+    return false;
+  }
+  
+  clearError(inputField, errorMessage);
+  return true;
+}
+
  
 /**
  * Validates the selected category and displays an error message if no category is selected.
