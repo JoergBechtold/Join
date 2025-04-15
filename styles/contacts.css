@@ -335,6 +335,24 @@ body {
   border: 1px solid rgba(209, 209, 209, 1);
 }
 
+.name-input {
+  background-image: url(/assets/icons/gray-person.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.email-input {
+  background-image: url(/assets/icons/mail.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.phone-input {
+  background-image: url(/assets/icons/call.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
 .input-group ::placeholder {
   font-weight: 400;
   font-size: 20px;
