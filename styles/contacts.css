@@ -620,7 +620,7 @@ input.invalid {
 .email-error,
 .phone-error {
   display: inline-block;
-  font-size: 13px;
+  font-size: 16px;
   color: red;
   animation: fadeIn 0.3s ease-in;
 }
