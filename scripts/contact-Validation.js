@@ -70,7 +70,7 @@ function updateNameError(nameInput, container, isValid) {
       err = document.createElement('span');
       err.className = 'name-error';
       err.style.color = 'red';
-      err.textContent = 'Please enter your first and last name with spaces.';
+      err.textContent = 'first and last name with spaces.';
       nameInput.parentNode.insertBefore(err, nameInput.nextSibling);
     }
   } else if (err) {
@@ -208,85 +208,37 @@ function checkInputs() {
   if (!container) return;
   const inputs = getFormInputs(container);
 
-  // Alle Felder validieren und Fehlermeldungen anzeigen
-  const validName = validateName(inputs.nameIn, container, true);
-  const validEmail = validateEmail(inputs.emailIn, container, true);
-  const validPhone = validatePhone(inputs.phoneIn, container, true);
+  // Track which fields have been touched by the user
+  const active = document.activeElement;
+  
+  // Validate all fields - show errors for touched fields or when actively editing
+  const validName = validateName(inputs.nameIn, container, 
+    inputs.nameIn.dataset.touched === 'true' || active === inputs.nameIn);
+  
+  const validEmail = validateEmail(inputs.emailIn, container, 
+    inputs.emailIn.dataset.touched === 'true' || active === inputs.emailIn);
+  
+  const validPhone = validatePhone(inputs.phoneIn, container, 
+    inputs.phoneIn.dataset.touched === 'true' || active === inputs.phoneIn);
 
+  // Update button state
   updateButtonState(
     inputs.btn,
     inputs.nameIn.value.trim() !== '' &&
-    inputs.phoneIn.value.trim() !== '' &&
-    validName &&
-    validEmail &&
-    validPhone
+      inputs.phoneIn.value.trim() !== '' &&
+      validName &&
+      validEmail &&
+      validPhone
   );
 }
 
-const touchedFields = {
-  name: false,
-  email: false,
-  phone: false
-};
-
-function initInputEvents() {
-  const containers = document.querySelectorAll('.container-add, .container-edit');
-
-  containers.forEach(container => {
-    const nameInput = container.querySelector('input[placeholder="Firstname Lastname"]');
-    const emailInput = container.querySelector('input[placeholder="Email"]');
-    const phoneInput = container.querySelector('input[placeholder="Phone"]');
-    const btn = container.querySelector('.create-button');
-
-    // NAME
-    nameInput.onfocus = () => { touchedFields.name = true; };
-    nameInput.oninput = () => {
-      const valid = validateName(nameInput, container, touchedFields.name);
-      updateButtonState(btn, validateInputs(getFormInputs(container), container));
-      toggleInvalidClass(nameInput, valid);
-    };
-    nameInput.onblur = () => {
-      const valid = validateName(nameInput, container, true);
-      toggleInvalidClass(nameInput, valid);
-    };
-
-    // EMAIL
-    emailInput.onfocus = () => { touchedFields.email = true; };
-    emailInput.oninput = () => {
-      const valid = validateEmail(emailInput, container, touchedFields.email);
-      updateButtonState(btn, validateInputs(getFormInputs(container), container));
-      toggleInvalidClass(emailInput, valid);
-    };
-    emailInput.onblur = () => {
-      const valid = validateEmail(emailInput, container, true);
-      toggleInvalidClass(emailInput, valid);
-    };
-
-    // PHONE
-    phoneInput.onfocus = () => { touchedFields.phone = true; };
-    phoneInput.oninput = () => {
-      const valid = validatePhone(phoneInput, container, touchedFields.phone);
-      updateButtonState(btn, validateInputs(getFormInputs(container), container));
-      toggleInvalidClass(phoneInput, valid);
-    };
-    phoneInput.onblur = () => {
-      const valid = validatePhone(phoneInput, container, true);
-      toggleInvalidClass(phoneInput, valid);
-    };
+// Add event listeners to mark fields as touched when they lose focus
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener('blur', function() {
+    this.dataset.touched = 'true';
+    checkInputs();
   });
-}
-
-function toggleInvalidClass(input, isValid) {
-  const group = input.closest('.input-group');
-  if (!isValid) {
-    input.classList.add('invalid');
-    if (group) group.classList.add('has-error');
-  } else {
-    input.classList.remove('invalid');
-    if (group) group.classList.remove('has-error');
-  }
-}
-
+});
 
 /**
  * Retrieves the current values from the input fields (name, email, phone)
