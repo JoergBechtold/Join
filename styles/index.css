@@ -92,6 +92,7 @@
   padding: 10px 0 35px 0;
   border: none;
   max-height: calc(80dvh - 137px);
+  min-height: calc(80dvh - 137px);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;
