@@ -162,13 +162,36 @@ function showAddContactPopup() {
   document.querySelector('.overlay').classList.add('active');
 }
 
-/**
- * Closes the add contact popup by hiding the add contact container
- * and deactivating the overlay.
- */
 function closeAddContactPopup() {
-  const pop = document.querySelector('.container-add');
-  pop.classList.add('hidden');
-  pop.classList.remove('active');
+  const addPopup = document.querySelector('.container-add');
+  const editPopup = document.querySelector('.container-edit');
+
+  [addPopup, editPopup].forEach((popup) => {
+    if (popup) {
+      popup.classList.add('close'); // Animation starten
+
+      setTimeout(() => {
+        popup.classList.add('hidden');
+        popup.classList.remove('close'); // Zurücksetzen
+      }, 200); // muss zur Transition-Dauer passen
+    }
+  });
+
   document.querySelector('.overlay').classList.remove('active');
 }
+
+function closeEditContactPopup() {
+  const editPopup = document.querySelector('.container-edit');
+  if (editPopup) {
+    editPopup.classList.add('close');
+
+    setTimeout(() => {
+      editPopup.classList.add('hidden');
+      editPopup.classList.remove('active', 'close');
+    }, 200);
+  }
+
+  document.querySelector('.overlay').classList.remove('active');
+}
+
+

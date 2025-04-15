@@ -203,40 +203,90 @@ function updateButtonState(btn, isValid) {
   }
 }
 
-/**
- * Checks the inputs in the active container, validates them, and updates the state of the associated button.
- * Only displays an error message for the input that is currently active.
- */
 function checkInputs() {
   const container = getActiveContainer();
   if (!container) return;
   const inputs = getFormInputs(container);
 
-  // First run silent validations to compute overall validity.
-  const validName = validateName(inputs.nameIn, container, false);
-  const validEmail = validateEmail(inputs.emailIn, container, false);
-  const validPhone = validatePhone(inputs.phoneIn, container, false);
+  // Alle Felder validieren und Fehlermeldungen anzeigen
+  const validName = validateName(inputs.nameIn, container, true);
+  const validEmail = validateEmail(inputs.emailIn, container, true);
+  const validPhone = validatePhone(inputs.phoneIn, container, true);
 
-  // Determine which input is currently active.
-  const active = document.activeElement;
-  if (active === inputs.nameIn) {
-    validateName(inputs.nameIn, container, true);
-  } else if (active === inputs.emailIn) {
-    validateEmail(inputs.emailIn, container, true);
-  } else if (active === inputs.phoneIn) {
-    validatePhone(inputs.phoneIn, container, true);
-  }
-
-  // Update button state based on overall validity.
   updateButtonState(
     inputs.btn,
     inputs.nameIn.value.trim() !== '' &&
-      inputs.phoneIn.value.trim() !== '' &&
-      validName &&
-      validEmail &&
-      validPhone
+    inputs.phoneIn.value.trim() !== '' &&
+    validName &&
+    validEmail &&
+    validPhone
   );
 }
+
+const touchedFields = {
+  name: false,
+  email: false,
+  phone: false
+};
+
+function initInputEvents() {
+  const containers = document.querySelectorAll('.container-add, .container-edit');
+
+  containers.forEach(container => {
+    const nameInput = container.querySelector('input[placeholder="Firstname Lastname"]');
+    const emailInput = container.querySelector('input[placeholder="Email"]');
+    const phoneInput = container.querySelector('input[placeholder="Phone"]');
+    const btn = container.querySelector('.create-button');
+
+    // NAME
+    nameInput.onfocus = () => { touchedFields.name = true; };
+    nameInput.oninput = () => {
+      const valid = validateName(nameInput, container, touchedFields.name);
+      updateButtonState(btn, validateInputs(getFormInputs(container), container));
+      toggleInvalidClass(nameInput, valid);
+    };
+    nameInput.onblur = () => {
+      const valid = validateName(nameInput, container, true);
+      toggleInvalidClass(nameInput, valid);
+    };
+
+    // EMAIL
+    emailInput.onfocus = () => { touchedFields.email = true; };
+    emailInput.oninput = () => {
+      const valid = validateEmail(emailInput, container, touchedFields.email);
+      updateButtonState(btn, validateInputs(getFormInputs(container), container));
+      toggleInvalidClass(emailInput, valid);
+    };
+    emailInput.onblur = () => {
+      const valid = validateEmail(emailInput, container, true);
+      toggleInvalidClass(emailInput, valid);
+    };
+
+    // PHONE
+    phoneInput.onfocus = () => { touchedFields.phone = true; };
+    phoneInput.oninput = () => {
+      const valid = validatePhone(phoneInput, container, touchedFields.phone);
+      updateButtonState(btn, validateInputs(getFormInputs(container), container));
+      toggleInvalidClass(phoneInput, valid);
+    };
+    phoneInput.onblur = () => {
+      const valid = validatePhone(phoneInput, container, true);
+      toggleInvalidClass(phoneInput, valid);
+    };
+  });
+}
+
+function toggleInvalidClass(input, isValid) {
+  const group = input.closest('.input-group');
+  if (!isValid) {
+    input.classList.add('invalid');
+    if (group) group.classList.add('has-error');
+  } else {
+    input.classList.remove('invalid');
+    if (group) group.classList.remove('has-error');
+  }
+}
+
 
 /**
  * Retrieves the current values from the input fields (name, email, phone)

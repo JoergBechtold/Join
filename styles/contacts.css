@@ -211,21 +211,20 @@ body {
   display: flex;
   background: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: right 0.5s ease-in-out;
+  transition: right 0.1s ease-in;
   z-index: 1000;
-  animation: slideInFromRight 0.3s ease-out;
-  scroll-behavior: smooth;
+  right: 50%;
 }
 
-/* Animations
-@keyframes slideInFromRight {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-} */
+.container-add.close,
+.container-edit.close {
+  right: -500px;
+  transition: right 0.2s ease-in;
+}
+
 
 .container-add.active,
 .container-edit.active {
-  right: 50%;
   transform: translate(50%, -50%);
 }
 
@@ -351,6 +350,11 @@ body {
   transform: translateY(-50%);
   font-size: 16px;
   color: #888;
+  transition: top 0.2s ease;
+}
+
+.input-group.has-error .icon {
+  transform: translateY(-70%);
 }
 
 input:focus {
@@ -607,6 +611,26 @@ color: var(--blue);
   left: 750px;
 }
 
+input.invalid {
+  border: 2px solid red;
+  outline: none;
+}
+
+.name-error,
+.email-error,
+.phone-error {
+  display: inline-block;
+  font-size: 13px;
+  color: red;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 @media screen and (max-width: 768px) {
   .contact-list{
     display: flex;
@@ -751,24 +775,22 @@ color: var(--blue);
     .container-edit {
       width: 600px;
       bottom: -100%;
-      transform: translateX(-50%);
+      transform: translate(50%, 0);
       border: 1px solid rgba(42, 54, 71, 1);
       flex-direction: column; 
-      animation: slideInFromBottom 0.3s ease-out;
-      transition: bottom 0.5s ease-in-out;
-      scroll-behavior: smooth;
+      transition: bottom 0.3s ease-in;
     }
-
-  /* Animation für mobile Container
-@keyframes slideInFromBottom {
-  from { transform: translate(-50%, 100%); opacity: 0; }
-  to { transform: translate(-50%, 0); opacity: 1; }
-} */
-
-   /* Aktiv-Zustand: Element soll sichtbar sein
-   .container-add.active,
-   .container-edit.active {
-     bottom: 0; /* Das Element fährt nach oben in den sichtbaren Bereich */
+  
+    .container-add.active,
+    .container-edit.active {
+      bottom: 0;
+      /* transform: translate(50%, 0); */
+    }
+  
+    .container-add.close,
+    .container-edit.close {
+      bottom: -100% !important;
+    }
 
     .left-section {
       width: 100%;
@@ -820,6 +842,10 @@ color: var(--blue);
       font-size: 14px;
       padding: 10px 14px;
     }
+
+    .input-group.has-error .icon {
+  transform: translateY(-70%);
+}
   
     .button-group {
       flex-direction: column;
@@ -965,7 +991,7 @@ color: var(--blue);
   .right-section form{
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 17px;
     margin-top: 20px;
   }
 
@@ -976,18 +1002,6 @@ color: var(--blue);
 
   .input-group .icon {
     right: 100px;
-  }
-
-  .name-error{
-    display: none;
-  }
-
-  .email-error{
-    display: none;
-  }
-
-  .phone-error{
-    display: none;
   }
 
 .close-btn img {
