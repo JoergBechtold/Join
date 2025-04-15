@@ -572,6 +572,10 @@
     height: 244px;
   }
 
+  .drag-area {
+    min-height: unset;
+  }
+
   .drag-area::-webkit-scrollbar {
     display: none;
   }
@@ -630,10 +634,6 @@
     max-height: 646px;
     box-sizing: border-box;
     width: 340px;
-  }
-
-  .drag-area {
-    min-height: unset;
   }
 }
 
