@@ -942,19 +942,14 @@ input.invalid {
 
 .button-responsive{
   display: flex !important;
+  justify-content: center !important;
   flex-direction: row !important;
-  margin-left: 70px !important;
-  width: 70% !important;
+  width: 100% !important;
 }
 
 .btn-responsive{
   display: flex !important;
 }
-
-/* @keyframes slideInFromBottom {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-} */
 }
 
 @media screen and (max-width: 450px){
@@ -992,10 +987,6 @@ input.invalid {
 
   .input-group input::placeholder{
     font-size: 14px;
-  }
-
-  .button-save-gray{
-    width: 50%;
   }
 
   .profile-image{
