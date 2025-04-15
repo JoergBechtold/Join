@@ -371,3 +371,17 @@ function closePopup(action = null) {
   }
   if (overlay) overlay.style.display = 'none';
 }
+
+/**
+ * Sets the minimum selectable date for the due date input field to today.
+ * This ensures that users cannot select a date in the past when choosing a due date.
+ * The function is intended to be called, for example, when the input field is clicked.
+ */
+function setEditMinDate() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const minDate = `${yyyy}-${mm}-${dd}`;
+  document.getElementById('edit_due_date').setAttribute('min', minDate);
+}
