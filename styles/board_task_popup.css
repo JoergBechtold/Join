@@ -13,7 +13,7 @@
 .popup-info {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;
@@ -27,6 +27,7 @@
 .popup::-webkit-scrollbar,
 .popup-info::-webkit-scrollbar,
 .assignee-container::-webkit-scrollbar,
+.subtasks-list::-webkit-scrollbar,
 .overflow-y::-webkit-scrollbar {
   width: var(--scollbar-width-thin);
 }
@@ -34,6 +35,7 @@
 .popup::-webkit-scrollbar-thumb,
 .popup-info::-webkit-scrollbar-thumb,
 .assignee-container::-webkit-scrollbar-thumb,
+.subtasks-list::-webkit-scrollbar-thumb,
 .overflow-y::-webkit-scrollbar-thumb {
   background: var(--primary-color-gray);
   border-radius: 10px;
@@ -66,7 +68,7 @@
   flex-direction: column;
   display: none;
   border-radius: 30px;
-  padding-top: 48px;
+  padding-top: 34px;
   padding-right: 40px;
   padding-bottom: 48px;
   padding-left: 40px;
@@ -101,8 +103,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
 }
 
 .tag-container {
@@ -158,7 +158,7 @@
   justify-content: space-between;
   padding-top: 7px;
   padding-bottom: 7px;
-  max-height: 155px;
+  max-height: 104px;
   overflow: auto;
   scrollbar-gutter: stable;
 }
@@ -180,6 +180,8 @@
   flex-direction: column;
   gap: 8px;
   margin-left: 8px;
+  overflow-y: auto;
+  max-height: 74px;
 }
 
 .subtasks-list span {
@@ -267,5 +269,9 @@
 @media only screen and (max-width: 360px){
   .popup-container{
     transform: translate(-50%, -56%);
+  }
+
+  .subtasks-list {
+    gap: 6px;
   }
 }
