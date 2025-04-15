@@ -397,26 +397,49 @@ async function renderCards() {
 }
 
 /**
- * Checks each column on the board and updates its state based on whether tasks exist.
- * If a column is empty, it appends a placeholder message.
- * If a task is present, it ensures the placeholder is removed.
+ * Updates all board columns by checking for empty task containers
+ * and rendering or removing placeholder messages accordingly.
  */
 function updateEmptyColumns() {
   const columns = document.querySelectorAll('.drag-area');
   columns.forEach((column) => {
     const hasTasks = column.querySelector('.todo-card');
-    let placeholder = column.querySelector('.empty-task-container');
+    const placeholder = column.querySelector('.empty-task-container');
     if (!hasTasks && !placeholder) {
-      placeholder = document.createElement('div');
-      placeholder.className = 'empty-task-container';
-      const span = document.createElement('span');
-      span.classList.add('no-task');
-      span.textContent = 'No Tasks to do';
-      placeholder.appendChild(span);
-      column.appendChild(placeholder);
+      addEmptyColumnPlaceholder(column);
     } else if (hasTasks && placeholder) {
-      placeholder.remove();}
+      placeholder.remove();
+    }
   });
+}
+
+/**
+ * Appends a custom "no tasks" placeholder message to the given column.
+ * @param {HTMLElement} column - The drag-area column element to update.
+ */
+function addEmptyColumnPlaceholder(column) {
+  const placeholder = document.createElement('div');
+  placeholder.className = 'empty-task-container';
+
+  const span = document.createElement('span');
+  span.classList.add('no-task');
+  span.textContent = getEmptyMessageForColumn(column.id);
+
+  placeholder.appendChild(span);
+  column.appendChild(placeholder);
+}
+
+/**
+ * Returns the appropriate empty message based on the column ID.
+ * @param {string} columnId - The ID of the column (e.g., "open", "in-progress").
+ * @returns {string} The corresponding empty message text.
+ */
+function getEmptyMessageForColumn(columnId) {
+  if (columnId === 'open') return 'No Tasks to do';
+  if (columnId === 'in-progress') return 'No Tasks in Progress';
+  if (columnId === 'await-feedback') return 'No Tasks Await Feedback';
+  if (columnId === 'done') return 'No Tasks Done';
+  return 'No Tasks';
 }
 
 /**
