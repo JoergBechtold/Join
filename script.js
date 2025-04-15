@@ -291,6 +291,21 @@ function setAllPropertysForEditPopup() {
   addTaskfetchTemplateRef.classList.add('overflow-y');
 }
 
+/**
+ * Decides which task submit function to call based on current context.
+ * Calls `pushBoardTaskToFirebase()` for board popup, otherwise `checkandSubmit()`.
+ */
+function handleTaskSubmit() {
+  const isBoardAddTask = document.getElementById('board_add_task');
+  const isVisible = isBoardAddTask && isBoardAddTask.style.display !== 'none';
+
+  if (isVisible) {
+    pushBoardTaskToFirebase();
+  } else {
+    checkandSubmit();
+  }
+}
+
 
 // manual function to load the colors into the array in the firebase
 // async function manuellloadColorToFirebase(){

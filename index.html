@@ -59,7 +59,7 @@
             <img src="assets/icons/search.svg" class="search-icon" alt="" />
           </div>
           </div>
-          <button onclick="openBoardAddTaskForm(); fetchAddTask()" class="button-primary-dark-gray">Add Task +</button>
+          <button onclick="openBoardAddTaskDefault()" class="button-primary-dark-gray">Add Task +</button>
         </div>
       </div>
 
@@ -67,7 +67,7 @@
         <div>
           <div class="column-title">
             <span>To do</span>
-            <div class="card-container-plus-button" onclick="openBoardAddTaskForm(); fetchAddTask()">
+            <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('open')">
             </div>
           </div>
           <div
@@ -82,7 +82,7 @@
         <div>
           <div class="column-title">
             <span>In Progress</span>
-            <div class="card-container-plus-button" onclick="openBoardAddTaskForm(); fetchAddTask()">
+            <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('in-progress')">
             </div>
           </div>
           <div
@@ -97,7 +97,7 @@
         <div>
           <div class="column-title">
             <span>Await feedback</span>
-            <div class="card-container-plus-button" onclick="openBoardAddTaskForm(); fetchAddTask()">
+            <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('await-feedback')">
             </div>
           </div>
           <div

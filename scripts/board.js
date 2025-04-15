@@ -3,6 +3,7 @@ const PATH_TO_TASKS = 'tasks';
 
 let currentDraggedElement = null;
 let allContacts = {};
+let currentTaskTargetState = 'open';
 
 /**
  * Initializes the board view by performing necessary data loading.
@@ -13,6 +14,69 @@ async function initBoard() {
   await showLoggedInLinks();
   allContacts = await loadData(PATH_TO_CONTACTS);
   await renderCards();
+}
+
+/**
+ * Opens the board task form popup and sets the default target column for the new task.
+ * @param {string} state - The target state for the new task ('open', 'in-progress', etc.)
+ */
+function openBoardAddTaskWithState(state) {
+  currentTaskTargetState = state;
+  openBoardAddTaskForm();
+  fetchAddTask();
+}
+
+/**
+ * Pushes a new task to Firebase from the board popup using the current target state.
+ * @returns {Promise<void>}
+ */
+async function pushBoardTaskToFirebase() {
+  const taskData = createBoardTaskData();
+  try {
+    const response = await postData('tasks', taskData);
+    if (response) {
+      showPupupOverlayTaskAdded();
+      await updateAssignedContactsOnBoard();
+      closeBoardAddTask();
+    } else {
+      throw new Error('No response from Firebase');
+    }
+  } catch (error) {
+    console.error('Error while saving board task:', error);
+  }
+}
+
+/**
+ * Creates a task data object for the board popup based on form inputs.
+ * @returns {Object} Task data including title, description, due_date, priority, assigned_to, category, subtasks, and state.
+ */
+function createBoardTaskData() {
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const dueDate = document.getElementById('due_date').value.trim();
+  const selectedCategory = document.getElementById('selected_option').textContent.trim();
+  const priority = getPriority();
+  const subtasksArray = Array.isArray(subtasks) && subtasks.length > 0 ? subtasks : '';
+  const assignedTo = Array.isArray(selectedContacts) && selectedContacts.length > 0 ? selectedContacts : '';
+  return {
+    title: title,
+    description: description || '',
+    due_date: dueDate,
+    priority: priority,
+    assigned_to: assignedTo,
+    category: selectedCategory,
+    subtasks: subtasksArray,
+    state: currentTaskTargetState,
+  };
+}
+
+/**
+ * Opens the add task popup from the main board button and resets target state to 'open'.
+ */
+function openBoardAddTaskDefault() {
+  currentTaskTargetState = 'open';
+  openBoardAddTaskForm();
+  fetchAddTask();
 }
 
 /**
