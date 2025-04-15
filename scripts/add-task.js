@@ -198,7 +198,6 @@ async function pushTaskToFirebase() {
     const response = await postData('tasks', taskData);
     if (response) {
       showPupupOverlayTaskAdded();
-      clearAll();
       setTimeout(() => {
         goToUrl('index.html');
       }, 1700);
