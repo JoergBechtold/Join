@@ -95,16 +95,13 @@
 
           <form onsubmit="saveContact(event)">
             <div class="input-group">
-              <input type="text" placeholder="Firstname Lastname" oninput="checkInputs()" />
-              <img class="icon" src="assets/icons/gray-person.svg" alt="Icon" />
+              <input type="text" class="name-input" placeholder="Firstname Lastname" oninput="checkInputs()" />
             </div>
             <div class="input-group">
-              <input type="email" placeholder="Email" oninput="checkInputs()" />
-              <img class="icon" src="assets/icons/mail.svg" alt="Icon" />
+              <input type="email" class="email-input" placeholder="Email" oninput="checkInputs()" />
             </div>
             <div class="input-group">
-              <input  type="tel" placeholder="Phone" oninput="this.value = this.value.replace(/\D/g, ''); checkInputs()"  />
-              <img class="icon" src="assets/icons/call.svg" alt="Icon" />
+              <input  type="tel" class="phone-input" placeholder="Phone" oninput="this.value = this.value.replace(/\D/g, ''); checkInputs()"  />
             </div>
 
             <div class="button-group button-responsive">
