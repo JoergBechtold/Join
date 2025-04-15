@@ -631,6 +631,10 @@
     box-sizing: border-box;
     width: 340px;
   }
+
+  .drag-area {
+    min-height: unset;
+  }
 }
 
 @media screen and (max-width: 360px) {
