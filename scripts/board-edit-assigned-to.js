@@ -170,3 +170,24 @@ function clearEditAssignedTo() {
     if (imgElement) imgElement.src = 'assets/icons/Square_box.svg';
   });
 }
+
+/**
+ * Closes the edit contacts dropdown if the user clicks outside of it.
+ * @param {MouseEvent} event - The click event from the body.
+ */
+function closeEditDropdownOnBodyClick(event) {
+  const clickedElement = event.target;
+  if (
+    editDropdownOpen &&
+    !clickedElement.closest('#edit_custom_select') &&
+    !clickedElement.closest('#edit_contacts_options')
+  ) {
+    const optionsContainer = document.getElementById('edit_contacts_options');
+    const arrowIcon = document.getElementById('edit_contacts_arrow');
+    const inputField = document.getElementById('edit_selected_contact');
+    const customSelect = document.getElementById('edit_custom_select');
+    const selectedContactsContainer = document.getElementById('edit_selected_contact_circles');
+
+    closeEditDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
+  }
+}
