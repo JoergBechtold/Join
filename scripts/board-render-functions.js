@@ -10,6 +10,7 @@ let redirectInterval = null;
  */
 function createCard(key, container, task) {
   renderCardBaseStructure(key, container, task);
+  setupMobileCardNavigation(document.getElementById(key), key);
   renderCardSubtasks(key, task);
   renderCardFooter(key, task);
 }
@@ -29,7 +30,6 @@ function renderCardBaseStructure(key, container, task) {
   createTitle(key, task);
   createDescription(key, task);
   createSubtaskContainer(key);
-  createMobileDropdownButton(key);
 }
 
 /**
@@ -59,35 +59,6 @@ function renderCardFooter(key, task) {
   createAssignedContacts(key, task);
   createPrioContainer(key);
   createPrio(key, task);
-}
-
-/**
- * Adds a mobile dropdown menu button to the task card for screen widths < 768px.
- *
- * @param {string} key - Unique task ID.
- */
-function createMobileDropdownButton(key) {
-  if (window.innerWidth >= 768) return;
-  const card = document.getElementById(key);
-  const wrapper = document.createElement('div');
-  wrapper.className = 'mobile-menu-wrapper';
-  wrapper.innerHTML = `
-    <div class="mobile-menu-icon" onclick="toggleMobileDropdown('${key}', event)">
-      <img src="assets/icons/swap-horiz.svg" alt="Menu">
-    </div>
-    <div class="mobile-dropdown d-none" id="dropdown-${key}">
-      <span class="move-to-label">Move to</span>
-      <div class="dropdown-option" onclick="moveTaskTo('${key}', 'open')">
-        <img src="assets/icons/arrow-upward.svg"> To-do
-      </div>
-      <div class="dropdown-option" onclick="moveTaskTo('${key}', 'await-feedback')">
-        <img src="assets/icons/arrow-downward.svg"> Review
-      </div>
-    </div>
-  `;
-  if (window.innerWidth < 768) {
-    card.appendChild(wrapper);
-  }  
 }
 
 /**
