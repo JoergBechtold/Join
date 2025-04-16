@@ -283,10 +283,18 @@ function renderTaskNotFound(popup) {
  * @returns {string} HTML string for subtask display.
  */
 function editSubtaskItem(subtask, index) {
-  const text = typeof subtask === "object" ? subtask.title : subtask;
+  const title = typeof subtask === "object" ? subtask.title : subtask;
+  const isCompleted = subtask.completed ? 'true' : 'false';
+
   return `
     <div class="subtask-item">
-      <span class="subtask-text" ondblclick="editExistingSubtask(${index})">• ${text}</span>
+      <span 
+        class="subtask-text" 
+        data-index="${index}" 
+        data-completed="${isCompleted}" 
+        ondblclick="editExistingSubtask(${index})">
+        • ${title}
+      </span>
       <div class="subtask-icons">
         <img src="assets/icons/edit.svg" alt="Edit" class="subtask-icon edit-icon"
           onclick="editExistingSubtask(${index})">

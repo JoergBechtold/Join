@@ -214,20 +214,21 @@ function applyEditedTaskData(task) {
 }
 
 /**
- * Checks the subtasks entered in the edit popup and returns an array.
- *
- * @returns {Array<Object>} An array of subtask objects.
+ * Retrieves and returns the current list of subtasks from the edit popup.
+ * Preserves the 'completed' state of each subtask if it exists.
+ * 
+ * @returns {Array<Object>} Array of subtask objects with title and completed state.
  */
 function checkSubtasks() {
   const elements = document.querySelectorAll('#edit_subtask_enum .subtask-text');
   let subtasks = [];
   elements.forEach(el => {
-    const text = el.textContent.replace('• ', '').trim();
+    const title = el.textContent.replace('• ', '').trim();
     const index = el.getAttribute('data-index');
     const isCompleted = editPopupSubtasks[index]?.completed || false;
-    if (text) {
+    if (title) {
       subtasks.push({
-        title: text,
+        title,
         completed: isCompleted
       });
     }
