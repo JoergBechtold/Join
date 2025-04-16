@@ -478,7 +478,11 @@
   align-items: center;
 }
 
-
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
 
 @media screen and (max-width: 1440px) {
   .main-board {
@@ -628,7 +632,7 @@
     height: 113px;
   }
 
-  .move-to-label {
+  .dropdown-label {
     color: #fff;
     font-size: 16px;
     margin-bottom: 6px;
