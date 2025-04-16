@@ -628,8 +628,9 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    width: 106px;
+    width: 118px;
     height: 113px;
+    z-index: 2000;
   }
 
   .dropdown-label {
