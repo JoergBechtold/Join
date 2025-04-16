@@ -141,19 +141,42 @@ function updateEditSelectedContacts(element) {
 }
 
 /**
- * Renders the currently selected contacts as colored circles inside the container.
- * Each contact is displayed with their initials and background color.
+ * Renders up to 4 selected contacts as colored circles inside the given container.
+ *
+ * @param {HTMLElement} container - The container to render the contact circles into.
+ * @param {Array} contacts - Array of contact objects with initials and colors.
+ * @param {number} maxVisible - Maximum number of visible contact circles.
  */
-function renderEditSelectedContacts() {
-  const container = document.getElementById('edit_selected_contact_circles');
-  container.innerHTML = '';
-  selectedEditContacts.forEach((contact) => {
+function renderVisibleContacts(container, contacts, maxVisible) {
+  const visibleContacts = contacts.slice(0, maxVisible);
+  visibleContacts.forEach((contact) => {
     const circle = document.createElement('div');
     circle.className = 'circle';
     circle.textContent = contact.initials;
     circle.style.backgroundColor = contact.contactColor || contact.randomColor || '#ccc';
     container.appendChild(circle);
   });
+}
+
+/**
+ * Renders selected contacts and a "+X" indicator if more than allowed are selected.
+ */
+function renderEditSelectedContacts() {
+  const container = document.getElementById('edit_selected_contact_circles');
+  if (!container) return;
+
+  container.innerHTML = '';
+  const maxVisible = 4;
+
+  renderVisibleContacts(container, selectedEditContacts, maxVisible);
+
+  const extraCount = selectedEditContacts.length - maxVisible;
+  if (extraCount > 0) {
+    const extra = document.createElement('span');
+    extra.className = 'extra-circle';
+    extra.textContent = `+${extraCount}`;
+    container.appendChild(extra);
+  }
 }
 
 /**
