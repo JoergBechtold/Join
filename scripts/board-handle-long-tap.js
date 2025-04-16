@@ -1,155 +1,73 @@
-let scrolling = false;
-let cardScrollDirection = 0;
+/**
+ * Adds a navigation menu icon to mobile task cards (<768px) that opens a dropdown
+ * allowing the user to move the task to another state ("To-do" or "Review").
+ * The menu closes automatically when clicking outside.
+ */
+function setupMobileCardNavigation(card, taskId) {
+  if (window.innerWidth >= 768) return;
 
-/**
- * Initializes the touch-based drag functionality for a task card.
- * Delegates to specific setup functions for touch start, move, and end.
- *
- * @param {HTMLElement} card - The task card element to apply drag behavior to.
- */
-function setupTouchDrag(card) {
-  initTouchStart(card);
-  initTouchMove(card);
-  initTouchEnd(card);
-}
-/**
- * Starts long tap detection and stores initial finger offset.
- * @param {HTMLElement} card - The task card element.
- */
-function initTouchStart(card) {
-  card.ontouchstart = function (e) {
-    if (window.innerWidth >= 768) return;
-    const touch = e.touches[0];
-    const rect = card.getBoundingClientRect();
-    card.dragOffsetX = touch.clientX - rect.left;
-    card.dragOffsetY = touch.clientY - rect.top;
-    card.longTapTimer = setTimeout(() => {
-      card.isDragging = true;
-      activateDragStyle(card);
-    }, 500);
+  const menuIcon = document.createElement('img');
+  menuIcon.src = 'assets/icons/swap-horiz.svg';
+  menuIcon.className = 'mobile-menu-icon';
+  card.appendChild(menuIcon);
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'mobile-dropdown d-none';
+  dropdown.innerHTML = `
+    <span class="dropdown-label">Move to</span>
+    <div class="dropdown-option" onclick="moveMobileTask('${taskId}', 'open')">
+      <img src="assets/icons/arrow-upward.svg"> To-do
+    </div>
+    <div class="dropdown-option" onclick="moveMobileTask('${taskId}', 'review')">
+      <img src="assets/icons/arrow-downward.svg"> Review
+    </div>
+  `;
+  card.appendChild(dropdown);
+
+  menuIcon.onclick = function () {
+    closeAllMobileMenus();
+    dropdown.classList.toggle('d-none');
   };
-}
 
-/**
- * Applies styles for dragging behavior and disables scrolling globally.
- * @param {HTMLElement} card - The card being dragged.
- */
-function activateDragStyle(card) {
-  const rect = card.getBoundingClientRect();
-  card.style.position = 'fixed';
-  card.style.zIndex = 999;
-  card.style.left = `${rect.left}px`;
-  card.style.top = `${rect.top}px`;
-  card.style.width = `${rect.width}px`;
-  card.style.height = `${rect.height}px`;
-  card.style.pointerEvents = 'none';
-  card.classList.add('tilted');
-  document.querySelector('.main-board').classList.add('no-scroll');
-  document.body.classList.add('body-no-scroll');
-  document.documentElement.classList.add('body-no-scroll');
-}
-
-/**
- * Sets up the ontouchmove event to update the card position during dragging.
- *
- * @param {HTMLElement} card - The task card element being moved.
- */
-function initTouchMove(card) {
-  card.ontouchmove = function (e) {
-    if (!card.isDragging) return;
-    const touch = e.touches[0];
-    positionCardOnTouch(card, touch);
-    handleAutoScroll(touch);
-  };
-}
-
-/**
- * Updates card position based on finger movement.
- * @param {HTMLElement} card - The card being dragged.
- * @param {Touch} touch - The current touch position.
- */
-function positionCardOnTouch(card, touch) {
-  const offsetX = card.dragOffsetX || 0;
-  const offsetY = card.dragOffsetY || 0;
-  card.style.left = `${touch.clientX - offsetX}px`;
-  card.style.top = `${touch.clientY - offsetY}px`;
-}
-
-/**
- * Smoothly scrolls .main-board while finger is near top/bottom edge.
- * @param {Touch} touch - The current touch position.
- */
-function handleAutoScroll(touch) {
-  const board = document.querySelector('.main-board');
-  const rect = board.getBoundingClientRect();
-  const topEdge = rect.top + 50;
-  const bottomEdge = rect.bottom - 50;
-
-  cardScrollDirection = 0;
-  if (touch.clientY < topEdge) cardScrollDirection = -1;
-  else if (touch.clientY > bottomEdge) cardScrollDirection = 1;
-
-  if (!scrolling) startSmoothScroll(board);
-}
-
-/**
- * Starts smooth scroll animation in the desired direction.
- * @param {HTMLElement} board - The board container.
- */
-function startSmoothScroll(board) {
-  scrolling = true;
-  function scroll() {
-    if (cardScrollDirection !== 0) {
-      board.scrollTop += cardScrollDirection * 200;
-      requestAnimationFrame(scroll);
-    } else {
-      scrolling = false;
-    }
-  }
-  scroll();
-}
-
-/**
- * Sets up the ontouchend event to drop the dragged card into a valid column.
- *
- * @param {HTMLElement} card - The card that is being dragged and released.
- */
-function initTouchEnd(card) {
-  card.ontouchend = function (e) {
-    clearTimeout(card.longTapTimer);
-    if (!card.isDragging) return;
-
-    card.isDragging = false;
-    resetDragStyle(card);
-
-    const touch = e.changedTouches[0];
-    const dropColumn = getDropTarget(touch);
-    if (dropColumn) {
-      currentDraggedElement = card.id;
-      moveTo(dropColumn.id);
+  document.body.onclick = function (e) {
+    if (!card.contains(e.target)) {
+      dropdown.classList.add('d-none');
     }
   };
 }
 
 /**
- * Resets the card styles and re-enables scrolling globally.
- * @param {HTMLElement} card - The task card element to reset.
+ * Moves a task to a new column by updating its state and re-rendering the board.
+ *
+ * @param {string} key - The unique identifier of the task.
+ * @param {string} newState - The new state to assign (e.g. 'open', 'await-feedback').
  */
-function resetDragStyle(card) {
-  card.classList.remove('tilted');
-  card.style = '';
-  document.querySelector('.main-board').classList.remove('no-scroll');
-  document.body.classList.remove('body-no-scroll');
-  document.documentElement.classList.remove('body-no-scroll');
+async function moveTaskTo(key, newState) {
+  const task = await loadData(`tasks/${key}`);
+  if (!task) return;
+  task.state = newState;
+  await updateData(`tasks/${key}`, task);
+  await renderCards();
 }
 
 /**
- * Returns the nearest drag-area column based on the touch release point.
- *
- * @param {Touch} touch - The touch point on release.
- * @returns {HTMLElement|null} The drop target column or null if none.
+ * Moves a task to a different state using the dropdown on mobile cards.
+ * @param {string} taskId - The ID of the task to move.
+ * @param {string} newState - The new state to move the task to.
  */
-function getDropTarget(touch) {
-  const target = document.elementFromPoint(touch.clientX, touch.clientY);
-  return target?.closest(".drag-area");
+async function moveMobileTask(taskId, newState) {
+  const task = await loadData(`${PATH_TO_TASKS}/${taskId}`);
+  if (!task) return;
+  task.state = newState;
+  await updateData(`${PATH_TO_TASKS}/${taskId}`, task);
+  await renderCards();
+  updateEmptyColumns();
+}
+
+/**
+ * Closes any open mobile dropdown if user clicks outside.
+ */
+function closeAllDropdowns() {
+  const all = document.querySelectorAll('.mobile-dropdown');
+  all.forEach(d => d.classList.add('d-none'));
 }

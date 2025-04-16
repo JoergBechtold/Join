@@ -478,6 +478,8 @@
   align-items: center;
 }
 
+
+
 @media screen and (max-width: 1440px) {
   .main-board {
     overflow-y: auto;
@@ -593,6 +595,60 @@
   .popup-actions {
     position: unset;
   }
+
+  .mobile-menu-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+    flex-direction: row-reverse;
+  }
+
+  .mobile-menu-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 18px;
+    cursor: pointer;
+  }
+
+  .mobile-dropdown {
+    margin-top: 6px;
+    background: #2a3647;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 106px;
+    height: 113px;
+  }
+
+  .move-to-label {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 6px;
+    display: block;
+    text-align: center;
+  }
+
+  .dropdown-option {
+    color: #fff;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .dropdown-option:hover {
+    background-color: #3a3a3a;
+  }
 }
 
 @media screen and (max-width: 375px)  {
@@ -610,6 +666,15 @@
 
   .board-responsive-plus-button {
     margin-right: unset;
+  }
+
+  .todo-card {
+    gap: unset;
+    padding: 12px;
+  }
+
+  .under-container {
+    width: 209px !important;
   }
 
   .popup-container {

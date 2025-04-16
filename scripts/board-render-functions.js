@@ -29,6 +29,7 @@ function renderCardBaseStructure(key, container, task) {
   createTitle(key, task);
   createDescription(key, task);
   createSubtaskContainer(key);
+  createMobileDropdownButton(key);
 }
 
 /**
@@ -58,6 +59,51 @@ function renderCardFooter(key, task) {
   createAssignedContacts(key, task);
   createPrioContainer(key);
   createPrio(key, task);
+}
+
+/**
+ * Adds a mobile dropdown menu button to the task card for screen widths < 768px.
+ *
+ * @param {string} key - Unique task ID.
+ */
+function createMobileDropdownButton(key) {
+  if (window.innerWidth >= 768) return;
+  const card = document.getElementById(key);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'mobile-menu-wrapper';
+  wrapper.innerHTML = `
+    <div class="mobile-menu-icon" onclick="toggleMobileDropdown('${key}', event)">
+      <img src="assets/icons/swap-horiz.svg" alt="Menu">
+    </div>
+    <div class="mobile-dropdown d-none" id="dropdown-${key}">
+      <span class="move-to-label">Move to</span>
+      <div class="dropdown-option" onclick="moveTaskTo('${key}', 'open')">
+        <img src="assets/icons/arrow-upward.svg"> To-do
+      </div>
+      <div class="dropdown-option" onclick="moveTaskTo('${key}', 'await-feedback')">
+        <img src="assets/icons/arrow-downward.svg"> Review
+      </div>
+    </div>
+  `;
+  if (window.innerWidth < 768) {
+    card.appendChild(wrapper);
+  }  
+}
+
+/**
+ * Toggles the dropdown menu for a specific task and closes others.
+ * Stops event bubbling to prevent opening the task popup.
+ *
+ * @param {string} key - Task ID.
+ * @param {MouseEvent} event - The click event.
+ */
+function toggleMobileDropdown(key, event) {
+  event.stopPropagation();
+  const thisDropdown = document.getElementById(`dropdown-${key}`);
+  document.querySelectorAll('.mobile-dropdown').forEach(d => {
+    if (d !== thisDropdown) d.classList.add('d-none');
+  });
+  if (thisDropdown) thisDropdown.classList.toggle('d-none');
 }
 
 /**

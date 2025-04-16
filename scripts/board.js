@@ -93,9 +93,6 @@ function createCardContainer(key, container) {
   cardDiv.ondragstart = startDragging;
   cardDiv.ondragend = endDragging;
   cardDiv.setAttribute('onclick', `openPopup('${key}')`);
-  if (window.innerWidth < 768) {
-    setupTouchDrag(cardDiv); 
-  }
   container.appendChild(cardDiv);
 }
 
