@@ -195,25 +195,44 @@ function clearEditAssignedTo() {
 }
 
 /**
- * Handles clicks outside of custom dropdowns to close them,
- * including edit contacts and mobile move-to menu.
- *
- * @param {MouseEvent} event - The click event from <body>.
+ * Handles body clicks and determines whether to close dropdowns.
+ * Keeps the edit contacts dropdown open if clicking on its options.
+ * 
+ * @param {MouseEvent} event - The body click event.
  */
 function closeEditDropdownOnBodyClick(event) {
   const isEditDropdown = event.target.closest('#edit_custom_select');
+  const isContactOption = event.target.closest('.contacts-custom-select-option');
+  if (!isEditDropdown && !isContactOption) {
+    tryCloseEditDropdown();
+  }
+  tryCloseMobileDropdown(event);
+}
+
+/**
+ * Closes the edit contacts dropdown if it's currently open.
+ */
+function tryCloseEditDropdown() {
+  const optionsContainer = document.getElementById('edit_contacts_options');
+  const arrowIcon = document.getElementById('edit_contacts_arrow');
+  const inputField = document.getElementById('edit_selected_contact');
+  const customSelect = document.getElementById('edit_custom_select');
+  const selectedContactsContainer = document.getElementById('edit_selected_contact_circles');
+
+  if (!optionsContainer.classList.contains('d-none')) {
+    closeEditDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
+  }
+}
+
+/**
+ * Closes all open mobile dropdowns unless the click was inside the menu or its icon.
+ * 
+ * @param {MouseEvent} event - The body click event.
+ */
+function tryCloseMobileDropdown(event) {
   const isMobileMenuIcon = event.target.closest('.mobile-menu-icon');
   const isMobileDropdown = event.target.closest('.mobile-dropdown');
-  if (!isEditDropdown) {
-    const optionsContainer = document.getElementById('edit_contacts_options');
-    const arrowIcon = document.getElementById('edit_contacts_arrow');
-    const inputField = document.getElementById('edit_selected_contact');
-    const customSelect = document.getElementById('edit_custom_select');
-    const selectedContactsContainer = document.getElementById('edit_selected_contact_circles');
-    if (!optionsContainer.classList.contains('d-none')) {
-      closeEditDropdown(optionsContainer, arrowIcon, inputField, customSelect, selectedContactsContainer);
-    }
-  }
+
   if (!isMobileMenuIcon && !isMobileDropdown) {
     document.querySelectorAll('.mobile-dropdown').forEach((dropdown) => {
       dropdown.classList.add('d-none');
