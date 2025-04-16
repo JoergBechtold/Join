@@ -208,32 +208,42 @@ function checkInputs() {
   if (!container) return;
   const inputs = getFormInputs(container);
 
-  // Track which fields have been touched
-  const active = document.activeElement;
+  validateAllInputs(inputs, container);
+  setupBlurListeners(inputs, container);
+}
 
-  // Füge Blur-Event-Listener hinzu (nur einmal pro Feld)
+function setupBlurListeners(inputs, container) {
   ['nameIn', 'emailIn', 'phoneIn'].forEach(key => {
     const input = inputs[key];
     if (!input.dataset.listenerAdded) {
       input.addEventListener('blur', function () {
         this.dataset.touched = 'true';
-        checkInputs();
+        validateAllInputs(inputs, container);
       });
       input.dataset.listenerAdded = 'true';
     }
   });
+}
 
-  // Validierung der Felder (nur wenn sie schon berührt wurden oder aktiv sind)
-  const validName = validateName(inputs.nameIn, container,
-    inputs.nameIn.dataset.touched === 'true' || active === inputs.nameIn);
+function validateAllInputs(inputs, container) {
+  const validName = validateName(
+    inputs.nameIn,
+    container,
+    inputs.nameIn.dataset.touched === 'true'
+  );
 
-  const validEmail = validateEmail(inputs.emailIn, container,
-    inputs.emailIn.dataset.touched === 'true' || active === inputs.emailIn);
+  const validEmail = validateEmail(
+    inputs.emailIn,
+    container,
+    inputs.emailIn.dataset.touched === 'true'
+  );
 
-  const validPhone = validatePhone(inputs.phoneIn, container,
-    inputs.phoneIn.dataset.touched === 'true' || active === inputs.phoneIn);
+  const validPhone = validatePhone(
+    inputs.phoneIn,
+    container,
+    inputs.phoneIn.dataset.touched === 'true'
+  );
 
-  // Button aktivieren/deaktivieren je nach Gültigkeit
   updateButtonState(
     inputs.btn,
     inputs.nameIn.value.trim() !== '' &&
@@ -243,6 +253,7 @@ function checkInputs() {
     validPhone
   );
 }
+
 
 
 /**

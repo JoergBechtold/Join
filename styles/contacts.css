@@ -703,6 +703,7 @@ input.invalid {
   .responsive-flex{
     display: flex;
     justify-content: space-between;
+    top: 100px;
     width: 290px;
     position: fixed;
     margin-top: 30px;
@@ -960,7 +961,7 @@ input.invalid {
   }
 
   .underline {
-    margin-bottom: 35px;
+    margin-bottom: 0px;
   }
 
   .input-group {
@@ -969,7 +970,7 @@ input.invalid {
     margin-bottom: unset;
     width: 422px;
     height: 50px;
-    gap: 8px;
+    gap: 0px;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -994,7 +995,7 @@ input.invalid {
   .right-section form{
     display: flex;
     flex-direction: column;
-    gap: 17px;
+    gap: 24px;
     margin-top: 20px;
   }
 
