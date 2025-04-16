@@ -703,9 +703,9 @@
 }
 
 @media screen and (max-width: 360px) {
-  .popup-container, .edit-popup {
+  /* .popup-container, .edit-popup {
     width: 300px !important;
-  }
+  } */
 
   .edit-prio-button {
     font-size: 16px;

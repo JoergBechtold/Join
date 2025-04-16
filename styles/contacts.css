@@ -1,5 +1,4 @@
-body {
-  font-family: 'Inter', sans-serif;
+.body-contacts {
   margin: 0;
   padding: 0;
   background-color: #f6f7f8;
@@ -12,11 +11,6 @@ body {
   height: 100vh;
   gap: 30px;
 }
-
-/* .main-content {
-  padding-top: 100px;
-  padding-left: 50px;
-} */
 
 .sidebarContact {
   width: 456px;

@@ -77,6 +77,11 @@
   z-index: 1000;
 }
 
+.edit-popup{
+  padding-bottom: 90px;
+
+}
+
 .edit-close-buttton-container {
   display: flex;
   flex-direction: column;
@@ -181,7 +186,7 @@
   gap: 8px;
   margin-left: 8px;
   overflow-y: auto;
-  max-height: 74px;
+  max-height: fit-content;
 }
 
 .subtasks-list span {
@@ -266,10 +271,36 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 360px){
-  .popup-container{
-    transform: translate(-50%, -56%);
+@media only screen and (max-width: 450px){
+  .popup-container, .edit-popup {
+    width: 100%;
+    max-height: unset;
+    height: 100%;
+    border-radius: 0;
+    padding-inline: clamp(15px, -46.5385px + 19.2308vw, 40px);
   }
+
+  .edit-popup{
+    padding-bottom: 90px; 
+  }
+
+  .popup, .popup-info {
+    height: 100%;
+  }
+
+  .assignee-container {
+    max-height: unset; 
+  }
+
+  .subtasks-list{
+    max-height: unset;
+  }
+}
+
+@media only screen and (max-width: 360px){
+  /* .popup-container{
+    transform: translate(-50%, -56%);
+  } */
 
   .subtasks-list {
     gap: 6px;
