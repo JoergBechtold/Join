@@ -651,7 +651,7 @@ input.invalid {
 
   .contacts-container{
     padding-left: 0px;
-    height: 100%;
+    height: calc(100dvh - 80px);
     padding-top: 80px;
   }
 
