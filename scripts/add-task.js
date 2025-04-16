@@ -296,18 +296,17 @@ function createTaskData() {
 
 /**
  * Determines the priority of the task based on the currently active button.
+ * If no button has been activated yet, defaults to "Medium".
  *
- * @returns {string} The priority of the task ("Urgent", "Medium", "Low", or "No Priority").
+ * @returns {string} The priority of the task ("Urgent", "Medium", or "Low").
  */
 function getPriority() {
-  if (activeButton && activeButton.id === 'urgent_button') {
-    return 'Urgent';
-  } else if (activeButton && activeButton.id === 'medium_button') {
+  if (!activeButton || activeButton.id === 'medium_button') {
     return 'Medium';
-  } else if (activeButton && activeButton.id === 'low_button') {
+  } else if (activeButton.id === 'urgent_button') {
+    return 'Urgent';
+  } else if (activeButton.id === 'low_button') {
     return 'Low';
-  } else {
-    return 'No Priority';
   }
 }
 
