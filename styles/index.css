@@ -613,6 +613,7 @@
   }
 
   .mobile-menu-wrapper {
+    position: relative;
     display: flex;
     justify-content: flex-end;
     margin-bottom: 8px;
@@ -641,6 +642,10 @@
     display: flex;
     flex-direction: column;
     z-index: 2000;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    width: 170px;
   }
 
   .move-to-label {
