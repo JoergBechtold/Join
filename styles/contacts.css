@@ -788,7 +788,7 @@ input.invalid {
     .container-edit {
       width: 600px;
       bottom: -100%;
-      transform: translate(50%, 0);
+      /* transform: translate(50%, 0); */
       border: 1px solid rgba(42, 54, 71, 1);
       flex-direction: column; 
       transition: bottom 0.3s ease-in;
