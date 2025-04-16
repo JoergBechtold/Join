@@ -1,3 +1,5 @@
+let categoryDropdownOpen = false;
+
 /**
  * Clears all input fields, buttons, subtasks, selections, assigned contacts, and error messages.
  */
@@ -25,17 +27,65 @@ function clearInput() {
 }
 
 /**
- * Toggles the visibility of the category dropdown menu and updates the arrow icon accordingly.
+ * Opens the category dropdown menu and updates its visual state.
+ *
+ * @param {HTMLElement} optionsContainer - The container element for the category options.
+ * @param {HTMLElement} arrowIcon - The arrow icon indicating the dropdown state.
+ * @param {HTMLElement} customSelect - The custom select container element.
+ */
+function openCategoryDropdown(optionsContainer, arrowIcon, customSelect) {
+  optionsContainer.classList.remove('d-none');
+  arrowIcon.src = 'assets/icons/arrow_drop_down_up.svg';
+  customSelect.classList.replace('custom-select', 'custom-select-focused');
+  categoryDropdownOpen = true;
+}
+
+/**
+ * Closes the category dropdown menu and resets its visual state.
+ *
+ * @param {HTMLElement} optionsContainer - The container element for the category options.
+ * @param {HTMLElement} arrowIcon - The arrow icon indicating the dropdown state.
+ * @param {HTMLElement} customSelect - The custom select container element.
+ */
+function closeCategoryDropdown(optionsContainer, arrowIcon, customSelect) {
+  optionsContainer.classList.add('d-none');
+  arrowIcon.src = 'assets/icons/arrow_drop_down.svg';
+  customSelect.classList.replace('custom-select-focused', 'custom-select');
+  categoryDropdownOpen = false;
+}
+
+/**
+ * Toggles the visibility of the category dropdown menu.
+ * Opens the dropdown if it is currently closed, and closes it if it is open.
+ * Updates the visual state accordingly.
  */
 function toggleCategoryDropdown() {
   const optionsContainer = document.getElementById('options_container');
   const arrowIcon = document.getElementById('select_arrow');
+  const customSelect = document.getElementById('costum_select_category');
   if (optionsContainer.classList.contains('d-none')) {
-    optionsContainer.classList.remove('d-none');
-    arrowIcon.src = 'assets/icons/arrow_drop_down_up.svg';
+    openCategoryDropdown(optionsContainer, arrowIcon, customSelect);
   } else {
-    optionsContainer.classList.add('d-none');
-    arrowIcon.src = 'assets/icons/arrow_drop_down.svg';
+    closeCategoryDropdown(optionsContainer, arrowIcon, customSelect);
+  }
+}
+
+/**
+ * Closes the category dropdown menu when a click occurs outside of it.
+ *
+ * @param {Event} event - The click event that triggered this function.
+ */
+function closeCategoryDropdownOnBodyClick(event) {
+  const clickedElement = event.target;
+  if (
+    categoryDropdownOpen &&
+    !clickedElement.closest('#costum_select_category') &&
+    !clickedElement.closest('#options_container')
+  ) {
+    const optionsContainer = document.getElementById('options_container');
+    const arrowIcon = document.getElementById('select_arrow');
+    const customSelect = document.getElementById('costum_select_category');
+    closeCategoryDropdown(optionsContainer, arrowIcon, customSelect);
   }
 }
 
