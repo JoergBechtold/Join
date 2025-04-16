@@ -460,14 +460,7 @@ button[disabled]:hover {
   border: 1px solid var(--red);
   opacity: 1;
 } */
-/* .input-base[type='email']:invalid,
-.input-base[type='password']:invalid,
-.input-base[type='text']:invalid,
-.not-valide-error {
-  outline: none;
-  border: 1px solid var(--red);
-  opacity: 1;
-} */
+
 
 .error-message-name,
 .error-message-confirm-password,

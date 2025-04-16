@@ -229,7 +229,7 @@ function checkAndShowAnimationSummary() {
       if (mobileViewGreetingOverlayRef) {
         mobileViewGreetingOverlayRef.style.display = 'none';
       }
-    }, 2000);
+    }, 2500);
 }
 
 

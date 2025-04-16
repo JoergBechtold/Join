@@ -62,7 +62,7 @@
   z-index: 999; 
   align-items: center;
   justify-content: center;
-  animation: opacityGreetingOverlay 0.8s ease-in forwards 0.8s;
+  animation: opacityGreetingOverlay 0.8s ease-in forwards 2s;
   
 }
 
