@@ -81,7 +81,6 @@ function openBoardAddTaskDefault() {
 
 /**
  * Creates a draggable task card container and appends it to the specified column.
- *
  * @param {string} key - The unique identifier for the task.
  * @param {HTMLElement} container - The column (drag-area) where the task card will be placed.
  */
@@ -99,7 +98,6 @@ function createCardContainer(key, container) {
 /**
  * Creates and appends the inner container for a task card.
  * This container holds all content inside the card (title, category, description, etc.).
- *
  * @param {string} key - The unique identifier for the task card.
  */
 function createUnderContainer(key) {
@@ -113,7 +111,6 @@ function createUnderContainer(key) {
 /**
  * Creates and appends a category tag container inside the task card.
  * The container is styled differently depending on the task category.
- *
  * @param {string} key - The unique identifier for the task card.
  * @param {Object} task - The task object containing category information.
  */
@@ -130,7 +127,6 @@ function createCategoryTag(key, task) {
 /**
  * Creates and appends a span element containing the task category label
  * inside the tag container of the task card.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing the category text.
  */
@@ -144,7 +140,6 @@ function createTagSpan(key, task) {
 
 /**
  * Creates and appends a title element (h1) to the task card.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing the title text.
  */
@@ -158,7 +153,6 @@ function createTitle(key, task) {
 
 /**
  * Creates and appends a description element to the task card.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing the description text.
  */
@@ -173,7 +167,6 @@ function createDescription(key, task) {
 /**
  * Creates a container element for subtasks within the task card
  * and appends it to the card's content area.
- *
  * @param {string} key - The unique identifier of the task card.
  */
 function createSubtaskContainer(key) {
@@ -187,7 +180,6 @@ function createSubtaskContainer(key) {
 /**
  * Creates and appends a counter element that shows the number of completed subtasks
  * relative to the total number of subtasks for a given task card.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing subtasks.
  */
@@ -204,7 +196,6 @@ function createSubtaskCounter(key, task) {
 /**
  * Creates and appends a container element for the progress bar
  * within the subtask section of a task card.
- *
  * @param {string} key - The unique identifier of the task card.
  */
 function createProgressContainer(key) {
@@ -218,7 +209,6 @@ function createProgressContainer(key) {
 /**
  * Creates and appends a progress bar and corresponding label to a task card.
  * Delegates rendering of the visual bar and the completion label.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing subtasks.
  */
@@ -234,7 +224,6 @@ function createProgressBar(key, task) {
 /**
  * Creates a container for assigned contacts and priority information
  * and appends it to the task card.
- *
  * @param {string} key - The unique identifier of the task card.
  */
 function createContactsAndPrioContainer(key) {
@@ -248,7 +237,6 @@ function createContactsAndPrioContainer(key) {
 /**
  * Creates and appends the container for assigned contact bubbles
  * within the task card's contact and priority section.
- *
  * @param {string} key - The unique identifier of the task card.
  */
 function createAssignedContactsContainer(key) {
@@ -261,7 +249,6 @@ function createAssignedContactsContainer(key) {
 
 /**
  * Creates and appends the assigned contact initials and extra count to the given container.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing assigned contacts.
  */
@@ -275,7 +262,6 @@ function createAssignedContacts(key, task) {
 
 /**
  * Creates and appends the container element for displaying the task's priority icon.
- *
  * @param {string} key - The unique identifier of the task card.
  */
 function createPrioContainer(key) {
@@ -287,7 +273,6 @@ function createPrioContainer(key) {
 
 /**
  * Creates and appends a priority icon to the task card based on its priority level.
- *
  * @param {string} key - The unique identifier of the task card.
  * @param {Object} task - The task object containing priority information.
  */
@@ -307,7 +292,6 @@ function createPrio(key, task) {
 /**
  * Updates the board by reloading all tasks and rendering them into their respective columns.
  * Clears existing task cards and repopulates each column with up-to-date task data.
- *
  * @returns {Promise<void>} A promise that resolves when the board has been fully updated.
  */
 async function updateAssignedContactsOnBoard() {
@@ -326,7 +310,6 @@ async function updateAssignedContactsOnBoard() {
 /**
  * Handles the deletion of a contact by confirming with the user and removing it from the board and database.
  * If successful, updates the board to reflect the changes.
- *
  * @param {HTMLElement} deleteBtn - The delete button that was clicked to trigger the deletion.
  * @returns {Promise<boolean>} A promise resolving to true if the deletion was successful, otherwise false.
  */
@@ -392,7 +375,6 @@ function getEmptyMessageForColumn(columnId) {
 /**
  * Opens a modal form by its ID and activates the overlay.
  * Adds a click event to the overlay to close the form if clicked outside the modal content.
- *
  * @param {string} formId - The ID of the form/modal to be shown.
  */
 function openForm(formId) {
