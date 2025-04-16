@@ -230,7 +230,7 @@ function createProgressBar(key, task) {
   const subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
   const completed = subtasks.filter(st => st.completed).length;
   const percent = subtasks.length > 0 ? (completed / subtasks.length) * 100 : 0;
-  renderProgressVisualBar(progressContainer, percent);
+  renderProgressVisualBar(progressContainer, percent, false);
   renderProgressLabel(progressContainer, key, completed, subtasks.length);
 }
 

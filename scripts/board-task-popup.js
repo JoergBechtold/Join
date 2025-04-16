@@ -56,9 +56,10 @@ function updateProgress(taskId, task) {
   const total = subtasks.length;
   const completed = subtasks.filter(st => st.completed).length;
   const progressPercent = total > 0 ? (completed / total) * 100 : 0;
-  const bar = document.getElementById(`${taskId}-progress-bar`);
-  if (bar) {
-    bar.style.width = `${progressPercent}%`;
+  const progressContainer = document.getElementById(`${taskId}-progress`);
+  if (progressContainer) {
+    progressContainer.innerHTML = '';
+    renderProgressVisualBar(progressContainer, progressPercent, true);
   }
   const label = document.getElementById(`${taskId}-progress-label`);
   if (label) {

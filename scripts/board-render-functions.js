@@ -32,7 +32,8 @@ function renderCardBaseStructure(key, container, task) {
 }
 
 /**
- * Renders progress bar and subtask count if subtasks exist.
+ * Renders subtask container and counter label only.
+ * Progressbar is created manually when subtasks are updated.
  *
  * @param {string} key - The unique identifier of the task.
  * @param {Object} task - The task object with subtasks.
@@ -65,13 +66,17 @@ function renderCardFooter(key, task) {
  * @param {HTMLElement} container - The container where the bar will be added.
  * @param {number} percent - The completion percentage.
  */
-function renderProgressVisualBar(container, percent) {
+function renderProgressVisualBar(container, percent, shouldAnimate = false) {
   const bar = document.createElement("div");
   bar.className = "progress-bar";
-  bar.style.width = "0%";
-  setTimeout(() => {
+  if (shouldAnimate) {
+    bar.style.width = "0%";
+    setTimeout(() => {
+      bar.style.width = `${percent}%`;
+    }, 10);
+  } else {
     bar.style.width = `${percent}%`;
-  }, 10);
+  }
   container.appendChild(bar);
 }
 
