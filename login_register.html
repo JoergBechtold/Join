@@ -100,24 +100,24 @@
           <form onsubmit="handleSignUp(); return false;" class="form with-100-percent-max-width-422px" id="sign_up_form">
             <label class="input-base-container" for="name">
               <input
-                title="Please enter your first and last name with spaces."
+                title="Please enter your first and last name with spaces in between."
                 class="input-base"
                 id="name_sign_up"
                 type="text"
                 required
                 placeholder="Firstname Lastname"
+                onblur="validateName(this)"
               />
-              <span class="error-message-name" id="error_message_name">Please enter your first and last name with spaces.</span>
-
+              <span class="error-message-name" id="error_message_name">Please enter your first and last name with spaces in between.</span>
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/gray-person.svg" alt="Personen Icon" />
               </div>
             </label>
 
             <label class="input-base-container" for="email_sign-up">
-              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" required placeholder="Email" />
-              <span class="error-message-email" id="error_message_email">Email address already exists.</span>
-
+              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" required placeholder="Email" onblur="validateEmail(this)"/>
+                <span class="error-message-email" id="error_message_email">Email address already exists.</span>
+                <span class="error-message-email-not-valide" id="error_message_email_not_valide">This is not a valid email address.</span>
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
@@ -132,6 +132,7 @@
                 type="password"
                 required
                 placeholder="Password"
+                onblur="validatePassword (this)"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_password_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
@@ -143,6 +144,7 @@
                   alt="password visibility off"
                 />
               </div>
+              <span class="error-message-password" id="error_message_password">Please enter more than 8 characters.</span>
             </label>
 
             <label class="input-base-container" for="confirm_sign_up">

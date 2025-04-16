@@ -26,8 +26,10 @@ function getIdRefs() {
     checkboxRef: document.getElementById('checkbox'),
     signUpButtonRef: document.getElementById('sign_up_button'),
     customCheckmarkRef: document.getElementById('custom_checkmark'),
+    errorMessageEmailNotValideRef: document.getElementById('error_message_email_not_valide'),
     errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
+    errorMessagePasswordRef: document.getElementById('error_message_password'),
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
     errorMessageEmailRef: document.getElementById('error_message_email'),
     popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
@@ -211,8 +213,6 @@ async function handleSignUp() {
 
   try {
     const nameParts = name.split(' ');
-    if (!checkNamePartsLength(nameParts)) return;
-
     const profileData = await createUserProfileDataFromParts(nameParts);
 
     if (!checkPasswordConfirm(password, confirmPassword)) return;
@@ -321,6 +321,144 @@ function checkPasswordConfirm(password, confirmPassword) {
 
 /**
  * 
+ * @function validateName
+ * @description Validates the format of a name input field. It checks if the input
+ * has leading or trailing whitespace and if it consists of exactly two parts
+ * (first name and last name) separated by one or more spaces. If the validation
+ * fails, it displays an error message and adds a 'not-valide-error' class to the
+ * input field. If the validation succeeds, it hides the error message and removes
+ * the 'not-valide-error' class.
+ * @param {HTMLInputElement} nameInputField - The HTML input element for the name.
+ * @returns {boolean} `true` if the name is valid (no leading/trailing whitespace
+ * and consists of exactly two parts), `false` otherwise.
+ */
+function validateName(nameInputField) {
+  const name = nameInputField.value;
+  const trimmedName = name.trim();
+  const nameParts = trimmedName.split(/\s+/).filter(part => part !== '');
+
+  if (name !== trimmedName || nameParts.length !== 2) {
+    const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
+    errorMessageNameRef.classList.add('d-flex');
+    nameSignUpRef.classList.add('not-valide-error');
+    return false;
+  } else {
+    const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
+    errorMessageNameRef.classList.remove('d-flex');
+    nameSignUpRef.classList.remove('not-valide-error');
+    return true;
+  }
+}
+
+/**
+ * 
+ * @function validateEmail
+ * @description Validates the format and whitespace of an email address entered in an input field.
+ * It checks if the email has leading or trailing whitespace and if it matches a basic email format
+ * using the `ifEmailPattern` function. Based on the validation results from `ifValidateEmailTrimmed`
+ * and `ifEmailPattern`, it manages the visibility of error messages and the 'not-valide-error' class
+ * on the email input field.
+ * @param {HTMLInputElement} emailInputField - The HTML input element for the email address.
+ * @returns {boolean} `true` if the email is valid (no leading/trailing whitespace and matches the format),
+ * `false` otherwise.
+ */
+function validateEmail(emailInputField) {
+  const { emailSignUpRef, errorMessageEmailRef, errorMessageEmailNotValideRef } = getIdRefs();
+  const email = emailInputField.value;
+  const trimmedEmail = email.trim();
+  let isValid = true;
+
+  if (!ifValidateEmailTrimmed(email, trimmedEmail, errorMessageEmailNotValideRef, errorMessageEmailRef, emailSignUpRef)) {
+    isValid = false;
+  }
+
+  if (!ifEmailPattern(trimmedEmail, errorMessageEmailNotValideRef, errorMessageEmailRef, emailSignUpRef)) {
+    isValid = false;
+  }
+
+  if (isValid) {
+    errorMessageEmailNotValideRef.classList.remove('d-flex');
+    errorMessageEmailRef.classList.remove('d-flex');
+    emailSignUpRef.classList.remove('not-valide-error');
+  }
+  return isValid;
+}
+
+/**
+ * 
+ * @function ifValidateEmailTrimmed
+ * @description Checks if the original email input value has leading or trailing whitespace
+ * compared to its trimmed version. If whitespace is present, it displays an error message
+ * indicating an invalid email format (due to whitespace), hides a generic email error message,
+ * and adds a 'not-valide-error' class to the email input field.
+ * @param {string} email - The original value of the email input field.
+ * @param {string} trimmedEmail - The trimmed value of the email input field (whitespace removed).
+ * @param {HTMLElement} errorMessageEmailNotValideRef - The DOM element for the specific "not valid email" error message.
+ * @param {HTMLElement} errorMessageEmailRef - The DOM element for a generic email error message.
+ * @param {HTMLElement} emailSignUpRef - The DOM element for the email input field.
+ * @returns {boolean} `false` if leading or trailing whitespace is detected, `true` otherwise.
+ */
+function ifValidateEmailTrimmed(email,trimmedEmail,errorMessageEmailNotValideRef,errorMessageEmailRef,emailSignUpRef){
+  if (email !== trimmedEmail) {
+    errorMessageEmailNotValideRef.classList.add('d-flex');
+    errorMessageEmailRef.classList.remove('d-flex'); 
+    emailSignUpRef.classList.add('not-valide-error');
+    return false;
+  }
+  return true;
+}
+
+/**
+ * 
+ * @function ifEmailPattern
+ * @description Checks if the provided trimmed email address matches a basic email format
+ * using a regular expression. If the format is invalid, it displays a specific
+ * "not valid email" error message, hides a generic email error message, and adds
+ * a 'not-valide-error' class to the email input field.
+ * @param {string} trimmedEmail - The trimmed value of the email input field (whitespace removed).
+ * @param {HTMLElement} errorMessageEmailNotValideRef - The DOM element for the specific "not valid email" error message.
+ * @param {HTMLElement} errorMessageEmailRef - The DOM element for a generic email error message.
+ * @param {HTMLElement} emailSignUpRef - The DOM element for the email input field.
+ * @returns {boolean} `false` if the trimmed email does not match the required pattern, `true` otherwise.
+ */
+function ifEmailPattern(trimmedEmail,errorMessageEmailNotValideRef,errorMessageEmailRef,emailSignUpRef){
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(trimmedEmail)) {
+    errorMessageEmailNotValideRef.classList.add('d-flex');
+    errorMessageEmailRef.classList.remove('d-flex');
+    emailSignUpRef.classList.add('not-valide-error');
+    return false;
+  }
+  return true;
+}
+
+/**
+ * 
+ * @function validatePassword
+ * @description Validates the length of the password in the input field.
+ * It checks if the password length is less than 8 characters. If it is,
+ * it displays an error message and adds a 'not-valide-error' class to the input field.
+ * Otherwise, it hides the error message and removes the 'not-valide-error' class.
+ * @param {HTMLInputElement} passwordInputField - The HTML input element for the password.
+ * @returns {boolean} Returns `false` if the password length is less than 8, and `true` otherwise.
+ */
+function validatePassword (passwordInputField){
+  const { passwordSignUpRef,errorMessagePasswordRef } = getIdRefs();
+  const password = passwordInputField.value;
+
+  if (password.length < 8) {
+    errorMessagePasswordRef.classList.add('d-flex'); 
+    passwordSignUpRef.classList.add('not-valide-error'); 
+    return false;
+  } else {
+    errorMessagePasswordRef.classList.remove('d-flex'); 
+    passwordSignUpRef.classList.remove('not-valide-error'); 
+    return true; 
+  }
+}
+
+/**
+ * 
  * @function resetProberties
  * @description Resets the sign-up form to its initial state and unchecks the terms and conditions checkbox.
  * It uses the `reset()` method of the form element and calls the `toggleCheckbox` function with `true` to uncheck the checkbox.
@@ -411,9 +549,9 @@ async function checkUserIsPresent(parameter = false) {
 
     if (users) {
       const userIds = Object.keys(users);
-      checkUserIsPresentForLoob(users,userIds, parameter)
-      return false;
+     return checkUserIsPresentForLoob(users,userIds, parameter);
     }
+    return false;
   } catch (error) {
     console.error('Error verifying user', error);
     return false;
@@ -435,9 +573,17 @@ async function checkUserIsPresentForLoob(users,userIds, parameter) {
   for (let index = 0; index < userIds.length; index++) {
     const userId = userIds[index];
     const user = users[userId];
-    ifParameterTrue(parameter, user);
-    await ifParameterFalse(parameter, user, userId);
+    if (parameter) {
+      if (ifParameterTrue(parameter, user)) {
+        return true;
+      }
+    } else {
+      if (await ifParameterFalse(parameter, user, userId)) {
+        return true;
+      }
+    }
   }
+  return false;
 }
 
 /**
@@ -450,7 +596,7 @@ async function checkUserIsPresentForLoob(users,userIds, parameter) {
  * @returns {boolean|void} - Returns `true` if the parameter is true and the emails match. Returns `void` otherwise.
  * 
  */
-function ifParameterTrue(parameter, user){
+function ifParameterTrue(parameter, user) {
   const { email } = setIdRefValueTrim();
   const { emailSignUpRef, errorMessageEmailRef } = getIdRefs();
 
@@ -458,10 +604,12 @@ function ifParameterTrue(parameter, user){
     if (user.email === email) {
       errorMessageEmailRef.classList.add('d-flex');
       emailSignUpRef.classList.add('not-valide-error');
-      return true;
+      return true; 
     }
-  } 
+  }
+  return false; 
 }
+
 
 /**
  * 
@@ -474,23 +622,22 @@ function ifParameterTrue(parameter, user){
  * @returns {Promise<boolean|void>} - Returns `true` if the parameter is false and the login is successful. Returns `void` otherwise.
  * 
  */
-async function ifParameterFalse(parameter, user, userId){
+async function ifParameterFalse(parameter, user, userId) {
   const { emailLogIn, passwordLogIn } = setIdRefValueTrim();
   const { loginFormRef } = getIdRefs();
 
   if (!parameter) {
     if (user.email === emailLogIn && user.password === passwordLogIn) {
       sessionStorage.setItem('loggedInUserId', userId);
-
       await loadUserData();
       loginFormRef.reset();
-      
-      loginSuccessful(); 
-      return true;
-    } else{
-      showLoginError(); 
+      loginSuccessful();
+      return true; 
+    } else {
+      showLoginError();
     }
   }
+  return false; 
 }
 
 /**

@@ -452,20 +452,21 @@ button[disabled]:hover {
   opacity: 1;
 }
 
-/* .input-base[type='email']:invalid:not(:placeholder-shown),
-.input-base[type='password']:invalid:not(:placeholder-shown),
+
 .input-base[type='text']:invalid:not(:placeholder-shown),
 .not-valide-error {
   outline: none;
   border: 1px solid var(--red);
   opacity: 1;
-} */
+}
 
 
 .error-message-name,
 .error-message-confirm-password,
 .error-message-log-in,
-.error-message-email {
+.error-message-email,
+.error-message-email-not-valide,
+.error-message-password {
   position: absolute;
   top: 115%;
   left: 0;
@@ -487,6 +488,14 @@ button[disabled]:hover {
 }
 
 .error-message-email {
+  display: none;
+}
+
+.error-message-email-not-valide{
+  display: none;
+}
+
+.error-message-password{
   display: none;
 }
 
