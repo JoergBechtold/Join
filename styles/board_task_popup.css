@@ -289,11 +289,7 @@
   }
 
   .assignee-container {
-    max-height: unset; 
-  }
-
-  .subtasks-list{
-    max-height: unset;
+    max-height: 155px; 
   }
 }
 
