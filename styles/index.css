@@ -102,11 +102,11 @@
   width: var(--scollbar-width-thin);
 }
 
-.drag-area-highlight {
+/* .drag-area-highlight {
   border: 1px dashed #a8a8a8;
   border-radius: 8px;
   transition: border 0.3s ease-in-out;
-}
+} */
 
 .no-task {
   display: flex;
@@ -482,6 +482,14 @@
   opacity: 0.5;
   pointer-events: none;
   cursor: not-allowed;
+}
+
+.drop-placeholder {
+  height: 280px;
+  border: 1px dashed black;
+  border-radius: 16px;
+  margin: 12px 0;
+  background-color: rgb(201, 201, 201);
 }
 
 @media screen and (max-width: 1440px) {

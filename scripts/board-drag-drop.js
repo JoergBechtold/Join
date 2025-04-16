@@ -10,30 +10,44 @@ function startDragging(event) {
 }
 
 /**
- * Handles the end of a drag operation on a task card.
- * Removes the visual "tilted" effect from the dragged card.
- *
- * @param {DragEvent} event - The dragend event triggered on the card.
+ * Handles the end of the drag operation.
+ * Removes tilt styling and cleans up any drop placeholders from the board.
+ * 
+ * @param {DragEvent} event - The dragend event triggered when the user releases the task card.
  */
 function endDragging(event) {
   if (currentDraggedElement) {
-    let draggedElement = document.getElementById(currentDraggedElement);
+    const draggedElement = document.getElementById(currentDraggedElement);
     if (draggedElement) {
-      draggedElement.classList.remove("tilted");
+      draggedElement.classList.remove('tilted');
     }
+  }
+  removePlaceholder();
+}
+
+/**
+ * Allows dropping by preventing the default behavior and inserting
+ * a visual placeholder where the task card would be dropped.
+ * 
+ * @param {DragEvent} event - The dragover event triggered when dragging over a valid drop zone.
+ */
+function allowDrop(event) {
+  event.preventDefault();
+  const dropColumn = event.target.closest('.drag-area');
+  if (dropColumn && !dropColumn.querySelector('.drop-placeholder')) {
+    removePlaceholder();
+    const placeholder = document.createElement('div');
+    placeholder.className = 'drop-placeholder';
+    dropColumn.appendChild(placeholder);
   }
 }
 
 /**
- * Enables dropping of dragged elements in valid drop zones
- * and adds a visual highlight to the target column.
- *
- * @param {DragEvent} event - The dragover event from the dragged element.
+ * Removes any existing visual drop placeholder from the board.
+ * Ensures only one placeholder is visible at any time.
  */
-function allowDrop(event) {
-  event.preventDefault();
-  const dropColumn = event.target.closest(".drag-area");
-  if (dropColumn) dropColumn.classList.add("highlight-border");
+function removePlaceholder() {
+  document.querySelectorAll('.drop-placeholder').forEach(p => p.remove());
 }
 
 /**
