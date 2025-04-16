@@ -139,3 +139,57 @@ function closeBoardAddTask() {
     redirectInterval = null;
   }
 }
+
+/**
+ * Filters tasks based on search input and updates the board accordingly.
+ * If query is too short, it renders all cards normally.
+ */
+async function searchCards() {
+  const searchQuery = getSearchQuery();
+  if (searchQuery.length < 3) {
+    renderCards();
+    return;
+  }
+  const tasks = await loadData(PATH_TO_TASKS);
+  clearAllColumns();
+  let found = false;
+  for (const [key, task] of Object.entries(tasks)) {
+    if (task.title.toLowerCase().includes(searchQuery)) {
+      const column = document.getElementById(task.state);
+      if (column) {
+        createCard(key, column, task);
+        found = true;
+      }
+    }
+  }
+  showEmptySearchPlaceholders();
+}
+
+/**
+ * Returns the search query from the input field in lowercase.
+ * @returns {string} The trimmed lowercase search string.
+ */
+function getSearchQuery() {
+  return document.getElementById('find_cards').value.trim().toLowerCase();
+}
+
+/**
+ * Clears the content of all task columns on the board.
+ */
+function clearAllColumns() {
+  const columns = document.querySelectorAll('.drag-area');
+  columns.forEach((column) => (column.innerHTML = ''));
+}
+
+/**
+ * Renders placeholder text in columns that have no visible tasks after search.
+ */
+function showEmptySearchPlaceholders() {
+  const columns = document.querySelectorAll('.drag-area');
+  columns.forEach((column) => {
+    const hasTask = column.querySelector('.todo-card');
+    if (!hasTask) {
+      addEmptyColumnPlaceholder(column);
+    }
+  });
+}

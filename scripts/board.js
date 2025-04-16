@@ -435,33 +435,11 @@ function addEmptyColumnPlaceholder(column) {
  * @returns {string} The corresponding empty message text.
  */
 function getEmptyMessageForColumn(columnId) {
-  if (columnId === 'open') return 'No Tasks to do';
-  if (columnId === 'in-progress') return 'No Tasks in Progress';
-  if (columnId === 'await-feedback') return 'No Tasks Await Feedback';
-  if (columnId === 'done') return 'No Tasks Done';
+  if (columnId === 'open') return 'No Tasks In To Do';
+  if (columnId === 'in-progress') return 'No Tasks In Progress';
+  if (columnId === 'await-feedback') return 'No Tasks In Await Feedback';
+  if (columnId === 'done') return 'No Tasks In Done';
   return 'No Tasks';
-}
-
-/**
- * Searches and filters tasks by the entered keyword (min. 3 characters).
- * If less than 3 characters are entered, all tasks are rendered.
- * Otherwise, only matching tasks are displayed in their respective columns.
- */
-async function searchCards() {
-  const searchQuery = document.getElementById('find_cards').value.toLowerCase();
-  if (searchQuery.length < 3) {
-    renderCards();
-    return;
-  }
-  const tasks = await loadData(PATH_TO_TASKS);
-  const allColumns = document.querySelectorAll('.drag-area');
-  allColumns.forEach((column) => (column.innerHTML = ''));
-  Object.entries(tasks).forEach(([key, task]) => {
-    if (task.title.toLowerCase().includes(searchQuery)) {
-      const column = document.getElementById(task.state);
-      if (column) createCard(key, column, task);
-    }
-  });
 }
 
 /**
