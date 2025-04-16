@@ -158,7 +158,9 @@ function showSuccessPopup() {
 function showAddContactPopup() {
   const pop = document.querySelector('.container-add');
   pop.classList.remove('hidden');
-  pop.classList.add('active');
+  setTimeout(() => {
+    pop.classList.add('active');
+  }, 300); 
   document.querySelector('.overlay').classList.add('active');
 }
 
@@ -168,12 +170,12 @@ function closeAddContactPopup() {
 
   [addPopup, editPopup].forEach((popup) => {
     if (popup) {
-      popup.classList.add('close'); // Animation starten
+      popup.classList.add('close'); 
 
       setTimeout(() => {
         popup.classList.add('hidden');
-        popup.classList.remove('close'); // Zurücksetzen
-      }, 200); // muss zur Transition-Dauer passen
+        popup.classList.remove('close'); 
+      }, 200); 
     }
   });
 

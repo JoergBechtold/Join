@@ -197,7 +197,7 @@
 .container-add,
 .container-edit {
   position: fixed;
-  /* right: -500px; */
+  right: -500px;
   top: 50%;
   transform: translate(50%, -50%);
   height: 592px;
@@ -703,7 +703,7 @@ input.invalid {
   .responsive-flex{
     display: flex;
     justify-content: space-between;
-    top: 100px;
+    top: 70px;
     width: 290px;
     position: fixed;
     margin-top: 30px;
