@@ -70,7 +70,7 @@ function updateNameError(nameInput, container, isValid) {
       err = document.createElement('span');
       err.className = 'name-error';
       err.style.color = 'red';
-      err.textContent = 'first and last name with spaces.';
+      err.textContent = 'First and Last name with spaces';
       nameInput.parentNode.insertBefore(err, nameInput.nextSibling);
     }
   } else if (err) {
@@ -208,37 +208,42 @@ function checkInputs() {
   if (!container) return;
   const inputs = getFormInputs(container);
 
-  // Track which fields have been touched by the user
+  // Track which fields have been touched
   const active = document.activeElement;
-  
-  // Validate all fields - show errors for touched fields or when actively editing
-  const validName = validateName(inputs.nameIn, container, 
+
+  // Füge Blur-Event-Listener hinzu (nur einmal pro Feld)
+  ['nameIn', 'emailIn', 'phoneIn'].forEach(key => {
+    const input = inputs[key];
+    if (!input.dataset.listenerAdded) {
+      input.addEventListener('blur', function () {
+        this.dataset.touched = 'true';
+        checkInputs();
+      });
+      input.dataset.listenerAdded = 'true';
+    }
+  });
+
+  // Validierung der Felder (nur wenn sie schon berührt wurden oder aktiv sind)
+  const validName = validateName(inputs.nameIn, container,
     inputs.nameIn.dataset.touched === 'true' || active === inputs.nameIn);
-  
-  const validEmail = validateEmail(inputs.emailIn, container, 
+
+  const validEmail = validateEmail(inputs.emailIn, container,
     inputs.emailIn.dataset.touched === 'true' || active === inputs.emailIn);
-  
-  const validPhone = validatePhone(inputs.phoneIn, container, 
+
+  const validPhone = validatePhone(inputs.phoneIn, container,
     inputs.phoneIn.dataset.touched === 'true' || active === inputs.phoneIn);
 
-  // Update button state
+  // Button aktivieren/deaktivieren je nach Gültigkeit
   updateButtonState(
     inputs.btn,
     inputs.nameIn.value.trim() !== '' &&
-      inputs.phoneIn.value.trim() !== '' &&
-      validName &&
-      validEmail &&
-      validPhone
+    inputs.phoneIn.value.trim() !== '' &&
+    validName &&
+    validEmail &&
+    validPhone
   );
 }
 
-// Add event listeners to mark fields as touched when they lose focus
-document.querySelectorAll('input').forEach(input => {
-  input.addEventListener('blur', function() {
-    this.dataset.touched = 'true';
-    checkInputs();
-  });
-});
 
 /**
  * Retrieves the current values from the input fields (name, email, phone)
