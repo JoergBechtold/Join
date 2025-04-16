@@ -274,37 +274,6 @@ function createAssignedContacts(key, task) {
 }
 
 /**
- * Renders up to four assigned contact initials inside the container.
- *
- * @param {Array} contacts - The array of assigned contact objects.
- * @param {HTMLElement} container - The DOM element where initials should be added.
- */
-function renderAssignedInitials(contacts, container) {
-  contacts.slice(0, 4).forEach((contact) => {
-    const span = document.createElement('span');
-    span.className = 'initials-span';
-    span.textContent = contact.initials;
-    span.style.backgroundColor = contact.randomColor || contact.contactColor || '#ccc';
-    container.appendChild(span);
-  });
-}
-
-/**
- * Appends a "+X" indicator if more than four contacts are assigned.
- *
- * @param {Array} contacts - The array of assigned contact objects.
- * @param {HTMLElement} container - The DOM element where the indicator should be added.
- */
-function renderExtraAssignedIndicator(contacts, container) {
-  if (contacts.length > 4) {
-    const extra = document.createElement('span');
-    extra.className = 'extra-contacts-span';
-    extra.textContent = `+${contacts.length - 4}`;
-    container.appendChild(extra);
-  }
-}
-
-/**
  * Creates and appends the container element for displaying the task's priority icon.
  *
  * @param {string} key - The unique identifier of the task card.
@@ -372,28 +341,6 @@ async function processContactDeletion(deleteBtn) {
     await updateAssignedContactsOnBoard(); 
   }
   return success;
-}
-
-/**
- * Loads tasks and renders them into columns. 
- * Updates mobile dropdowns after rendering.
- * 
- * @returns {Promise<void>}
- */
-async function renderCards() {
-  const tasks = await loadData(PATH_TO_TASKS);
-  const allColumns = document.querySelectorAll('.drag-area');
-  allColumns.forEach(col => col.innerHTML = '');
-
-  for (const [key, task] of Object.entries(tasks)) {
-    const column = document.getElementById(task.state);
-    if (column) {
-      createCard(key, column, task);
-    }
-  }
-
-  updateEmptyColumns();
-  updateMobileDropdowns();
 }
 
 /**
