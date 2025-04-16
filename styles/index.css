@@ -612,7 +612,7 @@
     margin-right: unset;
   }
 
-  .popup-container {
+  /* .popup-container {
     padding: 30px 5px 5px 12px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
@@ -634,13 +634,13 @@
     max-height: 646px;
     box-sizing: border-box;
     width: 340px;
-  }
+  } */
 }
 
 @media screen and (max-width: 360px) {
-  .popup-container, .edit-popup {
+  /* .popup-container, .edit-popup {
     width: 300px !important;
-  }
+  } */
 
   .edit-prio-button {
     font-size: 16px;

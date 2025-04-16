@@ -412,7 +412,6 @@ async function checkUserIsPresent(parameter = false) {
     if (users) {
       const userIds = Object.keys(users);
       checkUserIsPresentForLoob(users,userIds, parameter)
-      // showLoginError();
       return false;
     }
   } catch (error) {
