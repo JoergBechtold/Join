@@ -344,7 +344,7 @@
   opacity: 0;
   z-index: 105;
   transition: all 0.5s ease-in-out;
-  display: none; /* wichtig, initial ausblenden */
+  display: none;
 }
 
 .board-add-task.show {
