@@ -362,6 +362,11 @@
   position: relative;
 }
 
+.h1-board-add-task {
+  margin-bottom: unset;
+  padding: 20px 0px 20px 0px;
+}
+
 .popup-add-task {
   width: 100%;
 }

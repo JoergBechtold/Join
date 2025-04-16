@@ -387,10 +387,6 @@
   .align-with-gap {
     gap: 20px;
   }
-
-  .add-task-fetch-template{
-    padding-top: 50px;
-  }
 }
 
 @media only screen and (max-width: 450px){
