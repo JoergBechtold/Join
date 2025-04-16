@@ -9,26 +9,7 @@ function createMobileDropdownButton(key) {
   const card = document.getElementById(key);
   const wrapper = document.createElement('div');
   wrapper.className = 'mobile-menu-wrapper';
-  wrapper.innerHTML = `
-    <div class="mobile-menu-icon" onclick="toggleMobileDropdown('${key}', event)">
-      <img src="assets/icons/swap-horiz.svg" alt="Menu">
-    </div>
-    <div class="mobile-dropdown d-none" id="dropdown-${key}">
-      <span class="move-to-label">Move to</span>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'open')">
-        <img src="assets/icons/plus-white.svg"> To-do
-      </div>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'in-progress')">
-        <img src="assets/icons/plus-white.svg"> In Progress
-      </div>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'await-feedback')">
-        <img src="assets/icons/plus-white.svg"> Await Feedback
-      </div>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'done')">
-        <img src="assets/icons/plus-white.svg"> Done
-      </div>
-    </div>
-  `;
+  wrapper.innerHTML = generateMobileDropdownHTML(key);
   card.appendChild(wrapper);
 }
 
