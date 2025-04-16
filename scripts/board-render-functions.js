@@ -10,7 +10,7 @@ let redirectInterval = null;
  */
 function createCard(key, container, task) {
   renderCardBaseStructure(key, container, task);
-  setupMobileCardNavigation(document.getElementById(key), key);
+  createMobileDropdownButton(key);
   renderCardSubtasks(key, task);
   renderCardFooter(key, task);
 }

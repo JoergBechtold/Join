@@ -375,22 +375,25 @@ async function processContactDeletion(deleteBtn) {
 }
 
 /**
- * Loads all tasks from the database and renders them into their respective columns on the board.
- * Clears previous tasks before rendering and updates empty column placeholders.
- *
- * @returns {Promise<void>} A promise that resolves when rendering is complete.
+ * Loads tasks and renders them into columns. 
+ * Updates mobile dropdowns after rendering.
+ * 
+ * @returns {Promise<void>}
  */
 async function renderCards() {
   const tasks = await loadData(PATH_TO_TASKS);
   const allColumns = document.querySelectorAll('.drag-area');
   allColumns.forEach(col => col.innerHTML = '');
+
   for (const [key, task] of Object.entries(tasks)) {
     const column = document.getElementById(task.state);
     if (column) {
       createCard(key, column, task);
     }
   }
+
   updateEmptyColumns();
+  updateMobileDropdowns();
 }
 
 /**

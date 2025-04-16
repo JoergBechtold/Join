@@ -1,48 +1,46 @@
 /**
- * Adds a navigation menu to mobile task cards (<768px) with "Move to" options.
- * Displays a dropdown with dynamic column shifting logic based on current state.
- * @param {HTMLElement} card - The task card element.
- * @param {string} taskId - The unique ID of the task.
+ * Renders a mobile dropdown menu with direct move options to all board states.
+ * Only shown on screens below 768px width.
+ * 
+ * @param {string} key - The unique task ID.
  */
-async function setupMobileCardNavigation(card, taskId) {
+function createMobileDropdownButton(key) {
   if (window.innerWidth >= 768) return;
-
-  const task = await loadData(`${PATH_TO_TASKS}/${taskId}`);
-  if (!task) return;
-
-  const menuIcon = document.createElement("img");
-  menuIcon.src = "assets/icons/swap-horiz.svg";
-  menuIcon.className = "mobile-menu-icon";
-  menuIcon.alt = "Menu";
-
-  const dropdown = document.createElement("div");
-  dropdown.className = "mobile-dropdown d-none";
-  
-  const isLastColumn = task.state === "done";
-
-  dropdown.innerHTML = `
-    <span class="dropdown-label">Move to</span>
-    <div class="dropdown-option" onclick="moveTaskTo('${taskId}', 'open')">
-      <img src="assets/icons/arrow-upward.svg"> To-do
+  const card = document.getElementById(key);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'mobile-menu-wrapper';
+  wrapper.innerHTML = `
+    <div class="mobile-menu-icon" onclick="toggleMobileDropdown('${key}', event)">
+      <img src="assets/icons/swap-horiz.svg" alt="Menu">
     </div>
-    <div 
-      class="dropdown-option ${isLastColumn ? "disabled" : ""}" 
-      ${!isLastColumn ? `onclick="moveTaskToNextColumn('${taskId}')"` : ""}>
-      <img src="assets/icons/arrow-downward.svg"> Review
+    <div class="mobile-dropdown d-none" id="dropdown-${key}">
+      <span class="move-to-label">Move to</span>
+      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'open')">
+        <img src="assets/icons/plus-white.svg"> To-do
+      </div>
+      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'in-progress')">
+        <img src="assets/icons/plus-white.svg"> In Progress
+      </div>
+      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'await-feedback')">
+        <img src="assets/icons/plus-white.svg"> Await Feedback
+      </div>
+      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'done')">
+        <img src="assets/icons/plus-white.svg"> Done
+      </div>
     </div>
   `;
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "mobile-menu-wrapper";
-  wrapper.appendChild(menuIcon);
-  wrapper.appendChild(dropdown);
   card.appendChild(wrapper);
+}
 
-  menuIcon.onclick = function (event) {
-    event.stopPropagation();
-    closeAllDropdowns();
-    dropdown.classList.toggle("d-none");
-  };
+/**
+ * Handles mobile dropdown move without triggering popup open.
+ * @param {Event} event - The click event.
+ * @param {string} key - Task ID.
+ * @param {string} newState - New task state.
+ */
+function handleMobileMove(event, key, newState) {
+  event.stopPropagation();
+  moveTaskTo(key, newState);
 }
 
 /**
@@ -81,18 +79,25 @@ async function moveTaskToNextColumn(taskId) {
 }
 
 /**
- * Moves a task to a different state using the dropdown on mobile cards.
- * @param {string} taskId - The ID of the task to move.
- * @param {string} newState - The new state to move the task to.
+ * Ensures mobile dropdown buttons are shown only on small screens.
+ * Adds or removes them depending on screen width.
  */
-// async function moveMobileTask(taskId, newState) {
-//   const task = await loadData(`${PATH_TO_TASKS}/${taskId}`);
-//   if (!task) return;
-//   task.state = newState;
-//   await updateData(`${PATH_TO_TASKS}/${taskId}`, task);
-//   await renderCards();
-//   updateEmptyColumns();
-// }
+function updateMobileDropdowns() {
+  const cards = document.querySelectorAll('.todo-card');
+
+  cards.forEach(card => {
+    const wrapper = card.querySelector('.mobile-menu-wrapper');
+    const taskId = card.id;
+
+    if (window.innerWidth < 768 && !wrapper) {
+      createMobileDropdownButton(taskId);
+    }
+
+    if (window.innerWidth >= 768 && wrapper) {
+      wrapper.remove();
+    }
+  });
+}
 
 /**
  * Closes any open mobile dropdown if user clicks outside.
