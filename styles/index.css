@@ -677,7 +677,7 @@
     width: 209px !important;
   }
 
-  .popup-container {
+  /* .popup-container {
     padding: 30px 5px 5px 12px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
@@ -687,9 +687,9 @@
     max-height: 646px;
     box-sizing: border-box;
     width: 340px;
-  }
+  } */
 
-  .edit-popup {
+  /* .edit-popup {
     padding: 30px 5px 70px 12px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
@@ -699,7 +699,7 @@
     max-height: 646px;
     box-sizing: border-box;
     width: 340px;
-  }
+  } */
 }
 
 @media screen and (max-width: 360px) {

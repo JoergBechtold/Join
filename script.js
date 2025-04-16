@@ -306,6 +306,23 @@ function handleTaskSubmit() {
   }
 }
 
+function validateField(inputField) {
+  if (!inputField.checkValidity()) {
+    inputField.classList.add('not-valide-error');
+    // Hier müsstest du ggf. auch die zugehörige Fehlermeldung anzeigen
+    const errorMessage = inputField.parentNode.querySelector('.error-message-log-in');
+    if (errorMessage) {
+      errorMessage.style.display = 'block';
+    }
+  } else {
+    inputField.classList.remove('not-valide-error');
+    const errorMessage = inputField.parentNode.querySelector('.error-message-log-in');
+    if (errorMessage) {
+      errorMessage.style.display = 'none';
+    }
+  }
+}
+
 
 // manual function to load the colors into the array in the firebase
 // async function manuellloadColorToFirebase(){

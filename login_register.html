@@ -48,7 +48,7 @@
 
           <form id="login_form" onsubmit="checkUserIsPresent(); return false;" class="form with-100-percent-max-width-422px">
             <label class="input-base-container" for="email_log_in">
-              <input title="Please enter your email address" class="input-base" id="email_log_in" type="email" required placeholder="Email" />
+              <input title="Please enter your email address" class="input-base" id="email_log_in" type="email" required placeholder="Email" onblur="validateField(this)" />
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
@@ -63,6 +63,7 @@
                 type="password"
                 required
                 placeholder="Password"
+                onblur="validateField(this)"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
