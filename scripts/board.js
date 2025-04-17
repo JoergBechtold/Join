@@ -375,7 +375,7 @@ function addEmptyColumnPlaceholder(column) {
  * @returns {string} The corresponding empty message text.
  */
 function getEmptyMessageForColumn(columnId) {
-  if (columnId === 'open') return 'No Tasks In To Do';
+  if (columnId === 'open') return 'No Tasks In To do';
   if (columnId === 'in-progress') return 'No Tasks In Progress';
   if (columnId === 'await-feedback') return 'No Tasks In Await Feedback';
   if (columnId === 'done') return 'No Tasks In Done';
