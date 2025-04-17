@@ -94,25 +94,33 @@ function generateEditContactsHTML(data, selectedEditContacts) {
  * @param {string} key - Unique task ID.
  * @returns {string} HTML string for dropdown content.
  */
-function generateMobileDropdownHTML(key) {
+function generateMobileDropdownHTML(key, currentState) {
+  const options = [
+    { state: 'open', label: 'To-do' },
+    { state: 'in-progress', label: 'In Progress' },
+    { state: 'await-feedback', label: 'Await Feedback' },
+    { state: 'done', label: 'Done' }
+  ];
+
+  const optionsHTML = options.map(opt => {
+    const isCurrent = opt.state === currentState;
+
+    return isCurrent 
+      ? `<div class="dropdown-option disabled">
+          <img src="assets/icons/plus-white.svg"> ${opt.label}
+        </div>`
+      : `<div class="dropdown-option" onclick="handleMobileMove(event, '${key}', '${opt.state}')">
+          <img src="assets/icons/plus-white.svg"> ${opt.label}
+        </div>`;
+  }).join('');
+
   return `
     <div class="mobile-menu-icon" onclick="toggleMobileDropdown('${key}', event)">
       <img src="assets/icons/swap-horiz.svg" alt="Menu">
     </div>
     <div class="mobile-dropdown d-none" id="dropdown-${key}">
       <span class="move-to-label">Move to</span>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'open')">
-        <img src="assets/icons/plus-white.svg"> To-do
-      </div>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'in-progress')">
-        <img src="assets/icons/plus-white.svg"> In Progress
-      </div>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'await-feedback')">
-        <img src="assets/icons/plus-white.svg"> Await Feedback
-      </div>
-      <div class="dropdown-option" onclick="handleMobileMove(event, '${key}', 'done')">
-        <img src="assets/icons/plus-white.svg"> Done
-      </div>
+      ${optionsHTML}
     </div>
   `;
 }

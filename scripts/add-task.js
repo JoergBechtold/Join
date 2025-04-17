@@ -110,6 +110,24 @@ function clearSelection() {
 }
 
 /**
+ * Shows or hides the error message for an input field.
+ *
+ * @param {HTMLElement} inputField - The input element to style.
+ * @param {HTMLElement} errorMessage - The element to display the error message.
+ * @param {string} message - The error message to show. If empty, hides the message.
+ */
+function setInputError(inputField, errorMessage, message) {
+  if (message) {
+    errorMessage.textContent = message;
+    errorMessage.classList.remove('d-none');
+    inputField.classList.add('red-border');
+  } else {
+    errorMessage.classList.add('d-none');
+    inputField.classList.remove('red-border');
+  }
+}
+
+/**
  * Validates the title input field and displays an error message if it is empty
  * or if the title exceeds 40 characters.
  *
@@ -120,22 +138,16 @@ function validateInputTitle() {
   const errorMessage = document.getElementById('error_message_title');
   const value = inputField.value.trim();
   if (value === '') {
-    errorMessage.textContent = 'This field is required';
-    errorMessage.classList.remove('d-none');
-    inputField.classList.add('red-border');
+    setInputError(inputField, errorMessage, 'This field is required');
     return false;
   }
   if (value.length > 40) {
-    errorMessage.textContent = 'The title must not exceed 40 characters';
-    errorMessage.classList.remove('d-none');
-    inputField.classList.add('red-border');
+    setInputError(inputField, errorMessage, 'The title must not exceed 40 characters');
     return false;
   }
-  errorMessage.classList.add('d-none');
-  inputField.classList.remove('red-border');
+  setInputError(inputField, errorMessage, '');
   return true;
 }
-
 
 /**
  * Shows an error message for the input field.

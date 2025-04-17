@@ -81,6 +81,8 @@ function openBoardAddTaskDefault() {
 
 /**
  * Creates a draggable task card container and appends it to the specified column.
+ * Prevents popup opening when clicking disabled dropdown items.
+ * 
  * @param {string} key - The unique identifier for the task.
  * @param {HTMLElement} container - The column (drag-area) where the task card will be placed.
  */
@@ -91,7 +93,15 @@ function createCardContainer(key, container) {
   cardDiv.draggable = true;
   cardDiv.ondragstart = startDragging;
   cardDiv.ondragend = endDragging;
-  cardDiv.setAttribute('onclick', `openPopup('${key}')`);
+  cardDiv.onclick = function (event) {
+    const target = event.target;
+    const isMenuButton = target.closest('.mobile-menu-icon');
+    const isInDropdown = target.closest('.mobile-dropdown');
+    if (!isMenuButton && !isInDropdown) {
+      openPopup(key);
+    }
+  };
+  
   container.appendChild(cardDiv);
 }
 
@@ -365,7 +375,7 @@ function addEmptyColumnPlaceholder(column) {
  * @returns {string} The corresponding empty message text.
  */
 function getEmptyMessageForColumn(columnId) {
-  if (columnId === 'open') return 'No Tasks In To Do';
+  if (columnId === 'open') return 'No Tasks In To do';
   if (columnId === 'in-progress') return 'No Tasks In Progress';
   if (columnId === 'await-feedback') return 'No Tasks In Await Feedback';
   if (columnId === 'done') return 'No Tasks In Done';

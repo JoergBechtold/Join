@@ -231,7 +231,7 @@
 .cards-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  /* -webkit-line-clamp: 2; */
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 16px;
@@ -504,6 +504,11 @@
     font-size: var(--font-size-14);
     font-weight: var(--font-weight-400);
     color: red;
+}
+
+.dropdown-option.disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 @media screen and (max-width: 1440px) {
