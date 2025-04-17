@@ -190,9 +190,12 @@ function togglePasswordVisibility(inputId, iconElement) {
  * 
  * @async
  * @function handleSignUp
- * @description Handles the user sign-up process. It retrieves user input, creates profile data,
- * checks for password confirmation and existing email, creates the user in the database,
- * and handles success or error scenarios.
+ * @description Asynchronously handles the sign-up process. It retrieves user input values (name, email, password),
+ * creates profile data, checks if the password confirmation is valid, and then attempts to create a new user.
+ * Upon successful user creation, it calls the `handleSignUpSuccess` function. If any error occurs during the process,
+ * it logs the error to the console.
+ * @returns {void} - This function does not return a value directly but performs asynchronous operations
+ * that may result in user creation or an error.
  */
 async function handleSignUp() {
   const { name, email, password} = setIdRefValueTrimSignUp();
@@ -203,18 +206,7 @@ async function handleSignUp() {
 
     if (!checkPasswordConfirm()) return;
 
-    // const isEmailPresent = await checkUserIsPresent(true);
-
-    // if (isEmailPresent) return; 
-  
-    await createUser(
-      profileData.firstName,
-      profileData.lastName,
-      email,
-      password,
-      profileData.randomColor,
-      profileData.initials
-    );
+    await createUser(profileData.firstName, profileData.lastName, email, password, profileData.randomColor, profileData.initials);
     handleSignUpSuccess()
   } catch (error) {
     console.error('Error creating user', error);
@@ -476,15 +468,20 @@ function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, error
 
 /**
  * 
- * Validates a password input field and displays error messages if necessary.
- * The validation includes checking for emptiness and a minimum length of 8 characters.
- *
- * @param {HTMLInputElement} passwordInputField - The HTML input field for the password.
- * @param {boolean} boolean - A boolean value indicating whether the password is being validated for sign-up (true) or login (false).
- * @returns {boolean} - True if the password is valid, otherwise false.
+ * @function validatePassword
+ * @description Validates a password input field, checking for emptiness and minimum length.
+ * It handles different error message elements based on whether the validation is for sign-up or login.
+ * If the password field is empty, it calls the `handleEmptyPassword` function. Otherwise, it calls
+ * `handlePasswordLengthValidation` to check the password length.
+ * @param {HTMLInputElement} passwordInputField - The HTML input element for the password.
+ * @param {boolean} boolean - A boolean value indicating the context of the validation:
+ * - `true` if the validation is for the sign-up form.
+ * - `false` if the validation is for the login form.
+ * @returns {boolean} - Returns the result of either `handleEmptyPassword` (if the field is empty)
+ * or `handlePasswordLengthValidation` (based on the password length validation).
  */
 function validatePassword(passwordInputField, boolean) {
-  const { passwordSignUpRef, passwordLogInRef, errorMessagePasswordLogInRef, errorMessagePasswordSignInRef } = getIdRefs();
+  const { passwordSignUpRef, passwordLogInRef, errorMessagePasswordLogInRef, errorMessagePasswordSignInRef,errorMessageLogInRef } = getIdRefs();
   const password = passwordInputField.value;
   const trimmedPassword = password.trim();
   let currentPasswordRef;
@@ -499,7 +496,7 @@ function validatePassword(passwordInputField, boolean) {
   }
 
   if (trimmedPassword === '') {
-    return handleEmptyPassword(currentPasswordRef, currentErrorMessageRef);
+    return handleEmptyPassword(currentPasswordRef, currentErrorMessageRef,errorMessageLogInRef);
   }
   return handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, currentErrorMessageRef);
 }
@@ -513,9 +510,10 @@ function validatePassword(passwordInputField, boolean) {
  * @param {HTMLElement | null} currentErrorMessageRef - The reference element of the error message display for the password.
  * @returns {boolean} - Returns true, as an empty field is considered "valid" in terms of the *minimum requirement* (actual validation for existence might occur elsewhere).
  */
-function handleEmptyPassword(currentPasswordRef, currentErrorMessageRef) {
+function handleEmptyPassword(currentPasswordRef, currentErrorMessageRef,errorMessageLogInRef) {
   if (currentErrorMessageRef) {
     currentErrorMessageRef.classList.remove('d-flex');
+    errorMessageLogInRef.classList.remove('d-flex');
   }
   if (currentPasswordRef) {
     currentPasswordRef.classList.remove('not-valide-error');
