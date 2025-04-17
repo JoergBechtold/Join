@@ -262,19 +262,23 @@ function validateEditInputs() {
 }
 
 /**
- * Validates the title in the edit popup.
- *
- * @returns {boolean} True if the title is not empty.
+ * Validates the edit task title input.
+ * Ensures it is not empty and does not exceed 40 characters.
+ * @returns {boolean} True if valid, false otherwise.
  */
 function validateEditInputTitle() {
-  const titleInput = document.getElementById('edit_title');
-  const errorMessage = document.getElementById('error_message_edit_title') || document.getElementById('error_message_title');
-  if (titleInput.value.trim() === '') {
-    displayError(titleInput, errorMessage, "This field is required.");
-    return false;
+  const input = document.getElementById('edit_title');
+  const error = document.getElementById('error_message_edit_title') || document.getElementById('error_message_title');
+  const value = input.value.trim();
+  if (value === '') {
+    displayError(input, error, 'This field is required.');
+  } else if (value.length > 40) {
+    displayError(input, error, 'The title must not exceed 40 characters.');
+  } else {
+    clearError(input, error);
+    return true;
   }
-  clearError(titleInput, errorMessage);
-  return true;
+  return false;
 }
 
 /**
@@ -282,21 +286,27 @@ function validateEditInputTitle() {
  *
  * @returns {boolean} True if a date is entered and it is not in the past.
  */
+/**
+ * Validates the due date input in the edit popup.
+ * Ensures it is not empty and not a date in the past.
+ * Uses shared error display logic for consistency.
+ * 
+ * @returns {boolean} True if valid, otherwise false.
+ */
 function validateEditInputDate() {
-  const dateInput = document.getElementById('edit_due_date');
-  const errorMessage = document.getElementById('error_message_edit_date') || document.getElementById('error_message_date');
-  const inputValue = dateInput.value.trim();
-  const today = getTodayNormalized();
+  const inputField = document.getElementById('edit_due_date');
+  const errorMessage = document.getElementById('error_message_edit_date');
+
+  const inputValue = inputField.value.trim();
   if (inputValue === '') {
-    displayError(dateInput, errorMessage, "This field is required.");
+    showInputError(inputField, errorMessage, 'This field is required');
     return false;
   }
-  const selectedDate = getNormalizedDate(inputValue);
-  if (selectedDate < today) {
-    displayError(dateInput, errorMessage, "Date cannot be in the past.");
+  if (isDateInPast(inputValue)) {
+    showInputError(inputField, errorMessage, 'Please select today or a future date');
     return false;
   }
-  clearError(dateInput, errorMessage);
+  hideInputError(inputField, errorMessage);
   return true;
 }
 

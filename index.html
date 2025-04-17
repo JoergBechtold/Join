@@ -143,6 +143,7 @@
                 <div class="form-group">
                   <label for="edit_title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
                   <input id="edit_title" class="input-base" type="text" placeholder="Enter a title" />
+                  <span id="error_message_edit_title" class="error-message d-none"></span>
                   <div class="error-message-required d-none" id="edit_error_title">This field is required</div>
                 </div>
         
@@ -155,6 +156,7 @@
                   <label for="edit_due_date"><span class="label-text">Due date</span> <span class="red-star">*</span></label>
                   <div class="input-container">
                     <input id="edit_due_date" class="input-base due-date" type="date" onclick="setEditMinDate()"/>
+                    <span id="error_message_edit_date" class="error-message d-none"></span>
                   </div>
                   <div class="error-message-required d-none" id="edit_error_date">This field is required</div>
                 </div>

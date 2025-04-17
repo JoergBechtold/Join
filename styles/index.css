@@ -497,6 +497,15 @@
   background-color: rgb(201, 201, 201);
 }
 
+.error-message {
+  position: absolute;
+    bottom: -18px;
+    left: 0;
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-400);
+    color: red;
+}
+
 @media screen and (max-width: 1440px) {
   /* .main-board {
     overflow-y: auto;
