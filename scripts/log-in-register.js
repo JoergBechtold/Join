@@ -49,14 +49,25 @@ function getIdRefs() {
  * @returns {object} An object containing the trimmed values of various input fields.
  * 
  */
-function setIdRefValueTrim() {
+function setIdRefValueTrimLogIn() {
+  return {
+    // name: document.getElementById('name_sign_up').value.trim(),
+    // email: document.getElementById('email_sign-up').value.trim(),
+    // password: document.getElementById('password_sign_up').value.trim(),
+    // confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
+    emailLogIn: document.getElementById('email_log_in').value.trim(),
+    passwordLogIn: document.getElementById('password_log_in').value.trim(),
+  };
+}
+
+function setIdRefValueTrimSignUp() {
   return {
     name: document.getElementById('name_sign_up').value.trim(),
     email: document.getElementById('email_sign-up').value.trim(),
     password: document.getElementById('password_sign_up').value.trim(),
     confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
-    emailLogIn: document.getElementById('email_log_in').value.trim(),
-    passwordLogIn: document.getElementById('password_log_in').value.trim(),
+    // emailLogIn: document.getElementById('email_log_in').value.trim(),
+    // passwordLogIn: document.getElementById('password_log_in').value.trim(),
   };
 }
 
@@ -184,7 +195,7 @@ function togglePasswordVisibility(inputId, iconElement) {
  * and handles success or error scenarios.
  */
 async function handleSignUp() {
-  const { name, email, password} = setIdRefValueTrim();
+  const { name, email, password} = setIdRefValueTrimSignUp();
 
   try {
     const nameParts = name.split(' ');
@@ -192,9 +203,9 @@ async function handleSignUp() {
 
     if (!checkPasswordConfirm()) return;
 
-    const isEmailPresent = await checkUserIsPresent(true);
+    // const isEmailPresent = await checkUserIsPresent(true);
 
-    if (isEmailPresent) return; 
+    // if (isEmailPresent) return; 
   
     await createUser(
       profileData.firstName,
@@ -282,7 +293,7 @@ function checkNamePartsLength(nameParts) {
  * @returns {boolean} - Returns true if the passwords match or if the confirm password field is empty, false otherwise.
  */
 function checkPasswordConfirm() {
-  const { password, confirmPassword } = setIdRefValueTrim();
+  const { password, confirmPassword } = setIdRefValueTrimSignUp();
   const { errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
 
   if (confirmPassword === "") {
@@ -359,7 +370,6 @@ function validateEmail(emailInputField, boolean) {
   const trimmedEmail = email.trim();
   let isValid = true;
   let currentEmailRef;
-  const isSignUp = boolean;
 
   if (boolean) {
     currentEmailRef = emailSignUpRef;
@@ -372,7 +382,7 @@ function validateEmail(emailInputField, boolean) {
   }
 
   if(trimmedEmail === ''){
-    clearEmailValidationErrors(isSignUp);
+    clearEmailValidationErrors(boolean);
     return false;
   }
 
@@ -381,7 +391,7 @@ function validateEmail(emailInputField, boolean) {
   }
 
   if (isValid) {
-    clearEmailValidationErrors(isSignUp);
+    clearEmailValidationErrors(boolean);
   }
   return isValid;
 }
@@ -391,17 +401,17 @@ function validateEmail(emailInputField, boolean) {
  * @function clearEmailValidationErrors
  * @description Removes the display style and error class from email validation error messages and the corresponding email input field.
  * It differentiates between sign-up and login forms to target the correct error message and input field.
- * @param {boolean} isSignUp - A boolean flag indicating whether the validation context is for the sign-up form (`true`) or the login form (`false`).
+ * @param {boolean} - A boolean flag indicating whether the validation context is for the sign-up form (`true`) or the login form (`false`).
  */
-function clearEmailValidationErrors(isSignUp) {
+function clearEmailValidationErrors(boolean) {
   const { errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, emailSignUpRef, emailLogInRef } = getIdRefs();
-  errorMessageEmailNotValideSignUpRef.classList.remove('d-flex');
-  errorMessageEmailNotValideLoginRef.classList.remove('d-flex');
-  errorMessageEmailRef.classList.remove('d-flex');
-  if (isSignUp) {
+  if (boolean) {
     emailSignUpRef.classList.remove('not-valide-error');
+    errorMessageEmailNotValideSignUpRef.classList.remove('d-flex');
+    errorMessageEmailRef.classList.remove('d-flex');
   } else {
     emailLogInRef.classList.remove('not-valide-error');
+    errorMessageEmailNotValideLoginRef.classList.remove('d-flex');
   }
 }
 
@@ -456,7 +466,6 @@ function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, error
     } else {
       errorMessageEmailNotValideLoginRef.classList.add('d-flex');
     }
-    errorMessageEmailRef.classList.remove('d-flex');
     if (emailRef) {
       emailRef.classList.add('not-valide-error');
     }
@@ -491,32 +500,8 @@ function validatePassword(passwordInputField, boolean) {
 
   if (trimmedPassword === '') {
     return handleEmptyPassword(currentPasswordRef, currentErrorMessageRef);
-    // if (currentErrorMessageRef) {
-    //   currentErrorMessageRef.classList.remove('d-flex');
-    // }
-    // if (currentPasswordRef) {
-    //   currentPasswordRef.classList.remove('not-valide-error');
-    // }
-    // return true;
   }
   return handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, currentErrorMessageRef);
-  // if (trimmedPassword.length < 8) {
-  //   if (currentErrorMessageRef) {
-  //     currentErrorMessageRef.classList.add('d-flex');
-  //   }
-  //   if (currentPasswordRef) {
-  //     currentPasswordRef.classList.add('not-valide-error');
-  //   }
-  //   return false;
-  // } else {
-  //   if (currentErrorMessageRef) {
-  //     currentErrorMessageRef.classList.remove('d-flex');
-  //   }
-  //   if (currentPasswordRef) {
-  //     currentPasswordRef.classList.remove('not-valide-error');
-  //   }
-  //   return true;
-  // }
 }
 
 /**
@@ -540,14 +525,16 @@ function handleEmptyPassword(currentPasswordRef, currentErrorMessageRef) {
 
 /**
  * 
- * Validates the length of the password.
- * Displays an error message and adds an error class to the input field if the length is less than 8 characters.
- * Removes the error message and error class if the length is sufficient.
- *
- * @param {string} trimmedPassword - The trimmed password.
- * @param {HTMLElement | null} currentPasswordRef - The reference element of the password input field.
- * @param {HTMLElement | null} currentErrorMessageRef - The reference element of the error message display for the password.
- * @returns {boolean} - True if the password is at least 8 characters long, otherwise false.
+ * @function handlePasswordLengthValidation
+ * @description Validates the length of a provided password. If the password's trimmed length is less than 8 characters,
+ * it displays an error message and adds a visual error indicator to the associated input field.
+ * If the password meets the minimum length requirement, it hides the error message and removes the error indicator.
+ * @param {string} trimmedPassword - The password string after leading and trailing whitespace has been removed.
+ * @param {HTMLElement | null} currentPasswordRef - A reference to the HTML input element for the password.
+ * This can be null if the element is not found.
+ * @param {HTMLElement | null} currentErrorMessageRef - A reference to the HTML element displaying the password length error message.
+ * This can be null if the element is not found.
+ * @returns {boolean} - Returns `true` if the trimmed password length is 8 characters or more, otherwise returns `false`.
  */
 function handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, currentErrorMessageRef) {
   if (trimmedPassword.length < 8) {
@@ -568,17 +555,6 @@ function handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, cur
     return true;
   }
 }
-
-/**
- * 
- * @function resetProberties
- * @description Resets the sign-up form to its initial state and unchecks the terms and conditions checkbox.
- * It uses the `reset()` method of the form element and calls the `toggleCheckbox` function with `true` to uncheck the checkbox.
- */
-// function resetProberties() {
-//   document.getElementById('sign_up_form').reset();
-//   toggleCheckbox(true);
-// }
 
 /**
  * 
@@ -634,7 +610,7 @@ function toggleCheckbox(element = false) {
  * It retrieves the necessary HTML element references using the `getIdRefs` function.
  * @returns {void} - This function does not return any value directly. It modifies the `disabled` property of the sign-up button.
  */
-function enableOrDisableSignUpButton() {
+ async function enableOrDisableSignUpButton() {
   const {
     nameSignUpRef,
     emailSignUpRef,
@@ -645,12 +621,19 @@ function enableOrDisableSignUpButton() {
   } = getIdRefs();
 
   const isNameValid = validateName(nameSignUpRef);
-  const isEmailValid = validateEmail(emailSignUpRef, false); 
+  const isEmailValid = validateEmail(emailSignUpRef, true); 
   const isPasswordValid = validatePassword(passwordSignUpRef, true);
   const isConfirmValid = checkPasswordConfirm(confirmPasswordSignUpRef);
   const isCheckboxChecked = checkboxRef.checked;
 
+  let isEmailAlreadyExists = false;
+
+  
   if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isCheckboxChecked) {
+    isEmailAlreadyExists = await checkUserIsPresent(true); 
+  }
+
+  if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isCheckboxChecked && !isEmailAlreadyExists) {
     signUpButtonRef.disabled = false;
   } else {
     signUpButtonRef.disabled = true;
@@ -721,7 +704,7 @@ async function checkUserIsPresentForLoob(users,userIds, parameter) {
  * 
  */
 function ifParameterTrue(parameter, user) {
-  const { email } = setIdRefValueTrim();
+  const { email } = setIdRefValueTrimSignUp();
   const { emailSignUpRef, errorMessageEmailRef } = getIdRefs();
 
   if (parameter) {
@@ -746,7 +729,7 @@ function ifParameterTrue(parameter, user) {
  * 
  */
 async function ifParameterFalse(parameter, user, userId) {
-  const { emailLogIn, passwordLogIn } = setIdRefValueTrim();
+  const { emailLogIn, passwordLogIn } = setIdRefValueTrimLogIn();
   const { loginFormRef } = getIdRefs();
 
   if (!parameter) {
@@ -762,65 +745,6 @@ async function ifParameterFalse(parameter, user, userId) {
   }
   return false; 
 }
-
-/**
- * 
- * @function safeRemoveClass
- * @description Safely removes a specified class name from an HTML element's class list.
- * It first checks if the element reference exists and if the class name is present before attempting to remove it.
- * This prevents errors that might occur if the element or class does not exist.
- * @param {HTMLElement | null} elementRef - A reference to the HTML element from which the class should be removed. Can be null.
- * @param {string} className - The name of the class to remove from the element's class list.
- * @returns {void} - This function does not return any value directly. It modifies the class list of the provided HTML element.
- */
-// function safeRemoveClass(elementRef, className) {
-//   if (elementRef && elementRef.classList.contains(className)) {
-//     elementRef.classList.remove(className);
-//   }
-// }
-
-/**
- * 
- * @function resetSignUpFormErrors
- * @description Resets the error messages and visual error indicators for the sign-up form.
- * It retrieves references to the error message elements and input fields using `getIdRefs` and then
- * safely removes the 'd-flex' class (to hide error messages) and the 'not-valide-error' class
- * from the respective elements. This function is typically called when the user interacts with the form again.
- * @returns {void} - This function does not return any value directly. It modifies the class lists of various HTML elements.
- */
-// function resetSignUpFormErrors() {
-//   const { errorMessageNameRef, errorMessageEmailNotValideSignUpRef,
-//           errorMessagePasswordRef, errorMessageConfirmPasswordRef,
-//           nameSignUpRef, emailSignUpRef, passwordSignUpRef, confirmSignUpRef } = getIdRefs();
-
-//   safeRemoveClass(errorMessageNameRef, 'd-flex');
-//   safeRemoveClass(errorMessageEmailNotValideSignUpRef, 'd-flex');
-//   safeRemoveClass(errorMessagePasswordRef, 'd-flex');
-//   safeRemoveClass(errorMessageConfirmPasswordRef, 'd-flex');
-//   safeRemoveClass(nameSignUpRef, 'not-valide-error');
-//   safeRemoveClass(emailSignUpRef, 'not-valide-error');
-//   safeRemoveClass(passwordSignUpRef, 'not-valide-error');
-//   safeRemoveClass(confirmSignUpRef, 'not-valide-error');
-// }
-
-/**
- * 
- * @function resetLogInFormErrors
- * @description Resets the error messages and visual error indicators for the log-in form.
- * It retrieves references to the error message elements and input fields using `getIdRefs` and then
- * safely removes the 'd-flex' class (to hide error messages) and the 'not-valide-error' class
- * from the respective elements. This function is typically called when the user interacts with the form again.
- * @returns {void} - This function does not return any value directly. It modifies the class lists of various HTML elements.
- */
-// function resetLogInFormErrors() {
-//   const { errorMessageEmailNotValideLoginRef, errorMessageLogInRef, emailLogInRef, passwordLogInRef, errorMessagePasswordLogInRef } = getIdRefs();
-
-//   safeRemoveClass(errorMessageEmailNotValideLoginRef, 'd-flex');
-//   safeRemoveClass(errorMessageLogInRef, 'd-flex');
-//   safeRemoveClass(errorMessagePasswordLogInRef, 'd-flex');
-//   safeRemoveClass(emailLogInRef, 'not-valide-error');
-//   safeRemoveClass(passwordLogInRef, 'not-valide-error');
-// }
 
 /**
  * 
