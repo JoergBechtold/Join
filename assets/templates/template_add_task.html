@@ -4,7 +4,7 @@
     <div id="left_container" class="form-column left-container">
       <div class="form-group">
         <label for="title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
-        <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" />
+        <input id="title" class="input-base" type="text" name="title" placeholder="Enter a title" onblur="validateInputTitle()" />
         <div class="error-message-required d-none" id="error_message_title">This field is required</div>
       </div>
 

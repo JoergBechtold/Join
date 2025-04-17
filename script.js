@@ -292,6 +292,17 @@ function setAllPropertysForEditPopup() {
 }
 
 /**
+ * Validates the required task form inputs (title, date, category).
+ * @returns {boolean} True if all fields are valid, false otherwise.
+ */
+function isTaskFormValid() {
+  const titleValid = validateInputTitle();
+  const dateValid = validateInputDate();
+  const categoryValid = validateCategory();
+  return titleValid && dateValid && categoryValid;
+}
+
+/**
  * Decides which task submit function to call based on current context.
  * Calls `pushBoardTaskToFirebase()` for board popup, otherwise `checkandSubmit()`.
  */
@@ -299,17 +310,18 @@ function handleTaskSubmit() {
   const isBoardAddTask = document.getElementById('board_add_task');
   const isVisible = isBoardAddTask && isBoardAddTask.style.display !== 'none';
 
+  if (!isTaskFormValid()) return;
+
   if (isVisible) {
     pushBoardTaskToFirebase();
   } else {
-    checkandSubmit();
+    pushTaskToFirebase();
   }
 }
 
 function validateField(inputField) {
   if (!inputField.checkValidity()) {
     inputField.classList.add('not-valide-error');
-    // Hier müsstest du ggf. auch die zugehörige Fehlermeldung anzeigen
     const errorMessage = inputField.parentNode.querySelector('.error-message-log-in');
     if (errorMessage) {
       errorMessage.style.display = 'block';
