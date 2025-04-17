@@ -31,7 +31,7 @@ function getIdRefs() {
     errorMessageEmailNotValideLoginRef: document.getElementById('error_message_email_not_valide_login'),
     errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
-    errorMessagePasswordSignInRef: document.getElementById('error_message_password_sign_in'),
+    errorMessagePasswordSignInRef: document.getElementById('error_message_password_sign_up'),
     errorMessagePasswordLogInRef: document.getElementById('error_message_password_log_in'),
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
     errorMessageEmailRef: document.getElementById('error_message_email'),

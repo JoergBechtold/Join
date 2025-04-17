@@ -1,4 +1,4 @@
-.body-sign-in {
+.body-sign-up {
     position: relative;
     height: 100dvh;
     width: 100%;
@@ -308,7 +308,7 @@
     margin-right: 5px;
   }
   
-  .footer-sign-in {
+  .footer-sign-up {
    
     position: absolute;
     bottom: 50px;
@@ -320,7 +320,7 @@
     gap: 25px;
   }
   
-  .footer-sign-in a {
+  .footer-sign-up a {
     width: 105px;
     white-space: nowrap;
     cursor: pointer;
@@ -329,7 +329,7 @@
     font-weight: var(--font-weight-400);
   }
   
-  .footer-sign-in a:hover {
+  .footer-sign-up a:hover {
     font-weight: var(--font-weight-700);
     color: var(--blue);
     scale: var(--scale-hover);
@@ -495,7 +495,7 @@
   } */
   
   @media only screen and (max-width: 376px){
-    .sign-in-main{
+    .sign-up-main{
       transform: translateY(-40px);
     }
   
@@ -557,7 +557,7 @@
       width: 100%;
     }
     
-    .footer-sign-in {
+    .footer-sign-up {
       bottom: 24px;
       gap: 15px;
     }

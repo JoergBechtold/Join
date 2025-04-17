@@ -467,7 +467,7 @@ button[disabled]:hover {
 .error-message-email,
 .error-message-email-not-valide-sign-up,
 .error-message-email-not-valide-login,
-.error-message-password-sign-in,
+.error-message-password-sign-up,
 .error-message-password-log-in {
   position: absolute;
   top: 100%;
@@ -502,7 +502,7 @@ button[disabled]:hover {
   display: none;
 }
 
-.error-message-password-sign-in{
+.error-message-password-sign-up{
   display: none;
 }
 
