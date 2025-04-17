@@ -85,103 +85,6 @@
           </form>
         </div>
       </section>
-
-      <!-- sign up section -->
-      <!-- <section>
-        <div class="sign-up-container" id="sign_up_container">
-          <div class="headline-vector">
-            <div onclick="showLogIn()" class="arrow-left-sign-up">
-              <img src="assets/icons/arrow-left.svg" alt="Pfeil nach links" />
-            </div>
-            <h1>Sign up</h1>
-            <div class="vector-sign-up"></div>
-          </div>
-
-          <form novalidate onsubmit="handleSignUp(); return false;" class="form with-100-percent-max-width-422px" id="sign_up_form">
-            <label class="input-base-container" for="name">
-              <input
-                title="Please enter your first and last name with spaces in between."
-                class="input-base"
-                id="name_sign_up"
-                type="text"
-                placeholder="Firstname Lastname"
-                onblur="validateName(this);enableOrDisableSignUpButton()"
-              />
-              <span class="error-message-name" id="error_message_name">Please enter your first and last name.</span>
-              <div class="input-base-icon cursor-pointer">
-                <img src="assets/icons/gray-person.svg" alt="Personen Icon" />
-              </div>
-            </label>
-
-            <label class="input-base-container" for="email_sign-up">
-              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" placeholder="Email" onblur="validateEmail(this, true);enableOrDisableSignUpButton()"/>
-                <span class="error-message-email" id="error_message_email">Email address already exists.</span>
-                <span class="error-message-email-not-valide-sign-up" id="error_message_email_not_valide_sign_up">This is not a valid email address.</span>
-              <div class="input-base-icon cursor-pointer">
-                <img src="assets/icons/mail.svg" alt="Mail Icon" />
-              </div>
-            </label>
-
-            <label class="input-base-container" for="password_sign_up">
-              <input
-                title="Please enter your password."
-                minlength="8"
-                class="input-base"
-                id="password_sign_up"
-                type="password"
-                placeholder="Password"
-                onblur="validatePassword(this, true);enableOrDisableSignUpButton()"
-              />
-              <div class="input-base-icon cursor-pointer">
-                <img id="lock_icon_password_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
-                <img
-                  id="password_sign_up_visibility_eye_off_icon"
-                  class="visibility-eye-off-icon d-none"
-                  onclick="togglePasswordVisibility('password_sign_up', this)"
-                  src="assets/icons/visibility-eye-off.svg"
-                  alt="password visibility off"
-                />
-              </div>
-              <span class="error-message-password-sign-in" id="error_message_password_sign_in">Please enter more than 8 characters.</span>
-            </label>
-
-            <label class="input-base-container" for="confirm_sign_up">
-              <input
-                title="Please repeat your password."
-                minlength="8"
-                class="input-base"
-                id="confirm_sign_up"
-                type="password"
-                placeholder="Confirm Password"
-                onblur="checkPasswordConfirm(this);enableOrDisableSignUpButton()"
-              />
-              <div class="input-base-icon cursor-pointer">
-                <img id="lock_icon_confirm_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
-                <img
-                  id="confirm_sign_up_visibility_eye_off_icon"
-                  class="visibility-eye-off-icon d-none"
-                  onclick="togglePasswordVisibility('confirm_sign_up', this)"
-                  src="assets/icons/visibility-eye-off.svg"
-                  alt="password visibility off"
-                />
-              </div>
-              <span class="error-message-confirm-password" id="error_message_confirm_password">Your passwords don't match. Please try again.</span>
-            </label>
-
-            <div class="checkbox-accept-privacy-policy" id="checkbox_accept_privacy_policy">
-              <input class="input-checkbox" onclick="toggleCheckbox()" type="checkbox" id="checkbox" />
-              <label for="checkbox">
-                <img id="custom_checkmark" class="custom-checkmark" src="assets/icons/checkbox-empty.svg" alt="Checkbox not Checked" />
-                <span>I accept the</span><a href="privacy_policy.html">Privacy policy</a>
-              </label>
-            </div>
-
-            <div class="button-sign-up-container">
-              <button class="button-sign-up" id="sign_up_button" disabled>Sign up</button>
-            </div>
-          </form>
-        </div>
-      </section> -->
     </main>
 
     <nav class="nav-log-in" id="nav_log_in">
@@ -198,12 +101,6 @@
         <span>Legal Notice</span>
       </a>
     </footer>
-
-    <!-- <div id="popup_overlay_sign_up" class="popup-overlay-small-gray">
-      <div id="popup_sign_up" class="popup-small-gray">
-        <span>You Signed Up successfully</span>
-      </div>
-    </div> -->
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
