@@ -81,6 +81,8 @@ function openBoardAddTaskDefault() {
 
 /**
  * Creates a draggable task card container and appends it to the specified column.
+ * Prevents popup opening when clicking disabled dropdown items.
+ * 
  * @param {string} key - The unique identifier for the task.
  * @param {HTMLElement} container - The column (drag-area) where the task card will be placed.
  */
@@ -91,7 +93,15 @@ function createCardContainer(key, container) {
   cardDiv.draggable = true;
   cardDiv.ondragstart = startDragging;
   cardDiv.ondragend = endDragging;
-  cardDiv.setAttribute('onclick', `openPopup('${key}')`);
+  cardDiv.onclick = function (event) {
+    const target = event.target;
+    const isDropdown = target.closest('.dropdown-option');
+    const isDisabled = isDropdown?.classList.contains('disabled');
+    const isMenuButton = target.closest('.mobile-menu-icon');
+    if (!isMenuButton && (!isDropdown || (isDropdown && !isDisabled))) {
+      openPopup(key);
+    }
+  };  
   container.appendChild(cardDiv);
 }
 

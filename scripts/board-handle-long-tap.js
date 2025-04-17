@@ -1,15 +1,19 @@
 /**
  * Renders a mobile dropdown menu with direct move options to all board states.
  * Only shown on screens below 768px width.
+ * Prevents duplicate buttons and disables the current state option.
  * 
  * @param {string} key - The unique task ID.
  */
-function createMobileDropdownButton(key) {
+async function createMobileDropdownButton(key) {
   if (window.innerWidth >= 768) return;
+  const task = await loadData(`tasks/${key}`);
+  if (!task) return;
   const card = document.getElementById(key);
+  if (!card || card.querySelector('.mobile-menu-wrapper')) return;
   const wrapper = document.createElement('div');
   wrapper.className = 'mobile-menu-wrapper';
-  wrapper.innerHTML = generateMobileDropdownHTML(key);
+  wrapper.innerHTML = generateMobileDropdownHTML(key, task.state);
   card.appendChild(wrapper);
 }
 
@@ -21,6 +25,7 @@ function createMobileDropdownButton(key) {
  */
 function handleMobileMove(event, key, newState) {
   event.stopPropagation();
+  if (event.currentTarget.classList.contains('disabled')) return;
   moveTaskTo(key, newState);
 }
 

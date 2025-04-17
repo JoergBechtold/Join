@@ -506,6 +506,11 @@
     color: red;
 }
 
+.dropdown-option.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 @media screen and (max-width: 1440px) {
   /* .main-board {
     overflow-y: auto;
@@ -615,7 +620,6 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
-    overflow: hidden;
     text-overflow: ellipsis;
   }
 
