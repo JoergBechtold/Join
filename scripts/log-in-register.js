@@ -602,33 +602,22 @@ function toggleCheckbox(element = false) {
 
 /**
  * 
+ * @async
  * @function enableOrDisableSignUpButton
- * @description Enables or disables the sign-up button based on the validation status of the name, email, password,
- * confirm password fields, and the checked state of the terms and conditions checkbox.
- * It retrieves the necessary HTML element references using the `getIdRefs` function.
- * @returns {void} - This function does not return any value directly. It modifies the `disabled` property of the sign-up button.
+ * @description Asynchronously enables or disables the sign-up button based on the validation status of the sign-up input fields
+ * (name, email, password, confirm password), the checked state of the terms and conditions checkbox,
+ * and whether the entered email address already exists. It calls `validateSignUpInputs` to retrieve the validation statuses
+ * and `checkUserIsPresent` to check for existing users.
+ * @returns {void} - This function does not return a value directly but modifies the `disabled` property of the sign-up button.
  */
- async function enableOrDisableSignUpButton() {
-  const {
-    nameSignUpRef,
-    emailSignUpRef,
-    passwordSignUpRef,
-    confirmPasswordSignUpRef,
-    checkboxRef,
-    signUpButtonRef
-  } = getIdRefs();
-
-  const isNameValid = validateName(nameSignUpRef);
-  const isEmailValid = validateEmail(emailSignUpRef, true); 
-  const isPasswordValid = validatePassword(passwordSignUpRef, true);
-  const isConfirmValid = checkPasswordConfirm(confirmPasswordSignUpRef);
-  const isCheckboxChecked = checkboxRef.checked;
+async function enableOrDisableSignUpButton() {
+  const { signUpButtonRef } = getIdRefs();
+  const { isNameValid, isEmailValid, isPasswordValid, isConfirmValid, isCheckboxChecked } = validateSignUpInputs();
 
   let isEmailAlreadyExists = false;
 
-  
   if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isCheckboxChecked) {
-    isEmailAlreadyExists = await checkUserIsPresent(true); 
+    isEmailAlreadyExists = await checkUserIsPresent(true);
   }
 
   if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isCheckboxChecked && !isEmailAlreadyExists) {
@@ -636,6 +625,34 @@ function toggleCheckbox(element = false) {
   } else {
     signUpButtonRef.disabled = true;
   }
+}
+
+/**
+ * 
+ * @function validateSignUpInputs
+ * @description Retrieves references to the sign-up input fields and performs individual validation checks for name, email, password,
+ * confirm password, and the terms and conditions checkbox. It returns an object containing the boolean results of each validation.
+ * @returns {object} - An object containing the validation statuses for each input field:
+ * - `isNameValid`: Boolean indicating if the name input is valid.
+ * - `isEmailValid`: Boolean indicating if the email input is valid.
+ * - `isPasswordValid`: Boolean indicating if the password input is valid.
+ * - `isConfirmValid`: Boolean indicating if the confirm password input matches the password.
+ * - `isCheckboxChecked`: Boolean indicating if the terms and conditions checkbox is checked.
+ */
+function validateSignUpInputs() {
+  const { nameSignUpRef, emailSignUpRef, passwordSignUpRef, confirmPasswordSignUpRef, checkboxRef } = getIdRefs();
+  const isNameValid = validateName(nameSignUpRef);
+  const isEmailValid = validateEmail(emailSignUpRef, true);
+  const isPasswordValid = validatePassword(passwordSignUpRef, true);
+  const isConfirmValid = checkPasswordConfirm(confirmPasswordSignUpRef);
+  const isCheckboxChecked = checkboxRef.checked;
+  return {
+    isNameValid,
+    isEmailValid,
+    isPasswordValid,
+    isConfirmValid,
+    isCheckboxChecked,
+  };
 }
 
 /**
