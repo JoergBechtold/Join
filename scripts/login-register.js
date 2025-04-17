@@ -1,3 +1,4 @@
+
 /**
  * 
  * @function getIdRefs
@@ -179,7 +180,7 @@ function showLogIn() {
   signUpContainerRef.classList.remove('d-flex');
   navLogInRef.classList.remove('d-none');
   document.getElementById('sign_up_form').reset();
-  resetSignUpFormErrors()
+  resetSignUpFormErrors();
   signUpButtonRef.disabled = false;
 }
 
@@ -215,6 +216,7 @@ function togglePasswordVisibility(inputId, iconElement) {
  * It relies on `setIdRefValueTrim`, `checkNamePartsLength`, `createUserProfileDataFromParts`,
  * `checkPasswordConfirm`, `checkUserIsPresent`, `createUser`, and `handleSignUpSuccess` to perform its tasks.
  */
+
 async function handleSignUp() {
   const { name, email, password} = setIdRefValueTrim();
 
@@ -222,11 +224,8 @@ async function handleSignUp() {
     const nameParts = name.split(' ');
     const profileData = await createUserProfileDataFromParts(nameParts);
 
-    // if (!checkPasswordConfirm(password, confirmPassword)) return;
     if (!checkPasswordConfirm()) return;
 
-    
-  
     const isEmailPresent = await checkUserIsPresent(true);
 
     if (isEmailPresent) return; 
@@ -423,7 +422,7 @@ function validateEmail(emailInputField, boolean) {
   if (isValid) {
     clearEmailValidationErrors(isSignUp);
   }
-  signUpButtonRef.disabled = false;
+  // signUpButtonRef.disabled = false;
   return isValid;
 }
 
@@ -531,10 +530,10 @@ function validatePassword(passwordInputField, boolean) {
 
   if (boolean) {
     currentPasswordRef = passwordSignUpRef;
-    currentErrorMessageRef = errorMessagePasswordSignInRef; // Verwende die Sign-Up Fehlermeldung
+    currentErrorMessageRef = errorMessagePasswordSignInRef;
   } else {
     currentPasswordRef = passwordLogInRef;
-    currentErrorMessageRef = errorMessagePasswordLogInRef; // Verwende die Login Fehlermeldung
+    currentErrorMessageRef = errorMessagePasswordLogInRef; 
   }
 
   if (trimmedPassword === '') {
@@ -565,28 +564,6 @@ function validatePassword(passwordInputField, boolean) {
     return true;
   }
 }
-
-// function validatePassword (passwordInputField, boolean){
-//   const { passwordSignUpRef,errorMessagePasswordRef } = getIdRefs();
-//   const password = passwordInputField.value;
-//   const trimmedPassword = password.trim();
-
-//   if(trimmedPassword === ''){
-//     errorMessagePasswordRef.classList.remove('d-flex'); 
-//     passwordSignUpRef.classList.remove('not-valide-error'); 
-//     return false; 
-//   }
-
-//   if (trimmedPassword.length < 8) {
-//     errorMessagePasswordRef.classList.add('d-flex'); 
-//     passwordSignUpRef.classList.add('not-valide-error'); 
-//     return false;
-//   } else {
-//     errorMessagePasswordRef.classList.remove('d-flex'); 
-//     passwordSignUpRef.classList.remove('not-valide-error'); 
-//     return true; 
-//   }
-// }
 
 /**
  * 
@@ -638,11 +615,33 @@ function toggleCheckbox(element = false) {
   if (checkboxRef.checked) {
     customCheckmarkRef.src = 'assets/icons/checkbox-checked.svg';
     customCheckmarkRef.alt = 'Checkbox Checked';
-    signUpButtonRef.disabled = false;
+    // signUpButtonRef.disabled = false;
   } else {
     customCheckmarkRef.src = 'assets/icons/checkbox-empty.svg';
     customCheckmarkRef.alt = 'Checkbox not Checked';
-    signUpButtonRef.disabled = true;
+    // signUpButtonRef.disabled = true;
+  }
+  enableOrDisableSignUpButton();
+}
+
+function enableOrDisableSignUpButton() {
+  const nameInput = document.getElementById('name_sign_up');
+  const emailInput = document.getElementById('email_sign-up');
+  const passwordInput = document.getElementById('password_sign_up');
+  const confirmInput = document.getElementById('confirm_sign_up');
+  const checkbox = document.getElementById('checkbox');
+  const signUpButton = document.getElementById('sign_up_button');
+
+  const isNameValid = validateName(nameInput);
+  const isEmailValid = validateEmail(emailInput, false); 
+  const isPasswordValid = validatePassword(passwordInput, true);
+  const isConfirmValid = checkPasswordConfirm(confirmInput);
+  const isCheckboxChecked = checkbox.checked;
+
+  if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isCheckboxChecked) {
+    signUpButton.disabled = false;
+  } else {
+    signUpButton.disabled = true;
   }
 }
 
@@ -753,29 +752,35 @@ async function ifParameterFalse(parameter, user, userId) {
   return false; 
 }
 
+function safeRemoveClass(elementRef, className) {
+  if (elementRef && elementRef.classList.contains(className)) {
+    elementRef.classList.remove(className);
+  }
+}
+
 function resetSignUpFormErrors() {
   const { errorMessageNameRef, errorMessageEmailNotValideSignUpRef,
           errorMessagePasswordRef, errorMessageConfirmPasswordRef,
-          nameSignUpRef, emailSignUpRef, passwordSignUpRef } = getIdRefs();
+          nameSignUpRef, emailSignUpRef, passwordSignUpRef, confirmSignUpRef } = getIdRefs();
 
-  errorMessageNameRef.classList.remove('d-flex');
-  errorMessageEmailNotValideSignUpRef.classList.remove('d-flex');
-  errorMessagePasswordRef.classList.remove('d-flex');
-  errorMessageConfirmPasswordRef.classList.remove('d-flex');
-  nameSignUpRef.classList.remove('not-valide-error');
-  emailSignUpRef.classList.remove('not-valide-error');
-  passwordSignUpRef.classList.remove('not-valide-error');
-
+  safeRemoveClass(errorMessageNameRef, 'd-flex');
+  safeRemoveClass(errorMessageEmailNotValideSignUpRef, 'd-flex');
+  safeRemoveClass(errorMessagePasswordRef, 'd-flex');
+  safeRemoveClass(errorMessageConfirmPasswordRef, 'd-flex');
+  safeRemoveClass(nameSignUpRef, 'not-valide-error');
+  safeRemoveClass(emailSignUpRef, 'not-valide-error');
+  safeRemoveClass(passwordSignUpRef, 'not-valide-error');
+  safeRemoveClass(confirmSignUpRef, 'not-valide-error');
 }
 
 function resetLogInFormErrors() {
-  const { errorMessageEmailNotValideLoginRef, errorMessageLogInRef, emailLogInRef, passwordLogInRef,errorMessagePasswordLogInRef } = getIdRefs();
+  const { errorMessageEmailNotValideLoginRef, errorMessageLogInRef, emailLogInRef, passwordLogInRef, errorMessagePasswordLogInRef } = getIdRefs();
 
-  errorMessageEmailNotValideLoginRef.classList.remove('d-flex');
-  errorMessageLogInRef.classList.remove('d-flex');
-  errorMessagePasswordLogInRef.remove('d-flex');
-  emailLogInRef.classList.remove('not-valide-error');
-  passwordLogInRef.classList.remove('not-valide-error');
+  safeRemoveClass(errorMessageEmailNotValideLoginRef, 'd-flex');
+  safeRemoveClass(errorMessageLogInRef, 'd-flex');
+  safeRemoveClass(errorMessagePasswordLogInRef, 'd-flex');
+  safeRemoveClass(emailLogInRef, 'not-valide-error');
+  safeRemoveClass(passwordLogInRef, 'not-valide-error');
 }
 
 /**

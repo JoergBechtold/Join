@@ -108,7 +108,7 @@
                 type="text"
                 required
                 placeholder="Firstname Lastname"
-                onblur="validateName(this)"
+                onblur="validateName(this);enableOrDisableSignUpButton()"
               />
               <span class="error-message-name" id="error_message_name">Please enter your first and last name with spaces in between.</span>
               <div class="input-base-icon cursor-pointer">
@@ -117,7 +117,7 @@
             </label>
 
             <label class="input-base-container" for="email_sign-up">
-              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" required placeholder="Email" onblur="validateEmail(this, true)"/>
+              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" required placeholder="Email" onblur="validateEmail(this, true);enableOrDisableSignUpButton()"/>
                 <span class="error-message-email" id="error_message_email">Email address already exists.</span>
                 <span class="error-message-email-not-valide-sign-up" id="error_message_email_not_valide_sign_up">This is not a valid email address.</span>
               <div class="input-base-icon cursor-pointer">
@@ -134,7 +134,7 @@
                 type="password"
                 required
                 placeholder="Password"
-                onblur="validatePassword(this, true)"
+                onblur="validatePassword(this, true);enableOrDisableSignUpButton()"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_password_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
@@ -158,7 +158,7 @@
                 type="password"
                 required
                 placeholder="Confirm Password"
-                onblur="checkPasswordConfirm(this)"
+                onblur="checkPasswordConfirm(this);enableOrDisableSignUpButton()"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_confirm_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
