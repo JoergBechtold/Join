@@ -489,7 +489,7 @@ function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, error
  * @param {HTMLInputElement} passwordInputField - The HTML input element for the password.
  * @returns {boolean} Returns `false` if the password length is less than 8, and `true` otherwise.
  */
-function validatePassword (passwordInputField){
+function validatePassword (passwordInputField, boolean){
   const { passwordSignUpRef,errorMessagePasswordRef } = getIdRefs();
   const password = passwordInputField.value;
 
