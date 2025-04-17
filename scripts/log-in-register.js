@@ -1,4 +1,3 @@
-
 /**
  * 
  * @function getIdRefs
@@ -42,32 +41,38 @@ function getIdRefs() {
 }
 
 /**
- *
- * @function setIdRefValueTrim
- * @description Retrieves the trimmed values from specific input fields in the DOM and returns them as an object.
- * The `trim()` method is used to remove whitespace from both ends of the input values.
- * @returns {object} An object containing the trimmed values of various input fields.
  * 
+ * @function setIdRefValueTrimLogIn
+ * @description Retrieves the values from the email and password input fields in the login form,
+ * trims any leading or trailing whitespace, and returns them as an object.
+ * @returns {object} - An object containing the trimmed values of the login form fields:
+ * - `emailLogIn`: The trimmed value of the email input field.
+ * - `passwordLogIn`: The trimmed value of the password input field.
  */
 function setIdRefValueTrimLogIn() {
   return {
-    // name: document.getElementById('name_sign_up').value.trim(),
-    // email: document.getElementById('email_sign-up').value.trim(),
-    // password: document.getElementById('password_sign_up').value.trim(),
-    // confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
     emailLogIn: document.getElementById('email_log_in').value.trim(),
     passwordLogIn: document.getElementById('password_log_in').value.trim(),
   };
 }
 
+/**
+ * 
+ * @function setIdRefValueTrimSignUp
+ * @description Retrieves the values from the name, email, password, and confirm password input fields
+ * in the sign-up form, trims any leading or trailing whitespace from each, and returns them as an object.
+ * @returns {object} - An object containing the trimmed values of the sign-up form fields:
+ * - `name`: The trimmed value of the name input field.
+ * - `email`: The trimmed value of the email input field.
+ * - `password`: The trimmed value of the password input field.
+ * - `confirmPassword`: The trimmed value of the confirm password input field.
+ */
 function setIdRefValueTrimSignUp() {
   return {
     name: document.getElementById('name_sign_up').value.trim(),
     email: document.getElementById('email_sign-up').value.trim(),
     password: document.getElementById('password_sign_up').value.trim(),
     confirmPassword: document.getElementById('confirm_sign_up').value.trim(),
-    // emailLogIn: document.getElementById('email_log_in').value.trim(),
-    // passwordLogIn: document.getElementById('password_log_in').value.trim(),
   };
 }
 
@@ -240,7 +245,6 @@ async function createUserProfileDataFromParts(nameParts){
 function delayedRedirectAndReset(){
  setTimeout(() => {
       goToUrl('log_in.html');
-      // resetProberties();
       toggleCheckbox(true);
     }, 500);
 }
@@ -792,7 +796,6 @@ function showLoginError() {
     passwordLogInRef.classList.add('not-valide-error');
   }
 }
-
 
 /**
  * 
