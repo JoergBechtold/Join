@@ -110,23 +110,32 @@ function clearSelection() {
 }
 
 /**
- * Validates the title input field and displays an error message if it is empty.
+ * Validates the title input field and displays an error message if it is empty
+ * or if the title exceeds 40 characters.
  *
  * @returns {boolean} `true` if the title is valid, otherwise `false`.
  */
 function validateInputTitle() {
   const inputField = document.getElementById('title');
   const errorMessage = document.getElementById('error_message_title');
-  if (inputField.value.trim() === '') {
+  const value = inputField.value.trim();
+  if (value === '') {
+    errorMessage.textContent = 'This field is required';
     errorMessage.classList.remove('d-none');
     inputField.classList.add('red-border');
     return false;
-  } else {
-    errorMessage.classList.add('d-none');
-    inputField.classList.remove('red-border');
-    return true;
   }
+  if (value.length > 40) {
+    errorMessage.textContent = 'The title must not exceed 40 characters';
+    errorMessage.classList.remove('d-none');
+    inputField.classList.add('red-border');
+    return false;
+  }
+  errorMessage.classList.add('d-none');
+  inputField.classList.remove('red-border');
+  return true;
 }
+
 
 /**
  * Shows an error message for the input field.
