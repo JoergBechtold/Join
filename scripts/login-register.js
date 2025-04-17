@@ -26,7 +26,8 @@ function getIdRefs() {
     checkboxRef: document.getElementById('checkbox'),
     signUpButtonRef: document.getElementById('sign_up_button'),
     customCheckmarkRef: document.getElementById('custom_checkmark'),
-    errorMessageEmailNotValideRef: document.getElementById('error_message_email_not_valide'),
+    errorMessageEmailNotValideSignUpRef: document.getElementById('error_message_email_not_valide_sign_up'),
+    errorMessageEmailNotValideLoginRef: document.getElementById('error_message_email_not_valide_login'),
     errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
     errorMessagePasswordRef: document.getElementById('error_message_password'),
@@ -354,55 +355,92 @@ function validateName(nameInputField) {
  * 
  * @function validateEmail
  * @description Validates the format and whitespace of an email address entered in an input field.
- * It checks if the email has leading or trailing whitespace and if it matches a basic email format
- * using the `ifEmailPattern` function. Based on the validation results from `ifValidateEmailTrimmed`
- * and `ifEmailPattern`, it manages the visibility of error messages and the 'not-valide-error' class
- * on the email input field.
+ * It checks if the email has leading or trailing whitespace using `ifValidateEmailTrimmed`
+ * and if it matches a basic email format using `ifEmailPattern`. Based on the validation
+ * results, it manages the visibility of error messages and the 'not-valide-error' class
+ * on the relevant email input field (sign-up or login).
  * @param {HTMLInputElement} emailInputField - The HTML input element for the email address.
- * @returns {boolean} `true` if the email is valid (no leading/trailing whitespace and matches the format),
- * `false` otherwise.
+ * @param {boolean} boolean - A boolean flag indicating whether the validation is for the
+ * sign-up form (`true`) or the login form (`false`), determining which error messages
+ * and input field to target.
+ * @returns {boolean} `true` if the email is valid (no leading/trailing whitespace and
+ * matches the format), `false` otherwise.
  */
-function validateEmail(emailInputField) {
-  const { emailSignUpRef, errorMessageEmailRef, errorMessageEmailNotValideRef } = getIdRefs();
+function validateEmail(emailInputField, boolean) {
+  const { emailSignUpRef, emailLogInRef, errorMessageEmailRef, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef } = getIdRefs();
   const email = emailInputField.value;
   const trimmedEmail = email.trim();
   let isValid = true;
+  let currentEmailRef;
+  const isSignUp = boolean;
 
-  if (!ifValidateEmailTrimmed(email, trimmedEmail, errorMessageEmailNotValideRef, errorMessageEmailRef, emailSignUpRef)) {
+  if (boolean) {
+    currentEmailRef = emailSignUpRef;
+  } else {
+    currentEmailRef = emailLogInRef;
+  }
+
+  if (!ifValidateEmailTrimmed(email, trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) {
     isValid = false;
   }
 
-  if (!ifEmailPattern(trimmedEmail, errorMessageEmailNotValideRef, errorMessageEmailRef, emailSignUpRef)) {
+  if (!ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) {
     isValid = false;
   }
 
   if (isValid) {
-    errorMessageEmailNotValideRef.classList.remove('d-flex');
-    errorMessageEmailRef.classList.remove('d-flex');
-    emailSignUpRef.classList.remove('not-valide-error');
+    clearEmailValidationErrors(isSignUp);
   }
   return isValid;
 }
 
 /**
  * 
+ * @function clearEmailValidationErrors
+ * @description Removes the display style and error class from email validation error messages and the corresponding email input field.
+ * It differentiates between sign-up and login forms to target the correct error message and input field.
+ * @param {boolean} isSignUp - A boolean flag indicating whether the validation context is for the sign-up form (`true`) or the login form (`false`).
+ */
+function clearEmailValidationErrors(isSignUp) {
+  const { errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, emailSignUpRef, emailLogInRef } = getIdRefs();
+  errorMessageEmailNotValideSignUpRef.classList.remove('d-flex');
+  errorMessageEmailNotValideLoginRef.classList.remove('d-flex');
+  errorMessageEmailRef.classList.remove('d-flex');
+  if (isSignUp) {
+    emailSignUpRef.classList.remove('not-valide-error');
+  } else {
+    emailLogInRef.classList.remove('not-valide-error');
+  }
+}
+
+/**
+ * 
  * @function ifValidateEmailTrimmed
  * @description Checks if the original email input value has leading or trailing whitespace
- * compared to its trimmed version. If whitespace is present, it displays an error message
- * indicating an invalid email format (due to whitespace), hides a generic email error message,
- * and adds a 'not-valide-error' class to the email input field.
+ * compared to its trimmed version. If whitespace is present, it displays a specific
+ * "not valid email" error message (either for sign-up or login based on the boolean flag),
+ * hides a generic email error message, and adds a 'not-valide-error' class to the
+ * provided email input field reference.
  * @param {string} email - The original value of the email input field.
  * @param {string} trimmedEmail - The trimmed value of the email input field (whitespace removed).
- * @param {HTMLElement} errorMessageEmailNotValideRef - The DOM element for the specific "not valid email" error message.
+ * @param {HTMLElement} errorMessageEmailNotValideSignUpRef - The DOM element for the specific "not valid email" error message for sign-up.
+ * @param {HTMLElement} errorMessageEmailNotValideLoginRef - The DOM element for the specific "not valid email" error message for login.
  * @param {HTMLElement} errorMessageEmailRef - The DOM element for a generic email error message.
- * @param {HTMLElement} emailSignUpRef - The DOM element for the email input field.
+ * @param {HTMLElement} emailRef - The DOM element for the email input field to which the 'not-valide-error' class might be added.
+ * @param {boolean} boolean - A boolean flag indicating whether the validation is for the sign-up (true) or login (false) form, determining which specific error message to show.
  * @returns {boolean} `false` if leading or trailing whitespace is detected, `true` otherwise.
  */
-function ifValidateEmailTrimmed(email,trimmedEmail,errorMessageEmailNotValideRef,errorMessageEmailRef,emailSignUpRef){
+function ifValidateEmailTrimmed(email, trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, emailRef, boolean) {
   if (email !== trimmedEmail) {
-    errorMessageEmailNotValideRef.classList.add('d-flex');
-    errorMessageEmailRef.classList.remove('d-flex'); 
-    emailSignUpRef.classList.add('not-valide-error');
+    if (boolean) {
+      errorMessageEmailNotValideSignUpRef.classList.add('d-flex');
+    } else {
+      errorMessageEmailNotValideLoginRef.classList.add('d-flex');
+    }
+    errorMessageEmailRef.classList.remove('d-flex');
+    if (emailRef) {
+      emailRef.classList.add('not-valide-error');
+    }
     return false;
   }
   return true;
@@ -413,20 +451,29 @@ function ifValidateEmailTrimmed(email,trimmedEmail,errorMessageEmailNotValideRef
  * @function ifEmailPattern
  * @description Checks if the provided trimmed email address matches a basic email format
  * using a regular expression. If the format is invalid, it displays a specific
- * "not valid email" error message, hides a generic email error message, and adds
- * a 'not-valide-error' class to the email input field.
+ * "not valid email" error message (either for sign-up or login based on the boolean flag),
+ * hides a generic email error message, and adds a 'not-valide-error' class to the
+ * provided email input field reference.
  * @param {string} trimmedEmail - The trimmed value of the email input field (whitespace removed).
- * @param {HTMLElement} errorMessageEmailNotValideRef - The DOM element for the specific "not valid email" error message.
+ * @param {HTMLElement} errorMessageEmailNotValideSignUpRef - The DOM element for the specific "not valid email" error message for sign-up.
+ * @param {HTMLElement} errorMessageEmailNotValideLoginRef - The DOM element for the specific "not valid email" error message for login.
  * @param {HTMLElement} errorMessageEmailRef - The DOM element for a generic email error message.
- * @param {HTMLElement} emailSignUpRef - The DOM element for the email input field.
+ * @param {HTMLElement} emailRef - The DOM element for the email input field to which the 'not-valide-error' class might be added.
+ * @param {boolean} boolean - A boolean flag indicating whether the validation is for the sign-up (true) or login (false) form, determining which specific error message to show.
  * @returns {boolean} `false` if the trimmed email does not match the required pattern, `true` otherwise.
  */
-function ifEmailPattern(trimmedEmail,errorMessageEmailNotValideRef,errorMessageEmailRef,emailSignUpRef){
+function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, emailRef, boolean) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(trimmedEmail)) {
-    errorMessageEmailNotValideRef.classList.add('d-flex');
+    if (boolean) {
+      errorMessageEmailNotValideSignUpRef.classList.add('d-flex');
+    } else {
+      errorMessageEmailNotValideLoginRef.classList.add('d-flex');
+    }
     errorMessageEmailRef.classList.remove('d-flex');
-    emailSignUpRef.classList.add('not-valide-error');
+    if (emailRef) {
+      emailRef.classList.add('not-valide-error');
+    }
     return false;
   }
   return true;

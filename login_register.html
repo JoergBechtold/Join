@@ -48,11 +48,11 @@
 
           <form id="login_form" onsubmit="checkUserIsPresent(); return false;" class="form with-100-percent-max-width-422px">
             <label class="input-base-container" for="email_log_in">
-              <input title="Please enter your email address" class="input-base" id="email_log_in" type="email" required placeholder="Email" onblur="validateField(this)" />
+              <input title="Please enter your email address" class="input-base" id="email_log_in" type="email" required placeholder="Email" onblur="validateEmail(this, false)" />
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
-              <!-- <span class="error-message-email-not-valide" id="error_message_email_not_valide">This is not a valid email address.</span> -->
+              <span class="error-message-email-not-valide-login" id="error_message_email_not_valide_login">This is not a valid email address.</span>
 
             </label>
 
@@ -65,7 +65,7 @@
                 type="password"
                 required
                 placeholder="Password"
-                onblur="validateField(this)"
+                onblur="validatePassword(this)"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
@@ -117,9 +117,9 @@
             </label>
 
             <label class="input-base-container" for="email_sign-up">
-              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" required placeholder="Email" onblur="validateEmail(this)"/>
+              <input title="Please enter your email address" class="input-base" id="email_sign-up" type="email" required placeholder="Email" onblur="validateEmail(this, true)"/>
                 <span class="error-message-email" id="error_message_email">Email address already exists.</span>
-                <span class="error-message-email-not-valide" id="error_message_email_not_valide">This is not a valid email address.</span>
+                <span class="error-message-email-not-valide-sign-up" id="error_message_email_not_valide_sign_up">This is not a valid email address.</span>
               <div class="input-base-icon cursor-pointer">
                 <img src="assets/icons/mail.svg" alt="Mail Icon" />
               </div>
@@ -134,7 +134,7 @@
                 type="password"
                 required
                 placeholder="Password"
-                onblur="validatePassword (this)"
+                onblur="validatePassword(this)"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_password_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />

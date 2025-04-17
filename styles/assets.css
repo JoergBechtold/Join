@@ -465,14 +465,16 @@ button[disabled]:hover {
 .error-message-confirm-password,
 .error-message-log-in,
 .error-message-email,
-.error-message-email-not-valide,
+.error-message-email-not-valide-sign-up,
+.error-message-email-not-valide-login,
 .error-message-password {
   position: absolute;
-  top: 115%;
+  top: 100%;
   left: 0;
   color: red;
   font-size: var(--font-size-12);
   font-weight: var(--font-weight-400);
+  white-space: nowrap;
 }
 
 .error-message-name {
@@ -491,7 +493,11 @@ button[disabled]:hover {
   display: none;
 }
 
-.error-message-email-not-valide{
+.error-message-email-not-valide-sign-up{
+  display: none;
+}
+
+.error-message-email-not-valide-login{
   display: none;
 }
 
