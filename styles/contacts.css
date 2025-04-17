@@ -199,7 +199,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(150%, -50%); /* Startposition: außerhalb rechts */
+  transform: translate(350%, -50%); /* Startposition: außerhalb rechts */
   height: 592px;
   border-radius: 30px;
   display: flex;
@@ -789,22 +789,13 @@ input.invalid {
     .container-edit {
       width: 600px;
       bottom: -100%;
-      transform: translate(-50%, 0);
       border: 1px solid rgba(42, 54, 71, 1);
       flex-direction: column; 
-      transition: bottom 0.3s ease-in;
-    }
-  
-    .container-add.active,
-    .container-edit.active {
-      top: 50%;
-      transform: translate(-50%, -50%); /* Ziel: zentriert */
     }
   
     .container-add.close,
     .container-edit.close {
-      top: 100%;
-      transform: translate(-50%, 0); /* Zurück nach unten */
+      transform: translate(150%, -50%); /* Raus-Animation nach rechts */
     }
 
     .left-section {

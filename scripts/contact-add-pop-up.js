@@ -160,38 +160,26 @@ function showAddContactPopup() {
   pop.classList.remove('hidden');
   setTimeout(() => {
     pop.classList.add('active');
-  }, 10); 
+  }, 100); 
   document.querySelector('.overlay').classList.add('active');
 }
 
 function closeAddContactPopup() {
   const addPopup = document.querySelector('.container-add');
-  const overlay = document.querySelector('.overlay');
-  const inputs = addPopup.querySelectorAll('input');
-  const errorMessages = addPopup.querySelectorAll('.name-error, .email-error, .phone-error');
+  const editPopup = document.querySelector('.container-edit');
 
-  // 1. Felder leeren
-  inputs.forEach(input => {
-    input.value = '';
-    input.dataset.touched = 'false'; // auch zurücksetzen
+  [addPopup, editPopup].forEach((popup) => {
+    if (popup) {
+      popup.classList.add('close'); 
+
+      setTimeout(() => {
+        popup.classList.add('hidden');
+        popup.classList.remove('close'); 
+      }, 200); 
+    }
   });
 
-  // 2. Fehlermeldungen entfernen
-  errorMessages.forEach(msg => msg.remove());
-
-  // 3. Popup schließen mit Animation
-  addPopup.classList.add('close');
-
-  setTimeout(() => {
-    addPopup.classList.add('hidden');
-    addPopup.classList.remove('active', 'close');
-
-    // 4. Kontakte neu laden und Validierung erneut auslösen
-    checkInputs();
-  }, 200);
-
-  // 5. Overlay ausblenden
-  overlay.classList.remove('active');
+  document.querySelector('.overlay').classList.remove('active');
 }
 
 
@@ -202,7 +190,7 @@ function closeEditContactPopup() {
 
     setTimeout(() => {
       editPopup.classList.add('hidden');
-      editPopup.classList.remove('active', 'close');
+      editPopup.classList.remove('close');
     }, 200);
   }
 
