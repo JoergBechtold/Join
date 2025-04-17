@@ -83,10 +83,22 @@ function createPhoneAndEmailLink(parentElement, linkText, linkHref) {
  * @param {HTMLElement} contactDiv - The contact element whose details will be shown.
  */
 function showContactDetails(contactDiv) {
+  const isLargeScreen = window.innerWidth > 1087;
+  const isAlreadyActive = contactDiv && contactDiv.classList.contains("active-contact");
+  const detailPanel = document.querySelector(".contact-detail");
+
+  if (isAlreadyActive && isLargeScreen) {
+    contactDiv.classList.remove("active-contact");
+    activeContact = null;
+    detailPanel.classList.remove("visible");
+    return;
+  }
+
   if (activateContact(contactDiv)) {
     updateContactDetailPanel(contactDiv);
   }
 }
+
 
 /**
  * Event handler for clicks on the contact list.
