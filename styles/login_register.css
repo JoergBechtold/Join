@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  max-width: 1920px;
+  justify-self: center;
 }
 
 .animations-logo-overlay {

@@ -30,7 +30,8 @@ function getIdRefs() {
     errorMessageEmailNotValideLoginRef: document.getElementById('error_message_email_not_valide_login'),
     errorMessageNameRef: document.getElementById('error_message_name'),
     errorMessageLogInRef: document.getElementById('error_message_log_in'),
-    errorMessagePasswordRef: document.getElementById('error_message_password'),
+    errorMessagePasswordSignInRef: document.getElementById('error_message_password_sign_in'),
+    errorMessagePasswordLogInRef: document.getElementById('error_message_password_log_in'),
     errorMessageConfirmPasswordRef: document.getElementById('error_message_confirm_password'),
     errorMessageEmailRef: document.getElementById('error_message_email'),
     popupOverlaySignUpRef: document.getElementById('popup_overlay_sign_up'),
@@ -128,10 +129,12 @@ function addFadeInAnimation(element) {
  * It also calls the `removeAnimation` function, presumably to clear any existing animations.
  */
 function showSignUp() {
-  const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
+  const {loginFormRef, navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
   loginContainerRef.classList.add('d-none');
   navLogInRef.classList.add('d-none');
   signUpContainerRef.classList.add('d-flex');
+  loginFormRef.reset();
+  resetLogInFormErrors()
   removeAnimation();
 }
 
@@ -171,10 +174,13 @@ function removeOpacity() {
  * @description Displays the login container and navigation elements while hiding the sign-up container.
  */
 function showLogIn() {
-  const { navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
+  const {signUpButtonRef, navLogInRef, loginContainerRef, signUpContainerRef } = getIdRefs();
   loginContainerRef.classList.remove('d-none');
   signUpContainerRef.classList.remove('d-flex');
   navLogInRef.classList.remove('d-none');
+  document.getElementById('sign_up_form').reset();
+  resetSignUpFormErrors()
+  signUpButtonRef.disabled = false;
 }
 
 /**
@@ -210,13 +216,16 @@ function togglePasswordVisibility(inputId, iconElement) {
  * `checkPasswordConfirm`, `checkUserIsPresent`, `createUser`, and `handleSignUpSuccess` to perform its tasks.
  */
 async function handleSignUp() {
-  const { name, email, password, confirmPassword } = setIdRefValueTrim();
+  const { name, email, password} = setIdRefValueTrim();
 
   try {
     const nameParts = name.split(' ');
     const profileData = await createUserProfileDataFromParts(nameParts);
 
-    if (!checkPasswordConfirm(password, confirmPassword)) return;
+    // if (!checkPasswordConfirm(password, confirmPassword)) return;
+    if (!checkPasswordConfirm()) return;
+
+    
   
     const isEmailPresent = await checkUserIsPresent(true);
 
@@ -309,15 +318,28 @@ function checkNamePartsLength(nameParts) {
  * @param {string} confirmPassword - The value of the confirm password input field.
  * @returns {boolean} - Returns `true` if the `password` and `confirmPassword` values are identical, and `false` otherwise.
  */
-function checkPasswordConfirm(password, confirmPassword) {
+function checkPasswordConfirm() {
+  const { password, confirmPassword } = setIdRefValueTrim();
   const { errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
+
+  if (confirmPassword === "") {
+    errorMessageConfirmPasswordRef.classList.remove('d-flex');
+    confirmPasswordSignUpRef.classList.remove('not-valide-error');
+    passwordSignUpRef.classList.remove('not-valide-error'); 
+    return true; 
+  }
+
   if (password !== confirmPassword) {
     errorMessageConfirmPasswordRef.classList.add('d-flex');
     passwordSignUpRef.classList.add('not-valide-error');
     confirmPasswordSignUpRef.classList.add('not-valide-error');
     return false;
+  } else {
+    errorMessageConfirmPasswordRef.classList.remove('d-flex');
+    confirmPasswordSignUpRef.classList.remove('not-valide-error');
+    passwordSignUpRef.classList.remove('not-valide-error'); 
+    return true;
   }
-  return true;
 }
 
 /**
@@ -334,17 +356,22 @@ function checkPasswordConfirm(password, confirmPassword) {
  * and consists of exactly two parts), `false` otherwise.
  */
 function validateName(nameInputField) {
+  const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
   const name = nameInputField.value;
   const trimmedName = name.trim();
   const nameParts = trimmedName.split(/\s+/).filter(part => part !== '');
 
+  if(trimmedName === ''){
+    errorMessageNameRef.classList.remove('d-flex');
+    nameSignUpRef.classList.remove('not-valide-error');
+    return false;
+  }
+
   if (name !== trimmedName || nameParts.length !== 2) {
-    const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
     errorMessageNameRef.classList.add('d-flex');
     nameSignUpRef.classList.add('not-valide-error');
     return false;
   } else {
-    const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
     errorMessageNameRef.classList.remove('d-flex');
     nameSignUpRef.classList.remove('not-valide-error');
     return true;
@@ -367,7 +394,7 @@ function validateName(nameInputField) {
  * matches the format), `false` otherwise.
  */
 function validateEmail(emailInputField, boolean) {
-  const { emailSignUpRef, emailLogInRef, errorMessageEmailRef, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef } = getIdRefs();
+  const {signUpButtonRef, emailSignUpRef, emailLogInRef, errorMessageEmailRef, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef } = getIdRefs();
   const email = emailInputField.value;
   const trimmedEmail = email.trim();
   let isValid = true;
@@ -384,6 +411,11 @@ function validateEmail(emailInputField, boolean) {
     isValid = false;
   }
 
+  if(trimmedEmail === ''){
+    clearEmailValidationErrors(isSignUp);
+    return false;
+  }
+
   if (!ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) {
     isValid = false;
   }
@@ -391,6 +423,7 @@ function validateEmail(emailInputField, boolean) {
   if (isValid) {
     clearEmailValidationErrors(isSignUp);
   }
+  signUpButtonRef.disabled = false;
   return isValid;
 }
 
@@ -489,20 +522,71 @@ function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, error
  * @param {HTMLInputElement} passwordInputField - The HTML input element for the password.
  * @returns {boolean} Returns `false` if the password length is less than 8, and `true` otherwise.
  */
-function validatePassword (passwordInputField, boolean){
-  const { passwordSignUpRef,errorMessagePasswordRef } = getIdRefs();
+function validatePassword(passwordInputField, boolean) {
+  const { passwordSignUpRef, passwordLogInRef, errorMessagePasswordLogInRef, errorMessagePasswordSignInRef } = getIdRefs();
   const password = passwordInputField.value;
+  const trimmedPassword = password.trim();
+  let currentPasswordRef;
+  let currentErrorMessageRef;
 
-  if (password.length < 8) {
-    errorMessagePasswordRef.classList.add('d-flex'); 
-    passwordSignUpRef.classList.add('not-valide-error'); 
+  if (boolean) {
+    currentPasswordRef = passwordSignUpRef;
+    currentErrorMessageRef = errorMessagePasswordSignInRef; // Verwende die Sign-Up Fehlermeldung
+  } else {
+    currentPasswordRef = passwordLogInRef;
+    currentErrorMessageRef = errorMessagePasswordLogInRef; // Verwende die Login Fehlermeldung
+  }
+
+  if (trimmedPassword === '') {
+    if (currentErrorMessageRef) {
+      currentErrorMessageRef.classList.remove('d-flex');
+    }
+    if (currentPasswordRef) {
+      currentPasswordRef.classList.remove('not-valide-error');
+    }
+    return true;
+  }
+
+  if (trimmedPassword.length < 8) {
+    if (currentErrorMessageRef) {
+      currentErrorMessageRef.classList.add('d-flex');
+    }
+    if (currentPasswordRef) {
+      currentPasswordRef.classList.add('not-valide-error');
+    }
     return false;
   } else {
-    errorMessagePasswordRef.classList.remove('d-flex'); 
-    passwordSignUpRef.classList.remove('not-valide-error'); 
-    return true; 
+    if (currentErrorMessageRef) {
+      currentErrorMessageRef.classList.remove('d-flex');
+    }
+    if (currentPasswordRef) {
+      currentPasswordRef.classList.remove('not-valide-error');
+    }
+    return true;
   }
 }
+
+// function validatePassword (passwordInputField, boolean){
+//   const { passwordSignUpRef,errorMessagePasswordRef } = getIdRefs();
+//   const password = passwordInputField.value;
+//   const trimmedPassword = password.trim();
+
+//   if(trimmedPassword === ''){
+//     errorMessagePasswordRef.classList.remove('d-flex'); 
+//     passwordSignUpRef.classList.remove('not-valide-error'); 
+//     return false; 
+//   }
+
+//   if (trimmedPassword.length < 8) {
+//     errorMessagePasswordRef.classList.add('d-flex'); 
+//     passwordSignUpRef.classList.add('not-valide-error'); 
+//     return false;
+//   } else {
+//     errorMessagePasswordRef.classList.remove('d-flex'); 
+//     passwordSignUpRef.classList.remove('not-valide-error'); 
+//     return true; 
+//   }
+// }
 
 /**
  * 
@@ -559,24 +643,6 @@ function toggleCheckbox(element = false) {
     customCheckmarkRef.src = 'assets/icons/checkbox-empty.svg';
     customCheckmarkRef.alt = 'Checkbox not Checked';
     signUpButtonRef.disabled = true;
-  }
-}
-
-/**
- * 
- * @function passwordMatch
- * @description Checks if the values of two password input fields match.
- * If the passwords do not match, it adds the 'd-flex' class to the error message associated with the confirm password field to make it visible.
- * @param {HTMLInputElement} password - The HTML input element for the primary password.
- * @param {HTMLInputElement} confirmPassword - The HTML input element for the password confirmation.
- * @returns {boolean} - Returns `false` if the password values do not match, and implicitly `undefined` (which evaluates to false in a boolean context) if they do match and the error message is not shown. Note: It does not explicitly return `true` when passwords match.
- */
-function passwordMatch(password, confirmPassword) {
-  const { errorMessageConfirmPasswordRef } = getIdRefs();
-
-  if (!password.value === confirmPassword.value) {
-    errorMessageConfirmPasswordRef.classList.add('d-flex');
-    return false;
   }
 }
 
@@ -685,6 +751,31 @@ async function ifParameterFalse(parameter, user, userId) {
     }
   }
   return false; 
+}
+
+function resetSignUpFormErrors() {
+  const { errorMessageNameRef, errorMessageEmailNotValideSignUpRef,
+          errorMessagePasswordRef, errorMessageConfirmPasswordRef,
+          nameSignUpRef, emailSignUpRef, passwordSignUpRef } = getIdRefs();
+
+  errorMessageNameRef.classList.remove('d-flex');
+  errorMessageEmailNotValideSignUpRef.classList.remove('d-flex');
+  errorMessagePasswordRef.classList.remove('d-flex');
+  errorMessageConfirmPasswordRef.classList.remove('d-flex');
+  nameSignUpRef.classList.remove('not-valide-error');
+  emailSignUpRef.classList.remove('not-valide-error');
+  passwordSignUpRef.classList.remove('not-valide-error');
+
+}
+
+function resetLogInFormErrors() {
+  const { errorMessageEmailNotValideLoginRef, errorMessageLogInRef, emailLogInRef, passwordLogInRef,errorMessagePasswordLogInRef } = getIdRefs();
+
+  errorMessageEmailNotValideLoginRef.classList.remove('d-flex');
+  errorMessageLogInRef.classList.remove('d-flex');
+  errorMessagePasswordLogInRef.remove('d-flex');
+  emailLogInRef.classList.remove('not-valide-error');
+  passwordLogInRef.classList.remove('not-valide-error');
 }
 
 /**

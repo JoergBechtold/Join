@@ -69,7 +69,6 @@
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
-
                 <img
                   id="visibility_eye_off_icon"
                   class="visibility-eye-off-icon d-none"
@@ -78,6 +77,7 @@
                   alt="password visibility off"
                 />
               </div>
+              <span class="error-message-password-log-in" id="error_message_password_log_in">Please enter more than 8 characters.</span>
               <span class="error-message-log-in" id="error_message_log_in">Check your email and password. Please try again.</span>
             </label>
             <div class="button-container">
@@ -146,7 +146,7 @@
                   alt="password visibility off"
                 />
               </div>
-              <span class="error-message-password" id="error_message_password">Please enter more than 8 characters.</span>
+              <span class="error-message-password-sign-in" id="error_message_password_sign_in">Please enter more than 8 characters.</span>
             </label>
 
             <label class="input-base-container" for="confirm_sign_up">
@@ -158,6 +158,7 @@
                 type="password"
                 required
                 placeholder="Confirm Password"
+                onblur="checkPasswordConfirm(this)"
               />
               <div class="input-base-icon cursor-pointer">
                 <img id="lock_icon_confirm_sign_up" class="lock-icon" src="assets/icons/lock.svg" alt="Lock Icon" />
