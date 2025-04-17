@@ -231,7 +231,7 @@
 .cards-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  /* -webkit-line-clamp: 2; */
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 16px;
@@ -613,14 +613,6 @@
 
   .todo-card {
     height: 244px;
-  }
-
-  .cards-title,
-  .cards-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    text-overflow: ellipsis;
   }
 
   .drag-area::-webkit-scrollbar {
