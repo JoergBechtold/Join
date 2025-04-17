@@ -83,3 +83,75 @@ async function moveTo(state) {
   await renderCards();
   updateEmptyColumns();
 }
+
+/**
+ * Renders a mobile dropdown menu with direct move options to all board states.
+ * Only shown on screens below 768px width.
+ * Prevents duplicate buttons and disables the current state option.
+ * 
+ * @param {string} key - The unique task ID.
+ */
+async function createMobileDropdownButton(key) {
+  if (window.innerWidth >= 768) return;
+  const task = await loadData(`tasks/${key}`);
+  if (!task) return;
+  const card = document.getElementById(key);
+  if (!card || card.querySelector('.mobile-menu-wrapper')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'mobile-menu-wrapper';
+  wrapper.innerHTML = generateMobileDropdownHTML(key, task.state);
+  card.appendChild(wrapper);
+}
+
+/**
+ * Handles mobile dropdown move without triggering popup open.
+ * @param {Event} event - The click event.
+ * @param {string} key - Task ID.
+ * @param {string} newState - New task state.
+ */
+function handleMobileMove(event, key, newState) {
+  event.stopPropagation();
+  if (event.currentTarget.classList.contains('disabled')) return;
+  moveTaskTo(key, newState);
+}
+
+/**
+ * Moves a task to a new column by updating its state and re-rendering the board.
+ * @param {string} key - The unique task ID.
+ * @param {string} newState - The new state to assign (e.g., 'done').
+ */
+async function moveTaskTo(key, newState) {
+  const task = await loadData(`tasks/${key}`);
+  if (!task) return;
+  task.state = newState;
+  await updateData(`tasks/${key}`, task);
+  await renderCards();
+}
+
+/**
+ * Ensures mobile dropdown buttons are shown only on small screens.
+ * Adds or removes them depending on screen width.
+ */
+function updateMobileDropdowns() {
+  const cards = document.querySelectorAll('.todo-card');
+  cards.forEach(card => {
+    const wrapper = card.querySelector('.mobile-menu-wrapper');
+    const taskId = card.id;
+
+    if (window.innerWidth < 768 && !wrapper) {
+      createMobileDropdownButton(taskId);
+    }
+
+    if (window.innerWidth >= 768 && wrapper) {
+      wrapper.remove();
+    }
+  });
+}
+
+/**
+ * Closes any open mobile dropdown if user clicks outside.
+ */
+function closeAllDropdowns() {
+  const all = document.querySelectorAll(".mobile-dropdown");
+  all.forEach((d) => d.classList.add("d-none"));
+}

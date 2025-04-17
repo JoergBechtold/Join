@@ -95,13 +95,13 @@ function createCardContainer(key, container) {
   cardDiv.ondragend = endDragging;
   cardDiv.onclick = function (event) {
     const target = event.target;
-    const isDropdown = target.closest('.dropdown-option');
-    const isDisabled = isDropdown?.classList.contains('disabled');
     const isMenuButton = target.closest('.mobile-menu-icon');
-    if (!isMenuButton && (!isDropdown || (isDropdown && !isDisabled))) {
+    const isInDropdown = target.closest('.mobile-dropdown');
+    if (!isMenuButton && !isInDropdown) {
       openPopup(key);
     }
-  };  
+  };
+  
   container.appendChild(cardDiv);
 }
 
