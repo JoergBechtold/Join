@@ -545,6 +545,10 @@
     overflow: auto;
   }
 
+  .main-board::-webkit-scrollbar {
+    width: var(--scollbar-width-thin);
+  }
+
   .main-board.no-scroll {
     overflow-y: hidden !important;
   }  
@@ -685,12 +689,17 @@
     margin-left: 0;
     margin-right: 0px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 0;
     padding-bottom: 80px;
   }
 
   .column-title {
     width: 100%;
+    padding-right: 20px;
+  }
+
+  .headline-input-container{
+    padding-right: 20px;
   }
 
   .board-responsive-plus-button {
