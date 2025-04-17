@@ -322,7 +322,6 @@ function handleTaskSubmit() {
 function validateField(inputField) {
   if (!inputField.checkValidity()) {
     inputField.classList.add('not-valide-error');
-    // Hier müsstest du ggf. auch die zugehörige Fehlermeldung anzeigen
     const errorMessage = inputField.parentNode.querySelector('.error-message-log-in');
     if (errorMessage) {
       errorMessage.style.display = 'block';
