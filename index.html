@@ -20,10 +20,10 @@
     <link rel="stylesheet" href="styles/edit_popup.css">
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Checks whether the user is logged in. If not then links to login_register.html -->
+    <!-- Checks whether the user is logged in. If not then links to log_in.html -->
     <script>
       if (sessionStorage.getItem('loggedIn') === null) {
-          window.location.href = 'login_register.html';
+          window.location.href = 'log_in.html';
       }
   </script>
 
@@ -253,7 +253,7 @@
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
     <script src="scripts/firebase.js"></script>
     <script src="scripts/load-header.js"></script>
-    <script src="scripts/login-register.js"></script>
+    <script src="scripts/log-in-register.js"></script>
     <script src="scripts/add-task-templates.js"></script>
     <script src="scripts/add-task.js"></script>
     <script src="scripts/add-task-priority-buttons.js"></script>

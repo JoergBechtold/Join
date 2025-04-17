@@ -1,4 +1,4 @@
-.body-login-register {
+.body-log-in {
   position: relative;
   height: 100dvh;
   width: 100%;
@@ -158,10 +158,10 @@
   gap: 16px;
 }
 
-.checkbox-container {
+/* .checkbox-container {
   display: flex;
   padding: 0 16px 0 16px;
-}
+} */
 
 .button-container {
   margin-top: 18px;
@@ -171,8 +171,7 @@
   align-items: center;
 }
 
-.button-log-in,
-.button-sign-up {
+.button-log-in {
   background-color: var(--primary-color-gray);
   color: white;
   box-shadow: none;
@@ -185,8 +184,7 @@
   border: var(--border-buttons-gray);
 }
 
-.button-log-in:hover,
-.button-sign-up:hover {
+.button-log-in:hover {
   scale: var(--scale-hover);
   background-color: var(--blue);
   box-shadow: var(--box-shadow-button);
@@ -214,7 +212,7 @@
 }
 
 /* sign up section */
-.sign-up-container {
+/* .sign-up-container {
   position: relative;
   padding: 48px 20px 48px 20px;
   gap: 20px;
@@ -227,7 +225,7 @@
   background-color: white;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
-}
+} */
 
 .visibility-eye-off-icon {
   display: none;
@@ -243,7 +241,7 @@
   display: block;
 }
 
-.checkbox-accept-privacy-policy {
+/* .checkbox-accept-privacy-policy {
   box-sizing: border-box;
   width: 100%;
   height: auto;
@@ -251,65 +249,66 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-}
+} */
 
-.checkbox-accept-privacy-policy {
+/* .checkbox-accept-privacy-policy {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.checkbox-accept-privacy-policy label {
+/* .checkbox-accept-privacy-policy label {
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.checkbox-accept-privacy-policy a {
+/* .checkbox-accept-privacy-policy a {
   color: var(--light-blue);
   font-weight: var(--font-weight-400);
   font-size: 16px;
   white-space: nowrap;
   width: 105px;
-}
+} */
 
-.checkbox-accept-privacy-policy a:hover {
+/* .checkbox-accept-privacy-policy a:hover {
   font-weight: var(--font-weight-500);
   text-decoration: underline;
   text-decoration-style: solid;
   text-underline-offset: 3px;
-}
+} */
 
-.checkbox-accept-privacy-policy span {
+/* .checkbox-accept-privacy-policy span {
   font-weight: var(--font-weight-400);
   font-size: 16px;
   white-space: nowrap;
-}
+} */
 
-.checkbox-accept-privacy-policy input {
+/* .checkbox-accept-privacy-policy input {
   display: none;
-}
+} */
 
-.custom-checkmark {
+/* .custom-checkmark {
   cursor: pointer;
   position: relative;
   aspect-ratio: 1 / 1;
   width: 16px;
   display: inline-block;
   margin-right: 5px;
-}
+} */
 
-.input-checkbox {
+/* .input-checkbox {
   cursor: pointer;
   position: relative;
   aspect-ratio: 1 / 1;
   width: 16px;
   display: inline-block;
   margin-right: 5px;
-}
+} */
 
-.footer-login-register {
+.footer-log-in {
+
   position: absolute;
   bottom: 50px;
   display: flex;
@@ -321,14 +320,16 @@
   gap: 25px;
 }
 
-.footer-login-register a {
+.footer-log-in a {
+  width: 105px;
+  white-space: nowrap;
   cursor: pointer;
   color: var(--gray-a-links);
   font-size: 16px;
   font-weight: var(--font-weight-400);
 }
 
-.footer-login-register a:hover {
+.footer-log-in a:hover {
   font-weight: var(--font-weight-700);
   color: var(--blue);
   scale: var(--scale-hover);
@@ -494,7 +495,7 @@
 }
 
 @media only screen and (max-width: 376px){
-  .login-register-main{
+  .log-in-main{
     transform: translateY(-40px);
   }
 
@@ -502,13 +503,13 @@
     bottom: 94px;
   }
 
-  .login-container,.sign-up-container {
+  .login-container{
    padding: 16px clamp(16px, -3.8px + 6.1875vw, 115px) 16px clamp(16px, -3.8px + 6.1875vw, 115px);
    gap: 4px;
    min-height: unset;
   }
 
-  .vector-login,.vector-sign-up{
+  .vector-login{
    background-image: url(../assets/icons/vector-mobile.svg);
    background-repeat: no-repeat;
    background-size: 100%;
@@ -519,10 +520,10 @@
    width: 90px;
   }
 
-  .vector-sign-up{
+  /* .vector-sign-up{
    height: 3px;
    width: 95px;
-  }
+  } */
 
   .headline-vector{
     gap: 4px;
@@ -548,7 +549,7 @@
     align-items: center;
   }
   
-  .button-log-in, .button-sign-up, .button-guest-log-in {
+  .button-log-in,.button-guest-log-in {
     padding: 10px 15px 10px 15px;
   }
   
@@ -556,7 +557,7 @@
     width: 100%;
   }
   
-  .footer-login-register {
+  .footer-log-in {
     bottom: 24px;
     gap: 15px;
   }
