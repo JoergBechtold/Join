@@ -472,7 +472,7 @@ button[disabled]:hover {
   top: 100%;
   left: 0;
   color: red;
-  font-size: var(--font-size-12);
+  font-size: var(--font-size-14);
   font-weight: var(--font-weight-400);
   white-space: nowrap;
 }
