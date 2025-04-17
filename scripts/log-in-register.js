@@ -764,16 +764,35 @@ async function ifParameterFalse(parameter, user, userId) {
 /**
  * 
  * @function showLoginError
- * @description Retrieves references to the login error message, email input, and password input elements using `getIdRefs()`.
- * It then adds the 'd-flex' class to the error message to make it visible and the 'not-valide-error' class to both the email and password input fields to visually indicate an error.
- * 
+ * @description Displays the generic login error message if neither the specific email nor password error messages are currently visible.
+ * It also adds the 'not-valide-error' class to the email and password input fields to visually indicate an error,
+ * preventing duplicate application of the error class.
+ * @returns {void} - This function does not return a value directly but modifies the visibility of the login error message
+ * and the visual error state of the email and password input fields.
  */
 function showLoginError() {
-  const { errorMessageLogInRef, passwordLogInRef, emailLogInRef } = getIdRefs();
-  errorMessageLogInRef.classList.add('d-flex');
-  emailLogInRef.classList.add('not-valide-error');
-  passwordLogInRef.classList.add('not-valide-error');
+  const { errorMessageLogInRef, passwordLogInRef, emailLogInRef, errorMessageEmailNotValideLoginRef, errorMessagePasswordLogInRef } = getIdRefs();
+
+  const isEmailErrorVisible = errorMessageEmailNotValideLoginRef && errorMessageEmailNotValideLoginRef.classList.contains('d-flex');
+  const isPasswordErrorVisible = errorMessagePasswordLogInRef && errorMessagePasswordLogInRef.classList.contains('d-flex');
+
+  if (errorMessageLogInRef) {
+    if (!isEmailErrorVisible && !isPasswordErrorVisible) {
+      errorMessageLogInRef.classList.add('d-flex');
+    } else {
+      errorMessageLogInRef.classList.remove('d-flex');
+    }
+  }
+
+  if (emailLogInRef && !emailLogInRef.classList.contains('not-valide-error')) {
+    emailLogInRef.classList.add('not-valide-error');
+  }
+
+  if (passwordLogInRef && !passwordLogInRef.classList.contains('not-valide-error')) {
+    passwordLogInRef.classList.add('not-valide-error');
+  }
 }
+
 
 /**
  * 
