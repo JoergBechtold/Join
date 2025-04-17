@@ -249,7 +249,8 @@ async function pushTaskToFirebase() {
     if (response) {
       showPupupOverlayTaskAdded();
       setTimeout(() => {
-        goToUrl('index.html');
+        hidePopupOverlayTaskAdded(); 
+        goToUrl('index.html');      
       }, 1700);
     } else {
       throw new Error('No response received from Firebase.');
@@ -312,14 +313,19 @@ function getPriority() {
 
 /**
  * Displays a popup overlay indicating that a task has been successfully added.
- * The popup is shown briefly and then automatically hidden after a timeout.
+ * The popup remains visible until it is manually hidden.
  */
 function showPupupOverlayTaskAdded() {
   const taskAdded = document.getElementById('popup_overlay_task_added');
   taskAdded.classList.add('d-flex');
-  setTimeout(function () {
-    taskAdded.classList.remove('d-flex');
-  }, 800);
+}
+
+/**
+ * Hides the popup overlay for task added.
+ */
+function hidePopupOverlayTaskAdded() {
+  const taskAdded = document.getElementById('popup_overlay_task_added');
+  taskAdded.classList.remove('d-flex');
 }
 
 /**
