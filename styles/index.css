@@ -593,14 +593,12 @@
     overflow-y: hidden;
     height: auto;
     width: auto;
+    min-height: unset;
+    padding-right: 8px;
   }
 
   .todo-card {
     height: 244px;
-  }
-
-  .drag-area {
-    min-height: unset;
   }
 
   .drag-area::-webkit-scrollbar {
