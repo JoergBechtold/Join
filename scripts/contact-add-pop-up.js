@@ -164,6 +164,27 @@ function showAddContactPopup() {
   document.querySelector('.overlay').classList.add('active');
 }
 
+/**
+ * Displays the edit contact popup by making the edit contact container visible
+ * and activating the overlay.
+ */
+function showEditContactPopup() {
+  const editPopup = document.querySelector('.container-edit');
+  const overlay = document.querySelector('.overlay');
+
+  // Sicherstellen, dass alte Klassen entfernt sind
+  editPopup.classList.remove('close', 'hidden');
+
+  // Animation triggern
+  setTimeout(() => {
+    editPopup.classList.add('active');
+  }, 10);
+
+  // Overlay aktivieren
+  overlay.classList.add('active');
+}
+
+
 function closeAddContactPopup() {
   const addPopup = document.querySelector('.container-add');
   const overlay = document.querySelector('.overlay');
