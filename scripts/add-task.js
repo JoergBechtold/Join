@@ -99,6 +99,7 @@ function selectOption(value) {
   selectedOption.textContent = value.charAt(0).toUpperCase() + value.slice(1);
   document.getElementById('options_container').classList.add('d-none');
   document.getElementById('select_arrow').src = 'assets/icons/arrow_drop_down.svg';
+  validateCategory();
 }
 
 /**

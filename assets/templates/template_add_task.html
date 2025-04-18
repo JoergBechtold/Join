@@ -65,7 +65,7 @@
       <div class="form-group">
         <label for="category"> <span class="label-text">Category</span> <span class="red-star">*</span></label>
        <div class="custom-select-container">
-          <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()">
+          <div class="custom-select" id="costum_select_category" onclick="toggleCategoryDropdown()" tabindex="0" onblur="validateCategory()">
             <span id="selected_option" class="label-text">Select task category</span>
             <img class="select-icon" id="select_arrow" src="assets/icons/arrow_drop_down.svg" alt="Arrow" />
           </div>
