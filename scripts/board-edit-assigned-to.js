@@ -83,7 +83,7 @@ function filterEditContacts() {
  */
 async function loadEditContacts() {
   const optionsContainer = document.getElementById('edit_contacts_options');
-  if (optionsContainer.childElementCount) return;
+  optionsContainer.innerHTML = ''; // <-- Alte Optionen vorher leeren
   try {
     const data = await loadData('contacts');
     if (data) {
@@ -96,6 +96,7 @@ async function loadEditContacts() {
     optionsContainer.innerHTML = '<div class="error-select-option">Error loading contacts.</div>';
   }
 }
+
 
 /**
  * Generates the HTML markup for the contact options in the edit task dropdown.
