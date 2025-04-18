@@ -187,47 +187,38 @@ function showEditContactPopup() {
 
 function closeAddContactPopup() {
   const addPopup = document.querySelector('.container-add');
-  const overlay = document.querySelector('.overlay');
-  const inputs = addPopup.querySelectorAll('input');
-  const errorMessages = addPopup.querySelectorAll('.name-error, .email-error, .phone-error');
+  if (!addPopup) return;
 
-  // 1. Felder leeren
-  inputs.forEach(input => {
-    input.value = '';
-    input.dataset.touched = 'false'; // auch zurücksetzen
-  });
+  resetForm(addPopup, true); // Felder + Fehler zurücksetzen
 
-  // 2. Fehlermeldungen entfernen
-  errorMessages.forEach(msg => msg.remove());
-
-  // 3. Popup schließen mit Animation
   addPopup.classList.add('close');
 
   setTimeout(() => {
     addPopup.classList.add('hidden');
-    addPopup.classList.remove('active', 'close');
-
-    // 4. Kontakte neu laden und Validierung erneut auslösen
-    checkInputs();
+    addPopup.classList.remove('close', 'active');
   }, 200);
 
-  // 5. Overlay ausblenden
-  overlay.classList.remove('active');
+  document.querySelector('.overlay').classList.remove('active');
 }
+
 
 
 function closeEditContactPopup() {
   const editPopup = document.querySelector('.container-edit');
-  if (editPopup) {
-    editPopup.classList.add('close');
+  if (!editPopup) return;
 
-    setTimeout(() => {
-      editPopup.classList.add('hidden');
-      editPopup.classList.remove('active', 'close');
-    }, 200);
-  }
+  resetForm(editPopup); // Nur Fehler entfernen, Werte beibehalten
+
+  editPopup.classList.add('close');
+
+  setTimeout(() => {
+    editPopup.classList.add('hidden');
+    editPopup.classList.remove('active', 'close');
+  }, 200);
 
   document.querySelector('.overlay').classList.remove('active');
 }
+
+
 
 

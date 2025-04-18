@@ -254,8 +254,6 @@ function validateAllInputs(inputs, container) {
   );
 }
 
-
-
 /**
  * Retrieves the current values from the input fields (name, email, phone)
  * within the active container.
@@ -277,16 +275,22 @@ function getInputValues() {
 }
 
 /**
- * Resets the form input fields (name, email, phone), checks the inputs,
- * and closes the "add contact" popup.
+ * Resets input fields and validation states inside the given container.
+ * Clears input values, removes error messages, and resets touched state.
+ *
+ * @param {HTMLElement} container - The form container (e.g. .container-add or .container-edit)
+ * @param {boolean} clearValues - Optional: If true, input values will be cleared (default: false)
  */
-function resetForm() {
-  const name = document.querySelector('input[placeholder="Firstname Lastname"]'),
-    email = document.querySelector('input[placeholder="Email"]'),
-    phone = document.querySelector('input[placeholder="Phone"]');
-  name.value = '';
-  email.value = '';
-  phone.value = '';
-  checkInputs();
-  closeAddContactPopup();
+function resetForm(container, clearValues = false) {
+  if (!container) return;
+
+  const inputs = container.querySelectorAll('input');
+  const errors = container.querySelectorAll('.name-error, .email-error, .phone-error');
+
+  inputs.forEach(input => {
+    input.dataset.touched = 'false';
+    if (clearValues) input.value = '';
+  });
+
+  errors.forEach(error => error.remove());
 }
