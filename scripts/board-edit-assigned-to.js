@@ -83,11 +83,12 @@ function filterEditContacts() {
  */
 async function loadEditContacts() {
   const optionsContainer = document.getElementById('edit_contacts_options');
-  optionsContainer.innerHTML = ''; // <-- Alte Optionen vorher leeren
+  optionsContainer.innerHTML = '';
   try {
     const data = await loadData('contacts');
     if (data) {
       optionsContainer.innerHTML = renderEditContactsHtml(data);
+      markAlreadySelectedContacts();
     } else {
       throw new Error('Keine Daten erhalten');
     }
@@ -97,6 +98,18 @@ async function loadEditContacts() {
   }
 }
 
+function markAlreadySelectedContacts() {
+  const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
+  contactOptions.forEach((option) => {
+    const circleElement = option.querySelector('.circle');
+    const initials = circleElement.textContent.trim();
+    const isSelected = selectedEditContacts.some((c) => c.initials === initials);
+    if (isSelected) {
+      option.classList.add('contacts-custom-select-option-selected');
+      updateImage(option); // Setze das Häkchen-Bild
+    }
+  });
+}
 
 /**
  * Generates the HTML markup for the contact options in the edit task dropdown.
