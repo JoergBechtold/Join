@@ -516,9 +516,11 @@ function validatePassword(passwordInputField, boolean) {
  */
 function handleEmptyPassword(currentPasswordRef, currentErrorMessageRef,errorMessageLogInRef) {
   if (currentErrorMessageRef) {
-    currentErrorMessageRef.classList.remove('d-flex');
-    errorMessageLogInRef.classList.remove('d-flex');
+      currentErrorMessageRef.classList.remove('d-flex');
   }
+  if (errorMessageLogInRef) {
+      errorMessageLogInRef.classList.remove('d-flex');
+  }    
   if (currentPasswordRef) {
     currentPasswordRef.classList.remove('not-valide-error');
   }
