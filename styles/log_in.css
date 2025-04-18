@@ -158,11 +158,6 @@
   gap: 16px;
 }
 
-/* .checkbox-container {
-  display: flex;
-  padding: 0 16px 0 16px;
-} */
-
 .button-container {
   margin-top: 18px;
   gap: var(--button-gap);
@@ -211,22 +206,6 @@
   box-shadow: var(--box-shadow-button);
 }
 
-/* sign up section */
-/* .sign-up-container {
-  position: relative;
-  padding: 48px 20px 48px 20px;
-  gap: 20px;
-  width: clamp(300px, 240px + 18.75vw, 600px);
-  max-width: 652px;
-  min-height: 450px;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  box-shadow: var(--box-shadow);
-  border-radius: var(--border-radius);
-} */
-
 .visibility-eye-off-icon {
   display: none;
 }
@@ -240,72 +219,6 @@
 .input-base:not(:placeholder-shown) + .input-base-icon .visibility-eye-off-icon {
   display: block;
 }
-
-/* .checkbox-accept-privacy-policy {
-  box-sizing: border-box;
-  width: 100%;
-  height: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-} */
-
-/* .checkbox-accept-privacy-policy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* .checkbox-accept-privacy-policy label {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* .checkbox-accept-privacy-policy a {
-  color: var(--light-blue);
-  font-weight: var(--font-weight-400);
-  font-size: 16px;
-  white-space: nowrap;
-  width: 105px;
-} */
-
-/* .checkbox-accept-privacy-policy a:hover {
-  font-weight: var(--font-weight-500);
-  text-decoration: underline;
-  text-decoration-style: solid;
-  text-underline-offset: 3px;
-} */
-
-/* .checkbox-accept-privacy-policy span {
-  font-weight: var(--font-weight-400);
-  font-size: 16px;
-  white-space: nowrap;
-} */
-
-/* .checkbox-accept-privacy-policy input {
-  display: none;
-} */
-
-/* .custom-checkmark {
-  cursor: pointer;
-  position: relative;
-  aspect-ratio: 1 / 1;
-  width: 16px;
-  display: inline-block;
-  margin-right: 5px;
-} */
-
-/* .input-checkbox {
-  cursor: pointer;
-  position: relative;
-  aspect-ratio: 1 / 1;
-  width: 16px;
-  display: inline-block;
-  margin-right: 5px;
-} */
 
 .footer-log-in {
 
@@ -519,11 +432,6 @@
    height: 3px;
    width: 90px;
   }
-
-  /* .vector-sign-up{
-   height: 3px;
-   width: 95px;
-  } */
 
   .headline-vector{
     gap: 4px;
