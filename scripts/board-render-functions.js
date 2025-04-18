@@ -15,6 +15,10 @@ function createCard(key, container, task) {
   renderCardFooter(key, task);
 }
 
+window.addEventListener('resize', () => {
+  updateMobileDropdowns();
+});
+
 /**
  * Loads tasks and renders them into columns. 
  * Updates mobile dropdowns after rendering.
