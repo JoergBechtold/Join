@@ -76,28 +76,48 @@ function delayedRedirectAndReset(){
 }
 
 /**
- * 
- * @function checkPasswordConfirm
- * @description Checks if the password and confirm password input fields match.
- * It updates the visual feedback (error message and input field styling) based on the comparison.
- * @returns {boolean} - Returns true if the passwords match or if the confirm password field is empty, false otherwise.
+ *
+ * @function handlePasswordConfirmationResult
+ * @description Handles the visual feedback based on whether the provided passwords match.
+ * If they do not match, it displays the error message and adds the error class to both password input fields.
+ * If they match, it clears the error message and removes the error class from the input fields.
+ * @param {boolean} passwordsMatch - A boolean indicating whether the password and confirm password values are the same.
+ * @param {HTMLElement} errorMessageConfirmPasswordRef - The HTML element for the confirm password error message.
+ * @param {HTMLElement} passwordSignUpRef - The HTML input element for the password on the sign-up form.
+ * @param {HTMLElement} confirmPasswordSignUpRef - The HTML input element for the confirm password on the sign-up form.
+ * @returns {boolean} - Returns `false` if the passwords do not match, `true` otherwise.
  */
-function checkPasswordConfirm() {
-  const { password, confirmPassword } = setIdRefValueTrimSignUp();
-  const { errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
-  if (confirmPassword === "") {
-    clearConfirmPasswordError()
-    return true; 
-  }
-  if (password !== confirmPassword) {
+function handlePasswordConfirmationResult(passwordsMatch, errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef) {
+  if (!passwordsMatch) {
     errorMessageConfirmPasswordRef.classList.add('d-flex');
     passwordSignUpRef.classList.add('not-valide-error');
     confirmPasswordSignUpRef.classList.add('not-valide-error');
     return false;
   } else {
-    clearConfirmPasswordError()
+    clearConfirmPasswordError();
     return true;
   }
+}
+
+/**
+ *
+ * @function checkPasswordConfirm
+ * @description Checks if the password and confirm password input fields match.
+ * It utilizes the `handlePasswordConfirmationResult` function to manage the visual feedback
+ * based on the comparison. It also handles the case where the confirm password field is empty.
+ * @returns {boolean} - Returns `true` if the passwords match or if the confirm password field is empty, `false` otherwise.
+ */
+function checkPasswordConfirm() {
+  const { password, confirmPassword } = setIdRefValueTrimSignUp();
+  const { errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef } = getIdRefs();
+
+  if (confirmPassword === "") {
+    clearConfirmPasswordError();
+    return true;
+  }
+
+  const passwordsMatch = password === confirmPassword;
+  return handlePasswordConfirmationResult(passwordsMatch, errorMessageConfirmPasswordRef, passwordSignUpRef, confirmPasswordSignUpRef);
 }
 
 /**
@@ -235,12 +255,11 @@ function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, error
 }
 
 /**
- * 
+ *
  * @function validatePassword
  * @description Validates a password input field, checking for emptiness and minimum length.
- * It handles different error message elements based on whether the validation is for sign-up or login.
- * If the password field is empty, it calls the `handleEmptyPassword` function. Otherwise, it calls
- * `handlePasswordLengthValidation` to check the password length.
+ * It utilizes helper functions to retrieve password data and the appropriate DOM element references
+ * based on whether the validation is for sign-up or login.
  * @param {HTMLInputElement} passwordInputField - The HTML input element for the password.
  * @param {boolean} boolean - A boolean value indicating the context of the validation:
  * - `true` if the validation is for the sign-up form.
@@ -249,22 +268,53 @@ function ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, error
  * or `handlePasswordLengthValidation` (based on the password length validation).
  */
 function validatePassword(passwordInputField, boolean) {
-  const { passwordSignUpRef, passwordLogInRef, errorMessagePasswordLogInRef, errorMessagePasswordSignInRef,errorMessageLogInRef } = getIdRefs();
+  const { errorMessageLogInRef } = getIdRefs();
+  const { trimmedPassword } = getPasswordInputData(passwordInputField);
+  const { currentPasswordRef, currentErrorMessageRef } = getPasswordRefs(boolean);
+
+  if (trimmedPassword === '') return handleEmptyPassword(currentPasswordRef, currentErrorMessageRef, errorMessageLogInRef);
+  return handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, currentErrorMessageRef);
+}
+
+/**
+ *
+ * @function getPasswordInputData
+ * @description Extracts the password value from the provided input field and trims any leading or trailing whitespace.
+ * @param {HTMLInputElement} passwordInputField - The HTML input element for the password.
+ * @returns {object} - An object containing the original password value and the trimmed password value.
+ * - `password`: The original value of the password input field.
+ * - `trimmedPassword`: The password value with leading and trailing whitespace removed.
+ */
+function getPasswordInputData(passwordInputField) {
   const password = passwordInputField.value;
   const trimmedPassword = password.trim();
+  return { password, trimmedPassword };
+}
+
+/**
+ *
+ * @function getPasswordRefs
+ * @description Determines and returns the appropriate password input field reference and error message reference
+ * based on whether the context is the sign-up form or the login form.
+ * @param {boolean} isSignUp - A boolean indicating whether the context is the sign-up form (`true`) or the login form (`false`).
+ * @returns {object} - An object containing the password input field reference and the error message reference.
+ * - `currentPasswordRef`: The HTML element reference for the password input field (either `passwordSignUpRef` or `passwordLogInRef`).
+ * - `currentErrorMessageRef`: The HTML element reference for the corresponding password error message (either `errorMessagePasswordSignInRef` or `errorMessagePasswordLogInRef`).
+ */
+function getPasswordRefs(isSignUp) {
+  const { passwordSignUpRef, passwordLogInRef, errorMessagePasswordSignInRef, errorMessagePasswordLogInRef } = getIdRefs();
   let currentPasswordRef;
   let currentErrorMessageRef;
-  if (boolean) {
+
+  if (isSignUp) {
     currentPasswordRef = passwordSignUpRef;
     currentErrorMessageRef = errorMessagePasswordSignInRef;
   } else {
     currentPasswordRef = passwordLogInRef;
-    currentErrorMessageRef = errorMessagePasswordLogInRef; 
+    currentErrorMessageRef = errorMessagePasswordLogInRef;
   }
-  if (trimmedPassword === '') {
-    return handleEmptyPassword(currentPasswordRef, currentErrorMessageRef,errorMessageLogInRef);
-  }
-  return handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, currentErrorMessageRef);
+
+  return { currentPasswordRef, currentErrorMessageRef };
 }
 
 /**
@@ -289,36 +339,58 @@ function handleEmptyPassword(currentPasswordRef, currentErrorMessageRef,errorMes
 }
 
 /**
- * 
+ *
  * @function handlePasswordLengthValidation
- * @description Validates the length of a provided password. If the password's trimmed length is less than 8 characters,
- * it displays an error message and adds a visual error indicator to the associated input field.
- * If the password meets the minimum length requirement, it hides the error message and removes the error indicator.
+ * @description Validates the length of a provided password. If the trimmed length is less than 8 characters,
+ * it calls `showPasswordLengthError` to display an error message and add a visual error indicator.
+ * Otherwise, it calls `clearPasswordLengthError` to hide the error message and remove the error indicator.
  * @param {string} trimmedPassword - The password string after leading and trailing whitespace has been removed.
  * @param {HTMLElement | null} currentPasswordRef - A reference to the HTML input element for the password.
- * This can be null if the element is not found.
  * @param {HTMLElement | null} currentErrorMessageRef - A reference to the HTML element displaying the password length error message.
- * This can be null if the element is not found.
  * @returns {boolean} - Returns `true` if the trimmed password length is 8 characters or more, otherwise returns `false`.
  */
 function handlePasswordLengthValidation(trimmedPassword, currentPasswordRef, currentErrorMessageRef) {
   if (trimmedPassword.length < 8) {
-    if (currentErrorMessageRef) {
-      currentErrorMessageRef.classList.add('d-flex');
-    }
-    if (currentPasswordRef) {
-      currentPasswordRef.classList.add('not-valide-error');
-    }
-    return false;
+    return showPasswordLengthError(currentPasswordRef, currentErrorMessageRef);
   } else {
-    if (currentErrorMessageRef) {
-      currentErrorMessageRef.classList.remove('d-flex');
-    }
-    if (currentPasswordRef) {
-      currentPasswordRef.classList.remove('not-valide-error');
-    }
-    return true;
+    return clearPasswordLengthError(currentPasswordRef, currentErrorMessageRef);
   }
+}
+
+/**
+ *
+ * @function showPasswordLengthError
+ * @description Displays the password length error message and adds the error class to the password input field.
+ * @param {HTMLElement | null} currentPasswordRef - A reference to the HTML input element for the password.
+ * @param {HTMLElement | null} currentErrorMessageRef - A reference to the HTML element displaying the password length error message.
+ * @returns {boolean} - Returns `false` to indicate that the password length is invalid.
+ */
+function showPasswordLengthError(currentPasswordRef, currentErrorMessageRef) {
+  if (currentErrorMessageRef) {
+    currentErrorMessageRef.classList.add('d-flex');
+  }
+  if (currentPasswordRef) {
+    currentPasswordRef.classList.add('not-valide-error');
+  }
+  return false;
+}
+
+/**
+ *
+ * @function clearPasswordLengthError
+ * @description Clears the password length error message and removes the error class from the password input field.
+ * @param {HTMLElement | null} currentPasswordRef - A reference to the HTML input element for the password.
+ * @param {HTMLElement | null} currentErrorMessageRef - A reference to the HTML element displaying the password length error message.
+ * @returns {boolean} - Returns `true` to indicate that the password length is valid (meets the minimum requirement).
+ */
+function clearPasswordLengthError(currentPasswordRef, currentErrorMessageRef) {
+  if (currentErrorMessageRef) {
+    currentErrorMessageRef.classList.remove('d-flex');
+  }
+  if (currentPasswordRef) {
+    currentPasswordRef.classList.remove('not-valide-error');
+  }
+  return true;
 }
 
 /**
@@ -346,28 +418,41 @@ async function checkUserIsPresent(parameter = false) {
 }
 
 /**
- * 
- * @function checkUserIsPresentForLoob
- * @description **This function is called by the `checkUserIsPresent` function.**
- * It iterates through the user IDs and performs actions based on the `parameter` value.
- * If `parameter` is true, it calls `ifParameterTrue` with the user data.
- * If `parameter` is false, it asynchronously calls `ifParameterFalse` with the user data and user ID.
- * @param {object} users - An object containing user data, where keys are user IDs and values are user objects.
- * @param {string[]} userIds - An array of user IDs extracted from the `users` object.
- * @param {boolean} parameter - A boolean flag that determines which function (`ifParameterTrue` or `ifParameterFalse`) is called for each user.
+ *
+ * @async
+ * @function handleUserPresenceCheck
+ * @description Checks user presence based on the provided parameter. If the parameter is true,
+ * it calls `ifParameterTrue`. If the parameter is false, it asynchronously calls `ifParameterFalse`.
+ * @param {*} parameter - A boolean flag determining which check to perform.
+ * @param {object} user - The user object to check against.
+ * @param {string} userId - The ID of the user (only relevant when parameter is false).
+ * @returns {Promise<boolean>} - Returns the boolean result of either `ifParameterTrue` or `ifParameterFalse`.
  */
-async function checkUserIsPresentForLoob(users,userIds, parameter) {
+async function handleUserPresenceCheck(parameter, user, userId) {
+  if (parameter) {
+    return ifParameterTrue(parameter, user);
+  } else {
+    return await ifParameterFalse(parameter, user, userId);
+  }
+}
+
+/**
+ *
+ * @async
+ * @function checkUserIsPresentForLoob
+ * @description Iterates through a list of user IDs and checks for user presence using the `handleUserPresenceCheck` function.
+ * It returns true as soon as a user check returns true.
+ * @param {object} users - An object containing user data, where keys are user IDs and values are user objects.
+ * @param {string[]} userIds - An array of user IDs to iterate through.
+ * @param {boolean} parameter - A boolean flag passed to `handleUserPresenceCheck` to determine the type of check.
+ * @returns {Promise<boolean>} - Returns `true` if any user check returns true, `false` otherwise.
+ */
+async function checkUserIsPresentForLoob(users, userIds, parameter) {
   for (let index = 0; index < userIds.length; index++) {
     const userId = userIds[index];
     const user = users[userId];
-    if (parameter) {
-      if (ifParameterTrue(parameter, user)) {
-        return true;
-      }
-    } else {
-      if (await ifParameterFalse(parameter, user, userId)) {
-        return true;
-      }
+    if (await handleUserPresenceCheck(parameter, user, userId)) {
+      return true;
     }
   }
   return false;
