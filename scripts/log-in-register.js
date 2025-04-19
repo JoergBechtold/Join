@@ -312,23 +312,41 @@ function clearConfirmPasswordError() {
 }
 
 /**
- * 
+ *
+ * @function getNameInputData
+ * @description Extracts the name value from the provided input field, trims any leading or trailing whitespace,
+ * and splits the trimmed name into an array of parts based on whitespace.
+ * @param {HTMLInputElement} nameInputField - The HTML input element for the name.
+ * @returns {object} - An object containing the original name, the trimmed name, and an array of name parts.
+ * - `name`: The original value of the name input field.
+ * - `trimmedName`: The name value with leading and trailing whitespace removed.
+ * - `nameParts`: An array of strings, where each element is a part of the trimmed name separated by one or more whitespace characters. Empty parts are filtered out.
+ */
+function getNameInputData(nameInputField) {
+  const name = nameInputField.value;
+  const trimmedName = name.trim();
+  const nameParts = trimmedName.split(/\s+/).filter(part => part !== '');
+  return { name, trimmedName, nameParts };
+}
+
+/**
+ *
  * @function validateName
- * @description Validates the name input field. It checks if the name is not empty and consists of exactly two parts (first and last name) after trimming whitespace.
+ * @description Validates the name input field. It checks if the trimmed name is not empty and consists of exactly two parts (first and last name).
  * It updates the visual feedback (error message and input field styling) based on the validation result.
  * @param {HTMLInputElement} nameInputField - The input element for the name.
  * @returns {boolean} - Returns true if the name is valid, false otherwise.
  */
 function validateName(nameInputField) {
   const { nameSignUpRef, errorMessageNameRef } = getIdRefs();
-  const name = nameInputField.value;
-  const trimmedName = name.trim();
-  const nameParts = trimmedName.split(/\s+/).filter(part => part !== '');
-  if(trimmedName === ''){
+  const { name, trimmedName, nameParts } = getNameInputData(nameInputField);
+
+  if (trimmedName === '') {
     errorMessageNameRef.classList.remove('d-flex');
     nameSignUpRef.classList.remove('not-valide-error');
     return false;
   }
+
   if (name !== trimmedName || nameParts.length !== 2) {
     errorMessageNameRef.classList.add('d-flex');
     nameSignUpRef.classList.add('not-valide-error');
@@ -341,39 +359,47 @@ function validateName(nameInputField) {
 }
 
 /**
- * 
+ *
+ * @function getEmailInputData
+ * @description Extracts the email value from the provided input field, trims any leading or trailing whitespace,
+ * and determines the appropriate email reference (for sign-up or login) based on the `isSignUp` flag.
+ * @param {HTMLInputElement} emailInputField - The HTML input element for the email.
+ * @param {boolean} isSignUp - A boolean indicating whether the context is the sign-up form (`true`) or the login form (`false`).
+ * @returns {object} - An object containing the trimmed email value and the corresponding email reference element.
+ * - `trimmedEmail`: The email value with leading and trailing whitespace removed.
+ * - `currentEmailRef`: The HTML element reference for the email input field (either `emailSignUpRef` or `emailLogInRef`).
+ */
+function getEmailInputData(emailInputField, isSignUp) {
+  const { emailSignUpRef, emailLogInRef } = getIdRefs();
+  const email = emailInputField.value;
+  const trimmedEmail = email.trim();
+  const currentEmailRef = isSignUp ? emailSignUpRef : emailLogInRef;
+  return { trimmedEmail, currentEmailRef };
+}
+
+/**
+ *
  * @function validateEmail
  * @description Validates the email input field. It checks if the email is not empty,
- * has no leading/trailing whitespace, and matches a basic email pattern.
+ * has no leading/trailing whitespace, and matches a basic email pattern using helper functions.
  * It updates the visual feedback (error messages and input field styling) based on the validation result.
  * @param {HTMLInputElement} emailInputField - The input element for the email.
- * @param {boolean} boolean - A boolean indicating if the validation is for the sign-up form (true) or login form (false).
+ * @param {boolean} boolean - A boolean indicating if the validation is for the sign-up form (`true`) or login form (`false`).
  * @returns {boolean} - Returns true if the email is valid, false otherwise.
  */
 function validateEmail(emailInputField, boolean) {
-  const {emailSignUpRef, emailLogInRef, errorMessageEmailRef, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef } = getIdRefs();
-  const email = emailInputField.value;
-  const trimmedEmail = email.trim();
+  const { errorMessageEmailRef, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef } = getIdRefs();
+  const { trimmedEmail, currentEmailRef } = getEmailInputData(emailInputField, boolean);
   let isValid = true;
-  let currentEmailRef;
-  if (boolean) {
-    currentEmailRef = emailSignUpRef;
-  } else {
-    currentEmailRef = emailLogInRef;
-  }
-  if (!ifValidateEmailTrimmed(email, trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) {
-    isValid = false;
-  }
-  if(trimmedEmail === ''){
-    clearEmailValidationErrors(boolean);
-    return false;
-  }
-  if (!ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) {
-    isValid = false;
-  }
-  if (isValid) {
-    clearEmailValidationErrors(boolean);
-  }
+
+  if (!ifValidateEmailTrimmed(emailInputField.value, trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) isValid = false;
+
+  if (trimmedEmail === '') return clearEmailValidationErrors(boolean), false;
+
+  if (!ifEmailPattern(trimmedEmail, errorMessageEmailNotValideSignUpRef, errorMessageEmailNotValideLoginRef, errorMessageEmailRef, currentEmailRef, boolean)) isValid = false;
+
+  if (isValid) clearEmailValidationErrors(boolean);
+
   return isValid;
 }
 
@@ -742,30 +768,45 @@ async function ifParameterFalse(parameter, user, userId) {
 }
 
 /**
- * 
+ *
  * @function showLoginError
  * @description Displays the generic login error message if neither the specific email nor password error messages are currently visible.
  * It also adds the 'not-valide-error' class to the email and password input fields to visually indicate an error,
- * preventing duplicate application of the error class.
- * @returns {void} - This function does not return a value directly but modifies the visibility of the login error message
- * and the visual error state of the email and password input fields.
+ * preventing duplicate application of the error class. It utilizes the `handleGenericLoginErrorDisplay` function
+ * to manage the visibility of the main error message.
  */
 function showLoginError() {
   const { errorMessageLogInRef, passwordLogInRef, emailLogInRef, errorMessageEmailNotValideLoginRef, errorMessagePasswordLogInRef } = getIdRefs();
   const isEmailErrorVisible = errorMessageEmailNotValideLoginRef && errorMessageEmailNotValideLoginRef.classList.contains('d-flex');
   const isPasswordErrorVisible = errorMessagePasswordLogInRef && errorMessagePasswordLogInRef.classList.contains('d-flex');
+
+  handleGenericLoginErrorDisplay(errorMessageLogInRef, isEmailErrorVisible, isPasswordErrorVisible);
+
+  if (emailLogInRef && !emailLogInRef.classList.contains('not-valide-error')) {
+    emailLogInRef.classList.add('not-valide-error');
+  }
+  if (passwordLogInRef && !passwordLogInRef.classList.contains('not-valide-error')) {
+    passwordLogInRef.classList.add('not-valide-error');
+  }
+}
+
+/**
+ *
+ * @function handleGenericLoginErrorDisplay
+ * @description Controls the visibility of the generic login error message based on the visibility states
+ * of the specific email and password error messages. It displays the generic error message only if neither
+ * the email nor the password error messages are currently visible.
+ * @param {HTMLElement | null} errorMessageLogInRef - The HTML element representing the generic login error message.
+ * @param {boolean} isEmailErrorVisible - A boolean indicating if the email error message is currently visible (has the 'd-flex' class).
+ * @param {boolean} isPasswordErrorVisible - A boolean indicating if the password error message is currently visible (has the 'd-flex' class).
+ */
+function handleGenericLoginErrorDisplay(errorMessageLogInRef, isEmailErrorVisible, isPasswordErrorVisible) {
   if (errorMessageLogInRef) {
     if (!isEmailErrorVisible && !isPasswordErrorVisible) {
       errorMessageLogInRef.classList.add('d-flex');
     } else {
       errorMessageLogInRef.classList.remove('d-flex');
     }
-  }
-  if (emailLogInRef && !emailLogInRef.classList.contains('not-valide-error')) {
-    emailLogInRef.classList.add('not-valide-error');
-  }
-  if (passwordLogInRef && !passwordLogInRef.classList.contains('not-valide-error')) {
-    passwordLogInRef.classList.add('not-valide-error');
   }
 }
 
