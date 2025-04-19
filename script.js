@@ -67,34 +67,74 @@ function showConfirmPopup(msg, callback) {
   n.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(false); };
 }
 
+/**
+ *
+ * @async
+ * @function getRandomColor
+ * @description Asynchronously loads random color data and processes it to retrieve a single random color.
+ * It handles potential errors during the data loading process.
+ * @returns {Promise<string|null>} - A promise that resolves with a randomly selected color (string) if successful, or null if an error occurs during loading or processing.
+ */
 
 async function getRandomColor() {
   try {
-    let randomColorsJson = await loadData('randomColorsJson');
-
-    if (randomColorsJson) {
-      const key = Object.keys(randomColorsJson)[0]; 
-      const singelColorFromJson = randomColorsJson[key];
-    if (!singelColorFromJson || singelColorFromJson.length === 0) {
-      console.error('No more colors available or invalid data from Firebase');
-      return null;
-    }
-  
-    const randomIndex = Math.floor(Math.random() * singelColorFromJson.length);
-    const selectedColor = singelColorFromJson[randomIndex];
-    singelColorFromJson.splice(randomIndex, 1);
-    const updateResult =  await updateData(`randomColorsJson/${key}`, singelColorFromJson);
-
-    if (!updateResult) {
-      console.error('Failed to update colors in Firebase.');
-      return null; 
-    }
-
-    return selectedColor;
-  } }catch (error) {
+    const randomColorsData = await loadData('randomColorsJson');
+    return await processColorsData(randomColorsData);
+  } catch (error) {
     console.error('Error getting random color:', error);
     return null;
   }
+}
+
+/**
+ *
+ * @async
+ * @function processColorsData
+ * @description Processes the JSON data containing random colors, extracting the key and the array of colors.
+ * It performs checks for the existence of the JSON data, the key within it, and the availability of colors in the array.
+ * If the data is valid, it calls the function to select and update a color.
+ * @param {object|null} randomColorsJson - The JSON object containing the random colors, or null if loading failed.
+ * @returns {Promise<string|null>} - A promise that resolves with the randomly selected color (string) if processing is successful, or null if any validation fails.
+ */
+async function processColorsData(randomColorsJson) {
+  if (!randomColorsJson) return null;
+
+  const key = Object.keys(randomColorsJson)[0];
+  if (!key) {
+    console.error('No key found in randomColorsJson.');
+    return null;
+  }
+
+  const singleColorFromJson = randomColorsJson[key];
+  if (!singleColorFromJson || singleColorFromJson.length === 0) {
+    console.error('No more colors available or invalid data from Firebase');
+    return null;
+  }
+
+  return await selectAndUpdateColor(key, singleColorFromJson);
+}
+
+/**
+ *
+ * @async
+ * @function selectAndUpdateColor
+ * @description Selects a random color from an array, removes it, and updates the remaining colors in Firebase.
+ * @param {string} key - The key in the Firebase database where the color array is stored.
+ * @param {Array<string>} colorsArray - An array of color strings.
+ * @returns {Promise<string|null>} - A promise that resolves with the randomly selected color (string) if the update is successful, or null if the update fails.
+ */
+async function selectAndUpdateColor(key, colorsArray) {
+  const randomIndex = Math.floor(Math.random() * colorsArray.length);
+  const selectedColor = colorsArray[randomIndex];
+  colorsArray.splice(randomIndex, 1);
+  const updateResult = await updateData(`randomColorsJson/${key}`, colorsArray);
+
+  if (!updateResult) {
+    console.error('Failed to update colors in Firebase.');
+    return null;
+  }
+
+  return selectedColor;
 }
 
 /**
@@ -292,8 +332,11 @@ function setAllPropertysForEditPopup() {
 }
 
 /**
- * Validates the required task form inputs (title, date, category).
- * @returns {boolean} True if all fields are valid, false otherwise.
+ *
+ * @function isTaskFormValid
+ * @description Checks the validity of the task form by validating the title, date, and category fields.
+ * It calls the individual validation functions for each field and returns true only if all fields are valid.
+ * @returns {boolean} - Returns true if all task form fields are valid, false otherwise.
  */
 function isTaskFormValid() {
   const titleValid = validateInputTitle();
@@ -303,8 +346,10 @@ function isTaskFormValid() {
 }
 
 /**
- * Decides which task submit function to call based on current context.
- * Calls `pushBoardTaskToFirebase()` for board popup, otherwise `checkandSubmit()`.
+ *
+ * @function handleTaskSubmit
+ * @description Handles the submission of a task, determining whether it's a new task being added on the board or a task being added through the main form.
+ * It validates the task form and then calls the appropriate function to push the task data to Firebase based on the visibility of the board's add task section.
  */
 function handleTaskSubmit() {
   const isBoardAddTask = document.getElementById('board_add_task');
@@ -319,6 +364,14 @@ function handleTaskSubmit() {
   }
 }
 
+/**
+ *
+ * @function validateField
+ * @description Checks the validity of an input field and displays or hides an associated error message.
+ * If invalid, it adds the CSS class 'not-valide-error' to the input field and displays the element with the class 'error-message-log-in' in the parent element.
+ * If valid, it removes the CSS class and hides the error message again.
+ * @param {HTMLInputElement} inputField - The input field to validate (of type HTMLInputElement).
+ */
 function validateField(inputField) {
   if (!inputField.checkValidity()) {
     inputField.classList.add('not-valide-error');
@@ -336,103 +389,5 @@ function validateField(inputField) {
 }
 
 
-// manual function to load the colors into the array in the firebase
-async function manuellloadColorToFirebase(){
-  // await updateData('randomColorsJson',  [
-  //   "#ff5eb3",
-  //   "#6e52ff",
-  //   "#9327ff",
-  //   "#00bee8",
-  //   "#1fd7c1",
-  //   "#ff745e",
-  //   "#ffa35e",
-  //   "#fc71ff",
-  //   "#ffc701",
-  //   "#59378a",
-  //   "#e0ffff",
-  //   "#f5f5dc",
-  //   "#00008b",
-  //   "#008080",
-  //   "#faf0e6",
-  //   "#8fbc8f",
-  //   "#9acd32",
-  //   "#cd5c5c",
-  //   "#fa8072",
-  //   "#483d8b",
-  //   "#d8bfd8",
-  //   "#bc8f8f",
-  //   "#5f9ea0",
-  //   "#b8860b",
-  //   "#6495ed",
-  //   "#bdb76b",
-  //   "#ff00ff",
-  //   "#dda0dd",
-  //   "#adff2f",
-  //   "#0038ff",
-  //   "#c3ff2b",
-  //   "#ffe62b",
-  //   "#ff4646",
-  //   "#ffbb2b",
-  //   "#00a86b",
-  //   "#00ced1",
-  //   "#b19cd9",
-  //   "#8b008b",
-  //   "#228b22",
-  //   "#d2691e",
-  //   "#808000",
-  //   "#4682b4",
-  //   "#a0522d",
-  //   "#8fbc8f",
-  //   "#ee82ee",
-  //   "#a52a2a",
-  // ]);
-  // await postData('randomColorsJson',  [
-  //   "#ff5eb3",
-  //   "#6e52ff",
-  //   "#9327ff",
-  //   "#00bee8",
-  //   "#1fd7c1",
-  //   "#ff745e",
-  //   "#ffa35e",
-  //   "#fc71ff",
-  //   "#ffc701",
-  //   "#59378a",
-  //   "#e0ffff",
-  //   "#f5f5dc",
-  //   "#00008b",
-  //   "#008080",
-  //   "#faf0e6",
-  //   "#8fbc8f",
-  //   "#9acd32",
-  //   "#cd5c5c",
-  //   "#fa8072",
-  //   "#483d8b",
-  //   "#d8bfd8",
-  //   "#bc8f8f",
-  //   "#5f9ea0",
-  //   "#b8860b",
-  //   "#6495ed",
-  //   "#bdb76b",
-  //   "#ff00ff",
-  //   "#dda0dd",
-  //   "#adff2f",
-  //   "#0038ff",
-  //   "#c3ff2b",
-  //   "#ffe62b",
-  //   "#ff4646",
-  //   "#ffbb2b",
-  //   "#00a86b",
-  //   "#00ced1",
-  //   "#b19cd9",
-  //   "#8b008b",
-  //   "#228b22",
-  //   "#d2691e",
-  //   "#808000",
-  //   "#4682b4",
-  //   "#a0522d",
-  //   "#8fbc8f",
-  //   "#ee82ee",
-  //   "#a52a2a",
-  // ]);
- }
+
 
