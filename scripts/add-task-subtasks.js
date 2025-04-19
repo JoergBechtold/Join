@@ -44,16 +44,25 @@ function handleSubtaskDelete() {
 
 /**
  * Saves a new subtask to the global `subtasks` array and updates the display.
- * Clears the input field after saving and resets its visual state using `handleSubtaskDelete`.
+ * Before saving, checks if the entered subtask already exists (case-insensitive).
+ * If the subtask already exists, the input field is cleared and nothing else happens.
+ * After successful saving, clears the input field and resets its visual state using `handleSubtaskDelete`.
  */
 function handleSubtaskSave() {
     const subtaskInput = document.getElementById('subtask_input');
     const subtaskValue = subtaskInput.value.trim();
     if (subtaskValue !== '') {
-        subtasks.push({ title: subtaskValue, completed: false });
-        subtaskInput.value = '';
-        handleSubtaskDelete();
-        updateSubtaskDisplay();
+        const exists = subtasks.some(subtask => 
+            subtask.title.toLowerCase() === subtaskValue.toLowerCase()
+        );
+        if (!exists) {
+            subtasks.push({ title: subtaskValue, completed: false });
+            subtaskInput.value = '';
+            handleSubtaskDelete();
+            updateSubtaskDisplay();
+        } else {
+            subtaskInput.value = '';
+        }
     }
 }
 
@@ -133,26 +142,64 @@ function cancelEditSubtask() {
 }
 
 /**
- * Validates the edited subtask input. If the input is empty, restores the original value
- * and exits edit mode without saving changes.
+ * Exits subtask edit mode, restores the original value, and resets the UI state.
  * @param {HTMLElement} editInput - The input element for editing the subtask.
- * @returns {boolean} - Returns true if the input is valid (not empty), false otherwise.
+ */
+function exitEditMode(editInput) {
+    if (currentEditIndex !== null) {
+        editInput.value = subtasks[currentEditIndex].title;
+    }
+    editInput.classList.add('d-none');
+    document.getElementById('edit_delete_icon').classList.add('d-none');
+    document.getElementById('edit_save_icon').classList.add('d-none');
+    document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
+    currentEditIndex = null;
+}
+
+/**
+ * Validates the edited subtask input. If the input is empty or already exists in the `subtasks` array
+ * (case-insensitive, except for itself), calls `exitEditMode` and returns false.
+ * @param {HTMLElement} editInput - The input element for editing the subtask.
+ * @returns {boolean} - Returns true if the input is valid (not empty and not duplicate), false otherwise.
  */
 function validateSubtaskInput(editInput) {
     const editedValue = editInput.value.trim();
     if (editedValue === '') {
-        if (currentEditIndex !== null) {
-            editInput.value = subtasks[currentEditIndex].title; 
-        }
-        editInput.classList.add('d-none');
-        document.getElementById('edit_delete_icon').classList.add('d-none');
-        document.getElementById('edit_save_icon').classList.add('d-none');
-        document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
-        currentEditIndex = null;
-        return false; 
+        exitEditMode(editInput);
+        return false;
     }
-    return true; 
+    const exists = subtasks.some((subtask, index) =>
+        index !== currentEditIndex &&
+        subtask.title.toLowerCase() === editedValue.toLowerCase()
+    );
+    if (exists) {
+        exitEditMode(editInput);
+        return false;
+    }
+    return true;
 }
+
+/**
+ * Saves changes made to an edited subtask by updating its value in the global array.
+ * Restores normal mode after saving and updates the display to reflect changes.
+ */
+function saveEditedSubtask() {
+    const editInput = document.getElementById('edit_subtask_input');
+    if (!validateSubtaskInput(editInput)) {
+        return;
+    }
+    const editedValue = editInput.value.trim();
+    if (currentEditIndex !== null) {
+        subtasks[currentEditIndex].title = editedValue;
+    }
+    editInput.classList.add('d-none');
+    document.getElementById('edit_delete_icon').classList.add('d-none');
+    document.getElementById('edit_save_icon').classList.add('d-none');
+    document.getElementsByClassName('subtask-enum')[0].style.display = 'block';
+    updateSubtaskDisplay();
+    currentEditIndex = null;
+}
+
 
 /**
  * Saves changes made to an edited subtask by updating its value in the global array.
