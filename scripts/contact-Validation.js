@@ -1,38 +1,45 @@
 /**
- * Validates the email address in the provided input field.
- * Only shows error message if showError is true.
- *
- * @param {HTMLInputElement} emailInput - The email input field.
- * @param {HTMLElement} container - The container where the error message should be displayed.
- * @param {boolean} [showError=false] - Whether to display the error message.
- * @returns {boolean} True if the email is valid; otherwise, false.
+ * Validates the email input and optionally displays an error message.
+ * 
+ * @param {HTMLInputElement} emailInput - The input field for email.
+ * @param {HTMLElement} container - The container where the error should appear.
+ * @param {boolean} [showError=false] - Whether to show the error message.
+ * @returns {boolean} True if email is valid, false otherwise.
  */
 function validateEmail(emailInput, container, showError = false) {
   const emailValue = emailInput.value.trim();
   const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-  let err = container.querySelector('.email-error');
+  const err = container.querySelector('.email-error');
 
-  if (showError) {
-    // Show error message only if the field is non-valid and either contains text or should be marked as invalid.
-    if (!isValid || emailValue === '') {
-      if (!err) {
-        err = document.createElement('span');
-        err.className = 'email-error';
-        err.style.color = 'red';
-        err.textContent = 'Invalid email address';
-        emailInput.parentNode.insertBefore(err, emailInput.nextSibling);
-      }
-    } else if (err) {
-      err.remove();
-    }
-  } else {
-    // Suppress error messages if not showing, just remove any existing error
-    if (err) {
-      err.remove();
-    }
-  }
-
+  handleEmailError(emailInput, container, isValid, showError, err);
   return isValid;
+}
+
+/**
+ * Adds or removes the error message for the email field based on validity and user interaction.
+ * 
+ * @param {HTMLInputElement} input - The email input field.
+ * @param {HTMLElement} container - Container where error message appears.
+ * @param {boolean} isValid - Whether the email input is valid.
+ * @param {boolean} show - Whether to display the error message.
+ * @param {HTMLElement|null} errElem - Existing error element (if any).
+ */
+function handleEmailError(input, container, isValid, show, errElem) {
+  if (show) {
+    if (!isValid || input.value.trim() === '') {
+      if (!errElem) {
+        const span = document.createElement('span');
+        span.className = 'email-error';
+        span.style.color = 'red';
+        span.textContent = 'Invalid email address';
+        input.parentNode.insertBefore(span, input.nextSibling);
+      }
+    } else if (errElem) {
+      errElem.remove();
+    }
+  } else if (errElem) {
+    errElem.remove();
+  }
 }
 
 /**
@@ -64,7 +71,6 @@ function updateNameError(nameInput, container, isValid) {
   const nameValue = nameInput.value;
   const trimmed = nameValue.trim();
   const hasMultipleParts = trimmed.split(/\s+/).length >= 2;
-
   if (!isValid || trimmed === '' || !hasMultipleParts) {
     if (!err) {
       err = document.createElement('span');
@@ -93,7 +99,6 @@ function validateName(nameInput, container, showError = false) {
   if (showError) {
     updateNameError(nameInput, container, isValid);
   } else {
-    // Remove error message if one exists but we're not showing errors right now
     let err = container.querySelector('.name-error');
     if (err) err.remove();
   }
@@ -102,7 +107,7 @@ function validateName(nameInput, container, showError = false) {
 
 /**
  * Validates the phone number in the provided input field.
- * Only shows error message if showError is true.
+ * Delegates error display to helper function.
  *
  * @param {HTMLInputElement} phoneInput - The phone input field.
  * @param {HTMLElement} container - The container where the error message should be displayed.
@@ -115,27 +120,37 @@ function validatePhone(phoneInput, container, showError = false) {
     /^\+?[0-9]+$/.test(phoneValue) &&
     phoneValue.length >= 7 &&
     phoneValue.length <= 15;
-  let err = container.querySelector('.phone-error');
 
-  if (showError) {
-    if (!isValid || phoneValue === '') {
-      if (!err) {
-        err = document.createElement('span');
-        err.className = 'phone-error';
-        err.style.color = 'red';
-        err.textContent = 'Invalid phone number (7-15 digits)';
-        phoneInput.parentNode.insertBefore(err, phoneInput.nextSibling);
-      }
-    } else if (err) {
-      err.remove();
-    }
-  } else {
-    if (err) {
-      err.remove();
-    }
-  }
-
+  const err = container.querySelector('.phone-error');
+  handlePhoneError(phoneInput, phoneValue, isValid, showError, err);
   return isValid;
+}
+
+/**
+ * Displays or removes the error message for the phone input.
+ *
+ * @param {HTMLInputElement} input - The phone input field.
+ * @param {string} value - The trimmed input value.
+ * @param {boolean} isValid - Whether the phone number is valid.
+ * @param {boolean} show - Whether the error should be shown.
+ * @param {HTMLElement|null} errElem - Existing error element, if present.
+ */
+function handlePhoneError(input, value, isValid, show, errElem) {
+  if (show) {
+    if (!isValid || value === '') {
+      if (!errElem) {
+        const span = document.createElement('span');
+        span.className = 'phone-error';
+        span.style.color = 'red';
+        span.textContent = 'Invalid phone number (7-15 digits)';
+        input.parentNode.insertBefore(span, input.nextSibling);
+      }
+    } else if (errElem) {
+      errElem.remove();
+    }
+  } else if (errElem) {
+    errElem.remove();
+  }
 }
 
 /**
@@ -174,7 +189,6 @@ function getFormInputs(container) {
  * @returns {boolean} True if all inputs are valid; otherwise, false.
  */
 function validateInputs(inputs, container) {
-  // Silent validation (no error messages displayed)
   const validName = validateName(inputs.nameIn, container, false);
   const validEmail = validateEmail(inputs.emailIn, container, false);
   const validPhone = validatePhone(inputs.phoneIn, container, false);
@@ -203,6 +217,11 @@ function updateButtonState(btn, isValid) {
   }
 }
 
+/**
+ * Main input validation handler.
+ * Retrieves the currently active form container and its input elements,
+ * then runs validation and sets up blur listeners for delayed error display.
+ */
 function checkInputs() {
   const container = getActiveContainer();
   if (!container) return;
@@ -212,6 +231,14 @@ function checkInputs() {
   setupBlurListeners(inputs, container);
 }
 
+
+/**
+ * Adds a blur event listener to each input field (name, email, phone) if not already added.
+ * On blur, marks the input as touched and triggers validation.
+ *
+ * @param {Object} inputs - An object containing the input elements (nameIn, emailIn, phoneIn).
+ * @param {HTMLElement} container - The container element where error messages are displayed.
+ */
 function setupBlurListeners(inputs, container) {
   ['nameIn', 'emailIn', 'phoneIn'].forEach(key => {
     const input = inputs[key];
@@ -225,27 +252,88 @@ function setupBlurListeners(inputs, container) {
   });
 }
 
+
+/**
+ * Validates all input fields and updates the submit button's state.
+ * 
+ * @param {Object} inputs - An object containing the input elements.
+ * @param {HTMLElement} container - The container for showing validation messages.
+ */
 function validateAllInputs(inputs, container) {
-  const validName = validateName(
+  const validName = validateNameField(inputs, container);
+  const validEmail = validateEmailField(inputs, container);
+  const validPhone = validatePhoneField(inputs, container);
+
+  const formValid = isFormValid(inputs, validName, validEmail, validPhone);
+  updateButtonState(inputs.btn, formValid);
+}
+
+/**
+ * Validates the name input field.
+ * 
+ * @param {Object} inputs - An object containing the input elements.
+ * @param {HTMLElement} container - The container for showing validation messages.
+ * @returns {boolean} - Whether the name is valid.
+ */
+function validateNameField(inputs, container) {
+  return validateName(
     inputs.nameIn,
     container,
-    inputs.nameIn.dataset.touched === 'true'
+    isInputTouched(inputs.nameIn)
   );
+}
 
-  const validEmail = validateEmail(
+/**
+ * Validates the email input field.
+ * 
+ * @param {Object} inputs - An object containing the input elements.
+ * @param {HTMLElement} container - The container for showing validation messages.
+ * @returns {boolean} - Whether the email is valid.
+ */
+function validateEmailField(inputs, container) {
+  return validateEmail(
     inputs.emailIn,
     container,
-    inputs.emailIn.dataset.touched === 'true'
+    isInputTouched(inputs.emailIn)
   );
+}
 
-  const validPhone = validatePhone(
+/**
+ * Validates the phone input field.
+ * 
+ * @param {Object} inputs - An object containing the input elements.
+ * @param {HTMLElement} container - The container for showing validation messages.
+ * @returns {boolean} - Whether the phone number is valid.
+ */
+function validatePhoneField(inputs, container) {
+  return validatePhone(
     inputs.phoneIn,
     container,
-    inputs.phoneIn.dataset.touched === 'true'
+    isInputTouched(inputs.phoneIn)
   );
+}
 
-  updateButtonState(
-    inputs.btn,
+/**
+ * Determines whether an input field has been touched.
+ * 
+ * @param {HTMLInputElement} input - The input element to check.
+ * @returns {boolean} - True if the input has been touched.
+ */
+function isInputTouched(input) {
+  return input.dataset.touched === 'true';
+}
+
+/**
+ * Determines if the form is valid based on all validation checks.
+ * 
+ * @param {Object} inputs - An object containing the input elements.
+ * @param {boolean} validName - Whether the name is valid.
+ * @param {boolean} validEmail - Whether the email is valid.
+ * @param {boolean} validPhone - Whether the phone is valid.
+ * @returns {boolean} - True if the form is valid and can be submitted.
+ */
+function isFormValid(inputs, validName, validEmail, validPhone) {
+  return (
     inputs.nameIn.value.trim() !== '' &&
     inputs.phoneIn.value.trim() !== '' &&
     validName &&
@@ -253,6 +341,7 @@ function validateAllInputs(inputs, container) {
     validPhone
   );
 }
+
 
 /**
  * Retrieves the current values from the input fields (name, email, phone)

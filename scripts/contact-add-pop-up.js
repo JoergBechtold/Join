@@ -171,20 +171,24 @@ function showAddContactPopup() {
 function showEditContactPopup() {
   const editPopup = document.querySelector('.container-edit');
   const overlay = document.querySelector('.overlay');
-
-  // Sicherstellen, dass alte Klassen entfernt sind
   editPopup.classList.remove('close', 'hidden');
-
-  // Animation triggern
   setTimeout(() => {
     editPopup.classList.add('active');
   }, 10);
-
-  // Overlay aktivieren
   overlay.classList.add('active');
 }
 
 
+/**
+ * Closes the add contact popup with animation, resets form inputs and validation states,
+ * and hides the overlay.
+ *
+ * This function:
+ * - Calls `resetForm` to clear input values and any existing validation errors.
+ * - Triggers a closing animation by adding the `close` class.
+ * - After the animation ends, hides the popup and removes related classes.
+ * - Deactivates the overlay.
+ */
 function closeAddContactPopup() {
   const addPopup = document.querySelector('.container-add');
   if (!addPopup) return;
@@ -202,12 +206,21 @@ function closeAddContactPopup() {
 }
 
 
-
+/**
+ * Closes the edit contact popup with a closing animation,
+ * hides the overlay, and resets the form and validation states.
+ *
+ * This function:
+ * - Adds a closing animation class.
+ * - Hides the popup after the animation.
+ * - Clears all input fields and error messages via `resetForm`.
+ * - Removes the overlay from the screen.
+ */
 function closeEditContactPopup() {
   const editPopup = document.querySelector('.container-edit');
   if (!editPopup) return;
 
-  resetForm(editPopup); // Nur Fehler entfernen, Werte beibehalten
+  resetForm(editPopup); 
 
   editPopup.classList.add('close');
 

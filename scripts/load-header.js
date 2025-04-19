@@ -1,38 +1,59 @@
 /**
- * Asynchronously loads the header (and sidebar) and initializes it.
- * If no header container exists yet, one is created and inserted at the beginning
- * of the document body.
- *
- * After successfully loading the header, additional functions are called
- * to, for example, initialize active links and the user icon.
+ * Ensures a header container exists. Creates one if not found.
+ * @returns {HTMLElement} The header container element.
+ */
+function ensureHeaderContainer() {
+  let container = document.getElementById('header_container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'header_container';
+    document.body.insertBefore(container, document.body.firstChild);
+  }
+  return container;
+}
+
+/**
+ * Fetches and returns the content of the header HTML file.
+ * @returns {Promise<string>} The fetched HTML content.
+ * @throws Will throw an error if the fetch fails.
+ */
+async function fetchHeaderHtml() {
+  const response = await fetch('header_sidebar.html');
+  if (!response.ok) {
+    throw new Error(`Error retrieving header ${response.status}`);
+  }
+  return await response.text();
+}
+
+/**
+ * Runs initialization routines after header is loaded.
+ */
+function initializeHeaderContent() {
+  const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
+  ifButtonLinkSidebar(buttonLinksSidebar);
+  loadInitialsUserIcon();
+  ifActivePage();
+}
+
+/**
+ * Asynchronously loads the header and initializes its behavior.
+ * Creates the container if necessary and inserts HTML content.
  *
  * @async
- * @function loadHeaderAndInitialize
  * @returns {Promise<void>}
  */
 async function loadHeaderAndInitialize() {
-  let headerContainer = document.getElementById('header_container');
-  if (!headerContainer) {
-    headerContainer = document.createElement('div');
-    headerContainer.id = 'header_container';
-    document.body.insertBefore(headerContainer, document.body.firstChild);
-  }
+  const container = ensureHeaderContainer();
 
   try {
-    const response = await fetch('header_sidebar.html');
-    if (!response.ok) {
-      throw new Error(`Error retrieving header ${response.status}`);
-    }
-    const data = await response.text();
-    headerContainer.innerHTML = data;
-    const buttonLinksSidebar = sessionStorage.getItem('linksSidebarBoolienKey');
-    ifButtonLinkSidebar(buttonLinksSidebar);
-    loadInitialsUserIcon();
-    ifActivePage();
+    const html = await fetchHeaderHtml();
+    container.innerHTML = html;
+    initializeHeaderContent();
   } catch (error) {
     console.error('Error loading header', error);
   }
 }
+
 
 /**
  * Shows or hides the login links in the sidebar based on the provided parameter.

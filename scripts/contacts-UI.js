@@ -158,14 +158,12 @@ function processContactEdition() {
   nameInput.value = activeContact.querySelector('.contact-name').textContent;
   emailInput.value = activeContact.querySelector('.contact-email').textContent;
   phoneInput.value = activeContact.getAttribute('data-phone') || "";
-  
   const profileImageContainer = document.querySelector('.container-edit .profile-image');
   profileImageContainer.innerHTML = ''; 
   const activeAvatar = activeContact.querySelector('.contact-avatar');
   profileImageContainer.textContent = activeAvatar.textContent.trim();
   profileImageContainer.style.backgroundColor = activeAvatar.style.backgroundColor || '#ccc';
   profileImageContainer.classList.add('edit-mode');
-  
   showEditContactPopup();
   checkInputs();
 }
@@ -251,8 +249,6 @@ function repositionContactIfNeeded(newName) {
 * @param {string} initials - The initials to display in the avatar.
 */
 function updateContactUI(newName, newEmail, newPhone, initials) {
-// Retrieve the original grouping letter from a custom data attribute.
-// If not present, default to the current displayed first letter.
 const originalFirstLetter =
   activeContact.getAttribute('data-first-letter') ||
   activeContact.querySelector('.contact-name').textContent.charAt(0).toUpperCase();

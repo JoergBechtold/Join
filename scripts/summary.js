@@ -67,41 +67,60 @@ async function fetchTaskData() {
 }
 
 /**
+ * Initializes an object for task statistics.
+ * @returns {Object} An object with default counters.
+ */
+function initializeStats() {
+  return {
+    todo: 0,
+    done: 0,
+    urgent: 0,
+    tasksInBoard: 0,
+    tasksInProgress: 0,
+    awaitingFeedback: 0
+  };
+}
+
+/**
+ * Updates the stats object based on a single task.
+ * @param {Object} task - The task object.
+ * @param {Object} stats - The stats object to update.
+ */
+function updateStatsFromTask(task, stats) {
+  stats.tasksInBoard++;
+
+  switch (task.state) {
+    case 'open':
+      stats.todo++;
+      break;
+    case 'done':
+      stats.done++;
+      break;
+    case 'in-progress':
+      stats.tasksInProgress++;
+      break;
+    case 'await-feedback':
+      stats.awaitingFeedback++;
+      break;
+  }
+
+  if (task.priority?.toLowerCase() === 'urgent') {
+    stats.urgent++;
+  }
+}
+
+/**
  * Computes statistics based on the provided tasks object.
  *
  * @param {Object} tasks - The tasks object.
- * @returns {Object} An object containing the computed statistics:
- * - todo: Number of open tasks.
- * - done: Number of completed tasks.
- * - urgent: Number of tasks marked as "urgent".
- * - tasksInBoard: Total number of tasks on the board.
- * - tasksInProgress: Tasks that are in progress.
- * - awaitingFeedback: Tasks that are waiting for feedback.
+ * @returns {Object} Computed statistics.
  */
 function computeTaskStats(tasks) {
-  let stats = {
-      todo: 0,
-      done: 0,
-      urgent: 0,
-      tasksInBoard: 0,
-      tasksInProgress: 0,
-      awaitingFeedback: 0
-  };
-  Object.values(tasks).forEach(task => {
-      stats.tasksInBoard++;
-      if (task.state === 'open')
-          stats.todo++;
-      else if (task.state === 'done')
-          stats.done++;
-      else if (task.state === 'in-progress')
-          stats.tasksInProgress++;
-      else if (task.state === 'await-feedback')
-          stats.awaitingFeedback++;
-      if (task.priority && task.priority.toLowerCase() === 'urgent')
-          stats.urgent++;
-  });
+  const stats = initializeStats();
+  Object.values(tasks).forEach(task => updateStatsFromTask(task, stats));
   return stats;
 }
+
 
 /**
  * Updates the display of task statistics in the UI.
@@ -174,38 +193,55 @@ function addHoverEffect(container, imgElement, defaultSrc, hoverSrc) {
 }
 
 /**
- * 
- * @function initializeSummaryPage
- * @description Initializes the summary page by loading necessary data,
- * updating UI elements, setting up recurring updates, and
- * attaching event listeners. Handles potential errors during
- * the initialization process.
- * 
+ * Initializes all asynchronous data required for the summary page.
+ * Loads header, user, and initial task data.
+ */
+async function initializeSummaryData() {
+  await loadHeaderAndInitialize();
+  const user = await loadUserData();
+  greetingName(user);
+  updateTaskData();
+}
+
+/**
+ * Sets up dynamic UI updates and recurring refresh intervals.
+ * Also applies greeting, date, and animation triggers.
+ */
+function setupSummaryUI() {
+  updateGreeting();
+  updateDate();
+  checkAndShowAnimationSummary();
+  setInterval(updateTaskData, 5000);
+  addClickEvents();
+}
+
+/**
+ * Adds hover effects to the To-Do and Done icon containers.
+ */
+function setupHoverIcons() {
+  const pencilContainer = document.querySelector('.pencil:first-child');
+  const pencilImg = pencilContainer?.querySelector('img');
+  const doneContainer = document.querySelector('.pencil:nth-child(2)');
+  const doneImg = doneContainer?.querySelector('img');
+
+  addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
+  addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
+}
+
+/**
+ * Main initialization function for the summary page.
+ * Coordinates setup and handles errors.
  */
 async function initializeSummaryPage() {
   try {
-    await loadHeaderAndInitialize();
-    updateGreeting();
-    updateDate();
-    updateTaskData();
-    setInterval(updateTaskData, 5000);
-    addClickEvents();
-    const user = await loadUserData();
-    greetingName(user);
-    checkAndShowAnimationSummary();
-
-    let pencilContainer = document.querySelector('.pencil:first-child');
-    let pencilImg = pencilContainer ? pencilContainer.querySelector('img') : null;
-    let doneContainer = document.querySelector('.pencil:nth-child(2)');
-    let doneImg = doneContainer ? doneContainer.querySelector('img') : null;
-
-    addHoverEffect(pencilContainer, pencilImg, 'assets/icons/Pencil.svg', 'assets/icons/pencilhover.svg');
-    addHoverEffect(doneContainer, doneImg, 'assets/icons/done.svg', 'assets/icons/donehover.svg');
-    
+    await initializeSummaryData();
+    setupSummaryUI();
+    setupHoverIcons();
   } catch (error) {
     console.error('Error initializing the summary page', error);
   }
 }
+
 
 /**
  * 

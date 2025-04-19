@@ -98,6 +98,13 @@ async function loadEditContacts() {
   }
 }
 
+/**
+ * Marks contacts as selected in the edit form dropdown if they are already assigned.
+ *
+ * Iterates through all contact options in the custom select dropdown and checks
+ * if the contact's initials exist in the `selectedEditContacts` array.
+ * If found, the option is visually marked as selected and a checkmark image is added.
+ */
 function markAlreadySelectedContacts() {
   const contactOptions = document.querySelectorAll('.contacts-custom-select-option');
   contactOptions.forEach((option) => {
@@ -110,6 +117,7 @@ function markAlreadySelectedContacts() {
     }
   });
 }
+
 
 /**
  * Generates the HTML markup for the contact options in the edit task dropdown.

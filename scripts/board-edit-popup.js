@@ -89,33 +89,73 @@ function renderEditPreview(task) {
 }
 
 /**
- * Loads the task data into the edit form.
- *
+ * Loads basic input fields into the edit form.
  * @param {Object} task - The task object.
  */
-function loadEditFormData(task) {
+function loadBasicEditFields(task) {
   document.getElementById('edit_title').value = task.title || '';
   document.getElementById('edit_description').value = task.description || '';
   document.getElementById('edit_due_date').value = task.due_date || '';
-  if (task.priority) {
-    const prio = task.priority.toLowerCase();
+}
+
+/**
+ * Sets the selected priority in the edit form if valid.
+ * @param {string} priority - The priority value from the task.
+ */
+function loadEditPriority(priority) {
+  if (priority) {
+    const prio = priority.toLowerCase();
     if (['urgent', 'medium', 'low'].includes(prio)) {
       setEditPriority(`edit_${prio}_button`);
     }
   }
-  if (task.category) {
-    document.getElementById('edit_selected_option').textContent = task.category;
+}
+
+/**
+ * Sets the selected category in the edit form dropdown.
+ * @param {string} category - The task category.
+ */
+function loadEditCategory(category) {
+  if (category) {
+    document.getElementById('edit_selected_option').textContent = category;
   }
-  editPopupSubtasks = Array.isArray(task.subtasks) ? [...task.subtasks] : [];
+}
+
+/**
+ * Loads and renders subtasks for the edit form.
+ * @param {Array} subtasks - The list of subtasks.
+ */
+function loadEditSubtasks(subtasks) {
+  editPopupSubtasks = Array.isArray(subtasks) ? [...subtasks] : [];
   updateEditSubtaskDisplay();
-  selectedEditContacts = Array.isArray(task.assigned_to)
-    ? task.assigned_to.map(c => ({
+}
+
+/**
+ * Loads and displays assigned contacts in the edit form.
+ * @param {Array} contacts - Array of contact objects.
+ */
+function loadEditContacts(contacts) {
+  selectedEditContacts = Array.isArray(contacts)
+    ? contacts.map(c => ({
         initials: c.initials,
         randomColor: c.randomColor
       }))
     : [];
   renderEditSelectedContacts();
 }
+
+/**
+ * Loads the task data into the edit form by delegating to specialized loaders.
+ * @param {Object} task - The task object.
+ */
+function loadEditFormData(task) {
+  loadBasicEditFields(task);
+  loadEditPriority(task.priority);
+  loadEditCategory(task.category);
+  loadEditSubtasks(task.subtasks);
+  loadEditContacts(task.assigned_to);
+}
+
 
 /**
  * Sets the active priority button in the edit popup.
