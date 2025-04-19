@@ -157,6 +157,7 @@ async function createContact(event) {
   let info = await prepareContact(event);
   if (info) {
     finalizeContact(info.data, info.el);
+    closeAddContactPopup();
   }
 }
 
