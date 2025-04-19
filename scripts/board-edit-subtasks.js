@@ -1,10 +1,15 @@
 /**
- * Adds a new subtask in the edit popup if input is not empty.
+ * Adds a new subtask in the edit popup if input is valid and not duplicate.
  */
 function handleEditSubtaskAdd() {
   const input = document.getElementById('edit_subtask_input');
   const value = input.value.trim();
   if (!value) return;
+  const isDuplicate = editPopupSubtasks.some(subtask => subtask.title.toLowerCase() === value.toLowerCase());
+  if (isDuplicate) {
+    input.value = '';
+    return;
+  }
   editPopupSubtasks.push({ title: value, completed: false });
   input.value = '';
   renderEditSubtasks();
