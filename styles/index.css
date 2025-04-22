@@ -133,6 +133,7 @@
 }
 
 .column-title {
+  min-height: 30px;
   width: 252px;
   font-size: var(--font-size-47-20);
   font-weight: 700;

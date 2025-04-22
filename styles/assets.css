@@ -152,6 +152,20 @@ button[disabled]:hover {
   display: block;
 }
 
+.name-error,
+.email-error,
+.phone-error {
+  display: inline-block;
+  font-size: 16px;
+  color: red;
+  animation: fadeIn-error 0.3s ease-in; 
+}
+
+@keyframes fadeIn-error {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .action-box.edit:hover .edit-icon img {
   content: url('../assets/icons/editblue.svg');
   transform: translateY(0.6px);
@@ -476,6 +490,8 @@ button[disabled]:hover {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-400);
   white-space: nowrap;
+  animation: fadeIn-error 0.3s ease-in; 
+
 }
 
 .error-message-name {

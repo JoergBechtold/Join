@@ -36,6 +36,8 @@ async function renderCards() {
   const allColumns = document.querySelectorAll('.drag-area');
   allColumns.forEach(col => col.innerHTML = '');
 
+  if(!tasks) return;
+
   for (const [key, task] of Object.entries(tasks)) {
     const column = document.getElementById(task.state);
     if (column) {
