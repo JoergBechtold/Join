@@ -490,7 +490,7 @@ button[disabled]:hover {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-400);
   white-space: nowrap;
-  animation: fadeIn-error 0.3s ease-in; 
+  animation: fadeIn-error 0.3s ease-in-out; 
 
 }
 

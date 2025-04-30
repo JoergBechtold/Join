@@ -283,6 +283,7 @@
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-400);
   color: red;
+  animation: fadeIn-error 0.3s ease-in-out;
 }
 
 .custom-task {
