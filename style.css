@@ -24,7 +24,7 @@
   overflow: hidden;
 }
 
-.with-100-percent-max-width-422px{
+.with-100-percent-max-width-422px {
   width: 100%;
   max-width: 422px;
 }
@@ -86,7 +86,7 @@ a {
   --font-size-16-19: clamp(16px, 15.4px + 0.1875vw, 19px);
   --font-size-20: 20px;
   --font-size-21: 21px;
-  --font-size-14-20:clamp(16px, 15.2px + 0.25vw, 20px);
+  --font-size-14-20: clamp(16px, 15.2px + 0.25vw, 20px);
   --font-size-16-20: clamp(16px, 15.2px + 0.25vw, 20px);
   --font-size-16-21: clamp(16px, 15px + 0.3125vw, 21px);
   --font-size-18-21: clamp(18px, 17.4px + 0.1875vw, 21px);
@@ -106,9 +106,9 @@ a {
   --font-size-47-64: clamp(47px, 43.6px + 1.0625vw, 64px);
 
   /* responsive size new */
-  --font-size-37-61:clamp(37px, 32.2px + 1.5vw, 61px);
-  --font-size-47-20:clamp(20px, 34.4px + -0.75vw, 32px);
-  
+  --font-size-37-61: clamp(37px, 32.2px + 1.5vw, 61px);
+  --font-size-47-20: clamp(20px, 34.4px + -0.75vw, 32px);
+
   /* font weight */
   --font-weight-700: 700;
   --font-weight-500: 500;
@@ -126,15 +126,14 @@ a {
   --animation-logo-overlay-responsive: backgroundAnimationResponsive 0.8s ease forwards 1s;
 
   /* width */
-  --width-64-100:clamp(64px, 56.8px + 2.25vw, 100px);
-
+  --width-64-100: clamp(64px, 56.8px + 2.25vw, 100px);
 
   /* hover-scale */
   --scale-hover: 1.01;
 
   /* margin left main */
   --margin-left-main: 328px;
-  --margin-left-main-responsive:20px;
+  --margin-left-main-responsive: 20px;
 
   /* padding top main */
   --padding-top-main: clamp(95px, 76px + 5.9375vw, 190px);
@@ -170,5 +169,3 @@ a {
 ::-webkit-scrollbar-thumb:active {
   cursor: grabbing;
 }
-
-
