@@ -7,7 +7,7 @@ let randomColorsJson = null;
  * and loading the random colors. It sequentially awaits the completion of each of these asynchronous operations.
  */
 async function startProcess() {
- await loadHeaderAndInitialize()
+  await loadHeaderAndInitialize()
   initBoard()
   await initializeRandomColors();
 }
@@ -59,9 +59,9 @@ function showConfirmation(message) {
  */
 function showConfirmPopup(msg, callback) {
   const p = document.querySelector('.confirm-popup'),
-        m = p.querySelector('.confirm-message'),
-        y = p.querySelector('.confirm-yes'),
-        n = p.querySelector('.confirm-no');
+    m = p.querySelector('.confirm-message'),
+    y = p.querySelector('.confirm-yes'),
+    n = p.querySelector('.confirm-no');
   m.textContent = msg; p.classList.remove('hidden'); p.classList.add('active');
   y.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(true); };
   n.onclick = () => { p.classList.add('hidden'); p.classList.remove('active'); callback(false); };
@@ -195,7 +195,7 @@ function loginSuccessful() {
   sessionStorage.setItem('loggedIn', 'true');
   window.showButtonLinksSidebar = true;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-  goToUrl('summary.html'); 
+  goToUrl('summary.html');
 }
 
 /**
@@ -208,7 +208,7 @@ function loginSuccessful() {
 function logOut() {
   window.showButtonLinksSidebar = false;
   sessionStorage.setItem('linksSidebarBoolienKey', window.showButtonLinksSidebar);
-  sessionStorage.removeItem('loggedIn'); 
+  sessionStorage.removeItem('loggedIn');
   sessionStorage.removeItem('loggedInUserId');
   sessionStorage.removeItem('activePage');
   goToUrl('log_in.html');
