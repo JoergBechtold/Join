@@ -64,18 +64,17 @@
   margin-right: 10px;
 }
 
-@media screen and (max-width: 992px)  {
+@media screen and (max-width: 992px) {
   .main-privacy {
     margin-left: 230px;
     margin-right: 0;
     padding-right: 20px;
-    width: calc(750px + (300 * ((100vw - 1050px) / 310)));  
-
+    width: calc(750px + (300 * ((100vw - 1050px) / 310)));
   }
 }
 
 @media (max-width: 768px) {
-  .main-privacy{
+  .main-privacy {
     margin-left: var(--margin-left-main-responsive);
     width: calc(300px + (400 * ((100vw - 480px) / 288)));
   }

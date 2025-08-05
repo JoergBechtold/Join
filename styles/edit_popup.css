@@ -1,45 +1,45 @@
 .edit-subtask-enum::-webkit-scrollbar {
-    width: var(--scollbar-width-thin);
+  width: var(--scollbar-width-thin);
 }
 
 .edit-subtask-enum::-webkit-scrollbar-thumb {
-    background: var(--primary-color-gray);
-    border-radius: 10px;
+  background: var(--primary-color-gray);
+  border-radius: 10px;
 }
 
 .edit-content {
-    flex-direction: column;
-    margin-bottom: unset;
+  flex-direction: column;
+  margin-bottom: unset;
 }
 
 .edit-overflow {
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-    padding-right: 2px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding-right: 2px;
 }
 
 .edit-overflow::-webkit-scrollbar {
-    width: var(--scollbar-width-thin);
+  width: var(--scollbar-width-thin);
 }
 
 .close-div {
-    width: 100%;
-    display: flex;
-    justify-content: end;
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }
 
 .edit-form-column {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .edit-subtask-enum {
-    max-height: 88px;
-    overflow-y: auto;
+  max-height: 88px;
+  overflow-y: auto;
 }
 
-@media only screen and (max-width: 450px){
-    .edit-subtask-enum {
-        max-height: unset;
-        overflow-y: unset;
-    }
+@media only screen and (max-width: 450px) {
+  .edit-subtask-enum {
+    max-height: unset;
+    overflow-y: unset;
+  }
 }

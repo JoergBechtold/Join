@@ -8,9 +8,7 @@
   margin-left: var(--margin-left-main);
   padding-top: var(--padding-top-main);
   margin-right: 80px;
- 
 }
-
 
 .help-headline {
   display: flex;
@@ -59,13 +57,13 @@
 .help-content a {
   color: var(--light-blue);
 }
- 
+
 @media screen and (max-width: 992px) {
   .main-help {
     margin-left: 230px;
     margin-right: 0;
     padding-right: 20px;
-    width: calc(750px + (300 * ((100vw - 1050px) / 310)));  
+    width: calc(750px + (300 * ((100vw - 1050px) / 310)));
   }
 }
 

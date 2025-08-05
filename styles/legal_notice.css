@@ -56,21 +56,19 @@
   margin-right: 10px;
 }
 
-@media screen and (max-width: 992px)  {
+@media screen and (max-width: 992px) {
   .main-legal {
     margin-left: 230px;
     margin-right: 0;
     padding-right: 20px;
-    width: calc(750px + (300 * ((100vw - 1050px) / 310)));  
-
+    width: calc(750px + (300 * ((100vw - 1050px) / 310)));
   }
 }
 
 @media (max-width: 768px) {
-  .main-legal{
+  .main-legal {
     margin-left: var(--margin-left-main-responsive);
     width: calc(300px + (400 * ((100vw - 480px) / 288)));
-
   }
 
   .main-legal h1 {
@@ -92,5 +90,3 @@
     width: calc(300px + 277 * (100vw - 320px) / 360);
   }
 }
-
-

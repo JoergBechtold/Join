@@ -61,7 +61,7 @@
   transform: translate(-50%, -50%);
   background: #fff;
   max-width: 525px;
-  width:  clamp(340px, 303px + 11.5625vw, 525px);
+  width: clamp(340px, 303px + 11.5625vw, 525px);
   max-height: 780px;
   height: clamp(560px, 516px + 13.75vw, 780px);
   z-index: 101;
@@ -77,9 +77,8 @@
   z-index: 1000;
 }
 
-.edit-popup{
+.edit-popup {
   padding-bottom: 90px;
-
 }
 
 .edit-close-buttton-container {
@@ -219,7 +218,7 @@
   align-items: center;
 }
 
-.subtasks-elements-container:hover{
+.subtasks-elements-container:hover {
   background-color: #eeeeee;
   border-radius: var(--border-radius-input-fields);
 }
@@ -271,8 +270,9 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 450px){
-  .popup-container, .edit-popup {
+@media only screen and (max-width: 450px) {
+  .popup-container,
+  .edit-popup {
     width: 100%;
     max-height: unset;
     height: 100%;
@@ -280,20 +280,21 @@
     padding-inline: clamp(15px, -46.5385px + 19.2308vw, 40px);
   }
 
-  .edit-popup{
-    padding-bottom: 90px; 
+  .edit-popup {
+    padding-bottom: 90px;
   }
 
-  .popup, .popup-info {
+  .popup,
+  .popup-info {
     height: 100%;
   }
 
   .assignee-container {
-    max-height: 155px; 
+    max-height: 155px;
   }
 }
 
-@media only screen and (max-width: 360px){
+@media only screen and (max-width: 360px) {
   /* .popup-container{
     transform: translate(-50%, -56%);
   } */
