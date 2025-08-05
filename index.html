@@ -1,273 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
 
-    <!-- Embedding the favicon -->
-    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
-    <base href="./" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
 
-    <!-- Embedding the css -->
-    <link rel="stylesheet" href="assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="styles/header_sidebar.css" />
-    <link rel="stylesheet" href="styles/add_task.css" />
-    <link rel="stylesheet" href="styles/add_task_assets.css" />
-    <link rel="stylesheet" href="styles/board_task_popup.css" />
-    <link rel="stylesheet" href="styles/assets.css" />
-    <link rel="stylesheet" href="styles/index.css" />
-    <link rel="stylesheet" href="styles/edit_popup.css">
-    <link rel="stylesheet" href="style.css" />
+  <!-- Embedding the favicon -->
+  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
+  <base href="./" />
 
-    <!-- Checks whether the user is logged in. If not then links to log_in.html -->
-    <script>
-      if (sessionStorage.getItem('loggedIn') === null) {
-          window.location.href = 'log_in.html';
-      }
+  <!-- Embedding the css -->
+  <link rel="stylesheet" href="assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="styles/header_sidebar.css" />
+  <link rel="stylesheet" href="styles/add_task.css" />
+  <link rel="stylesheet" href="styles/add_task_assets.css" />
+  <link rel="stylesheet" href="styles/board_task_popup.css" />
+  <link rel="stylesheet" href="styles/assets.css" />
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/edit_popup.css">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Checks whether the user is logged in. If not then links to log_in.html -->
+  <script>
+    if (sessionStorage.getItem('loggedIn') === null) {
+      window.location.href = 'log_in.html';
+    }
   </script>
 
-  </head>
-  <body class="body-board" onload="startProcess()" onclick="closeEditDropdownOnBodyClick(event),closeDropdownOnBodyClick(event), closeCategoryDropdownOnBodyClick(event)">
-     <!-- no landscape mode allowed overlay -->
-     <div class="portrait-overlay" id="portrait_overlay">
-      <div class="portrait-overlay-content">
-        <h1>Please turn your phone</h1>
-        <div class="portrait-overlay-vector"></div> 
-      </div>
+</head>
+
+<body class="body-board" onload="startProcess()"
+  onclick="closeEditDropdownOnBodyClick(event),closeDropdownOnBodyClick(event), closeCategoryDropdownOnBodyClick(event)">
+  <!-- no landscape mode allowed overlay -->
+  <div class="portrait-overlay" id="portrait_overlay">
+    <div class="portrait-overlay-content">
+      <h1>Please turn your phone</h1>
+      <div class="portrait-overlay-vector"></div>
     </div>
-  
-    <div id="header_container"></div>
+  </div>
 
-    <div id="overlay" class="overlay" onclick="if(event.target === this){ closePopup(); }"></div>
+  <div id="header_container"></div>
 
-    <div class="board-add-task" id="board_add_task"></div>
+  <div id="overlay" class="overlay" onclick="if(event.target === this){ closePopup(); }"></div>
 
-    <main class="main-board">
-      <div class="headline-input-container">
-        <div class="board-headline-plus-button">
+  <div class="board-add-task" id="board_add_task"></div>
+
+  <main class="main-board">
+    <div class="headline-input-container">
+      <div class="board-headline-plus-button">
         <span>Board</span>
         <div onclick="goToUrl('add_task.html')" class="board-responsive-plus-button">
-          <img src="assets/icons/add-white.svg" alt="Plus Button" >
+          <img src="assets/icons/add-white.svg" alt="Plus Button">
         </div>
       </div>
-        <div class="search-input-add-button-div">
-          <div class="search-input-div">
-            <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text" placeholder="Find Card"/>
-            <div class="placeholder"></div>
-            <div class="search-box">
+      <div class="search-input-add-button-div">
+        <div class="search-input-div">
+          <input id="find_cards" oninput="searchCards()" class="search-inputfield" type="text"
+            placeholder="Find Card" />
+          <div class="placeholder"></div>
+          <div class="search-box">
             <img src="assets/icons/search.svg" class="search-icon" alt="" />
           </div>
-          </div>
-          <button onclick="openBoardAddTaskDefault()" class="button-primary-dark-gray">Add Task +</button>
         </div>
+        <button onclick="openBoardAddTaskDefault()" class="button-primary-dark-gray">Add Task +</button>
       </div>
-
-      <div class="card-container">
-        <div>
-          <div class="column-title">
-            <span>To do</span>
-            <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('open')">
-            </div>
-          </div>
-          <div
-            class="drag-area"
-            id="open"
-            ondrop="moveTo('open')"
-            ondragleave="removeHighlight('open')"
-            ondragover="allowDrop(event); highlight('open')"
-          ></div>
-        </div>
-
-        <div>
-          <div class="column-title">
-            <span>In Progress</span>
-            <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('in-progress')">
-            </div>
-          </div>
-          <div
-            class="drag-area"
-            id="in-progress"
-            ondrop="moveTo('in-progress')"
-            ondragleave="removeHighlight('in-progress')"
-            ondragover="allowDrop(event); highlight('in-progress')"
-          ></div>
-        </div>
-
-        <div>
-          <div class="column-title">
-            <span>Await feedback</span>
-            <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('await-feedback')">
-            </div>
-          </div>
-          <div
-            class="drag-area"
-            id="await-feedback"
-            ondrop="moveTo('await-feedback')"
-            ondragleave="removeHighlight('await-feedback')"
-            ondragover="allowDrop(event); highlight('await-feedback')"
-          ></div>
-        </div>
-
-        <div>
-          <span class="column-title">Done</span>
-          <div
-            class="drag-area"
-            id="done"
-            ondrop="moveTo('done')"
-            ondragleave="removeHighlight('done')"
-            ondragover="allowDrop(event); highlight('done')"
-          ></div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Popup-Container -->
-    <div class="popup-container" id="popup_container" style="display: none">
-      <div id="popup" class="popup"></div>
     </div>
 
-    <!--Edit Popup-->
-    <div id="edit_popup" class="edit-popup">
-      <div class="close-div">
-        <button class="close-button" type="button" onclick="closePopup('cancelPopup')">
-          <img src="assets/icons/cancel.svg" alt="Close" class="close-icon" />
-        </button>
+    <div class="card-container">
+      <div>
+        <div class="column-title">
+          <span>To do</span>
+          <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('open')">
+          </div>
+        </div>
+        <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')"
+          ondragover="allowDrop(event); highlight('open')"></div>
       </div>
-      
-      <div class="edit-close-buttton-container edit-overflow">
-        <div id="edit_task_template">
-          <form class="form-add-task form-edit-popup">
-            <div class="add-task-content edit-content" id="add-task-content">
-              <div class="form-column left-container edit-form-column" id="left-container">
-                <div class="form-group">
-                  <label for="edit_title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
-                  <input id="edit_title" class="input-base" type="text" placeholder="Enter a title" />
-                  <span id="error_message_edit_title" class="error-message d-none"></span>
-                  <div class="error-message-required d-none" id="edit_error_title">This field is required</div>
-                </div>
-        
-                <div class="form-group">
-                  <label for="edit_description"><span class="label-text">Description</span></label>
-                  <textarea id="edit_description" class="textarea-base" placeholder="Enter a Description"></textarea>
-                </div>
-        
-                <div class="form-group">
-                  <label for="edit_due_date"><span class="label-text">Due date</span> <span class="red-star">*</span></label>
-                  <div class="input-container">
-                    <input id="edit_due_date" class="input-base due-date" type="date" onclick="setEditMinDate()"/>
-                    <span id="error_message_edit_date" class="error-message d-none"></span>
-                  </div>
-                  <div class="error-message-required d-none" id="edit_error_date">This field is required</div>
-                </div>
+
+      <div>
+        <div class="column-title">
+          <span>In Progress</span>
+          <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('in-progress')">
+          </div>
+        </div>
+        <div class="drag-area" id="in-progress" ondrop="moveTo('in-progress')"
+          ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')"></div>
+      </div>
+
+      <div>
+        <div class="column-title">
+          <span>Await feedback</span>
+          <div class="card-container-plus-button" onclick="openBoardAddTaskWithState('await-feedback')">
+          </div>
+        </div>
+        <div class="drag-area" id="await-feedback" ondrop="moveTo('await-feedback')"
+          ondragleave="removeHighlight('await-feedback')" ondragover="allowDrop(event); highlight('await-feedback')">
+        </div>
+      </div>
+
+      <div>
+        <span class="column-title">Done</span>
+        <div class="drag-area" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')"
+          ondragover="allowDrop(event); highlight('done')"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup-Container -->
+  <div class="popup-container" id="popup_container" style="display: none">
+    <div id="popup" class="popup"></div>
+  </div>
+
+  <!--Edit Popup-->
+  <div id="edit_popup" class="edit-popup">
+    <div class="close-div">
+      <button class="close-button" type="button" onclick="closePopup('cancelPopup')">
+        <img src="assets/icons/cancel.svg" alt="Close" class="close-icon" />
+      </button>
+    </div>
+
+    <div class="edit-close-buttton-container edit-overflow">
+      <div id="edit_task_template">
+        <form class="form-add-task form-edit-popup">
+          <div class="add-task-content edit-content" id="add-task-content">
+            <div class="form-column left-container edit-form-column" id="left-container">
+              <div class="form-group">
+                <label for="edit_title"><span class="label-text">Title</span> <span class="red-star">*</span></label>
+                <input id="edit_title" class="input-base" type="text" placeholder="Enter a title" />
+                <span id="error_message_edit_title" class="error-message d-none"></span>
+                <div class="error-message-required d-none" id="edit_error_title">This field is required</div>
               </div>
-        
-              <div class="vertical-line"></div>
-        
-              <div class="form-column right-container">
-                <div class="form-group">
-                  <label><span class="label-text">Priority</span></label>
-                  <div class="prio-buttons">
-                    <button type="button" class="prio edit-prio-button" id="edit_urgent_button" onclick="setEditPriority('edit_urgent_button')">
-                      Urgent
-                      <img src="assets/icons/prio-high.svg" class="prio-icon edit-prio-icon" id="edit_urgent_img" />
-                    </button>
-                    <button type="button" class="prio edit-prio-button" id="edit_medium_button" onclick="setEditPriority('edit_medium_button')">
-                      Medium
-                      <img src="assets/icons/prio-medium.svg" class="prio-icon edit-prio-icon" id="edit_medium_img" />
-                    </button>
-                    <button type="button" class="prio edit-prio-button" id="edit_low_button" onclick="setEditPriority('edit_low_button')">
-                      Low
-                      <img src="assets/icons/prio-low.svg" class="prio-icon edit-prio-icon" id="edit_low_img" />
-                    </button>
-                  </div>
+
+              <div class="form-group">
+                <label for="edit_description"><span class="label-text">Description</span></label>
+                <textarea id="edit_description" class="textarea-base" placeholder="Enter a Description"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="edit_due_date"><span class="label-text">Due date</span> <span
+                    class="red-star">*</span></label>
+                <div class="input-container">
+                  <input id="edit_due_date" class="input-base due-date" type="date" onclick="setEditMinDate()" />
+                  <span id="error_message_edit_date" class="error-message d-none"></span>
                 </div>
-        
-                <div class="form-group">
-                  <label><span class="label-text">Assigned to</span></label>
-                  <div class="custom-select-container">
-                    <div class="custom-select" id="edit_custom_select" onclick="toggleEditContactsDropdown()">
-                      <input class="custom-input" type="text" id="edit_selected_contact" placeholder="Select contacts to assign" oninput="filterEditContacts()" />
-                      <img class="select-icon" id="edit_contacts_arrow" src="assets/icons/arrow_drop_down.svg" />
-                    </div>
-                    <div class="contacts-custom-options d-none" id="edit_contacts_options"></div>
-                    <div class="show-selected-contacts" id="edit_selected_contact_circles"></div>
-                  </div>
-                </div>
-        
-                <div class="form-group">
-                  <label><span class="label-text">Subtasks</span></label>
-                  <div class="input-container">
-                    <input id="edit_subtask_input" class="input-base" type="text" placeholder="Add new subtask" onkeydown="handleEditSubtaskKey(event)" />
-                    <img id="edit_add_subtask_icon" class="input-base-icon" src="assets/icons/add.svg" onclick="handleEditSubtaskAdd()" />
-                  </div>
-                  <div class="subtask-enum edit-subtask-enum" id="edit_subtask_enum"></div>
-                </div>
+                <div class="error-message-required d-none" id="edit_error_date">This field is required</div>
               </div>
             </div>
-          </form>
-        </div>
-      </div>
-      <div class="footer-add-task ok-btn-container">
-        <div class="align-with-gap">
-          <div class="button-clear-white-img-box"></div>
-          <button type="submit" class="button-create-task-gray align" onclick="submitEditTask()">
-            Ok
-            <img src="assets/icons/check.svg" alt="Check" />
-          </button>
-        </div>
-      </div>
-      <div class="popup-overlay-small-gray" id="popup_overlay_task_added">
-        <div class="popup-small-gray custom-task" id="popup_task_added">
-          <span>Task added to board</span>
-          <img src="assets/icons/boardicon.svg" alt="Board Icon" />
-        </div>
+
+            <div class="vertical-line"></div>
+
+            <div class="form-column right-container">
+              <div class="form-group">
+                <label><span class="label-text">Priority</span></label>
+                <div class="prio-buttons">
+                  <button type="button" class="prio edit-prio-button" id="edit_urgent_button"
+                    onclick="setEditPriority('edit_urgent_button')">
+                    Urgent
+                    <img src="assets/icons/prio-high.svg" class="prio-icon edit-prio-icon" id="edit_urgent_img" />
+                  </button>
+                  <button type="button" class="prio edit-prio-button" id="edit_medium_button"
+                    onclick="setEditPriority('edit_medium_button')">
+                    Medium
+                    <img src="assets/icons/prio-medium.svg" class="prio-icon edit-prio-icon" id="edit_medium_img" />
+                  </button>
+                  <button type="button" class="prio edit-prio-button" id="edit_low_button"
+                    onclick="setEditPriority('edit_low_button')">
+                    Low
+                    <img src="assets/icons/prio-low.svg" class="prio-icon edit-prio-icon" id="edit_low_img" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label><span class="label-text">Assigned to</span></label>
+                <div class="custom-select-container">
+                  <div class="custom-select" id="edit_custom_select" onclick="toggleEditContactsDropdown()">
+                    <input class="custom-input" type="text" id="edit_selected_contact"
+                      placeholder="Select contacts to assign" oninput="filterEditContacts()" />
+                    <img class="select-icon" id="edit_contacts_arrow" src="assets/icons/arrow_drop_down.svg" />
+                  </div>
+                  <div class="contacts-custom-options d-none" id="edit_contacts_options"></div>
+                  <div class="show-selected-contacts" id="edit_selected_contact_circles"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label><span class="label-text">Subtasks</span></label>
+                <div class="input-container">
+                  <input id="edit_subtask_input" class="input-base" type="text" placeholder="Add new subtask"
+                    onkeydown="handleEditSubtaskKey(event)" />
+                  <img id="edit_add_subtask_icon" class="input-base-icon" src="assets/icons/add.svg"
+                    onclick="handleEditSubtaskAdd()" />
+                </div>
+                <div class="subtask-enum edit-subtask-enum" id="edit_subtask_enum"></div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-
-    <!-- Template für Add Task Formular -->
-    <template class="add-task-template-container" id="addTaskTemplate">
-      <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
-        <button class="close-button-popup" onclick="closeBoardAddTask()">
-          <img src="assets/icons/cancel.svg" alt="" />
+    <div class="footer-add-task ok-btn-container">
+      <div class="align-with-gap">
+        <div class="button-clear-white-img-box"></div>
+        <button type="submit" class="button-create-task-gray align" onclick="submitEditTask()">
+          Ok
+          <img src="assets/icons/check.svg" alt="Check" />
         </button>
-
-        <!-- fetch template popup add task -->
-        <div id="add_task_fetch_template"></div>
-      </div>
-    </template>
-
-    <!-- Delete task message -->
-    <div id="custom_confirm_overlay" class="confirm-overlay d-none">
-      <div class="confirm-popup">
-        <p id="custom_confirm_message">Do you really want to permanently delete this task?</p>
-        <div class="confirm-buttons">
-          <button id="confirm_delete_btn" class="btn-delete" onclick="handleCustomConfirm(true)">Delete</button>
-          <button id="confirm_cancel_btn" class="btn-cancel" onclick="handleCustomConfirm(false)">Cancel</button>
-        </div>
       </div>
     </div>
-    
+    <div class="popup-overlay-small-gray" id="popup_overlay_task_added">
+      <div class="popup-small-gray custom-task" id="popup_task_added">
+        <span>Task added to board</span>
+        <img src="assets/icons/boardicon.svg" alt="Board Icon" />
+      </div>
+    </div>
+  </div>
 
-    <!-- Embedding scripts -->
-    <!-- Scripts/templates must always be included before the normal scripts.js! -->
-    <script src="scripts/firebase.js"></script>
-    <script src="scripts/load-header.js"></script>
-    <script src="scripts/log-in-register.js"></script>
-    <script src="scripts/add-task-templates.js"></script>
-    <script src="scripts/add-task.js"></script>
-    <script src="scripts/add-task-priority-buttons.js"></script>
-    <script src="scripts/add-task-subtasks.js"></script>
-    <script src="scripts/board-edit-subtasks.js"></script>
-    <script src="scripts/add-task-assigned-to.js"></script>
-    <script src="scripts/board-templates.js"></script>
-    <script src="scripts/board-edit-popup.js"></script>
-    <script src="scripts/board-edit-assigned-to.js"></script>
-    <script src="scripts/board-contact-deletion.js"></script>
-    <script src="scripts/board-task-popup.js"></script>
-    <script src="scripts/board-drag-drop.js"></script>
-    <script src="scripts/board-render-functions.js"></script>
-    <script src="scripts/board.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <!-- Template für Add Task Formular -->
+  <template class="add-task-template-container" id="addTaskTemplate">
+    <div onclick="closeDropdownOnBodyClick(event)" class="popup-add-task">
+      <button class="close-button-popup" onclick="closeBoardAddTask()">
+        <img src="assets/icons/cancel.svg" alt="" />
+      </button>
+
+      <!-- fetch template popup add task -->
+      <div id="add_task_fetch_template"></div>
+    </div>
+  </template>
+
+  <!-- Delete task message -->
+  <div id="custom_confirm_overlay" class="confirm-overlay d-none">
+    <div class="confirm-popup">
+      <p id="custom_confirm_message">Do you really want to permanently delete this task?</p>
+      <div class="confirm-buttons">
+        <button id="confirm_delete_btn" class="btn-delete" onclick="handleCustomConfirm(true)">Delete</button>
+        <button id="confirm_cancel_btn" class="btn-cancel" onclick="handleCustomConfirm(false)">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Embedding scripts -->
+  <!-- Scripts/templates must always be included before the normal scripts.js! -->
+  <script src="scripts/firebase.js"></script>
+  <script src="scripts/load-header.js"></script>
+  <script src="scripts/log-in-register.js"></script>
+  <script src="scripts/add-task-templates.js"></script>
+  <script src="scripts/add-task.js"></script>
+  <script src="scripts/add-task-priority-buttons.js"></script>
+  <script src="scripts/add-task-subtasks.js"></script>
+  <script src="scripts/board-edit-subtasks.js"></script>
+  <script src="scripts/add-task-assigned-to.js"></script>
+  <script src="scripts/board-templates.js"></script>
+  <script src="scripts/board-edit-popup.js"></script>
+  <script src="scripts/board-edit-assigned-to.js"></script>
+  <script src="scripts/board-contact-deletion.js"></script>
+  <script src="scripts/board-task-popup.js"></script>
+  <script src="scripts/board-drag-drop.js"></script>
+  <script src="scripts/board-render-functions.js"></script>
+  <script src="scripts/board.js"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>
